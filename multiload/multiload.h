@@ -15,12 +15,12 @@ G_BEGIN_DECLS
 #define MAX_COLORS 5
 
 enum {
-  GRAPH_CPULOAD = 0,
-  GRAPH_MEMLOAD = 1,
-  GRAPH_NETLOAD = 2,
-  GRAPH_SWAPLOAD = 3,
-  GRAPH_LOADAVG = 4,
-  GRAPH_DISKLOAD = 5
+	GRAPH_CPULOAD = 0,
+	GRAPH_MEMLOAD = 1,
+	GRAPH_NETLOAD = 2,
+	GRAPH_SWAPLOAD = 3,
+	GRAPH_LOADAVG = 4,
+	GRAPH_DISKLOAD = 5
 };
 
 typedef struct _MultiloadPlugin MultiloadPlugin;
@@ -40,67 +40,65 @@ typedef struct _GraphType GraphType;
 #define MAX_SPEED 10000
 
 struct _LoadGraph {
-    MultiloadPlugin *multiload;
+	MultiloadPlugin *multiload;
 
-    guint id;
-    guint draw_width, draw_height;
+	guint id;
+	guint draw_width, draw_height;
 
-    guint allocated;
+	guint allocated;
 
-    gint **data;
-    guint data_size;
-    guint *pos;
+	gint **data;
+	guint data_size;
+	guint *pos;
 
-    GtkWidget *main_widget;
-    GtkWidget *frame, *box, *disp;
-    cairo_surface_t *surface;
-    int timer_index;
+	GtkWidget *main_widget;
+	GtkWidget *frame, *box, *disp;
+	cairo_surface_t *surface;
+	int timer_index;
 
-    gint show_frame;
+	gint show_frame;
 
-    long cpu_time [NCPUSTATES];
-    long cpu_last [NCPUSTATES];
-    int cpu_initialized;
+	long cpu_time [NCPUSTATES];
+	long cpu_last [NCPUSTATES];
+	int cpu_initialized;
 
-    double loadavg1;
-    NetSpeed *netspeed_in;
-    NetSpeed *netspeed_out;
+	double loadavg1;
+	NetSpeed *netspeed_in;
+	NetSpeed *netspeed_out;
 
-    gboolean tooltip_update;
+	gboolean tooltip_update;
 };
 
 struct _GraphConfig {
-    gboolean visible;
-    GdkColor colors[MAX_COLORS];
+	gboolean visible;
+	GdkColor colors[MAX_COLORS];
 };
 
 struct _MultiloadPlugin
 {
-    /* Current state */
-    GtkWidget *box;
-    GtkOrientation orientation;
-    LoadGraph *graphs[NGRAPHS];
+	/* Current state */
+	GtkWidget *box;
+	GtkOrientation orientation;
+	LoadGraph *graphs[NGRAPHS];
 
-    /* Settings */
-    GtkContainer *container;
-    GraphConfig graph_config[NGRAPHS];
-    guint speed;
-    guint size;
+	/* Settings */
+	GtkContainer *container;
+	GraphConfig graph_config[NGRAPHS];
+	guint speed;
+	guint size;
 };
 
 struct _GraphType {
-    const char *interactive_label;
-    const char *noninteractive_label;
-    const char *name;
-    LoadGraphDataFunc get_data;
-    guint num_colors;
-    const struct
-      {
-        const char *prefs_label;
-        const char *default_value;
-      }
-    colors[MAX_COLORS];
-    //const char *default_colors;
+	const char *interactive_label;
+	const char *noninteractive_label;
+	const char *name;
+	LoadGraphDataFunc get_data;
+	guint num_colors;
+	const struct {
+		const char *prefs_label;
+		const char *default_value;
+	} colors[MAX_COLORS];
+	//const char *default_colors;
 };
 GraphType graph_types[NGRAPHS];
 
@@ -133,7 +131,7 @@ multiload_colorconfig_default(MultiloadPlugin *ma, guint i);
 
 void
 multiload_colorconfig_unstringify(MultiloadPlugin *ma, guint i,
-                                  const char *list);
+								const char *list);
 
 int
 multiload_find_graph_by_name(const char *str, const char **suffix);

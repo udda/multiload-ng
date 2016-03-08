@@ -41,34 +41,31 @@
 
 static void
 multiload_configure_response (GtkWidget           *dialog,
-                              gint                 response,
-                              MultiloadXfcePlugin *multiload)
+							  gint                 response,
+							  MultiloadXfcePlugin *multiload)
 {
-  gboolean result;
+	gboolean result;
 
-  if (response == GTK_RESPONSE_HELP)
-    {
-      /* show help */
-      result = g_spawn_command_line_async ("exo-open --launch WebBrowser "
-                                           PLUGIN_WEBSITE, NULL);
+	if (response == GTK_RESPONSE_HELP) {
+		/* show help */
+		result = g_spawn_command_line_async ("exo-open --launch WebBrowser "
+		PLUGIN_WEBSITE, NULL);
 
-      if (G_UNLIKELY (result == FALSE))
-        g_warning (_("Unable to open the following url: %s"), PLUGIN_WEBSITE);
-    }
-  else
-    {
-      /* remove the dialog data from the plugin */
-      g_object_set_data (G_OBJECT (multiload->plugin), "dialog", NULL);
+		if (G_UNLIKELY (result == FALSE))
+			g_warning (_("Unable to open the following url: %s"), PLUGIN_WEBSITE);
+	} else {
+		/* remove the dialog data from the plugin */
+		g_object_set_data (G_OBJECT (multiload->plugin), "dialog", NULL);
 
-      /* unlock the panel menu */
-      xfce_panel_plugin_unblock_menu (multiload->plugin);
+		/* unlock the panel menu */
+		xfce_panel_plugin_unblock_menu (multiload->plugin);
 
-      /* save the plugin */
-      multiload_save (multiload->plugin, &multiload->ma);
+		/* save the plugin */
+		multiload_save (multiload->plugin, &multiload->ma);
 
-      /* destroy the properties dialog */
-      gtk_widget_destroy (dialog);
-    }
+		/* destroy the properties dialog */
+		gtk_widget_destroy (dialog);
+	}
 }
 
 /* Lookup the MultiloadPlugin object from the preferences dialog. */
@@ -76,56 +73,55 @@ multiload_configure_response (GtkWidget           *dialog,
 MultiloadPlugin *
 multiload_configure_get_plugin (GtkWidget *widget)
 {
-  GtkWidget *toplevel = gtk_widget_get_toplevel (widget);
-  MultiloadPlugin *ma = NULL;
-  if ( G_LIKELY (gtk_widget_is_toplevel (toplevel)) )
-    ma = g_object_get_data(G_OBJECT(toplevel), "MultiloadPlugin");
-  else      
-    g_assert_not_reached ();
-  g_assert( ma != NULL);
-  return ma;
+	GtkWidget *toplevel = gtk_widget_get_toplevel (widget);
+	MultiloadPlugin *ma = NULL;
+	if ( G_LIKELY (gtk_widget_is_toplevel (toplevel)) )
+		ma = g_object_get_data(G_OBJECT(toplevel), "MultiloadPlugin");
+	else
+		g_assert_not_reached ();
+	g_assert( ma != NULL);
+	return ma;
 }
 
 void
 multiload_configure (XfcePanelPlugin     *plugin,
-                     MultiloadXfcePlugin *multiload)
+					 MultiloadXfcePlugin *multiload)
 {
-  GtkWidget *dialog;
+	GtkWidget *dialog;
 
-  /* block the plugin menu */
-  xfce_panel_plugin_block_menu (plugin);
+	/* block the plugin menu */
+	xfce_panel_plugin_block_menu (plugin);
 
-  /* create the dialog */
-  dialog = xfce_titled_dialog_new_with_buttons
-      (_("Multiload"),
-       GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
-       GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
-       GTK_STOCK_HELP, GTK_RESPONSE_HELP,
-       GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
-       NULL);
+	/* create the dialog */
+	dialog = xfce_titled_dialog_new_with_buttons(_("Multiload"),
+					GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
+					GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
+					GTK_STOCK_HELP, GTK_RESPONSE_HELP,
+					GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
+					NULL);
 
-  /* center dialog on the screen */
-  gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
+	/* center dialog on the screen */
+	gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 
-  /* set dialog icon */
-  gtk_window_set_icon_name (GTK_WINDOW (dialog), "utilities-system-monitor");
+	/* set dialog icon */
+	gtk_window_set_icon_name (GTK_WINDOW (dialog), "utilities-system-monitor");
 
-  /* link the dialog to the plugin, so we can destroy it when the plugin
-   * is closed, but the dialog is still open */
-  g_object_set_data (G_OBJECT (plugin), "dialog", dialog);
-  g_object_set_data (G_OBJECT (dialog), "MultiloadPlugin", &multiload->ma);
+	/* link the dialog to the plugin, so we can destroy it when the plugin
+	* is closed, but the dialog is still open */
+	g_object_set_data (G_OBJECT (plugin), "dialog", dialog);
+	g_object_set_data (G_OBJECT (dialog), "MultiloadPlugin", &multiload->ma);
 
-  /* Initialize dialog widgets */
-  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
-  gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-  multiload_init_preferences(dialog, &multiload->ma);
+	/* Initialize dialog widgets */
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+	multiload_init_preferences(dialog, &multiload->ma);
 
-  /* connect the reponse signal to the dialog */
-  g_signal_connect (G_OBJECT (dialog), "response",
-                    G_CALLBACK(multiload_configure_response), multiload);
+	/* connect the reponse signal to the dialog */
+	g_signal_connect (G_OBJECT (dialog), "response",
+					G_CALLBACK(multiload_configure_response), multiload);
 
-  /* show the entire dialog */
-  gtk_widget_show_all (dialog);
+	/* show the entire dialog */
+	gtk_widget_show_all (dialog);
 }
 
 #include "about-data.h"
@@ -133,17 +129,17 @@ multiload_configure (XfcePanelPlugin     *plugin,
 void
 multiload_about (XfcePanelPlugin *plugin)
 {
-  gtk_show_about_dialog(NULL,
-      "logo-icon-name", "utilities-system-monitor",
-      "program-name", _("Multiload"),
-      "version",      PACKAGE_VERSION,
-      "comments",     _("A system load monitor that graphs processor, memory, "
-                        "and swap space use, plus network and disk activity."),
-      "website",      PLUGIN_WEBSITE,
-      "copyright",    _("Copyright \xC2\xA9 1999-2012 nandhp, FSF, and others"),
-      "license",      about_data_license,
-      "authors",      about_data_authors,
-      /* "documenters",  about_data_documenters, */
-      "translator-credits", _("translator-credits"),
-      NULL);
+	gtk_show_about_dialog(NULL,
+	"logo-icon-name",	"utilities-system-monitor",
+	"program-name",		_("Multiload"),
+	"version",			PACKAGE_VERSION,
+	"comments",			_("A system load monitor that graphs processor, memory, "
+						"and swap space use, plus network and disk activity."),
+	"website",			PLUGIN_WEBSITE,
+	"copyright",		_("Copyright \xC2\xA9 1999-2012 nandhp, FSF, and others"),
+	"license",			about_data_license,
+	"authors",			about_data_authors,
+	/* "documenters",	about_data_documenters, */
+	"translator-credits", _("translator-credits"),
+	NULL);
 }

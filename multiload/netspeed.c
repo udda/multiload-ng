@@ -53,16 +53,15 @@ char* netspeed_get(NetSpeed *ns)
 
 	if ((older != 0) && (newer > older))
 		rate = (newer - older) * 1000 / ((N_STATES - 1) *
-		          ns->graph->multiload->speed);
+				  ns->graph->multiload->speed);
 	else
-	        /* We end up here if we haven't got enough data yet or the
-		   network interface has jumped back (or there has never
-		   been any activity on any interface). A value of 0 is
-		   likely to be accurate, but if it is wrong it will be
-		   clearly wrong. In any event, it should fix itself in a
-		   few seconds. */
-	        rate = 0;
+		/*	We end up here if we haven't got enough data yet or the
+			network interface has jumped back (or there has never
+			been any activity on any interface). A value of 0 is
+			likely to be accurate, but if it is wrong it will be
+			clearly wrong. In any event, it should fix itself in a
+			few seconds. */
+		rate = 0;
 
 	return format_rate_for_display(rate);
 }
-

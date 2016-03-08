@@ -30,123 +30,117 @@
 
 void
 multiload_save (XfcePanelPlugin *plugin,
-                MultiloadPlugin *ma)
+				MultiloadPlugin *ma)
 {
-  XfceRc *rc;
-  gchar *file;
-  guint i;
+	XfceRc *rc;
+	gchar *file;
+	guint i;
 
-  /* get the config file location */
-  file = xfce_panel_plugin_save_location (plugin, TRUE);
+	/* get the config file location */
+	file = xfce_panel_plugin_save_location (plugin, TRUE);
 
-  if (G_UNLIKELY (file == NULL))
-    {
-       DBG ("Failed to open config file");
-       return;
-    }
+	if (G_UNLIKELY (file == NULL)) {
+		DBG ("Failed to open config file");
+		return;
+	}
 
-  /* open the config file, read/write */
-  rc = xfce_rc_simple_open (file, FALSE);
-  g_free (file);
+	/* open the config file, read/write */
+	rc = xfce_rc_simple_open (file, FALSE);
+	g_free (file);
 
-  if (G_LIKELY (rc != NULL))
-    {
-      /* save the settings */
-      DBG(".");
+	if (G_LIKELY (rc != NULL)) {
+		/* save the settings */
+		DBG(".");
 
-      /* Write size and speed */
-      xfce_rc_write_int_entry (rc, "speed", ma->speed);
-      xfce_rc_write_int_entry (rc, "size", ma->size);
-      
-      for ( i = 0; i < NGRAPHS; i++ )
-        { 
-          char *key, list[8*MAX_COLORS];
+		/* Write size and speed */
+		xfce_rc_write_int_entry (rc, "speed", ma->speed);
+		xfce_rc_write_int_entry (rc, "size", ma->size);
 
-          /* Visibility */
-          key = g_strdup_printf("%s_visible", graph_types[i].name);
-          xfce_rc_write_bool_entry (rc, key, ma->graph_config[i].visible);
-          g_free (key);
+		for ( i = 0; i < NGRAPHS; i++ ) { 
+			char *key, list[8*MAX_COLORS];
 
-          /* Save colors */
-          multiload_colorconfig_stringify (ma, i, list);
-          key = g_strdup_printf("%s_colors", graph_types[i].name);
-          xfce_rc_write_entry (rc, key, list);
-          g_free (key);
-        }
+			/* Visibility */
+			key = g_strdup_printf("%s_visible", graph_types[i].name);
+			xfce_rc_write_bool_entry (rc, key, ma->graph_config[i].visible);
+			g_free (key);
 
-      /* close the rc file */
-      xfce_rc_close (rc);
-    }
+			/* Save colors */
+			multiload_colorconfig_stringify (ma, i, list);
+			key = g_strdup_printf("%s_colors", graph_types[i].name);
+			xfce_rc_write_entry (rc, key, list);
+			g_free (key);
+		}
+
+		/* close the rc file */
+		xfce_rc_close (rc);
+	}
 }
 
 void
 multiload_read (XfcePanelPlugin *plugin,
-                MultiloadPlugin *ma)
+				MultiloadPlugin *ma)
 {
-  XfceRc *rc;
-  gchar *file;
-  guint i, found = 0;
+	XfceRc *rc;
+	gchar *file;
+	guint i, found = 0;
 
-  /* get the plugin config file location */
-  file = xfce_panel_plugin_lookup_rc_file (plugin);
+	/* get the plugin config file location */
+	file = xfce_panel_plugin_lookup_rc_file (plugin);
 
-  if (G_LIKELY (file != NULL))
-    {
-      /* open the config file, readonly */
-      rc = xfce_rc_simple_open (file, TRUE);
+	if (G_LIKELY (file != NULL)) {
+		/* open the config file, readonly */
+		rc = xfce_rc_simple_open (file, TRUE);
 
-      /* cleanup */
-      g_free (file);
+		/* cleanup */
+		g_free (file);
 
-      if (G_LIKELY (rc != NULL))
-        {
-          /* Read speed and size */
-          ma->speed = xfce_rc_read_int_entry(rc, "speed", DEFAULT_SPEED);
-          ma->size = xfce_rc_read_int_entry(rc, "size", DEFAULT_SIZE);
+		if (G_LIKELY (rc != NULL)) {
+			/* Read speed and size */
+			ma->speed = xfce_rc_read_int_entry(rc, "speed", DEFAULT_SPEED);
+			ma->size = xfce_rc_read_int_entry(rc, "size", DEFAULT_SIZE);
 
-          /* Read visibility and colors for each graph */
-          for ( i = 0; i < NGRAPHS; i++ )
-            { 
-              char *key;
-              const char *list;
+			/* Read visibility and colors for each graph */
+			for ( i = 0; i < NGRAPHS; i++ ) {
+				char *key;
+				const char *list;
 
-              /* Visibility */
-              key = g_strdup_printf("%s_visible", graph_types[i].name);
-              ma->graph_config[i].visible =
-                  xfce_rc_read_bool_entry(rc, key, i == 0 ? TRUE : FALSE);
-              g_free (key);
+				/* Visibility */
+				key = g_strdup_printf("%s_visible", graph_types[i].name);
+				ma->graph_config[i].visible =
+						xfce_rc_read_bool_entry(rc, key, i == 0 ? TRUE : FALSE);
+				g_free (key);
 
-              /* Colors - Try to load from xfconf */
-              key = g_strdup_printf("%s_colors", graph_types[i].name);
-              list = xfce_rc_read_entry (rc, key, NULL);
-              g_free (key);
-              multiload_colorconfig_unstringify(ma, i, list);
-            }
+				/* Colors - Try to load from xfconf */
+				key = g_strdup_printf("%s_colors", graph_types[i].name);
+				list = xfce_rc_read_entry (rc, key, NULL);
+				g_free (key);
+				multiload_colorconfig_unstringify(ma, i, list);
+			}
 
-          /* cleanup */
-          xfce_rc_close (rc);
+			/* cleanup */
+			xfce_rc_close (rc);
 
-          /* Ensure at lease one graph is visible */
-          for ( i = 0; i < NGRAPHS; i++ )
-            if ( ma->graph_config[i].visible == TRUE )
-              found++;
-          if ( found == 0 )
-            ma->graph_config[0].visible = TRUE;
+			/* Ensure at lease one graph is visible */
+			for ( i = 0; i < NGRAPHS; i++ ) {
+				if ( ma->graph_config[i].visible == TRUE )
+					found++;
+				if ( found == 0 )
+					ma->graph_config[0].visible = TRUE;
+			}
 
-          /* leave the function, everything went well */
-          return;
-        }
-    }
+			/* leave the function, everything went well */
+			return;
+		}
+	}
 
-  /* something went wrong, apply default values */
-  DBG ("Applying default settings");
+	/* something went wrong, apply default values */
+	DBG ("Applying default settings");
 
-  ma->speed = DEFAULT_SPEED;
-  ma->size = DEFAULT_SIZE;
-  for ( i = 0; i < NGRAPHS; i++ )
-    { 
-      /* Default visibility and colors */
-      ma->graph_config[i].visible = i == 0 ? TRUE : FALSE;
-      multiload_colorconfig_default(ma, i);
-    }
+	ma->speed = DEFAULT_SPEED;
+	ma->size = DEFAULT_SIZE;
+	for ( i = 0; i < NGRAPHS; i++ ) { 
+		/* Default visibility and colors */
+		ma->graph_config[i].visible = i == 0 ? TRUE : FALSE;
+		multiload_colorconfig_default(ma, i);
+	}
 }

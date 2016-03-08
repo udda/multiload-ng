@@ -13,9 +13,9 @@ G_BEGIN_DECLS
 #define PROP_DISKLOAD 5
 
 typedef enum {
-    LOADAVG_1 = 0,
-    LOADAVG_5,
-    LOADAVG_15
+	LOADAVG_1 = 0,
+	LOADAVG_5,
+	LOADAVG_15
 } LoadAvgType;
 
 typedef struct	_MultiLoadProperties		MultiLoadProperties;
@@ -23,18 +23,18 @@ typedef struct	_MultiLoadProperties		MultiLoadProperties;
 typedef struct	_LoadGraphProperties		LoadGraphProperties;
 
 struct _LoadGraphProperties {
-    guint type, n;
-    const gchar *name;
-    const gchar **texts;
-    const gchar **color_defs;
-    GdkColor *colors;
-    gulong adj_data [3];
-    gint loadavg_type;
-    gint use_default;
+	guint type, n;
+	const gchar *name;
+	const gchar **texts;
+	const gchar **color_defs;
+	GdkColor *colors;
+	gulong adj_data [3];
+	gint loadavg_type;
+	gint use_default;
 };
 
 struct _MultiLoadProperties {
-    LoadGraphProperties cpuload, memload, swapload, netload, loadavg;
+	LoadGraphProperties cpuload, memload, swapload, netload, loadavg;
 };
 
 /*

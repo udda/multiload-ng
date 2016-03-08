@@ -24,10 +24,10 @@ G_BEGIN_DECLS
 
 void
 multiload_configure (XfcePanelPlugin      *plugin,
-                     MultiloadXfcePlugin  *multiload);
+					MultiloadXfcePlugin  *multiload);
 
 void
-multiload_about     (XfcePanelPlugin      *plugin);
+multiload_about (XfcePanelPlugin      *plugin);
 
 G_END_DECLS
 

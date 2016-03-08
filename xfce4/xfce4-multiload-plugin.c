@@ -43,138 +43,138 @@ XFCE_PANEL_PLUGIN_REGISTER_INTERNAL (multiload_construct);  /* Xfce 4.6 */
 static MultiloadXfcePlugin *
 multiload_new (XfcePanelPlugin *plugin)
 {
-  MultiloadXfcePlugin *multiload;
-  GtkOrientation orientation;
+	MultiloadXfcePlugin *multiload;
+	GtkOrientation orientation;
 
-  /* allocate memory for the plugin structure */
-  multiload = panel_slice_new0 (MultiloadXfcePlugin);
+	/* allocate memory for the plugin structure */
+	multiload = panel_slice_new0 (MultiloadXfcePlugin);
 
-  /* pointer to plugin */
-  multiload->plugin = plugin;
+	/* pointer to plugin */
+	multiload->plugin = plugin;
 
-  /* read the user settings */
-  multiload_read (plugin, &multiload->ma);
+	/* read the user settings */
+	multiload_read (plugin, &multiload->ma);
 
-  /* create a container widget */
-  multiload->ebox = gtk_event_box_new ();
-  gtk_widget_show (multiload->ebox);
+	/* create a container widget */
+	multiload->ebox = gtk_event_box_new ();
+	gtk_widget_show (multiload->ebox);
 
-  /* get the current orientation */
-  orientation = xfce_panel_plugin_get_orientation (plugin);
+	/* get the current orientation */
+	orientation = xfce_panel_plugin_get_orientation (plugin);
 
-  /* Initialize the applet */
-  multiload->ma.container = GTK_CONTAINER(multiload->ebox);
-  multiload_refresh(&(multiload->ma), orientation);
+	/* Initialize the applet */
+	multiload->ma.container = GTK_CONTAINER(multiload->ebox);
+	multiload_refresh(&(multiload->ma), orientation);
 
-  return multiload;
+	return multiload;
 }
 
 static void
 multiload_free (XfcePanelPlugin *plugin,
-                MultiloadXfcePlugin *multiload)
+				MultiloadXfcePlugin *multiload)
 {
-  GtkWidget *dialog;
+	GtkWidget *dialog;
 
-  /* check if the dialog is still open. if so, destroy it */
-  dialog = g_object_get_data (G_OBJECT (plugin), "dialog");
-  if (G_UNLIKELY (dialog != NULL))
-    gtk_widget_destroy (dialog);
+	/* check if the dialog is still open. if so, destroy it */
+	dialog = g_object_get_data (G_OBJECT (plugin), "dialog");
+	if (G_UNLIKELY (dialog != NULL))
+		gtk_widget_destroy (dialog);
 
-  multiload_destroy (&multiload->ma);
+	multiload_destroy (&multiload->ma);
 
-  /* destroy the panel widgets */
-  gtk_widget_destroy (multiload->ebox);
+	/* destroy the panel widgets */
+	gtk_widget_destroy (multiload->ebox);
 
-  /* cleanup the settings (FIXME) */
+	/* cleanup the settings (FIXME) */
 
-  /* free the plugin structure */
-  panel_slice_free (MultiloadXfcePlugin, multiload);
+	/* free the plugin structure */
+	panel_slice_free (MultiloadXfcePlugin, multiload);
 }
 
 static void
 multiload_orientation_changed (XfcePanelPlugin *plugin,
-                               GtkOrientation   orientation,
-                               MultiloadPlugin *ma)
+							   GtkOrientation   orientation,
+							   MultiloadPlugin *ma)
 {
-  /* Get the plugin's current size request */
-  gint size = -1, size_alt = -1;
-  gtk_widget_get_size_request (GTK_WIDGET (plugin), &size, &size_alt);
-  if ( size < 0 )
-    size = size_alt;
+	/* Get the plugin's current size request */
+	gint size = -1, size_alt = -1;
+	gtk_widget_get_size_request (GTK_WIDGET (plugin), &size, &size_alt);
+	if ( size < 0 )
+		size = size_alt;
 
-  /* Rotate the plugin size to the new orientation */
-  if ( orientation == GTK_ORIENTATION_HORIZONTAL)
-    gtk_widget_set_size_request (GTK_WIDGET (plugin), -1, size);
-  else
-    gtk_widget_set_size_request (GTK_WIDGET (plugin), size, -1);
+	/* Rotate the plugin size to the new orientation */
+	if ( orientation == GTK_ORIENTATION_HORIZONTAL)
+		gtk_widget_set_size_request (GTK_WIDGET (plugin), -1, size);
+	else
+		gtk_widget_set_size_request (GTK_WIDGET (plugin), size, -1);
 
-  multiload_refresh(ma, orientation);
+	multiload_refresh(ma, orientation);
 }
 
 static gboolean
 multiload_size_changed (XfcePanelPlugin *plugin,
-                        gint             size,
-                        MultiloadPlugin *ma)
+						gint             size,
+						MultiloadPlugin *ma)
 {
+	/* get the orientation of the plugin */
+	GtkOrientation orientation = xfce_panel_plugin_get_orientation (plugin);
 
-  /* get the orientation of the plugin */
-  GtkOrientation orientation = xfce_panel_plugin_get_orientation (plugin);
+	/* set the widget size */
+	if ( orientation == GTK_ORIENTATION_HORIZONTAL)
+		gtk_widget_set_size_request (GTK_WIDGET (plugin), -1, size);
+	else
+		gtk_widget_set_size_request (GTK_WIDGET (plugin), size, -1);
 
-  /* set the widget size */
-  if ( orientation == GTK_ORIENTATION_HORIZONTAL)
-    gtk_widget_set_size_request (GTK_WIDGET (plugin), -1, size);
-  else
-    gtk_widget_set_size_request (GTK_WIDGET (plugin), size, -1);
+	multiload_refresh(ma, orientation);
 
-  multiload_refresh(ma, orientation);
-
-  /* we handled the orientation */
-  return TRUE;
+	/* we handled the orientation */
+	return TRUE;
 }
 
 static void
 multiload_construct (XfcePanelPlugin *plugin)
 {
-  MultiloadXfcePlugin *multiload;
-  
-  /* Initialize multiload */
-  multiload_init ();
+	MultiloadXfcePlugin *multiload;
 
-  /* setup transation domain */
-  xfce_textdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
+	/* Initialize multiload */
+	multiload_init ();
 
-  /* create the plugin */
-  multiload = multiload_new (plugin);
+	/* setup transation domain */
+	xfce_textdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 
-  /* add the ebox to the panel */
-  gtk_container_add (GTK_CONTAINER (plugin), multiload->ebox);
+	/* create the plugin */
+	multiload = multiload_new (plugin);
 
-  /* show the panel's right-click menu on this ebox */
-  xfce_panel_plugin_add_action_widget (plugin, multiload->ebox);
+	/* add the ebox to the panel */
+	gtk_container_add (GTK_CONTAINER (plugin), multiload->ebox);
 
-  /* connect plugin signals */
-  g_signal_connect (G_OBJECT (plugin), "free-data",
-                    G_CALLBACK (multiload_free), multiload);
+	/* show the panel's right-click menu on this ebox */
+	xfce_panel_plugin_add_action_widget (plugin, multiload->ebox);
 
-  g_signal_connect (G_OBJECT (plugin), "save",
-                    G_CALLBACK (multiload_save), &multiload->ma);
+	/* connect plugin signals */
+	g_signal_connect (G_OBJECT (plugin), "free-data",
+						G_CALLBACK (multiload_free), multiload);
 
-  g_signal_connect (G_OBJECT (plugin), "size-changed",
-                    G_CALLBACK (multiload_size_changed), &multiload->ma);
+	g_signal_connect (G_OBJECT (plugin), "save",
+						G_CALLBACK (multiload_save), &multiload->ma);
 
-  g_signal_connect (G_OBJECT (plugin), "orientation-changed",
-                    G_CALLBACK (multiload_orientation_changed), &multiload->ma);
+	g_signal_connect (G_OBJECT (plugin), "size-changed",
+						G_CALLBACK (multiload_size_changed), &multiload->ma);
 
-  /* show the configure menu item and connect signal */
-  xfce_panel_plugin_menu_show_configure (plugin);
-  g_signal_connect (G_OBJECT (plugin), "configure-plugin",
-                    G_CALLBACK (multiload_configure), multiload);
+	g_signal_connect (G_OBJECT (plugin), "orientation-changed",
+						G_CALLBACK (multiload_orientation_changed), &multiload->ma);
 
-  /* show the about menu item and connect signal */
-  xfce_panel_plugin_menu_show_about (plugin);
-  g_signal_connect (G_OBJECT (plugin), "about",
-                    G_CALLBACK (multiload_about), NULL);
-  /* FIXME: void xfce_panel_plugin_menu_insert_item  (XfcePanelPlugin *plugin,
-                                                         GtkMenuItem *item);
-  */
+	/* show the configure menu item and connect signal */
+	xfce_panel_plugin_menu_show_configure (plugin);
+	g_signal_connect (G_OBJECT (plugin), "configure-plugin",
+						G_CALLBACK (multiload_configure), multiload);
+
+	/* show the about menu item and connect signal */
+	xfce_panel_plugin_menu_show_about (plugin);
+	g_signal_connect (G_OBJECT (plugin), "about",
+						G_CALLBACK (multiload_about), NULL);
+
+	/* FIXME: void xfce_panel_plugin_menu_insert_item  (XfcePanelPlugin *plugin,
+						GtkMenuItem *item);
+	*/
 }

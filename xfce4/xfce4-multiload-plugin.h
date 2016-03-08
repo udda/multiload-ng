@@ -30,11 +30,11 @@ typedef struct _MultiloadXfcePlugin MultiloadXfcePlugin;
 
 struct _MultiloadXfcePlugin
 {
-    MultiloadPlugin ma;
+	MultiloadPlugin ma;
 
-    /* panel widgets */
-    XfcePanelPlugin *plugin;
-    GtkWidget       *ebox;
+	/* panel widgets */
+	XfcePanelPlugin *plugin;
+	GtkWidget       *ebox;
 };
 
 G_END_DECLS

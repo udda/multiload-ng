@@ -18,8 +18,8 @@
 #include "properties.h"
 #include "multiload.h"
 
-#define PROP_SPEED		6
-#define PROP_SIZE		7
+#define PROP_SPEED			6
+#define PROP_SIZE			7
 #define HIG_IDENTATION		"    "
 
 /* Defined in panel-specific code. */
@@ -70,110 +70,101 @@ key_writable (PanelApplet *applet, const char *key)
 
 static void
 properties_set_checkboxes_sensitive(MultiloadPlugin *ma, GtkWidget *checkbox,
-                                    gboolean sensitive)
+									gboolean sensitive)
 {
-  /* Cound the number of visible graphs */
-  gint i, total_graphs = 0, last_graph = 0;
+	/* CounT the number of visible graphs */
+	gint i, total_graphs = 0, last_graph = 0;
 
-  if ( !sensitive )
-    /* Only set unsensitive if one checkbox remains checked */
-    for (i = 0; i < NGRAPHS; i++)
-      if (ma->graph_config[i].visible)
-        {
-          last_graph = i;
-          total_graphs++;
-        }
-		
-  if ( total_graphs < 2 )
-    {
-      /* Container widget that contains the checkboxes */
-      GtkWidget *container = gtk_widget_get_ancestor(checkbox, GTK_TYPE_BOX);
-      if (container && container != checkbox)
-        {
-          GList *list = gtk_container_get_children (GTK_CONTAINER(container));
-          if ( sensitive )
-            {
-              /* Enable all checkboxes */
-              GList *item = list;
-              while ( item && item->data ) {
-                GtkWidget *nthbox = GTK_WIDGET (item->data);
-                soft_set_sensitive(nthbox, TRUE);
-                item = g_list_next (item);
-              }
-            }
-          else
-            {
-              /* Disable last remaining checkbox */
-              GtkWidget *nthbox = GTK_WIDGET(g_list_nth_data(list, last_graph));
-              if ( nthbox )
-                soft_set_sensitive(nthbox, FALSE);
-              else
-                g_assert_not_reached ();
-            }
-        }
-      else
-        g_assert_not_reached ();
-    }
-	
-  return;
+	if ( !sensitive ) {
+	/* Only set unsensitive if one checkbox remains checked */
+		for (i = 0; i < NGRAPHS; i++) {
+			if (ma->graph_config[i].visible) {
+				last_graph = i;
+				total_graphs++;
+			}
+		}
+	}
+
+	if ( total_graphs < 2 ) {
+		/* Container widget that contains the checkboxes */
+		GtkWidget *container = gtk_widget_get_ancestor(checkbox, GTK_TYPE_BOX);
+		if (container && container != checkbox) {
+				GList *list = gtk_container_get_children (GTK_CONTAINER(container));
+			if ( sensitive ) {
+				/* Enable all checkboxes */
+				GList *item = list;
+				while ( item && item->data ) {
+					GtkWidget *nthbox = GTK_WIDGET (item->data);
+					soft_set_sensitive(nthbox, TRUE);
+					item = g_list_next (item);
+				}
+			} else {
+				/* Disable last remaining checkbox */
+				GtkWidget *nthbox = GTK_WIDGET(g_list_nth_data(list, last_graph));
+				if ( nthbox )
+					soft_set_sensitive(nthbox, FALSE);
+				else
+					g_assert_not_reached ();
+			}
+		} else {
+			g_assert_not_reached ();
+		}
+	}
+
+	return;
 }
 
 static void
 property_toggled_cb(GtkWidget *widget, gpointer id)
 {
-  MultiloadPlugin *ma = multiload_configure_get_plugin(widget);
-  gint prop_type = GPOINTER_TO_INT(id);
-  gboolean active = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
+	MultiloadPlugin *ma = multiload_configure_get_plugin(widget);
+	gint prop_type = GPOINTER_TO_INT(id);
+	gboolean active = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 
-  if (active)
-    {
-      properties_set_checkboxes_sensitive(ma, widget, TRUE);
-      gtk_widget_show_all (ma->graphs[prop_type]->main_widget);
-      ma->graph_config[prop_type].visible = TRUE;
-      load_graph_start(ma->graphs[prop_type]);
-    }
-  else
-    {
-      load_graph_stop(ma->graphs[prop_type]);
-      gtk_widget_hide (ma->graphs[prop_type]->main_widget);
-      ma->graph_config[prop_type].visible = FALSE;
-      properties_set_checkboxes_sensitive(ma, widget, FALSE);
-    }
+	if (active) {
+		properties_set_checkboxes_sensitive(ma, widget, TRUE);
+		gtk_widget_show_all (ma->graphs[prop_type]->main_widget);
+		ma->graph_config[prop_type].visible = TRUE;
+		load_graph_start(ma->graphs[prop_type]);
+	} else {
+		load_graph_stop(ma->graphs[prop_type]);
+		gtk_widget_hide (ma->graphs[prop_type]->main_widget);
+		ma->graph_config[prop_type].visible = FALSE;
+		properties_set_checkboxes_sensitive(ma, widget, FALSE);
+	}
 
-  return;
+	return;
 }
 
 static void
 spin_button_changed_cb(GtkWidget *widget, gpointer id)
 {
-  MultiloadPlugin *ma = multiload_configure_get_plugin(widget);
-  gint prop_type = GPOINTER_TO_INT(id);
-  gint value = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
-  gint i;
+	MultiloadPlugin *ma = multiload_configure_get_plugin(widget);
+	gint prop_type = GPOINTER_TO_INT(id);
+	gint value = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
+	gint i;
 
-  switch(prop_type)
-    {
-      case PROP_SPEED:
-        ma->speed = value;
-        for (i = 0; i < NGRAPHS; i++)
-          {
-            load_graph_stop(ma->graphs[i]);
-            if (ma->graph_config[i].visible)
-              load_graph_start(ma->graphs[i]);
-          }
-        break;
+	switch(prop_type) {
+		case PROP_SPEED:
+			ma->speed = value;
+			for (i = 0; i < NGRAPHS; i++) {
+				load_graph_stop(ma->graphs[i]);
+				if (ma->graph_config[i].visible)
+					load_graph_start(ma->graphs[i]);
+			}
+			break;
 
-      case PROP_SIZE:
-        ma->size = value;
-        for (i = 0; i < NGRAPHS; i++)
-          load_graph_resize(ma->graphs[i]);			
-        break;
+		case PROP_SIZE:
+			ma->size = value;
+			for (i = 0; i < NGRAPHS; i++)
+				load_graph_resize(ma->graphs[i]);			
+			break;
 
-      default:
-        g_assert_not_reached();
-    }
+		default:
+			g_assert_not_reached();
+	}
 
-  return;
+	return;
 }
 
 /* create a new page in the notebook widget, add it, and return a pointer to it */
@@ -196,51 +187,50 @@ add_page(GtkNotebook *notebook, const gchar *label)
 static void
 color_picker_set_cb(GtkColorButton *color_picker, gpointer data)
 {
+	/* Parse user data for graph and color slot */
+	MultiloadPlugin *ma = multiload_configure_get_plugin(GTK_WIDGET (color_picker));
+	guint color_slot = GPOINTER_TO_INT(data);
+	guint graph = color_slot>>16, index = color_slot&0xFFFF; 
 
-  /* Parse user data for graph and color slot */
-  MultiloadPlugin *ma = multiload_configure_get_plugin(GTK_WIDGET (color_picker));
-  guint color_slot = GPOINTER_TO_INT(data);
-  guint graph = color_slot>>16, index = color_slot&0xFFFF; 
-
-  g_assert(graph >= 0 && graph < NGRAPHS);
-  g_assert(index >= 0 && index < graph_types[graph].num_colors);
+	g_assert(graph >= 0 && graph < NGRAPHS);
+	g_assert(index >= 0 && index < graph_types[graph].num_colors);
 		
-  gtk_color_button_get_color(color_picker, &ma->graph_config[graph].colors[index]);
-	
-  return;
+	gtk_color_button_get_color(color_picker, &ma->graph_config[graph].colors[index]);
+
+	return;
 }
 
 /* create a color selector */
 static void
 add_color_selector(GtkWidget *page, const gchar *name, guint graph, guint index,
-                   MultiloadPlugin *ma)
+				   MultiloadPlugin *ma)
 {
-  GtkWidget *vbox;
-  GtkWidget *label;
-  GtkWidget *color_picker;
-  guint color_slot = ((graph&0xFFFF)<<16)|(index&0xFFFF);
+	GtkWidget *vbox;
+	GtkWidget *label;
+	GtkWidget *color_picker;
+	guint color_slot = ((graph&0xFFFF)<<16)|(index&0xFFFF);
 		
-  vbox = gtk_vbox_new (FALSE, 6);
-  label = gtk_label_new_with_mnemonic(name);
-  color_picker = gtk_color_button_new();
-  gtk_label_set_mnemonic_widget (GTK_LABEL (label), color_picker);
+	vbox = gtk_vbox_new (FALSE, 6);
+	label = gtk_label_new_with_mnemonic(name);
+	color_picker = gtk_color_button_new();
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), color_picker);
 
-  gtk_box_pack_start(GTK_BOX(vbox), color_picker, FALSE, FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox), color_picker, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
 
-  gtk_box_pack_start(GTK_BOX(page), vbox, FALSE, FALSE, 0);	
+	gtk_box_pack_start(GTK_BOX(page), vbox, FALSE, FALSE, 0);	
 
-  gtk_color_button_set_color(GTK_COLOR_BUTTON(color_picker),
-                             &ma->graph_config[graph].colors[index]);
+	gtk_color_button_set_color(GTK_COLOR_BUTTON(color_picker),
+							 &ma->graph_config[graph].colors[index]);
 
-  g_signal_connect(G_OBJECT(color_picker), "color_set",
-                   G_CALLBACK(color_picker_set_cb),
-                   GINT_TO_POINTER(color_slot));
+	g_signal_connect(G_OBJECT(color_picker), "color_set",
+					G_CALLBACK(color_picker_set_cb),
+					GINT_TO_POINTER(color_slot));
 
-  //if ( ! key_writable (ma->applet, gconf_path))
-  //	hard_set_sensitive (vbox, FALSE);
+	//if ( ! key_writable (ma->applet, gconf_path))
+	//	hard_set_sensitive (vbox, FALSE);
 
-  return;
+	return;
 }
 
 /* creates the properties dialog and initialize it from the current
@@ -267,7 +257,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_widget_show (vbox);
 	
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), vbox,
-			    TRUE, TRUE, 0);
+				TRUE, TRUE, 0);
 
 	categories_vbox = gtk_vbox_new (FALSE, 18);
 	gtk_box_pack_start (GTK_BOX (vbox), categories_vbox, TRUE, TRUE, 0);
@@ -303,25 +293,24 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_widget_show (control_hbox);
 	
 
-	for ( i = 0; i < NGRAPHS; i++ )
-	  {
-	    GtkWidget *checkbox = gtk_check_button_new_with_mnemonic
-	        (graph_types[i].interactive_label);
-	    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbox),
-				    ma->graph_config[i].visible);
-	    g_signal_connect(G_OBJECT(checkbox), "toggled",
-			     G_CALLBACK(property_toggled_cb),
-			     GINT_TO_POINTER(i));
-	    gtk_box_pack_start (GTK_BOX (control_hbox), checkbox,
-	                        FALSE, FALSE, 0);
+	for ( i = 0; i < NGRAPHS; i++ ) {
+		GtkWidget *checkbox = gtk_check_button_new_with_mnemonic
+			(graph_types[i].interactive_label);
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbox),
+					ma->graph_config[i].visible);
+		g_signal_connect(G_OBJECT(checkbox), "toggled",
+				 G_CALLBACK(property_toggled_cb),
+				 GINT_TO_POINTER(i));
+		gtk_box_pack_start (GTK_BOX (control_hbox), checkbox,
+							FALSE, FALSE, 0);
 
-	    //if ( ! key_writable (ma->applet, "view_cpuload"))
-	    //	hard_set_sensitive (check_box, FALSE); // FIXME
+		//if ( ! key_writable (ma->applet, "view_cpuload"))
+		//	hard_set_sensitive (check_box, FALSE); // FIXME
 
-	    /* If only one graph is visible, disable its checkbox. */
-	    if ( i == NGRAPHS-1 )
-	      properties_set_checkboxes_sensitive(ma, checkbox, FALSE);
-          }
+		/* If only one graph is visible, disable its checkbox. */
+		if ( i == NGRAPHS-1 )
+			properties_set_checkboxes_sensitive(ma, checkbox, FALSE);
+	}
 
 	category_vbox = gtk_vbox_new (FALSE, 6);
 	gtk_box_pack_start (GTK_BOX (categories_vbox), category_vbox, TRUE, TRUE, 0);
@@ -363,8 +352,8 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	label = gtk_label_new_with_mnemonic(text);
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
 	gtk_size_group_add_widget (label_size, label);
-        gtk_box_pack_start (GTK_BOX (control_hbox), label, FALSE, FALSE, 0);
-      	g_free(text);
+	gtk_box_pack_start (GTK_BOX (control_hbox), label, FALSE, FALSE, 0);
+	g_free(text);
 	
 	hbox = gtk_hbox_new (FALSE, 6);
 	gtk_box_pack_start (GTK_BOX (control_hbox), hbox, TRUE, TRUE, 0);
@@ -454,20 +443,17 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	notebook = GTK_NOTEBOOK(gtk_notebook_new());
 	gtk_container_add (GTK_CONTAINER (control_vbox), GTK_WIDGET (notebook));
 	
-	for ( i = 0; i < NGRAPHS; i++ )
-	  {
-	    guint j;
-	    GtkWidget *page =
-	        add_page(notebook,  graph_types[i].noninteractive_label);
-	    gtk_container_set_border_width (GTK_CONTAINER (page), 12);
-	    for ( j = 0; j < graph_types[i].num_colors; j++ )
-	      {
-	        add_color_selector(page, graph_types[i].colors[j].prefs_label,
-	                           i, j, ma);
-              }
-          }
+	for ( i = 0; i < NGRAPHS; i++ ) {
+		guint j;
+		GtkWidget *page = add_page(notebook,
+								graph_types[i].noninteractive_label);
+		gtk_container_set_border_width (GTK_CONTAINER (page), 12);
+		for ( j = 0; j < graph_types[i].num_colors; j++ ) {
+			add_color_selector(page, graph_types[i].colors[j].prefs_label,
+								i, j, ma);
+		}
+	}
 	gtk_notebook_set_current_page (notebook, 0);
 
 	return;
 }
-
