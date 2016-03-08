@@ -227,21 +227,17 @@ GetMemory (int Maximum, int data [5], LoadGraph *g)
 void
 GetSwap (int Maximum, int data [2], LoadGraph *g)
 {
-    int used, free;
+    int used;
 
     glibtop_swap swap;
 
     glibtop_get_swap (&swap);
     g_return_if_fail ((swap.flags & needed_swap_flags) == needed_swap_flags);
 
-    if (swap.total == 0) {
-	used = 0;
-	free = Maximum;
-    }
-    else {
-	used    = rint (Maximum * (float)swap.used / swap.total);
-	free    = rint (Maximum * (float)swap.free / swap.total);
-    }
+    if (swap.total == 0)
+	   used = 0;
+    else
+	   used    = rint (Maximum * (float)swap.used / swap.total);
 
     data [0] = used;
     data [1] = Maximum - used;
@@ -253,7 +249,7 @@ GetLoadAvg (int Maximum, int data [2], LoadGraph *g)
     const float per_cpu_max_loadavg = 5.0f;
     float max_loadavg;
     float loadavg1;
-    float used, free;
+    float used;
 
     glibtop_loadavg loadavg;
     glibtop_get_loadavg (&loadavg);
@@ -266,7 +262,6 @@ GetLoadAvg (int Maximum, int data [2], LoadGraph *g)
     loadavg1 = MIN(loadavg.loadavg[0], max_loadavg);
 
     used    = loadavg1 / max_loadavg;
-    free    = (max_loadavg - loadavg1) / max_loadavg;
 
     data [0] = rint ((float) Maximum * used);
     data [1] = Maximum - data[0];

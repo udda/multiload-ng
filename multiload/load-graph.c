@@ -45,7 +45,7 @@ shift_right(LoadGraph *g)
 static void
 load_graph_draw (LoadGraph *g)
 {
-    GtkStyle *style;
+//    GtkStyle *style;
     guint i, j;
     cairo_t *cr;
     GdkColor *colors = g->multiload->graph_config[g->id].colors;
@@ -63,7 +63,7 @@ load_graph_draw (LoadGraph *g)
                                               g->draw_width, g->draw_height);
          */
 	
-    style = gtk_widget_get_style (g->disp);
+//    style = gtk_widget_get_style (g->disp);
 
     cr = cairo_create (g->surface);
     cairo_set_line_width (cr, 1.0);
