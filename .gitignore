@@ -22,6 +22,7 @@ xfce4/*.desktop.in
 po/.intltool-merge-cache
 po/Makefile.in.in
 po/POTFILES
+po/LINGUAS
 stamp-*
 *-stamp
 about-data.h
