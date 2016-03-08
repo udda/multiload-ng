@@ -1,0 +1,258 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: multiload-nandhp\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-12 16:17+0200\n"
+"PO-Revision-Date: 2015-06-12 16:33+0100\n"
+"Last-Translator: Mario Cianciolo <mr.udda@gmail.com>\n"
+"Language-Team: Mario Cianciolo <mr.udda@gmail.com>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Poedit 1.5.5\n"
+
+#. xgettext: use and cache are > 1 most of the time,
+#. please assume that they always are.
+#.
+#: ../multiload/multiload.c:46
+#, c-format
+msgid ""
+"%s:\n"
+"%u%% in use by programs\n"
+"%u%% in use as cache"
+msgstr ""
+"%s:\n"
+"%u%% usata dai programmi\n"
+"%u%% usata come cache"
+
+#. xgettext: same as in graphic tab of g-s-m
+#: ../multiload/multiload.c:60
+#, c-format
+msgid ""
+"%s:\n"
+"Receiving %s\n"
+"Sending %s"
+msgstr ""
+"%s:\n"
+"Ricezione %s\n"
+"Invio %s"
+
+#: ../multiload/multiload.c:69
+#, c-format
+msgid "The system load average is %0.02f"
+msgstr "Il carico medio del sistema è %0.02f"
+
+#: ../multiload/multiload.c:84
+#, c-format
+msgid ""
+"%s:\n"
+"%u%% in use"
+msgid_plural ""
+"%s:\n"
+"%u%% in use"
+msgstr[0] ""
+"%s:\n"
+"%u%% in uso"
+msgstr[1] ""
+"%s:\n"
+"%u%% in uso"
+msgstr[2] ""
+"%s:\n"
+"%u%% in uso"
+
+#. prefs_label       tooltip_label      name       get_data num_colors
+#: ../multiload/multiload.c:177
+msgid "_Processor"
+msgstr "_Processore"
+
+#: ../multiload/multiload.c:177
+msgid "Processor"
+msgstr "Processore"
+
+#: ../multiload/multiload.c:178 ../multiload/multiload.c:183
+msgid "_User"
+msgstr "_Utente"
+
+#: ../multiload/multiload.c:178
+msgid "_System"
+msgstr "_Sistema"
+
+#: ../multiload/multiload.c:179
+msgid "N_ice"
+msgstr "Ni_ce"
+
+#: ../multiload/multiload.c:179
+msgid "I_OWait"
+msgstr "IO_Wait"
+
+#: ../multiload/multiload.c:180
+msgid "Idl_e"
+msgstr "I_nattivo"
+
+#: ../multiload/multiload.c:182
+msgid "_Memory"
+msgstr "_Memoria"
+
+#: ../multiload/multiload.c:182
+msgid "Memory"
+msgstr "Memoria"
+
+#: ../multiload/multiload.c:183
+msgid "_Shared"
+msgstr "Condivi_sa"
+
+#: ../multiload/multiload.c:184
+msgid "_Buffers"
+msgstr "_Buffer"
+
+#: ../multiload/multiload.c:184
+msgid "Cach_ed"
+msgstr "C_ache"
+
+#: ../multiload/multiload.c:185 ../multiload/multiload.c:192
+msgid "_Free"
+msgstr "Li_bero"
+
+#: ../multiload/multiload.c:187
+msgid "_Network"
+msgstr "_Rete"
+
+#: ../multiload/multiload.c:187
+msgid "Network"
+msgstr "Rete"
+
+#: ../multiload/multiload.c:188
+msgid "_In"
+msgstr "Ricez_ione"
+
+#: ../multiload/multiload.c:188
+msgid "O_ut"
+msgstr "Invi_o"
+
+#: ../multiload/multiload.c:189
+msgid "L_ocal"
+msgstr "Lo_cale"
+
+#: ../multiload/multiload.c:189 ../multiload/multiload.c:195
+#: ../multiload/multiload.c:199
+msgid "_Background"
+msgstr "Sfon_do"
+
+#: ../multiload/multiload.c:191
+msgid "S_wap Space"
+msgstr "S_wap"
+
+#: ../multiload/multiload.c:191
+msgid "Swap Space"
+msgstr "Swap"
+
+#: ../multiload/multiload.c:192
+msgid "_Used"
+msgstr "_Usato"
+
+#: ../multiload/multiload.c:194
+msgid "_Load"
+msgstr "Carico"
+
+#: ../multiload/multiload.c:194
+msgid "Load Average"
+msgstr "Carico medio"
+
+#: ../multiload/multiload.c:195
+msgid "A_verage"
+msgstr "Me_dia"
+
+#: ../multiload/multiload.c:197
+msgid "_Disk"
+msgstr "_Disco"
+
+#: ../multiload/multiload.c:197
+msgid "Disk"
+msgstr "Disco"
+
+#: ../multiload/multiload.c:198
+msgid "_Read"
+msgstr "Let_tura"
+
+#: ../multiload/multiload.c:198
+msgid "Wr_ite"
+msgstr "Sc_rittura"
+
+#: ../multiload/netspeed.c:43
+#, c-format
+msgid "%s/s"
+msgstr "%s/s"
+
+#: ../multiload/properties.c:280
+msgid "Monitored Resources"
+msgstr "Risorse controllate"
+
+#: ../multiload/properties.c:330
+msgid "Options"
+msgstr "Opzioni"
+
+#: ../multiload/properties.c:359
+msgid "Wid_th: "
+msgstr "Larg_hezza: "
+
+#: ../multiload/properties.c:361
+msgid "Heigh_t: "
+msgstr "Alte_zza:"
+
+#: ../multiload/properties.c:391
+msgid "pixels"
+msgstr "pixel"
+
+#: ../multiload/properties.c:399
+msgid "Upd_ate interval: "
+msgstr "A_ggiorna ogni: "
+
+#. if ( ! key_writable (ma->applet, "speed")) {
+#. hard_set_sensitive (label, FALSE);
+#. hard_set_sensitive (hbox, FALSE);
+#. }
+#: ../multiload/properties.c:423
+msgid "milliseconds"
+msgstr "millisecondi"
+
+#: ../multiload/properties.c:432
+msgid "Colors"
+msgstr "Colori"
+
+#: ../xfce4/xfce4-multiload-dialogs.c:56
+#: ../lxpanel/lxpanel-multiload-plugin.c:224
+#, c-format
+msgid "Unable to open the following url: %s"
+msgstr "Impossibile aprire il seguente URL: %s"
+
+#: ../xfce4/xfce4-multiload-dialogs.c:100
+#: ../xfce4/xfce4-multiload-dialogs.c:138 ../xfce4/multiload.desktop.in.h:1
+#: ../lxpanel/lxpanel-multiload-plugin.c:262
+#: ../lxpanel/lxpanel-multiload-plugin.c:307
+msgid "Multiload"
+msgstr "Multiload"
+
+#: ../xfce4/xfce4-multiload-dialogs.c:140 ../xfce4/multiload.desktop.in.h:2
+#: ../lxpanel/lxpanel-multiload-plugin.c:309
+msgid ""
+"A system load monitor that graphs processor, memory, and swap space use, "
+"plus network and disk activity."
+msgstr ""
+"Un monitor di sistema che crea grafici per uso di processore, memoria e swap, "
+"oltre a attività di rete e del disco."
+
+#: ../xfce4/xfce4-multiload-dialogs.c:143
+msgid "Copyright © 1999-2012 nandhp, FSF, and others"
+msgstr "Copyright © 1999-2012 nandhp, FSF e altri"
+
+#. "documenters",  about_data_documenters,
+#: ../xfce4/xfce4-multiload-dialogs.c:147
+msgid "translator-credits"
+msgstr "Mario Cianciolo <mr.udda@gmail.com>"
