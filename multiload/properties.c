@@ -185,9 +185,6 @@ add_color_selector(GtkWidget *page, const gchar *name, guint graph, guint index,
 					G_CALLBACK(color_picker_set_cb),
 					GINT_TO_POINTER(color_slot));
 
-	//if ( ! key_writable (ma->applet, gconf_path))
-	//	hard_set_sensitive (vbox, FALSE);
-
 	return;
 }
 
@@ -262,9 +259,6 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 		gtk_box_pack_start (GTK_BOX (control_hbox), checkbox,
 							FALSE, FALSE, 0);
 
-		//if ( ! key_writable (ma->applet, "view_cpuload"))
-		//	hard_set_sensitive (check_box, FALSE); // FIXME
-
 		/* If only one graph is visible, disable its checkbox. */
 		if ( i == NGRAPHS-1 )
 			properties_set_checkboxes_sensitive(ma, checkbox, FALSE);
@@ -326,11 +320,6 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	g_signal_connect(G_OBJECT(spin_button), "value_changed",
 				G_CALLBACK(spin_button_changed_cb),
 				GINT_TO_POINTER(PROP_SIZE));
-	
-	//if ( ! key_writable (ma->applet, "size")) {
-	//	hard_set_sensitive (label, FALSE);
-	//	hard_set_sensitive (hbox, FALSE);
-	//}
 
 	gtk_size_group_add_widget (spin_size, spin_button);
 	gtk_box_pack_start (GTK_BOX (hbox), spin_button, FALSE, FALSE, 0);
@@ -362,11 +351,6 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_size_group_add_widget (spin_size, spin_button);
 	gtk_box_pack_start (GTK_BOX (hbox), spin_button, FALSE, FALSE, 0);
 
-	//if ( ! key_writable (ma->applet, "speed")) {
-	//	hard_set_sensitive (label, FALSE);
-	//	hard_set_sensitive (hbox, FALSE);
-	//}
-	
 	label = gtk_label_new(_("milliseconds"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
