@@ -112,9 +112,6 @@ multiload_refresh(MultiloadPlugin *ma, GtkOrientation orientation)
 {
 	gint i;
 
-	gint spacing_between_graphs = 1;
-	gint plugin_border = 2;
-
 	/* stop and free the old graphs */
 	for (i = 0; i < NGRAPHS; i++) {
 		if (!ma->graphs[i])
@@ -137,7 +134,7 @@ multiload_refresh(MultiloadPlugin *ma, GtkOrientation orientation)
 		ma->box = gtk_vbox_new (FALSE, 0);
 	gtk_widget_show (ma->box);
 	gtk_container_add (ma->container, ma->box);
-	gtk_container_set_border_width(GTK_CONTAINER(ma->box), plugin_border);
+	gtk_container_set_border_width(GTK_CONTAINER(ma->box), ma->padding);
 	ma->orientation = orientation;
 	/* We use show/hide to control graph visibility. Don't let a rogue panel
 	 * screw that up. */
@@ -152,7 +149,7 @@ multiload_refresh(MultiloadPlugin *ma, GtkOrientation orientation)
 	for (i = 0; i < NGRAPHS; i++) {
 		gtk_box_pack_start(GTK_BOX(ma->box), 
 				   ma->graphs[i]->main_widget, 
-				   TRUE, TRUE, spacing_between_graphs);
+				   TRUE, TRUE, ma->spacing);
 		if (ma->graph_config[i].visible) {
 			gtk_widget_show_all (ma->graphs[i]->main_widget);
 			load_graph_start(ma->graphs[i]);

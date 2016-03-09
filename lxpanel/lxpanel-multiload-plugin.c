@@ -57,6 +57,10 @@ multiload_read(char **fp, MultiloadPlugin *ma)
 					ma->speed = atoi(s.t[1]);
 				} else if ( g_ascii_strcasecmp(s.t[0], "size") == 0 ) {
 					ma->size = atoi(s.t[1]);
+				} else if ( g_ascii_strcasecmp(s.t[0], "padding") == 0 ) {
+					ma->padding = atoi(s.t[1]);
+				} else if ( g_ascii_strcasecmp(s.t[0], "spacing") == 0 ) {
+					ma->spacing = atoi(s.t[1]);
 				} else {
 					const char *suffix; /* Set by multiload_find_graph_by_name */
 					int i = multiload_find_graph_by_name(s.t[0], &suffix);
@@ -80,6 +84,10 @@ multiload_read(char **fp, MultiloadPlugin *ma)
 		ma->speed = DEFAULT_SPEED;
 	if ( ma->size == 0 )
 		ma->size = DEFAULT_SIZE;
+	if ( ma->padding == 0 )
+		ma->padding = DEFAULT_PADDING;
+	if ( ma->spacing == 0 )
+		ma->padding = DEFAULT_SPACING;
 	/* Ensure at lease one graph is visible */
 	for ( i = 0; i < NGRAPHS; i++ ) {
 		if ( ma->graph_config[i].visible == TRUE )
@@ -98,6 +106,8 @@ static void multiload_save_configuration(Plugin * p, FILE * fp)
 	/* Write size and speed */
 	lxpanel_put_int (fp, "speed", ma->speed);
 	lxpanel_put_int (fp, "size", ma->size);
+	lxpanel_put_int (fp, "padding", ma->padding);
+	lxpanel_put_int (fp, "spacing", ma->spacing);
 
 	for ( i = 0; i < NGRAPHS; i++ ) {
 		char *key, list[8*MAX_COLORS];

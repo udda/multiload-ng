@@ -34,10 +34,22 @@ typedef struct _GraphType GraphType;
 #define MIN_SIZE 10
 #define DEFAULT_SIZE 40
 #define MAX_SIZE 400
+#define STEP_SIZE 5
 
 #define MIN_SPEED 50
 #define DEFAULT_SPEED 500
 #define MAX_SPEED 10000
+#define STEP_SPEED 50
+
+#define MIN_PADDING 0
+#define DEFAULT_PADDING 2
+#define MAX_PADDING 40
+#define STEP_PADDING 1
+
+#define MIN_SPACING 0
+#define DEFAULT_SPACING 1
+#define MAX_SPACING 40
+#define STEP_SPACING 1
 
 struct _LoadGraph {
 	MultiloadPlugin *multiload;
@@ -86,6 +98,8 @@ struct _MultiloadPlugin
 	GraphConfig graph_config[NGRAPHS];
 	guint speed;
 	guint size;
+	guint padding;
+	guint spacing;
 };
 
 struct _GraphType {

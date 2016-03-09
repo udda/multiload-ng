@@ -20,6 +20,8 @@
 
 #define PROP_SPEED			6
 #define PROP_SIZE			7
+#define PROP_PADDING		8
+#define PROP_SPACING		9
 #define HIG_IDENTATION		"    "
 
 /* Defined in panel-specific code. */
@@ -115,7 +117,17 @@ spin_button_changed_cb(GtkWidget *widget, gpointer id)
 		case PROP_SIZE:
 			ma->size = value;
 			for (i = 0; i < NGRAPHS; i++)
-				load_graph_resize(ma->graphs[i]);			
+				load_graph_resize(ma->graphs[i]);
+			break;
+
+		case PROP_PADDING:
+			ma->padding = value;
+			multiload_refresh(ma, ma->orientation);
+			break;
+
+		case PROP_SPACING:
+			ma->spacing = value;
+			multiload_refresh(ma, ma->orientation);
 			break;
 
 		default:
@@ -313,7 +325,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 
 	spin_size = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 			  
-	spin_button = gtk_spin_button_new_with_range(MIN_SIZE, MAX_SIZE, 5);
+	spin_button = gtk_spin_button_new_with_range(MIN_SIZE, MAX_SIZE, STEP_SIZE);
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), spin_button);
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_button),
 				(gdouble)ma->size);
@@ -341,7 +353,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_box_pack_start (GTK_BOX (control_hbox), hbox, TRUE, TRUE, 0);
 	gtk_widget_show (hbox);
 	
-	spin_button = gtk_spin_button_new_with_range(MIN_SPEED, MAX_SPEED, 50);
+	spin_button = gtk_spin_button_new_with_range(MIN_SPEED, MAX_SPEED, STEP_SPEED);
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), spin_button);
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_button),
 				(gdouble)ma->speed);
@@ -354,8 +366,61 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	label = gtk_label_new(_("milliseconds"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-	
-	
+
+	control_hbox = gtk_hbox_new (FALSE, 12);
+	gtk_box_pack_start (GTK_BOX (control_vbox), control_hbox, TRUE, TRUE, 0);
+	gtk_widget_show (control_hbox);
+
+	label = gtk_label_new_with_mnemonic(_("Pa_dding: "));
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
+	gtk_size_group_add_widget (label_size, label);
+	gtk_box_pack_start (GTK_BOX (control_hbox), label, FALSE, FALSE, 0);
+
+	hbox = gtk_hbox_new (FALSE, 6);
+	gtk_box_pack_start (GTK_BOX (control_hbox), hbox, TRUE, TRUE, 0);
+	gtk_widget_show (hbox);
+
+	spin_button = gtk_spin_button_new_with_range(MIN_PADDING, MAX_PADDING, STEP_PADDING);
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), spin_button);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_button),
+				(gdouble)ma->padding);
+	g_signal_connect(G_OBJECT(spin_button), "value_changed",
+				G_CALLBACK(spin_button_changed_cb),
+				GINT_TO_POINTER(PROP_PADDING));
+	gtk_size_group_add_widget (spin_size, spin_button);
+	gtk_box_pack_start (GTK_BOX (hbox), spin_button, FALSE, FALSE, 0);
+
+	label = gtk_label_new(_("pixels"));
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+
+	control_hbox = gtk_hbox_new (FALSE, 12);
+	gtk_box_pack_start (GTK_BOX (control_vbox), control_hbox, TRUE, TRUE, 0);
+	gtk_widget_show (control_hbox);
+
+	label = gtk_label_new_with_mnemonic(_("S_pacing: "));
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
+	gtk_size_group_add_widget (label_size, label);
+	gtk_box_pack_start (GTK_BOX (control_hbox), label, FALSE, FALSE, 0);
+
+	hbox = gtk_hbox_new (FALSE, 6);
+	gtk_box_pack_start (GTK_BOX (control_hbox), hbox, TRUE, TRUE, 0);
+	gtk_widget_show (hbox);
+
+	spin_button = gtk_spin_button_new_with_range(MIN_SPACING, MAX_SPACING, STEP_SPACING);
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), spin_button);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_button),
+				(gdouble)ma->spacing);
+	g_signal_connect(G_OBJECT(spin_button), "value_changed",
+				G_CALLBACK(spin_button_changed_cb),
+				GINT_TO_POINTER(PROP_SPACING));
+	gtk_size_group_add_widget (spin_size, spin_button);
+	gtk_box_pack_start (GTK_BOX (hbox), spin_button, FALSE, FALSE, 0);
+
+	label = gtk_label_new(_("pixels"));
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+
 	category_vbox = gtk_vbox_new (FALSE, 6);
 	gtk_box_pack_start (GTK_BOX (categories_vbox), category_vbox, TRUE, TRUE, 0);
 	gtk_widget_show (category_vbox);
