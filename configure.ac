@@ -55,7 +55,7 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package.])
 AM_GLIB_GNU_GETTEXT
 
 # Dependencies
-AM_PATH_GTK_2_0([2.14.0],,AC_MSG_ERROR([Gtk+ 2.14.0 or higher required.]))
+AM_PATH_GTK_2_0([2.18.0],,AC_MSG_ERROR([Gtk+ 2.18.0 or higher required.]))
 PKG_CHECK_MODULES(CAIRO, [cairo])
 AC_SUBST(CAIRO_CFLAGS)
 AC_SUBST(CAIRO_LIBS)

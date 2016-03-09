@@ -9,7 +9,7 @@ It supports Xfce 4.6 and lxpanel 0.5.5 and above.
 System Requirements
 -------------------
 
-- GTK+                          >= 2.14.0
+- GTK+                          >= 2.18.0
 - Cairo
 - LibGTop                       >= 2.11.92
 
