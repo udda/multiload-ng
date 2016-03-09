@@ -57,6 +57,7 @@ multiload_new (XfcePanelPlugin *plugin)
 
 	/* create a container widget */
 	multiload->ebox = gtk_event_box_new ();
+	gtk_event_box_set_visible_window(GTK_EVENT_BOX(multiload->ebox), FALSE);
 	gtk_widget_show (multiload->ebox);
 
 	/* get the current orientation */
