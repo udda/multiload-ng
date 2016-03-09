@@ -26,48 +26,6 @@
 extern MultiloadPlugin *
 multiload_configure_get_plugin (GtkWidget *widget);
 
-#if 0
-#define NEVER_SENSITIVE		"never_sensitive"
-/* set sensitive and setup NEVER_SENSITIVE appropriately */
-static void
-hard_set_sensitive (GtkWidget *w, gboolean sensitivity)
-{
-	gtk_widget_set_sensitive (w, sensitivity);
-	g_object_set_data (G_OBJECT (w), NEVER_SENSITIVE,
-			   GINT_TO_POINTER ( ! sensitivity));
-}
-
-/* set sensitive, but always insensitive if NEVER_SENSITIVE is set */
-static void
-soft_set_sensitive (GtkWidget *w, gboolean sensitivity)
-{
-	if (g_object_get_data (G_OBJECT (w), NEVER_SENSITIVE))
-		gtk_widget_set_sensitive (w, FALSE);
-	else
-		gtk_widget_set_sensitive (w, sensitivity);
-}
-
-static gboolean
-key_writable (PanelApplet *applet, const char *key)
-{
-	gboolean writable;
-	char *fullkey;
-	static GConfClient *client = NULL;
-	if (client == NULL)
-		client = gconf_client_get_default ();
-
-	fullkey = panel_applet_gconf_get_full_key (applet, key);
-
-	writable = gconf_client_key_is_writable (client, fullkey, NULL);
-
-	g_free (fullkey);
-
-	return writable;
-}
-#else
-#define soft_set_sensitive gtk_widget_set_sensitive
-#endif
-
 static void
 properties_set_checkboxes_sensitive(MultiloadPlugin *ma, GtkWidget *checkbox,
 									gboolean sensitive)
@@ -95,14 +53,14 @@ properties_set_checkboxes_sensitive(MultiloadPlugin *ma, GtkWidget *checkbox,
 				GList *item = list;
 				while ( item && item->data ) {
 					GtkWidget *nthbox = GTK_WIDGET (item->data);
-					soft_set_sensitive(nthbox, TRUE);
+					gtk_widget_set_sensitive(nthbox, TRUE);
 					item = g_list_next (item);
 				}
 			} else {
 				/* Disable last remaining checkbox */
 				GtkWidget *nthbox = GTK_WIDGET(g_list_nth_data(list, last_graph));
 				if ( nthbox )
-					soft_set_sensitive(nthbox, FALSE);
+					gtk_widget_set_sensitive(nthbox, FALSE);
 				else
 					g_assert_not_reached ();
 			}
