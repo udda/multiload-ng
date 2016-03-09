@@ -21,7 +21,7 @@ msgstr ""
 #. xgettext: use and cache are > 1 most of the time,
 #. please assume that they always are.
 #.
-#: ../multiload/multiload.c:46
+#: ../multiload/multiload.c:45
 #, c-format
 msgid ""
 "%s:\n"
@@ -33,7 +33,7 @@ msgstr ""
 "%u%% použito jako cache"
 
 #. xgettext: same as in graphic tab of g-s-m
-#: ../multiload/multiload.c:60
+#: ../multiload/multiload.c:59
 #, c-format
 msgid ""
 "%s:\n"
@@ -44,12 +44,12 @@ msgstr ""
 "Přijímání %s\n"
 "Odesílání %s"
 
-#: ../multiload/multiload.c:69
+#: ../multiload/multiload.c:68
 #, c-format
 msgid "The system load average is %0.02f"
 msgstr "Průměrná zátěž systému je %0.02f"
 
-#: ../multiload/multiload.c:84
+#: ../multiload/multiload.c:83
 #, c-format
 msgid ""
 "%s:\n"
@@ -68,120 +68,120 @@ msgstr[2] ""
 "%u%% použito"
 
 #. prefs_label       tooltip_label      name       get_data num_colors
-#: ../multiload/multiload.c:177
+#: ../multiload/multiload.c:174
 msgid "_Processor"
 msgstr "_Procesor"
 
-#: ../multiload/multiload.c:177
+#: ../multiload/multiload.c:174
 msgid "Processor"
 msgstr "Procesor"
 
-#: ../multiload/multiload.c:178 ../multiload/multiload.c:183
+#: ../multiload/multiload.c:175 ../multiload/multiload.c:180
 msgid "_User"
 msgstr "_Uživatel"
 
-#: ../multiload/multiload.c:178
+#: ../multiload/multiload.c:175
 msgid "_System"
 msgstr "_Systém"
 
-#: ../multiload/multiload.c:179
+#: ../multiload/multiload.c:176
 msgid "N_ice"
 msgstr "Ni_ce"
 
-#: ../multiload/multiload.c:179
+#: ../multiload/multiload.c:176
 msgid "I_OWait"
 msgstr "IO_Wait"
 
-#: ../multiload/multiload.c:180
+#: ../multiload/multiload.c:177
 msgid "Idl_e"
 msgstr "N_ečinný"
 
-#: ../multiload/multiload.c:182
+#: ../multiload/multiload.c:179
 msgid "_Memory"
 msgstr "Pa_měť"
 
-#: ../multiload/multiload.c:182
+#: ../multiload/multiload.c:179
 msgid "Memory"
 msgstr "Paměť"
 
-#: ../multiload/multiload.c:183
+#: ../multiload/multiload.c:180
 msgid "_Shared"
 msgstr "Sdí_lené"
 
-#: ../multiload/multiload.c:184
+#: ../multiload/multiload.c:181
 msgid "_Buffers"
 msgstr "_Buffery"
 
-#: ../multiload/multiload.c:184
+#: ../multiload/multiload.c:181
 msgid "Cach_ed"
 msgstr "C_ache"
 
-#: ../multiload/multiload.c:185 ../multiload/multiload.c:192
+#: ../multiload/multiload.c:182 ../multiload/multiload.c:189
 msgid "_Free"
 msgstr "V_olno"
 
-#: ../multiload/multiload.c:187
+#: ../multiload/multiload.c:184
 msgid "_Network"
 msgstr "_Síť"
 
-#: ../multiload/multiload.c:187
+#: ../multiload/multiload.c:184
 msgid "Network"
 msgstr "Síť"
 
-#: ../multiload/multiload.c:188
+#: ../multiload/multiload.c:185
 msgid "_In"
 msgstr "Vst_up"
 
-#: ../multiload/multiload.c:188
+#: ../multiload/multiload.c:185
 msgid "O_ut"
 msgstr "Výs_tup"
 
-#: ../multiload/multiload.c:189
+#: ../multiload/multiload.c:186
 msgid "L_ocal"
 msgstr "Lo_kální"
 
-#: ../multiload/multiload.c:189 ../multiload/multiload.c:195
-#: ../multiload/multiload.c:199
+#: ../multiload/multiload.c:186 ../multiload/multiload.c:192
+#: ../multiload/multiload.c:196
 msgid "_Background"
 msgstr "_Pozadí"
 
-#: ../multiload/multiload.c:191
+#: ../multiload/multiload.c:188
 msgid "S_wap Space"
 msgstr "Odkládací prostor"
 
-#: ../multiload/multiload.c:191
+#: ../multiload/multiload.c:188
 msgid "Swap Space"
 msgstr "Odkládací prostor"
 
-#: ../multiload/multiload.c:192
+#: ../multiload/multiload.c:189
 msgid "_Used"
 msgstr "_Použito"
 
-#: ../multiload/multiload.c:194
+#: ../multiload/multiload.c:191
 msgid "_Load"
 msgstr "Zá_těž"
 
-#: ../multiload/multiload.c:194
+#: ../multiload/multiload.c:191
 msgid "Load Average"
 msgstr "Průměrná zátěž"
 
-#: ../multiload/multiload.c:195
+#: ../multiload/multiload.c:192
 msgid "A_verage"
 msgstr "P_růměr"
 
-#: ../multiload/multiload.c:197
+#: ../multiload/multiload.c:194
 msgid "_Disk"
 msgstr "_Disk"
 
-#: ../multiload/multiload.c:197
+#: ../multiload/multiload.c:194
 msgid "Disk"
 msgstr "Disk"
 
-#: ../multiload/multiload.c:198
+#: ../multiload/multiload.c:195
 msgid "_Read"
 msgstr "Č_tení"
 
-#: ../multiload/multiload.c:198
+#: ../multiload/multiload.c:195
 msgid "Wr_ite"
 msgstr "_Zápis"
 
@@ -190,27 +190,27 @@ msgstr "_Zápis"
 msgid "%s/s"
 msgstr "%s/s"
 
-#: ../multiload/properties.c:280
+#: ../multiload/properties.c:270
 msgid "Monitored Resources"
 msgstr "Monitorované zdroje"
 
-#: ../multiload/properties.c:330
+#: ../multiload/properties.c:319
 msgid "Options"
 msgstr "Volby"
 
-#: ../multiload/properties.c:359
+#: ../multiload/properties.c:348
 msgid "Wid_th: "
 msgstr "_Šířka"
 
-#: ../multiload/properties.c:361
+#: ../multiload/properties.c:350
 msgid "Heigh_t: "
 msgstr "_Výška:"
 
-#: ../multiload/properties.c:391
+#: ../multiload/properties.c:380
 msgid "pixels"
 msgstr "pixelů"
 
-#: ../multiload/properties.c:399
+#: ../multiload/properties.c:388
 msgid "Upd_ate interval: "
 msgstr "_Interval aktualizace:"
 
@@ -218,29 +218,29 @@ msgstr "_Interval aktualizace:"
 #. hard_set_sensitive (label, FALSE);
 #. hard_set_sensitive (hbox, FALSE);
 #. }
-#: ../multiload/properties.c:423
+#: ../multiload/properties.c:412
 msgid "milliseconds"
 msgstr "milisekund"
 
-#: ../multiload/properties.c:432
+#: ../multiload/properties.c:421
 msgid "Colors"
 msgstr "Barvy"
 
-#: ../xfce4/xfce4-multiload-dialogs.c:56
-#: ../lxpanel/lxpanel-multiload-plugin.c:224
+#: ../xfce4/xfce4-multiload-dialogs.c:55
+#: ../lxpanel/lxpanel-multiload-plugin.c:213
 #, c-format
 msgid "Unable to open the following url: %s"
 msgstr "Není možné otevřít následující url: %s"
 
-#: ../xfce4/xfce4-multiload-dialogs.c:100
-#: ../xfce4/xfce4-multiload-dialogs.c:138 ../xfce4/multiload.desktop.in.h:1
-#: ../lxpanel/lxpanel-multiload-plugin.c:262
-#: ../lxpanel/lxpanel-multiload-plugin.c:307
+#: ../xfce4/xfce4-multiload-dialogs.c:96
+#: ../xfce4/xfce4-multiload-dialogs.c:134 ../xfce4/multiload.desktop.in.h:1
+#: ../lxpanel/lxpanel-multiload-plugin.c:247
+#: ../lxpanel/lxpanel-multiload-plugin.c:290
 msgid "Multiload"
 msgstr "Multiload"
 
-#: ../xfce4/xfce4-multiload-dialogs.c:140 ../xfce4/multiload.desktop.in.h:2
-#: ../lxpanel/lxpanel-multiload-plugin.c:309
+#: ../xfce4/xfce4-multiload-dialogs.c:136 ../xfce4/multiload.desktop.in.h:2
+#: ../lxpanel/lxpanel-multiload-plugin.c:291
 msgid ""
 "A system load monitor that graphs processor, memory, and swap space use, "
 "plus network and disk activity."
@@ -248,11 +248,11 @@ msgstr ""
 "Monitor zátěže systému, který zobrazuje procesor, paměť, využití odkládacího "
 "místa, síťovou a diskovou aktivitu."
 
-#: ../xfce4/xfce4-multiload-dialogs.c:143
+#: ../xfce4/xfce4-multiload-dialogs.c:139
 msgid "Copyright © 1999-2012 nandhp, FSF, and others"
 msgstr "Copyright © 1999-2012 nandhp, FSF a další"
 
 #. "documenters",  about_data_documenters,
-#: ../xfce4/xfce4-multiload-dialogs.c:147
+#: ../xfce4/xfce4-multiload-dialogs.c:143
 msgid "translator-credits"
 msgstr "Jan Breuer <jan.breuer@jaybee.cz>"
