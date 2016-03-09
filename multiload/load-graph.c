@@ -71,7 +71,11 @@ load_graph_draw (LoadGraph *g)
 	for (i = 0; i < g->draw_width; i++)
 		g->pos [i] = g->draw_height - 1;
 
-	for (j = 0; j < graph_types[g->id].num_colors; j++) {
+	gdk_cairo_set_source_color (cr, &(colors[graph_types[g->id].num_colors-1]));
+	cairo_rectangle(cr, 0, 0, g->draw_width, g->draw_height);
+	cairo_fill(cr);
+
+	for (j = 0; j < graph_types[g->id].num_colors-1; j++) {
 		gdk_cairo_set_source_color (cr, &(colors[j]));
 
 		for (i = 0; i < g->draw_width; i++) {
