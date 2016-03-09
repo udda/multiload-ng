@@ -135,7 +135,7 @@ multiload_refresh(MultiloadPlugin *ma, GtkOrientation orientation)
 	gtk_widget_show (ma->box);
 	gtk_container_add (ma->container, ma->box);
 	ma->orientation = orientation;
-	/* We use show/hide to control graph visibility. Don't let a rouge panel
+	/* We use show/hide to control graph visibility. Don't let a rogue panel
 	 * screw that up. */
 	gtk_widget_set_no_show_all (ma->box, TRUE);
 
