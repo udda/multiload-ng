@@ -144,7 +144,7 @@ add_page(GtkNotebook *notebook, const gchar *label, const gchar *description)
 
 	page = gtk_vbox_new(FALSE, 0);
 	gtk_container_set_border_width(GTK_CONTAINER(page), PREF_CONTENT_PADDING);
-	page_label = gtk_label_new(label);
+	page_label = gtk_label_new_with_mnemonic(label);
 	gtk_widget_set_tooltip_text(page_label, description);
 
 	gtk_notebook_append_page(notebook, page, page_label);
@@ -272,7 +272,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 
 
 	// OPTIONS PAGE
-	page = add_page(tabs, _("Options"), _("Select settings that fit your needs."));
+	page = add_page(tabs, _("_Options"), _("Select settings that fit your needs."));
 
 	// -- table
 	table = GTK_TABLE(gtk_table_new(4, 3, FALSE));
