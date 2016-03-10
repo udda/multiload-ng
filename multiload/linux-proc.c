@@ -58,9 +58,9 @@ GetLoad (int Maximum, int data [5], LoadGraph *g)
 	int total;
 
 	glibtop_cpu cpu;
-	
+
 	glibtop_get_cpu (&cpu);
-	
+
 	g_return_if_fail ((cpu.flags & needed_cpu_flags) == needed_cpu_flags);
 
 	g->cpu_time [0] = cpu.user;
@@ -132,7 +132,7 @@ GetDiskLoad (int Maximum, int data [3], LoadGraph *g)
 		glibtop_get_fsusage(&fsusage, mountentries[i].mountdir);
 		//TODO debug code, remove as soon it's not needed anymore
 		if ((fsusage.flags & needed_fsusage_flags) != needed_fsusage_flags)
-			printf("ERR [%s] fsusage.flags = %08X needed = %08X", mountentries[i].mountdir, fsusage.flags, needed_fsusage_flags);
+			printf("ERR [%s] fsusage.flags = %08lX needed = %08X", mountentries[i].mountdir, fsusage.flags, needed_fsusage_flags);
 		read += fsusage.block_size * fsusage.read;
 		write += fsusage.block_size * fsusage.write;
 	}
@@ -172,9 +172,9 @@ GetPage (int Maximum, int data [3], LoadGraph *g)
 	int in, out, idle;
 
 	glibtop_swap swap;
-	
+
 	glibtop_get_swap (&swap);
-	
+
 	assert ((swap.flags & needed_page_flags) == needed_page_flags);
 
 	if ((lastin > 0) && (lastin < swap.pagein))
@@ -210,22 +210,22 @@ void
 GetMemory (int Maximum, int data [5], LoadGraph *g)
 {
 	int user, shared, buffer, cached;
-	
+
 	glibtop_mem mem;
-	
+
 	glibtop_get_mem (&mem);
-	
+
 	g_return_if_fail ((mem.flags & needed_mem_flags) == needed_mem_flags);
 
-	user    = rint (Maximum * (float)mem.user / (float)mem.total);
+	user    = rint (Maximum * (float)mem.user   / (float)mem.total);
 	shared  = rint (Maximum * (float)mem.shared / (float)mem.total);
 	buffer  = rint (Maximum * (float)mem.buffer / (float)mem.total);
-	cached = rint (Maximum * (float)mem.cached / (float)mem.total);
-	
+	cached  = rint (Maximum * (float)mem.cached / (float)mem.total);
+
 	data [0] = user;
 	data [1] = shared;
 	data [2] = buffer;
-	data[3] = cached;
+	data [3] = cached;
 	data [4] = Maximum-user-shared-buffer-cached;
 }
 
@@ -242,7 +242,7 @@ GetSwap (int Maximum, int data [2], LoadGraph *g)
 	if (swap.total == 0)
 	   used = 0;
 	else
-	   used    = rint (Maximum * (float)swap.used / swap.total);
+	   used = rint (Maximum * (float)swap.used / swap.total);
 
 	data [0] = used;
 	data [1] = Maximum - used;

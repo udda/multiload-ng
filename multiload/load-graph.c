@@ -30,7 +30,6 @@ cairo_set_source_rgba_from_config(cairo_t *cr, GraphConfig *config, guint color_
   data[i] are int*, so we just move the pointer, not the data.
   But moving data loses data[n-1], so we save data[n-1] and reuse
   it as new data[0]. In fact, we rotate data[].
-
 */
 static void
 shift_right(LoadGraph *g)
@@ -53,7 +52,6 @@ shift_right(LoadGraph *g)
 static void
 load_graph_draw (LoadGraph *g)
 {
-//    GtkStyle *style;
 	guint i, j, k;
 	cairo_t *cr;
 	GraphConfig *config = &(g->multiload->graph_config[g->id]);
@@ -66,13 +64,13 @@ load_graph_draw (LoadGraph *g)
 	if (!g->surface)
 		g->surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32,
 												g->draw_width, g->draw_height);
-		/* Not available on GTK < 2.22
-		   gdk_window_create_similar_surface (gtk_widget_get_window (g->disp),
-											  CAIRO_CONTENT_COLOR,
-											  g->draw_width, g->draw_height);
-		 */
-	
-//    style = gtk_widget_get_style (g->disp);
+		/*
+		// Not available on GTK < 2.22
+		g->surface = gdk_window_create_similar_surface (
+							gtk_widget_get_window (c->disp),
+							CAIRO_CONTENT_COLOR | CAIRO_CONTENT_ALPHA,
+							c->draw_width, c->draw_height);
+		*/
 
 	cr = cairo_create (g->surface);
 	cairo_set_line_width (cr, 1.0);
@@ -101,7 +99,7 @@ load_graph_draw (LoadGraph *g)
 
 		cairo_stroke (cr);
 	}
-	
+
 	cairo_destroy (cr);
 
 	cr = gdk_cairo_create (gtk_widget_get_window (g->disp));
@@ -178,7 +176,7 @@ load_graph_configure (GtkWidget *widget, GdkEventConfigure *event,
 {
 	GtkAllocation allocation;
 	LoadGraph *c = (LoadGraph *) data_ptr;
-	
+
 	load_graph_unalloc (c);
 
 	gtk_widget_get_allocation (c->disp, &allocation);
@@ -187,17 +185,19 @@ load_graph_configure (GtkWidget *widget, GdkEventConfigure *event,
 	c->draw_height = allocation.height;
 	c->draw_width = MAX (c->draw_width, 1);
 	c->draw_height = MAX (c->draw_height, 1);
-	
+
 	load_graph_alloc (c);
- 
+
 	if (!c->surface)
 		c->surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32,
 												c->draw_width, c->draw_height);
-		/* Not available on GTK < 2.22
-		   gdk_window_create_similar_surface (gtk_widget_get_window (c->disp),
-											  CAIRO_CONTENT_COLOR,
-											  c->draw_width, c->draw_height);
-		 */
+		/*
+		// Not available on GTK < 2.22
+		c->surface = gdk_window_create_similar_surface (
+							gtk_widget_get_window (c->disp),
+							CAIRO_CONTENT_COLOR | CAIRO_CONTENT_ALPHA,
+							c->draw_width, c->draw_height);
+		*/
 
 	gtk_widget_queue_draw (widget);
 
@@ -205,8 +205,7 @@ load_graph_configure (GtkWidget *widget, GdkEventConfigure *event,
 }
 
 static gint
-load_graph_expose (GtkWidget *widget, GdkEventExpose *event,
-		   gpointer data_ptr)
+load_graph_expose (GtkWidget *widget, GdkEventExpose *event, gpointer data_ptr)
 {
 	LoadGraph *g = (LoadGraph *) data_ptr;
 	cairo_t *cr;
@@ -268,7 +267,7 @@ LoadGraph *
 load_graph_new (MultiloadPlugin *ma, guint id)
 {
 	LoadGraph *g;
-	
+
 	g = g_new0 (LoadGraph, 1);
 	g->netspeed_in = netspeed_new(g);
 	g->netspeed_out = netspeed_new(g);
@@ -276,11 +275,11 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 
 	g->tooltip_update = FALSE;
 	g->multiload = ma;
-		
+
 	g->main_widget = gtk_vbox_new (FALSE, 0);
 
 	g->box = gtk_vbox_new (FALSE, 0);
-	
+
 	if (ma->show_frame) {
 		g->frame = gtk_frame_new (NULL);
 		gtk_frame_set_shadow_type (GTK_FRAME (g->frame), GTK_SHADOW_IN);
@@ -301,7 +300,7 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 						GDK_ENTER_NOTIFY_MASK |
 						GDK_LEAVE_NOTIFY_MASK |
 						GDK_BUTTON_PRESS_MASK);
-	
+
 	g_signal_connect (G_OBJECT (g->disp), "expose_event",
 					G_CALLBACK (load_graph_expose), g);
 	g_signal_connect (G_OBJECT(g->disp), "configure_event",
@@ -314,7 +313,7 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 					G_CALLBACK(load_graph_enter_cb), g);
 	g_signal_connect (G_OBJECT(g->disp), "leave-notify-event",
 					G_CALLBACK(load_graph_leave_cb), g);
-	
+
 	gtk_box_pack_start (GTK_BOX (g->box), g->disp, TRUE, TRUE, 0);    
 	gtk_widget_show_all(g->box);
 
@@ -348,6 +347,6 @@ load_graph_stop (LoadGraph *g)
 {
 	if (g->timer_index != -1)
 		g_source_remove (g->timer_index);
-	
+
 	g->timer_index = -1;
 }

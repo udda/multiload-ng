@@ -164,7 +164,7 @@ color_picker_set_cb(GtkColorButton *color_picker, gpointer data)
 
 	g_assert(graph >= 0 && graph < NGRAPHS);
 	g_assert(index >= 0 && index < graph_types[graph].num_colors);
-		
+
 	gtk_color_button_get_color(color_picker, &ma->graph_config[graph].colors[index]);
 	ma->graph_config[graph].alpha[index] = gtk_color_button_get_alpha(color_picker);
 

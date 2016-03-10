@@ -124,7 +124,7 @@ multiload_refresh(MultiloadPlugin *ma, GtkOrientation orientation)
 	for (i = 0; i < NGRAPHS; i++) {
 		if (!ma->graphs[i])
 			continue;
-	
+
 		load_graph_stop(ma->graphs[i]);
 		gtk_widget_destroy(ma->graphs[i]->main_widget);
 
@@ -153,7 +153,6 @@ multiload_refresh(MultiloadPlugin *ma, GtkOrientation orientation)
 	multiload_create_graphs (ma);
 
 	/* only start and display the graphs the user has turned on */
-
 	for (i = 0; i < NGRAPHS; i++) {
 		gtk_box_pack_start(GTK_BOX(ma->box), 
 				   ma->graphs[i]->main_widget, 
@@ -163,7 +162,7 @@ multiload_refresh(MultiloadPlugin *ma, GtkOrientation orientation)
 			load_graph_start(ma->graphs[i]);
 		}
 	}
-		
+
 	return;
 }
 
