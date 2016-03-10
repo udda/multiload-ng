@@ -5,18 +5,20 @@
 
 G_BEGIN_DECLS
 
-#define PROP_CPULOAD		0
-#define PROP_MEMLOAD		1
-#define PROP_NETLOAD		2
-#define PROP_SWAPLOAD		3
-#define PROP_LOADAVG		4
-#define PROP_DISKLOAD		5
+#define PROP_CPULOAD			0
+#define PROP_MEMLOAD			1
+#define PROP_NETLOAD			2
+#define PROP_SWAPLOAD			3
+#define PROP_LOADAVG			4
+#define PROP_DISKLOAD			5
 
-#define PROP_SPEED			6
-#define PROP_SIZE			7
-#define PROP_PADDING		8
-#define PROP_SPACING		9
-#define PROP_SHOWFRAME		10
+#define PROP_SPEED				6
+#define PROP_SIZE				7
+#define PROP_PADDING			8
+#define PROP_SPACING			9
+#define PROP_SHOWFRAME			10
+
+#define ACTION_DEFAULT_COLORS	1
 
 typedef enum {
 	LOADAVG_1 = 0,

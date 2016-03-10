@@ -18,7 +18,6 @@
 #include "properties.h"
 #include "multiload.h"
 
-#define HIG_IDENTATION		"    "
 
 #define PREF_CONTENT_PADDING 6
 
@@ -91,6 +90,20 @@ preference_toggled_cb(GtkWidget *widget, gpointer id)
 	if (prop_type == PROP_SHOWFRAME) {
 		ma->show_frame = active;
 		multiload_refresh(ma, ma->orientation);
+	}
+}
+
+static void
+button_clicked_cb(GtkWidget *widget, gpointer id)
+{
+	MultiloadPlugin *ma = multiload_configure_get_plugin(widget);
+	GtkWidget *dialog = gtk_widget_get_ancestor(widget, GTK_TYPE_DIALOG);
+	gint action = GPOINTER_TO_INT(id);
+	guint i;
+	if (action == ACTION_DEFAULT_COLORS) {
+		for ( i = 0; i < NGRAPHS; i++ )
+			multiload_colorconfig_default(ma, i);
+		multiload_init_preferences(dialog, ma);
 	}
 }
 
@@ -213,7 +226,7 @@ void
 multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 {
 	guint i, j, k;
-	GtkNotebook *tabs;
+	static GtkNotebook *tabs = NULL;
 	GtkSizeGroup *sizegroup;
 	GtkWidget *page;
 	GtkWidget *frame;
@@ -222,9 +235,15 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	GtkWidget *label;
 	GtkWidget *t;
 
+	GtkWidget *contentArea = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+
+	// Delete main container for replacing with new (useful to update content)
+	if (G_UNLIKELY(GTK_IS_WIDGET(tabs)))
+		gtk_container_remove(GTK_CONTAINER(contentArea), GTK_WIDGET(tabs));
+
+	// New container
 	tabs = GTK_NOTEBOOK(gtk_notebook_new());
-	gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(dialog))),
-				GTK_WIDGET(tabs), TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(contentArea), GTK_WIDGET(tabs), TRUE, TRUE, 0);
 
 
 
@@ -268,6 +287,15 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 		}
 	}
 	properties_set_checkboxes_sensitive(ma, FALSE);
+
+	// -- bottom buttons
+	box = gtk_hbox_new(FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(page), box, FALSE, FALSE, PREF_CONTENT_PADDING);
+
+	t = gtk_button_new_with_label(_("Default colors"));
+	g_signal_connect(G_OBJECT(t), "clicked",
+							G_CALLBACK(button_clicked_cb), GINT_TO_POINTER(ACTION_DEFAULT_COLORS));
+	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 
 
@@ -355,4 +383,6 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 			GINT_TO_POINTER(PROP_SHOWFRAME));
 	gtk_box_pack_start(GTK_BOX(page), t, FALSE, FALSE, 0);
 
+
+	gtk_widget_show_all(GTK_WIDGET(contentArea));
 }
