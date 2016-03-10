@@ -47,20 +47,20 @@ properties_set_checkboxes_sensitive(MultiloadPlugin *ma, GtkWidget *checkbox,
 		/* Container widget that contains the checkboxes */
 		GtkWidget *container = gtk_widget_get_ancestor(checkbox, GTK_TYPE_BOX);
 		if (container && container != checkbox) {
-				GList *list = gtk_container_get_children (GTK_CONTAINER(container));
+			GList *list = gtk_container_get_children (GTK_CONTAINER(container));
 			if ( sensitive ) {
 				/* Enable all checkboxes */
 				GList *item = list;
 				while ( item && item->data ) {
 					GtkWidget *nthbox = GTK_WIDGET (item->data);
-					gtk_widget_set_sensitive(nthbox, TRUE);
+					gtk_widget_set_sensitive(gtk_frame_get_label_widget(GTK_FRAME(nthbox)), TRUE);
 					item = g_list_next (item);
 				}
 			} else {
 				/* Disable last remaining checkbox */
 				GtkWidget *nthbox = GTK_WIDGET(g_list_nth_data(list, last_graph));
 				if ( nthbox )
-					gtk_widget_set_sensitive(nthbox, FALSE);
+					gtk_widget_set_sensitive(gtk_frame_get_label_widget(GTK_FRAME(nthbox)), FALSE);
 				else
 					g_assert_not_reached ();
 			}
@@ -227,24 +227,6 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(dialog))),
 				GTK_WIDGET(tabs), TRUE, TRUE, 0);
 
-	// RESOURCES PAGE
-	page = add_page(tabs, _("Resources"), _("Select one or more graphs to show."));
-
-	// -- checkboxes
-	box = gtk_vbox_new(TRUE, 0);
-	gtk_container_set_border_width(GTK_CONTAINER(box), PREF_CONTENT_PADDING);
-	for (i = 0; i < NGRAPHS; i++) {
-		t = gtk_check_button_new_with_mnemonic(graph_types[i].interactive_label);
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(t),
-							ma->graph_config[i].visible);
-		g_signal_connect(G_OBJECT(t), "toggled",
-							G_CALLBACK(property_toggled_cb), GINT_TO_POINTER(i));
-		gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, 0);
-	}
-	properties_set_checkboxes_sensitive(ma, t, FALSE);
-	gtk_box_pack_start(GTK_BOX(page), GTK_WIDGET(box), FALSE, FALSE, 0);
-
-
 	// OPTIONS PAGE
 	page = add_page(tabs, _("Options"), _("Select settings that fit your needs."));
 
@@ -336,7 +318,15 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	// -- colors
 	sizegroup = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
 	for( i = 0; i < NGRAPHS; i++ ) {
-		frame = gtk_frame_new(graph_types[i].noninteractive_label);
+
+		t = gtk_check_button_new_with_mnemonic(graph_types[i].interactive_label);
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(t),
+							ma->graph_config[i].visible);
+		g_signal_connect(G_OBJECT(t), "toggled",
+							G_CALLBACK(property_toggled_cb), GINT_TO_POINTER(i));
+
+		frame = gtk_frame_new(NULL);
+		gtk_frame_set_label_widget(GTK_FRAME(frame), t);
 		gtk_box_pack_start(GTK_BOX(page), GTK_WIDGET(frame), FALSE, FALSE, 0);
 
 		box = gtk_hbox_new(FALSE, 0);
@@ -358,4 +348,5 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 			}
 		}
 	}
+	properties_set_checkboxes_sensitive(ma, gtk_frame_get_label_widget(frame), FALSE);
 }

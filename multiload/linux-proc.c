@@ -130,7 +130,8 @@ GetDiskLoad (int Maximum, int data [3], LoadGraph *g)
 			continue;
 
 		glibtop_get_fsusage(&fsusage, mountentries[i].mountdir);
-		g_return_if_fail ((fsusage.flags & needed_fsusage_flags) == needed_fsusage_flags);
+		if ((fsusage.flags & needed_fsusage_flags) != needed_fsusage_flags)
+			printf("ERR [%s] fsusage.flags = %08X needed = %08X", mountentries[i].mountdir, fsusage.flags, needed_fsusage_flags);
 		read += fsusage.block_size * fsusage.read;
 		write += fsusage.block_size * fsusage.write;
 	}
