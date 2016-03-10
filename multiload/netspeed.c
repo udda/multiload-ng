@@ -36,7 +36,7 @@ void netspeed_add(NetSpeed *ns, gulong tx)
 
 /* Something very similar to g_format_size_for_display() but for rates.
  * This should give the same display as in g-s-m */
-static char*
+char*
 format_rate_for_display(guint rate)
 {
 	char* bytes = g_format_size_full(rate, G_FORMAT_SIZE_IEC_UNITS);

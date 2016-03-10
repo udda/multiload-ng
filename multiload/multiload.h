@@ -78,6 +78,9 @@ struct _LoadGraph {
 	NetSpeed *netspeed_in;
 	NetSpeed *netspeed_out;
 
+	guint diskread;
+	guint diskwrite;
+
 	gboolean tooltip_update;
 };
 

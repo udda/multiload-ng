@@ -30,6 +30,11 @@ static const unsigned needed_page_flags =
 (1 << GLIBTOP_SWAP_PAGEOUT);
 #endif
 
+static const unsigned needed_fsusage_flags = 
+(1 << GLIBTOP_FSUSAGE_BLOCK_SIZE) +
+(1 << GLIBTOP_FSUSAGE_READ) +
+(1 << GLIBTOP_FSUSAGE_WRITE);
+
 static const unsigned needed_mem_flags =
 (1 << GLIBTOP_MEM_USED) +
 (1 << GLIBTOP_MEM_FREE);
@@ -108,7 +113,7 @@ GetDiskLoad (int Maximum, int data [3], LoadGraph *g)
 	guint64 readdiff, writediff;
 
 
-	if(first_call)
+	if (first_call)
 		autoscaler_init(&scaler, 60, 500);
 
 	read = write = 0;
@@ -125,7 +130,9 @@ GetDiskLoad (int Maximum, int data [3], LoadGraph *g)
 			continue;
 
 		glibtop_get_fsusage(&fsusage, mountentries[i].mountdir);
-		read += fsusage.read; write += fsusage.write;
+		g_return_if_fail ((fsusage.flags & needed_fsusage_flags) == needed_fsusage_flags);
+		read += fsusage.block_size * fsusage.read;
+		write += fsusage.block_size * fsusage.write;
 	}
 
 	g_free(mountentries);
@@ -147,6 +154,10 @@ GetDiskLoad (int Maximum, int data [3], LoadGraph *g)
 	data[0] = (float)Maximum *  readdiff / (float)max;
 	data[1] = (float)Maximum * writediff / (float)max;
 	data[2] = (float)Maximum - (data [0] + data[1]);
+
+	// HACK: I don't know why these speeds need to be divided by 8, I will investigate
+	g->diskread = (guint64)((readdiff*1000.0)/(8*g->multiload->speed));
+	g->diskwrite = (guint64)((writediff*1000.0)/(8*g->multiload->speed));
 }
 
 #if 0

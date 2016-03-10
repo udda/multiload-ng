@@ -68,6 +68,14 @@ multiload_tooltip_update(LoadGraph *g)
 			tooltip_text = g_strdup_printf(_("The system load average is %0.02f"),
 							g->loadavg1);
 			break;
+		case GRAPH_DISKLOAD:
+			{
+			tooltip_text = g_strdup_printf(_("%s:\n"
+							"Read %s\n"
+							"Write %s"),
+							name, format_rate_for_display(g->diskread), format_rate_for_display(g->diskwrite));
+			}
+			break;
 		default:
 			{
 			const char *msg;
