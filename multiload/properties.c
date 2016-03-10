@@ -20,7 +20,7 @@
 
 #define HIG_IDENTATION		"    "
 
-#define PREF_CONTENT_PADDING 8
+#define PREF_CONTENT_PADDING 6
 
 /* Defined in panel-specific code. */
 extern MultiloadPlugin *
@@ -141,20 +141,11 @@ add_page(GtkNotebook *notebook, const gchar *label, const gchar *description)
 {
 	GtkWidget *page;
 	GtkWidget *page_label;
-	GtkWidget *l;
 
 	page = gtk_vbox_new(FALSE, 0);
 	gtk_container_set_border_width(GTK_CONTAINER(page), PREF_CONTENT_PADDING);
 	page_label = gtk_label_new(label);
 	gtk_widget_set_tooltip_text(page_label, description);
-
-	l = gtk_label_new(description);
-	gtk_label_set_justify(GTK_LABEL(l), GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment(GTK_MISC(l), 0, 0.5);
-	gtk_box_pack_start(GTK_BOX(page), l, FALSE, FALSE, 0);
-
-	l = gtk_label_new(NULL);
-	gtk_box_pack_start(GTK_BOX(page), l, FALSE, FALSE, 10);
 
 	gtk_notebook_append_page(notebook, page, page_label);
 
@@ -188,7 +179,7 @@ new_color_selector(const gchar *name, guint graph, guint index,
 	GtkWidget *color_picker;
 	guint color_slot = ((graph&0xFFFF)<<16)|(index&0xFFFF);
 		
-	vbox = gtk_vbox_new (FALSE, 4);
+	vbox = gtk_vbox_new (FALSE, 0);
 	label = gtk_label_new_with_mnemonic(name);
 	color_picker = gtk_color_button_new();
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), color_picker);
@@ -327,11 +318,10 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	sizegroup = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
 	for( i = 0; i < NGRAPHS; i++ ) {
 		frame = gtk_frame_new(graph_types[i].noninteractive_label);
-		gtk_container_set_border_width(GTK_CONTAINER(frame), PREF_CONTENT_PADDING);
 		gtk_box_pack_start(GTK_BOX(page), GTK_WIDGET(frame), FALSE, FALSE, 0);
 
-		box = gtk_hbox_new(FALSE, PREF_CONTENT_PADDING);
-		gtk_container_set_border_width(GTK_CONTAINER(box), PREF_CONTENT_PADDING);
+		box = gtk_hbox_new(FALSE, 0);
+		gtk_container_set_border_width(GTK_CONTAINER(box), 2);
 		gtk_container_add(GTK_CONTAINER(frame), GTK_WIDGET(box));
 
 		k = graph_types[i].num_colors;
@@ -341,11 +331,11 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 			if (j == k-1) {
 				label = gtk_label_new(NULL); // actually a spacer
 				gtk_size_group_add_widget(sizegroup, label);
-				gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, 0);
+				gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
 
-				gtk_box_pack_end(GTK_BOX(box), t, FALSE, FALSE, 0);
+				gtk_box_pack_end(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 			} else {
-				gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, 0);
+				gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 			}
 		}
 	}
