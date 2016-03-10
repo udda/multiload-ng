@@ -171,30 +171,57 @@ multiload_init()
 
 	/* Prepare graph types */
 	GraphType temp[] = {
-		/* prefs_label       tooltip_label      name       get_data num_colors */
-		{ _("_Processor"),   _("Processor"),    "cpuload",  GetLoad,     5,
-		{ { _("_User"), "#0072b3" }, { _("_System"), "#0092e6" },
-		{ _("N_ice"), "#00a3ff" }, { _("I_OWait"), "#002f3d" },
-		{ _("_Background"), "#000000" } } },
+		/*	prefs_label			tooltip_label		name			get_data */
+		{	_("_Processor"),	_("Processor"),		"cpuload",		GetLoad,
+			5, { // num_colors
+				{ _("_User"),		"#0072B3" },
+				{ _("_System"),		"#0092E6" },
+				{ _("N_ice"),		"#00A3FF" },
+				{ _("I_OWait"),		"#002F3D" },
+				{ _("_Background"),	"#000000" }
+			}
+		},
 
-		{ _("_Memory"),      _("Memory"),       "memload",  GetMemory,   5,
-		{ { _("_User"), "#00b35b" }, { _("_Shared"), "#00e675" },
-		{ _("_Buffers"), "#00ff82" }, { _("Cach_ed"), "#AAF5D0" },
-		{ _("_Background"), "#000000" } } },
+		{	_("_Memory"),		_("Memory"),		"memload",		GetMemory,
+			5, { // num_colors
+				{ _("_User"),		"#00B35B" },
+				{ _("_Shared"),		"#00E675" },
+				{ _("_Buffers"),	"#00FF82" },
+				{ _("Cach_ed"),		"#AAF5D0" },
+				{ _("_Background"),	"#000000" }
+			}
+		},
 
-		{ _("_Network"),     _("Network"),      "netload",  GetNet,      4,
-		{ { _("_In"), "#fce94f" }, { _("O_ut"), "#edd400" },
-		{ _("L_ocal"), "#c4a000" },  { _("_Background"), "#000000" } } },
+		{	_("_Network"),		_("Network"),		"netload",		GetNet,
+			4, { // num_colors
+				{ _("_In"),			"#FCE94F" },
+				{ _("O_ut"),		"#EDD400" },
+				{ _("L_ocal"),		"#C4A000" },
+				{ _("_Background"),	"#000000" }
+			}
+		},
 
-		{ _("S_wap Space"),  _("Swap Space"),   "swapload", GetSwap,     2,
-		{ { _("_Used"), "#8b00c3" }, { _("_Background"), "#000000" } } },
+		{	_("S_wap Space"),	_("Swap Space"),	"swapload",		GetSwap,
+			2, { // num_colors
+				{ _("_Used"),		"#8B00C3" },
+				{ _("_Background"),	"#000000" }
+			}
+		},
 
-		{ _("_Load"),        _("Load Average"), "loadavg",  GetLoadAvg,  2,
-		{ { _("A_verage"), "#d50000" }, { _("_Background"), "#000000" } } },
+		{	_("_Load"),			_("Load Average"),	"loadavg",		GetLoadAvg,
+			2, { // num_colors
+				{ _("A_verage"),	"#D50000" },
+				{ _("_Background"),	"#000000" }
+			}
+		},
 
-		{ _("_Disk"),        _("Disk"),         "diskload", GetDiskLoad, 3,
-		{ { _("_Read"), "#C65000" }, { _("Wr_ite"), "#FF6700" },
-		{ _("_Background"), "#000000" } } }
+		{	_("_Disk"),			_("Disk"),			"diskload",		GetDiskLoad,
+			3, { // num_colors
+				{ _("_Read"),		"#C65000" },
+				{ _("Wr_ite"),		"#FF6700" },
+				{ _("_Background"),	"#000000" }
+			}
+		}
 	};
 	memcpy(&graph_types, &temp, sizeof(graph_types));
 }
