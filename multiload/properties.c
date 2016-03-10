@@ -226,6 +226,51 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(dialog))),
 				GTK_WIDGET(tabs), TRUE, TRUE, 0);
 
+
+
+	// COLORS PAGE
+	page = add_page(tabs, _("_Resources"), _("Change colors and visibility of the graphs."));
+
+	sizegroup = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
+	for( i = 0; i < NGRAPHS; i++ ) {
+		// -- -- checkbox
+		t = gtk_check_button_new_with_mnemonic(graph_types[i].interactive_label);
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(t),
+							ma->graph_config[i].visible);
+		g_signal_connect(G_OBJECT(t), "toggled",
+							G_CALLBACK(property_toggled_cb), GINT_TO_POINTER(i));
+		checkbuttons[i] = t;
+
+		// -- -- frame
+		frame = gtk_frame_new(NULL);
+		gtk_frame_set_label_widget(GTK_FRAME(frame), t);
+		gtk_box_pack_start(GTK_BOX(page), GTK_WIDGET(frame), FALSE, FALSE, 0);
+
+		box = gtk_hbox_new(FALSE, 0);
+		gtk_container_set_border_width(GTK_CONTAINER(box), 2);
+		gtk_container_add(GTK_CONTAINER(frame), GTK_WIDGET(box));
+
+		// -- -- colors
+		k = graph_types[i].num_colors;
+		for( j = 0; j < k; j++ ) {
+			if (j == k-1) {
+				label = gtk_label_new(NULL); // actually a spacer
+				gtk_size_group_add_widget(sizegroup, label);
+				gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
+
+				t = new_color_selector(i, j, FALSE, ma);
+				gtk_box_pack_end(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
+			} else {
+				t = new_color_selector(i, j, TRUE, ma);
+				gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
+			}
+			gtk_size_group_add_widget(sizegroup, t);
+		}
+	}
+	properties_set_checkboxes_sensitive(ma, FALSE);
+
+
+
 	// OPTIONS PAGE
 	page = add_page(tabs, _("Options"), _("Select settings that fit your needs."));
 
@@ -310,46 +355,4 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 			GINT_TO_POINTER(PROP_SHOWFRAME));
 	gtk_box_pack_start(GTK_BOX(page), t, FALSE, FALSE, 0);
 
-
-	// COLORS PAGE
-	page = add_page(tabs, _("Colors"), _("Change colors of the graphs."));
-
-	// -- colors
-	sizegroup = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
-	for( i = 0; i < NGRAPHS; i++ ) {
-		// -- -- checkbox
-		t = gtk_check_button_new_with_mnemonic(graph_types[i].interactive_label);
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(t),
-							ma->graph_config[i].visible);
-		g_signal_connect(G_OBJECT(t), "toggled",
-							G_CALLBACK(property_toggled_cb), GINT_TO_POINTER(i));
-		checkbuttons[i] = t;
-
-		// -- -- frame
-		frame = gtk_frame_new(NULL);
-		gtk_frame_set_label_widget(GTK_FRAME(frame), t);
-		gtk_box_pack_start(GTK_BOX(page), GTK_WIDGET(frame), FALSE, FALSE, 0);
-
-		box = gtk_hbox_new(FALSE, 0);
-		gtk_container_set_border_width(GTK_CONTAINER(box), 2);
-		gtk_container_add(GTK_CONTAINER(frame), GTK_WIDGET(box));
-
-		// -- -- colors
-		k = graph_types[i].num_colors;
-		for( j = 0; j < k; j++ ) {
-			if (j == k-1) {
-				label = gtk_label_new(NULL); // actually a spacer
-				gtk_size_group_add_widget(sizegroup, label);
-				gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
-
-				t = new_color_selector(i, j, FALSE, ma);
-				gtk_box_pack_end(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
-			} else {
-				t = new_color_selector(i, j, TRUE, ma);
-				gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
-			}
-			gtk_size_group_add_widget(sizegroup, t);
-		}
-	}
-	properties_set_checkboxes_sensitive(ma, FALSE);
 }
