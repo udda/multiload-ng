@@ -24,6 +24,8 @@
 #define PROP_SPACING		9
 #define HIG_IDENTATION		"    "
 
+#define PREF_CONTENT_PADDING 8
+
 /* Defined in panel-specific code. */
 extern MultiloadPlugin *
 multiload_configure_get_plugin (GtkWidget *widget);
@@ -139,17 +141,27 @@ spin_button_changed_cb(GtkWidget *widget, gpointer id)
 
 /* create a new page in the notebook widget, add it, and return a pointer to it */
 static GtkWidget *
-add_page(GtkNotebook *notebook, const gchar *label)
+add_page(GtkNotebook *notebook, const gchar *label, const gchar *description)
 {
 	GtkWidget *page;
 	GtkWidget *page_label;
-	
-	page = gtk_hbox_new(TRUE, 0);
+	GtkWidget *l;
+
+	page = gtk_vbox_new(FALSE, 0);
+	gtk_container_set_border_width(GTK_CONTAINER(page), PREF_CONTENT_PADDING);
 	page_label = gtk_label_new(label);
-	gtk_container_set_border_width(GTK_CONTAINER(page), 6);
-		
+	gtk_widget_set_tooltip_text(page_label, description);
+
+	l = gtk_label_new(description);
+	gtk_label_set_justify(GTK_LABEL(l), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment(GTK_MISC(l), 0, 0.5);
+	gtk_box_pack_start(GTK_BOX(page), l, FALSE, FALSE, 0);
+
+	l = gtk_label_new(NULL);
+	gtk_box_pack_start(GTK_BOX(page), l, FALSE, FALSE, 10);
+
 	gtk_notebook_append_page(notebook, page, page_label);
-	
+
 	return page;
 }
 
@@ -171,8 +183,8 @@ color_picker_set_cb(GtkColorButton *color_picker, gpointer data)
 }
 
 /* create a color selector */
-static void
-add_color_selector(GtkWidget *page, const gchar *name, guint graph, guint index,
+static GtkWidget *
+new_color_selector(const gchar *name, guint graph, guint index,
 				   MultiloadPlugin *ma)
 {
 	GtkWidget *vbox;
@@ -180,7 +192,7 @@ add_color_selector(GtkWidget *page, const gchar *name, guint graph, guint index,
 	GtkWidget *color_picker;
 	guint color_slot = ((graph&0xFFFF)<<16)|(index&0xFFFF);
 		
-	vbox = gtk_vbox_new (FALSE, 6);
+	vbox = gtk_vbox_new (FALSE, 4);
 	label = gtk_label_new_with_mnemonic(name);
 	color_picker = gtk_color_button_new();
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), color_picker);
@@ -188,16 +200,13 @@ add_color_selector(GtkWidget *page, const gchar *name, guint graph, guint index,
 	gtk_box_pack_start(GTK_BOX(vbox), color_picker, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
 
-	gtk_box_pack_start(GTK_BOX(page), vbox, FALSE, FALSE, 0);	
-
 	gtk_color_button_set_color(GTK_COLOR_BUTTON(color_picker),
 							 &ma->graph_config[graph].colors[index]);
 
 	g_signal_connect(G_OBJECT(color_picker), "color_set",
-					G_CALLBACK(color_picker_set_cb),
-					GINT_TO_POINTER(color_slot));
+				G_CALLBACK(color_picker_set_cb), GINT_TO_POINTER(color_slot));
 
-	return;
+	return vbox;
 }
 
 /* creates the properties dialog and initialize it from the current
@@ -205,262 +214,143 @@ add_color_selector(GtkWidget *page, const gchar *name, guint graph, guint index,
 void
 multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 {
-	GtkWidget *hbox, *vbox;
-	GtkWidget *categories_vbox;
-	GtkWidget *category_vbox;
-	GtkWidget *control_vbox;
-	GtkWidget *control_hbox;
-	GtkWidget *indent;
-	GtkWidget *spin_button;
+	guint i, j, k;
+	GtkNotebook *tabs;
+	GtkSizeGroup *sizegroup;
+	GtkWidget *page;
+	GtkWidget *frame;
+	GtkWidget *box;
+	GtkTable *table;
 	GtkWidget *label;
-	GtkNotebook *notebook;
-	GtkSizeGroup *label_size;
-	GtkSizeGroup *spin_size;
-	gchar *text;
-	guint i;
+	GtkWidget *t;
 
-	vbox = gtk_vbox_new (FALSE, 0);
-	gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
-	gtk_widget_show (vbox);
-	
-	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), vbox,
-				TRUE, TRUE, 0);
+	tabs = GTK_NOTEBOOK(gtk_notebook_new());
+	gtk_box_pack_start(GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(dialog))),
+				GTK_WIDGET(tabs), TRUE, TRUE, 0);
 
-	categories_vbox = gtk_vbox_new (FALSE, 18);
-	gtk_box_pack_start (GTK_BOX (vbox), categories_vbox, TRUE, TRUE, 0);
-	gtk_widget_show (categories_vbox);
+	// RESOURCES PAGE
+	page = add_page(tabs, _("Resources"), _("Select one or more graphs to show."));
 
-	category_vbox = gtk_vbox_new (FALSE, 6);
-	gtk_box_pack_start (GTK_BOX (categories_vbox), category_vbox, TRUE, TRUE, 0);
-	gtk_widget_show (category_vbox);
-	
-	text = g_strconcat ("<span weight=\"bold\">", _("Monitored Resources"), "</span>", NULL);
-	label = gtk_label_new (text);
-	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
-	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-	gtk_box_pack_start (GTK_BOX (category_vbox), label, FALSE, FALSE, 0);
-	g_free (text);
-	
-	hbox = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (category_vbox), hbox, TRUE, TRUE, 0);
-	gtk_widget_show (hbox);
-	
-	indent = gtk_label_new (HIG_IDENTATION);
-	gtk_label_set_justify (GTK_LABEL (indent), GTK_JUSTIFY_LEFT);
-	gtk_box_pack_start (GTK_BOX (hbox), indent, FALSE, FALSE, 0);
-	gtk_widget_show (indent);
-	
-	control_vbox = gtk_vbox_new (FALSE, 6);
-	gtk_box_pack_start (GTK_BOX (hbox), control_vbox, TRUE, TRUE, 0);
-	gtk_widget_show (control_vbox);
-	
-	control_hbox = gtk_hbox_new (FALSE, 12);
-	gtk_box_pack_start (GTK_BOX (control_vbox), control_hbox, TRUE, TRUE, 0);
-	gtk_widget_show (control_hbox);
-	
-
-	for ( i = 0; i < NGRAPHS; i++ ) {
-		GtkWidget *checkbox = gtk_check_button_new_with_mnemonic
-			(graph_types[i].interactive_label);
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbox),
-					ma->graph_config[i].visible);
-		g_signal_connect(G_OBJECT(checkbox), "toggled",
-				 G_CALLBACK(property_toggled_cb),
-				 GINT_TO_POINTER(i));
-		gtk_box_pack_start (GTK_BOX (control_hbox), checkbox,
-							FALSE, FALSE, 0);
-
-		/* If only one graph is visible, disable its checkbox. */
-		if ( i == NGRAPHS-1 )
-			properties_set_checkboxes_sensitive(ma, checkbox, FALSE);
+	// -- checkboxes
+	box = gtk_vbox_new(TRUE, 0);
+	gtk_container_set_border_width(GTK_CONTAINER(box), PREF_CONTENT_PADDING);
+	for (i = 0; i < NGRAPHS; i++) {
+		t = gtk_check_button_new_with_mnemonic(graph_types[i].interactive_label);
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(t),
+							ma->graph_config[i].visible);
+		g_signal_connect(G_OBJECT(t), "toggled",
+							G_CALLBACK(property_toggled_cb), GINT_TO_POINTER(i));
+		gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, 0);
 	}
+	properties_set_checkboxes_sensitive(ma, t, FALSE);
+	gtk_box_pack_start(GTK_BOX(page), GTK_WIDGET(box), FALSE, FALSE, 0);
 
-	category_vbox = gtk_vbox_new (FALSE, 6);
-	gtk_box_pack_start (GTK_BOX (categories_vbox), category_vbox, TRUE, TRUE, 0);
-	gtk_widget_show (category_vbox);
 
-	text = g_strconcat ("<span weight=\"bold\">", _("Options"), "</span>", NULL);
-	label = gtk_label_new (text);
-	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
-	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-	gtk_box_pack_start (GTK_BOX (category_vbox), label, FALSE, FALSE, 0);
-	gtk_widget_show (label);
-	g_free (text);
-	
-	hbox = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (category_vbox), hbox, TRUE, TRUE, 0);
-	gtk_widget_show (hbox);
+	// OPTIONS PAGE
+	page = add_page(tabs, _("Options"), _("Select settings that fit your needs."));
 
-	indent = gtk_label_new (HIG_IDENTATION);
-	gtk_label_set_justify (GTK_LABEL (indent), GTK_JUSTIFY_LEFT);
-	gtk_box_pack_start (GTK_BOX (hbox), indent, FALSE, FALSE, 0);
-	gtk_widget_show (indent);
+	// -- table
+	table = GTK_TABLE(gtk_table_new(4, 3, FALSE));
+	gtk_container_set_border_width(GTK_CONTAINER(table), PREF_CONTENT_PADDING);
+	gtk_table_set_col_spacings(table, 4);
+	gtk_table_set_row_spacings(table, 4);
+	gtk_box_pack_start (GTK_BOX (page), GTK_WIDGET(table), FALSE, FALSE, 0);
 
-	control_vbox = gtk_vbox_new (FALSE, 6);
-	gtk_box_pack_start (GTK_BOX (hbox), control_vbox, TRUE, TRUE, 0);
-	gtk_widget_show (control_vbox);
-	
-	control_hbox = gtk_hbox_new (FALSE, 12);
-	gtk_box_pack_start (GTK_BOX (control_vbox), control_hbox, TRUE, TRUE, 0);
-	gtk_widget_show (control_hbox);
-	
-	label_size = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-
-	if ( ma->orientation == GTK_ORIENTATION_HORIZONTAL )
-		text = g_strdup(_("Wid_th: "));
+	// -- -- row: width/height
+	if (ma->orientation == GTK_ORIENTATION_HORIZONTAL)
+		label = gtk_label_new_with_mnemonic(_("Wid_th: "));
 	else
-		text = g_strdup(_("Heigh_t: "));
-	
-	label = gtk_label_new_with_mnemonic(text);
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
-	gtk_size_group_add_widget (label_size, label);
-	gtk_box_pack_start (GTK_BOX (control_hbox), label, FALSE, FALSE, 0);
-	g_free(text);
-	
-	hbox = gtk_hbox_new (FALSE, 6);
-	gtk_box_pack_start (GTK_BOX (control_hbox), hbox, TRUE, TRUE, 0);
-	gtk_widget_show (hbox);
+		label = gtk_label_new_with_mnemonic(_("Heigh_t: "));
+	gtk_misc_set_alignment(GTK_MISC(label), 0.0f, 0.5f);
+	gtk_table_attach_defaults(table, GTK_WIDGET(label), 0, 1, 0, 1);
 
-	spin_size = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-			  
-	spin_button = gtk_spin_button_new_with_range(MIN_SIZE, MAX_SIZE, STEP_SIZE);
-	gtk_label_set_mnemonic_widget (GTK_LABEL (label), spin_button);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_button),
-				(gdouble)ma->size);
-	g_signal_connect(G_OBJECT(spin_button), "value_changed",
-				G_CALLBACK(spin_button_changed_cb),
-				GINT_TO_POINTER(PROP_SIZE));
+	t = gtk_spin_button_new_with_range(MIN_SIZE, MAX_SIZE, STEP_SIZE);
+	gtk_label_set_mnemonic_widget (GTK_LABEL(label), t);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(t), (gdouble)ma->size);
+	g_signal_connect(G_OBJECT(t), "value_changed",
+			G_CALLBACK(spin_button_changed_cb), GINT_TO_POINTER(PROP_SIZE));
+	gtk_table_attach_defaults(table, GTK_WIDGET(t), 1, 2, 0, 1);
 
-	gtk_size_group_add_widget (spin_size, spin_button);
-	gtk_box_pack_start (GTK_BOX (hbox), spin_button, FALSE, FALSE, 0);
-	
 	label = gtk_label_new (_("pixels"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-	
-	control_hbox = gtk_hbox_new (FALSE, 12);
-	gtk_box_pack_start (GTK_BOX (control_vbox), control_hbox, TRUE, TRUE, 0);
-	gtk_widget_show (control_hbox);
-	
+	gtk_table_attach_defaults(table, GTK_WIDGET(label), 2, 3, 0, 1);
+
+	// -- -- row: padding
+	label = gtk_label_new_with_mnemonic(_("Pa_dding: "));
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
+	gtk_table_attach_defaults(table, GTK_WIDGET(label), 0, 1, 1, 2);
+
+	t = gtk_spin_button_new_with_range(MIN_PADDING, MAX_PADDING, STEP_PADDING);
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), t);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(t), (gdouble)ma->padding);
+	g_signal_connect(G_OBJECT(t), "value_changed",
+			G_CALLBACK(spin_button_changed_cb), GINT_TO_POINTER(PROP_PADDING));
+	gtk_table_attach_defaults(table, GTK_WIDGET(t), 1, 2, 1, 2);
+
+	label = gtk_label_new(_("pixels"));
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
+	gtk_table_attach_defaults(table, GTK_WIDGET(label), 2, 3, 1, 2);
+
+	// -- -- row: spacing
+	label = gtk_label_new_with_mnemonic(_("S_pacing: "));
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
+	gtk_table_attach_defaults(table, GTK_WIDGET(label), 0, 1, 2, 3);
+
+	t = gtk_spin_button_new_with_range(MIN_SPACING, MAX_SPACING, STEP_SPACING);
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), t);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(t), (gdouble)ma->spacing);
+	g_signal_connect(G_OBJECT(t), "value_changed",
+			G_CALLBACK(spin_button_changed_cb), GINT_TO_POINTER(PROP_SPACING));
+	gtk_table_attach_defaults(table, GTK_WIDGET(t), 1, 2, 2, 3);
+
+	label = gtk_label_new(_("pixels"));
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
+	gtk_table_attach_defaults(table, GTK_WIDGET(label), 2, 3, 2, 3);
+
+	// -- -- row: update interval
 	label = gtk_label_new_with_mnemonic(_("Upd_ate interval: "));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
-	gtk_size_group_add_widget (label_size, label);
-	gtk_box_pack_start (GTK_BOX (control_hbox), label, FALSE, FALSE, 0);
-	
-	hbox = gtk_hbox_new (FALSE, 6);
-	gtk_box_pack_start (GTK_BOX (control_hbox), hbox, TRUE, TRUE, 0);
-	gtk_widget_show (hbox);
-	
-	spin_button = gtk_spin_button_new_with_range(MIN_SPEED, MAX_SPEED, STEP_SPEED);
-	gtk_label_set_mnemonic_widget (GTK_LABEL (label), spin_button);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_button),
-				(gdouble)ma->speed);
-	g_signal_connect(G_OBJECT(spin_button), "value_changed",
-				G_CALLBACK(spin_button_changed_cb),
-				GINT_TO_POINTER(PROP_SPEED));
-	gtk_size_group_add_widget (spin_size, spin_button);
-	gtk_box_pack_start (GTK_BOX (hbox), spin_button, FALSE, FALSE, 0);
+	gtk_table_attach_defaults(table, GTK_WIDGET(label), 0, 1, 3, 4);
+
+	t = gtk_spin_button_new_with_range(MIN_SPEED, MAX_SPEED, STEP_SPEED);
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), t);
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(t), (gdouble)ma->speed);
+	g_signal_connect(G_OBJECT(t), "value_changed",
+			G_CALLBACK(spin_button_changed_cb), GINT_TO_POINTER(PROP_SPEED));
+	gtk_table_attach_defaults(table, GTK_WIDGET(t), 1, 2, 3, 4);
 
 	label = gtk_label_new(_("milliseconds"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_table_attach_defaults(table, GTK_WIDGET(label), 2, 3, 3, 4);
 
-	control_hbox = gtk_hbox_new (FALSE, 12);
-	gtk_box_pack_start (GTK_BOX (control_vbox), control_hbox, TRUE, TRUE, 0);
-	gtk_widget_show (control_hbox);
 
-	label = gtk_label_new_with_mnemonic(_("Pa_dding: "));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
-	gtk_size_group_add_widget (label_size, label);
-	gtk_box_pack_start (GTK_BOX (control_hbox), label, FALSE, FALSE, 0);
+	// COLORS PAGE
+	page = add_page(tabs, _("Colors"), _("Change colors of the graphs."));
 
-	hbox = gtk_hbox_new (FALSE, 6);
-	gtk_box_pack_start (GTK_BOX (control_hbox), hbox, TRUE, TRUE, 0);
-	gtk_widget_show (hbox);
+	// -- colors
+	sizegroup = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
+	for( i = 0; i < NGRAPHS; i++ ) {
+		frame = gtk_frame_new(graph_types[i].noninteractive_label);
+		gtk_container_set_border_width(GTK_CONTAINER(frame), PREF_CONTENT_PADDING);
+		gtk_box_pack_start(GTK_BOX(page), GTK_WIDGET(frame), FALSE, FALSE, 0);
 
-	spin_button = gtk_spin_button_new_with_range(MIN_PADDING, MAX_PADDING, STEP_PADDING);
-	gtk_label_set_mnemonic_widget (GTK_LABEL (label), spin_button);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_button),
-				(gdouble)ma->padding);
-	g_signal_connect(G_OBJECT(spin_button), "value_changed",
-				G_CALLBACK(spin_button_changed_cb),
-				GINT_TO_POINTER(PROP_PADDING));
-	gtk_size_group_add_widget (spin_size, spin_button);
-	gtk_box_pack_start (GTK_BOX (hbox), spin_button, FALSE, FALSE, 0);
+		box = gtk_hbox_new(FALSE, PREF_CONTENT_PADDING);
+		gtk_container_set_border_width(GTK_CONTAINER(box), PREF_CONTENT_PADDING);
+		gtk_container_add(GTK_CONTAINER(frame), GTK_WIDGET(box));
 
-	label = gtk_label_new(_("pixels"));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+		k = graph_types[i].num_colors;
+		for( j = 0; j < k; j++ ) {
+			t = new_color_selector(graph_types[i].colors[j].prefs_label, i, j, ma);
+			gtk_size_group_add_widget(sizegroup, t);
+			if (j == k-1) {
+				label = gtk_label_new(NULL); // actually a spacer
+				gtk_size_group_add_widget(sizegroup, label);
+				gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, 0);
 
-	control_hbox = gtk_hbox_new (FALSE, 12);
-	gtk_box_pack_start (GTK_BOX (control_vbox), control_hbox, TRUE, TRUE, 0);
-	gtk_widget_show (control_hbox);
-
-	label = gtk_label_new_with_mnemonic(_("S_pacing: "));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
-	gtk_size_group_add_widget (label_size, label);
-	gtk_box_pack_start (GTK_BOX (control_hbox), label, FALSE, FALSE, 0);
-
-	hbox = gtk_hbox_new (FALSE, 6);
-	gtk_box_pack_start (GTK_BOX (control_hbox), hbox, TRUE, TRUE, 0);
-	gtk_widget_show (hbox);
-
-	spin_button = gtk_spin_button_new_with_range(MIN_SPACING, MAX_SPACING, STEP_SPACING);
-	gtk_label_set_mnemonic_widget (GTK_LABEL (label), spin_button);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_button),
-				(gdouble)ma->spacing);
-	g_signal_connect(G_OBJECT(spin_button), "value_changed",
-				G_CALLBACK(spin_button_changed_cb),
-				GINT_TO_POINTER(PROP_SPACING));
-	gtk_size_group_add_widget (spin_size, spin_button);
-	gtk_box_pack_start (GTK_BOX (hbox), spin_button, FALSE, FALSE, 0);
-
-	label = gtk_label_new(_("pixels"));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-
-	category_vbox = gtk_vbox_new (FALSE, 6);
-	gtk_box_pack_start (GTK_BOX (categories_vbox), category_vbox, TRUE, TRUE, 0);
-	gtk_widget_show (category_vbox);
-
-	text = g_strconcat ("<span weight=\"bold\">", _("Colors"), "</span>", NULL);
-	label = gtk_label_new (text);
-	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
-	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-	gtk_box_pack_start (GTK_BOX (category_vbox), label, FALSE, FALSE, 0);
-	gtk_widget_show (label);
-	g_free (text);
-	
-	hbox = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (category_vbox), hbox, TRUE, TRUE, 0);
-	gtk_widget_show (hbox);
-
-	indent = gtk_label_new (HIG_IDENTATION);
-	gtk_label_set_justify (GTK_LABEL (indent), GTK_JUSTIFY_LEFT);
-	gtk_box_pack_start (GTK_BOX (hbox), indent, FALSE, FALSE, 0);
-	gtk_widget_show (indent);
-
-	control_vbox = gtk_vbox_new (FALSE, 6);
-	gtk_box_pack_start (GTK_BOX (hbox), control_vbox, TRUE, TRUE, 0);
-	gtk_widget_show (control_vbox);
-
-	notebook = GTK_NOTEBOOK(gtk_notebook_new());
-	gtk_container_add (GTK_CONTAINER (control_vbox), GTK_WIDGET (notebook));
-	
-	for ( i = 0; i < NGRAPHS; i++ ) {
-		guint j;
-		GtkWidget *page = add_page(notebook,
-								graph_types[i].noninteractive_label);
-		gtk_container_set_border_width (GTK_CONTAINER (page), 12);
-		for ( j = 0; j < graph_types[i].num_colors; j++ ) {
-			add_color_selector(page, graph_types[i].colors[j].prefs_label,
-								i, j, ma);
+				gtk_box_pack_end(GTK_BOX(box), t, FALSE, FALSE, 0);
+			} else {
+				gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, 0);
+			}
 		}
 	}
-	gtk_notebook_set_current_page (notebook, 0);
-
-	return;
 }
