@@ -22,19 +22,22 @@
 
 #define PREF_CONTENT_PADDING 6
 
+static GtkWidget *checkbuttons[NGRAPHS];
+
 /* Defined in panel-specific code. */
 extern MultiloadPlugin *
 multiload_configure_get_plugin (GtkWidget *widget);
 
 static void
-properties_set_checkboxes_sensitive(MultiloadPlugin *ma, GtkWidget *checkbox,
-									gboolean sensitive)
+properties_set_checkboxes_sensitive(MultiloadPlugin *ma, gboolean sensitive)
 {
-	/* CounT the number of visible graphs */
-	gint i, total_graphs = 0, last_graph = 0;
+	gint i;
+	// CounT the number of visible graphs
+	gint total_graphs = 0;
+	gint last_graph = 0;
 
-	if ( !sensitive ) {
-	/* Only set unsensitive if one checkbox remains checked */
+	if (!sensitive) {
+		// Only set unsensitive if one checkbox remains checked
 		for (i = 0; i < NGRAPHS; i++) {
 			if (ma->graph_config[i].visible) {
 				last_graph = i;
@@ -44,28 +47,13 @@ properties_set_checkboxes_sensitive(MultiloadPlugin *ma, GtkWidget *checkbox,
 	}
 
 	if ( total_graphs < 2 ) {
-		/* Container widget that contains the checkboxes */
-		GtkWidget *container = gtk_widget_get_ancestor(checkbox, GTK_TYPE_BOX);
-		if (container && container != checkbox) {
-			GList *list = gtk_container_get_children (GTK_CONTAINER(container));
-			if ( sensitive ) {
-				/* Enable all checkboxes */
-				GList *item = list;
-				while ( item && item->data ) {
-					GtkWidget *nthbox = GTK_WIDGET (item->data);
-					gtk_widget_set_sensitive(gtk_frame_get_label_widget(GTK_FRAME(nthbox)), TRUE);
-					item = g_list_next (item);
-				}
-			} else {
-				/* Disable last remaining checkbox */
-				GtkWidget *nthbox = GTK_WIDGET(g_list_nth_data(list, last_graph));
-				if ( nthbox )
-					gtk_widget_set_sensitive(gtk_frame_get_label_widget(GTK_FRAME(nthbox)), FALSE);
-				else
-					g_assert_not_reached ();
-			}
+		if (sensitive) {
+			// Enable all checkboxes
+			for (i = 0; i < NGRAPHS; i++)
+				gtk_widget_set_sensitive(checkbuttons[i], TRUE);
 		} else {
-			g_assert_not_reached ();
+			// Disable last remaining checkbox
+			gtk_widget_set_sensitive(checkbuttons[last_graph], FALSE);
 		}
 	}
 
@@ -80,7 +68,7 @@ property_toggled_cb(GtkWidget *widget, gpointer id)
 	gboolean active = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 
 	if (active) {
-		properties_set_checkboxes_sensitive(ma, widget, TRUE);
+		properties_set_checkboxes_sensitive(ma, TRUE);
 		gtk_widget_show_all (ma->graphs[prop_type]->main_widget);
 		ma->graph_config[prop_type].visible = TRUE;
 		load_graph_start(ma->graphs[prop_type]);
@@ -88,7 +76,7 @@ property_toggled_cb(GtkWidget *widget, gpointer id)
 		load_graph_stop(ma->graphs[prop_type]);
 		gtk_widget_hide (ma->graphs[prop_type]->main_widget);
 		ma->graph_config[prop_type].visible = FALSE;
-		properties_set_checkboxes_sensitive(ma, widget, FALSE);
+		properties_set_checkboxes_sensitive(ma, FALSE);
 	}
 
 	return;
@@ -318,13 +306,15 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	// -- colors
 	sizegroup = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
 	for( i = 0; i < NGRAPHS; i++ ) {
-
+		// -- -- checkbox
 		t = gtk_check_button_new_with_mnemonic(graph_types[i].interactive_label);
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(t),
 							ma->graph_config[i].visible);
 		g_signal_connect(G_OBJECT(t), "toggled",
 							G_CALLBACK(property_toggled_cb), GINT_TO_POINTER(i));
+		checkbuttons[i] = t;
 
+		// -- -- frame
 		frame = gtk_frame_new(NULL);
 		gtk_frame_set_label_widget(GTK_FRAME(frame), t);
 		gtk_box_pack_start(GTK_BOX(page), GTK_WIDGET(frame), FALSE, FALSE, 0);
@@ -333,6 +323,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 		gtk_container_set_border_width(GTK_CONTAINER(box), 2);
 		gtk_container_add(GTK_CONTAINER(frame), GTK_WIDGET(box));
 
+		// -- -- colors
 		k = graph_types[i].num_colors;
 		for( j = 0; j < k; j++ ) {
 			t = new_color_selector(graph_types[i].colors[j].prefs_label, i, j, ma);
@@ -348,5 +339,5 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 			}
 		}
 	}
-	properties_set_checkboxes_sensitive(ma, gtk_frame_get_label_widget(frame), FALSE);
+	properties_set_checkboxes_sensitive(ma, FALSE);
 }
