@@ -18,10 +18,6 @@
 #include "properties.h"
 #include "multiload.h"
 
-#define PROP_SPEED			6
-#define PROP_SIZE			7
-#define PROP_PADDING		8
-#define PROP_SPACING		9
 #define HIG_IDENTATION		"    "
 
 #define PREF_CONTENT_PADDING 8

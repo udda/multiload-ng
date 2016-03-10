@@ -5,12 +5,17 @@
 
 G_BEGIN_DECLS
 
-#define PROP_CPULOAD 0
-#define PROP_MEMLOAD 1
-#define PROP_NETLOAD 2
-#define PROP_SWAPLOAD 3
-#define PROP_LOADAVG 4
-#define PROP_DISKLOAD 5
+#define PROP_CPULOAD		0
+#define PROP_MEMLOAD		1
+#define PROP_NETLOAD		2
+#define PROP_SWAPLOAD		3
+#define PROP_LOADAVG		4
+#define PROP_DISKLOAD		5
+
+#define PROP_SPEED			6
+#define PROP_SIZE			7
+#define PROP_PADDING		8
+#define PROP_SPACING		9
 
 typedef enum {
 	LOADAVG_1 = 0,
@@ -18,9 +23,6 @@ typedef enum {
 	LOADAVG_15
 } LoadAvgType;
 
-typedef struct	_MultiLoadProperties		MultiLoadProperties;
-
-typedef struct	_LoadGraphProperties		LoadGraphProperties;
 
 struct _LoadGraphProperties {
 	guint type, n;
@@ -32,18 +34,19 @@ struct _LoadGraphProperties {
 	gint loadavg_type;
 	gint use_default;
 };
+typedef struct	_LoadGraphProperties	LoadGraphProperties;
+
 
 struct _MultiLoadProperties {
-	LoadGraphProperties cpuload, memload, swapload, netload, loadavg;
+	LoadGraphProperties cpuload;
+	LoadGraphProperties memload;
+	LoadGraphProperties swapload;
+	LoadGraphProperties netload;
+	LoadGraphProperties loadavg;
 };
+typedef struct	_MultiLoadProperties	MultiLoadProperties;
 
-/*
-void multiload_properties_apply (void) G_GNUC_INTERNAL;
-void multiload_properties_close (void) G_GNUC_INTERNAL;
-void multiload_properties_changed (void) G_GNUC_INTERNAL;
-void multiload_show_properties (PropertyClass prop_class) G_GNUC_INTERNAL;
-void multiload_init_properties (void) G_GNUC_INTERNAL;
-*/
+
 G_GNUC_INTERNAL void
 multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma);
 
