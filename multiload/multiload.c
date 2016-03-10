@@ -273,7 +273,7 @@ multiload_colorconfig_stringify(MultiloadPlugin *ma, guint i, char *list)
 {
 	guint ncolors = graph_types[i].num_colors, j;
 	GdkColor *colors = ma->graph_config[i].colors;
-	guint *alphas = ma->graph_config[i].alpha;
+	guint16 *alphas = ma->graph_config[i].alpha;
 	char *listpos = list;
 
 	if ( G_UNLIKELY (!list) )
@@ -293,7 +293,7 @@ multiload_colorconfig_stringify(MultiloadPlugin *ma, guint i, char *list)
 
 /* Wrapper for gdk_color_parse with alpha */
 static gboolean
-gdk_color_parse_alpha(const gchar *gspec, GdkColor *color, guint *alpha) {
+gdk_color_parse_alpha(const gchar *gspec, GdkColor *color, guint16 *alpha) {
 	gchar buf[8];
 	guint i;
 	if (strlen(gspec) == 7)
@@ -304,10 +304,15 @@ gdk_color_parse_alpha(const gchar *gspec, GdkColor *color, guint *alpha) {
 		buf[1] = gspec[2];
 		buf[2] = 0;
 		errno = 0;
-		*alpha = (guint)strtol(buf, NULL, 16) << 8;
-		if (errno)
+		*alpha = (guint16)strtol(buf, NULL, 16);
+		if (errno) {
 			// error in strtol, set alpha=max
 			*alpha = 0xFFFF;
+		} else {
+			/* alpha is in the form '0x00jk'. Transform it in the form
+			  '0xjkjk', so the conversion of 8 to 16 bits is proportional. */
+			*alpha |= (*alpha << 8);
+		}
 
 		// color part
 		buf[0] = '#';
@@ -340,7 +345,7 @@ multiload_colorconfig_unstringify(MultiloadPlugin *ma, guint i,
 {
 	guint ncolors = graph_types[i].num_colors, j;
 	GdkColor *colors = ma->graph_config[i].colors;
-	guint *alphas = ma->graph_config[i].alpha;
+	guint16 *alphas = ma->graph_config[i].alpha;
 	const char *listpos = list;
 
 	if ( G_UNLIKELY (!listpos) )

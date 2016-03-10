@@ -87,7 +87,7 @@ struct _LoadGraph {
 struct _GraphConfig {
 	gboolean visible;
 	GdkColor colors[MAX_COLORS];
-	guint alpha[MAX_COLORS];
+	guint16 alpha[MAX_COLORS];
 };
 
 struct _MultiloadPlugin
