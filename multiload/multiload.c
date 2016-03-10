@@ -182,52 +182,52 @@ multiload_init()
 		/*	prefs_label			tooltip_label		name			get_data */
 		{	_("_Processor"),	_("Processor"),		"cpuload",		GetLoad,
 			5, { // num_colors
-				{ _("_User"),		"#0072B3" },
-				{ _("_System"),		"#0092E6" },
-				{ _("N_ice"),		"#00A3FF" },
-				{ _("I_OWait"),		"#002F3D" },
-				{ _("_Background"),	"#000000" }
+				{ _("_User"),			_("User"),			"#0072B3" },
+				{ _("_System"),			_("System"),		"#0092E6" },
+				{ _("N_ice"),			_("Nice"),			"#00A3FF" },
+				{ _("I_OWait"),			_("IOWait"),		"#002F3D" },
+				{ _("_Background"),		_("Background"),	"#000000" }
 			}
 		},
 
 		{	_("_Memory"),		_("Memory"),		"memload",		GetMemory,
 			5, { // num_colors
-				{ _("_User"),		"#00B35B" },
-				{ _("_Shared"),		"#00E675" },
-				{ _("_Buffers"),	"#00FF82" },
-				{ _("Cach_ed"),		"#AAF5D0" },
-				{ _("_Background"),	"#000000" }
+				{ _("_User"),			_("User"),			"#00B35B" },
+				{ _("_Shared"),			_("Shared"),		"#00E675" },
+				{ _("_Buffers"),		_("Buffers"),		"#00FF82" },
+				{ _("Cach_ed"),			_("Cached"),		"#AAF5D0" },
+				{ _("_Background"),		_("Background"),	"#000000" }
 			}
 		},
 
 		{	_("_Network"),		_("Network"),		"netload",		GetNet,
 			4, { // num_colors
-				{ _("_In"),			"#FCE94F" },
-				{ _("O_ut"),		"#EDD400" },
-				{ _("L_ocal"),		"#C4A000" },
-				{ _("_Background"),	"#000000" }
+				{ _("_In"),				_("In"),			"#FCE94F" },
+				{ _("O_ut"),			_("Out"),			"#EDD400" },
+				{ _("L_ocal"),			_("Local"),			"#C4A000" },
+				{ _("_Background"),		_("Background"),	"#000000" }
 			}
 		},
 
 		{	_("S_wap Space"),	_("Swap Space"),	"swapload",		GetSwap,
 			2, { // num_colors
-				{ _("_Used"),		"#8B00C3" },
-				{ _("_Background"),	"#000000" }
+				{ _("_Used"),			_("Used"),			"#8B00C3" },
+				{ _("_Background"),		_("Background"),	"#000000" }
 			}
 		},
 
 		{	_("_Load"),			_("Load Average"),	"loadavg",		GetLoadAvg,
 			2, { // num_colors
-				{ _("A_verage"),	"#D50000" },
-				{ _("_Background"),	"#000000" }
+				{ _("A_verage"),		_("Average"),		"#D50000" },
+				{ _("_Background"),		_("Background"),	"#000000" }
 			}
 		},
 
 		{	_("_Disk"),			_("Disk"),			"diskload",		GetDiskLoad,
 			3, { // num_colors
-				{ _("_Read"),		"#C65000" },
-				{ _("Wr_ite"),		"#FF6700" },
-				{ _("_Background"),	"#000000" }
+				{ _("_Read"),			_("Read"),			"#C65000" },
+				{ _("Wr_ite"),			_("Write"),			"#FF6700" },
+				{ _("_Background"),		_("Background"),	"#000000" }
 			}
 		}
 	};

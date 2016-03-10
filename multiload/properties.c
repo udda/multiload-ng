@@ -159,7 +159,8 @@ color_picker_set_cb(GtkColorButton *color_picker, gpointer data)
 	/* Parse user data for graph and color slot */
 	MultiloadPlugin *ma = multiload_configure_get_plugin(GTK_WIDGET (color_picker));
 	guint color_slot = GPOINTER_TO_INT(data);
-	guint graph = color_slot>>16, index = color_slot&0xFFFF; 
+	guint graph = color_slot >> 16;
+	guint index = color_slot & 0xFFFF; 
 
 	g_assert(graph >= 0 && graph < NGRAPHS);
 	g_assert(index >= 0 && index < graph_types[graph].num_colors);
@@ -171,24 +172,28 @@ color_picker_set_cb(GtkColorButton *color_picker, gpointer data)
 
 /* create a color selector */
 static GtkWidget *
-new_color_selector(const gchar *name, guint graph, guint index,
-				   MultiloadPlugin *ma)
+new_color_selector(guint graph, guint index, MultiloadPlugin *ma)
 {
 	GtkWidget *vbox;
 	GtkWidget *label;
 	GtkWidget *color_picker;
-	guint color_slot = ((graph&0xFFFF)<<16)|(index&0xFFFF);
-		
+	guint color_slot = ( (graph&0xFFFF) << 16 ) | (index&0xFFFF);
+
+	const gchar *color_name = graph_types[graph].colors[index].interactive_label;
+	const gchar *dialog_title = g_strdup_printf(_("Select color:  %s -> %s"),
+					graph_types[graph].noninteractive_label,
+					graph_types[graph].colors[index].noninteractive_label);
+
 	vbox = gtk_vbox_new (FALSE, 0);
-	label = gtk_label_new_with_mnemonic(name);
-	color_picker = gtk_color_button_new();
+	label = gtk_label_new_with_mnemonic(color_name);
+	color_picker = gtk_color_button_new_with_color(
+				&ma->graph_config[graph].colors[index]);
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), color_picker);
 
-	gtk_box_pack_start(GTK_BOX(vbox), color_picker, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+	gtk_color_button_set_title (GTK_COLOR_BUTTON(color_picker),	dialog_title);
 
-	gtk_color_button_set_color(GTK_COLOR_BUTTON(color_picker),
-							 &ma->graph_config[graph].colors[index]);
+	gtk_box_pack_start (GTK_BOX(vbox), color_picker, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX(vbox), label, FALSE, FALSE, 0);
 
 	g_signal_connect(G_OBJECT(color_picker), "color_set",
 				G_CALLBACK(color_picker_set_cb), GINT_TO_POINTER(color_slot));
@@ -326,7 +331,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 		// -- -- colors
 		k = graph_types[i].num_colors;
 		for( j = 0; j < k; j++ ) {
-			t = new_color_selector(graph_types[i].colors[j].prefs_label, i, j, ma);
+			t = new_color_selector(i, j, ma);
 			gtk_size_group_add_widget(sizegroup, t);
 			if (j == k-1) {
 				label = gtk_label_new(NULL); // actually a spacer

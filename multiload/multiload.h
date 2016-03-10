@@ -114,7 +114,8 @@ struct _GraphType {
 	LoadGraphDataFunc get_data;
 	guint num_colors;
 	const struct {
-		const char *prefs_label;
+		const char *interactive_label;
+		const char *noninteractive_label;
 		const char *default_value;
 	} colors[MAX_COLORS];
 	//const char *default_colors;
