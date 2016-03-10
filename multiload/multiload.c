@@ -175,19 +175,19 @@ multiload_init()
 		{ _("_Processor"),   _("Processor"),    "cpuload",  GetLoad,     5,
 		{ { _("_User"), "#0072b3" }, { _("_System"), "#0092e6" },
 		{ _("N_ice"), "#00a3ff" }, { _("I_OWait"), "#002f3d" },
-		{ _("Idl_e"), "#000000" } } },
+		{ _("_Background"), "#000000" } } },
 
 		{ _("_Memory"),      _("Memory"),       "memload",  GetMemory,   5,
 		{ { _("_User"), "#00b35b" }, { _("_Shared"), "#00e675" },
 		{ _("_Buffers"), "#00ff82" }, { _("Cach_ed"), "#AAF5D0" },
-		{ _("_Free"), "#000000" } } },
+		{ _("_Background"), "#000000" } } },
 
 		{ _("_Network"),     _("Network"),      "netload",  GetNet,      4,
 		{ { _("_In"), "#fce94f" }, { _("O_ut"), "#edd400" },
 		{ _("L_ocal"), "#c4a000" },  { _("_Background"), "#000000" } } },
 
 		{ _("S_wap Space"),  _("Swap Space"),   "swapload", GetSwap,     2,
-		{ { _("_Used"), "#8b00c3" }, { _("_Free"), "#000000" } } },
+		{ { _("_Used"), "#8b00c3" }, { _("_Background"), "#000000" } } },
 
 		{ _("_Load"),        _("Load Average"), "loadavg",  GetLoadAvg,  2,
 		{ { _("A_verage"), "#d50000" }, { _("_Background"), "#000000" } } },
