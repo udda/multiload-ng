@@ -16,6 +16,7 @@ G_BEGIN_DECLS
 #define PROP_SIZE			7
 #define PROP_PADDING		8
 #define PROP_SPACING		9
+#define PROP_SHOWFRAME		10
 
 typedef enum {
 	LOADAVG_1 = 0,

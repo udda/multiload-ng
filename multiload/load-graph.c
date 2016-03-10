@@ -267,14 +267,13 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 	g->id = id;
 
 	g->tooltip_update = FALSE;
-	g->show_frame = TRUE;
 	g->multiload = ma;
 		
 	g->main_widget = gtk_vbox_new (FALSE, 0);
 
 	g->box = gtk_vbox_new (FALSE, 0);
 	
-	if (g->show_frame) {
+	if (ma->show_frame) {
 		g->frame = gtk_frame_new (NULL);
 		gtk_frame_set_shadow_type (GTK_FRAME (g->frame), GTK_SHADOW_IN);
 		gtk_container_add (GTK_CONTAINER (g->frame), g->box);

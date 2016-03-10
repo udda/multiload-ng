@@ -95,6 +95,18 @@ property_toggled_cb(GtkWidget *widget, gpointer id)
 }
 
 static void
+preference_toggled_cb(GtkWidget *widget, gpointer id)
+{
+	MultiloadPlugin *ma = multiload_configure_get_plugin(widget);
+	gint prop_type = GPOINTER_TO_INT(id);
+	gboolean active = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
+	if (prop_type == PROP_SHOWFRAME) {
+		ma->show_frame = active;
+		multiload_refresh(ma, ma->orientation);
+	}
+}
+
+static void
 spin_button_changed_cb(GtkWidget *widget, gpointer id)
 {
 	MultiloadPlugin *ma = multiload_configure_get_plugin(widget);
@@ -309,6 +321,13 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	label = gtk_label_new(_("milliseconds"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
 	gtk_table_attach_defaults(table, GTK_WIDGET(label), 2, 3, 3, 4);
+
+	// -- checkbox: show frame
+	t = gtk_check_button_new_with_mnemonic(_("Frames around graphs"));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(t), ma->show_frame);
+	g_signal_connect(G_OBJECT(t), "toggled", G_CALLBACK(preference_toggled_cb),
+			GINT_TO_POINTER(PROP_SHOWFRAME));
+	gtk_box_pack_start(GTK_BOX(page), t, FALSE, FALSE, 0);
 
 
 	// COLORS PAGE

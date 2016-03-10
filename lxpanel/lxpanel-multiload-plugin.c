@@ -61,6 +61,8 @@ multiload_read(char **fp, MultiloadPlugin *ma)
 					ma->padding = atoi(s.t[1]);
 				} else if ( g_ascii_strcasecmp(s.t[0], "spacing") == 0 ) {
 					ma->spacing = atoi(s.t[1]);
+				} else if ( g_ascii_strcasecmp(s.t[0], "show-frame") == 0 ) {
+					ma->show_frame = atoi(s.t[1]);
 				} else {
 					const char *suffix; /* Set by multiload_find_graph_by_name */
 					int i = multiload_find_graph_by_name(s.t[0], &suffix);
@@ -108,6 +110,7 @@ static void multiload_save_configuration(Plugin * p, FILE * fp)
 	lxpanel_put_int (fp, "size", ma->size);
 	lxpanel_put_int (fp, "padding", ma->padding);
 	lxpanel_put_int (fp, "spacing", ma->spacing);
+	lxpanel_put_int (fp, "show-frame", ma->show_frame);
 
 	for ( i = 0; i < NGRAPHS; i++ ) {
 		char *key, list[8*MAX_COLORS];

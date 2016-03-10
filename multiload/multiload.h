@@ -51,6 +51,8 @@ typedef struct _GraphType GraphType;
 #define MAX_SPACING 40
 #define STEP_SPACING 1
 
+#define DEFAULT_SHOWFRAME TRUE
+
 struct _LoadGraph {
 	MultiloadPlugin *multiload;
 
@@ -67,8 +69,6 @@ struct _LoadGraph {
 	GtkWidget *frame, *box, *disp;
 	cairo_surface_t *surface;
 	int timer_index;
-
-	gint show_frame;
 
 	long cpu_time [NCPUSTATES];
 	long cpu_last [NCPUSTATES];
@@ -103,6 +103,8 @@ struct _MultiloadPlugin
 	guint size;
 	guint padding;
 	guint spacing;
+
+	gboolean show_frame;
 };
 
 struct _GraphType {
