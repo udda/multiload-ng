@@ -60,7 +60,7 @@ multiload_save (XfcePanelPlugin *plugin,
 		xfce_rc_write_int_entry (rc, "show-frame", ma->show_frame);
 
 		for ( i = 0; i < NGRAPHS; i++ ) { 
-			char *key, list[8*MAX_COLORS];
+			char *key, list[10*MAX_COLORS];
 
 			/* Visibility */
 			key = g_strdup_printf("%s_visible", graph_types[i].name);

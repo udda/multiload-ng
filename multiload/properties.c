@@ -166,13 +166,14 @@ color_picker_set_cb(GtkColorButton *color_picker, gpointer data)
 	g_assert(index >= 0 && index < graph_types[graph].num_colors);
 		
 	gtk_color_button_get_color(color_picker, &ma->graph_config[graph].colors[index]);
+	ma->graph_config[graph].alpha[index] = gtk_color_button_get_alpha(color_picker);
 
 	return;
 }
 
 /* create a color selector */
 static GtkWidget *
-new_color_selector(guint graph, guint index, MultiloadPlugin *ma)
+new_color_selector(guint graph, guint index, gboolean use_alpha, MultiloadPlugin *ma)
 {
 	GtkWidget *vbox;
 	GtkWidget *label;
@@ -187,10 +188,15 @@ new_color_selector(guint graph, guint index, MultiloadPlugin *ma)
 	vbox = gtk_vbox_new (FALSE, 0);
 	label = gtk_label_new_with_mnemonic(color_name);
 	color_picker = gtk_color_button_new_with_color(
-				&ma->graph_config[graph].colors[index]);
+					&ma->graph_config[graph].colors[index]);
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), color_picker);
 
 	gtk_color_button_set_title (GTK_COLOR_BUTTON(color_picker),	dialog_title);
+	if (use_alpha) {
+		gtk_color_button_set_use_alpha (GTK_COLOR_BUTTON(color_picker), TRUE);
+		gtk_color_button_set_alpha (GTK_COLOR_BUTTON(color_picker),
+					ma->graph_config[graph].alpha[index]);
+	}
 
 	gtk_box_pack_start (GTK_BOX(vbox), color_picker, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX(vbox), label, FALSE, FALSE, 0);
@@ -331,17 +337,18 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 		// -- -- colors
 		k = graph_types[i].num_colors;
 		for( j = 0; j < k; j++ ) {
-			t = new_color_selector(i, j, ma);
-			gtk_size_group_add_widget(sizegroup, t);
 			if (j == k-1) {
 				label = gtk_label_new(NULL); // actually a spacer
 				gtk_size_group_add_widget(sizegroup, label);
 				gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
 
+				t = new_color_selector(i, j, FALSE, ma);
 				gtk_box_pack_end(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 			} else {
+				t = new_color_selector(i, j, TRUE, ma);
 				gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 			}
+			gtk_size_group_add_widget(sizegroup, t);
 		}
 	}
 	properties_set_checkboxes_sensitive(ma, FALSE);

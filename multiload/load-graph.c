@@ -13,6 +13,15 @@
 #include "multiload.h"
 
 
+/* Wrapper for cairo_set_source_rgba */
+static void
+cairo_set_source_rgba_from_config(cairo_t *cr, GraphConfig *config, guint color_index)
+{
+	GdkColor *c = &(config->colors[color_index]);
+	guint a = config->alpha[color_index];
+	cairo_set_source_rgba(cr, c->red/65535.0, c->green/65535.0, c->blue/65535.0, a/65535.0);
+}
+
 /*
   Shifts data right
 
@@ -45,16 +54,17 @@ static void
 load_graph_draw (LoadGraph *g)
 {
 //    GtkStyle *style;
-	guint i, j;
+	guint i, j, k;
 	cairo_t *cr;
-	GdkColor *colors = g->multiload->graph_config[g->id].colors;
+	GraphConfig *config = &(g->multiload->graph_config[g->id]);
+	GdkColor *colors = config->colors;
 
 	/* we might get called before the configure event so that
 	 * g->disp->allocation may not have the correct size
 	 * (after the user resized the applet in the prop dialog). */
 
 	if (!g->surface)
-		g->surface = cairo_image_surface_create(CAIRO_FORMAT_RGB24,
+		g->surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32,
 												g->draw_width, g->draw_height);
 		/* Not available on GTK < 2.22
 		   gdk_window_create_similar_surface (gtk_widget_get_window (g->disp),
@@ -71,21 +81,19 @@ load_graph_draw (LoadGraph *g)
 	for (i = 0; i < g->draw_width; i++)
 		g->pos [i] = g->draw_height - 1;
 
-	gdk_cairo_set_source_color (cr, &(colors[graph_types[g->id].num_colors-1]));
+	k = graph_types[g->id].num_colors-1; //this is the index of last color (background)
+	gdk_cairo_set_source_color (cr, &(colors[k]));
 	cairo_rectangle(cr, 0, 0, g->draw_width, g->draw_height);
 	cairo_fill(cr);
 
-	for (j = 0; j < graph_types[g->id].num_colors-1; j++) {
-		gdk_cairo_set_source_color (cr, &(colors[j]));
+	for (j = 0; j < k; j++) {
+		cairo_set_source_rgba_from_config(cr, config, j);
 
 		for (i = 0; i < g->draw_width; i++) {
 			if (g->data [i][j] != 0) {
-				cairo_move_to (cr,
-							   g->draw_width - i - 0.5,
-							   g->pos[i] + 0.5);
-				cairo_line_to (cr,
-							   g->draw_width - i - 0.5,
-							   g->pos[i] - (g->data [i][j] - 0.5));
+				cairo_move_to (cr, g->draw_width - i - 0.5, g->pos[i] + 0.5);
+				cairo_line_to (cr, g->draw_width - i - 0.5,
+								g->pos[i] - (g->data [i][j] - 0.5));
 
 				g->pos [i] -= g->data [i][j];
 			}
@@ -183,7 +191,7 @@ load_graph_configure (GtkWidget *widget, GdkEventConfigure *event,
 	load_graph_alloc (c);
  
 	if (!c->surface)
-		c->surface = cairo_image_surface_create(CAIRO_FORMAT_RGB24,
+		c->surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32,
 												c->draw_width, c->draw_height);
 		/* Not available on GTK < 2.22
 		   gdk_window_create_similar_surface (gtk_widget_get_window (c->disp),

@@ -113,7 +113,7 @@ static void multiload_save_configuration(Plugin * p, FILE * fp)
 	lxpanel_put_int (fp, "show-frame", ma->show_frame);
 
 	for ( i = 0; i < NGRAPHS; i++ ) {
-		char *key, list[8*MAX_COLORS];
+		char *key, list[10*MAX_COLORS];
 
 		/* Visibility */
 		key = g_strdup_printf("%sVisible", graph_types[i].name);

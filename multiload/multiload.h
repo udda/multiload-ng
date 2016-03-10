@@ -87,6 +87,7 @@ struct _LoadGraph {
 struct _GraphConfig {
 	gboolean visible;
 	GdkColor colors[MAX_COLORS];
+	guint alpha[MAX_COLORS];
 };
 
 struct _MultiloadPlugin
@@ -118,7 +119,6 @@ struct _GraphType {
 		const char *noninteractive_label;
 		const char *default_value;
 	} colors[MAX_COLORS];
-	//const char *default_colors;
 };
 GraphType graph_types[NGRAPHS];
 
@@ -141,7 +141,7 @@ multiload_destroy(MultiloadPlugin *ma);
 
 /* Utility functions for preferences and data storage */
 gboolean
-multiload_gdk_color_stringify(GdkColor* color, gchar *color_string);
+multiload_gdk_color_stringify(GdkColor* color, guint alpha, gchar *color_string);
 
 void
 multiload_colorconfig_stringify(MultiloadPlugin *ma, guint i, char *list);

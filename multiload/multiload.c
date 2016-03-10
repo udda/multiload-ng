@@ -182,52 +182,52 @@ multiload_init()
 		/*	prefs_label			tooltip_label		name			get_data */
 		{	_("_Processor"),	_("Processor"),		"cpuload",		GetLoad,
 			5, { // num_colors
-				{ _("_User"),			_("User"),			"#0072B3" },
-				{ _("_System"),			_("System"),		"#0092E6" },
-				{ _("N_ice"),			_("Nice"),			"#00A3FF" },
-				{ _("I_OWait"),			_("IOWait"),		"#002F3D" },
-				{ _("_Background"),		_("Background"),	"#000000" }
+				{ _("_User"),			_("User"),			"#FF0072B3" },
+				{ _("_System"),			_("System"),		"#FF0092E6" },
+				{ _("N_ice"),			_("Nice"),			"#FF00A3FF" },
+				{ _("I_OWait"),			_("IOWait"),		"#FF002F3D" },
+				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		},
 
 		{	_("_Memory"),		_("Memory"),		"memload",		GetMemory,
 			5, { // num_colors
-				{ _("_User"),			_("User"),			"#00B35B" },
-				{ _("_Shared"),			_("Shared"),		"#00E675" },
-				{ _("_Buffers"),		_("Buffers"),		"#00FF82" },
-				{ _("Cach_ed"),			_("Cached"),		"#AAF5D0" },
-				{ _("_Background"),		_("Background"),	"#000000" }
+				{ _("_User"),			_("User"),			"#FF00B35B" },
+				{ _("_Shared"),			_("Shared"),		"#FF00E675" },
+				{ _("_Buffers"),		_("Buffers"),		"#FF00FF82" },
+				{ _("Cach_ed"),			_("Cached"),		"#FFAAF5D0" },
+				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		},
 
 		{	_("_Network"),		_("Network"),		"netload",		GetNet,
 			4, { // num_colors
-				{ _("_In"),				_("In"),			"#FCE94F" },
-				{ _("O_ut"),			_("Out"),			"#EDD400" },
-				{ _("L_ocal"),			_("Local"),			"#C4A000" },
-				{ _("_Background"),		_("Background"),	"#000000" }
+				{ _("_In"),				_("In"),			"#FFFCE94F" },
+				{ _("O_ut"),			_("Out"),			"#FFEDD400" },
+				{ _("L_ocal"),			_("Local"),			"#FFC4A000" },
+				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		},
 
 		{	_("S_wap Space"),	_("Swap Space"),	"swapload",		GetSwap,
 			2, { // num_colors
-				{ _("_Used"),			_("Used"),			"#8B00C3" },
-				{ _("_Background"),		_("Background"),	"#000000" }
+				{ _("_Used"),			_("Used"),			"#FF8B00C3" },
+				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		},
 
 		{	_("_Load"),			_("Load Average"),	"loadavg",		GetLoadAvg,
 			2, { // num_colors
-				{ _("A_verage"),		_("Average"),		"#D50000" },
-				{ _("_Background"),		_("Background"),	"#000000" }
+				{ _("A_verage"),		_("Average"),		"#FFD50000" },
+				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		},
 
 		{	_("_Disk"),			_("Disk"),			"diskload",		GetDiskLoad,
 			3, { // num_colors
-				{ _("_Read"),			_("Read"),			"#C65000" },
-				{ _("Wr_ite"),			_("Write"),			"#FF6700" },
-				{ _("_Background"),		_("Background"),	"#000000" }
+				{ _("_Read"),			_("Read"),			"#FFC65000" },
+				{ _("Wr_ite"),			_("Write"),			"#FFFF6700" },
+				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		}
 	};
@@ -251,27 +251,30 @@ multiload_destroy(MultiloadPlugin *ma)
 	return;
 }
 
-/* Convert a GdkColor into a string of the form "#aabbcc" Output string must
-   have size at least 8.
+/* Convert a GdkColor into a string of the form "#aarrggbb"
+   Output string must have size at least 10.
  */
 gboolean
-multiload_gdk_color_stringify(GdkColor* color, gchar *color_string)
+multiload_gdk_color_stringify(GdkColor* color, guint alpha, gchar *color_string)
 {
-  int rc = snprintf(color_string, 8, "#%02X%02X%02X", 
+	int rc = snprintf(color_string, 10, "#%02X%02X%02X%02X",
+					alpha / 256,
 					color->red / 256, color->green / 256, color->blue / 256);
-  gboolean retval = (rc == 7);
-  g_assert(retval);
-  return retval; 
+	gboolean retval = (rc == 9);
+	g_assert(retval);
+	return retval;
 }
 
-/* Convert a graph configuration into a string of the form
-   "#aabbcc,#ddeeff,...". Output string must have size at least 8*MAX_COLORS.
+/* Convert a graph configuration into a string
+   of the form "#aarrggbb,#aarrggbb,..."
+   Output string must have size at least 10*MAX_COLORS.
  */
 void
 multiload_colorconfig_stringify(MultiloadPlugin *ma, guint i, char *list)
 {
 	guint ncolors = graph_types[i].num_colors, j;
 	GdkColor *colors = ma->graph_config[i].colors;
+	guint *alphas = ma->graph_config[i].alpha;
 	char *listpos = list;
 
 	if ( G_UNLIKELY (!list) )
@@ -279,14 +282,42 @@ multiload_colorconfig_stringify(MultiloadPlugin *ma, guint i, char *list)
 
 	/* Create color list */
 	for ( j = 0; j < ncolors; j++ ) {
-		multiload_gdk_color_stringify(&colors[j], listpos);
+		multiload_gdk_color_stringify(&colors[j], alphas[j], listpos);
 		if ( j == ncolors-1 )
-			listpos[7] = 0;
+			listpos[9] = 0;
 		else
-			listpos[7] = ',';
-		listpos += 8;
+			listpos[9] = ',';
+		listpos += 10;
 	}
-	g_assert (strlen(list) == 8*ncolors-1);
+	g_assert (strlen(list) == 10*ncolors-1);
+}
+
+/* Wrapper for gdk_color_parse with alpha */
+static gboolean
+gdk_color_parse_alpha(const gchar *gspec, GdkColor *color, guint *alpha) {
+	gchar buf[8];
+	guint i;
+	if (strlen(gspec) == 7)
+		return gdk_color_parse(gspec, color);
+	else if (G_LIKELY (strlen(gspec) == 9) ) {
+		// alpha part
+		buf[0] = gspec[1];
+		buf[1] = gspec[2];
+		buf[2] = 0;
+		errno = 0;
+		*alpha = (guint)strtol(buf, NULL, 16) << 8;
+		if (errno)
+			// error in strtol, set alpha=max
+			*alpha = 0xFFFF;
+
+		// color part
+		buf[0] = '#';
+		for (i=0; i<6; i++)
+			buf[1+i] = gspec[3+i];
+		buf[7] = 0;
+		return gdk_color_parse(buf, color);
+	} else
+		return FALSE;
 }
 
 /* Set the colors for graph i to the default values */
@@ -294,9 +325,11 @@ void
 multiload_colorconfig_default(MultiloadPlugin *ma, guint i)
 {
 	guint j;
-	for ( j = 0; j < graph_types[i].num_colors; j++ )
-	gdk_color_parse(graph_types[i].colors[j].default_value,
-					&ma->graph_config[i].colors[j]);
+	for ( j = 0; j < graph_types[i].num_colors; j++ ) {
+		gdk_color_parse_alpha(graph_types[i].colors[j].default_value,
+						&ma->graph_config[i].colors[j],
+						&ma->graph_config[i].alpha[j]);
+	}
 }
 
 /* Set the colors for a graph from a string, as produced by
@@ -308,6 +341,7 @@ multiload_colorconfig_unstringify(MultiloadPlugin *ma, guint i,
 {
 	guint ncolors = graph_types[i].num_colors, j;
 	GdkColor *colors = ma->graph_config[i].colors;
+	guint *alphas = ma->graph_config[i].alpha;
 	const char *listpos = list;
 
 	if ( G_UNLIKELY (!listpos) )
@@ -322,18 +356,21 @@ multiload_colorconfig_unstringify(MultiloadPlugin *ma, guint i,
 			pos = (int)(strchr(listpos, ',')-listpos);
 
 		/* Try to parse the color */
-		if ( G_UNLIKELY (pos != 7) )
+		if ( G_UNLIKELY (pos != 9) )
 			return multiload_colorconfig_default(ma, i);
 
 		/* Extract the color into a null-terminated buffer */
-		char buf[8];
-		strncpy(buf, listpos, 7);
-		buf[7] = 0;
-		if ( G_UNLIKELY (gdk_color_parse(buf, &colors[j]) != TRUE) )
+		char buf[10];
+		strncpy(buf, listpos, 9);
+		buf[9] = 0;
+		if ( G_UNLIKELY (gdk_color_parse_alpha(buf, &colors[j], &alphas[j]) != TRUE) )
 			return multiload_colorconfig_default(ma, i);
 
-		listpos += 8;
+		listpos += 10;
 	}
+
+	//ignore alpha value of last color (background)
+	alphas[ncolors-1] = 0xFFFF;
 }
 
 int
