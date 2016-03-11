@@ -31,8 +31,8 @@ static void
 properties_set_checkboxes_sensitive(MultiloadPlugin *ma, gboolean sensitive)
 {
 	gint i;
-	// CounT the number of visible graphs
-	gint total_graphs = 0;
+	// Count the number of visible graphs
+	gint visible_count = 0;
 	gint last_graph = 0;
 
 	if (!sensitive) {
@@ -40,12 +40,12 @@ properties_set_checkboxes_sensitive(MultiloadPlugin *ma, gboolean sensitive)
 		for (i = 0; i < NGRAPHS; i++) {
 			if (ma->graph_config[i].visible) {
 				last_graph = i;
-				total_graphs++;
+				visible_count ++;
 			}
 		}
 	}
 
-	if ( total_graphs < 2 ) {
+	if ( visible_count < 2 ) {
 		if (sensitive) {
 			// Enable all checkboxes
 			for (i = 0; i < NGRAPHS; i++)
@@ -186,12 +186,12 @@ color_picker_set_cb(GtkColorButton *color_picker, gpointer data)
 
 /* create a color selector */
 static GtkWidget *
-new_color_selector(guint graph, guint index, gboolean use_alpha, MultiloadPlugin *ma)
+color_selector_new(guint graph, guint index, gboolean use_alpha, MultiloadPlugin *ma)
 {
 	GtkWidget *vbox;
 	GtkWidget *label;
 	GtkWidget *color_picker;
-	guint color_slot = ( (graph&0xFFFF) << 16 ) | (index&0xFFFF);
+	guint color_slot = ( (graph & 0xFFFF) << 16 ) | (index & 0xFFFF);
 
 	const gchar *color_name = graph_types[graph].colors[index].interactive_label;
 	const gchar *dialog_title = g_strdup_printf(_("Select color:  %s -> %s"),
@@ -220,8 +220,7 @@ new_color_selector(guint graph, guint index, gboolean use_alpha, MultiloadPlugin
 	return vbox;
 }
 
-/* creates the properties dialog and initialize it from the current
- * configuration */
+// create the properties dialog and initialize it from current configuration
 void
 multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 {
@@ -237,11 +236,11 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 
 	GtkWidget *contentArea = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 
-	// Delete main container for replacing with new (useful to update content)
+	// Delete old container if present
 	if (G_UNLIKELY(GTK_IS_WIDGET(tabs)))
 		gtk_container_remove(GTK_CONTAINER(contentArea), GTK_WIDGET(tabs));
 
-	// New container
+	// Create new container
 	tabs = GTK_NOTEBOOK(gtk_notebook_new());
 	gtk_box_pack_start(GTK_BOX(contentArea), GTK_WIDGET(tabs), TRUE, TRUE, 0);
 
@@ -277,10 +276,10 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 				gtk_size_group_add_widget(sizegroup, label);
 				gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
 
-				t = new_color_selector(i, j, FALSE, ma);
+				t = color_selector_new(i, j, FALSE, ma);
 				gtk_box_pack_end(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 			} else {
-				t = new_color_selector(i, j, TRUE, ma);
+				t = color_selector_new(i, j, TRUE, ma);
 				gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 			}
 			gtk_size_group_add_widget(sizegroup, t);

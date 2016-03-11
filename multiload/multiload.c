@@ -120,7 +120,7 @@ multiload_refresh(MultiloadPlugin *ma, GtkOrientation orientation)
 {
 	gint i;
 
-	/* stop and free the old graphs */
+	// stop and free the old graphs
 	for (i = 0; i < NGRAPHS; i++) {
 		if (!ma->graphs[i])
 			continue;
@@ -138,7 +138,7 @@ multiload_refresh(MultiloadPlugin *ma, GtkOrientation orientation)
 	ma->box = gtk_vbox_new (FALSE, 0);
 	gtk_container_set_border_width(GTK_CONTAINER(ma->box), ma->padding);
 
-	// Switch betweek GtkVBox and GtkHBox depending of orientation
+	// Switch between GtkVBox and GtkHBox depending of orientation
 	ma->orientation = orientation;
 	gtk_orientable_set_orientation(GTK_ORIENTABLE(ma->box), ma->orientation);
 
