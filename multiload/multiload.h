@@ -11,7 +11,7 @@ G_BEGIN_DECLS
 #define PLUGIN_WEBSITE "https://github.com/nandhp/multiload-nandhp"
 
 #define NCPUSTATES 5
-#define NGRAPHS 6
+#define NGRAPHS 7
 #define MAX_COLORS 5
 
 enum {
@@ -20,7 +20,8 @@ enum {
 	GRAPH_NETLOAD = 2,
 	GRAPH_SWAPLOAD = 3,
 	GRAPH_LOADAVG = 4,
-	GRAPH_DISKLOAD = 5
+	GRAPH_DISKLOAD = 5,
+	GRAPH_TEMPERATURE = 6
 };
 
 typedef struct _MultiloadPlugin MultiloadPlugin;
@@ -80,6 +81,9 @@ struct _LoadGraph {
 
 	guint diskread;
 	guint diskwrite;
+
+	// temperature (millicelsius)
+	guint temperature;
 
 	gboolean tooltip_update;
 };

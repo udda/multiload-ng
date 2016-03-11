@@ -76,6 +76,11 @@ multiload_tooltip_update(LoadGraph *g)
 							name, format_rate_for_display(g->diskread), format_rate_for_display(g->diskwrite));
 			}
 			break;
+		case GRAPH_TEMPERATURE:
+			{
+			tooltip_text = g_strdup_printf(_("%s:\n" "%.1f °C"), name, (g->temperature/1000.0));
+			}
+			break;
 		default:
 			{
 			const char *msg;
@@ -225,6 +230,13 @@ multiload_init()
 			3, { // num_colors
 				{ _("_Read"),			_("Read"),			"#FFC65000" },
 				{ _("Wr_ite"),			_("Write"),			"#FFFF6700" },
+				{ _("_Background"),		_("Background"),	"#FF000000" }
+			}
+		},
+
+		{	_("_Temperature"),	_("Temperature"),	"temperature",	GetTemperature,
+			2, { // num_colors
+				{ _("_Temperature"),	_("Temperature"),	"#FFFF00FF" },
 				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		}

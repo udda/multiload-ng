@@ -4,6 +4,7 @@
 #include <math.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <dirent.h>
 
 #include <glibtop.h>
 #include <glibtop/cpu.h>
@@ -157,6 +158,107 @@ GetDiskLoad (int Maximum, int data [3], LoadGraph *g)
 	// TODO HACK: I don't know why these speeds need to be divided by 8...
 	g->diskread  = (guint64) ( (readdiff  * 1000.0)  / (8 * g->multiload->speed) );
 	g->diskwrite = (guint64) ( (writediff * 1000.0)  / (8 * g->multiload->speed) );
+}
+
+void
+GetTemperature (int Maximum, int data[2], LoadGraph *g)
+{
+	guint temp = 0;
+	guint max_temp = 0;
+
+	guint i;
+	guint t;
+	size_t s;
+
+	DIR *dir;
+	DIR *dir_base;
+	FILE *file_temp;
+	FILE *file_trip_type;
+	struct dirent *ent_base;
+	struct dirent *ent;
+	gchar* thermal_dir;
+	gchar *thermal_temp;
+	gchar* thermal_trip_type;
+	gchar* thermal_trip_temp;
+	gchar str[8];
+	const gchar *basedir = "/sys/class/thermal";
+
+
+	// handle errors by providing empty data if something goes wrong
+	memset(data, 0, 2 * sizeof data[0]);
+
+	// check if /sys path exists
+	dir_base = opendir(basedir);
+	if (!dir_base)
+		return;
+
+	// iterate through files in dir_base
+	while ((ent_base = readdir(dir_base)) != NULL) {
+		if (strncmp(ent_base->d_name, "thermal_zone", 12) != 0)
+			continue;
+
+		// found directory 'thermal_zoneX'. Check if we can access
+		thermal_dir = g_strdup_printf("%s/%s",basedir, ent_base->d_name);
+		dir = opendir(thermal_dir);
+		if (dir)
+			closedir(dir);
+		else
+			continue;
+
+
+		thermal_temp = g_strdup_printf("%s/temp", thermal_dir);
+		file_temp = fopen(thermal_temp, "r");
+		if (!file_temp)
+			continue;
+		s = fread(str, 1, 8, file_temp);
+		fclose(file_temp);
+		g_free(thermal_temp);
+		if (s < 1)
+			continue;
+
+		t = atoi(str);
+		if (t > temp)
+			temp = t;
+
+//		printf("\n\n---\n%s, temp=%d", thermal_dir, temp);
+		// iterate through files in thermal_dir
+		for (i=0;;i++) {
+			thermal_trip_type = g_strdup_printf("%s/trip_point_%d_type", thermal_dir, i);
+			file_trip_type = fopen(thermal_trip_type, "r");
+			if (!file_trip_type)
+				break; //no more trip point files
+
+			// found file 'trip_point_X_type'. Check if it contains word "critical"
+			s = fread(str, 1, 8, file_trip_type);
+//			printf("%s OK[%d]\n", thermal_trip_type, s);
+			if (s == 8 && !strncmp(str, "critical", 8)) {
+				thermal_trip_temp = g_strdup_printf("%s/trip_point_%d_temp", thermal_dir, i);
+				file_temp = fopen(thermal_trip_temp, "r");
+				if (!file_temp)
+					continue;
+				s = fread(str, 1, 8, file_temp);
+				fclose(file_temp);
+				g_free(thermal_trip_temp);
+				if (s < 1)
+					continue;
+
+				t = atoi(str);
+				if (t > max_temp)
+					max_temp = t;
+//				printf("%d -> %d\n", t, max_temp);
+			}
+			fclose(file_trip_type);
+			g_free(thermal_trip_type);
+		}
+
+		g_free(thermal_dir);
+	}
+	closedir(dir_base);
+
+	data[0] = (float)Maximum * temp / (float)max_temp;
+	data[1] = Maximum - data[0];
+
+	g->temperature = temp;
 }
 
 #if 0
