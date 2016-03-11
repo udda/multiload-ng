@@ -135,13 +135,12 @@ multiload_refresh(MultiloadPlugin *ma, GtkOrientation orientation)
 	if (ma->box)
 		gtk_widget_destroy(ma->box);
 
-	ma->orientation = orientation;
-	/* Can we do gtk_orientable_set_orientation? */
-	if ( orientation == GTK_ORIENTATION_HORIZONTAL )
-		ma->box = gtk_hbox_new (FALSE, 0);
-	else
-		ma->box = gtk_vbox_new (FALSE, 0);
+	ma->box = gtk_vbox_new (FALSE, 0);
 	gtk_container_set_border_width(GTK_CONTAINER(ma->box), ma->padding);
+
+	// Switch betweek GtkVBox and GtkHBox depending of orientation
+	ma->orientation = orientation;
+	gtk_orientable_set_orientation(GTK_ORIENTABLE(ma->box), ma->orientation);
 
 	gtk_widget_show (ma->box);
 	gtk_container_add (ma->container, ma->box);
