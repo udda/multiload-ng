@@ -25,12 +25,6 @@ static const unsigned needed_cpu_flags =
 (1 << GLIBTOP_CPU_SYS) +
 (1 << GLIBTOP_CPU_NICE);
 
-#if 0
-static const unsigned needed_page_flags =
-(1 << GLIBTOP_SWAP_PAGEIN) +
-(1 << GLIBTOP_SWAP_PAGEOUT);
-#endif
-
 static const unsigned needed_fsusage_flags = 
 (1 << GLIBTOP_FSUSAGE_BLOCK_SIZE) +
 (1 << GLIBTOP_FSUSAGE_READ) +
@@ -260,50 +254,6 @@ GetTemperature (int Maximum, int data[2], LoadGraph *g)
 
 	g->temperature = temp;
 }
-
-#if 0
-void
-GetPage (int Maximum, int data [3], LoadGraph *g)
-{
-	static int max = 100; /* guess at maximum page rate (= in + out) */
-	static u_int64_t lastin = 0;
-	static u_int64_t lastout = 0;
-	int in, out, idle;
-
-	glibtop_swap swap;
-
-	glibtop_get_swap (&swap);
-
-	assert ((swap.flags & needed_page_flags) == needed_page_flags);
-
-	if ((lastin > 0) && (lastin < swap.pagein))
-		in = swap.pagein - lastin;
-	else
-		in = 0;
-	lastin = swap.pagein;
-
-	if ((lastout > 0) && (lastout < swap.pageout))
-		out = swap.pageout - lastout;
-	else
-		out = 0;
-	lastout = swap.pageout;
-
-	if ((in + out) > max) {
-	/* Maximum page rate has increased. Change the scale without
-	   any indication whatsoever to the user (not a nice thing to
-	   do). */
-		max = in + out;
-	}
-
-	in   = rint (Maximum * ((float)in / max));
-	out  = rint (Maximum * ((float)out / max));
-	idle = Maximum - in - out;
-
-	data [0] = in;
-	data [1] = out;
-	data [2] = idle;
-}
-#endif /* 0 */
 
 void
 GetMemory (int Maximum, int data [5], LoadGraph *g)
