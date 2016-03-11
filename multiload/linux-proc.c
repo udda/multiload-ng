@@ -101,7 +101,7 @@ void
 GetDiskLoad (int Maximum, int data [3], LoadGraph *g)
 {
 	static gboolean first_call = TRUE;
-	static guint64 lastread = 0
+	static guint64 lastread = 0;
 	static guint64 lastwrite = 0;
 	static AutoScaler scaler;
 
@@ -135,7 +135,7 @@ GetDiskLoad (int Maximum, int data [3], LoadGraph *g)
 
 	g_free(mountentries);
 
-	readdiff  = read - lastread;
+	readdiff  = read  - lastread;
 	writediff = write - lastwrite;
 
 	lastread  = read;
