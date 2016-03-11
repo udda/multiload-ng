@@ -13,6 +13,10 @@ System Requirements
 - Cairo
 - LibGTop                       >= 2.11.92
 
+For temperature support:
+Linux kernel with CONFIG_THERMAL (Generic Thermal sysfs driver).
+Any modern kernel (since 2010) should be just fine.
+
 For the Xfce panel plugin:
 
 - libxfce4panel                 >= 4.6.0
