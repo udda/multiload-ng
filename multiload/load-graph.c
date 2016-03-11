@@ -233,13 +233,15 @@ load_graph_destroy (GtkWidget *widget, gpointer data_ptr)
 	gtk_widget_destroy(widget);
 }
 
+/*
 static gboolean
 load_graph_clicked (GtkWidget *widget, GdkEventButton *event, LoadGraph *load)
 {
-	/* Formerly used to have properties open to this graph. */
+	// Formerly used to have properties open to this graph.
 
 	return FALSE;
 }
+*/
 
 static gboolean
 load_graph_enter_cb(GtkWidget *widget, GdkEventCrossing *event, gpointer data)
@@ -308,8 +310,8 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 					G_CALLBACK (load_graph_configure), g);
 	g_signal_connect (G_OBJECT(g->disp), "destroy",
 					G_CALLBACK (load_graph_destroy), g);
-	g_signal_connect (G_OBJECT(g->disp), "button-press-event",
-					G_CALLBACK (load_graph_clicked), g);
+//	g_signal_connect (G_OBJECT(g->disp), "button-press-event",
+//					G_CALLBACK (load_graph_clicked), g);
 	g_signal_connect (G_OBJECT(g->disp), "enter-notify-event",
 					G_CALLBACK(load_graph_enter_cb), g);
 	g_signal_connect (G_OBJECT(g->disp), "leave-notify-event",
