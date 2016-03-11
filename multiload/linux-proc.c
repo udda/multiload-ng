@@ -116,10 +116,6 @@ GetDiskLoad (int Maximum, int data [3], LoadGraph *g)
 	guint64 write = 0;
 	guint64 readdiff, writediff;
 
-
-	if (first_call)
-		autoscaler_init(&scaler, 60, 500);
-
 	mountentries = glibtop_get_mountlist (&mountlist, FALSE);
 
 	for (i = 0; i < mountlist.number; i++) {
@@ -147,6 +143,7 @@ GetDiskLoad (int Maximum, int data [3], LoadGraph *g)
 
 	if (first_call) {
 		first_call = FALSE;
+		autoscaler_init(&scaler, 60, 500);
 		memset(data, 0, 3 * sizeof data[0]);
 		return;
 	}
