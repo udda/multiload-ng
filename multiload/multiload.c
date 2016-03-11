@@ -135,28 +135,28 @@ multiload_refresh(MultiloadPlugin *ma, GtkOrientation orientation)
 	if (ma->box)
 		gtk_widget_destroy(ma->box);
 
+	ma->orientation = orientation;
 	/* Can we do gtk_orientable_set_orientation? */
 	if ( orientation == GTK_ORIENTATION_HORIZONTAL )
 		ma->box = gtk_hbox_new (FALSE, 0);
 	else
 		ma->box = gtk_vbox_new (FALSE, 0);
+	gtk_container_set_border_width(GTK_CONTAINER(ma->box), ma->padding);
+
 	gtk_widget_show (ma->box);
 	gtk_container_add (ma->container, ma->box);
-	gtk_container_set_border_width(GTK_CONTAINER(ma->box), ma->padding);
-	ma->orientation = orientation;
-	/* We use show/hide to control graph visibility. Don't let a rogue panel
-	 * screw that up. */
+
+	// Children (graphs) are individually shown/hidden to control visibility
 	gtk_widget_set_no_show_all (ma->box, TRUE);
 
-	/* Create the NGRAPHS graphs, with user-configurable properties taken
-	 * from ma->graph_config. */
+	// Create the NGRAPHS graphs, with user properties from ma->graph_config
 	multiload_create_graphs (ma);
 
-	/* only start and display the graphs the user has turned on */
+	// Only start and display the graphs the user has turned on
 	for (i = 0; i < NGRAPHS; i++) {
 		gtk_box_pack_start(GTK_BOX(ma->box), 
-				   ma->graphs[i]->main_widget, 
-				   TRUE, TRUE, ma->spacing);
+						   ma->graphs[i]->main_widget,
+						   TRUE, TRUE, ma->spacing);
 		if (ma->graph_config[i].visible) {
 			gtk_widget_show_all (ma->graphs[i]->main_widget);
 			load_graph_start(ma->graphs[i]);
