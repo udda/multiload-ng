@@ -101,39 +101,39 @@ void
 GetDiskLoad (int Maximum, int data [3], LoadGraph *g)
 {
 	static gboolean first_call = TRUE;
-	static guint64 lastread = 0, lastwrite = 0;
+	static guint64 lastread = 0
+	static guint64 lastwrite = 0;
 	static AutoScaler scaler;
 
 	glibtop_mountlist mountlist;
 	glibtop_mountentry *mountentries;
+	glibtop_fsusage fsusage;
+
 	guint i;
 	int max;
 
-	guint64 read, write;
+	guint64 read = 0;
+	guint64 write = 0;
 	guint64 readdiff, writediff;
 
 
 	if (first_call)
 		autoscaler_init(&scaler, 60, 500);
 
-	read = write = 0;
-
 	mountentries = glibtop_get_mountlist (&mountlist, FALSE);
 
 	for (i = 0; i < mountlist.number; i++) {
-		glibtop_fsusage fsusage;
-
-		if (strcmp(mountentries[i].type, "smbfs") == 0
-			|| strcmp(mountentries[i].type, "nfs") == 0
-			|| strcmp(mountentries[i].type, "cifs") == 0
-			|| strcmp(mountentries[i].type, "fuse.sshfs") == 0)
+		if (   strcmp (mountentries[i].type, "smbfs") == 0
+			|| strcmp (mountentries[i].type, "nfs") == 0
+			|| strcmp (mountentries[i].type, "cifs") == 0
+			|| strncmp(mountentries[i].type, "fuse.", 5) == 0)
 			continue;
 
 		glibtop_get_fsusage(&fsusage, mountentries[i].mountdir);
-		//TODO debug code, remove as soon it's not needed anymore
 		if ((fsusage.flags & needed_fsusage_flags) != needed_fsusage_flags)
-			printf("ERR [%s] fsusage.flags = %08lX needed = %08X", mountentries[i].mountdir, fsusage.flags, needed_fsusage_flags);
-		read += fsusage.block_size * fsusage.read;
+			continue; // FS does not have required capabilities
+
+		read  += fsusage.block_size * fsusage.read;
 		write += fsusage.block_size * fsusage.write;
 	}
 
@@ -157,9 +157,9 @@ GetDiskLoad (int Maximum, int data [3], LoadGraph *g)
 	data[1] = (float)Maximum * writediff / (float)max;
 	data[2] = (float)Maximum - (data [0] + data[1]);
 
-	// HACK: I don't know why these speeds need to be divided by 8, I will investigate
-	g->diskread = (guint64)((readdiff*1000.0)/(8*g->multiload->speed));
-	g->diskwrite = (guint64)((writediff*1000.0)/(8*g->multiload->speed));
+	// TODO HACK: I don't know why these speeds need to be divided by 8...
+	g->diskread  = (guint64) ( (readdiff  * 1000.0)  / (8 * g->multiload->speed) );
+	g->diskwrite = (guint64) ( (writediff * 1000.0)  / (8 * g->multiload->speed) );
 }
 
 #if 0
