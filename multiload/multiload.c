@@ -66,7 +66,7 @@ multiload_tooltip_update(LoadGraph *g)
 			break;
 		case GRAPH_LOADAVG:
 			tooltip_text = g_strdup_printf(_("The system load average is %0.02f"),
-							g->loadavg1);
+							g->loadavg);
 			break;
 		case GRAPH_DISKLOAD:
 			{
@@ -236,7 +236,7 @@ multiload_init()
 
 		{	_("_Temperature"),	_("Temperature"),	"temperature",	GetTemperature,
 			2, { // num_colors
-				{ _("_Temperature"),	_("Temperature"),	"#FFFF00FF" },
+				{ _("_Value"),			_("Value"),			"#FFFF00FF" },
 				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		}

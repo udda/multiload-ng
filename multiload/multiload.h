@@ -75,7 +75,7 @@ struct _LoadGraph {
 	long cpu_last [NCPUSTATES];
 	int cpu_initialized;
 
-	double loadavg1;
+	double loadavg;
 	NetSpeed *netspeed_in;
 	NetSpeed *netspeed_out;
 

@@ -155,7 +155,8 @@ GetDiskLoad (int Maximum, int data [3], LoadGraph *g)
 }
 
 static int
-read_temp_from_file(const gchar *path) {
+read_temp_from_file(const gchar *path)
+{
 	FILE *f;
 	size_t s;
 	// temperatures are in millicelsius, 8 chars are enough
@@ -176,7 +177,8 @@ read_temp_from_file(const gchar *path) {
 }
 
 static gboolean
-file_check_contents(FILE *f, const gchar *string) {
+file_check_contents(FILE *f, const gchar *string)
+{
 	size_t n;
 	size_t s;
 	gchar *buf;
@@ -269,7 +271,7 @@ GetTemperature (int Maximum, int data[2], LoadGraph *g)
 				g_free(d_type);
 			}
 			paths[i] = g_strdup_printf("%s/temp", d_thermal);
-//			printf("[%d] %s :: %d\n", i, paths[i], maxtemps[i]);
+		//	printf("[%d] %s :: %d\n", i, paths[i], maxtemps[i]);
 			i++;
 			g_free(d_thermal);
 		}
@@ -284,11 +286,11 @@ GetTemperature (int Maximum, int data[2], LoadGraph *g)
 	// finds max temperature and its index (to use the respective maximum)
 	for (i=0,j=0; i<n_zones; i++) {
 		t = read_temp_from_file(paths[i]);
-//		printf("read %d (%d)\n", i, t);
+	//	printf("read %d (%d)\n", i, t);
 		if (t > temp) {
 			temp = t;
 			j = i;
-//			printf("MAX %d (%d)\n", j, t);
+	//		printf("MAX %d (%d)\n", j, t);
 		}
 	}
 
@@ -345,22 +347,19 @@ GetLoadAvg (int Maximum, int data [2], LoadGraph *g)
 {
 	const float per_cpu_max_loadavg = 5.0f;
 	float max_loadavg;
-	float loadavg1;
-	float used;
+	float loadavg;
 
-	glibtop_loadavg loadavg;
-	glibtop_get_loadavg (&loadavg);
+	glibtop_loadavg _loadavg;
+	glibtop_get_loadavg (&_loadavg);
 
-	g_return_if_fail ((loadavg.flags & needed_loadavg_flags) == needed_loadavg_flags);
+	g_return_if_fail ((_loadavg.flags & needed_loadavg_flags) == needed_loadavg_flags);
 
 	max_loadavg = per_cpu_max_loadavg * (1 + glibtop_global_server->ncpu);
 
-	g->loadavg1 = loadavg.loadavg[0];
-	loadavg1 = MIN(loadavg.loadavg[0], max_loadavg);
+	g->loadavg = _loadavg.loadavg[0];
+	loadavg = MIN(_loadavg.loadavg[0], max_loadavg);
 
-	used    = loadavg1 / max_loadavg;
-
-	data [0] = rint ((float) Maximum * used);
+	data [0] = rint ((float) Maximum * loadavg / max_loadavg);
 	data [1] = Maximum - data[0];
 }
 
