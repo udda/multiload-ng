@@ -89,7 +89,19 @@ preference_toggled_cb(GtkWidget *widget, gpointer id)
 	gboolean active = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
 	if (prop_type == PROP_SHOWFRAME) {
 		ma->show_frame = active;
-		multiload_refresh(ma, ma->orientation);
+		multiload_refresh(ma);
+	}
+}
+
+static void
+combobox_changed_cb(GtkWidget *widget, gpointer id)
+{
+	MultiloadPlugin *ma = multiload_configure_get_plugin(widget);
+	gint prop_type = GPOINTER_TO_INT(id);
+	int index = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
+	if (prop_type == PROP_ORIENTATION) {
+		ma->orientation_policy = index;
+		multiload_refresh(ma);
 	}
 }
 
@@ -133,12 +145,12 @@ spin_button_changed_cb(GtkWidget *widget, gpointer id)
 
 		case PROP_PADDING:
 			ma->padding = value;
-			multiload_refresh(ma, ma->orientation);
+			multiload_refresh(ma);
 			break;
 
 		case PROP_SPACING:
 			ma->spacing = value;
-			multiload_refresh(ma, ma->orientation);
+			multiload_refresh(ma);
 			break;
 
 		default:
@@ -313,7 +325,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_box_pack_start (GTK_BOX (page), GTK_WIDGET(table), FALSE, FALSE, 0);
 
 	// -- -- row: width/height
-	if (ma->orientation == GTK_ORIENTATION_HORIZONTAL)
+	if (multiload_get_orientation(ma) == GTK_ORIENTATION_HORIZONTAL)
 		label = gtk_label_new_with_mnemonic(_("Wid_th: "));
 	else
 		label = gtk_label_new_with_mnemonic(_("Heigh_t: "));
@@ -378,6 +390,22 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	label = gtk_label_new(_("milliseconds"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
 	gtk_table_attach_defaults(table, GTK_WIDGET(label), 2, 3, 3, 4);
+
+	// -- -- row: orientation
+	label = gtk_label_new_with_mnemonic(_("_Orientation: "));
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
+	gtk_table_attach_defaults(table, GTK_WIDGET(label), 0, 1, 4, 5);
+
+	t = gtk_combo_box_text_new();
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(t), _("Automatic"));
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(t), _("Horizontal"));
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(t), _("Vertical"));
+	gtk_combo_box_set_active(GTK_COMBO_BOX(t), ma->orientation_policy);
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), t);
+
+	g_signal_connect(G_OBJECT(t), "changed",
+			G_CALLBACK(combobox_changed_cb), GINT_TO_POINTER(PROP_ORIENTATION));
+	gtk_table_attach_defaults(table, GTK_WIDGET(t), 1, 2, 4, 5);
 
 	// -- checkbox: show frame
 	t = gtk_check_button_new_with_mnemonic(_("Frames around graphs"));

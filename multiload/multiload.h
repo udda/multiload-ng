@@ -24,6 +24,10 @@ enum {
 	GRAPH_TEMPERATURE = 6
 };
 
+#define MULTILOAD_ORIENTATION_AUTO			0
+#define MULTILOAD_ORIENTATION_HORIZONTAL	1
+#define MULTILOAD_ORIENTATION_VERTICAL		2
+
 typedef struct _MultiloadPlugin MultiloadPlugin;
 typedef struct _LoadGraph LoadGraph;
 typedef void (*LoadGraphDataFunc) (int, int [], LoadGraph *);
@@ -53,6 +57,7 @@ typedef struct _GraphType GraphType;
 #define STEP_SPACING 1
 
 #define DEFAULT_SHOWFRAME TRUE
+#define DEFAULT_ORIENTATION MULTILOAD_ORIENTATION_AUTO
 
 struct _LoadGraph {
 	MultiloadPlugin *multiload;
@@ -98,12 +103,13 @@ struct _MultiloadPlugin
 {
 	/* Current state */
 	GtkWidget *box;
-	GtkOrientation orientation;
+	GtkOrientation panel_orientation;
 	LoadGraph *graphs[NGRAPHS];
 
 	/* Settings */
 	GtkContainer *container;
 	GraphConfig graph_config[NGRAPHS];
+	guint orientation_policy;
 	guint speed;
 	guint size;
 	guint padding;
@@ -131,7 +137,11 @@ GraphType graph_types[NGRAPHS];
 
 /* remove the old graphs and rebuild them */
 void
-multiload_refresh(MultiloadPlugin *ma, GtkOrientation orientation);
+multiload_refresh(MultiloadPlugin *ma);
+
+/* get current orientation */
+GtkOrientation
+multiload_get_orientation(MultiloadPlugin *ma);
 
 /* update the tooltip to the graph's current "used" percentage */
 void

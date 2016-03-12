@@ -63,6 +63,8 @@ multiload_read(char **fp, MultiloadPlugin *ma)
 					ma->spacing = atoi(s.t[1]);
 				} else if ( g_ascii_strcasecmp(s.t[0], "show-frame") == 0 ) {
 					ma->show_frame = atoi(s.t[1]);
+				} else if ( g_ascii_strcasecmp(s.t[0], "orientation") == 0 ) {
+					ma->orientation_policy = atoi(s.t[1]);
 				} else {
 					const char *suffix; /* Set by multiload_find_graph_by_name */
 					int i = multiload_find_graph_by_name(s.t[0], &suffix);
@@ -111,6 +113,7 @@ static void multiload_save_configuration(Plugin * p, FILE * fp)
 	lxpanel_put_int (fp, "padding", ma->padding);
 	lxpanel_put_int (fp, "spacing", ma->spacing);
 	lxpanel_put_int (fp, "show-frame", ma->show_frame);
+	lxpanel_put_int (fp, "orientation", ma->orientation_policy);
 
 	for ( i = 0; i < NGRAPHS; i++ ) {
 		char *key, list[10*MAX_COLORS];
@@ -136,18 +139,16 @@ static void multiload_panel_configuration_changed(Plugin *p)
 	MultiloadLxpanelPlugin *multiload = p->priv;
 
 	/* Determine orientation and size */
-	GtkOrientation orientation =
-	(p->panel->orientation == GTK_ORIENTATION_VERTICAL) ?
-					GTK_ORIENTATION_VERTICAL : GTK_ORIENTATION_HORIZONTAL;
-	int size = (orientation == GTK_ORIENTATION_VERTICAL) ?
-					p->panel->width : p->panel->height;
-	if ( orientation == GTK_ORIENTATION_HORIZONTAL )
-		gtk_widget_set_size_request (p->pwid, -1, size);
-	else
-		gtk_widget_set_size_request (p->pwid, size, -1);
+	if ( p->panel->orientation == GTK_ORIENTATION_VERTICAL ) {
+		multiload->ma->panel_orientation = GTK_ORIENTATION_VERTICAL;
+		gtk_widget_set_size_request (p->pwid, p->panel->width, -1);
+	} else { // p->panel->orientation can have values other than vert/horiz
+		multiload->ma->panel_orientation = GTK_ORIENTATION_HORIZONTAL;
+		gtk_widget_set_size_request (p->pwid, -1, p->panel->height);
+	}
 
 	/* Refresh the panel applet */
-	multiload_refresh(&(multiload->ma), orientation);
+	multiload_refresh(&(multiload->ma));
 }
 
 static gboolean

@@ -58,6 +58,7 @@ multiload_save (XfcePanelPlugin *plugin,
 		xfce_rc_write_int_entry (rc, "padding", ma->padding);
 		xfce_rc_write_int_entry (rc, "spacing", ma->spacing);
 		xfce_rc_write_int_entry (rc, "show-frame", ma->show_frame);
+		xfce_rc_write_int_entry (rc, "orientation", ma->orientation_policy);
 
 		for ( i = 0; i < NGRAPHS; i++ ) { 
 			char *key, list[10*MAX_COLORS];
@@ -104,6 +105,7 @@ multiload_read (XfcePanelPlugin *plugin,
 			ma->padding = xfce_rc_read_int_entry(rc, "padding", DEFAULT_PADDING);
 			ma->spacing = xfce_rc_read_int_entry(rc, "spacing", DEFAULT_PADDING);
 			ma->show_frame = xfce_rc_read_int_entry (rc, "show-frame", DEFAULT_SHOWFRAME);
+			ma->orientation_policy = xfce_rc_read_int_entry (rc, "orientation", DEFAULT_ORIENTATION);
 
 			/* Read visibility and colors for each graph */
 			for ( i = 0; i < NGRAPHS; i++ ) {

@@ -44,7 +44,6 @@ static MultiloadXfcePlugin *
 multiload_new (XfcePanelPlugin *plugin)
 {
 	MultiloadXfcePlugin *multiload;
-	GtkOrientation orientation;
 
 	/* allocate memory for the plugin structure */
 	multiload = panel_slice_new0 (MultiloadXfcePlugin);
@@ -61,11 +60,11 @@ multiload_new (XfcePanelPlugin *plugin)
 	gtk_widget_show (multiload->ebox);
 
 	/* get the current orientation */
-	orientation = xfce_panel_plugin_get_orientation (plugin);
+	multiload->ma.panel_orientation = xfce_panel_plugin_get_orientation (plugin);
 
 	/* Initialize the applet */
 	multiload->ma.container = GTK_CONTAINER(multiload->ebox);
-	multiload_refresh(&(multiload->ma), orientation);
+	multiload_refresh(&(multiload->ma));
 
 	return multiload;
 }
@@ -103,13 +102,15 @@ multiload_orientation_changed (XfcePanelPlugin *plugin,
 	if ( size < 0 )
 		size = size_alt;
 
+	ma->panel_orientation = orientation;
+
 	/* Rotate the plugin size to the new orientation */
 	if ( orientation == GTK_ORIENTATION_HORIZONTAL)
 		gtk_widget_set_size_request (GTK_WIDGET (plugin), -1, size);
 	else
 		gtk_widget_set_size_request (GTK_WIDGET (plugin), size, -1);
 
-	multiload_refresh(ma, orientation);
+	multiload_refresh(ma);
 }
 
 static gboolean
@@ -117,18 +118,14 @@ multiload_size_changed (XfcePanelPlugin *plugin,
 						gint             size,
 						MultiloadPlugin *ma)
 {
-	/* get the orientation of the plugin */
-	GtkOrientation orientation = xfce_panel_plugin_get_orientation (plugin);
-
 	/* set the widget size */
-	if ( orientation == GTK_ORIENTATION_HORIZONTAL)
+	if ( ma->panel_orientation == GTK_ORIENTATION_HORIZONTAL)
 		gtk_widget_set_size_request (GTK_WIDGET (plugin), -1, size);
 	else
 		gtk_widget_set_size_request (GTK_WIDGET (plugin), size, -1);
 
-	multiload_refresh(ma, orientation);
+	multiload_refresh(ma);
 
-	/* we handled the orientation */
 	return TRUE;
 }
 

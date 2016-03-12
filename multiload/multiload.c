@@ -119,9 +119,20 @@ multiload_create_graphs(MultiloadPlugin *ma)
 	}
 }
 
+/* get current orientation */
+GtkOrientation
+multiload_get_orientation(MultiloadPlugin *ma) {
+	if (ma->orientation_policy == MULTILOAD_ORIENTATION_HORIZONTAL)
+		return GTK_ORIENTATION_HORIZONTAL;
+	else if (ma->orientation_policy == MULTILOAD_ORIENTATION_VERTICAL)
+		return GTK_ORIENTATION_VERTICAL;
+	else // if (ma->orientation_policy == MULTILOAD_ORIENTATION_AUTO)
+		return ma->panel_orientation;
+}
+
 /* remove the old graphs and rebuild them */
 void
-multiload_refresh(MultiloadPlugin *ma, GtkOrientation orientation)
+multiload_refresh(MultiloadPlugin *ma)
 {
 	gint i;
 
@@ -144,8 +155,7 @@ multiload_refresh(MultiloadPlugin *ma, GtkOrientation orientation)
 	gtk_container_set_border_width(GTK_CONTAINER(ma->box), ma->padding);
 
 	// Switch between GtkVBox and GtkHBox depending of orientation
-	ma->orientation = orientation;
-	gtk_orientable_set_orientation(GTK_ORIENTABLE(ma->box), ma->orientation);
+	gtk_orientable_set_orientation(GTK_ORIENTABLE(ma->box), multiload_get_orientation(ma));
 
 	gtk_widget_show (ma->box);
 	gtk_container_add (ma->container, ma->box);
