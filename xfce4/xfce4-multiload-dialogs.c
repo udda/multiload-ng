@@ -93,7 +93,7 @@ multiload_configure (XfcePanelPlugin     *plugin,
 	xfce_panel_plugin_block_menu (plugin);
 
 	/* create the dialog */
-	dialog = xfce_titled_dialog_new_with_buttons(_("Multiload preferences"),
+	dialog = xfce_titled_dialog_new_with_buttons(_("Multiload"),
 					GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
 					GTK_DIALOG_DESTROY_WITH_PARENT,
 					GTK_STOCK_HELP, GTK_RESPONSE_HELP,
