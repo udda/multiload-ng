@@ -154,102 +154,145 @@ GetDiskLoad (int Maximum, int data [3], LoadGraph *g)
 	g->diskwrite = (guint64) ( (writediff * 1000.0)  / (8 * g->multiload->speed) );
 }
 
+static int
+read_temp_from_file(const gchar *path) {
+	FILE *f;
+	size_t s;
+	// temperatures are in millicelsius, 8 chars are enough
+	gchar buf[8];
+
+
+	f = fopen(path, "r");
+	if (!f)
+		return 0;
+
+	s = fread(buf, 1, sizeof(buf), f);
+	fclose(f);
+
+	if (s < 1)
+		return 0;
+
+	return atoi(buf);
+}
+
+static gboolean
+file_check_contents(FILE *f, const gchar *string) {
+	size_t n;
+	size_t s;
+	gchar *buf;
+
+	n = strlen(string);
+	buf = (gchar*)malloc(n);
+
+	s = fread(buf, 1, n, f);
+
+	if (s != n)
+		return FALSE;
+
+	if (strncmp(buf, string, n) != 0)
+		return FALSE;
+
+	return TRUE;
+}
+
 void
 GetTemperature (int Maximum, int data[2], LoadGraph *g)
 {
 	guint temp = 0;
-	guint max_temp = 0;
 
-	guint i;
-	guint t;
-	size_t s;
+	guint i, j, t;
 
 	DIR *dir;
-	DIR *dir_base;
-	FILE *file_temp;
-	FILE *file_trip_type;
-	struct dirent *ent_base;
-	struct dirent *ent;
-	gchar* thermal_dir;
-	gchar *thermal_temp;
-	gchar* thermal_trip_type;
-	gchar* thermal_trip_temp;
-	gchar str[8];
-	const gchar *basedir = "/sys/class/thermal";
+	struct dirent *entry;
 
+	static gboolean first_call = TRUE;
+	static gboolean support = FALSE;
+
+	// hold path and max temp for each thermal zone, filled on first call
+	static guint n_zones = 0;
+	static gchar **paths = NULL;
+	static guint *maxtemps = NULL;
 
 	// handle errors by providing empty data if something goes wrong
 	memset(data, 0, 2 * sizeof data[0]);
 
-	// check if /sys path exists
-	dir_base = opendir(basedir);
-	if (!dir_base)
-		return;
+	if (G_UNLIKELY(first_call)) {
+		first_call = FALSE;
 
-	// iterate through files in dir_base
-	while ((ent_base = readdir(dir_base)) != NULL) {
-		if (strncmp(ent_base->d_name, "thermal_zone", 12) != 0)
-			continue;
+		gchar *d_base = g_strdup("/sys/class/thermal");
 
-		// found directory 'thermal_zoneX'. Check if we can access
-		thermal_dir = g_strdup_printf("%s/%s",basedir, ent_base->d_name);
-		dir = opendir(thermal_dir);
-		if (dir)
-			closedir(dir);
-		else
-			continue;
+		// check if /sys path exists
+		dir = opendir(d_base);
+		if (!dir)
+			return;
 
-
-		thermal_temp = g_strdup_printf("%s/temp", thermal_dir);
-		file_temp = fopen(thermal_temp, "r");
-		if (!file_temp)
-			continue;
-		s = fread(str, 1, 8, file_temp);
-		fclose(file_temp);
-		g_free(thermal_temp);
-		if (s < 1)
-			continue;
-
-		t = atoi(str);
-		if (t > temp)
-			temp = t;
-
-//		printf("\n\n---\n%s, temp=%d", thermal_dir, temp);
-		// iterate through files in thermal_dir
-		for (i=0;;i++) {
-			thermal_trip_type = g_strdup_printf("%s/trip_point_%d_type", thermal_dir, i);
-			file_trip_type = fopen(thermal_trip_type, "r");
-			if (!file_trip_type)
-				break; //no more trip point files
-
-			// found file 'trip_point_X_type'. Check if it contains word "critical"
-			s = fread(str, 1, 8, file_trip_type);
-//			printf("%s OK[%d]\n", thermal_trip_type, s);
-			if (s == 8 && !strncmp(str, "critical", 8)) {
-				thermal_trip_temp = g_strdup_printf("%s/trip_point_%d_temp", thermal_dir, i);
-				file_temp = fopen(thermal_trip_temp, "r");
-				if (!file_temp)
-					continue;
-				s = fread(str, 1, 8, file_temp);
-				fclose(file_temp);
-				g_free(thermal_trip_temp);
-				if (s < 1)
-					continue;
-
-				t = atoi(str);
-				if (t > max_temp)
-					max_temp = t;
-//				printf("%d -> %d\n", t, max_temp);
-			}
-			fclose(file_trip_type);
-			g_free(thermal_trip_type);
+		// count thermal_zoneX dirs
+		while ((entry = readdir(dir)) != NULL) {
+			if (strncmp(entry->d_name, "thermal_zone", 12) == 0)
+				n_zones++;
 		}
 
-		g_free(thermal_dir);
-	}
-	closedir(dir_base);
+		// if there is at least one thermal zone, we can proceed
+		if (n_zones > 0)
+			support = TRUE;
 
-	data[0] = (float)Maximum * temp / (float)max_temp;
+		// allocate buffers
+		paths    = (gchar**) malloc( n_zones * sizeof (gchar*) );
+		maxtemps = (guint*)  malloc( n_zones * sizeof  (guint) );
+		memset(maxtemps, 0, n_zones * sizeof (guint));
+
+		// fill buffers
+		i=0;
+		rewinddir(dir);
+		while ((entry = readdir(dir)) != NULL) {
+			if (strncmp(entry->d_name, "thermal_zone", 12) != 0)
+				continue;
+
+			gchar *d_thermal = g_strdup_printf("%s/%s", d_base, entry->d_name);
+
+			// find "critical" (max) temperature searching in trip points
+			for (j=0; ; j++) {
+				gchar *d_type = g_strdup_printf("%s/trip_point_%d_type", d_thermal, j);
+				FILE *f_type = fopen(d_type, "r");
+				if (!f_type)
+					break; //no more trip point files, stop searching
+				gboolean found = file_check_contents(f_type, "critical");
+				fclose(f_type);
+
+				if (found) { // found critical temp
+					gchar *d_temp = g_strdup_printf("%s/trip_point_%d_temp", d_thermal, j);
+					t = read_temp_from_file(d_temp);
+					g_free(d_temp);
+					if (t > maxtemps[i])
+						maxtemps[i] = t;
+				}
+				g_free(d_type);
+			}
+			paths[i] = g_strdup_printf("%s/temp", d_thermal);
+//			printf("[%d] %s :: %d\n", i, paths[i], maxtemps[i]);
+			i++;
+			g_free(d_thermal);
+		}
+		closedir(dir);
+		g_free(d_base);
+	}
+
+	// check if we have sysfs thermal support
+	if (!support)
+		return;
+
+	// finds max temperature and its index (to use the respective maximum)
+	for (i=0,j=0; i<n_zones; i++) {
+		t = read_temp_from_file(paths[i]);
+//		printf("read %d (%d)\n", i, t);
+		if (t > temp) {
+			temp = t;
+			j = i;
+//			printf("MAX %d (%d)\n", j, t);
+		}
+	}
+
+	data[0] = (float)Maximum * temp / (float)maxtemps[j];
 	data[1] = Maximum - data[0];
 
 	g->temperature = temp;
