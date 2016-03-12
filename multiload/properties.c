@@ -188,7 +188,7 @@ color_picker_set_cb(GtkColorButton *color_picker, gpointer data)
 static GtkWidget *
 color_selector_new(guint graph, guint index, gboolean use_alpha, MultiloadPlugin *ma)
 {
-	GtkWidget *vbox;
+	GtkWidget *box;
 	GtkWidget *label;
 	GtkWidget *color_picker;
 	guint color_slot = ( (graph & 0xFFFF) << 16 ) | (index & 0xFFFF);
@@ -198,7 +198,7 @@ color_selector_new(guint graph, guint index, gboolean use_alpha, MultiloadPlugin
 					graph_types[graph].noninteractive_label,
 					graph_types[graph].colors[index].noninteractive_label);
 
-	vbox = gtk_vbox_new (FALSE, 0);
+	box = gtk_hbox_new (FALSE, 3);
 	label = gtk_label_new_with_mnemonic(color_name);
 	color_picker = gtk_color_button_new_with_color(
 					&ma->graph_config[graph].colors[index]);
@@ -211,13 +211,13 @@ color_selector_new(guint graph, guint index, gboolean use_alpha, MultiloadPlugin
 					ma->graph_config[graph].alpha[index]);
 	}
 
-	gtk_box_pack_start (GTK_BOX(vbox), color_picker, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX(vbox), label, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX(box), color_picker, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX(box), label, FALSE, FALSE, 0);
 
 	g_signal_connect(G_OBJECT(color_picker), "color_set",
 				G_CALLBACK(color_picker_set_cb), GINT_TO_POINTER(color_slot));
 
-	return vbox;
+	return box;
 }
 
 // create the properties dialog and initialize it from current configuration
@@ -230,6 +230,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	GtkWidget *page;
 	GtkWidget *frame;
 	GtkWidget *box;
+	GtkWidget *box2;
 	GtkTable *table;
 	GtkWidget *label;
 	GtkWidget *t;
@@ -249,7 +250,10 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	// COLORS PAGE
 	page = add_page(tabs, _("_Resources"), _("Change colors and visibility of the graphs."));
 
-	sizegroup = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
+	box = gtk_hbox_new(FALSE, PREF_CONTENT_PADDING);
+	gtk_container_add(GTK_CONTAINER(page), box);
+
+	sizegroup = gtk_size_group_new(GTK_SIZE_GROUP_BOTH);
 	for( i = 0; i < NGRAPHS; i++ ) {
 		// -- -- checkbox
 		t = gtk_check_button_new_with_mnemonic(graph_types[i].interactive_label);
@@ -262,25 +266,25 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 		// -- -- frame
 		frame = gtk_frame_new(NULL);
 		gtk_frame_set_label_widget(GTK_FRAME(frame), t);
-		gtk_box_pack_start(GTK_BOX(page), GTK_WIDGET(frame), FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(box), GTK_WIDGET(frame), FALSE, FALSE, 0);
 
-		box = gtk_hbox_new(FALSE, 0);
-		gtk_container_set_border_width(GTK_CONTAINER(box), 2);
-		gtk_container_add(GTK_CONTAINER(frame), GTK_WIDGET(box));
+		box2 = gtk_vbox_new(FALSE, 0);
+		gtk_container_set_border_width(GTK_CONTAINER(box2), PREF_CONTENT_PADDING);
+		gtk_container_add(GTK_CONTAINER(frame), GTK_WIDGET(box2));
 
 		// -- -- colors
 		k = graph_types[i].num_colors;
 		for( j = 0; j < k; j++ ) {
-			if (j == k-1) {
-				label = gtk_label_new(NULL); // actually a spacer
-				gtk_size_group_add_widget(sizegroup, label);
-				gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
-
+			if (j == k-1) { // last color (background)
 				t = color_selector_new(i, j, FALSE, ma);
-				gtk_box_pack_end(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
+				gtk_box_pack_end(GTK_BOX(box2), t, FALSE, FALSE, 0);
+
+				t = gtk_hseparator_new();
+				gtk_size_group_add_widget(sizegroup, t);
+				gtk_box_pack_end(GTK_BOX(box2), t, FALSE, FALSE, 0);
 			} else {
 				t = color_selector_new(i, j, TRUE, ma);
-				gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
+				gtk_box_pack_start(GTK_BOX(box2), t, FALSE, FALSE, 0);
 			}
 			gtk_size_group_add_widget(sizegroup, t);
 		}
@@ -292,8 +296,8 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_box_pack_start(GTK_BOX(page), box, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 	t = gtk_button_new_with_label(_("Default colors"));
-	g_signal_connect(G_OBJECT(t), "clicked",
-							G_CALLBACK(button_clicked_cb), GINT_TO_POINTER(ACTION_DEFAULT_COLORS));
+	g_signal_connect(G_OBJECT(t), "clicked", G_CALLBACK(button_clicked_cb),
+							GINT_TO_POINTER(ACTION_DEFAULT_COLORS));
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 
