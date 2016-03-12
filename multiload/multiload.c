@@ -194,59 +194,59 @@ multiload_init()
 	GraphType temp[] = {
 		/*	prefs_label			tooltip_label		name			get_data */
 		{	_("_Processor"),	_("Processor"),		"cpuload",		GetLoad,
-			5, { // num_colors
-				{ _("_User"),			_("User"),			"#FF0072B3" },
-				{ _("_System"),			_("System"),		"#FF0092E6" },
-				{ _("N_ice"),			_("Nice"),			"#FF00A3FF" },
-				{ _("I_OWait"),			_("IOWait"),		"#FF002F3D" },
+			5, { // hue: 196
+				{ _("_User"),			_("User"),			"#FF036F96" },
+				{ _("_System"),			_("System"),		"#FF42ACD1" },
+				{ _("N_ice"),			_("Nice"),			"#FFBEEEFF" },
+				{ _("I_OWait"),			_("IOWait"),		"#FF002633" },
 				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		},
 
 		{	_("_Memory"),		_("Memory"),		"memload",		GetMemory,
-			5, { // num_colors
-				{ _("_User"),			_("User"),			"#FF00B35B" },
-				{ _("_Shared"),			_("Shared"),		"#FF00E675" },
-				{ _("_Buffers"),		_("Buffers"),		"#FF00FF82" },
-				{ _("Cach_ed"),			_("Cached"),		"#FFAAF5D0" },
+			5, { // hue: 151
+				{ _("_User"),			_("User"),			"#FF03964F" },
+				{ _("_Shared"),			_("Shared"),		"#FF43D18D" },
+				{ _("_Buffers"),		_("Buffers"),		"#FFBFFFE0" },
+				{ _("Cach_ed"),			_("Cached"),		"#FF00331A" },
 				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		},
 
 		{	_("_Network"),		_("Network"),		"netload",		GetNet,
-			4, { // num_colors
-				{ _("_In"),				_("In"),			"#FFFCE94F" },
-				{ _("O_ut"),			_("Out"),			"#FFEDD400" },
-				{ _("L_ocal"),			_("Local"),			"#FFC4A000" },
+			4, { // hue: 53
+				{ _("_In"),				_("In"),			"#FFE2CC05" },
+				{ _("O_ut"),			_("Out"),			"#FF696018" },
+				{ _("L_ocal"),			_("Local"),			"#FFFFF7B1" },
 				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		},
 
 		{	_("S_wap Space"),	_("Swap Space"),	"swapload",		GetSwap,
-			2, { // num_colors
-				{ _("_Used"),			_("Used"),			"#FF8B00C3" },
+			2, { // hue: 278
+				{ _("_Used"),			_("Used"),			"#FF9C43D1" },
 				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		},
 
 		{	_("_Load"),			_("Load Average"),	"loadavg",		GetLoadAvg,
-			2, { // num_colors
-				{ _("A_verage"),		_("Average"),		"#FFD50000" },
+			2, { // hue: 0
+				{ _("A_verage"),		_("Average"),		"#FFD14343" },
 				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		},
 
 		{	_("_Disk"),			_("Disk"),			"diskload",		GetDiskLoad,
-			3, { // num_colors
-				{ _("_Read"),			_("Read"),			"#FFC65000" },
+			3, { // hue: 31
+				{ _("_Read"),			_("Read"),			"#FFED7A00" },
 				{ _("Wr_ite"),			_("Write"),			"#FFFF6700" },
 				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		},
 
 		{	_("_Temperature"),	_("Temperature"),	"temperature",	GetTemperature,
-			2, { // num_colors
-				{ _("_Value"),			_("Value"),			"#FFFF00FF" },
+			2, { // hue: 310
+				{ _("_Value"),			_("Value"),			"#FFF049D5" },
 				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		}
