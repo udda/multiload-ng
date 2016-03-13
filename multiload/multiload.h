@@ -43,7 +43,7 @@ typedef struct _GraphType GraphType;
 
 #define MIN_SPEED 50
 #define DEFAULT_SPEED 500
-#define MAX_SPEED 10000
+#define MAX_SPEED 20000
 #define STEP_SPEED 50
 
 #define MIN_PADDING 0
