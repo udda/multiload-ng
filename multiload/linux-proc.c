@@ -47,7 +47,7 @@ static const unsigned needed_netload_flags =
 
 
 void
-GetLoad (int Maximum, int data [5], LoadGraph *g)
+GetLoad (int Maximum, int data [4], LoadGraph *g)
 {
 	int usr, nice, sys, iowait, free;
 	int total;
@@ -83,17 +83,15 @@ GetLoad (int Maximum, int data [5], LoadGraph *g)
 	nice = rint (Maximum * (float)(nice) / total);
 	sys  = rint (Maximum * (float)(sys)  / total);
 	iowait = rint (Maximum * (float)(iowait) / total);
-	free = Maximum - usr - nice - sys - iowait;
 
 	data [0] = usr;
 	data [1] = sys;
 	data [2] = nice;
 	data [3] = iowait;
-	data [4] = free;
 }
 
 void
-GetDiskLoad (int Maximum, int data [3], LoadGraph *g)
+GetDiskLoad (int Maximum, int data [2], LoadGraph *g)
 {
 	static gboolean first_call = TRUE;
 	static guint64 lastread = 0;
@@ -139,7 +137,7 @@ GetDiskLoad (int Maximum, int data [3], LoadGraph *g)
 	if (first_call) {
 		first_call = FALSE;
 		autoscaler_init(&scaler, 60, 500);
-		memset(data, 0, 3 * sizeof data[0]);
+		memset(data, 0, 2 * sizeof data[0]);
 		return;
 	}
 
@@ -147,7 +145,6 @@ GetDiskLoad (int Maximum, int data [3], LoadGraph *g)
 
 	data[0] = (float)Maximum *  readdiff / (float)max;
 	data[1] = (float)Maximum * writediff / (float)max;
-	data[2] = (float)Maximum - (data [0] + data[1]);
 
 	// TODO HACK: I don't know why these speeds need to be divided by 8...
 	g->diskread  = (guint64) ( (readdiff  * 1000.0)  / (8 * g->multiload->speed) );
@@ -198,7 +195,7 @@ file_check_contents(FILE *f, const gchar *string)
 }
 
 void
-GetTemperature (int Maximum, int data[2], LoadGraph *g)
+GetTemperature (int Maximum, int data[1], LoadGraph *g)
 {
 	guint temp = 0;
 
@@ -216,7 +213,7 @@ GetTemperature (int Maximum, int data[2], LoadGraph *g)
 	static guint *maxtemps = NULL;
 
 	// handle errors by providing empty data if something goes wrong
-	memset(data, 0, 2 * sizeof data[0]);
+	memset(data, 0, 1 * sizeof data[0]);
 
 	if (G_UNLIKELY(first_call)) {
 		first_call = FALSE;
@@ -295,13 +292,12 @@ GetTemperature (int Maximum, int data[2], LoadGraph *g)
 	}
 
 	data[0] = (float)Maximum * temp / (float)maxtemps[j];
-	data[1] = Maximum - data[0];
 
 	g->temperature = temp;
 }
 
 void
-GetMemory (int Maximum, int data [5], LoadGraph *g)
+GetMemory (int Maximum, int data [4], LoadGraph *g)
 {
 	int user, shared, buffer, cached;
 
@@ -320,11 +316,10 @@ GetMemory (int Maximum, int data [5], LoadGraph *g)
 	data [1] = shared;
 	data [2] = buffer;
 	data [3] = cached;
-	data [4] = Maximum-user-shared-buffer-cached;
 }
 
 void
-GetSwap (int Maximum, int data [2], LoadGraph *g)
+GetSwap (int Maximum, int data [1], LoadGraph *g)
 {
 	int used;
 
@@ -339,11 +334,10 @@ GetSwap (int Maximum, int data [2], LoadGraph *g)
 	   used = rint (Maximum * (float)swap.used / swap.total);
 
 	data [0] = used;
-	data [1] = Maximum - used;
 }
 
 void
-GetLoadAvg (int Maximum, int data [2], LoadGraph *g)
+GetLoadAvg (int Maximum, int data [1], LoadGraph *g)
 {
 	const float per_cpu_max_loadavg = 5.0f;
 	float max_loadavg;
@@ -360,7 +354,6 @@ GetLoadAvg (int Maximum, int data [2], LoadGraph *g)
 	loadavg = MIN(_loadavg.loadavg[0], max_loadavg);
 
 	data [0] = rint ((float) Maximum * loadavg / max_loadavg);
-	data [1] = Maximum - data[0];
 }
 
 /*
@@ -398,7 +391,7 @@ is_net_device_virtual(char *device)
 }
 
 void
-GetNet (int Maximum, int data [4], LoadGraph *g)
+GetNet (int Maximum, int data [3], LoadGraph *g)
 {
 	enum Types {
 		IN_COUNT = 0,
@@ -477,11 +470,6 @@ GetNet (int Maximum, int data [4], LoadGraph *g)
 		for (i = 0; i < COUNT_TYPES; i++)
 			data[i]   = rint (Maximum * (float)delta[i]  / max);
 	}
-
-	//data[4] = Maximum - data[3] - data[2] - data[1] - data[0];
-	data[COUNT_TYPES] = Maximum;
-	for (i = 0; i < COUNT_TYPES; i++)
-		data[COUNT_TYPES] -= data[i];
 
 	memcpy(past, present, sizeof past);
 }

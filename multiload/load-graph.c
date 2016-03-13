@@ -155,7 +155,7 @@ load_graph_unalloc (LoadGraph *g)
 static void
 load_graph_alloc (LoadGraph *g)
 {
-	guint i, num_colors = graph_types[g->id].num_colors;
+	guint i;
 
 	if (g->allocated)
 		return;
@@ -163,10 +163,11 @@ load_graph_alloc (LoadGraph *g)
 	g->data = g_new0 (gint *, g->draw_width);
 	g->pos = g_new0 (guint, g->draw_width);
 
-	g->data_size = sizeof (guint) * num_colors;
+	// count out border and background
+	g->data_size =  graph_types[g->id].num_colors - 2;
 
 	for (i = 0; i < g->draw_width; i++)
-		g->data [i] = g_malloc0 (g->data_size);
+		g->data [i] = g_malloc0 (sizeof (guint) * g->data_size);
 
 	g->allocated = TRUE;
 }

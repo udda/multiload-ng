@@ -12,7 +12,7 @@ G_BEGIN_DECLS
 
 #define NCPUSTATES 5
 #define NGRAPHS 7
-#define MAX_COLORS 5
+#define MAX_COLORS 6
 
 enum {
 	GRAPH_CPULOAD = 0,

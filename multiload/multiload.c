@@ -84,10 +84,11 @@ multiload_tooltip_update(LoadGraph *g)
 		default:
 			{
 			const char *msg;
-			guint i, total_used, percent;
-			guint num_colors = graph_types[g->id].num_colors;
+			guint i;
+			guint percent;
+			guint total_used = 0;
 
-			for (i = 0, total_used = 0; i < (num_colors - 1); i++)
+			for (i = 0; i < g->data_size; i++)
 				total_used += g->data[0][i];
 
 			percent = 100.0f * total_used / g->draw_height;
@@ -194,59 +195,66 @@ multiload_init()
 	GraphType temp[] = {
 		/*	prefs_label			tooltip_label		name			get_data */
 		{	_("_Processor"),	_("Processor"),		"cpuload",		GetLoad,
-			5, { // hue: 196
+			6, { // hue: 196
 				{ _("_User"),			_("User"),			"#FF036F96" },
 				{ _("_System"),			_("System"),		"#FF42ACD1" },
 				{ _("N_ice"),			_("Nice"),			"#FFBEEEFF" },
 				{ _("I_OWait"),			_("IOWait"),		"#FF002633" },
+				{ _("Bor_der"),			_("Border"),		"#FF005D80" },
 				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		},
 
 		{	_("_Memory"),		_("Memory"),		"memload",		GetMemory,
-			5, { // hue: 151
+			6, { // hue: 151
 				{ _("_User"),			_("User"),			"#FF03964F" },
 				{ _("_Shared"),			_("Shared"),		"#FF43D18D" },
 				{ _("_Buffers"),		_("Buffers"),		"#FFBFFFE0" },
 				{ _("Cach_ed"),			_("Cached"),		"#FF00331A" },
+				{ _("Bor_der"),			_("Border"),		"#FF008042" },
 				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		},
 
 		{	_("_Network"),		_("Network"),		"netload",		GetNet,
-			4, { // hue: 53
+			5, { // hue: 53
 				{ _("_In"),				_("In"),			"#FFE2CC05" },
 				{ _("O_ut"),			_("Out"),			"#FF696018" },
 				{ _("L_ocal"),			_("Local"),			"#FFFFF7B1" },
+				{ _("Bor_der"),			_("Border"),		"#FF807100" },
 				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		},
 
 		{	_("S_wap Space"),	_("Swap Space"),	"swapload",		GetSwap,
-			2, { // hue: 278
+			3, { // hue: 278
 				{ _("_Used"),			_("Used"),			"#FF9C43D1" },
+				{ _("Bor_der"),			_("Border"),		"#FF510080" },
 				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		},
 
 		{	_("_Load"),			_("Load Average"),	"loadavg",		GetLoadAvg,
-			2, { // hue: 0
+			3, { // hue: 0
 				{ _("A_verage"),		_("Average"),		"#FFD14343" },
+				{ _("Bor_der"),			_("Border"),		"#FF800000" },
 				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		},
 
 		{	_("_Disk"),			_("Disk"),			"diskload",		GetDiskLoad,
-			3, { // hue: 31
+			4, { // hue: 31
 				{ _("_Read"),			_("Read"),			"#FFED7A00" },
 				{ _("Wr_ite"),			_("Write"),			"#FFFF6700" },
+				{ _("Bor_der"),			_("Border"),		"#FF804200" },
 				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		},
 
 		{	_("_Temperature"),	_("Temperature"),	"temperature",	GetTemperature,
-			2, { // hue: 310
+			3, { // hue: 310
 				{ _("_Value"),			_("Value"),			"#FFF049D5" },
+				{ _("Bor_der"),			_("Border"),		"#FF80006B" },
 				{ _("_Background"),		_("Background"),	"#FF000000" }
 			}
 		}
