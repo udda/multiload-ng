@@ -10,6 +10,7 @@ G_BEGIN_DECLS
 
 #define PLUGIN_WEBSITE "https://github.com/nandhp/multiload-nandhp"
 
+#define PER_CPU_MAX_LOADAVG 4
 #define NCPUSTATES 5
 #define NGRAPHS 7
 
