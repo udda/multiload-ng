@@ -118,10 +118,10 @@ load_graph_update (LoadGraph *g)
 
 	shift_right(g);
 
+	graph_types[g->id].get_data(g->draw_height, g->data [0], g);
+
 	if (g->tooltip_update)
 		multiload_tooltip_update(g);
-
-	graph_types[g->id].get_data(g->draw_height, g->data [0], g);
 
 	load_graph_draw(g);
 	return TRUE;
