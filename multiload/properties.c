@@ -285,21 +285,26 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 		gtk_container_add(GTK_CONTAINER(frame), GTK_WIDGET(box2));
 
 		// -- -- colors
-		k = graph_types[i].num_colors;
+		k = graph_types[i].num_colors - EXTRA_COLORS;
 		for( j = 0; j < k; j++ ) {
-			if (j == k-1) { // last color (background)
-				t = color_selector_new(i, j, FALSE, ma);
-				gtk_box_pack_end(GTK_BOX(box2), t, FALSE, FALSE, 0);
-
-				t = gtk_hseparator_new();
-				gtk_size_group_add_widget(sizegroup, t);
-				gtk_box_pack_end(GTK_BOX(box2), t, FALSE, FALSE, 0);
-			} else {
-				t = color_selector_new(i, j, TRUE, ma);
-				gtk_box_pack_start(GTK_BOX(box2), t, FALSE, FALSE, 0);
-			}
+			t = color_selector_new(i, j, TRUE, ma);
+			gtk_box_pack_start(GTK_BOX(box2), t, FALSE, FALSE, 0);
 			gtk_size_group_add_widget(sizegroup, t);
 		}
+
+		// background color
+		t = color_selector_new(i, k+1, FALSE, ma);
+		gtk_box_pack_end(GTK_BOX(box2), t, FALSE, FALSE, 0);
+
+		// border color
+		t = color_selector_new(i, k, FALSE, ma);
+		gtk_box_pack_end(GTK_BOX(box2), t, FALSE, FALSE, 0);
+
+		// separator
+		t = gtk_hseparator_new();
+		gtk_size_group_add_widget(sizegroup, t);
+		gtk_box_pack_end(GTK_BOX(box2), t, FALSE, FALSE, 0);
+
 	}
 	properties_set_checkboxes_sensitive(ma, FALSE);
 
