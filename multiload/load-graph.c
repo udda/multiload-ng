@@ -164,10 +164,10 @@ load_graph_alloc (LoadGraph *g)
 	g->pos = g_new0 (guint, g->draw_width);
 
 	// count out border and background
-	g->data_size =  graph_types[g->id].num_colors - 2;
+	guint data_size = graph_types[g->id].num_colors - EXTRA_COLORS;
 
 	for (i = 0; i < g->draw_width; i++)
-		g->data [i] = g_malloc0 (sizeof (guint) * g->data_size);
+		g->data [i] = g_malloc0 (sizeof (guint) * data_size);
 
 	g->allocated = TRUE;
 }
@@ -286,7 +286,10 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 
 	if (ma->show_frame) {
 		g->frame = gtk_frame_new (NULL);
-		gtk_frame_set_shadow_type (GTK_FRAME (g->frame), GTK_SHADOW_IN);
+		// frame border color
+		gtk_widget_modify_bg (g->frame, GTK_STATE_NORMAL,
+					&(ma->graph_config[id].colors[graph_types[id].num_colors-2]));
+		gtk_frame_set_shadow_type (GTK_FRAME (g->frame), GTK_SHADOW_NONE);
 		gtk_container_add (GTK_CONTAINER (g->frame), g->box);
 		gtk_box_pack_start (GTK_BOX (g->main_widget), g->frame, TRUE, TRUE, 0);
 	} else {

@@ -12,7 +12,10 @@ G_BEGIN_DECLS
 
 #define NCPUSTATES 5
 #define NGRAPHS 7
+
 #define MAX_COLORS 6
+// colors that not couple with data in the graph (like background)
+#define EXTRA_COLORS 2
 
 enum {
 	GRAPH_CPULOAD = 0,
@@ -68,7 +71,6 @@ struct _LoadGraph {
 	guint allocated;
 
 	gint **data;
-	guint data_size;
 	guint *pos;
 
 	GtkWidget *main_widget;

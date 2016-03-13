@@ -88,7 +88,7 @@ multiload_tooltip_update(LoadGraph *g)
 			guint percent;
 			guint total_used = 0;
 
-			for (i = 0; i < g->data_size; i++)
+			for (i = 0; i < graph_types[g->id].num_colors-EXTRA_COLORS; i++)
 				total_used += g->data[0][i];
 
 			percent = 100.0f * total_used / g->draw_height;
