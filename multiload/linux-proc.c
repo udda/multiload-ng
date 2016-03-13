@@ -349,7 +349,8 @@ GetLoadAvg (int Maximum, int data [1], LoadGraph *g)
 
 	max_loadavg = PER_CPU_MAX_LOADAVG * (1 + glibtop_global_server->ncpu);
 
-	g->loadavg = _loadavg.loadavg[0];
+	memcpy(g->loadavg, _loadavg.loadavg, sizeof(_loadavg.loadavg));
+
 	loadavg = MIN(_loadavg.loadavg[0], max_loadavg);
 
 	data [0] = rint ((float) Maximum * loadavg / max_loadavg);

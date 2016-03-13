@@ -17,7 +17,8 @@
 void
 multiload_tooltip_update(LoadGraph *g)
 {
-	gchar *tooltip_text;
+	gchar *text;
+	gchar *tooltip_markup;
 	const gchar *name;
 
 	g_assert(g);
@@ -29,8 +30,16 @@ multiload_tooltip_update(LoadGraph *g)
 		g_assert_not_reached();
 
 	switch (g->id) {
-		case GRAPH_MEMLOAD:
-			{
+		case GRAPH_CPULOAD: {
+			guint total_used = g->data[0][0] + g->data[0][1] + g->data[0][2] + g->data[0][3];
+
+			guint percent = 100.0f * total_used / g->draw_height;
+			percent = MIN(percent, 100);
+
+			text = g_strdup_printf(_("%u%% in use"), percent);
+		}	break;
+
+		case GRAPH_MEMLOAD: {
 			guint mem_user, mem_cache, user_percent, cache_percent;
 			mem_user  = g->data[0][0];
 			mem_cache = g->data[0][1] + g->data[0][2] + g->data[0][3];
@@ -39,51 +48,54 @@ multiload_tooltip_update(LoadGraph *g)
 			user_percent = MIN(user_percent, 100);
 			cache_percent = MIN(cache_percent, 100);
 
-			/* xgettext: use and cache are > 1 most of the time,
-			please assume that they always are.
-			*/
-			tooltip_text = g_strdup_printf(_("%s:\n"
-							"%u%% in use by programs\n"
-							"%u%% in use as cache"),
-							name,
-							user_percent,
-							cache_percent);
-			}
-			break;
-		case GRAPH_NETLOAD:
-			{
-			char *tx_in, *tx_out;
-			tx_in = netspeed_get(g->netspeed_in);
-			tx_out = netspeed_get(g->netspeed_out);
-			/* xgettext: same as in graphic tab of g-s-m */
-			tooltip_text = g_strdup_printf(_("%s:\n"
-							"Receiving %s\n"
-							"Sending %s"),
-							name, tx_in, tx_out);
-							g_free(tx_in);
-							g_free(tx_out);
-			}
-			break;
-		case GRAPH_LOADAVG:
-			tooltip_text = g_strdup_printf(_("The system load average is %0.02f"),
-							g->loadavg);
-			break;
-		case GRAPH_DISKLOAD:
-			{
-			tooltip_text = g_strdup_printf(_("%s:\n"
-							"Read %s\n"
-							"Write %s"),
-							name, format_rate_for_display(g->diskread), format_rate_for_display(g->diskwrite));
-			}
-			break;
-		case GRAPH_TEMPERATURE:
-			{
-			tooltip_text = g_strdup_printf(_("%s:\n" "%.1f °C"), name, (g->temperature/1000.0));
-			}
-			break;
-		default:
-			{
-			const char *msg;
+			// xgettext: use and cache are > 1 most of the time, assume that they always are.
+			text = g_strdup_printf(_(	"%u%% in use by programs\n"
+										"%u%% in use as cache"),
+										user_percent, cache_percent);
+		}	break;
+
+		case GRAPH_NETLOAD: {
+			gchar *tx_in = netspeed_get(g->netspeed_in);
+			gchar *tx_out = netspeed_get(g->netspeed_out);
+
+			text = g_strdup_printf(_(	"Receiving %s\n"
+										"Sending %s"),
+										tx_in, tx_out);
+			g_free(tx_in);
+			g_free(tx_out);
+		}	break;
+
+		case GRAPH_SWAPLOAD: {
+			guint percent = 100.0f * g->data[0][0] / g->draw_height;
+			percent = MIN(percent, 100);
+
+			text = g_strdup_printf(_("%u%% in use"), percent);
+		}	break;
+
+		case GRAPH_LOADAVG: {
+			text = g_strdup_printf(_(	"Last minute: %0.02f\n"
+										"Last 5 minutes: %0.02f\n"
+										"Last 10 minutes: %0.02f"),
+										g->loadavg[0], g->loadavg[1], g->loadavg[2]);
+		}	break;
+
+		case GRAPH_DISKLOAD: {
+			gchar *disk_read = format_rate_for_display(g->diskread);
+			gchar *disk_write = format_rate_for_display(g->diskwrite);
+
+			text = g_strdup_printf(_(	"Read %s\n"
+										"Write %s"),
+										disk_read, disk_write);
+
+			g_free(disk_read);
+			g_free(disk_write);
+		}	break;
+
+		case GRAPH_TEMPERATURE: {
+			text = g_strdup_printf(_("%.1f °C"), (g->temperature/1000.0));
+		}	break;
+
+		default: {
 			guint i;
 			guint percent;
 			guint total_used = 0;
@@ -94,19 +106,15 @@ multiload_tooltip_update(LoadGraph *g)
 			percent = 100.0f * total_used / g->draw_height;
 			percent = MIN(percent, 100);
 
-			msg = ngettext("%s:\n"
-							"%u%% in use",
-							"%s:\n"
-							"%u%% in use",
-							percent);
-
-			tooltip_text = g_strdup_printf(msg, name, percent);
-			}
-			break;
+			text = g_strdup_printf(_("%u%% in use"), percent);
+		}	break;
 	}
 
-	gtk_widget_set_tooltip_text(g->disp, tooltip_text);		
-	g_free(tooltip_text);
+	tooltip_markup = g_strdup_printf("<span underline='single' weight='bold' size='larger'>%s</span>\n%s", name, text);
+
+	gtk_widget_set_tooltip_markup(g->disp, tooltip_markup);
+	g_free(text);
+	g_free(tooltip_markup);
 }
 
 static void

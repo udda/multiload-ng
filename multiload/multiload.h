@@ -79,18 +79,23 @@ struct _LoadGraph {
 	cairo_surface_t *surface;
 	int timer_index;
 
+	// cpu load
 	long cpu_time [NCPUSTATES];
 	long cpu_last [NCPUSTATES];
 	int cpu_initialized;
 
-	double loadavg;
+	// net load
 	NetSpeed *netspeed_in;
 	NetSpeed *netspeed_out;
 
+	// load average
+	double loadavg[3];
+
+	// disk load
 	guint diskread;
 	guint diskwrite;
 
-	// temperature (millicelsius)
+	// temperature
 	guint temperature;
 
 	gboolean tooltip_update;
