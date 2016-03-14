@@ -1,6 +1,8 @@
 multiload/multiload.c
+multiload/multiload-config.c
 multiload/netspeed.c
 multiload/properties.c
+multiload/util.c
 xfce4/xfce4-multiload-plugin.c
 xfce4/xfce4-multiload-dialogs.c
 xfce4/multiload.desktop.in
