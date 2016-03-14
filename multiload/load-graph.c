@@ -254,16 +254,16 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 
 	g->box = gtk_vbox_new (FALSE, 0);
 
-	if (ma->show_frame) {
-		g->frame = gtk_frame_new (NULL);
-		// frame border color
-		gtk_widget_modify_bg (g->frame, GTK_STATE_NORMAL,
+	if (ma->graph_config[id].border_width > 0) {
+		g->border = gtk_event_box_new();
+		gtk_widget_modify_bg (g->border, GTK_STATE_NORMAL,
 					&(ma->graph_config[id].colors[multiload_config_get_num_colors(id)-2]));
-		gtk_frame_set_shadow_type (GTK_FRAME (g->frame), GTK_SHADOW_NONE);
-		gtk_container_add (GTK_CONTAINER (g->frame), g->box);
-		gtk_box_pack_start (GTK_BOX (g->main_widget), g->frame, TRUE, TRUE, 0);
+		gtk_container_set_border_width(GTK_CONTAINER(g->box), ma->graph_config[id].border_width);
+
+		gtk_container_add (GTK_CONTAINER (g->border), g->box);
+		gtk_box_pack_start (GTK_BOX (g->main_widget), g->border, TRUE, TRUE, 0);
 	} else {
-		g->frame = NULL;
+		g->border = NULL;
 		gtk_box_pack_start (GTK_BOX (g->main_widget), g->box, TRUE, TRUE, 0);
 	}
 

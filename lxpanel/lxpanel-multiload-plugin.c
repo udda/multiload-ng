@@ -76,8 +76,6 @@ multiload_read(char **fp, MultiloadPlugin *ma)
 					ma->padding = atoi(s.t[1]);
 				} else if ( g_ascii_strcasecmp(s.t[0], "spacing") == 0 ) {
 					ma->spacing = atoi(s.t[1]);
-				} else if ( g_ascii_strcasecmp(s.t[0], "show-frame") == 0 ) {
-					ma->show_frame = atoi(s.t[1]);
 				} else if ( g_ascii_strcasecmp(s.t[0], "orientation") == 0 ) {
 					ma->orientation_policy = atoi(s.t[1]);
 				} else {
@@ -88,6 +86,8 @@ multiload_read(char **fp, MultiloadPlugin *ma)
 						continue;
 					else if ( g_ascii_strcasecmp(suffix, "Visible") == 0 )
 						ma->graph_config[i].visible = atoi(s.t[1]) ? TRUE : FALSE;
+					else if ( g_ascii_strcasecmp(suffix, "BorderWidth") == 0 )
+						ma->graph_config[i].border_width = atoi(s.t[1]);
 					else if ( g_ascii_strcasecmp(suffix, "Colors") == 0 )
 						multiload_colorconfig_unstringify(ma, i, s.t[1]);
 				}
@@ -122,12 +122,11 @@ static void multiload_save_configuration(Plugin * p, FILE * fp)
 	MultiloadPlugin *ma = &multiload->ma;
 	guint i;
 
-	/* Write size and speed */
+	/* Write common config */
 	lxpanel_put_int (fp, "speed", ma->speed);
 	lxpanel_put_int (fp, "size", ma->size);
 	lxpanel_put_int (fp, "padding", ma->padding);
 	lxpanel_put_int (fp, "spacing", ma->spacing);
-	lxpanel_put_int (fp, "show-frame", ma->show_frame);
 	lxpanel_put_int (fp, "orientation", ma->orientation_policy);
 
 	for ( i = 0; i < GRAPH_MAX; i++ ) {
@@ -136,6 +135,11 @@ static void multiload_save_configuration(Plugin * p, FILE * fp)
 		/* Visibility */
 		key = g_strdup_printf("%sVisible", graph_types[i].name);
 		lxpanel_put_int (fp, key, ma->graph_config[i].visible);
+		g_free (key);
+
+		/* Show border */
+		key = g_strdup_printf("%sBorderWidth", graph_types[i].name);
+		lxpanel_put_int (fp, key, ma->graph_config[i].border_width);
 		g_free (key);
 
 		/* Save colors */

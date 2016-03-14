@@ -12,4 +12,6 @@ gchar* format_percent(guint value, guint total, guint ndigits);
 void gdk_color_to_argb_string(GdkColor* color, guint16 alpha, gchar *out_str);
 gboolean argb_string_to_gdk_color(const gchar *gspec, GdkColor *color, guint16 *alpha);
 
+GtkWidget* gtk_spin_button_new_with_parameters(gint min, gint max, gint step, gint start_value);
+
 #endif /* H_MULTILOAD_UTIL_ */

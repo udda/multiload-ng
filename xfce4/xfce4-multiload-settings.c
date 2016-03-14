@@ -48,12 +48,11 @@ multiload_save (XfcePanelPlugin *plugin, MultiloadPlugin *ma)
 		/* save the settings */
 		DBG(".");
 
-		/* Write size and speed */
+		/* Write common config */
 		xfce_rc_write_int_entry (rc, "speed", ma->speed);
 		xfce_rc_write_int_entry (rc, "size", ma->size);
 		xfce_rc_write_int_entry (rc, "padding", ma->padding);
 		xfce_rc_write_int_entry (rc, "spacing", ma->spacing);
-		xfce_rc_write_int_entry (rc, "show-frame", ma->show_frame);
 		xfce_rc_write_int_entry (rc, "orientation", ma->orientation_policy);
 
 		for ( i = 0; i < GRAPH_MAX; i++ ) {
@@ -62,6 +61,11 @@ multiload_save (XfcePanelPlugin *plugin, MultiloadPlugin *ma)
 			/* Visibility */
 			key = g_strdup_printf("%s_visible", graph_types[i].name);
 			xfce_rc_write_bool_entry (rc, key, ma->graph_config[i].visible);
+			g_free (key);
+
+			/* Border width */
+			key = g_strdup_printf("%s_border-width", graph_types[i].name);
+			xfce_rc_write_int_entry (rc, key, ma->graph_config[i].border_width);
 			g_free (key);
 
 			/* Save colors */
@@ -100,7 +104,6 @@ multiload_read (XfcePanelPlugin *plugin,
 			ma->size = xfce_rc_read_int_entry(rc, "size", DEFAULT_SIZE);
 			ma->padding = xfce_rc_read_int_entry(rc, "padding", DEFAULT_PADDING);
 			ma->spacing = xfce_rc_read_int_entry(rc, "spacing", DEFAULT_PADDING);
-			ma->show_frame = xfce_rc_read_int_entry (rc, "show-frame", DEFAULT_SHOWFRAME);
 			ma->orientation_policy = xfce_rc_read_int_entry (rc, "orientation", DEFAULT_ORIENTATION);
 
 			/* Read visibility and colors for each graph */
@@ -110,8 +113,12 @@ multiload_read (XfcePanelPlugin *plugin,
 
 				/* Visibility */
 				key = g_strdup_printf("%s_visible", graph_types[i].name);
-				ma->graph_config[i].visible =
-						xfce_rc_read_bool_entry(rc, key, i == 0 ? TRUE : FALSE);
+				ma->graph_config[i].visible = xfce_rc_read_bool_entry(rc, key, (i==0 ? TRUE:FALSE));
+				g_free (key);
+
+				/* Border width */
+				key = g_strdup_printf("%s_border-width", graph_types[i].name);
+				ma->graph_config[i].border_width = xfce_rc_read_int_entry(rc, key, DEFAULT_BORDER_WIDTH);
 				g_free (key);
 
 				/* Colors - Try to load from xfconf */
@@ -144,9 +151,8 @@ multiload_read (XfcePanelPlugin *plugin,
 	ma->size = DEFAULT_SIZE;
 	ma->padding = DEFAULT_PADDING;
 	ma->spacing = DEFAULT_SPACING;
-	ma->show_frame = DEFAULT_SHOWFRAME;
 	for ( i = 0; i < GRAPH_MAX; i++ ) {
-		/* Default visibility and colors */
+		ma->graph_config[i].border_width = DEFAULT_BORDER_WIDTH;
 		ma->graph_config[i].visible = i == 0 ? TRUE : FALSE;
 		multiload_colorconfig_default(ma, i);
 	}

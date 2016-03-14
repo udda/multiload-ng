@@ -54,7 +54,8 @@ gdk_color_to_argb_string(GdkColor* color, guint16 alpha, gchar *out_str)
 }
 
 gboolean
-argb_string_to_gdk_color(const gchar *gspec, GdkColor *color, guint16 *alpha) {
+argb_string_to_gdk_color(const gchar *gspec, GdkColor *color, guint16 *alpha)
+{
 	gchar buf[8];
 	if (strlen(gspec) == 7) {
 		// may be a standard RGB hex string, fallback to gdk_color_parse
@@ -83,4 +84,29 @@ argb_string_to_gdk_color(const gchar *gspec, GdkColor *color, guint16 *alpha) {
 	strncpy(buf+1, gspec+3, 6);
 	buf[7] = 0;
 	return gdk_color_parse(buf, color);
+}
+
+
+GtkWidget* gtk_spin_button_new_with_parameters(gint min, gint max, gint step, gint start_value)
+{
+	guint maxdigits;
+	guint mindigits;
+	guint maxlen;
+	gchar *str;
+	GtkWidget *w = gtk_spin_button_new_with_range(min, max, step);
+
+	// calculate max length
+	str = g_strdup_printf("%u", max);
+	maxdigits = strlen(str);
+	g_free(str);
+	str = g_strdup_printf("%u", min);
+	mindigits = strlen(str);
+	g_free(str);
+
+	maxlen = MAX(maxdigits, mindigits);
+	gtk_entry_set_max_length (GTK_ENTRY(w), maxlen);
+
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(w), (gdouble)start_value);
+
+	return w;
 }

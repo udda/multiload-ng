@@ -17,16 +17,17 @@ G_BEGIN_DECLS
 #define PROP_PADDING			8
 #define PROP_SPACING			9
 #define PROP_ORIENTATION		10
-#define PROP_SHOWFRAME			11
+#define PROP_BORDERWIDTH		11
 
 #define ACTION_DEFAULT_COLORS	1
 
+/*
 typedef enum {
 	LOADAVG_1 = 0,
 	LOADAVG_5,
 	LOADAVG_15
 } LoadAvgType;
-
+*/
 
 struct _LoadGraphProperties {
 	guint type, n;

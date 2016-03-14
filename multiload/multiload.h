@@ -57,7 +57,11 @@ typedef struct _GraphConfig GraphConfig;
 #define MAX_SPACING 40
 #define STEP_SPACING 1
 
-#define DEFAULT_SHOWFRAME TRUE
+#define MIN_BORDER_WIDTH 0
+#define DEFAULT_BORDER_WIDTH 1
+#define MAX_BORDER_WIDTH 16
+#define STEP_BORDER_WIDTH 1
+
 #define DEFAULT_ORIENTATION MULTILOAD_ORIENTATION_AUTO
 
 struct _LoadGraph {
@@ -70,7 +74,7 @@ struct _LoadGraph {
 	guint *pos;
 
 	GtkWidget *main_widget;
-	GtkWidget *frame, *box, *disp;
+	GtkWidget *border, *box, *disp;
 	cairo_surface_t *surface;
 	int timer_index;
 
@@ -99,6 +103,7 @@ struct _LoadGraph {
 
 struct _GraphConfig {
 	gboolean visible;
+	guint border_width;
 	GdkColor colors[MAX_COLORS];
 	guint16 alpha[MAX_COLORS];
 };
@@ -119,7 +124,6 @@ struct _MultiloadPlugin
 	guint padding;
 	guint spacing;
 
-	gboolean show_frame;
 };
 
 

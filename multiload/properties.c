@@ -81,18 +81,6 @@ property_toggled_cb(GtkWidget *widget, gpointer id)
 }
 
 static void
-preference_toggled_cb(GtkWidget *widget, gpointer id)
-{
-	MultiloadPlugin *ma = multiload_configure_get_plugin(widget);
-	gint prop_type = GPOINTER_TO_INT(id);
-	gboolean active = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
-	if (prop_type == PROP_SHOWFRAME) {
-		ma->show_frame = active;
-		multiload_refresh(ma);
-	}
-}
-
-static void
 combobox_changed_cb(GtkWidget *widget, gpointer id)
 {
 	MultiloadPlugin *ma = multiload_configure_get_plugin(widget);
@@ -122,7 +110,8 @@ static void
 spin_button_changed_cb(GtkWidget *widget, gpointer id)
 {
 	MultiloadPlugin *ma = multiload_configure_get_plugin(widget);
-	gint prop_type = GPOINTER_TO_INT(id);
+	gint prop_type = GPOINTER_TO_INT(id) & 0xFFFF;
+	gint prop_data = GPOINTER_TO_INT(id) >> 16;
 	gint value = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
 	gint i;
 
@@ -149,6 +138,11 @@ spin_button_changed_cb(GtkWidget *widget, gpointer id)
 
 		case PROP_SPACING:
 			ma->spacing = value;
+			multiload_refresh(ma);
+			break;
+
+		case PROP_BORDERWIDTH:
+			ma->graph_config[prop_data].border_width = value;
 			multiload_refresh(ma);
 			break;
 
@@ -195,7 +189,7 @@ color_picker_set_cb(GtkColorButton *color_picker, gpointer data)
 	return;
 }
 
-/* create a color selector */
+// create a color selector with optional custom label
 static GtkWidget *
 color_selector_new(guint graph, guint index, gboolean use_alpha, MultiloadPlugin *ma)
 {
@@ -210,19 +204,22 @@ color_selector_new(guint graph, guint index, gboolean use_alpha, MultiloadPlugin
 					graph_types[graph].colors[index].label_noninteractive);
 
 	box = gtk_hbox_new (FALSE, 3);
-	label = gtk_label_new_with_mnemonic(color_name);
+
+	// color button
 	color_picker = gtk_color_button_new_with_color(
 					&ma->graph_config[graph].colors[index]);
-	gtk_label_set_mnemonic_widget (GTK_LABEL (label), color_picker);
-
 	gtk_color_button_set_title (GTK_COLOR_BUTTON(color_picker),	dialog_title);
+	gtk_box_pack_start (GTK_BOX(box), color_picker, FALSE, FALSE, 0);
+
 	if (use_alpha) {
 		gtk_color_button_set_use_alpha (GTK_COLOR_BUTTON(color_picker), TRUE);
 		gtk_color_button_set_alpha (GTK_COLOR_BUTTON(color_picker),
 					ma->graph_config[graph].alpha[index]);
 	}
 
-	gtk_box_pack_start (GTK_BOX(box), color_picker, FALSE, FALSE, 0);
+	// label
+	label = gtk_label_new_with_mnemonic(color_name);
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), color_picker);
 	gtk_box_pack_start (GTK_BOX(box), label, FALSE, FALSE, 0);
 
 	g_signal_connect(G_OBJECT(color_picker), "color_set",
@@ -245,6 +242,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	GtkTable *table;
 	GtkWidget *label;
 	GtkWidget *t;
+	GtkWidget *s;
 
 	GtkWidget *contentArea = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 
@@ -285,19 +283,31 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 
 		// -- -- colors
 		k = multiload_config_get_num_data(i);
-		for( j = 0; j < k; j++ ) {
+		for( j=0; j<k; j++ ) {
 			t = color_selector_new(i, j, TRUE, ma);
-			gtk_box_pack_start(GTK_BOX(box2), t, FALSE, FALSE, 0);
 			gtk_size_group_add_widget(sizegroup, t);
+			gtk_box_pack_start(GTK_BOX(box2), t, FALSE, FALSE, 0);
 		}
+
 
 		// background color
 		t = color_selector_new(i, k+1, FALSE, ma);
+		gtk_size_group_add_widget(sizegroup, t);
 		gtk_box_pack_end(GTK_BOX(box2), t, FALSE, FALSE, 0);
+
 
 		// border color
 		t = color_selector_new(i, k, FALSE, ma);
+		gtk_size_group_add_widget(sizegroup, t);
 		gtk_box_pack_end(GTK_BOX(box2), t, FALSE, FALSE, 0);
+
+		s = gtk_spin_button_new_with_parameters(
+						MIN_BORDER_WIDTH, MAX_BORDER_WIDTH, STEP_BORDER_WIDTH,
+						ma->graph_config[i].border_width);
+		g_signal_connect(G_OBJECT(s), "value_changed",
+				G_CALLBACK(spin_button_changed_cb), GINT_TO_POINTER(PROP_BORDERWIDTH | (i<<16) ));
+		gtk_box_pack_end(GTK_BOX(t), s, FALSE, FALSE, 0);
+
 
 		// separator
 		t = gtk_hseparator_new();
@@ -336,9 +346,8 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_misc_set_alignment(GTK_MISC(label), 0.0f, 0.5f);
 	gtk_table_attach_defaults(table, GTK_WIDGET(label), 0, 1, 0, 1);
 
-	t = gtk_spin_button_new_with_range(MIN_SIZE, MAX_SIZE, STEP_SIZE);
+	t = gtk_spin_button_new_with_parameters(MIN_SIZE, MAX_SIZE, STEP_SIZE, ma->size);
 	gtk_label_set_mnemonic_widget (GTK_LABEL(label), t);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(t), (gdouble)ma->size);
 	g_signal_connect(G_OBJECT(t), "value_changed",
 			G_CALLBACK(spin_button_changed_cb), GINT_TO_POINTER(PROP_SIZE));
 	gtk_table_attach_defaults(table, GTK_WIDGET(t), 1, 2, 0, 1);
@@ -352,9 +361,8 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
 	gtk_table_attach_defaults(table, GTK_WIDGET(label), 0, 1, 1, 2);
 
-	t = gtk_spin_button_new_with_range(MIN_PADDING, MAX_PADDING, STEP_PADDING);
+	t = gtk_spin_button_new_with_parameters(MIN_PADDING, MAX_PADDING, STEP_PADDING, ma->padding);
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), t);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(t), (gdouble)ma->padding);
 	g_signal_connect(G_OBJECT(t), "value_changed",
 			G_CALLBACK(spin_button_changed_cb), GINT_TO_POINTER(PROP_PADDING));
 	gtk_table_attach_defaults(table, GTK_WIDGET(t), 1, 2, 1, 2);
@@ -368,9 +376,8 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
 	gtk_table_attach_defaults(table, GTK_WIDGET(label), 0, 1, 2, 3);
 
-	t = gtk_spin_button_new_with_range(MIN_SPACING, MAX_SPACING, STEP_SPACING);
+	t = gtk_spin_button_new_with_parameters(MIN_SPACING, MAX_SPACING, STEP_SPACING, ma->spacing);
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), t);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(t), (gdouble)ma->spacing);
 	g_signal_connect(G_OBJECT(t), "value_changed",
 			G_CALLBACK(spin_button_changed_cb), GINT_TO_POINTER(PROP_SPACING));
 	gtk_table_attach_defaults(table, GTK_WIDGET(t), 1, 2, 2, 3);
@@ -384,9 +391,8 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
 	gtk_table_attach_defaults(table, GTK_WIDGET(label), 0, 1, 3, 4);
 
-	t = gtk_spin_button_new_with_range(MIN_SPEED, MAX_SPEED, STEP_SPEED);
+	t = gtk_spin_button_new_with_parameters(MIN_SPEED, MAX_SPEED, STEP_SPEED, ma->speed);
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), t);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(t), (gdouble)ma->speed);
 	g_signal_connect(G_OBJECT(t), "value_changed",
 			G_CALLBACK(spin_button_changed_cb), GINT_TO_POINTER(PROP_SPEED));
 	gtk_table_attach_defaults(table, GTK_WIDGET(t), 1, 2, 3, 4);
@@ -410,13 +416,6 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	g_signal_connect(G_OBJECT(t), "changed",
 			G_CALLBACK(combobox_changed_cb), GINT_TO_POINTER(PROP_ORIENTATION));
 	gtk_table_attach_defaults(table, GTK_WIDGET(t), 1, 2, 4, 5);
-
-	// -- checkbox: show frame
-	t = gtk_check_button_new_with_mnemonic(_("Frames around graphs"));
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(t), ma->show_frame);
-	g_signal_connect(G_OBJECT(t), "toggled", G_CALLBACK(preference_toggled_cb),
-			GINT_TO_POINTER(PROP_SHOWFRAME));
-	gtk_box_pack_start(GTK_BOX(page), t, FALSE, FALSE, 0);
 
 
 	gtk_widget_show_all(GTK_WIDGET(contentArea));
