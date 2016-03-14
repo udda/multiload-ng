@@ -7,21 +7,20 @@
  *
  */
 
-#ifdef HAVE_CONFIG_H
 #include <config.h>
-#endif
-
 #include <string.h>
 #include <libintl.h>
 #include <gtk/gtk.h>
 
 #include "properties.h"
 #include "multiload.h"
+#include "multiload-config.h"
+#include "util.h"
 
 
 #define PREF_CONTENT_PADDING 6
 
-static GtkWidget *checkbuttons[NGRAPHS];
+static GtkWidget *checkbuttons[GRAPH_MAX];
 
 /* Defined in panel-specific code. */
 extern MultiloadPlugin *
@@ -37,7 +36,7 @@ properties_set_checkboxes_sensitive(MultiloadPlugin *ma, gboolean sensitive)
 
 	if (!sensitive) {
 		// Only set unsensitive if one checkbox remains checked
-		for (i = 0; i < NGRAPHS; i++) {
+		for (i = 0; i < GRAPH_MAX; i++) {
 			if (ma->graph_config[i].visible) {
 				last_graph = i;
 				visible_count ++;
@@ -48,7 +47,7 @@ properties_set_checkboxes_sensitive(MultiloadPlugin *ma, gboolean sensitive)
 	if ( visible_count < 2 ) {
 		if (sensitive) {
 			// Enable all checkboxes
-			for (i = 0; i < NGRAPHS; i++)
+			for (i = 0; i < GRAPH_MAX; i++)
 				gtk_widget_set_sensitive(checkbuttons[i], TRUE);
 		} else {
 			// Disable last remaining checkbox
@@ -113,7 +112,7 @@ button_clicked_cb(GtkWidget *widget, gpointer id)
 	gint action = GPOINTER_TO_INT(id);
 	guint i;
 	if (action == ACTION_DEFAULT_COLORS) {
-		for ( i = 0; i < NGRAPHS; i++ )
+		for ( i = 0; i < GRAPH_MAX; i++ )
 			multiload_colorconfig_default(ma, i);
 		multiload_init_preferences(dialog, ma);
 	}
@@ -130,7 +129,7 @@ spin_button_changed_cb(GtkWidget *widget, gpointer id)
 	switch(prop_type) {
 		case PROP_SPEED:
 			ma->speed = value;
-			for (i = 0; i < NGRAPHS; i++) {
+			for (i = 0; i < GRAPH_MAX; i++) {
 				load_graph_stop(ma->graphs[i]);
 				if (ma->graph_config[i].visible)
 					load_graph_start(ma->graphs[i]);
@@ -139,7 +138,7 @@ spin_button_changed_cb(GtkWidget *widget, gpointer id)
 
 		case PROP_SIZE:
 			ma->size = value;
-			for (i = 0; i < NGRAPHS; i++)
+			for (i = 0; i < GRAPH_MAX; i++)
 				load_graph_resize(ma->graphs[i]);
 			break;
 
@@ -187,8 +186,8 @@ color_picker_set_cb(GtkColorButton *color_picker, gpointer data)
 	guint graph = color_slot >> 16;
 	guint index = color_slot & 0xFFFF; 
 
-	g_assert(graph >= 0 && graph < NGRAPHS);
-	g_assert(index >= 0 && index < graph_types[graph].num_colors);
+	g_assert(graph >= 0 && graph < GRAPH_MAX);
+	g_assert(index >= 0 && index < multiload_config_get_num_colors(graph));
 
 	gtk_color_button_get_color(color_picker, &ma->graph_config[graph].colors[index]);
 	ma->graph_config[graph].alpha[index] = gtk_color_button_get_alpha(color_picker);
@@ -205,10 +204,10 @@ color_selector_new(guint graph, guint index, gboolean use_alpha, MultiloadPlugin
 	GtkWidget *color_picker;
 	guint color_slot = ( (graph & 0xFFFF) << 16 ) | (index & 0xFFFF);
 
-	const gchar *color_name = graph_types[graph].colors[index].interactive_label;
+	const gchar *color_name = graph_types[graph].colors[index].label_interactive;
 	const gchar *dialog_title = g_strdup_printf(_("Select color:  %s -> %s"),
-					graph_types[graph].noninteractive_label,
-					graph_types[graph].colors[index].noninteractive_label);
+					graph_types[graph].label_noninteractive,
+					graph_types[graph].colors[index].label_noninteractive);
 
 	box = gtk_hbox_new (FALSE, 3);
 	label = gtk_label_new_with_mnemonic(color_name);
@@ -266,9 +265,9 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_container_add(GTK_CONTAINER(page), box);
 
 	sizegroup = gtk_size_group_new(GTK_SIZE_GROUP_BOTH);
-	for( i = 0; i < NGRAPHS; i++ ) {
+	for( i = 0; i < GRAPH_MAX; i++ ) {
 		// -- -- checkbox
-		t = gtk_check_button_new_with_mnemonic(graph_types[i].interactive_label);
+		t = gtk_check_button_new_with_mnemonic(graph_types[i].label_interactive);
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(t),
 							ma->graph_config[i].visible);
 		g_signal_connect(G_OBJECT(t), "toggled",
@@ -285,7 +284,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 		gtk_container_add(GTK_CONTAINER(frame), GTK_WIDGET(box2));
 
 		// -- -- colors
-		k = graph_types[i].num_colors - EXTRA_COLORS;
+		k = multiload_config_get_num_data(i);
 		for( j = 0; j < k; j++ ) {
 			t = color_selector_new(i, j, TRUE, ma);
 			gtk_box_pack_start(GTK_BOX(box2), t, FALSE, FALSE, 0);

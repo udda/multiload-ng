@@ -11,6 +11,8 @@
 #include <gtk/gtk.h>
 
 #include "multiload.h"
+#include "multiload-config.h"
+#include "util.h"
 
 
 /* Wrapper for cairo_set_source_rgba */
@@ -20,31 +22,6 @@ cairo_set_source_rgba_from_config(cairo_t *cr, GraphConfig *config, guint color_
 	GdkColor *c = &(config->colors[color_index]);
 	guint a = config->alpha[color_index];
 	cairo_set_source_rgba(cr, c->red/65535.0, c->green/65535.0, c->blue/65535.0, a/65535.0);
-}
-
-/*
-  Shifts data right
-
-  data[i+1] = data[i]
-
-  data[i] are int*, so we just move the pointer, not the data.
-  But moving data loses data[n-1], so we save data[n-1] and reuse
-  it as new data[0]. In fact, we rotate data[].
-*/
-static void
-shift_right(LoadGraph *g)
-{
-	unsigned i;
-	int* last_data;
-
-	/* data[g->draw_width - 1] becomes data[0] */
-	last_data = g->data[g->draw_width - 1];
-
-	/* data[i+1] = data[i] */
-	for(i = g->draw_width - 1; i != 0; --i)
-		g->data[i] = g->data[i-1];
-
-	g->data[0] = last_data;
 }
 
 
@@ -66,13 +43,6 @@ load_graph_draw (LoadGraph *g)
 
 	if (!g->surface)
 		g->surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, W, H);
-		/*
-		// Not available on GTK < 2.22
-		g->surface = gdk_window_create_similar_surface (
-							gtk_widget_get_window (g->disp),
-							CAIRO_CONTENT_COLOR | CAIRO_CONTENT_ALPHA,
-							g->draw_width, g->draw_height);
-		*/
 
 	cr = cairo_create (g->surface);
 	cairo_set_line_width (cr, 1.0);
@@ -81,12 +51,12 @@ load_graph_draw (LoadGraph *g)
 	for (i = 0; i < W; i++)
 		g->pos[i] = H - 1;
 
-	k = graph_types[g->id].num_colors-1; //this is the index of last color (background)
+	k = multiload_config_get_num_colors(g->id) - 1; //this is the index of last color (background)
 	gdk_cairo_set_source_color (cr, &(colors[k]));
 	cairo_rectangle(cr, 0, 0, g->draw_width, g->draw_height);
 	cairo_fill(cr);
 
-	for (j = 0; j < k; j++) {
+	for (j = 0; j < multiload_config_get_num_data(g->id); j++) {
 		cairo_set_source_rgba_from_config(cr, config, j);
 
 		for (i = 0; i < W; i++) {
@@ -113,10 +83,17 @@ load_graph_draw (LoadGraph *g)
 static gboolean
 load_graph_update (LoadGraph *g)
 {
+	guint i;
+	gint* tmp;
+
 	if (g->data == NULL)
 		return TRUE;
 
-	shift_right(g);
+	// rotate data to the right
+	tmp = g->data[g->draw_width - 1];
+	for(i = g->draw_width - 1; i > 0; --i)
+		g->data[i] = g->data[i-1];
+	g->data[0] = tmp;
 
 	graph_types[g->id].get_data(g->draw_height, g->data [0], g);
 
@@ -164,10 +141,10 @@ load_graph_alloc (LoadGraph *g)
 	g->pos = g_new0 (guint, g->draw_width);
 
 	// count out border and background
-	guint data_size = graph_types[g->id].num_colors - EXTRA_COLORS;
+	guint data_size = sizeof (guint) * multiload_config_get_num_data(g->id);
 
 	for (i = 0; i < g->draw_width; i++)
-		g->data [i] = g_malloc0 (sizeof (guint) * data_size);
+		g->data [i] = g_malloc0 (data_size);
 
 	g->allocated = TRUE;
 }
@@ -193,13 +170,6 @@ load_graph_configure (GtkWidget *widget, GdkEventConfigure *event,
 	if (!c->surface)
 		c->surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32,
 												c->draw_width, c->draw_height);
-		/*
-		// Not available on GTK < 2.22
-		c->surface = gdk_window_create_similar_surface (
-							gtk_widget_get_window (c->disp),
-							CAIRO_CONTENT_COLOR | CAIRO_CONTENT_ALPHA,
-							c->draw_width, c->draw_height);
-		*/
 
 	gtk_widget_queue_draw (widget);
 
@@ -288,7 +258,7 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 		g->frame = gtk_frame_new (NULL);
 		// frame border color
 		gtk_widget_modify_bg (g->frame, GTK_STATE_NORMAL,
-					&(ma->graph_config[id].colors[graph_types[id].num_colors-2]));
+					&(ma->graph_config[id].colors[multiload_config_get_num_colors(id)-2]));
 		gtk_frame_set_shadow_type (GTK_FRAME (g->frame), GTK_SHADOW_NONE);
 		gtk_container_add (GTK_CONTAINER (g->frame), g->box);
 		gtk_box_pack_start (GTK_BOX (g->main_widget), g->frame, TRUE, TRUE, 0);

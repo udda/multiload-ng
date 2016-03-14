@@ -12,20 +12,19 @@ G_BEGIN_DECLS
 
 #define PER_CPU_MAX_LOADAVG 4
 #define NCPUSTATES 5
-#define NGRAPHS 7
 
 #define MAX_COLORS 6
-// colors that not couple with data in the graph (like background)
-#define EXTRA_COLORS 2
 
 enum {
-	GRAPH_CPULOAD = 0,
-	GRAPH_MEMLOAD = 1,
-	GRAPH_NETLOAD = 2,
-	GRAPH_SWAPLOAD = 3,
-	GRAPH_LOADAVG = 4,
-	GRAPH_DISKLOAD = 5,
-	GRAPH_TEMPERATURE = 6
+	GRAPH_CPULOAD,
+	GRAPH_MEMLOAD,
+	GRAPH_NETLOAD,
+	GRAPH_SWAPLOAD,
+	GRAPH_LOADAVG,
+	GRAPH_DISKLOAD,
+	GRAPH_TEMPERATURE,
+
+	GRAPH_MAX
 };
 
 #define MULTILOAD_ORIENTATION_AUTO			0
@@ -34,9 +33,7 @@ enum {
 
 typedef struct _MultiloadPlugin MultiloadPlugin;
 typedef struct _LoadGraph LoadGraph;
-typedef void (*LoadGraphDataFunc) (int, int [], LoadGraph *);
 typedef struct _GraphConfig GraphConfig;
-typedef struct _GraphType GraphType;
 
 #include "netspeed.h"
 
@@ -69,8 +66,6 @@ struct _LoadGraph {
 	guint id;
 	guint draw_width, draw_height;
 
-	guint allocated;
-
 	gint **data;
 	guint *pos;
 
@@ -98,6 +93,7 @@ struct _LoadGraph {
 	// temperature
 	guint temperature;
 
+	gboolean allocated;
 	gboolean tooltip_update;
 };
 
@@ -112,11 +108,11 @@ struct _MultiloadPlugin
 	/* Current state */
 	GtkWidget *box;
 	GtkOrientation panel_orientation;
-	LoadGraph *graphs[NGRAPHS];
+	LoadGraph *graphs[GRAPH_MAX];
 
 	/* Settings */
 	GtkContainer *container;
-	GraphConfig graph_config[NGRAPHS];
+	GraphConfig graph_config[GRAPH_MAX];
 	guint orientation_policy;
 	guint speed;
 	guint size;
@@ -126,19 +122,7 @@ struct _MultiloadPlugin
 	gboolean show_frame;
 };
 
-struct _GraphType {
-	const char *interactive_label;
-	const char *noninteractive_label;
-	const char *name;
-	LoadGraphDataFunc get_data;
-	guint num_colors;
-	const struct {
-		const char *interactive_label;
-		const char *noninteractive_label;
-		const char *default_value;
-	} colors[MAX_COLORS];
-};
-GraphType graph_types[NGRAPHS];
+
 
 #include "load-graph.h"
 #include "linux-proc.h"
@@ -161,10 +145,6 @@ multiload_init();
 void
 multiload_destroy(MultiloadPlugin *ma);
 
-/* Utility functions for preferences and data storage */
-gboolean
-multiload_gdk_color_stringify(GdkColor* color, guint alpha, gchar *color_string);
-
 void
 multiload_colorconfig_stringify(MultiloadPlugin *ma, guint i, char *list);
 
@@ -175,8 +155,6 @@ void
 multiload_colorconfig_unstringify(MultiloadPlugin *ma, guint i,
 								const char *list);
 
-int
-multiload_find_graph_by_name(const char *str, const char **suffix);
 
 G_END_DECLS
 

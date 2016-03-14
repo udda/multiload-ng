@@ -18,7 +18,9 @@ multiload_core_la_SOURCES = \
 	load-graph.c load-graph.h \
 	netspeed.c netspeed.h \
 	autoscaler.c autoscaler.h \
-	properties.c properties.h
+	properties.c properties.h \
+	multiload-config.c multiload-config.h \
+	util.c util.h
 
 multiload_core_la_CFLAGS = \
 	$(GTK_CFLAGS) \

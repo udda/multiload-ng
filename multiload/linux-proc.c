@@ -47,7 +47,7 @@ static const unsigned needed_netload_flags =
 
 
 void
-GetLoad (int Maximum, int data [4], LoadGraph *g)
+GetCpu (int Maximum, int data [4], LoadGraph *g)
 {
 	int usr, nice, sys, iowait, free;
 	int total;
@@ -91,7 +91,7 @@ GetLoad (int Maximum, int data [4], LoadGraph *g)
 }
 
 void
-GetDiskLoad (int Maximum, int data [2], LoadGraph *g)
+GetDisk (int Maximum, int data [2], LoadGraph *g)
 {
 	static gboolean first_call = TRUE;
 	static guint64 lastread = 0;

@@ -1,11 +1,10 @@
-#ifdef HAVE_CONFIG_H
 #include <config.h>
-#endif
 #include <glib.h>
 #include <time.h>
 
 #include "multiload.h"
 #include "netspeed.h"
+#include "util.h"
 
 enum { N_STATES = 4 };
 
@@ -32,15 +31,6 @@ void netspeed_add(NetSpeed *ns, gulong tx)
 {
 	ns->cur = (ns->cur + 1) % N_STATES;
 	ns->states[ns->cur] = tx;
-}
-
-/* Something very similar to g_format_size_for_display() but for rates.
- * This should give the same display as in g-s-m */
-char*
-format_rate_for_display(guint rate)
-{
-	char* bytes = g_format_size_full(rate, G_FORMAT_SIZE_IEC_UNITS);
-	return g_strdup_printf(_("%s/s"), bytes);
 }
 
 char* netspeed_get(NetSpeed *ns)

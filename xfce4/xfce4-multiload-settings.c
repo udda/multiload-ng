@@ -17,20 +17,16 @@
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-#ifdef HAVE_CONFIG_H
 #include <config.h>
-#endif
-#ifdef HAVE_STRING_H
 #include <string.h>
-#endif
 
 #include "multiload.h"
+#include "multiload-config.h"
 #include "xfce4-multiload-plugin.h"
 #include "xfce4-multiload-dialogs.h"
 
 void
-multiload_save (XfcePanelPlugin *plugin,
-				MultiloadPlugin *ma)
+multiload_save (XfcePanelPlugin *plugin, MultiloadPlugin *ma)
 {
 	XfceRc *rc;
 	gchar *file;
@@ -60,7 +56,7 @@ multiload_save (XfcePanelPlugin *plugin,
 		xfce_rc_write_int_entry (rc, "show-frame", ma->show_frame);
 		xfce_rc_write_int_entry (rc, "orientation", ma->orientation_policy);
 
-		for ( i = 0; i < NGRAPHS; i++ ) { 
+		for ( i = 0; i < GRAPH_MAX; i++ ) {
 			char *key, list[10*MAX_COLORS];
 
 			/* Visibility */
@@ -108,7 +104,7 @@ multiload_read (XfcePanelPlugin *plugin,
 			ma->orientation_policy = xfce_rc_read_int_entry (rc, "orientation", DEFAULT_ORIENTATION);
 
 			/* Read visibility and colors for each graph */
-			for ( i = 0; i < NGRAPHS; i++ ) {
+			for ( i = 0; i < GRAPH_MAX; i++ ) {
 				char *key;
 				const char *list;
 
@@ -129,7 +125,7 @@ multiload_read (XfcePanelPlugin *plugin,
 			xfce_rc_close (rc);
 
 			/* Ensure at lease one graph is visible */
-			for ( i = 0; i < NGRAPHS; i++ ) {
+			for ( i = 0; i < GRAPH_MAX; i++ ) {
 				if ( ma->graph_config[i].visible == TRUE )
 					found++;
 				if ( found == 0 )
@@ -149,7 +145,7 @@ multiload_read (XfcePanelPlugin *plugin,
 	ma->padding = DEFAULT_PADDING;
 	ma->spacing = DEFAULT_SPACING;
 	ma->show_frame = DEFAULT_SHOWFRAME;
-	for ( i = 0; i < NGRAPHS; i++ ) { 
+	for ( i = 0; i < GRAPH_MAX; i++ ) {
 		/* Default visibility and colors */
 		ma->graph_config[i].visible = i == 0 ? TRUE : FALSE;
 		multiload_colorconfig_default(ma, i);

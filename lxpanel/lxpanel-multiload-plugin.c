@@ -1,6 +1,4 @@
-#ifdef HAVE_CONFIG_H
 #include <config.h>
-#endif
 
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
@@ -13,6 +11,7 @@
 #include <ctype.h>
 
 #include "multiload/multiload.h"
+#include "multiload/multiload-config.h"
 #include "multiload/properties.h"
 
 /* FIXME: DIRTY HACKS! The following lxpanel functions are NOT in
@@ -34,6 +33,22 @@ struct _MultiloadLxpanelPlugin {
 };
 /** END H **/
 
+static int
+multiload_find_graph_by_name(const char *str, const char **suffix)
+{
+	guint i;
+	for ( i = 0; i < GRAPH_MAX; i++ ) {
+		int n = strlen(graph_types[i].name);
+		if ( strncasecmp(str, graph_types[i].name, n) == 0 ) {
+			if ( suffix )
+				*suffix = str+n;
+			return i;
+		}
+	}
+	return -1;
+}
+
+
 static void
 multiload_read(char **fp, MultiloadPlugin *ma)
 {
@@ -42,7 +57,7 @@ multiload_read(char **fp, MultiloadPlugin *ma)
 	/* Initial settings */
 	ma->speed = 0;
 	ma->size = 0;
-	for ( i = 0; i < NGRAPHS; i++ ) {
+	for ( i = 0; i < GRAPH_MAX; i++ ) {
 		/* Default visibility and colors */
 		ma->graph_config[i].visible = FALSE;
 		multiload_colorconfig_default(ma, i);
@@ -69,7 +84,7 @@ multiload_read(char **fp, MultiloadPlugin *ma)
 					const char *suffix; /* Set by multiload_find_graph_by_name */
 					int i = multiload_find_graph_by_name(s.t[0], &suffix);
 
-					if ( suffix == NULL || i < 0 || i >= NGRAPHS )
+					if ( suffix == NULL || i < 0 || i >= GRAPH_MAX )
 						continue;
 					else if ( g_ascii_strcasecmp(suffix, "Visible") == 0 )
 						ma->graph_config[i].visible = atoi(s.t[1]) ? TRUE : FALSE;
@@ -93,7 +108,7 @@ multiload_read(char **fp, MultiloadPlugin *ma)
 	if ( ma->spacing == 0 )
 		ma->padding = DEFAULT_SPACING;
 	/* Ensure at lease one graph is visible */
-	for ( i = 0; i < NGRAPHS; i++ ) {
+	for ( i = 0; i < GRAPH_MAX; i++ ) {
 		if ( ma->graph_config[i].visible == TRUE )
 			found++;
 	}
@@ -115,7 +130,7 @@ static void multiload_save_configuration(Plugin * p, FILE * fp)
 	lxpanel_put_int (fp, "show-frame", ma->show_frame);
 	lxpanel_put_int (fp, "orientation", ma->orientation_policy);
 
-	for ( i = 0; i < NGRAPHS; i++ ) {
+	for ( i = 0; i < GRAPH_MAX; i++ ) {
 		char *key, list[10*MAX_COLORS];
 
 		/* Visibility */
