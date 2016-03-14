@@ -5,51 +5,22 @@
 
 G_BEGIN_DECLS
 
-#define PROP_CPULOAD			0
-#define PROP_MEMLOAD			1
-#define PROP_NETLOAD			2
-#define PROP_SWAPLOAD			3
-#define PROP_LOADAVG			4
-#define PROP_DISKLOAD			5
-
-#define PROP_SPEED				6
-#define PROP_SIZE				7
-#define PROP_PADDING			8
-#define PROP_SPACING			9
-#define PROP_ORIENTATION		10
-#define PROP_BORDERWIDTH		11
-
-#define ACTION_DEFAULT_COLORS	1
-
-/*
-typedef enum {
-	LOADAVG_1 = 0,
-	LOADAVG_5,
-	LOADAVG_15
-} LoadAvgType;
-*/
-
-struct _LoadGraphProperties {
-	guint type, n;
-	const gchar *name;
-	const gchar **texts;
-	const gchar **color_defs;
-	GdkColor *colors;
-	gulong adj_data [3];
-	gint loadavg_type;
-	gint use_default;
+// properties and actions are all in the first 16 bits; this make room for another 16 bit value
+enum {
+	PROP_SHOWGRAPH			= 0x00010000,
+	PROP_SPEED				= 0x00020000,
+	PROP_SIZE				= 0x00030000,
+	PROP_PADDING			= 0x00040000,
+	PROP_SPACING			= 0x00050000,
+	PROP_ORIENTATION		= 0x00060000,
+	PROP_BORDERWIDTH		= 0x00070000,
+	PROP_COLOR				= 0x00080000
 };
-typedef struct	_LoadGraphProperties	LoadGraphProperties;
 
 
-struct _MultiLoadProperties {
-	LoadGraphProperties cpuload;
-	LoadGraphProperties memload;
-	LoadGraphProperties swapload;
-	LoadGraphProperties netload;
-	LoadGraphProperties loadavg;
+enum {
+	ACTION_DEFAULT_COLORS	= 0x01000000
 };
-typedef struct	_MultiLoadProperties	MultiLoadProperties;
 
 
 G_GNUC_INTERNAL void
