@@ -7,6 +7,7 @@
 #include "multiload.h"
 #include "multiload-colors.h"
 #include "multiload-config.h"
+#include "properties.h"
 #include "util.h"
 
 
@@ -186,7 +187,7 @@ gboolean multiload_colors_from_file(const gchar *filename, MultiloadPlugin *ma, 
 			status = FALSE;
 			break;
 		}
-		multiload_init_preferences(parent, ma);
+		multiload_init_preferences(GTK_WIDGET(parent), ma);
 		multiload_refresh(ma);
 	}
 

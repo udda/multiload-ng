@@ -4,6 +4,8 @@
 #include "multiload.h"
 
 
+G_BEGIN_DECLS
+
 // properties and actions are all in the first 16 bits; this make room for another 16 bit value
 enum {
 	PROP_SHOWGRAPH			= 0x00010000,
@@ -23,11 +25,10 @@ enum {
 	ACTION_IMPORT_COLORS	= 0x03000000
 };
 
-G_BEGIN_DECLS
 
 G_GNUC_INTERNAL void
 multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma);
 
 G_END_DECLS
 
-#endif
+#endif /* __PROPERTIES_H__ */

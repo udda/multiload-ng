@@ -216,7 +216,7 @@ multiload_destroy(MultiloadPlugin *ma)
 
 
 int
-multiload_find_graph_by_name(const char *str, char **suffix)
+multiload_find_graph_by_name(char *str, char **suffix)
 {
 	guint i;
 	for ( i = 0; i < GRAPH_MAX; i++ ) {

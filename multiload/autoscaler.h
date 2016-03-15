@@ -4,6 +4,9 @@
 #include <glib.h>
 #include <time.h>
 
+
+G_BEGIN_DECLS
+
 typedef struct _AutoScaler AutoScaler;
 
 struct _AutoScaler
@@ -18,9 +21,11 @@ struct _AutoScaler
 };
 
 
-G_GNUC_INTERNAL void autoscaler_init(AutoScaler *that, unsigned interval, unsigned floor);
+G_GNUC_INTERNAL void
+autoscaler_init(AutoScaler *that, unsigned interval, unsigned floor);
+G_GNUC_INTERNAL unsigned
+autoscaler_get_max(AutoScaler *that, unsigned current);
 
-G_GNUC_INTERNAL unsigned autoscaler_get_max(AutoScaler *that, unsigned current);
-
+G_END_DECLS
 
 #endif /* __AUTOSCALER_H__ */

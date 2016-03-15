@@ -6,14 +6,6 @@
 #include "netspeed.h"
 #include "util.h"
 
-enum { N_STATES = 4 };
-
-struct _NetSpeed
-{
-	LoadGraph *graph;
-	gulong states[N_STATES];
-	size_t cur;
-};
 
 NetSpeed* netspeed_new(LoadGraph *g)
 {

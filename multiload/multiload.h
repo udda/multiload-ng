@@ -1,5 +1,5 @@
-#ifndef __GLOBAL_H__
-#define __GLOBAL_H__
+#ifndef __MULTILOAD_H__
+#define __MULTILOAD_H__
 
 #include <glib.h>
 #include <glib/gi18n-lib.h>
@@ -131,27 +131,19 @@ struct _MultiloadPlugin
 
 G_BEGIN_DECLS
 
-/* remove the old graphs and rebuild them */
-void
+G_GNUC_INTERNAL void
 multiload_refresh(MultiloadPlugin *ma);
-
-/* get current orientation */
-GtkOrientation
+G_GNUC_INTERNAL GtkOrientation
 multiload_get_orientation(MultiloadPlugin *ma);
-
-/* update the tooltip to the graph's current "used" percentage */
-void
+G_GNUC_INTERNAL void
 multiload_tooltip_update(LoadGraph *g);
-
-void
+G_GNUC_INTERNAL void
 multiload_init();
-
-void
+G_GNUC_INTERNAL void
 multiload_destroy(MultiloadPlugin *ma);
-
-int
-multiload_find_graph_by_name(const char *str, char **suffix);
+G_GNUC_INTERNAL int
+multiload_find_graph_by_name(char *str, char **suffix);
 
 G_END_DECLS
 
-#endif
+#endif /* __MULTILOAD_H__ */
