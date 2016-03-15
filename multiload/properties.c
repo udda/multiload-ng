@@ -251,7 +251,8 @@ color_selector_new(guint graph, guint index, gboolean use_alpha, gboolean use_la
 	GtkWidget *label;
 	GtkWidget *color_picker;
 
-	const gchar *color_name = graph_types[graph].colors[index].label_interactive;
+	const gchar *name = graph_types[graph].colors[index].label_interactive;
+	const gchar *tooltip = graph_types[graph].colors[index].label_noninteractive;
 	const gchar *dialog_title = g_strdup_printf(_("Select color:  %s -> %s"),
 					graph_types[graph].label_noninteractive,
 					graph_types[graph].colors[index].label_noninteractive);
@@ -263,6 +264,7 @@ color_selector_new(guint graph, guint index, gboolean use_alpha, gboolean use_la
 					&ma->graph_config[graph].colors[index]);
 	gtk_color_button_set_title (GTK_COLOR_BUTTON(color_picker),	dialog_title);
 	gtk_box_pack_start (GTK_BOX(box), color_picker, FALSE, FALSE, 0);
+	gtk_widget_set_tooltip_text(color_picker, tooltip);
 
 	if (use_alpha) {
 		gtk_color_button_set_use_alpha (GTK_COLOR_BUTTON(color_picker), TRUE);
@@ -271,7 +273,7 @@ color_selector_new(guint graph, guint index, gboolean use_alpha, gboolean use_la
 	}
 
 	if (use_label) {
-		label = gtk_label_new_with_mnemonic(color_name);
+		label = gtk_label_new_with_mnemonic(name);
 		gtk_label_set_mnemonic_widget (GTK_LABEL (label), color_picker);
 		gtk_box_pack_start (GTK_BOX(box), label, FALSE, FALSE, 0);
 	}
