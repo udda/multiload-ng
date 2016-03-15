@@ -20,6 +20,7 @@
 
 
 #define PREF_CONTENT_PADDING 6
+#define PREF_LABEL_SPACING 3
 
 static GtkWidget *checkbuttons[GRAPH_MAX];
 
@@ -243,7 +244,7 @@ add_page(GtkNotebook *notebook, const gchar *label, const gchar *description)
 
 // create a color selector with optional custom label
 static GtkWidget *
-color_selector_new(guint graph, guint index, gboolean use_alpha, MultiloadPlugin *ma)
+color_selector_new(guint graph, guint index, gboolean use_alpha, gboolean use_label, MultiloadPlugin *ma)
 {
 	GtkWidget *box;
 	GtkWidget *label;
@@ -254,7 +255,7 @@ color_selector_new(guint graph, guint index, gboolean use_alpha, MultiloadPlugin
 					graph_types[graph].label_noninteractive,
 					graph_types[graph].colors[index].label_noninteractive);
 
-	box = gtk_hbox_new (FALSE, 3);
+	box = gtk_hbox_new (FALSE, PREF_LABEL_SPACING);
 
 	// color button
 	color_picker = gtk_color_button_new_with_color(
@@ -268,10 +269,11 @@ color_selector_new(guint graph, guint index, gboolean use_alpha, MultiloadPlugin
 					ma->graph_config[graph].alpha[index]);
 	}
 
-	// label
-	label = gtk_label_new_with_mnemonic(color_name);
-	gtk_label_set_mnemonic_widget (GTK_LABEL (label), color_picker);
-	gtk_box_pack_start (GTK_BOX(box), label, FALSE, FALSE, 0);
+	if (use_label) {
+		label = gtk_label_new_with_mnemonic(color_name);
+		gtk_label_set_mnemonic_widget (GTK_LABEL (label), color_picker);
+		gtk_box_pack_start (GTK_BOX(box), label, FALSE, FALSE, 0);
+	}
 
 	g_signal_connect(G_OBJECT(color_picker), "color_set",
 					G_CALLBACK(property_changed_cb),
@@ -288,13 +290,11 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	static GtkNotebook *tabs = NULL;
 	GtkSizeGroup *sizegroup;
 	GtkWidget *page;
-	GtkWidget *frame;
-	GtkWidget *box;
-	GtkWidget *box2;
+	GtkWidget *frame, *frame2;
+	GtkWidget *box, *box2, *box3;
 	GtkTable *table;
 	GtkWidget *label;
 	GtkWidget *t;
-	GtkWidget *s;
 
 	GtkWidget *contentArea = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 
@@ -336,29 +336,35 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 		// -- -- colors
 		k = multiload_config_get_num_data(i);
 		for( j=0; j<k; j++ ) {
-			t = color_selector_new(i, j, TRUE, ma);
+			t = color_selector_new(i, j, TRUE, TRUE, ma);
 			gtk_size_group_add_widget(sizegroup, t);
 			gtk_box_pack_start(GTK_BOX(box2), t, FALSE, FALSE, 0);
 		}
 
 
 		// background color
-		t = color_selector_new(i, k+1, FALSE, ma);
+		t = color_selector_new(i, k+1, FALSE, TRUE, ma);
 		gtk_size_group_add_widget(sizegroup, t);
 		gtk_box_pack_end(GTK_BOX(box2), t, FALSE, FALSE, 0);
 
 
-		// border color
-		t = color_selector_new(i, k, FALSE, ma);
-		gtk_size_group_add_widget(sizegroup, t);
-		gtk_box_pack_end(GTK_BOX(box2), t, FALSE, FALSE, 0);
+		// border
+		frame2 = gtk_frame_new(graph_types[i].colors[k].label_noninteractive);
+		gtk_box_pack_end(GTK_BOX(box2), frame2, FALSE, FALSE, PREF_LABEL_SPACING);
 
-		s = gtk_spin_button_new_with_parameters(
+		box3 = gtk_hbox_new(FALSE, PREF_CONTENT_PADDING);
+		gtk_container_set_border_width(GTK_CONTAINER(box3), PREF_CONTENT_PADDING);
+		gtk_container_add(GTK_CONTAINER(frame2), GTK_WIDGET(box3));
+
+		t = color_selector_new(i, k, FALSE, FALSE, ma);
+		gtk_box_pack_start(GTK_BOX(box3), t, FALSE, FALSE, 0);
+
+		t = gtk_spin_button_new_with_parameters(
 						MIN_BORDER_WIDTH, MAX_BORDER_WIDTH, STEP_BORDER_WIDTH,
 						ma->graph_config[i].border_width);
-		g_signal_connect(G_OBJECT(s), "value_changed",
+		g_signal_connect(G_OBJECT(t), "value_changed",
 				G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_BORDERWIDTH | i));
-		gtk_box_pack_end(GTK_BOX(t), s, FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(box3), t, FALSE, FALSE, 0);
 
 
 		// separator
