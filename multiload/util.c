@@ -40,27 +40,28 @@ format_percent(guint value, guint total, guint ndigits)
 	return ret;
 }
 
-
-GtkWidget* gtk_spin_button_new_with_parameters(gint min, gint max, gint step, gint start_value)
+static gint
+spin_button_output_cb (GtkSpinButton *spin, const gchar *format)
 {
-	guint maxdigits;
-	guint mindigits;
-	guint maxlen;
-	gchar *str;
+	gint n = gtk_spin_button_get_value_as_int(spin);
+	gchar *s = g_strdup_printf(format, n);
+
+	gtk_entry_set_text(GTK_ENTRY(spin), s);
+	g_free(s);
+
+	// block the default output
+	return TRUE;
+}
+
+GtkWidget* gtk_spin_button_new_with_parameters(gint min, gint max, gint step, gint start_value, const gchar* format)
+{
 	GtkWidget *w = gtk_spin_button_new_with_range(min, max, step);
 
-	// calculate max length
-	str = g_strdup_printf("%u", max);
-	maxdigits = strlen(str);
-	g_free(str);
-	str = g_strdup_printf("%u", min);
-	mindigits = strlen(str);
-	g_free(str);
-
-	maxlen = MAX(maxdigits, mindigits);
-	gtk_entry_set_max_length (GTK_ENTRY(w), maxlen);
-
+	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(w), FALSE);
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(w), (gdouble)start_value);
+
+	if (format != NULL)
+		g_signal_connect(G_OBJECT(w), "output", G_CALLBACK(spin_button_output_cb), (gpointer)format);
 
 	return w;
 }

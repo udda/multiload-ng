@@ -375,7 +375,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 
 		t = gtk_spin_button_new_with_parameters(
 						MIN_BORDER_WIDTH, MAX_BORDER_WIDTH, STEP_BORDER_WIDTH,
-						ma->graph_config[i].border_width);
+						ma->graph_config[i].border_width, _("%dpx"));
 		g_signal_connect(G_OBJECT(t), "value_changed",
 				G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_BORDERWIDTH | i));
 		gtk_widget_set_tooltip_text(t, _("Border width"));
@@ -431,7 +431,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_misc_set_alignment(GTK_MISC(label), 0.0f, 0.5f);
 	gtk_table_attach_defaults(table, GTK_WIDGET(label), 0, 1, 0, 1);
 
-	t = gtk_spin_button_new_with_parameters(MIN_SIZE, MAX_SIZE, STEP_SIZE, ma->size);
+	t = gtk_spin_button_new_with_parameters(MIN_SIZE, MAX_SIZE, STEP_SIZE, ma->size, _("%d pixel"));
 	gtk_label_set_mnemonic_widget (GTK_LABEL(label), t);
 	g_signal_connect(G_OBJECT(t), "value_changed",
 			G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_SIZE));
@@ -446,7 +446,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
 	gtk_table_attach_defaults(table, GTK_WIDGET(label), 0, 1, 1, 2);
 
-	t = gtk_spin_button_new_with_parameters(MIN_PADDING, MAX_PADDING, STEP_PADDING, ma->padding);
+	t = gtk_spin_button_new_with_parameters(MIN_PADDING, MAX_PADDING, STEP_PADDING, ma->padding, _("%d pixel"));
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), t);
 	g_signal_connect(G_OBJECT(t), "value_changed",
 			G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_PADDING));
@@ -461,7 +461,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
 	gtk_table_attach_defaults(table, GTK_WIDGET(label), 0, 1, 2, 3);
 
-	t = gtk_spin_button_new_with_parameters(MIN_SPACING, MAX_SPACING, STEP_SPACING, ma->spacing);
+	t = gtk_spin_button_new_with_parameters(MIN_SPACING, MAX_SPACING, STEP_SPACING, ma->spacing, _("%d pixel"));
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), t);
 	g_signal_connect(G_OBJECT(t), "value_changed",
 			G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_SPACING));
@@ -476,7 +476,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
 	gtk_table_attach_defaults(table, GTK_WIDGET(label), 0, 1, 3, 4);
 
-	t = gtk_spin_button_new_with_parameters(MIN_SPEED, MAX_SPEED, STEP_SPEED, ma->speed);
+	t = gtk_spin_button_new_with_parameters(MIN_SPEED, MAX_SPEED, STEP_SPEED, ma->speed, _("%d seconds"));
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), t);
 	g_signal_connect(G_OBJECT(t), "value_changed",
 			G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_SPEED));

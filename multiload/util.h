@@ -14,7 +14,7 @@ G_GNUC_INTERNAL gchar*
 format_percent(guint value, guint total, guint ndigits);
 
 G_GNUC_INTERNAL GtkWidget*
-gtk_spin_button_new_with_parameters(gint min, gint max, gint step, gint start_value);
+gtk_spin_button_new_with_parameters(gint min, gint max, gint step, gint start_value, const gchar *format);
 
 G_GNUC_INTERNAL void
 gtk_error_dialog(GtkWindow *parent, const gchar *message);
