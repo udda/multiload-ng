@@ -525,7 +525,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_size_group_add_widget(sizegroup2, t);
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
-	label = gtk_warning_bar_new(_("System settings could prevent the informative tooltip to show if the update interval is set too short."));
+	label = gtk_warning_bar_new(_("System settings could sometimes prevent the informative tooltip to show if the update interval is set too short."));
 	gtk_box_pack_start(GTK_BOX(box), label, TRUE, TRUE, PREF_CONTENT_PADDING);
 	g_object_set_data(G_OBJECT(t), "warning_bar", label);
 	g_object_set_data(G_OBJECT(t), "warning_prop", GINT_TO_POINTER(PROP_SPEED));
