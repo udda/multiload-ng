@@ -209,7 +209,8 @@ property_changed_cb(GtkWidget *widget, gpointer id) {
 			gtk_color_button_get_color(GTK_COLOR_BUTTON(widget), &ma->graph_config[graph].colors[i]);
 			ma->graph_config[graph].alpha[i] = gtk_color_button_get_alpha(GTK_COLOR_BUTTON(widget));
 
-			if (i == multiload_config_get_num_colors(graph)-2) //border color, need refresh
+			//border color update needs refresh
+			if (i == multiload_colors_get_extra_index(graph, EXTRA_COLOR_BORDER))
 				multiload_refresh(ma);
 			break;
 
@@ -343,12 +344,24 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 
 
 		// background color
-		t = color_selector_new(i, k+1, FALSE, TRUE, ma);
-		gtk_size_group_add_widget(sizegroup, t);
-		gtk_box_pack_end(GTK_BOX(box2), t, FALSE, FALSE, 0);
+		frame2 = gtk_frame_new(_("Background"));
+		gtk_box_pack_end(GTK_BOX(box2), frame2, FALSE, FALSE, PREF_LABEL_SPACING);
+
+		box3 = gtk_hbox_new(FALSE, PREF_CONTENT_PADDING);
+		gtk_container_set_border_width(GTK_CONTAINER(box3), PREF_CONTENT_PADDING);
+		gtk_container_add(GTK_CONTAINER(frame2), GTK_WIDGET(box3));
+
+		k = multiload_colors_get_extra_index(i, EXTRA_COLOR_BACKGROUND_TOP);
+		t = color_selector_new(i, k, FALSE, FALSE, ma);
+		gtk_box_pack_start(GTK_BOX(box3), t, FALSE, FALSE, 0);
+
+		k = multiload_colors_get_extra_index(i, EXTRA_COLOR_BACKGROUND_BOTTOM);
+		t = color_selector_new(i, k, FALSE, FALSE, ma);
+		gtk_box_pack_end(GTK_BOX(box3), t, FALSE, FALSE, 0);
 
 
 		// border
+		k = multiload_colors_get_extra_index(i, EXTRA_COLOR_BORDER);
 		frame2 = gtk_frame_new(graph_types[i].colors[k].label_noninteractive);
 		gtk_box_pack_end(GTK_BOX(box2), frame2, FALSE, FALSE, PREF_LABEL_SPACING);
 
@@ -364,7 +377,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 						ma->graph_config[i].border_width);
 		g_signal_connect(G_OBJECT(t), "value_changed",
 				G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_BORDERWIDTH | i));
-		gtk_box_pack_start(GTK_BOX(box3), t, FALSE, FALSE, 0);
+		gtk_box_pack_end(GTK_BOX(box3), t, FALSE, FALSE, 0);
 
 
 		// separator

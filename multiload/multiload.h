@@ -12,7 +12,7 @@
 #define PER_CPU_MAX_LOADAVG 3
 #define NCPUSTATES 5
 
-#define MAX_COLORS 6
+#define MAX_COLORS 7
 
 enum {
 	GRAPH_CPULOAD,

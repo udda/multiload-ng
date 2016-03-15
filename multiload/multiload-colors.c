@@ -58,6 +58,12 @@ argb_string_to_gdk_color(const gchar *gspec, GdkColor *color, guint16 *alpha)
 
 
 
+guint multiload_colors_get_extra_index(guint i, MultiloadExtraColor col)
+{
+	g_assert(col >= 0 && col < EXTRA_COLORS);
+	return multiload_config_get_num_colors(i) - EXTRA_COLORS + col;
+}
+
 
 /* Convert graph configuration into a string of the form "#aarrggbb,#aarrggbb,..."
    Output string must have size at least 10*MAX_COLORS. */

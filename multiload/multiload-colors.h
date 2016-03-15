@@ -10,6 +10,17 @@
 
 G_BEGIN_DECLS
 
+typedef enum {
+	EXTRA_COLOR_BORDER = 0,
+	EXTRA_COLOR_BACKGROUND_TOP,
+	EXTRA_COLOR_BACKGROUND_BOTTOM,
+
+	EXTRA_COLORS
+} MultiloadExtraColor;
+
+G_GNUC_INTERNAL guint
+multiload_colors_get_extra_index(guint i, MultiloadExtraColor col);
+
 G_GNUC_INTERNAL void
 multiload_colors_stringify(MultiloadPlugin *ma, guint i, char *list);
 G_GNUC_INTERNAL void

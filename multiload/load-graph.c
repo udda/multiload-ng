@@ -12,6 +12,7 @@
 
 #include "multiload.h"
 #include "multiload-config.h"
+#include "multiload-colors.h"
 #include "util.h"
 
 
@@ -24,12 +25,21 @@ cairo_set_source_rgba_from_config(cairo_t *cr, GraphConfig *config, guint color_
 	cairo_set_source_rgba(cr, c->red/65535.0, c->green/65535.0, c->blue/65535.0, a/65535.0);
 }
 
+static void
+cairo_set_vertical_gradient(cairo_t *cr, double height, GdkColor *a, GdkColor *b)
+{
+	cairo_pattern_t *pat = cairo_pattern_create_linear (0.0, 0.0, 0.0, height);
+	cairo_pattern_add_color_stop_rgb (pat, 0, a->red/65535.0, a->green/65535.0, a->blue/65535.0);
+	cairo_pattern_add_color_stop_rgb (pat, 1, b->red/65535.0, b->green/65535.0, b->blue/65535.0);
+	cairo_set_source(cr, pat);
+}
 
 /* Redraws the backing pixmap for the load graph and updates the window */
 static void
 load_graph_draw (LoadGraph *g)
 {
-	guint i, j, k;
+	guint i, j;
+	guint c_top, c_bottom;
 	cairo_t *cr;
 	GraphConfig *config = &(g->multiload->graph_config[g->id]);
 	GdkColor *colors = config->colors;
@@ -51,8 +61,10 @@ load_graph_draw (LoadGraph *g)
 	for (i = 0; i < W; i++)
 		g->pos[i] = H - 1;
 
-	k = multiload_config_get_num_colors(g->id) - 1; //this is the index of last color (background)
-	gdk_cairo_set_source_color (cr, &(colors[k]));
+	c_top = multiload_colors_get_extra_index(g->id, EXTRA_COLOR_BACKGROUND_TOP);
+	c_bottom = multiload_colors_get_extra_index(g->id, EXTRA_COLOR_BACKGROUND_BOTTOM);
+	cairo_set_vertical_gradient(cr, g->draw_height, &(colors[c_top]), &(colors[c_bottom]));
+//	gdk_cairo_set_source_color (cr, &(colors[k]));
 	cairo_rectangle(cr, 0, 0, g->draw_width, g->draw_height);
 	cairo_fill(cr);
 
@@ -241,6 +253,7 @@ LoadGraph *
 load_graph_new (MultiloadPlugin *ma, guint id)
 {
 	LoadGraph *g;
+	guint k;
 
 	g = g_new0 (LoadGraph, 1);
 	g->netspeed_in = netspeed_new(g);
@@ -255,9 +268,9 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 	g->box = gtk_vbox_new (FALSE, 0);
 
 	if (ma->graph_config[id].border_width > 0) {
+		k = multiload_colors_get_extra_index(id, EXTRA_COLOR_BORDER);
 		g->border = gtk_event_box_new();
-		gtk_widget_modify_bg (g->border, GTK_STATE_NORMAL,
-					&(ma->graph_config[id].colors[multiload_config_get_num_colors(id)-2]));
+		gtk_widget_modify_bg (g->border, GTK_STATE_NORMAL, &(ma->graph_config[id].colors[k]));
 		gtk_container_set_border_width(GTK_CONTAINER(g->box), ma->graph_config[id].border_width);
 
 		gtk_container_add (GTK_CONTAINER (g->border), g->box);
