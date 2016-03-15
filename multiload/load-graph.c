@@ -64,7 +64,6 @@ load_graph_draw (LoadGraph *g)
 	c_top = multiload_colors_get_extra_index(g->id, EXTRA_COLOR_BACKGROUND_TOP);
 	c_bottom = multiload_colors_get_extra_index(g->id, EXTRA_COLOR_BACKGROUND_BOTTOM);
 	cairo_set_vertical_gradient(cr, g->draw_height, &(colors[c_top]), &(colors[c_bottom]));
-//	gdk_cairo_set_source_color (cr, &(colors[k]));
 	cairo_rectangle(cr, 0, 0, g->draw_width, g->draw_height);
 	cairo_fill(cr);
 
@@ -152,7 +151,6 @@ load_graph_alloc (LoadGraph *g)
 	g->data = g_new0 (gint *, g->draw_width);
 	g->pos = g_new0 (guint, g->draw_width);
 
-	// count out border and background
 	guint data_size = sizeof (guint) * multiload_config_get_num_data(g->id);
 
 	for (i = 0; i < g->draw_width; i++)
