@@ -484,7 +484,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 
 
 	// -- checkbox
-	t = gtk_check_button_new_with_mnemonic(_("Transparent space between graps"));
+	t = gtk_check_button_new_with_mnemonic(_("Fill space between graps"));
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(t),
 						ma->fill_between);
 	g_signal_connect(G_OBJECT(t), "toggled",
