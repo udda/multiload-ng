@@ -154,7 +154,7 @@ multiload_refresh(MultiloadPlugin *ma)
 	if (ma->box)
 		gtk_widget_destroy(ma->box);
 
-	ma->box = gtk_vbox_new (FALSE, 0);
+	ma->box = gtk_vbox_new (FALSE, ma->spacing);
 	gtk_container_set_border_width(GTK_CONTAINER(ma->box), ma->padding);
 
 	// Switch between GtkVBox and GtkHBox depending of orientation
@@ -175,7 +175,7 @@ multiload_refresh(MultiloadPlugin *ma)
 
 		gtk_box_pack_start(GTK_BOX(ma->box),
 						   ma->graphs[i]->main_widget,
-						   TRUE, TRUE, ma->spacing);
+						   TRUE, TRUE, 0);
 
 		if (ma->graph_config[i].visible) {
 			gtk_widget_show_all (ma->graphs[i]->main_widget);
