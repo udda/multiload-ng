@@ -55,6 +55,7 @@ multiload_save (XfcePanelPlugin *plugin, MultiloadPlugin *ma)
 		xfce_rc_write_int_entry (rc, "padding", ma->padding);
 		xfce_rc_write_int_entry (rc, "spacing", ma->spacing);
 		xfce_rc_write_int_entry (rc, "orientation", ma->orientation_policy);
+		xfce_rc_write_int_entry (rc, "fill-between", ma->fill_between);
 
 		for ( i = 0; i < GRAPH_MAX; i++ ) {
 			char *key, list[10*MAX_COLORS];
@@ -106,6 +107,7 @@ multiload_read (XfcePanelPlugin *plugin,
 			ma->padding = xfce_rc_read_int_entry(rc, "padding", DEFAULT_PADDING);
 			ma->spacing = xfce_rc_read_int_entry(rc, "spacing", DEFAULT_PADDING);
 			ma->orientation_policy = xfce_rc_read_int_entry (rc, "orientation", DEFAULT_ORIENTATION);
+			ma->orientation_policy = xfce_rc_read_bool_entry (rc, "fill_between", DEFAULT_FILL_BETWEEN);
 
 			/* Read visibility and colors for each graph */
 			for ( i = 0; i < GRAPH_MAX; i++ ) {
@@ -152,6 +154,7 @@ multiload_read (XfcePanelPlugin *plugin,
 	ma->size = DEFAULT_SIZE;
 	ma->padding = DEFAULT_PADDING;
 	ma->spacing = DEFAULT_SPACING;
+	ma->fill_between = DEFAULT_FILL_BETWEEN;
 	for ( i = 0; i < GRAPH_MAX; i++ ) {
 		ma->graph_config[i].border_width = DEFAULT_BORDER_WIDTH;
 		ma->graph_config[i].visible = i == 0 ? TRUE : FALSE;

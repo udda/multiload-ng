@@ -189,7 +189,7 @@ property_changed_cb(GtkWidget *widget, gpointer id) {
 			value = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
 			ma->orientation_policy = value;
 			multiload_refresh(ma);
-		break;
+			break;
 
 		case PROP_BORDERWIDTH:
 			g_assert(prop_data>=0 && prop_data<GRAPH_MAX);
@@ -210,6 +210,12 @@ property_changed_cb(GtkWidget *widget, gpointer id) {
 
 			if (i == multiload_config_get_num_colors(graph)-2) //border color, need refresh
 				multiload_refresh(ma);
+			break;
+
+		case PROP_FILLBETWEEN:
+			value = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
+			ma->fill_between = value;
+			multiload_refresh(ma);
 			break;
 
 		default:
@@ -476,6 +482,15 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 			G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_ORIENTATION));
 	gtk_table_attach_defaults(table, GTK_WIDGET(t), 1, 2, 4, 5);
 
+
+	// -- checkbox
+	t = gtk_check_button_new_with_mnemonic(_("Transparent space between graps"));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(t),
+						ma->fill_between);
+	g_signal_connect(G_OBJECT(t), "toggled",
+						G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_FILLBETWEEN));
+	gtk_box_pack_start(GTK_BOX(page), t, FALSE, FALSE, PREF_CONTENT_PADDING);
+	
 
 	gtk_widget_show_all(GTK_WIDGET(contentArea));
 }

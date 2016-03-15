@@ -160,6 +160,8 @@ multiload_refresh(MultiloadPlugin *ma)
 	// Switch between GtkVBox and GtkHBox depending of orientation
 	gtk_orientable_set_orientation(GTK_ORIENTABLE(ma->box), multiload_get_orientation(ma));
 
+	gtk_event_box_set_visible_window(GTK_EVENT_BOX(ma->container), ma->fill_between);
+
 	gtk_widget_show (ma->box);
 	gtk_container_add (ma->container, ma->box);
 

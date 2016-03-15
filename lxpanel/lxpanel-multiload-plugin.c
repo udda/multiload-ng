@@ -64,6 +64,8 @@ multiload_read(char **fp, MultiloadPlugin *ma)
 					ma->spacing = atoi(s.t[1]);
 				} else if ( g_ascii_strcasecmp(s.t[0], "orientation") == 0 ) {
 					ma->orientation_policy = atoi(s.t[1]);
+				} else if ( g_ascii_strcasecmp(s.t[0], "fillBetween") == 0 ) {
+					ma->fill_between = atoi(s.t[1]) ? TRUE : FALSE;
 				} else {
 					const char *suffix; /* Set by multiload_find_graph_by_name */
 					int i = multiload_find_graph_by_name(s.t[0], &suffix);
@@ -114,6 +116,7 @@ static void multiload_save_configuration(Plugin * p, FILE * fp)
 	lxpanel_put_int (fp, "padding", ma->padding);
 	lxpanel_put_int (fp, "spacing", ma->spacing);
 	lxpanel_put_int (fp, "orientation", ma->orientation_policy);
+	lxpanel_put_int (fp, "fillBetween", ma->fill_between);
 
 	for ( i = 0; i < GRAPH_MAX; i++ ) {
 		char *key, list[10*MAX_COLORS];

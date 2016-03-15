@@ -62,6 +62,7 @@ typedef struct _GraphConfig GraphConfig;
 #define STEP_BORDER_WIDTH 1
 
 #define DEFAULT_ORIENTATION MULTILOAD_ORIENTATION_AUTO
+#define DEFAULT_FILL_BETWEEN FALSE
 
 struct _LoadGraph {
 	MultiloadPlugin *multiload;
@@ -122,7 +123,7 @@ struct _MultiloadPlugin
 	guint size;
 	guint padding;
 	guint spacing;
-
+	gboolean fill_between;
 };
 
 #include "load-graph.h"
