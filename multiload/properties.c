@@ -22,10 +22,8 @@
 #define PREF_CONTENT_PADDING 6
 #define PREF_LABEL_SPACING 3
 
+static GList *warning_bar_widgets = NULL;
 static GtkWidget *checkbuttons[GRAPH_MAX];
-static GtkWidget *infobar_widgets_speed[2];
-static GtkWidget *infobar_widgets_orientation[2];
-static GtkWidget *infobar_widgets_padding[2];
 
 /* Defined in panel-specific code. */
 extern MultiloadPlugin *
@@ -135,6 +133,7 @@ action_performed_cb(GtkWidget *widget, gpointer id)
 static void
 show_hide_warnings(MultiloadPlugin *ma)
 {
+	GList* l;
 	int n;
 	gboolean b;
 
@@ -142,19 +141,31 @@ show_hide_warnings(MultiloadPlugin *ma)
 	if (tooltip_timeout == -1)
 		g_object_get(gtk_settings_get_default(), "gtk-tooltip-timeout", &tooltip_timeout, NULL);
 
-	n = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(infobar_widgets_speed[0]));
-	b = (n < tooltip_timeout);
-	gtk_widget_set_visible(infobar_widgets_speed[1], b);
+	for ( l=warning_bar_widgets; l != NULL; l = l->next ) {
+		GtkWidget *w = GTK_WIDGET(l->data);
+		GtkWidget *warning_bar = g_object_get_data (G_OBJECT(w), "warning_bar");
+		gint prop_type = GPOINTER_TO_INT(g_object_get_data (G_OBJECT(w), "warning_prop"));
+		switch (prop_type) {
+			case PROP_SPEED:
+				n = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(w));
+				b = (n < tooltip_timeout);
+				gtk_widget_set_visible(warning_bar, b);
+				break;
 
-	n = gtk_combo_box_get_active(GTK_COMBO_BOX(infobar_widgets_orientation[0]));
-	b = ((ma->panel_orientation == GTK_ORIENTATION_HORIZONTAL && n == 2) ||
-		(ma->panel_orientation == GTK_ORIENTATION_VERTICAL && n == 1));
-	gtk_widget_set_visible(infobar_widgets_orientation[1], b);
+			case PROP_ORIENTATION:
+				n = gtk_combo_box_get_active(GTK_COMBO_BOX(w));
+				b = ((ma->panel_orientation == GTK_ORIENTATION_HORIZONTAL && n == 2) ||
+					(ma->panel_orientation == GTK_ORIENTATION_VERTICAL && n == 1));
+				gtk_widget_set_visible(warning_bar, b);
+				break;
 
-	n = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(infobar_widgets_padding[0]));
-	b = (n > 10);
-	gtk_widget_set_visible(infobar_widgets_padding[1], b);
-
+			case PROP_PADDING:
+				n = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(w));
+				b = (n >= 10);
+				gtk_widget_set_visible(warning_bar, b);
+				break;
+		}
+	}
 }
 
 
@@ -474,11 +485,13 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 			G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_PADDING));
 	gtk_size_group_add_widget(sizegroup2, t);
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
-	infobar_widgets_padding[0] = t;
 
-	t = gtk_warning_bar_new(_("If padding is set too large, the graph won't show."));
-	gtk_box_pack_start(GTK_BOX(box), t, TRUE, TRUE, PREF_CONTENT_PADDING);
-	infobar_widgets_padding[1] = t;
+	label = gtk_warning_bar_new(_("If padding is set too large, the graph won't show."));
+	gtk_box_pack_start(GTK_BOX(box), label, TRUE, TRUE, PREF_CONTENT_PADDING);
+	g_object_set_data(G_OBJECT(t), "warning_bar", label);
+	g_object_set_data(G_OBJECT(t), "warning_prop", GINT_TO_POINTER(PROP_PADDING));
+	// first call, store address of the list
+	warning_bar_widgets = g_list_append(warning_bar_widgets, t);
 
 	// -- -- row: spacing
 	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
@@ -511,11 +524,12 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 			G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_SPEED));
 	gtk_size_group_add_widget(sizegroup2, t);
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
-	infobar_widgets_speed[0] = t;
 
-	t = gtk_warning_bar_new(_("System settings could prevent the informative tooltip to show if the update interval is set too short."));
-	gtk_box_pack_start(GTK_BOX(box), t, TRUE, TRUE, PREF_CONTENT_PADDING);
-	infobar_widgets_speed[1] = t;
+	label = gtk_warning_bar_new(_("System settings could prevent the informative tooltip to show if the update interval is set too short."));
+	gtk_box_pack_start(GTK_BOX(box), label, TRUE, TRUE, PREF_CONTENT_PADDING);
+	g_object_set_data(G_OBJECT(t), "warning_bar", label);
+	g_object_set_data(G_OBJECT(t), "warning_prop", GINT_TO_POINTER(PROP_SPEED));
+	g_list_append(warning_bar_widgets, t);
 
 	// -- -- row: orientation
 	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
@@ -536,11 +550,12 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 			G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_ORIENTATION));
 	gtk_size_group_add_widget(sizegroup2, t);
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
-	infobar_widgets_orientation[0] = t;
 
-	t = gtk_warning_bar_new(_("Selected orientation is not the same of the panel. Graphs could be very small."));
-	gtk_box_pack_start(GTK_BOX(box), t, TRUE, TRUE, PREF_CONTENT_PADDING);
-	infobar_widgets_orientation[1] = t;
+	label = gtk_warning_bar_new(_("Selected orientation is not the same of the panel. Graphs could be very small."));
+	gtk_box_pack_start(GTK_BOX(box), label, TRUE, TRUE, PREF_CONTENT_PADDING);
+	g_object_set_data(G_OBJECT(t), "warning_bar", label);
+	g_object_set_data(G_OBJECT(t), "warning_prop", GINT_TO_POINTER(PROP_ORIENTATION));
+	g_list_append(warning_bar_widgets, t);
 
 
 	// -- checkbox
