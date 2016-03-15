@@ -298,7 +298,7 @@ static void multiload_configure(Plugin * p, GtkWindow * parent)
 	g_object_weak_ref(G_OBJECT(dialog), (GWeakNotify) panel_config_save, p->panel);
 
 	/* show the entire dialog */
-	gtk_widget_show_all (dialog);
+	gtk_widget_show (dialog);
 }
 
 /* Plugin descriptor. */

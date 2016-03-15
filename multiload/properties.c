@@ -23,6 +23,9 @@
 #define PREF_LABEL_SPACING 3
 
 static GtkWidget *checkbuttons[GRAPH_MAX];
+static GtkWidget *infobar_widgets_speed[2];
+static GtkWidget *infobar_widgets_orientation[2];
+static GtkWidget *infobar_widgets_padding[2];
 
 /* Defined in panel-specific code. */
 extern MultiloadPlugin *
@@ -129,6 +132,31 @@ action_performed_cb(GtkWidget *widget, gpointer id)
 	}
 }
 
+static void
+show_hide_warnings(MultiloadPlugin *ma)
+{
+	int n;
+	gboolean b;
+
+	static int tooltip_timeout = -1;
+	if (tooltip_timeout == -1)
+		g_object_get(gtk_settings_get_default(), "gtk-tooltip-timeout", &tooltip_timeout, NULL);
+
+	n = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(infobar_widgets_speed[0]));
+	b = (n < tooltip_timeout);
+	gtk_widget_set_visible(infobar_widgets_speed[1], b);
+
+	n = gtk_combo_box_get_active(GTK_COMBO_BOX(infobar_widgets_orientation[0]));
+	b = ((ma->panel_orientation == GTK_ORIENTATION_HORIZONTAL && n == 2) ||
+		(ma->panel_orientation == GTK_ORIENTATION_VERTICAL && n == 1));
+	gtk_widget_set_visible(infobar_widgets_orientation[1], b);
+
+	n = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(infobar_widgets_padding[0]));
+	b = (n > 10);
+	gtk_widget_set_visible(infobar_widgets_padding[1], b);
+
+}
+
 
 static void
 property_changed_cb(GtkWidget *widget, gpointer id) {
@@ -140,7 +168,6 @@ property_changed_cb(GtkWidget *widget, gpointer id) {
 	gint value;
 	gint graph;
 	gint i;
-
 
 	switch(prop_type) {
 		case PROP_SHOWGRAPH:
@@ -223,6 +250,7 @@ property_changed_cb(GtkWidget *widget, gpointer id) {
 		default:
 			g_assert_not_reached();
 	}
+	show_hide_warnings(ma);
 }
 
 /*
@@ -292,10 +320,9 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 {
 	guint i, j, k;
 	static GtkVBox *container = NULL;
-	GtkSizeGroup *sizegroup;
+	GtkSizeGroup *sizegroup, *sizegroup2;
 	GtkWidget *frame, *frame2;
 	GtkWidget *box, *box2, *box3;
-	GtkTable *table;
 	GtkWidget *label;
 	GtkWidget *t;
 
@@ -358,7 +385,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 
 		k = multiload_colors_get_extra_index(i, EXTRA_COLOR_BACKGROUND_BOTTOM);
 		t = color_selector_new(i, k, FALSE, FALSE, ma);
-		gtk_box_pack_end(GTK_BOX(box3), t, FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(box3), t, FALSE, FALSE, 0);
 
 
 		// border
@@ -375,18 +402,12 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 
 		t = gtk_spin_button_new_with_parameters(
 						MIN_BORDER_WIDTH, MAX_BORDER_WIDTH, STEP_BORDER_WIDTH,
-						ma->graph_config[i].border_width, _("%dpx"));
+						ma->graph_config[i].border_width, NULL);
+		gtk_entry_set_width_chars(GTK_ENTRY(t), 2);
 		g_signal_connect(G_OBJECT(t), "value_changed",
 				G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_BORDERWIDTH | i));
 		gtk_widget_set_tooltip_text(t, _("Border width"));
-		gtk_box_pack_end(GTK_BOX(box3), t, FALSE, FALSE, 0);
-
-
-		// separator
-//		t = gtk_hseparator_new();
-//		gtk_size_group_add_widget(sizegroup, t);
-//		gtk_box_pack_end(GTK_BOX(box2), t, FALSE, FALSE, 0);
-
+		gtk_box_pack_start(GTK_BOX(box3), t, FALSE, FALSE, 0);
 	}
 	properties_set_checkboxes_sensitive(ma, FALSE);
 
@@ -395,19 +416,19 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 	t = gtk_button_new_with_label(_("Default colors"));
-	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name("document-revert", GTK_ICON_SIZE_SMALL_TOOLBAR));
+	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name(GTK_STOCK_REVERT_TO_SAVED, GTK_ICON_SIZE_SMALL_TOOLBAR));
 	g_signal_connect(G_OBJECT(t), "clicked", G_CALLBACK(action_performed_cb),
 							GINT_TO_POINTER(ACTION_DEFAULT_COLORS));
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 	t = gtk_button_new_with_label(_("Import color theme"));
-	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name("document-open", GTK_ICON_SIZE_SMALL_TOOLBAR));
+	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name(GTK_STOCK_OPEN, GTK_ICON_SIZE_SMALL_TOOLBAR));
 	g_signal_connect(G_OBJECT(t), "clicked", G_CALLBACK(action_performed_cb),
 							GINT_TO_POINTER(ACTION_IMPORT_COLORS));
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 	t = gtk_button_new_with_label(_("Export color theme"));
-	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name("document-saveas", GTK_ICON_SIZE_SMALL_TOOLBAR));
+	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name(GTK_STOCK_SAVE_AS, GTK_ICON_SIZE_SMALL_TOOLBAR));
 	g_signal_connect(G_OBJECT(t), "clicked", G_CALLBACK(action_performed_cb),
 							GINT_TO_POINTER(ACTION_EXPORT_COLORS));
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
@@ -416,80 +437,94 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 
 	// OPTIONS
 
-	// -- table
-	table = GTK_TABLE(gtk_table_new(4, 3, FALSE));
-	gtk_container_set_border_width(GTK_CONTAINER(table), PREF_CONTENT_PADDING);
-	gtk_table_set_col_spacings(table, 4);
-	gtk_table_set_row_spacings(table, 4);
-	gtk_box_pack_start (GTK_BOX (container), GTK_WIDGET(table), FALSE, FALSE, 0);
+	sizegroup = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
+	sizegroup2 = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
 
-	// -- -- row: width/height
+	// Width / Height
+	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
+	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
+
 	if (multiload_get_orientation(ma) == GTK_ORIENTATION_HORIZONTAL)
 		label = gtk_label_new_with_mnemonic(_("Wid_th: "));
 	else
 		label = gtk_label_new_with_mnemonic(_("Heigh_t: "));
 	gtk_misc_set_alignment(GTK_MISC(label), 0.0f, 0.5f);
-	gtk_table_attach_defaults(table, GTK_WIDGET(label), 0, 1, 0, 1);
+	gtk_size_group_add_widget(sizegroup, label);
+	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 	t = gtk_spin_button_new_with_parameters(MIN_SIZE, MAX_SIZE, STEP_SIZE, ma->size, _("%d pixel"));
 	gtk_label_set_mnemonic_widget (GTK_LABEL(label), t);
 	g_signal_connect(G_OBJECT(t), "value_changed",
 			G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_SIZE));
-	gtk_table_attach_defaults(table, GTK_WIDGET(t), 1, 2, 0, 1);
-
-	label = gtk_label_new (_("pixels"));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
-	gtk_table_attach_defaults(table, GTK_WIDGET(label), 2, 3, 0, 1);
+	gtk_size_group_add_widget(sizegroup2, t);
+	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 	// -- -- row: padding
+	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
+	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
+
 	label = gtk_label_new_with_mnemonic(_("Pa_dding: "));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
-	gtk_table_attach_defaults(table, GTK_WIDGET(label), 0, 1, 1, 2);
+	gtk_size_group_add_widget(sizegroup, label);
+	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 	t = gtk_spin_button_new_with_parameters(MIN_PADDING, MAX_PADDING, STEP_PADDING, ma->padding, _("%d pixel"));
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), t);
 	g_signal_connect(G_OBJECT(t), "value_changed",
 			G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_PADDING));
-	gtk_table_attach_defaults(table, GTK_WIDGET(t), 1, 2, 1, 2);
+	gtk_size_group_add_widget(sizegroup2, t);
+	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
+	infobar_widgets_padding[0] = t;
 
-	label = gtk_label_new(_("pixels"));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
-	gtk_table_attach_defaults(table, GTK_WIDGET(label), 2, 3, 1, 2);
+	t = gtk_warning_bar_new(_("If padding is set too large, the graph won't show."));
+	gtk_box_pack_start(GTK_BOX(box), t, TRUE, TRUE, PREF_CONTENT_PADDING);
+	infobar_widgets_padding[1] = t;
 
 	// -- -- row: spacing
+	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
+	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
+
 	label = gtk_label_new_with_mnemonic(_("S_pacing: "));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
-	gtk_table_attach_defaults(table, GTK_WIDGET(label), 0, 1, 2, 3);
+	gtk_size_group_add_widget(sizegroup, label);
+	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 	t = gtk_spin_button_new_with_parameters(MIN_SPACING, MAX_SPACING, STEP_SPACING, ma->spacing, _("%d pixel"));
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), t);
 	g_signal_connect(G_OBJECT(t), "value_changed",
 			G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_SPACING));
-	gtk_table_attach_defaults(table, GTK_WIDGET(t), 1, 2, 2, 3);
-
-	label = gtk_label_new(_("pixels"));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
-	gtk_table_attach_defaults(table, GTK_WIDGET(label), 2, 3, 2, 3);
+	gtk_size_group_add_widget(sizegroup2, t);
+	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 	// -- -- row: update interval
+	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
+	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
+
 	label = gtk_label_new_with_mnemonic(_("Upd_ate interval: "));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
-	gtk_table_attach_defaults(table, GTK_WIDGET(label), 0, 1, 3, 4);
+	gtk_size_group_add_widget(sizegroup, label);
+	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
 
-	t = gtk_spin_button_new_with_parameters(MIN_SPEED, MAX_SPEED, STEP_SPEED, ma->speed, _("%d seconds"));
+	t = gtk_spin_button_new_with_parameters(MIN_SPEED, MAX_SPEED, STEP_SPEED, ma->speed, _("%d milliseconds"));
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), t);
 	g_signal_connect(G_OBJECT(t), "value_changed",
 			G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_SPEED));
-	gtk_table_attach_defaults(table, GTK_WIDGET(t), 1, 2, 3, 4);
+	gtk_size_group_add_widget(sizegroup2, t);
+	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
+	infobar_widgets_speed[0] = t;
 
-	label = gtk_label_new(_("milliseconds"));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
-	gtk_table_attach_defaults(table, GTK_WIDGET(label), 2, 3, 3, 4);
+	t = gtk_warning_bar_new(_("System settings could prevent the informative tooltip to show if the update interval is set too short."));
+	gtk_box_pack_start(GTK_BOX(box), t, TRUE, TRUE, PREF_CONTENT_PADDING);
+	infobar_widgets_speed[1] = t;
 
 	// -- -- row: orientation
+	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
+	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
+
 	label = gtk_label_new_with_mnemonic(_("_Orientation: "));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
-	gtk_table_attach_defaults(table, GTK_WIDGET(label), 0, 1, 4, 5);
+	gtk_size_group_add_widget(sizegroup, label);
+	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 	t = gtk_combo_box_text_new();
 	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(t), _("Automatic"));
@@ -497,10 +532,15 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(t), _("Vertical"));
 	gtk_combo_box_set_active(GTK_COMBO_BOX(t), ma->orientation_policy);
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), t);
-
 	g_signal_connect(G_OBJECT(t), "changed",
 			G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_ORIENTATION));
-	gtk_table_attach_defaults(table, GTK_WIDGET(t), 1, 2, 4, 5);
+	gtk_size_group_add_widget(sizegroup2, t);
+	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
+	infobar_widgets_orientation[0] = t;
+
+	t = gtk_warning_bar_new(_("Selected orientation is not the same of the panel. Graphs could be very small."));
+	gtk_box_pack_start(GTK_BOX(box), t, TRUE, TRUE, PREF_CONTENT_PADDING);
+	infobar_widgets_orientation[1] = t;
 
 
 	// -- checkbox
@@ -513,4 +553,5 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	
 
 	gtk_widget_show_all(GTK_WIDGET(contentArea));
+	show_hide_warnings(ma);
 }

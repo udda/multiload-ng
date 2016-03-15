@@ -119,7 +119,7 @@ multiload_configure (XfcePanelPlugin     *plugin,
 					G_CALLBACK(multiload_configure_response), multiload);
 
 	/* show the entire dialog */
-	gtk_widget_show_all (dialog);
+	gtk_widget_show (dialog);
 }
 
 #include "about-data.h"

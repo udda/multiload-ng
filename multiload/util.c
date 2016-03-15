@@ -59,12 +59,29 @@ GtkWidget* gtk_spin_button_new_with_parameters(gint min, gint max, gint step, gi
 
 	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(w), FALSE);
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(w), (gdouble)start_value);
+	gtk_entry_set_alignment(GTK_ENTRY(w), 1.0);
 
-	if (format != NULL)
+	if (format != NULL) {
+		gtk_entry_set_width_chars(GTK_ENTRY(w), strlen(format));
 		g_signal_connect(G_OBJECT(w), "output", G_CALLBACK(spin_button_output_cb), (gpointer)format);
+	}
 
 	return w;
 }
+
+GtkWidget* gtk_warning_bar_new(const gchar *text)
+{
+	GtkWidget *hbox = gtk_hbox_new(FALSE, 4);
+
+	GtkWidget *image = gtk_image_new_from_stock(GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_SMALL_TOOLBAR);
+	gtk_box_pack_start(GTK_BOX(hbox), image, FALSE, FALSE, 0);
+
+	GtkWidget *label = gtk_label_new(text);
+	gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+	return hbox;
+}
+
 
 
 static void
