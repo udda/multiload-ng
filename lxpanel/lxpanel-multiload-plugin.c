@@ -12,6 +12,7 @@
 
 #include "multiload/multiload.h"
 #include "multiload/multiload-config.h"
+#include "multiload/multiload-colors.h"
 #include "multiload/properties.h"
 
 /* FIXME: DIRTY HACKS! The following lxpanel functions are NOT in
@@ -33,21 +34,6 @@ struct _MultiloadLxpanelPlugin {
 };
 /** END H **/
 
-static int
-multiload_find_graph_by_name(const char *str, const char **suffix)
-{
-	guint i;
-	for ( i = 0; i < GRAPH_MAX; i++ ) {
-		int n = strlen(graph_types[i].name);
-		if ( strncasecmp(str, graph_types[i].name, n) == 0 ) {
-			if ( suffix )
-				*suffix = str+n;
-			return i;
-		}
-	}
-	return -1;
-}
-
 
 static void
 multiload_read(char **fp, MultiloadPlugin *ma)
@@ -60,7 +46,7 @@ multiload_read(char **fp, MultiloadPlugin *ma)
 	for ( i = 0; i < GRAPH_MAX; i++ ) {
 		/* Default visibility and colors */
 		ma->graph_config[i].visible = FALSE;
-		multiload_colorconfig_default(ma, i);
+		multiload_colors_default(ma, i);
 	}
 
 	if ( fp != NULL ) {
@@ -89,7 +75,7 @@ multiload_read(char **fp, MultiloadPlugin *ma)
 					else if ( g_ascii_strcasecmp(suffix, "BorderWidth") == 0 )
 						ma->graph_config[i].border_width = atoi(s.t[1]);
 					else if ( g_ascii_strcasecmp(suffix, "Colors") == 0 )
-						multiload_colorconfig_unstringify(ma, i, s.t[1]);
+						multiload_colors_unstringify(ma, i, s.t[1]);
 				}
 			} else {
 				ERR ("Failed to parse config token %s\n", s.str);
@@ -143,7 +129,7 @@ static void multiload_save_configuration(Plugin * p, FILE * fp)
 		g_free (key);
 
 		/* Save colors */
-		multiload_colorconfig_stringify (ma, i, list);
+		multiload_colors_stringify (ma, i, list);
 		key = g_strdup_printf("%sColors", graph_types[i].name);
 		/* Don't use lxpanel_put_str (fp, key, list), in order to avoid a compiler
 		 warning "the address of 'list' will always evaluate as 'true'".

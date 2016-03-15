@@ -19,6 +19,7 @@ multiload_core_la_SOURCES = \
 	netspeed.c netspeed.h \
 	autoscaler.c autoscaler.h \
 	properties.c properties.h \
+	multiload-colors.c multiload-colors.h \
 	multiload-config.c multiload-config.h \
 	util.c util.h
 

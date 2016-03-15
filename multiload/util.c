@@ -41,52 +41,6 @@ format_percent(guint value, guint total, guint ndigits)
 }
 
 
-void
-gdk_color_to_argb_string(GdkColor* color, guint16 alpha, gchar *out_str)
-{
-	// note: out_str must be at least 10 characters long
-	int rc = snprintf(out_str, 10, "#%02X%02X%02X%02X",
-					alpha / 256,
-					color->red / 256,
-					color->green / 256,
-					color->blue / 256);
-	g_assert(rc == 9);
-}
-
-gboolean
-argb_string_to_gdk_color(const gchar *gspec, GdkColor *color, guint16 *alpha)
-{
-	gchar buf[8];
-	if (strlen(gspec) == 7) {
-		// may be a standard RGB hex string, fallback to gdk_color_parse
-		return gdk_color_parse(gspec, color);
-	} else if (G_UNLIKELY (strlen(gspec) != 9) ) {
-		return FALSE;
-	}
-
-	// alpha part
-	buf[0] = gspec[1];
-	buf[1] = gspec[2];
-	buf[2] = 0;
-	errno = 0;
-	*alpha = (guint16)strtol(buf, NULL, 16);
-	if (errno) {
-		// error in strtol, set alpha=max
-		*alpha = 0xFFFF;
-	} else {
-		/* alpha is in the form '0x00jk'. Transform it in the form
-		  '0xjkjk', so the conversion of 8 to 16 bits is proportional. */
-		*alpha |= (*alpha << 8);
-	}
-
-	// color part
-	buf[0] = '#';
-	strncpy(buf+1, gspec+3, 6);
-	buf[7] = 0;
-	return gdk_color_parse(buf, color);
-}
-
-
 GtkWidget* gtk_spin_button_new_with_parameters(gint min, gint max, gint step, gint start_value)
 {
 	guint maxdigits;
@@ -109,4 +63,69 @@ GtkWidget* gtk_spin_button_new_with_parameters(gint min, gint max, gint step, gi
 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(w), (gdouble)start_value);
 
 	return w;
+}
+
+
+static void
+close_dialog_cb(GtkWidget *dialog, gint response, gpointer id) {
+	gtk_widget_destroy(dialog);
+}
+
+void gtk_error_dialog(GtkWindow *parent, const gchar *message)
+{
+	GtkWidget *dialog = gtk_message_dialog_new(parent,
+						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+						GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, message);
+	g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK(close_dialog_cb), NULL);
+	gtk_widget_show(dialog);
+}
+
+GtkWidget* gtk_yesno_dialog(GtkWindow *parent, const gchar *message, GCallback cb, gpointer data)
+{
+	GtkWidget *dialog = gtk_message_dialog_new(parent,
+						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+						GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, message);
+	g_signal_connect (G_OBJECT (dialog), "response", cb, data);
+	return dialog;
+}
+
+gchar* gtk_open_file_dialog(GtkWindow *parent, const gchar *title)
+{
+	int response;
+	char *filename;
+	GtkWidget *dialog = gtk_file_chooser_dialog_new (title, parent,
+										GTK_FILE_CHOOSER_ACTION_OPEN,
+										GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+										GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+										NULL);
+
+	response = gtk_dialog_run (GTK_DIALOG (dialog));
+	if (response == GTK_RESPONSE_ACCEPT)
+		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+	else
+		filename = NULL;
+	gtk_widget_destroy (dialog);
+	return filename;
+}
+
+gchar* gtk_save_file_dialog(GtkWindow *parent, const gchar *title, const gchar *current_name)
+{
+	int response;
+	char *filename;
+	GtkWidget *dialog = gtk_file_chooser_dialog_new (title, parent,
+										GTK_FILE_CHOOSER_ACTION_SAVE,
+										GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+										GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
+										NULL);
+	gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog), TRUE);
+	gtk_file_chooser_set_create_folders (GTK_FILE_CHOOSER (dialog), TRUE);
+	gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (dialog), current_name);
+
+	response = gtk_dialog_run (GTK_DIALOG (dialog));
+	if (response == GTK_RESPONSE_ACCEPT)
+		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+	else
+		filename = NULL;
+	gtk_widget_destroy (dialog);
+	return filename;
 }

@@ -6,11 +6,10 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gtk/gtk.h>
 
-G_BEGIN_DECLS
 
 #define PLUGIN_WEBSITE "https://github.com/nandhp/multiload-nandhp"
 
-#define PER_CPU_MAX_LOADAVG 4
+#define PER_CPU_MAX_LOADAVG 3
 #define NCPUSTATES 5
 
 #define MAX_COLORS 6
@@ -126,10 +125,11 @@ struct _MultiloadPlugin
 
 };
 
-
-
 #include "load-graph.h"
 #include "linux-proc.h"
+
+
+G_BEGIN_DECLS
 
 /* remove the old graphs and rebuild them */
 void
@@ -149,16 +149,8 @@ multiload_init();
 void
 multiload_destroy(MultiloadPlugin *ma);
 
-void
-multiload_colorconfig_stringify(MultiloadPlugin *ma, guint i, char *list);
-
-void
-multiload_colorconfig_default(MultiloadPlugin *ma, guint i);
-
-void
-multiload_colorconfig_unstringify(MultiloadPlugin *ma, guint i,
-								const char *list);
-
+int
+multiload_find_graph_by_name(const char *str, char **suffix);
 
 G_END_DECLS
 

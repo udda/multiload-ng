@@ -22,6 +22,7 @@
 
 #include "multiload.h"
 #include "multiload-config.h"
+#include "multiload-colors.h"
 #include "xfce4-multiload-plugin.h"
 #include "xfce4-multiload-dialogs.h"
 
@@ -69,7 +70,7 @@ multiload_save (XfcePanelPlugin *plugin, MultiloadPlugin *ma)
 			g_free (key);
 
 			/* Save colors */
-			multiload_colorconfig_stringify (ma, i, list);
+			multiload_colors_stringify (ma, i, list);
 			key = g_strdup_printf("%s_colors", graph_types[i].name);
 			xfce_rc_write_entry (rc, key, list);
 			g_free (key);
@@ -125,7 +126,7 @@ multiload_read (XfcePanelPlugin *plugin,
 				key = g_strdup_printf("%s_colors", graph_types[i].name);
 				list = xfce_rc_read_entry (rc, key, NULL);
 				g_free (key);
-				multiload_colorconfig_unstringify(ma, i, list);
+				multiload_colors_unstringify(ma, i, list);
 			}
 
 			/* cleanup */
@@ -154,6 +155,6 @@ multiload_read (XfcePanelPlugin *plugin,
 	for ( i = 0; i < GRAPH_MAX; i++ ) {
 		ma->graph_config[i].border_width = DEFAULT_BORDER_WIDTH;
 		ma->graph_config[i].visible = i == 0 ? TRUE : FALSE;
-		multiload_colorconfig_default(ma, i);
+		multiload_colors_default(ma, i);
 	}
 }

@@ -9,9 +9,11 @@
 gchar* format_rate_for_display (guint rate);
 gchar* format_percent(guint value, guint total, guint ndigits);
 
-void gdk_color_to_argb_string(GdkColor* color, guint16 alpha, gchar *out_str);
-gboolean argb_string_to_gdk_color(const gchar *gspec, GdkColor *color, guint16 *alpha);
-
 GtkWidget* gtk_spin_button_new_with_parameters(gint min, gint max, gint step, gint start_value);
+
+void gtk_error_dialog(GtkWindow *parent, const gchar *message);
+GtkWidget* gtk_yesno_dialog(GtkWindow *parent, const gchar *message, GCallback cb, gpointer data);
+gchar* gtk_open_file_dialog(GtkWindow *parent, const gchar *title);
+gchar* gtk_save_file_dialog(GtkWindow *parent, const gchar *title, const gchar *current_name);
 
 #endif /* H_MULTILOAD_UTIL_ */

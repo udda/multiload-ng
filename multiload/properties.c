@@ -15,6 +15,7 @@
 #include "properties.h"
 #include "multiload.h"
 #include "multiload-config.h"
+#include "multiload-colors.h"
 #include "util.h"
 
 
@@ -72,7 +73,7 @@ dialog_response_cb(GtkWidget *dialog, gint response, gpointer id) {
 		case ACTION_DEFAULT_COLORS:
 			if (response == GTK_RESPONSE_YES) {
 				for ( i = 0; i < GRAPH_MAX; i++ )
-					multiload_colorconfig_default(ma, i);
+					multiload_colors_default(ma, i);
 				multiload_init_preferences(pref_dialog, ma);
 				multiload_refresh(ma);
 			}
@@ -88,21 +89,42 @@ action_performed_cb(GtkWidget *widget, gpointer id)
 	gint action_type = GPOINTER_TO_INT(id) & 0xFFFF0000;
 //	gint action_data = GPOINTER_TO_INT(id) & 0x0000FFFF;
 
-	GtkWidget *dialog = gtk_widget_get_ancestor(widget, GTK_TYPE_DIALOG);
+	GtkWidget *pref_dialog = gtk_widget_get_ancestor(widget, GTK_TYPE_DIALOG);
+	GtkWidget *dialog;
+
+	gchar *filename;
 
 	switch(action_type) {
-		case ACTION_DEFAULT_COLORS: {
-			GtkWidget *confirm = gtk_message_dialog_new(GTK_WINDOW(dialog),
-								GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-								GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO,
+		case ACTION_DEFAULT_COLORS:
+			dialog = gtk_yesno_dialog(GTK_WINDOW(pref_dialog),
 								_("Revert to default colors?\n"
-								"You will lose any customization."));
-			g_object_set_data (G_OBJECT(confirm), "MultiloadPlugin", ma);
-			g_object_set_data (G_OBJECT(confirm), "PrefDialog", dialog);
-			g_signal_connect (G_OBJECT (confirm), "response",
+								"You will lose any customization."),
 								G_CALLBACK(dialog_response_cb), id);
-			gtk_widget_show_all (confirm);
-			} break;
+			g_object_set_data (G_OBJECT(dialog), "MultiloadPlugin", ma);
+			g_object_set_data (G_OBJECT(dialog), "PrefDialog", pref_dialog);
+			gtk_widget_show_all (dialog);
+			break;
+
+		case ACTION_IMPORT_COLORS:
+			filename = gtk_open_file_dialog(GTK_WINDOW(pref_dialog),
+								_("Import color theme"));
+			if (filename != NULL) {
+				multiload_colors_from_file(filename, ma, GTK_WINDOW(pref_dialog));
+				g_free (filename);
+			}
+		break;
+
+		case ACTION_EXPORT_COLORS:
+			filename = gtk_save_file_dialog(GTK_WINDOW(pref_dialog),
+								_("Export color theme"), "multiload.colors");
+			if (filename != NULL) {
+				multiload_colors_to_file(filename, ma, GTK_WINDOW(pref_dialog));
+				g_free (filename);
+			}
+		break;
+
+		default:
+			g_assert_not_reached();
 	}
 }
 
@@ -346,9 +368,21 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_box_pack_start(GTK_BOX(page), box, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 	t = gtk_button_new_with_label(_("Default colors"));
-	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name("gtk-paste", GTK_ICON_SIZE_BUTTON));
+	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name("document-revert", GTK_ICON_SIZE_BUTTON));
 	g_signal_connect(G_OBJECT(t), "clicked", G_CALLBACK(action_performed_cb),
 							GINT_TO_POINTER(ACTION_DEFAULT_COLORS));
+	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
+
+	t = gtk_button_new_with_label(_("Import color theme"));
+	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name("document-open", GTK_ICON_SIZE_BUTTON));
+	g_signal_connect(G_OBJECT(t), "clicked", G_CALLBACK(action_performed_cb),
+							GINT_TO_POINTER(ACTION_IMPORT_COLORS));
+	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
+
+	t = gtk_button_new_with_label(_("Export color theme"));
+	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name("document-saveas", GTK_ICON_SIZE_BUTTON));
+	g_signal_connect(G_OBJECT(t), "clicked", G_CALLBACK(action_performed_cb),
+							GINT_TO_POINTER(ACTION_EXPORT_COLORS));
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 
