@@ -1,5 +1,6 @@
 multiload/multiload.c
 multiload/multiload-config.c
+multiload/multiload-colors.c
 multiload/netspeed.c
 multiload/properties.c
 multiload/util.c
