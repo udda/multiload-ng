@@ -225,7 +225,8 @@ property_changed_cb(GtkWidget *widget, gpointer id) {
 	}
 }
 
-/* create a new page in the notebook widget, add it, and return a pointer to it */
+/*
+// create a new page in the notebook widget, add it, and return a pointer to it
 static GtkWidget *
 add_page(GtkNotebook *notebook, const gchar *label, const gchar *description)
 {
@@ -241,7 +242,7 @@ add_page(GtkNotebook *notebook, const gchar *label, const gchar *description)
 
 	return page;
 }
-
+*/
 
 // create a color selector with optional custom label
 static GtkWidget *
@@ -290,9 +291,8 @@ void
 multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 {
 	guint i, j, k;
-	static GtkNotebook *tabs = NULL;
+	static GtkVBox *container = NULL;
 	GtkSizeGroup *sizegroup;
-	GtkWidget *page;
 	GtkWidget *frame, *frame2;
 	GtkWidget *box, *box2, *box3;
 	GtkTable *table;
@@ -302,20 +302,18 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	GtkWidget *contentArea = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 
 	// Delete old container if present
-	if (G_UNLIKELY(GTK_IS_WIDGET(tabs)))
-		gtk_container_remove(GTK_CONTAINER(contentArea), GTK_WIDGET(tabs));
+	if (G_UNLIKELY(GTK_IS_WIDGET(container)))
+		gtk_container_remove(GTK_CONTAINER(contentArea), GTK_WIDGET(container));
 
 	// Create new container
-	tabs = GTK_NOTEBOOK(gtk_notebook_new());
-	gtk_box_pack_start(GTK_BOX(contentArea), GTK_WIDGET(tabs), TRUE, TRUE, 0);
+	container = GTK_VBOX(gtk_vbox_new(FALSE, PREF_CONTENT_PADDING));
+	gtk_box_pack_start(GTK_BOX(contentArea), GTK_WIDGET(container), TRUE, TRUE, 0);
 
 
 
-	// COLORS PAGE
-	page = add_page(tabs, _("_Resources"), _("Change colors and visibility of the graphs."));
-
+	// COLORS
 	box = gtk_hbox_new(FALSE, PREF_CONTENT_PADDING);
-	gtk_container_add(GTK_CONTAINER(page), box);
+	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
 	sizegroup = gtk_size_group_new(GTK_SIZE_GROUP_BOTH);
 	for( i = 0; i < GRAPH_MAX; i++ ) {
@@ -325,12 +323,13 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 							ma->graph_config[i].visible);
 		g_signal_connect(G_OBJECT(t), "toggled",
 							G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_SHOWGRAPH | i));
+		gtk_widget_set_tooltip_text(t, _("Show or hide this graph"));
 		checkbuttons[i] = t;
 
 		// -- -- frame
 		frame = gtk_frame_new(NULL);
 		gtk_frame_set_label_widget(GTK_FRAME(frame), t);
-		gtk_box_pack_start(GTK_BOX(box), GTK_WIDGET(frame), FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(box), GTK_WIDGET(frame), FALSE, FALSE, PREF_CONTENT_PADDING);
 
 		box2 = gtk_vbox_new(FALSE, 0);
 		gtk_container_set_border_width(GTK_CONTAINER(box2), PREF_CONTENT_PADDING);
@@ -379,50 +378,50 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 						ma->graph_config[i].border_width);
 		g_signal_connect(G_OBJECT(t), "value_changed",
 				G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_BORDERWIDTH | i));
+		gtk_widget_set_tooltip_text(t, _("Border width"));
 		gtk_box_pack_end(GTK_BOX(box3), t, FALSE, FALSE, 0);
 
 
 		// separator
-		t = gtk_hseparator_new();
-		gtk_size_group_add_widget(sizegroup, t);
-		gtk_box_pack_end(GTK_BOX(box2), t, FALSE, FALSE, 0);
+//		t = gtk_hseparator_new();
+//		gtk_size_group_add_widget(sizegroup, t);
+//		gtk_box_pack_end(GTK_BOX(box2), t, FALSE, FALSE, 0);
 
 	}
 	properties_set_checkboxes_sensitive(ma, FALSE);
 
 	// -- bottom buttons
 	box = gtk_hbox_new(FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(page), box, FALSE, FALSE, PREF_CONTENT_PADDING);
+	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 	t = gtk_button_new_with_label(_("Default colors"));
-	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name("document-revert", GTK_ICON_SIZE_BUTTON));
+	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name("document-revert", GTK_ICON_SIZE_SMALL_TOOLBAR));
 	g_signal_connect(G_OBJECT(t), "clicked", G_CALLBACK(action_performed_cb),
 							GINT_TO_POINTER(ACTION_DEFAULT_COLORS));
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 	t = gtk_button_new_with_label(_("Import color theme"));
-	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name("document-open", GTK_ICON_SIZE_BUTTON));
+	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name("document-open", GTK_ICON_SIZE_SMALL_TOOLBAR));
 	g_signal_connect(G_OBJECT(t), "clicked", G_CALLBACK(action_performed_cb),
 							GINT_TO_POINTER(ACTION_IMPORT_COLORS));
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 	t = gtk_button_new_with_label(_("Export color theme"));
-	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name("document-saveas", GTK_ICON_SIZE_BUTTON));
+	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name("document-saveas", GTK_ICON_SIZE_SMALL_TOOLBAR));
 	g_signal_connect(G_OBJECT(t), "clicked", G_CALLBACK(action_performed_cb),
 							GINT_TO_POINTER(ACTION_EXPORT_COLORS));
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 
 
-	// OPTIONS PAGE
-	page = add_page(tabs, _("_Options"), _("Select settings that fit your needs."));
+	// OPTIONS
 
 	// -- table
 	table = GTK_TABLE(gtk_table_new(4, 3, FALSE));
 	gtk_container_set_border_width(GTK_CONTAINER(table), PREF_CONTENT_PADDING);
 	gtk_table_set_col_spacings(table, 4);
 	gtk_table_set_row_spacings(table, 4);
-	gtk_box_pack_start (GTK_BOX (page), GTK_WIDGET(table), FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (container), GTK_WIDGET(table), FALSE, FALSE, 0);
 
 	// -- -- row: width/height
 	if (multiload_get_orientation(ma) == GTK_ORIENTATION_HORIZONTAL)
@@ -510,7 +509,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 						ma->fill_between);
 	g_signal_connect(G_OBJECT(t), "toggled",
 						G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_FILLBETWEEN));
-	gtk_box_pack_start(GTK_BOX(page), t, FALSE, FALSE, PREF_CONTENT_PADDING);
+	gtk_box_pack_start(GTK_BOX(container), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 	
 
 	gtk_widget_show_all(GTK_WIDGET(contentArea));
