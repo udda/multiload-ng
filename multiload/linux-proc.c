@@ -302,8 +302,8 @@ GetDisk (int Maximum, int data [2], LoadGraph *g)
 		if ((fsusage.flags & needed_flags) != needed_flags)
 			continue; // FS does not have required capabilities
 
-		read  += fsusage.block_size * fsusage.read;
-		write += fsusage.block_size * fsusage.write;
+		read  += fsusage.read;
+		write += fsusage.write;
 	}
 
 	g_free(mountentries);
@@ -322,9 +322,10 @@ GetDisk (int Maximum, int data [2], LoadGraph *g)
 	data[0] = (float)Maximum *  readdiff / (float)max;
 	data[1] = (float)Maximum * writediff / (float)max;
 
-	// TODO HACK: I don't know why these speeds need to be divided by 8...
-	xd->read_speed  = (guint64) ( (readdiff  * 1000.0)  / (8 * g->multiload->speed) );
-	xd->write_speed = (guint64) ( (writediff * 1000.0)  / (8 * g->multiload->speed) );
+	/* read/write are relative to SECTORS (standard 512 byte) and not blocks
+	 * as glibtop documentation states. So multiply value by 512 */
+	xd->read_speed  = (guint64) ( (readdiff  * 512 * 1000.0)  / (g->multiload->speed) );
+	xd->write_speed = (guint64) ( (writediff * 512 * 1000.0)  / (g->multiload->speed) );
 }
 
 
