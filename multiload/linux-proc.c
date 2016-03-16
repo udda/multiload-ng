@@ -15,6 +15,7 @@
 #include <glibtop/netlist.h>
 #include <glibtop/mountlist.h>
 #include <glibtop/fsusage.h>
+#include <glibtop/uptime.h>
 
 #include "util.h"
 #include "linux-proc.h"
@@ -34,12 +35,16 @@ GetCpu (int Maximum, int data [4], LoadGraph *g)
 	guint32 user, nice, sys, iowait, idle, total;
 	gboolean first_call = FALSE;
 	glibtop_cpu cpu;
+	glibtop_uptime uptime;
 
-	static const guint64 needed_flags =
+	static const guint64 needed_flags_cpu =
 		(1 << GLIBTOP_CPU_USER) +
 		(1 << GLIBTOP_CPU_IDLE) +
 		(1 << GLIBTOP_CPU_SYS) +
 		(1 << GLIBTOP_CPU_NICE);
+
+	static const guint64 needed_flags_uptime =
+		(1 << GLIBTOP_UPTIME_UPTIME);
 
 	CpuData *xd = (CpuData*) g->extra_data;
 	g_assert_nonnull(xd);
@@ -50,13 +55,18 @@ GetCpu (int Maximum, int data [4], LoadGraph *g)
 
 
 	glibtop_get_cpu (&cpu);
-	g_return_if_fail ((cpu.flags & needed_flags) == needed_flags);
+	g_return_if_fail ((cpu.flags & needed_flags_cpu) == needed_flags_cpu);
+
 
 	xd->cpu_time [0] = cpu.user;
 	xd->cpu_time [1] = cpu.nice;
 	xd->cpu_time [2] = cpu.sys;
 	xd->cpu_time [3] = cpu.iowait + cpu.irq + cpu.softirq;
 	xd->cpu_time [4] = cpu.idle;
+
+	glibtop_get_uptime(&uptime);
+	if ((uptime.flags & needed_flags_uptime) == needed_flags_uptime)
+		xd->uptime = uptime.uptime;
 
 	if (!first_call) {
 		user	= xd->cpu_time [0] - xd->cpu_last [0];
@@ -266,6 +276,8 @@ GetLoadAvg (int Maximum, int data [1], LoadGraph *g)
 void
 GetDisk (int Maximum, int data [2], LoadGraph *g)
 {
+	glibtop_mountlist mountlist;
+	glibtop_fsusage fsusage;
 	gboolean first_call = FALSE;
 
 	static const guint64 needed_flags =
@@ -287,7 +299,6 @@ GetDisk (int Maximum, int data [2], LoadGraph *g)
 	guint64 write = 0;
 	guint64 readdiff, writediff;
 
-	glibtop_mountlist mountlist;
 	glibtop_mountentry *mountentries = glibtop_get_mountlist (&mountlist, FALSE);
 
 	for (i = 0; i < mountlist.number; i++) {
@@ -297,7 +308,6 @@ GetDisk (int Maximum, int data [2], LoadGraph *g)
 			|| strncmp(mountentries[i].type, "fuse.", 5) == 0)
 			continue;
 
-		glibtop_fsusage fsusage;
 		glibtop_get_fsusage(&fsusage, mountentries[i].mountdir);
 		if ((fsusage.flags & needed_flags) != needed_flags)
 			continue; // FS does not have required capabilities

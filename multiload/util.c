@@ -85,6 +85,50 @@ format_percent(guint value, guint total, guint ndigits)
 	return ret;
 }
 
+gchar*
+format_time_duration(gdouble seconds) {
+	gint d, h, m, s;
+	gchar* format = g_new0(gchar, 24);
+
+	int n;
+	gchar *pos = format;
+
+	guint64 t = (guint64)seconds;
+
+	s = t%60;
+
+	t = (t-s)/60;
+	m = t%60;
+
+	t = (t-m)/60;
+	h = t%24;
+
+	d = (t-h)/24;
+
+	if (d) {
+		n = sprintf(pos, "%dd ", d);
+		pos += n;
+	}
+
+	if (h) {
+		n = sprintf(pos, "%dh ", h);
+		pos += n;
+	}
+
+	if (m) {
+		n = sprintf(pos, "%dm ", m);
+		pos += n;
+	}
+
+	if (s) {
+		n = sprintf(pos, "%ds ", s);
+		pos += n;
+	}
+
+	return format;
+}
+
+
 static gint
 spin_button_output_cb (GtkSpinButton *spin, const gchar *format)
 {

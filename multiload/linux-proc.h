@@ -17,6 +17,7 @@ typedef struct _CpuData {
 	gfloat user;
 	gfloat iowait;
 	gfloat total_use;
+	gdouble uptime;
 	guint64 num_cpu;
 } CpuData;
 

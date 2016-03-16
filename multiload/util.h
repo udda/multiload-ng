@@ -17,6 +17,8 @@ G_GNUC_INTERNAL gchar*
 format_rate_for_display (guint rate);
 G_GNUC_INTERNAL gchar*
 format_percent(guint value, guint total, guint ndigits);
+G_GNUC_INTERNAL gchar*
+format_time_duration(gdouble seconds);
 
 G_GNUC_INTERNAL GtkWidget*
 gtk_spin_button_new_with_parameters(gint min, gint max, gint step, gint start_value, const gchar *format);
