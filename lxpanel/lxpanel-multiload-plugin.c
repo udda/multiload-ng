@@ -266,7 +266,7 @@ static void multiload_configure(Plugin * p, GtkWindow * parent)
 	}
 
 	/* create the dialog */
-	multiload->dlg = gtk_dialog_new_with_buttons(_("Multiload preferences"),
+	multiload->dlg = gtk_dialog_new_with_buttons(_("Multiload"),
 					parent,
 					GTK_DIALOG_DESTROY_WITH_PARENT,
 					GTK_STOCK_HELP, GTK_RESPONSE_HELP,
