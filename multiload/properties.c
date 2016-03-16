@@ -332,6 +332,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	guint i, j, k;
 	static GtkVBox *container = NULL;
 	GtkSizeGroup *sizegroup, *sizegroup2;
+	GtkWidget *scroll;
 	GtkWidget *frame, *frame2;
 	GtkWidget *box, *box2, *box3;
 	GtkWidget *label;
@@ -350,8 +351,13 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 
 
 	// COLORS
+	scroll = gtk_scrolled_window_new(NULL, NULL);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scroll), GTK_POLICY_AUTOMATIC, GTK_POLICY_NEVER);
+	gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scroll), GTK_SHADOW_NONE);
+	gtk_box_pack_start(GTK_BOX(container), scroll, FALSE, FALSE, 0);
+
 	box = gtk_hbox_new(FALSE, PREF_CONTENT_PADDING);
-	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
+	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(scroll), box);
 
 	sizegroup = gtk_size_group_new(GTK_SIZE_GROUP_BOTH);
 	for( i = 0; i < GRAPH_MAX; i++ ) {
@@ -529,7 +535,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_box_pack_start(GTK_BOX(box), label, TRUE, TRUE, PREF_CONTENT_PADDING);
 	g_object_set_data(G_OBJECT(t), "warning_bar", label);
 	g_object_set_data(G_OBJECT(t), "warning_prop", GINT_TO_POINTER(PROP_SPEED));
-	g_list_append(warning_bar_widgets, t);
+	g_assert_nonnull(g_list_append(warning_bar_widgets, t));
 
 	// -- -- row: orientation
 	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
@@ -555,7 +561,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_box_pack_start(GTK_BOX(box), label, TRUE, TRUE, PREF_CONTENT_PADDING);
 	g_object_set_data(G_OBJECT(t), "warning_bar", label);
 	g_object_set_data(G_OBJECT(t), "warning_prop", GINT_TO_POINTER(PROP_ORIENTATION));
-	g_list_append(warning_bar_widgets, t);
+	g_assert_nonnull(g_list_append(warning_bar_widgets, t));
 
 
 	// -- checkbox
