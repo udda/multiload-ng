@@ -251,7 +251,7 @@ multiload_configure_get_plugin (GtkWidget *widget)
 		ma = g_object_get_data(G_OBJECT(toplevel), "MultiloadPlugin");
 	else
 		g_assert_not_reached ();
-	g_assert( ma != NULL);
+	g_assert_nonnull(ma);
 return ma;
 }
 

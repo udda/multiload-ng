@@ -23,7 +23,7 @@ multiload_tooltip_update(LoadGraph *g)
 	gchar *tooltip_markup;
 	const gchar *name;
 
-	g_assert(g);
+	g_assert_nonnull(g);
 
 	/* label the tooltip intuitively */
 	if ( g->id >= 0 && g->id < GRAPH_MAX )
@@ -194,7 +194,7 @@ multiload_init()
 		return;
 
 	glibtop *glt = glibtop_init();
-	g_assert(glt != NULL);
+	g_assert_nonnull(glt);
 
 	multiload_config_init();
 }
