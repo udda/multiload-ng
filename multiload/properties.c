@@ -143,7 +143,7 @@ show_hide_warnings(MultiloadPlugin *ma)
 
 	for ( l=warning_bar_widgets; l != NULL; l = l->next ) {
 		GtkWidget *w = GTK_WIDGET(l->data);
-		GtkWidget *warning_bar = g_object_get_data (G_OBJECT(w), "warning_bar");
+		GtkWidget *warning_bar = GTK_WIDGET(g_object_get_data (G_OBJECT(w), "warning_bar"));
 		gint prop_type = GPOINTER_TO_INT(g_object_get_data (G_OBJECT(w), "warning_prop"));
 		switch (prop_type) {
 			case PROP_SPEED:
