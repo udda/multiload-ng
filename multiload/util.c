@@ -1,9 +1,54 @@
 #include <config.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 
 #include "util.h"
+
+
+gboolean
+file_check_contents(FILE *f, const gchar *string)
+{
+	size_t n;
+	size_t s;
+	gchar *buf;
+
+	n = strlen(string);
+	buf = (gchar*)malloc(n);
+
+	s = fread(buf, 1, n, f);
+
+	if (s != n)
+		return FALSE;
+
+	if (strncmp(buf, string, n) != 0)
+		return FALSE;
+
+	return TRUE;
+}
+
+gint64
+read_int_from_file(const gchar *path)
+{
+	FILE *f;
+	size_t s;
+	//30 chars should contain every possible number
+	gchar buf[30];
+
+
+	f = fopen(path, "r");
+	if (!f)
+		return 0;
+
+	s = fread(buf, 1, sizeof(buf), f);
+	fclose(f);
+
+	if (s < 1)
+		return 0;
+
+	return atol(buf);
+}
 
 
 gchar*

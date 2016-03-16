@@ -16,30 +16,12 @@
 #include <glibtop/mountlist.h>
 #include <glibtop/fsusage.h>
 
+#include "util.h"
 #include "linux-proc.h"
 #include "autoscaler.h"
 
-static const unsigned needed_cpu_flags =
-(1 << GLIBTOP_CPU_USER) +
-(1 << GLIBTOP_CPU_IDLE) +
-(1 << GLIBTOP_CPU_SYS) +
-(1 << GLIBTOP_CPU_NICE);
 
-static const unsigned needed_fsusage_flags = 
-(1 << GLIBTOP_FSUSAGE_BLOCK_SIZE) +
-(1 << GLIBTOP_FSUSAGE_READ) +
-(1 << GLIBTOP_FSUSAGE_WRITE);
 
-static const unsigned needed_mem_flags =
-(1 << GLIBTOP_MEM_USED) +
-(1 << GLIBTOP_MEM_FREE);
-
-static const unsigned needed_swap_flags =
-(1 << GLIBTOP_SWAP_USED) +
-(1 << GLIBTOP_SWAP_FREE);
-
-static const unsigned needed_loadavg_flags =
-(1 << GLIBTOP_LOADAVG_LOADAVG);
 
 static const unsigned needed_netload_flags =
 (1 << GLIBTOP_NETLOAD_IF_FLAGS) +
@@ -49,58 +31,254 @@ static const unsigned needed_netload_flags =
 void
 GetCpu (int Maximum, int data [4], LoadGraph *g)
 {
-	int usr, nice, sys, iowait, free;
-	int total;
-
+	guint32 user, nice, sys, iowait, idle, total;
+	gboolean first_call = FALSE;
 	glibtop_cpu cpu;
 
-	glibtop_get_cpu (&cpu);
+	static const guint64 needed_flags =
+		(1 << GLIBTOP_CPU_USER) +
+		(1 << GLIBTOP_CPU_IDLE) +
+		(1 << GLIBTOP_CPU_SYS) +
+		(1 << GLIBTOP_CPU_NICE);
 
-	g_return_if_fail ((cpu.flags & needed_cpu_flags) == needed_cpu_flags);
-
-	g->cpu_time [0] = cpu.user;
-	g->cpu_time [1] = cpu.nice;
-	g->cpu_time [2] = cpu.sys;
-	g->cpu_time [3] = cpu.iowait + cpu.irq + cpu.softirq;
-	g->cpu_time [4] = cpu.idle;
-
-	if (!g->cpu_initialized) {
-		memcpy (g->cpu_last, g->cpu_time, sizeof (g->cpu_last));
-		g->cpu_initialized = 1;
+	CpuData *xd = (CpuData*) g->extra_data;
+	g_assert_nonnull(xd);
+	if (xd->num_cpu == 0) {
+		xd->num_cpu = 1 + glibtop_global_server->ncpu;
+		first_call = TRUE;
 	}
 
-	usr  = g->cpu_time [0] - g->cpu_last [0];
-	nice = g->cpu_time [1] - g->cpu_last [1];
-	sys  = g->cpu_time [2] - g->cpu_last [2];
-	iowait = g->cpu_time [3] - g->cpu_last [3];
-	free = g->cpu_time [4] - g->cpu_last [4];
 
-	total = usr + nice + sys + free + iowait;
+	glibtop_get_cpu (&cpu);
+	g_return_if_fail ((cpu.flags & needed_flags) == needed_flags);
 
-	memcpy(g->cpu_last, g->cpu_time, sizeof g->cpu_last);
+	xd->cpu_time [0] = cpu.user;
+	xd->cpu_time [1] = cpu.nice;
+	xd->cpu_time [2] = cpu.sys;
+	xd->cpu_time [3] = cpu.iowait + cpu.irq + cpu.softirq;
+	xd->cpu_time [4] = cpu.idle;
 
-	usr  = rint (Maximum * (float)(usr)  / total);
-	nice = rint (Maximum * (float)(nice) / total);
-	sys  = rint (Maximum * (float)(sys)  / total);
-	iowait = rint (Maximum * (float)(iowait) / total);
+	if (!first_call) {
+		user	= xd->cpu_time [0] - xd->cpu_last [0];
+		nice	= xd->cpu_time [1] - xd->cpu_last [1];
+		sys		= xd->cpu_time [2] - xd->cpu_last [2];
+		iowait	= xd->cpu_time [3] - xd->cpu_last [3];
+		idle	= xd->cpu_time [4] - xd->cpu_last [4];
 
-	data [0] = usr;
-	data [1] = sys;
-	data [2] = nice;
-	data [3] = iowait;
+		total = user + nice + sys + iowait + idle;
+
+		xd->user		= (float)(user) / total;
+		xd->iowait		= (float)(iowait) / total;
+		xd->total_use	= (float)(total-idle) / total;
+
+		data [0] = rint (Maximum * (float)(user)   / total);
+		data [1] = rint (Maximum * (float)(nice)   / total);
+		data [2] = rint (Maximum * (float)(sys)    / total);
+		data [3] = rint (Maximum * (float)(iowait) / total);
+	}
+
+	memcpy(xd->cpu_last, xd->cpu_time, sizeof xd->cpu_last);
 }
+
+
+void
+GetMemory (int Maximum, int data [4], LoadGraph *g)
+{
+	glibtop_mem mem;
+
+	static const guint64 needed_flags =
+		(1 << GLIBTOP_MEM_USER) +
+		(1 << GLIBTOP_MEM_SHARED) +
+		(1 << GLIBTOP_MEM_BUFFER) +
+		(1 << GLIBTOP_MEM_CACHED) +
+		(1 << GLIBTOP_MEM_FREE) +
+		(1 << GLIBTOP_MEM_TOTAL);
+
+	MemoryData *xd = (MemoryData*) g->extra_data;
+	g_assert_nonnull(xd);
+
+
+	glibtop_get_mem (&mem);
+	g_return_if_fail ((mem.flags & needed_flags) == needed_flags);
+
+	xd->user = mem.user;
+	xd->cache = mem.shared + mem.buffer + mem.cached;
+	xd->total = mem.total;
+
+	data [0] = rint (Maximum * (float)mem.user   / (float)mem.total);
+	data [1] = rint (Maximum * (float)mem.shared / (float)mem.total);
+	data [2] = rint (Maximum * (float)mem.buffer / (float)mem.total);
+	data [3] = rint (Maximum * (float)mem.cached / (float)mem.total);
+}
+
+
+void
+GetNet (int Maximum, int data [3], LoadGraph *g)
+{
+	enum Types {
+		IN_COUNT = 0,
+		OUT_COUNT = 1,
+		LOCAL_COUNT = 2,
+		COUNT_TYPES = 3
+	};
+
+	static int ticks = 0;
+	static gulong past[COUNT_TYPES] = {0};
+	static AutoScaler scaler;
+
+	gulong present[COUNT_TYPES] = {0};
+
+	guint i;
+	gchar **devices;
+	glibtop_netlist netlist;
+	gchar path[PATH_MAX];
+
+	NetData *xd = (NetData*) g->extra_data;
+	g_assert_nonnull(xd);
+
+
+
+	if (ticks == 0)
+		autoscaler_init(&scaler, 60, 501);
+
+
+	devices = glibtop_get_netlist(&netlist);
+
+	for (i = 0; i < netlist.number; ++i) {
+		glibtop_netload netload;
+
+		glibtop_get_netload(&netload, devices[i]);
+
+		g_return_if_fail((netload.flags & needed_netload_flags) == needed_netload_flags);
+
+		if (!(netload.if_flags & (1L << GLIBTOP_IF_FLAGS_UP)))
+			continue;
+
+		if (netload.if_flags & (1L << GLIBTOP_IF_FLAGS_LOOPBACK)) {
+			/* for loopback in and out are identical, so only count in */
+			present[LOCAL_COUNT] += netload.bytes_in;
+			continue;
+		}
+
+		/* Do not include virtual devices (any device not corresponding to a
+		 * physical device: VPN, PPPOE...) to avoid counting the same
+		 * throughput several times.
+		 * First check if /sys/class/net/DEVNAME/ exists (if not, may be old
+		 * linux kernel or not linux at all). */
+		sprintf(path, "/sys/class/net/%s", devices[i]);
+		if (access(path, F_OK) == 0) {
+			/* /sys/class/net/DEVNAME exists. Now check for another dir: physical
+			 * devices have a 'device' symlink in /sys/class/net/DEVNAME */
+			sprintf(path, "/sys/class/net/%s/device", devices[i]);
+			if (access(path, F_OK) != 0) {
+				/* symlink does not exist, device is virtual */
+				continue;
+			}
+		}
+
+
+		present[IN_COUNT] += netload.bytes_in;
+		present[OUT_COUNT] += netload.bytes_out;
+	}
+
+	g_strfreev(devices);
+	netspeed_add(xd->in, present[IN_COUNT]);
+	netspeed_add(xd->out, present[OUT_COUNT]);
+
+	if(ticks < 2) { /* avoid initial spike */
+		ticks++;
+		memset(data, 0, COUNT_TYPES * sizeof data[0]);
+	} else {
+		int delta[COUNT_TYPES];
+		int max;
+		int total = 0;
+
+		for (i = 0; i < COUNT_TYPES; i++) {
+			/* protect against weirdness */
+			if (present[i] >= past[i])
+				delta[i] = (present[i] - past[i]);
+			else
+				delta[i] = 0;
+			total += delta[i];
+		}
+
+		max = autoscaler_get_max(&scaler, total);
+
+		for (i = 0; i < COUNT_TYPES; i++)
+			data[i]   = rint (Maximum * (float)delta[i]  / max);
+	}
+
+	memcpy(past, present, sizeof past);
+}
+
+
+void
+GetSwap (int Maximum, int data [1], LoadGraph *g)
+{
+	glibtop_swap swap;
+
+	static const guint64 needed_flags =
+		(1 << GLIBTOP_SWAP_USED) +
+		(1 << GLIBTOP_SWAP_FREE);
+
+	SwapData *xd = (SwapData*) g->extra_data;
+	g_assert_nonnull(xd);
+
+
+	glibtop_get_swap (&swap);
+	g_return_if_fail ((swap.flags & needed_flags) == needed_flags);
+
+	xd->used = swap.used;
+	xd->total = swap.total;
+
+	if (swap.total == 0)
+	   data [0] = 0;
+	else
+	   data [0] = rint (Maximum * (float)swap.used / swap.total);
+}
+
+
+void
+GetLoadAvg (int Maximum, int data [1], LoadGraph *g)
+{
+	glibtop_loadavg loadavg;
+	float max;
+	float current;
+
+	static const guint64 needed_flags =
+		(1 << GLIBTOP_LOADAVG_LOADAVG);
+
+	LoadAvgData *xd = (LoadAvgData*) g->extra_data;
+	g_assert_nonnull(xd);
+
+	glibtop_get_loadavg (&loadavg);
+	g_return_if_fail ((loadavg.flags & needed_flags) == needed_flags);
+
+	max = PER_CPU_MAX_LOADAVG * (1 + glibtop_global_server->ncpu);
+	current = MIN(loadavg.loadavg[0], max);
+
+	memcpy(xd->loadavg, loadavg.loadavg, sizeof loadavg.loadavg);
+
+	data [0] = rint ((float) Maximum * current / max);
+}
+
 
 void
 GetDisk (int Maximum, int data [2], LoadGraph *g)
 {
-	static gboolean first_call = TRUE;
-	static guint64 lastread = 0;
-	static guint64 lastwrite = 0;
-	static AutoScaler scaler;
+	gboolean first_call = FALSE;
 
-	glibtop_mountlist mountlist;
-	glibtop_mountentry *mountentries;
-	glibtop_fsusage fsusage;
+	static const guint64 needed_flags =
+		(1 << GLIBTOP_FSUSAGE_BLOCK_SIZE) +
+		(1 << GLIBTOP_FSUSAGE_READ) +
+		(1 << GLIBTOP_FSUSAGE_WRITE);
+
+	DiskData *xd = (DiskData*) g->extra_data;
+	g_assert_nonnull(xd);
+	if (xd->scaler.floor == 0) {
+		autoscaler_init(&xd->scaler, 60, 500);
+		first_call = TRUE;
+	}
 
 	guint i;
 	int max;
@@ -109,7 +287,8 @@ GetDisk (int Maximum, int data [2], LoadGraph *g)
 	guint64 write = 0;
 	guint64 readdiff, writediff;
 
-	mountentries = glibtop_get_mountlist (&mountlist, FALSE);
+	glibtop_mountlist mountlist;
+	glibtop_mountentry *mountentries = glibtop_get_mountlist (&mountlist, FALSE);
 
 	for (i = 0; i < mountlist.number; i++) {
 		if (   strcmp (mountentries[i].type, "smbfs") == 0
@@ -118,8 +297,9 @@ GetDisk (int Maximum, int data [2], LoadGraph *g)
 			|| strncmp(mountentries[i].type, "fuse.", 5) == 0)
 			continue;
 
+		glibtop_fsusage fsusage;
 		glibtop_get_fsusage(&fsusage, mountentries[i].mountdir);
-		if ((fsusage.flags & needed_fsusage_flags) != needed_fsusage_flags)
+		if ((fsusage.flags & needed_flags) != needed_flags)
 			continue; // FS does not have required capabilities
 
 		read  += fsusage.block_size * fsusage.read;
@@ -128,81 +308,38 @@ GetDisk (int Maximum, int data [2], LoadGraph *g)
 
 	g_free(mountentries);
 
-	readdiff  = read  - lastread;
-	writediff = write - lastwrite;
+	readdiff  = read  - xd->last_read;
+	writediff = write - xd->last_write;
 
-	lastread  = read;
-	lastwrite = write;
+	xd->last_read  = read;
+	xd->last_write = write;
 
-	if (first_call) {
-		first_call = FALSE;
-		autoscaler_init(&scaler, 60, 500);
-		memset(data, 0, 2 * sizeof data[0]);
+	if (first_call)
 		return;
-	}
 
-	max = autoscaler_get_max(&scaler, readdiff + writediff);
+	max = autoscaler_get_max(&xd->scaler, readdiff + writediff);
 
 	data[0] = (float)Maximum *  readdiff / (float)max;
 	data[1] = (float)Maximum * writediff / (float)max;
 
 	// TODO HACK: I don't know why these speeds need to be divided by 8...
-	g->diskread  = (guint64) ( (readdiff  * 1000.0)  / (8 * g->multiload->speed) );
-	g->diskwrite = (guint64) ( (writediff * 1000.0)  / (8 * g->multiload->speed) );
+	xd->read_speed  = (guint64) ( (readdiff  * 1000.0)  / (8 * g->multiload->speed) );
+	xd->write_speed = (guint64) ( (writediff * 1000.0)  / (8 * g->multiload->speed) );
 }
 
-static int
-read_temp_from_file(const gchar *path)
-{
-	FILE *f;
-	size_t s;
-	// temperatures are in millicelsius, 8 chars are enough
-	gchar buf[8];
-
-
-	f = fopen(path, "r");
-	if (!f)
-		return 0;
-
-	s = fread(buf, 1, sizeof(buf), f);
-	fclose(f);
-
-	if (s < 1)
-		return 0;
-
-	return atoi(buf);
-}
-
-static gboolean
-file_check_contents(FILE *f, const gchar *string)
-{
-	size_t n;
-	size_t s;
-	gchar *buf;
-
-	n = strlen(string);
-	buf = (gchar*)malloc(n);
-
-	s = fread(buf, 1, n, f);
-
-	if (s != n)
-		return FALSE;
-
-	if (strncmp(buf, string, n) != 0)
-		return FALSE;
-
-	return TRUE;
-}
 
 void
 GetTemperature (int Maximum, int data[1], LoadGraph *g)
 {
 	guint temp = 0;
-
 	guint i, j, t;
 
 	DIR *dir;
 	struct dirent *entry;
+
+	TemperatureData *xd = (TemperatureData*) g->extra_data;
+	g_assert_nonnull(xd);
+
 
 	static gboolean first_call = TRUE;
 	static gboolean support = FALSE;
@@ -260,7 +397,7 @@ GetTemperature (int Maximum, int data[1], LoadGraph *g)
 
 				if (found) { // found critical temp
 					gchar *d_temp = g_strdup_printf("%s/trip_point_%d_temp", d_thermal, j);
-					t = read_temp_from_file(d_temp);
+					t = read_int_from_file(d_temp);
 					g_free(d_temp);
 					if (t > maxtemps[i])
 						maxtemps[i] = t;
@@ -282,7 +419,7 @@ GetTemperature (int Maximum, int data[1], LoadGraph *g)
 
 	// finds max temperature and its index (to use the respective maximum)
 	for (i=0,j=0; i<n_zones; i++) {
-		t = read_temp_from_file(paths[i]);
+		t = read_int_from_file(paths[i]);
 	//	printf("read %d (%d)\n", i, t);
 		if (t > temp) {
 			temp = t;
@@ -293,186 +430,5 @@ GetTemperature (int Maximum, int data[1], LoadGraph *g)
 
 	data[0] = (float)Maximum * temp / (float)maxtemps[j];
 
-	g->temperature = temp;
+	xd->temperature = temp;
 }
-
-void
-GetMemory (int Maximum, int data [4], LoadGraph *g)
-{
-	int user, shared, buffer, cached;
-
-	glibtop_mem mem;
-
-	glibtop_get_mem (&mem);
-
-	g_return_if_fail ((mem.flags & needed_mem_flags) == needed_mem_flags);
-
-	user    = rint (Maximum * (float)mem.user   / (float)mem.total);
-	shared  = rint (Maximum * (float)mem.shared / (float)mem.total);
-	buffer  = rint (Maximum * (float)mem.buffer / (float)mem.total);
-	cached  = rint (Maximum * (float)mem.cached / (float)mem.total);
-
-	data [0] = user;
-	data [1] = shared;
-	data [2] = buffer;
-	data [3] = cached;
-}
-
-void
-GetSwap (int Maximum, int data [1], LoadGraph *g)
-{
-	int used;
-
-	glibtop_swap swap;
-
-	glibtop_get_swap (&swap);
-	g_return_if_fail ((swap.flags & needed_swap_flags) == needed_swap_flags);
-
-	if (swap.total == 0)
-	   used = 0;
-	else
-	   used = rint (Maximum * (float)swap.used / swap.total);
-
-	data [0] = used;
-}
-
-void
-GetLoadAvg (int Maximum, int data [1], LoadGraph *g)
-{
-	float max_loadavg;
-	float loadavg;
-
-	glibtop_loadavg _loadavg;
-	glibtop_get_loadavg (&_loadavg);
-
-	g_return_if_fail ((_loadavg.flags & needed_loadavg_flags) == needed_loadavg_flags);
-
-	max_loadavg = PER_CPU_MAX_LOADAVG * (1 + glibtop_global_server->ncpu);
-
-	memcpy(g->loadavg, _loadavg.loadavg, sizeof(_loadavg.loadavg));
-
-	loadavg = MIN(_loadavg.loadavg[0], max_loadavg);
-
-	data [0] = rint ((float) Maximum * loadavg / max_loadavg);
-}
-
-/*
- * Return true if a network device (identified by its name) is virtual
- * (ie: not corresponding to a physical device). In case it is a physical
- * device or unknown, returns false.
- */
-static gboolean
-is_net_device_virtual(char *device)
-{
-	/*
-	 * There is not definitive way to find out. On some systems (Linux
-	 * kernels ≳ 2.19 without option SYSFS_DEPRECATED), there exist a
-	 * directory /sys/devices/virtual/net which only contains virtual
-	 * devices.  It's also possible to detect by the fact that virtual
-	 * devices do not have a symlink "device" in
-	 * /sys/class/net/name-of-dev/ .  This second method is more complex
-	 * but more reliable.
-	 */
-	char path[PATH_MAX];
-
-	/* Check if /sys/class/net/name-of-dev/ exists (may be old linux kernel
-	 * or not linux at all). */
-	if (sprintf(path, "/sys/class/net/%s", device) < 0)
-		return FALSE;
-	if (access(path, F_OK) != 0)
-		return FALSE; /* unknown */
-
-	if (sprintf(path, "/sys/class/net/%s/device", device) < 0)
-		return FALSE;
-	if (access(path, F_OK) != 0)
-		return TRUE;
-
-	return FALSE;
-}
-
-void
-GetNet (int Maximum, int data [3], LoadGraph *g)
-{
-	enum Types {
-		IN_COUNT = 0,
-		OUT_COUNT = 1,
-		LOCAL_COUNT = 2,
-		COUNT_TYPES = 3
-	};
-
-	static int ticks = 0;
-	static gulong past[COUNT_TYPES] = {0};
-	static AutoScaler scaler;
-
-	gulong present[COUNT_TYPES] = {0};
-
-	guint i;
-	gchar **devices;
-	glibtop_netlist netlist;
-
-
-	if (ticks == 0)
-		autoscaler_init(&scaler, 60, 501);
-
-
-	devices = glibtop_get_netlist(&netlist);
-
-	for (i = 0; i < netlist.number; ++i) {
-		glibtop_netload netload;
-
-		glibtop_get_netload(&netload, devices[i]);
-
-		g_return_if_fail((netload.flags & needed_netload_flags) == needed_netload_flags);
-
-		if (!(netload.if_flags & (1L << GLIBTOP_IF_FLAGS_UP)))
-			continue;
-
-		if (netload.if_flags & (1L << GLIBTOP_IF_FLAGS_LOOPBACK)) {
-			/* for loopback in and out are identical, so only count in */
-			present[LOCAL_COUNT] += netload.bytes_in;
-			continue;
-		}
-
-		/*
-		 * Do not include virtual devices (VPN, PPPOE...) to avoid
-		 * counting the same throughput several times.
-		 */
-		if (is_net_device_virtual(devices[i]))
-			continue;
-
-		present[IN_COUNT] += netload.bytes_in;
-		present[OUT_COUNT] += netload.bytes_out;
-	}
-
-	g_strfreev(devices);
-	netspeed_add(g->netspeed_in, present[IN_COUNT]);
-	netspeed_add(g->netspeed_out, present[OUT_COUNT]);
-
-	if(ticks < 2) { /* avoid initial spike */
-		ticks++;
-		memset(data, 0, COUNT_TYPES * sizeof data[0]);
-	} else {
-		int delta[COUNT_TYPES];
-		int max;
-		int total = 0;
-
-		for (i = 0; i < COUNT_TYPES; i++) {
-			/* protect against weirdness */
-			if (present[i] >= past[i])
-				delta[i] = (present[i] - past[i]);
-			else
-				delta[i] = 0;
-			total += delta[i];
-		}
-
-		max = autoscaler_get_max(&scaler, total);
-
-		for (i = 0; i < COUNT_TYPES; i++)
-			data[i]   = rint (Maximum * (float)delta[i]  / max);
-	}
-
-	memcpy(past, present, sizeof past);
-}
-
-
-

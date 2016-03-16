@@ -7,9 +7,7 @@
 
 G_BEGIN_DECLS
 
-typedef struct _AutoScaler AutoScaler;
-
-struct _AutoScaler
+typedef struct _AutoScaler
 {
 	/* const */ unsigned update_interval;
 	/* const */ unsigned floor;
@@ -18,7 +16,7 @@ struct _AutoScaler
 	time_t last_update;
 	float sum;
 	float last_average;
-};
+} AutoScaler;
 
 
 G_GNUC_INTERNAL void

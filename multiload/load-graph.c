@@ -208,8 +208,15 @@ load_graph_destroy (GtkWidget *widget, gpointer data_ptr)
 	LoadGraph *g = (LoadGraph *) data_ptr;
 
 	load_graph_stop (g);
-	netspeed_delete(g->netspeed_in);
-	netspeed_delete(g->netspeed_out);
+
+	if (g->id == GRAPH_NETLOAD) {
+		NetData *xd = (NetData*) g->extra_data;
+		if (xd == NULL)
+			return;
+
+		netspeed_delete(xd->in);
+		netspeed_delete(xd->out);
+	}
 
 	gtk_widget_destroy(widget);
 }
@@ -247,6 +254,34 @@ load_graph_leave_cb(GtkWidget *widget, GdkEventCrossing *event, gpointer data)
 	return TRUE;
 }
 
+static void
+load_graph_extra_data_init(LoadGraph *g) {
+	g_assert_nonnull(g);
+	switch(g->id) {
+		case GRAPH_CPULOAD:
+			g->extra_data = (gpointer)g_new0(CpuData, 1);
+			break;
+		case GRAPH_MEMLOAD:
+			g->extra_data = (gpointer)g_new0(MemoryData, 1);
+			break;
+		case GRAPH_NETLOAD:
+			g->extra_data = (gpointer)g_new0(NetData, 1);
+			break;
+		case GRAPH_SWAPLOAD:
+			g->extra_data = (gpointer)g_new0(SwapData, 1);
+			break;
+		case GRAPH_LOADAVG:
+			g->extra_data = (gpointer)g_new0(LoadAvgData, 1);
+			break;
+		case GRAPH_DISKLOAD:
+			g->extra_data = (gpointer)g_new0(DiskData, 1);
+			break;
+		case GRAPH_TEMPERATURE:
+			g->extra_data = (gpointer)g_new0(TemperatureData, 1);
+			break;
+	}
+}
+
 LoadGraph *
 load_graph_new (MultiloadPlugin *ma, guint id)
 {
@@ -254,9 +289,16 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 	guint k;
 
 	g = g_new0 (LoadGraph, 1);
-	g->netspeed_in = netspeed_new(g);
-	g->netspeed_out = netspeed_new(g);
 	g->id = id;
+	load_graph_extra_data_init(g);
+
+	if (g->id == GRAPH_NETLOAD) {
+		NetData *xd = (NetData*) g->extra_data;
+		g_assert_nonnull(xd);
+
+		xd->in = netspeed_new(g);
+		xd->out = netspeed_new(g);
+	}
 
 	g->tooltip_update = FALSE;
 	g->multiload = ma;
@@ -317,10 +359,7 @@ void
 load_graph_start (LoadGraph *g)
 {
 	guint speed = CLAMP(g->multiload->speed, MIN_SPEED, MAX_SPEED);
-
-	if (g->timer_index != -1)
-		g_source_remove (g->timer_index);
-
+	load_graph_stop(g);
 	g->timer_index = g_timeout_add (speed, (GSourceFunc) load_graph_update, g);
 }
 

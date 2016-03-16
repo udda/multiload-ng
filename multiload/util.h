@@ -8,6 +8,11 @@
 
 G_BEGIN_DECLS
 
+G_GNUC_INTERNAL gboolean
+file_check_contents(FILE *f, const gchar *string);
+G_GNUC_INTERNAL gint64
+read_int_from_file(const gchar *path);
+
 G_GNUC_INTERNAL gchar*
 format_rate_for_display (guint rate);
 G_GNUC_INTERNAL gchar*

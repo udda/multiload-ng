@@ -9,9 +9,6 @@
 
 #define PLUGIN_WEBSITE "https://github.com/nandhp/multiload-nandhp"
 
-#define PER_CPU_MAX_LOADAVG 3
-#define NCPUSTATES 5
-
 #define MAX_COLORS 7
 
 enum {
@@ -78,27 +75,11 @@ struct _LoadGraph {
 	cairo_surface_t *surface;
 	int timer_index;
 
-	// cpu load
-	long cpu_time [NCPUSTATES];
-	long cpu_last [NCPUSTATES];
-	int cpu_initialized;
-
-	// net load
-	NetSpeed *netspeed_in;
-	NetSpeed *netspeed_out;
-
-	// load average
-	double loadavg[3];
-
-	// disk load
-	guint diskread;
-	guint diskwrite;
-
-	// temperature
-	guint temperature;
-
 	gboolean allocated;
 	gboolean tooltip_update;
+
+	// data depend on graph type
+	gpointer *extra_data;
 };
 
 struct _GraphConfig {

@@ -13,6 +13,7 @@
 #include <glibtop.h>
 #include "multiload.h"
 #include "multiload-config.h"
+#include "linux-proc.h"
 #include "util.h"
 
 /* update the tooltip to the graph's current "used" percentage */
@@ -33,32 +34,40 @@ multiload_tooltip_update(LoadGraph *g)
 
 	switch (g->id) {
 		case GRAPH_CPULOAD: {
-			guint total_used = g->data[0][0] + g->data[0][1] + g->data[0][2] + g->data[0][3];
-			gchar *percent = format_percent(total_used, g->draw_height, 0);
+			CpuData *xd = (CpuData*) g->extra_data;
+			g_assert_nonnull(xd);
 
-			text = g_strdup_printf(_(	"%s in use"),
-										percent);
-
-			g_free(percent);
+			text = g_strdup_printf(_(	"Processors: %ld\n"
+										"%.1f%% in use by programs\n"
+										"%.1f%% in wait for I/O\n"
+										"%.1f%% total use"),
+										xd->num_cpu, (xd->user*100),
+										(xd->iowait*100), (xd->total_use*100));
 		}	break;
 
 		case GRAPH_MEMLOAD: {
-			guint mem_user  = g->data[0][0];
-			guint mem_cache = g->data[0][1] + g->data[0][2] + g->data[0][3];
-			gchar *user_percent = format_percent(mem_user, g->draw_height, 0);
-			gchar *cache_percent = format_percent(mem_cache, g->draw_height, 0);
+			MemoryData *xd = (MemoryData*) g->extra_data;
+			g_assert_nonnull(xd);
+
+			gchar *total = g_format_size_full(xd->total, G_FORMAT_SIZE_IEC_UNITS);
+			gchar *user = format_percent(xd->user, xd->total, 0);
+			gchar *cache = format_percent(xd->cache, xd->total, 0);
 
 			// xgettext: use and cache are > 1 most of the time, assume that they always are.
-			text = g_strdup_printf(_(	"%s in use by programs\n"
+			text = g_strdup_printf(_(	"Total memory: %s\n"
+										"%s in use by programs\n"
 										"%s in use as cache"),
-										user_percent, cache_percent);
-			g_free(user_percent);
-			g_free(cache_percent);
+										total, user, cache);
+			g_free(user);
+			g_free(cache);
 		}	break;
 
 		case GRAPH_NETLOAD: {
-			gchar *tx_in = netspeed_get(g->netspeed_in);
-			gchar *tx_out = netspeed_get(g->netspeed_out);
+			NetData *xd = (NetData*) g->extra_data;
+			g_assert_nonnull(xd);
+
+			gchar *tx_in = netspeed_get(xd->in);
+			gchar *tx_out = netspeed_get(xd->out);
 
 			text = g_strdup_printf(_(	"Receiving %s\n"
 										"Sending %s"),
@@ -68,23 +77,38 @@ multiload_tooltip_update(LoadGraph *g)
 		}	break;
 
 		case GRAPH_SWAPLOAD: {
-			gchar *percent = format_percent(g->data[0][0], g->draw_height, 0);
+			SwapData *xd = (SwapData*) g->extra_data;
+			g_assert_nonnull(xd);
 
-			text = g_strdup_printf(_("%s in use"), percent);
+			if (xd->total == 0) {
+				text = g_strdup_printf(_("Swap is not used"));
+			} else {
+				gchar *used = format_percent(xd->used, xd->total, 0);
+				gchar *total = g_format_size_full(xd->total, G_FORMAT_SIZE_IEC_UNITS);
 
-			g_free(percent);
+				text = g_strdup_printf(_("%s used of %s"), used, total);
+
+				g_free(used);
+				g_free(total);
+			}
 		}	break;
 
 		case GRAPH_LOADAVG: {
+			LoadAvgData *xd = (LoadAvgData*) g->extra_data;
+			g_assert_nonnull(xd);
+
 			text = g_strdup_printf(_(	"Last minute: %0.02f\n"
 										"Last 5 minutes: %0.02f\n"
 										"Last 15 minutes: %0.02f"),
-										g->loadavg[0], g->loadavg[1], g->loadavg[2]);
+										xd->loadavg[0], xd->loadavg[1], xd->loadavg[2]);
 		}	break;
 
 		case GRAPH_DISKLOAD: {
-			gchar *disk_read = format_rate_for_display(g->diskread);
-			gchar *disk_write = format_rate_for_display(g->diskwrite);
+			DiskData *xd = (DiskData*) g->extra_data;
+			g_assert_nonnull(xd);
+
+			gchar *disk_read = format_rate_for_display(xd->read_speed);
+			gchar *disk_write = format_rate_for_display(xd->write_speed);
 
 			text = g_strdup_printf(_(	"Read %s\n"
 										"Write %s"),
@@ -95,8 +119,11 @@ multiload_tooltip_update(LoadGraph *g)
 		}	break;
 
 		case GRAPH_TEMPERATURE: {
+			TemperatureData *xd = (TemperatureData*) g->extra_data;
+			g_assert_nonnull(xd);
+
 			text = g_strdup_printf(_(	"%.1f °C"),
-										(g->temperature/1000.0));
+										(xd->temperature/1000.0));
 		}	break;
 
 		default: {
