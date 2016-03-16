@@ -37,12 +37,17 @@ multiload_tooltip_update(LoadGraph *g)
 			CpuData *xd = (CpuData*) g->extra_data;
 			g_assert_nonnull(xd);
 
+			gchar *uptime = format_time_duration(xd->uptime);
+
 			text = g_strdup_printf(_(	"Processors: %ld\n"
 										"%.1f%% in use by programs\n"
 										"%.1f%% in wait for I/O\n"
-										"%.1f%% total use"),
+										"%.1f%% total use\n"
+										"Uptime: %s"),
 										xd->num_cpu, (xd->user*100),
-										(xd->iowait*100), (xd->total_use*100));
+										(xd->iowait*100), (xd->total_use*100),
+										uptime);
+			g_free(uptime);
 		}	break;
 
 		case GRAPH_MEMLOAD: {
