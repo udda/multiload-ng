@@ -141,7 +141,9 @@ show_hide_warnings(MultiloadPlugin *ma)
 	if (tooltip_timeout == -1)
 		g_object_get(gtk_settings_get_default(), "gtk-tooltip-timeout", &tooltip_timeout, NULL);
 
-	for ( l=warning_bar_widgets; l != NULL; l = l->next ) {
+	for ( l=warning_bar_widgets; ; l = l->next ) {
+		if (l == NULL)
+			break;
 		GtkWidget *w = GTK_WIDGET(l->data);
 		GtkWidget *warning_bar = GTK_WIDGET(g_object_get_data (G_OBJECT(w), "warning_bar"));
 		gint prop_type = GPOINTER_TO_INT(g_object_get_data (G_OBJECT(w), "warning_prop"));
@@ -341,7 +343,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	GtkWidget *contentArea = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 
 	// Delete old container if present
-	if (G_UNLIKELY(GTK_IS_WIDGET(container)))
+	if (G_UNLIKELY(container != NULL && GTK_IS_WIDGET(container)))
 		gtk_container_remove(GTK_CONTAINER(contentArea), GTK_WIDGET(container));
 
 	// Create new container
