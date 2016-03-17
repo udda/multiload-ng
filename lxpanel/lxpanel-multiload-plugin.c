@@ -223,7 +223,7 @@ multiload_constructor(LXPanel *panel, config_setting_t *settings) //char **fp)
 
 	/* Initialize the applet */
 	/* Set size request and update orientation */
-	multiload_panel_configuration_changed(panel, GTK_WIDGET(multiload->ma.container));
+	multiload_configuration_changed(panel, GTK_WIDGET(multiload->ma.container));
 
 	return GTK_WIDGET(multiload->ma.container);
 }
