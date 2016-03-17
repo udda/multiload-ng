@@ -7,6 +7,13 @@
 #include "util.h"
 
 
+gint64
+calculate_speed(guint64 delta, guint period_ms)
+{
+	return ( delta * 1000 ) / period_ms;
+}
+
+
 gboolean
 file_check_contents(FILE *f, const gchar *string)
 {

@@ -8,6 +8,9 @@
 
 G_BEGIN_DECLS
 
+G_GNUC_INTERNAL gint64
+calculate_speed(guint64 delta, guint period_ms);
+
 G_GNUC_INTERNAL gboolean
 file_check_contents(FILE *f, const gchar *string);
 G_GNUC_INTERNAL gint64
