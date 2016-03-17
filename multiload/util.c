@@ -120,10 +120,13 @@ format_time_duration(gdouble seconds) {
 		pos += n;
 	}
 
-	if (s) {
+	if (s || pos==format) {
 		n = sprintf(pos, "%ds ", s);
 		pos += n;
 	}
+
+	// remove last space
+	*(pos-1) = 0;
 
 	return format;
 }
