@@ -22,13 +22,6 @@
 #include "autoscaler.h"
 
 
-
-
-static const unsigned needed_netload_flags =
-(1 << GLIBTOP_NETLOAD_IF_FLAGS) +
-(1 << GLIBTOP_NETLOAD_BYTES_TOTAL);
-
-
 void
 GetCpu (int Maximum, int data [4], LoadGraph *g)
 {
@@ -36,6 +29,18 @@ GetCpu (int Maximum, int data [4], LoadGraph *g)
 	gboolean first_call = FALSE;
 	glibtop_cpu cpu;
 	glibtop_uptime uptime;
+
+	enum {
+		CPU_USER	= 0,
+		CPU_NICE	= 1,
+		CPU_SYS		= 2,
+		CPU_IOWAIT	= 3,
+		CPU_IDLE	= 4,
+
+		CPU_MAX		= 5
+	};
+
+	guint64 time[CPU_MAX];
 
 	static const guint64 needed_flags_cpu =
 		(1 << GLIBTOP_CPU_USER) +
@@ -58,36 +63,36 @@ GetCpu (int Maximum, int data [4], LoadGraph *g)
 	g_return_if_fail ((cpu.flags & needed_flags_cpu) == needed_flags_cpu);
 
 
-	xd->cpu_time [0] = cpu.user;
-	xd->cpu_time [1] = cpu.nice;
-	xd->cpu_time [2] = cpu.sys;
-	xd->cpu_time [3] = cpu.iowait + cpu.irq + cpu.softirq;
-	xd->cpu_time [4] = cpu.idle;
+	time [CPU_USER]		= cpu.user;
+	time [CPU_NICE]		= cpu.nice;
+	time [CPU_SYS]		= cpu.sys;
+	time [CPU_IOWAIT]	= cpu.iowait + cpu.irq + cpu.softirq;
+	time [CPU_IDLE]		= cpu.idle;
 
 	glibtop_get_uptime(&uptime);
 	if ((uptime.flags & needed_flags_uptime) == needed_flags_uptime)
 		xd->uptime = uptime.uptime;
 
 	if (!first_call) {
-		user	= xd->cpu_time [0] - xd->cpu_last [0];
-		nice	= xd->cpu_time [1] - xd->cpu_last [1];
-		sys		= xd->cpu_time [2] - xd->cpu_last [2];
-		iowait	= xd->cpu_time [3] - xd->cpu_last [3];
-		idle	= xd->cpu_time [4] - xd->cpu_last [4];
+		user	= time [CPU_USER]	- xd->last [CPU_USER];
+		nice	= time [CPU_NICE]	- xd->last [CPU_NICE];
+		sys		= time [CPU_SYS]	- xd->last [CPU_SYS];
+		iowait	= time [CPU_IOWAIT]	- xd->last [CPU_IOWAIT];
+		idle	= time [CPU_IDLE]	- xd->last [CPU_IDLE];
 
 		total = user + nice + sys + iowait + idle;
 
-		xd->user		= (float)(user) / total;
-		xd->iowait		= (float)(iowait) / total;
-		xd->total_use	= (float)(total-idle) / total;
+		xd->user			= (float)(user) / total;
+		xd->iowait			= (float)(iowait) / total;
+		xd->total_use		= (float)(total-idle) / total;
 
-		data [0] = rint (Maximum * (float)(user)   / total);
-		data [1] = rint (Maximum * (float)(nice)   / total);
-		data [2] = rint (Maximum * (float)(sys)    / total);
-		data [3] = rint (Maximum * (float)(iowait) / total);
+		data [CPU_USER]		= rint (Maximum * (float)(user)   / total);
+		data [CPU_NICE]		= rint (Maximum * (float)(nice)   / total);
+		data [CPU_SYS]		= rint (Maximum * (float)(sys)    / total);
+		data [CPU_IOWAIT]	= rint (Maximum * (float)(iowait) / total);
 	}
 
-	memcpy(xd->cpu_last, xd->cpu_time, sizeof xd->cpu_last);
+	memcpy(xd->last, time, sizeof xd->last);
 }
 
 
@@ -125,60 +130,45 @@ GetMemory (int Maximum, int data [4], LoadGraph *g)
 void
 GetNet (int Maximum, int data [3], LoadGraph *g)
 {
-	enum Types {
-		IN_COUNT = 0,
-		OUT_COUNT = 1,
-		LOCAL_COUNT = 2,
-		COUNT_TYPES = 3
+	glibtop_netlist netlist;
+	glibtop_netload netload;
+	static int ticks = 0;
+	gchar path[PATH_MAX];
+	gchar **devices;
+	guint i;
+
+	enum {
+		NET_IN		= 0,
+		NET_OUT		= 1,
+		NET_LOCAL	= 2,
+
+		NET_MAX		= 3
 	};
 
-	static int ticks = 0;
-	static gulong past[COUNT_TYPES] = {0};
-	static AutoScaler scaler;
+	guint64 present[NET_MAX];
 
-	gulong present[COUNT_TYPES] = {0};
-
-	guint i;
-	gchar **devices;
-	glibtop_netlist netlist;
-	gchar path[PATH_MAX];
+	static const unsigned needed_flags =
+		(1 << GLIBTOP_NETLOAD_IF_FLAGS) +
+		(1 << GLIBTOP_NETLOAD_BYTES_TOTAL);
 
 	NetData *xd = (NetData*) g->extra_data;
 	g_assert_nonnull(xd);
 
 
-
 	if (ticks == 0)
-		autoscaler_init(&scaler, 60, 501);
+		autoscaler_init(&xd->scaler, 60, 501);
 
 
 	devices = glibtop_get_netlist(&netlist);
 
-	for (i = 0; i < netlist.number; ++i) {
-		glibtop_netload netload;
-
-		glibtop_get_netload(&netload, devices[i]);
-
-		g_return_if_fail((netload.flags & needed_netload_flags) == needed_netload_flags);
-
-		if (!(netload.if_flags & (1L << GLIBTOP_IF_FLAGS_UP)))
-			continue;
-
-		if (netload.if_flags & (1L << GLIBTOP_IF_FLAGS_LOOPBACK)) {
-			/* for loopback in and out are identical, so only count in */
-			present[LOCAL_COUNT] += netload.bytes_in;
-			continue;
-		}
-
-		/* Do not include virtual devices (any device not corresponding to a
-		 * physical device: VPN, PPPOE...) to avoid counting the same
-		 * throughput several times.
+	for ( i=0; i<netlist.number; i++ ) {
+		/* Exclude virtual devices (any device not corresponding to a
+		 * physical device) to avoid counting the same throughput several times.
 		 * First check if /sys/class/net/DEVNAME/ exists (if not, may be old
 		 * linux kernel or not linux at all). */
 		sprintf(path, "/sys/class/net/%s", devices[i]);
 		if (access(path, F_OK) == 0) {
-			/* /sys/class/net/DEVNAME exists. Now check for another dir: physical
-			 * devices have a 'device' symlink in /sys/class/net/DEVNAME */
+			/* Now check for 'device' symlink, present only in physical devices */
 			sprintf(path, "/sys/class/net/%s/device", devices[i]);
 			if (access(path, F_OK) != 0) {
 				/* symlink does not exist, device is virtual */
@@ -186,39 +176,52 @@ GetNet (int Maximum, int data [3], LoadGraph *g)
 			}
 		}
 
+		glibtop_get_netload(&netload, devices[i]);
+		g_return_if_fail((netload.flags & needed_flags) == needed_flags);
 
-		present[IN_COUNT] += netload.bytes_in;
-		present[OUT_COUNT] += netload.bytes_out;
+		if (!(netload.if_flags & (1L << GLIBTOP_IF_FLAGS_UP)))
+			continue;
+
+		if (netload.if_flags & (1L << GLIBTOP_IF_FLAGS_LOOPBACK)) {
+			/* for loopback in and out are identical, so only count once */
+			present[NET_LOCAL] += netload.bytes_in;
+			continue;
+		}
+
+		present[NET_IN] += netload.bytes_in;
+		present[NET_OUT] += netload.bytes_out;
 	}
 
 	g_strfreev(devices);
-	netspeed_add(xd->in, present[IN_COUNT]);
-	netspeed_add(xd->out, present[OUT_COUNT]);
 
-	if(ticks < 2) { /* avoid initial spike */
+	if (ticks < 2) { /* avoid initial spike */
 		ticks++;
-		memset(data, 0, COUNT_TYPES * sizeof data[0]);
+		memset(data, 0, NET_MAX * sizeof data[0]);
 	} else {
-		int delta[COUNT_TYPES];
+		int delta[NET_MAX];
 		int max;
 		int total = 0;
 
-		for (i = 0; i < COUNT_TYPES; i++) {
+		for (i = 0; i < NET_MAX; i++) {
 			/* protect against weirdness */
-			if (present[i] >= past[i])
-				delta[i] = (present[i] - past[i]);
+			if (present[i] >= xd->last[i])
+				delta[i] = (present[i] - xd->last[i]);
 			else
 				delta[i] = 0;
 			total += delta[i];
 		}
 
-		max = autoscaler_get_max(&scaler, total);
+		max = autoscaler_get_max(&xd->scaler, total);
 
-		for (i = 0; i < COUNT_TYPES; i++)
-			data[i]   = rint (Maximum * (float)delta[i]  / max);
+		xd->in_speed	= calculate_speed(delta[NET_IN], 	g->multiload->speed);
+		xd->out_speed	= calculate_speed(delta[NET_OUT],	g->multiload->speed);
+		xd->local_speed	= calculate_speed(delta[NET_LOCAL],	g->multiload->speed);
+
+		for ( i=0; i<NET_MAX; i++ )
+			data[i] = rint (Maximum * (float)delta[i] / max);
 	}
 
-	memcpy(past, present, sizeof past);
+	memcpy(xd->last, present, sizeof xd->last);
 }
 
 
@@ -334,8 +337,8 @@ GetDisk (int Maximum, int data [2], LoadGraph *g)
 
 	/* read/write are relative to SECTORS (standard 512 byte) and not blocks
 	 * as glibtop documentation states. So multiply value by 512 */
-	xd->read_speed  = (guint64) ( (readdiff  * 512 * 1000.0)  / (g->multiload->speed) );
-	xd->write_speed = (guint64) ( (writediff * 512 * 1000.0)  / (g->multiload->speed) );
+	xd->read_speed  = calculate_speed(readdiff  * 512, g->multiload->speed);
+	xd->write_speed = calculate_speed(writediff * 512, g->multiload->speed);
 }
 
 

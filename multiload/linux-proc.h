@@ -7,12 +7,10 @@
 
 G_BEGIN_DECLS
 
-#define NCPUSTATES 5
 #define PER_CPU_MAX_LOADAVG 3
 
 typedef struct _CpuData {
-	guint32 cpu_time [NCPUSTATES];
-	guint32 cpu_last [NCPUSTATES];
+	guint64 last [5];
 
 	gfloat user;
 	gfloat iowait;
@@ -28,8 +26,12 @@ typedef struct _MemoryData {
 } MemoryData;
 
 typedef struct _NetData {
-	NetSpeed *in;
-	NetSpeed *out;
+	guint64 last [3];
+	AutoScaler scaler;
+
+	guint64 in_speed;
+	guint64 out_speed;
+	guint64 local_speed;
 } NetData;
 
 typedef struct _SwapData {
