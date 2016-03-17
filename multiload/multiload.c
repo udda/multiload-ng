@@ -13,6 +13,7 @@
 #include <glibtop.h>
 #include "multiload.h"
 #include "multiload-config.h"
+#include "multiload-colors.h"
 #include "linux-proc.h"
 #include "util.h"
 
@@ -225,11 +226,54 @@ multiload_init()
 	static int initialized = 0;
 	if ( initialized )
 		return;
+	initialized = 1;
 
 	glibtop *glt = glibtop_init();
 	g_assert_nonnull(glt);
 
 	multiload_config_init();
+}
+
+void multiload_defaults(MultiloadPlugin *ma)
+{
+	guint i;
+
+	/* default settings */
+	ma->speed = DEFAULT_SPEED;
+	ma->size = DEFAULT_SIZE;
+	ma->padding = DEFAULT_PADDING;
+	ma->spacing = DEFAULT_SPACING;
+	ma->fill_between = DEFAULT_FILL_BETWEEN;
+	for ( i = 0; i < GRAPH_MAX; i++ ) {
+		ma->graph_config[i].border_width = DEFAULT_BORDER_WIDTH;
+		ma->graph_config[i].visible = i == 0 ? TRUE : FALSE;
+		multiload_colors_default(ma, i);
+	}
+}
+
+void
+multiload_sanitize(MultiloadPlugin *ma)
+{
+	guint i, visible_count = 0;
+
+	/* Keep values between max and min */
+	ma->speed = CLAMP(ma->speed, MIN_SPEED, MAX_SPEED);
+	ma->size = CLAMP(ma->size, MIN_SIZE, MAX_SIZE);
+	ma->padding = CLAMP(ma->padding, MIN_PADDING, MAX_PADDING);
+	ma->spacing = CLAMP(ma->spacing, MIN_SPACING, MAX_SPACING);
+
+	for ( i=0; i<GRAPH_MAX; i++ ) {
+		ma->graph_config[i].border_width =
+								CLAMP(ma->graph_config[i].border_width,
+								MIN_BORDER_WIDTH, MAX_BORDER_WIDTH);
+
+		if (ma->graph_config[i].visible)
+			visible_count++;
+	}
+
+	/* Ensure at lease one graph is visible */
+	if (visible_count == 0)
+		ma->graph_config[0].visible = TRUE;
 }
 
 void

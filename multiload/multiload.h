@@ -27,10 +27,6 @@ enum {
 #define MULTILOAD_ORIENTATION_HORIZONTAL	1
 #define MULTILOAD_ORIENTATION_VERTICAL		2
 
-typedef struct _MultiloadPlugin MultiloadPlugin;
-typedef struct _LoadGraph LoadGraph;
-typedef struct _GraphConfig GraphConfig;
-
 #define MIN_SIZE 10
 #define DEFAULT_SIZE 40
 #define MAX_SIZE 400
@@ -59,6 +55,33 @@ typedef struct _GraphConfig GraphConfig;
 #define DEFAULT_ORIENTATION MULTILOAD_ORIENTATION_AUTO
 #define DEFAULT_FILL_BETWEEN FALSE
 
+typedef struct _LoadGraph LoadGraph;
+
+typedef struct _GraphConfig {
+	gboolean visible;
+	guint border_width;
+	GdkColor colors[MAX_COLORS];
+	guint16 alpha[MAX_COLORS];
+} GraphConfig;
+
+typedef struct _MultiloadPlugin {
+	/* Current state */
+	GtkWidget *box;
+	GtkOrientation panel_orientation;
+	LoadGraph *graphs[GRAPH_MAX];
+
+	/* Settings */
+	GtkContainer *container;
+	GraphConfig graph_config[GRAPH_MAX];
+	guint orientation_policy;
+	guint speed;
+	guint size;
+	guint padding;
+	guint spacing;
+	gboolean fill_between;
+} MultiloadPlugin;
+
+
 struct _LoadGraph {
 	MultiloadPlugin *multiload;
 
@@ -80,33 +103,9 @@ struct _LoadGraph {
 	gpointer *extra_data;
 };
 
-struct _GraphConfig {
-	gboolean visible;
-	guint border_width;
-	GdkColor colors[MAX_COLORS];
-	guint16 alpha[MAX_COLORS];
-};
 
-struct _MultiloadPlugin
-{
-	/* Current state */
-	GtkWidget *box;
-	GtkOrientation panel_orientation;
-	LoadGraph *graphs[GRAPH_MAX];
-
-	/* Settings */
-	GtkContainer *container;
-	GraphConfig graph_config[GRAPH_MAX];
-	guint orientation_policy;
-	guint speed;
-	guint size;
-	guint padding;
-	guint spacing;
-	gboolean fill_between;
-};
-
-#include "load-graph.h"
-#include "linux-proc.h"
+//#include "load-graph.h"
+//#include "linux-proc.h"
 
 
 G_BEGIN_DECLS
@@ -119,6 +118,10 @@ G_GNUC_INTERNAL void
 multiload_tooltip_update(LoadGraph *g);
 G_GNUC_INTERNAL void
 multiload_init();
+G_GNUC_INTERNAL void
+multiload_sanitize(MultiloadPlugin *ma);
+G_GNUC_INTERNAL void
+multiload_defaults(MultiloadPlugin *ma);
 G_GNUC_INTERNAL void
 multiload_destroy(MultiloadPlugin *ma);
 G_GNUC_INTERNAL int

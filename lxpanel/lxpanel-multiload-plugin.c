@@ -25,25 +25,14 @@ void
 multiload_read(config_setting_t *settings, MultiloadPlugin *ma)
 {
 	guint i;
-	guint found = 0;
 	gchar *key;
 	int tmp_int;
 	const char *tmp_str;
 
+	multiload_defaults(ma);
+
 	g_assert_nonnull(settings);
 	g_assert_nonnull(ma);
-
-	/* Default settings */
-	for ( i = 0; i < GRAPH_MAX; i++ ) {
-		ma->graph_config[i].visible = FALSE;
-		multiload_colors_default(ma, i);
-	}
-
-	ma->speed = DEFAULT_SPEED;
-	ma->size = DEFAULT_SIZE;
-	ma->padding = DEFAULT_PADDING;
-	ma->padding = DEFAULT_SPACING;
-
 
 	if (config_setting_lookup_int(settings, "speed", &tmp_int))
 		ma->speed = tmp_int;
@@ -75,13 +64,7 @@ multiload_read(config_setting_t *settings, MultiloadPlugin *ma)
 		g_free (key);
 	}
 
-	/* Ensure at lease one graph is visible */
-	for ( i = 0; i < GRAPH_MAX; i++ ) {
-		if ( ma->graph_config[i].visible == TRUE )
-			found++;
-	}
-	if ( found == 0 )
-		ma->graph_config[0].visible = TRUE;
+	multiload_sanitize(ma);
 }
 
 

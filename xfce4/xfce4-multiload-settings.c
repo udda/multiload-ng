@@ -88,7 +88,9 @@ multiload_read (XfcePanelPlugin *plugin,
 {
 	XfceRc *rc;
 	gchar *file;
-	guint i, found = 0;
+	guint i;
+
+	multiload_defaults(ma);
 
 	/* get the plugin config file location */
 	file = xfce_panel_plugin_lookup_rc_file (plugin);
@@ -134,30 +136,10 @@ multiload_read (XfcePanelPlugin *plugin,
 			/* cleanup */
 			xfce_rc_close (rc);
 
-			/* Ensure at lease one graph is visible */
-			for ( i = 0; i < GRAPH_MAX; i++ ) {
-				if ( ma->graph_config[i].visible == TRUE )
-					found++;
-				if ( found == 0 )
-					ma->graph_config[0].visible = TRUE;
-			}
+			multiload_sanitize(ma);
 
 			/* leave the function, everything went well */
 			return;
 		}
-	}
-
-	/* something went wrong, apply default values */
-	DBG ("Applying default settings");
-
-	ma->speed = DEFAULT_SPEED;
-	ma->size = DEFAULT_SIZE;
-	ma->padding = DEFAULT_PADDING;
-	ma->spacing = DEFAULT_SPACING;
-	ma->fill_between = DEFAULT_FILL_BETWEEN;
-	for ( i = 0; i < GRAPH_MAX; i++ ) {
-		ma->graph_config[i].border_width = DEFAULT_BORDER_WIDTH;
-		ma->graph_config[i].visible = i == 0 ? TRUE : FALSE;
-		multiload_colors_default(ma, i);
 	}
 }

@@ -1,5 +1,6 @@
 #include <config.h>
 
+#include "linux-proc.h"
 #include "multiload-colors.h"
 #include "multiload-config.h"
 

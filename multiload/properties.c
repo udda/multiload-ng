@@ -12,10 +12,11 @@
 #include <libintl.h>
 #include <gtk/gtk.h>
 
-#include "properties.h"
+#include "load-graph.h"
 #include "multiload.h"
 #include "multiload-config.h"
 #include "multiload-colors.h"
+#include "properties.h"
 #include "util.h"
 
 

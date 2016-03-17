@@ -39,4 +39,4 @@ struct _MultiloadXfcePlugin
 
 G_END_DECLS
 
-#endif /* !__XFCE4_MULTILOAD_PLUGIN_H__ */
+#endif /* __XFCE4_MULTILOAD_PLUGIN_H__ */
