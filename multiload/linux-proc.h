@@ -53,7 +53,8 @@ typedef struct _DiskData {
 } DiskData;
 
 typedef struct _TemperatureData {
-	guint16 temperature;
+	guint value;
+	guint max;
 } TemperatureData;
 
 

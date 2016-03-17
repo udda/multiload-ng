@@ -127,8 +127,9 @@ multiload_tooltip_update(LoadGraph *g)
 			TemperatureData *xd = (TemperatureData*) g->extra_data;
 			g_assert_nonnull(xd);
 
-			text = g_strdup_printf(_(	"%.1f °C"),
-										(xd->temperature/1000.0));
+			text = g_strdup_printf(_(	"Current: %.1f °C\n"
+										"Critical: %.1f °C"),
+										(xd->value/1000.0), (xd->max/1000.0));
 		}	break;
 
 		default: {

@@ -388,8 +388,7 @@ GetTemperature (int Maximum, int data[1], LoadGraph *g)
 
 		// allocate buffers
 		paths    = (gchar**) malloc( n_zones * sizeof (gchar*) );
-		maxtemps = (guint*)  malloc( n_zones * sizeof  (guint) );
-		memset(maxtemps, 0, n_zones * sizeof (guint));
+		maxtemps = g_new0(guint, n_zones);
 
 		// fill buffers
 		i=0;
@@ -444,5 +443,6 @@ GetTemperature (int Maximum, int data[1], LoadGraph *g)
 
 	data[0] = (float)Maximum * temp / (float)maxtemps[j];
 
-	xd->temperature = temp;
+	xd->value = temp;
+	xd->max = maxtemps[j];
 }
