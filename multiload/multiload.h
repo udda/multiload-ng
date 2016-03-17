@@ -31,8 +31,6 @@ typedef struct _MultiloadPlugin MultiloadPlugin;
 typedef struct _LoadGraph LoadGraph;
 typedef struct _GraphConfig GraphConfig;
 
-#include "netspeed.h"
-
 #define MIN_SIZE 10
 #define DEFAULT_SIZE 40
 #define MAX_SIZE 400

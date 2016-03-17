@@ -16,7 +16,6 @@ multiload_core_la_SOURCES = \
 	multiload.c multiload.h \
 	linux-proc.c linux-proc.h \
 	load-graph.c load-graph.h \
-	netspeed.c netspeed.h \
 	autoscaler.c autoscaler.h \
 	properties.c properties.h \
 	multiload-colors.c multiload-colors.h \

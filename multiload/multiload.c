@@ -71,15 +71,12 @@ multiload_tooltip_update(LoadGraph *g)
 			NetData *xd = (NetData*) g->extra_data;
 			g_assert_nonnull(xd);
 
-			gchar *tx_in = netspeed_get(xd->in);
-			gchar *tx_out = netspeed_get(xd->out);
+			gchar *tx_in = format_rate_for_display(xd->in_speed);
+			gchar *tx_out = format_rate_for_display(xd->out_speed);
 
-			gchar *tx_in2 = format_rate_for_display(xd->in_speed);
-			gchar *tx_out2 = format_rate_for_display(xd->out_speed);
-
-			text = g_strdup_printf(_(	"Receiving %s - %s\n"
-										"Sending %s - %s"),
-										tx_in, tx_in2, tx_out, tx_out2);
+			text = g_strdup_printf(_(	"Receiving: %s\n"
+										"Sending: %s"),
+										tx_in, tx_out);
 			g_free(tx_in);
 			g_free(tx_out);
 		}	break;

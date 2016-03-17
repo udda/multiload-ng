@@ -209,15 +209,6 @@ load_graph_destroy (GtkWidget *widget, gpointer data_ptr)
 
 	load_graph_stop (g);
 
-	if (g->id == GRAPH_NETLOAD) {
-		NetData *xd = (NetData*) g->extra_data;
-		if (xd == NULL)
-			return;
-
-		netspeed_delete(xd->in);
-		netspeed_delete(xd->out);
-	}
-
 	gtk_widget_destroy(widget);
 }
 
@@ -291,14 +282,6 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 	g = g_new0 (LoadGraph, 1);
 	g->id = id;
 	load_graph_extra_data_init(g);
-
-	if (g->id == GRAPH_NETLOAD) {
-		NetData *xd = (NetData*) g->extra_data;
-		g_assert_nonnull(xd);
-
-		xd->in = netspeed_new(g);
-		xd->out = netspeed_new(g);
-	}
 
 	g->tooltip_update = FALSE;
 	g->multiload = ma;
