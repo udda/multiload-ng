@@ -6,95 +6,75 @@
 
 #include <lxpanel/plugin.h>
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
-
 #include "multiload/multiload.h"
-#include "multiload/multiload-config.h"
 #include "multiload/multiload-colors.h"
+#include "multiload/multiload-config.h"
 #include "multiload/properties.h"
 
-/* FIXME: DIRTY HACKS! The following lxpanel functions are NOT in
-  the /usr/include/lxpanel/plugin.h header file! For a usage example,
-  see lxpanel/src/plugins/launchbar.c
- */
-/* Handle-right-click events. Defined in lxpanel/src/panel.h. */
-extern gboolean plugin_button_press_event(GtkWidget *widget, GdkEventButton *event, Plugin *plugin);
-/* Trigger a save event. Defined only in lxpanel/src/configurator.c! */ 
-void panel_config_save(Panel * panel);  /* defined in  */
 
-/** BEGIN H **/
-typedef struct _MultiloadLxpanelPlugin MultiloadLxpanelPlugin;
-
-/* an instance of this struct is what will be assigned to 'priv' */
-struct _MultiloadLxpanelPlugin {
+typedef struct  {
+	LXPanel * panel;
+	config_setting_t *settings;
 	MultiloadPlugin ma;
 	GtkWidget *dlg;
-};
-/** END H **/
+} MultiloadLxpanelPlugin;
 
 
-static void
-multiload_read(char **fp, MultiloadPlugin *ma)
+
+void
+multiload_read(config_setting_t *settings, MultiloadPlugin *ma)
 {
-	guint i, found = 0;
+	guint i;
+	guint found = 0;
+	gchar *key;
+	int tmp_int;
+	const char *tmp_str;
 
-	/* Initial settings */
-	ma->speed = 0;
-	ma->size = 0;
+	g_assert_nonnull(settings);
+	g_assert_nonnull(ma);
+
+	/* Default settings */
 	for ( i = 0; i < GRAPH_MAX; i++ ) {
-		/* Default visibility and colors */
 		ma->graph_config[i].visible = FALSE;
 		multiload_colors_default(ma, i);
 	}
 
-	if ( fp != NULL ) {
-		line s;
-		s.len = 1024;
-		while ( lxpanel_get_line(fp, &s) != LINE_BLOCK_END ) {
-			if ( s.type == LINE_VAR ) {
-				if ( g_ascii_strcasecmp(s.t[0], "speed") == 0 ) {
-					ma->speed = atoi(s.t[1]);
-				} else if ( g_ascii_strcasecmp(s.t[0], "size") == 0 ) {
-					ma->size = atoi(s.t[1]);
-				} else if ( g_ascii_strcasecmp(s.t[0], "padding") == 0 ) {
-					ma->padding = atoi(s.t[1]);
-				} else if ( g_ascii_strcasecmp(s.t[0], "spacing") == 0 ) {
-					ma->spacing = atoi(s.t[1]);
-				} else if ( g_ascii_strcasecmp(s.t[0], "orientation") == 0 ) {
-					ma->orientation_policy = atoi(s.t[1]);
-				} else if ( g_ascii_strcasecmp(s.t[0], "fillBetween") == 0 ) {
-					ma->fill_between = atoi(s.t[1]) ? TRUE : FALSE;
-				} else {
-					const char *suffix; /* Set by multiload_find_graph_by_name */
-					int i = multiload_find_graph_by_name(s.t[0], &suffix);
+	ma->speed = DEFAULT_SPEED;
+	ma->size = DEFAULT_SIZE;
+	ma->padding = DEFAULT_PADDING;
+	ma->padding = DEFAULT_SPACING;
 
-					if ( suffix == NULL || i < 0 || i >= GRAPH_MAX )
-						continue;
-					else if ( g_ascii_strcasecmp(suffix, "Visible") == 0 )
-						ma->graph_config[i].visible = atoi(s.t[1]) ? TRUE : FALSE;
-					else if ( g_ascii_strcasecmp(suffix, "BorderWidth") == 0 )
-						ma->graph_config[i].border_width = atoi(s.t[1]);
-					else if ( g_ascii_strcasecmp(suffix, "Colors") == 0 )
-						multiload_colors_unstringify(ma, i, s.t[1]);
-				}
-			} else {
-				ERR ("Failed to parse config token %s\n", s.str);
-				break;
-			}
-		}
+
+	if (config_setting_lookup_int(settings, "speed", &tmp_int))
+		ma->speed = tmp_int;
+	if (config_setting_lookup_int(settings, "size", &tmp_int))
+		ma->size = tmp_int;
+	if (config_setting_lookup_int(settings, "padding", &tmp_int))
+		ma->padding = tmp_int;
+	if (config_setting_lookup_int(settings, "spacing", &tmp_int))
+		ma->spacing = tmp_int;
+	if (config_setting_lookup_int(settings, "orientation", &tmp_int))
+		ma->orientation_policy = tmp_int;
+	if (config_setting_lookup_int(settings, "fill-between", &tmp_int))
+		ma->fill_between = tmp_int? TRUE:FALSE;
+
+	for ( i = 0; i < GRAPH_MAX; i++ ) {
+		key = g_strdup_printf("%s_visible", graph_types[i].name);
+		if (config_setting_lookup_int(settings, key, &tmp_int))
+			ma->graph_config[i].visible = tmp_int? TRUE:FALSE;
+		g_free (key);
+
+		key = g_strdup_printf("%s_border-width", graph_types[i].name);
+		if (config_setting_lookup_int(settings, key, &tmp_int))
+			ma->graph_config[i].border_width = tmp_int;
+		g_free (key);
+
+		key = g_strdup_printf("%s_colors", graph_types[i].name);
+		if (config_setting_lookup_string(settings, key, &tmp_str))
+			multiload_colors_unstringify(ma, i, tmp_str);
+		g_free (key);
 	}
 
-	/* Handle errors from atoi */
-	if ( ma->speed == 0 )
-		ma->speed = DEFAULT_SPEED;
-	if ( ma->size == 0 )
-		ma->size = DEFAULT_SIZE;
-	if ( ma->padding == 0 )
-		ma->padding = DEFAULT_PADDING;
-	if ( ma->spacing == 0 )
-		ma->padding = DEFAULT_SPACING;
 	/* Ensure at lease one graph is visible */
 	for ( i = 0; i < GRAPH_MAX; i++ ) {
 		if ( ma->graph_config[i].visible == TRUE )
@@ -104,124 +84,50 @@ multiload_read(char **fp, MultiloadPlugin *ma)
 		ma->graph_config[0].visible = TRUE;
 }
 
-static void multiload_save_configuration(Plugin * p, FILE * fp)
+
+
+void
+multiload_save(gpointer user_data)
 {
-	MultiloadLxpanelPlugin *multiload = p->priv;
+	MultiloadLxpanelPlugin *multiload = (MultiloadLxpanelPlugin*)user_data;
 	MultiloadPlugin *ma = &multiload->ma;
 	guint i;
 
-	/* Write common config */
-	lxpanel_put_int (fp, "speed", ma->speed);
-	lxpanel_put_int (fp, "size", ma->size);
-	lxpanel_put_int (fp, "padding", ma->padding);
-	lxpanel_put_int (fp, "spacing", ma->spacing);
-	lxpanel_put_int (fp, "orientation", ma->orientation_policy);
-	lxpanel_put_int (fp, "fillBetween", ma->fill_between);
+	config_group_set_int(multiload->settings, "speed", ma->speed);
+	config_group_set_int(multiload->settings, "size", ma->size);
+	config_group_set_int(multiload->settings, "padding", ma->padding);
+	config_group_set_int(multiload->settings, "spacing", ma->spacing);
+	config_group_set_int(multiload->settings, "orientation", ma->orientation_policy);
+	config_group_set_int(multiload->settings, "fill-between", ma->fill_between);
 
 	for ( i = 0; i < GRAPH_MAX; i++ ) {
 		char *key, list[10*MAX_COLORS];
 
-		/* Visibility */
-		key = g_strdup_printf("%sVisible", graph_types[i].name);
-		lxpanel_put_int (fp, key, ma->graph_config[i].visible);
+		key = g_strdup_printf("%s_visible", graph_types[i].name);
+		config_group_set_int(multiload->settings, key, ma->graph_config[i].visible);
 		g_free (key);
 
-		/* Show border */
-		key = g_strdup_printf("%sBorderWidth", graph_types[i].name);
-		lxpanel_put_int (fp, key, ma->graph_config[i].border_width);
+		key = g_strdup_printf("%s_border-width", graph_types[i].name);
+		config_group_set_int(multiload->settings, key, ma->graph_config[i].border_width);
 		g_free (key);
 
-		/* Save colors */
+		key = g_strdup_printf("%s_colors", graph_types[i].name);
 		multiload_colors_stringify (ma, i, list);
-		key = g_strdup_printf("%sColors", graph_types[i].name);
-		/* Don't use lxpanel_put_str (fp, key, list), in order to avoid a compiler
-		 warning "the address of 'list' will always evaluate as 'true'".
-		*/
-		lxpanel_put_line(fp, "%s=%s", key, list);
+		config_group_set_string(multiload->settings, key, list);
 		g_free (key);
 	}
 }
 
-static void multiload_panel_configuration_changed(Plugin *p)
+
+
+gboolean
+multiload_press_event(GtkWidget *ebox, GdkEventButton *event, LXPanel *panel)
 {
-	MultiloadLxpanelPlugin *multiload = p->priv;
-
-	/* Determine orientation and size */
-	if ( p->panel->orientation == GTK_ORIENTATION_VERTICAL ) {
-		multiload->ma->panel_orientation = GTK_ORIENTATION_VERTICAL;
-		gtk_widget_set_size_request (p->pwid, p->panel->width, -1);
-	} else { // p->panel->orientation can have values other than vert/horiz
-		multiload->ma->panel_orientation = GTK_ORIENTATION_HORIZONTAL;
-		gtk_widget_set_size_request (p->pwid, -1, p->panel->height);
-	}
-
-	/* Refresh the panel applet */
-	multiload_refresh(&(multiload->ma));
-}
-
-static gboolean
-multiload_press_event(GtkWidget *pwid, GdkEventButton *event, Plugin *p)
-{
-	/* Standard right-click handling. */
-	if (plugin_button_press_event(pwid, event, p))
-		return TRUE;
-
-	if (event->button == 1) { /* left button */
-	/* Launch system monitor */
-	}
 	return TRUE;
 }
 
-static int
-multiload_constructor(Plugin *p, char **fp)
-{
-	/* allocate our private structure instance */
-	MultiloadLxpanelPlugin *multiload = g_new0(MultiloadLxpanelPlugin, 1);
-	p->priv = multiload;
-
-	/* Initialize multiload */
-	multiload_init ();
-	multiload->dlg = NULL;
-
-	/* read the user settings */
-	multiload_read (fp, &multiload->ma);
-
-	/* create a container widget */
-	p->pwid = gtk_event_box_new ();
-	gtk_widget_show (p->pwid);
-
-	/* Initialize the applet */
-	multiload->ma.container = GTK_CONTAINER(p->pwid);
-	/* Set size request and update orientation */
-	multiload_panel_configuration_changed(p);
-
-	g_signal_connect(p->pwid, "button-press-event",
-						G_CALLBACK(multiload_press_event), p);
-	/* FIXME: No way to add system monitor item to menu? */
-
-	return 1;
-}
-
-static void
-multiload_destructor(Plugin * p)
-{
-	/* find our private structure instance */
-	MultiloadLxpanelPlugin *multiload = (MultiloadLxpanelPlugin *)p->priv;
-
-	/* Destroy dialog */
-	if ( multiload->dlg ) {
-		gtk_widget_destroy (multiload->dlg);
-		multiload->dlg = NULL;
-	}
-
-	/* free private data. Panel will free pwid for us. */
-	g_free(multiload);
-}
-
-static void
-multiload_configure_response (GtkWidget              *dialog,
-							  gint                    response,
-							  MultiloadLxpanelPlugin *multiload)
+void
+multiload_configure_response (GtkWidget *dialog, gint response, MultiloadLxpanelPlugin *multiload)
 {
 	gboolean result;
 
@@ -235,10 +141,110 @@ multiload_configure_response (GtkWidget              *dialog,
 			g_warning (_("Unable to open the following url: %s"), PLUGIN_WEBSITE);
 	} else {
 		/* destroy the properties dialog */
+		multiload_save(multiload);
 		gtk_widget_destroy (multiload->dlg);
 		multiload->dlg = NULL;
 	}
 }
+
+GtkWidget* multiload_configure(LXPanel *panel, GtkWidget *ebox)
+{
+	MultiloadLxpanelPlugin *multiload = lxpanel_plugin_get_data(ebox);
+
+	if ( multiload->dlg != NULL ) {
+		gtk_widget_show_all (multiload->dlg);
+		gtk_window_present (GTK_WINDOW (multiload->dlg));
+		return GTK_WIDGET(multiload->dlg);
+	}
+
+	/* create the dialog */
+	multiload->dlg = gtk_dialog_new_with_buttons(_("Multiload"),
+					GTK_WINDOW(ebox),
+					GTK_DIALOG_DESTROY_WITH_PARENT,
+					GTK_STOCK_HELP, GTK_RESPONSE_HELP,
+					GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
+					NULL);
+	multiload->dlg = multiload->dlg;
+
+	/* center dialog on the screen */
+	gtk_window_set_position (GTK_WINDOW (multiload->dlg), GTK_WIN_POS_CENTER);
+
+	/* set dialog icon */
+	gtk_window_set_icon_name (GTK_WINDOW (multiload->dlg), "utilities-system-monitor");
+
+	/* link the dialog to the plugin, so we can destroy it when the plugin
+	* is closed, but the dialog is still open */
+	g_object_set_data (G_OBJECT (multiload->dlg), "MultiloadPlugin", &multiload->ma);
+
+	/* Initialize dialog widgets */
+	gtk_dialog_set_default_response (GTK_DIALOG (multiload->dlg), GTK_RESPONSE_OK);
+	gtk_window_set_resizable (GTK_WINDOW (multiload->dlg), FALSE);
+	multiload_init_preferences(multiload->dlg, &multiload->ma);
+
+	/* connect the reponse signal to the dialog */
+	g_signal_connect (G_OBJECT (multiload->dlg), "response",
+					G_CALLBACK(multiload_configure_response), multiload);
+
+//	/* show the entire dialog */
+//	gtk_widget_show (multiload->dlg);
+	return GTK_WIDGET(multiload->dlg);
+}
+
+void multiload_configuration_changed(LXPanel *panel, GtkWidget *ebox)
+{
+	MultiloadLxpanelPlugin *multiload = lxpanel_plugin_get_data(ebox);
+
+	/* Determine orientation and size */
+	if ( panel_get_orientation(panel) == GTK_ORIENTATION_VERTICAL ) {
+		multiload->ma.panel_orientation = GTK_ORIENTATION_VERTICAL;
+		gtk_widget_set_size_request (ebox, panel_get_height(panel), -1); //TODO è lo stesso di width?
+	} else { //multiload->ma->panel_orientation can have values other than vert/horiz
+		multiload->ma.panel_orientation = GTK_ORIENTATION_HORIZONTAL;
+		gtk_widget_set_size_request (ebox, -1, panel_get_height(panel));
+	}
+
+	/* Refresh the panel applet */
+	multiload_refresh(&(multiload->ma));
+}
+
+
+void
+multiload_destructor(gpointer user_data)
+{
+	MultiloadLxpanelPlugin *multiload = lxpanel_plugin_get_data(user_data);
+	gtk_widget_destroy (GTK_WIDGET(user_data));
+	g_free(multiload);
+}
+
+
+
+GtkWidget*
+multiload_constructor(LXPanel *panel, config_setting_t *settings) //char **fp)
+{
+	/* allocate our private structure instance */
+	MultiloadLxpanelPlugin *multiload = g_new0(MultiloadLxpanelPlugin, 1);
+
+	multiload->panel = panel;
+	multiload->settings = settings;
+
+	/* Initialize multiload */
+	multiload_init ();
+	/* read the user settings */
+	multiload_read (settings, &multiload->ma);
+
+
+	/* create a container widget */
+	multiload->ma.container = GTK_CONTAINER(gtk_event_box_new ());
+	lxpanel_plugin_set_data(multiload->ma.container, multiload, multiload_destructor);
+	gtk_widget_show (GTK_WIDGET(multiload->ma.container));
+
+	/* Initialize the applet */
+	/* Set size request and update orientation */
+	multiload_panel_configuration_changed(panel, GTK_WIDGET(multiload->ma.container));
+
+	return GTK_WIDGET(multiload->ma.container);
+}
+
 
 /* Lookup the MultiloadPlugin object from the preferences dialog. */
 /* Called from multiload/properties.c */
@@ -252,79 +258,25 @@ multiload_configure_get_plugin (GtkWidget *widget)
 	else
 		g_assert_not_reached ();
 	g_assert_nonnull(ma);
-return ma;
+	return ma;
 }
 
-static void multiload_configure(Plugin * p, GtkWindow * parent)
-{
-	GtkWidget *dialog;
-	MultiloadLxpanelPlugin *multiload = (MultiloadLxpanelPlugin *)p->priv;
-	if ( multiload->dlg != NULL ) {
-		gtk_widget_show_all (multiload->dlg);
-		gtk_window_present (GTK_WINDOW (multiload->dlg));
-		return;
-	}
-
-	/* create the dialog */
-	multiload->dlg = gtk_dialog_new_with_buttons(_("Multiload"),
-					parent,
-					GTK_DIALOG_DESTROY_WITH_PARENT,
-					GTK_STOCK_HELP, GTK_RESPONSE_HELP,
-					GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
-					NULL);
-	dialog = multiload->dlg;
-
-	/* center dialog on the screen */
-	gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
-
-	/* set dialog icon */
-	gtk_window_set_icon_name (GTK_WINDOW (dialog), "utilities-system-monitor");
-
-	/* link the dialog to the plugin, so we can destroy it when the plugin
-	* is closed, but the dialog is still open */
-	g_object_set_data (G_OBJECT (dialog), "MultiloadPlugin", &multiload->ma);
-
-	/* Initialize dialog widgets */
-	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
-	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-	multiload_init_preferences(dialog, &multiload->ma);
-
-	/* connect the reponse signal to the dialog */
-	g_signal_connect (G_OBJECT (dialog), "response",
-					G_CALLBACK(multiload_configure_response), multiload);
-
-	/* Magic incantation from lxpanel/src/plugins/launchbar.c */
-	/* Establish a callback when the dialog completes. */
-	g_object_weak_ref(G_OBJECT(dialog), (GWeakNotify) panel_config_save, p->panel);
-
-	/* show the entire dialog */
-	gtk_widget_show (dialog);
-}
+FM_DEFINE_MODULE(lxpanel_gtk, multiload)
 
 /* Plugin descriptor. */
-PluginClass multiload_plugin_class = {
-
-	// this is a #define taking care of the size/version variables
-	PLUGINCLASS_VERSIONING,
-
-	// type of this plugin
-	type : "multiload",
-	name : N_("Multiload"),
-	version: PACKAGE_VERSION,
-	description : N_("A system load monitor that graphs processor, memory, "
+LXPanelPluginInit fm_module_init_lxpanel_gtk = {
+	.name = N_("Multiload"),
+	.description = N_("A system load monitor that graphs processor, memory, "
 					"and swap space use, plus network and disk activity."),
 
-	// we can have many running at the same time
-	one_per_system : FALSE,
-
-	// can't expand this plugin
-	expand_available : FALSE,
-
-	// assigning our functions to provided pointers.
-	constructor : multiload_constructor,
-	destructor  : multiload_destructor,
-	config : multiload_configure,
-	save : multiload_save_configuration,
-panel_configuration_changed : multiload_panel_configuration_changed
+	.new_instance = multiload_constructor,
+	.config = multiload_configure,
+	// these fields are not implemented in lxpanel>0.7
+	//.type = "multiload",
+	//.version = PACKAGE_VERSION,
+	.reconfigure = multiload_configuration_changed,
+	.one_per_system = FALSE,
+	.expand_available = FALSE
+//	.button_press_event = multiload_press_event
 };
 

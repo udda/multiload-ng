@@ -18,9 +18,6 @@ plugindir = \
 multiload_la_SOURCES = \
 	../about-data.h \
 	lxpanel-multiload-plugin.c
-# xfce4-multiload-plugin.h
-# xfce4-multiload-dialogs.c xfce4-multiload-dialogs.h
-# xfce4-multiload-settings.c xfce4-multiload-settings.h
 
 multiload_la_CFLAGS = \
 	$(GTK_CFLAGS) \

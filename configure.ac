@@ -99,7 +99,7 @@ AC_SUBST(XFCE4UI_LIBS)
 AC_SUBST(XFCEGUI4_CFLAGS)
 AC_SUBST(XFCEGUI4_LIBS)
 
-# lxpanel (Disabled by default due to API change in lxpanel 0.7)
+# lxpanel (disabled by default due to plugin not loading in LxPanel)
 AC_ARG_WITH([lxpanel], AS_HELP_STRING([--with-lxpanel], [Build plugin for lxpanel]),
             [], [with_lxpanel=no])
 AS_IF([test "x$with_lxpanel" != "xno"], [
