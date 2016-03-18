@@ -21,57 +21,60 @@
 void
 multiload_tooltip_update(LoadGraph *g)
 {
+	gchar *title = NULL;
 	gchar *text;
 	gchar *tooltip_markup;
-	const gchar *name;
 
 	g_assert_nonnull(g);
-
-	/* label the tooltip intuitively */
-	if ( g->id >= 0 && g->id < GRAPH_MAX )
-		name = graph_types[g->id].label_noninteractive;
-	else
-		g_assert_not_reached();
+	g_assert ( g->id >= 0 && g->id < GRAPH_MAX );
 
 	switch (g->id) {
 		case GRAPH_CPULOAD: {
 			CpuData *xd = (CpuData*) g->extra_data;
 			g_assert_nonnull(xd);
 
-			gchar *uptime = format_time_duration(xd->uptime);
 
-			text = g_strdup_printf(_(	"%s\n"
-										"%ld processors\n"
-										"%.2f GHz - governor: %s\n"
-										"%.1f%% in use by programs\n"
-										"%.1f%% in wait for I/O\n"
-										"%.1f%% total use\n"
-										"Uptime: %s"),
-										xd->cpu0_name,
-										xd->num_cpu,
-										xd->cpu0_mhz/1000.0, xd->cpu0_governor,
-										(xd->user*100),
-										(xd->iowait*100),
-										(xd->total_use*100),
-										uptime);
-			g_free(uptime);
+			if (g->multiload->tooltip_details) {
+				gchar *uptime = format_time_duration(xd->uptime);
+				title = g_strdup_printf(xd->cpu0_name);
+				text = g_strdup_printf(_(	"%ld processors  -  %.2f GHz  -  Governor: %s\n"
+											"%.1f%% in use by programs\n"
+											"%.1f%% in wait for I/O\n"
+											"%.1f%% total CPU use\n"
+											"\n"
+											"Uptime: %s"),
+											xd->num_cpu, xd->cpu0_mhz/1000.0, xd->cpu0_governor,
+											(xd->user*100),
+											(xd->iowait*100),
+											(xd->total_use*100),
+											uptime);
+				g_free(uptime);
+			} else {
+				text = g_strdup_printf("%.1f%%", xd->total_use*100);
+			}
 		}	break;
 
 		case GRAPH_MEMLOAD: {
 			MemoryData *xd = (MemoryData*) g->extra_data;
 			g_assert_nonnull(xd);
 
-			gchar *total = g_format_size_full(xd->total, G_FORMAT_SIZE_IEC_UNITS);
-			gchar *user = format_percent(xd->user, xd->total, 0);
-			gchar *cache = format_percent(xd->cache, xd->total, 0);
 
-			// xgettext: use and cache are > 1 most of the time, assume that they always are.
-			text = g_strdup_printf(_(	"Total memory: %s\n"
-										"%s in use by programs\n"
-										"%s in use as cache"),
-										total, user, cache);
-			g_free(user);
-			g_free(cache);
+			if (g->multiload->tooltip_details) {
+				gchar *total = g_format_size_full(xd->total, G_FORMAT_SIZE_IEC_UNITS);
+				gchar *user = format_percent(xd->user, xd->total, 1);
+				gchar *cache = format_percent(xd->cache, xd->total, 1);
+				title = g_strdup_printf(_("%s of RAM"), total);
+				text = g_strdup_printf(_(	"%s in use by programs\n"
+											"%s in use as cache"),
+											user, cache);
+				g_free(total);
+				g_free(user);
+				g_free(cache);
+			} else {
+				gchar *use = format_percent(xd->user+xd->cache, xd->total, 0);
+				text = g_strdup_printf("%s", use);
+				g_free(use);
+			}
 		}	break;
 
 		case GRAPH_NETLOAD: {
@@ -81,9 +84,14 @@ multiload_tooltip_update(LoadGraph *g)
 			gchar *tx_in = format_rate_for_display(xd->in_speed);
 			gchar *tx_out = format_rate_for_display(xd->out_speed);
 
-			text = g_strdup_printf(_(	"Receiving: %s\n"
-										"Sending: %s"),
-										tx_in, tx_out);
+			if (g->multiload->tooltip_details) {
+				text = g_strdup_printf(_(	"Receiving: %s\n"
+											"Sending: %s"),
+											tx_in, tx_out);
+			} else {
+				text = g_strdup_printf("⬆%s ⬇%s", tx_in, tx_out);
+			}
+
 			g_free(tx_in);
 			g_free(tx_out);
 		}	break;
@@ -98,7 +106,12 @@ multiload_tooltip_update(LoadGraph *g)
 				gchar *used = format_percent(xd->used, xd->total, 0);
 				gchar *total = g_format_size_full(xd->total, G_FORMAT_SIZE_IEC_UNITS);
 
-				text = g_strdup_printf(_("%s used of %s"), used, total);
+				if (g->multiload->tooltip_details) {
+					title = g_strdup_printf(_("%s of swap"), total);
+					text = g_strdup_printf(_("%s used"), used);
+				} else {
+					text = g_strdup_printf("%s", used);
+				}
 
 				g_free(used);
 				g_free(total);
@@ -109,10 +122,14 @@ multiload_tooltip_update(LoadGraph *g)
 			LoadAvgData *xd = (LoadAvgData*) g->extra_data;
 			g_assert_nonnull(xd);
 
-			text = g_strdup_printf(_(	"Last minute: %0.02f\n"
-										"Last 5 minutes: %0.02f\n"
-										"Last 15 minutes: %0.02f"),
-										xd->loadavg[0], xd->loadavg[1], xd->loadavg[2]);
+			if (g->multiload->tooltip_details) {
+				text = g_strdup_printf(_(	"Last minute: %0.02f\n"
+											"Last 5 minutes: %0.02f\n"
+											"Last 15 minutes: %0.02f"),
+											xd->loadavg[0], xd->loadavg[1], xd->loadavg[2]);
+			} else {
+				text = g_strdup_printf("%0.02f", xd->loadavg[0]);
+			}
 		}	break;
 
 		case GRAPH_DISKLOAD: {
@@ -122,10 +139,13 @@ multiload_tooltip_update(LoadGraph *g)
 			gchar *disk_read = format_rate_for_display(xd->read_speed);
 			gchar *disk_write = format_rate_for_display(xd->write_speed);
 
-			text = g_strdup_printf(_(	"Read %s\n"
-										"Write %s"),
-										disk_read, disk_write);
-
+			if (g->multiload->tooltip_details) {
+				text = g_strdup_printf(_(	"Read %s\n"
+											"Write %s"),
+											disk_read, disk_write);
+			} else {
+				text = g_strdup_printf("⬆%s ⬇%s", disk_read, disk_write);
+			}
 			g_free(disk_read);
 			g_free(disk_write);
 		}	break;
@@ -134,30 +154,31 @@ multiload_tooltip_update(LoadGraph *g)
 			TemperatureData *xd = (TemperatureData*) g->extra_data;
 			g_assert_nonnull(xd);
 
-			text = g_strdup_printf(_(	"Current: %.1f °C\n"
-										"Critical: %.1f °C"),
-										(xd->value/1000.0), (xd->max/1000.0));
+			if (g->multiload->tooltip_details) {
+				text = g_strdup_printf(_(	"Current: %.1f °C\n"
+											"Critical: %.1f °C"),
+											(xd->value/1000.0), (xd->max/1000.0));
+			} else {
+				text = g_strdup_printf("%.1f °C", xd->value/1000.0);
+			}
 		}	break;
 
 		default: {
-			guint i;
-			gchar *percent;
-			guint total_used = 0;
-
-			for (i = 0; i < multiload_config_get_num_data(g->id); i++)
-				total_used += g->data[0][i];
-
-			percent = format_percent(total_used, g->draw_height, 0);
-			text = g_strdup_printf(_(	"%s in use"),
-										percent);
-
-			g_free(percent);
+			g_assert_not_reached();
 		}	break;
 	}
 
-	tooltip_markup = g_strdup_printf("<span underline='single' weight='bold' size='larger'>%s</span>\n%s", name, text);
+	if (title == NULL)
+		title = g_strdup(graph_types[g->id].label_noninteractive);
+
+	if (g->multiload->tooltip_details) {
+		tooltip_markup = g_strdup_printf("<span weight='bold' size='larger'>%s</span>\n%s", title, text);
+	} else {
+		tooltip_markup = g_strdup_printf("%s: %s", title, text);
+	}
 
 	gtk_widget_set_tooltip_markup(g->disp, tooltip_markup);
+	g_free(title);
 	g_free(text);
 	g_free(tooltip_markup);
 }

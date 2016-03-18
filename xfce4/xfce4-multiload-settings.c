@@ -56,6 +56,7 @@ multiload_save (XfcePanelPlugin *plugin, MultiloadPlugin *ma)
 		xfce_rc_write_int_entry (rc, "spacing", ma->spacing);
 		xfce_rc_write_int_entry (rc, "orientation", ma->orientation_policy);
 		xfce_rc_write_int_entry (rc, "fill-between", ma->fill_between);
+		xfce_rc_write_int_entry (rc, "tooltip-details", ma->tooltip_details);
 
 		for ( i = 0; i < GRAPH_MAX; i++ ) {
 			char *key, list[10*MAX_COLORS];
@@ -109,7 +110,8 @@ multiload_read (XfcePanelPlugin *plugin,
 			ma->padding = xfce_rc_read_int_entry(rc, "padding", DEFAULT_PADDING);
 			ma->spacing = xfce_rc_read_int_entry(rc, "spacing", DEFAULT_PADDING);
 			ma->orientation_policy = xfce_rc_read_int_entry (rc, "orientation", DEFAULT_ORIENTATION);
-			ma->fill_between = xfce_rc_read_bool_entry (rc, "fill_between", DEFAULT_FILL_BETWEEN);
+			ma->fill_between = xfce_rc_read_bool_entry (rc, "fill-between", DEFAULT_FILL_BETWEEN);
+			ma->tooltip_details = xfce_rc_read_bool_entry (rc, "tooltip-details", DEFAULT_TOOLTIP_DETAILS);
 
 			/* Read visibility and colors for each graph */
 			for ( i = 0; i < GRAPH_MAX; i++ ) {

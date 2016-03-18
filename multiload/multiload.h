@@ -54,6 +54,7 @@ enum {
 
 #define DEFAULT_ORIENTATION MULTILOAD_ORIENTATION_AUTO
 #define DEFAULT_FILL_BETWEEN FALSE
+#define DEFAULT_TOOLTIP_DETAILS FALSE
 
 typedef struct _LoadGraph LoadGraph;
 
@@ -79,6 +80,7 @@ typedef struct _MultiloadPlugin {
 	guint padding;
 	guint spacing;
 	gboolean fill_between;
+	gboolean tooltip_details;
 } MultiloadPlugin;
 
 
