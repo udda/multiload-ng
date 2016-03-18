@@ -101,7 +101,7 @@ multiload_tooltip_update(LoadGraph *g)
 			g_assert_nonnull(xd);
 
 			if (xd->total == 0) {
-				text = g_strdup_printf(_("Swap is not used"));
+				text = g_strdup_printf(_("No swap"));
 			} else {
 				gchar *used = format_percent(xd->used, xd->total, 0);
 				gchar *total = g_format_size_full(xd->total, G_FORMAT_SIZE_IEC_UNITS);
@@ -140,8 +140,8 @@ multiload_tooltip_update(LoadGraph *g)
 			gchar *disk_write = format_rate_for_display(xd->write_speed);
 
 			if (g->multiload->tooltip_details) {
-				text = g_strdup_printf(_(	"Read %s\n"
-											"Write %s"),
+				text = g_strdup_printf(_(	"Read: %s\n"
+											"Write: %s"),
 											disk_read, disk_write);
 			} else {
 				text = g_strdup_printf("⬆%s ⬇%s", disk_read, disk_write);
