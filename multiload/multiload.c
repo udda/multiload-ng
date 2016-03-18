@@ -89,7 +89,7 @@ multiload_tooltip_update(LoadGraph *g)
 											"Sending: %s"),
 											tx_in, tx_out);
 			} else {
-				text = g_strdup_printf("⬆%s ⬇%s", tx_in, tx_out);
+				text = g_strdup_printf("\xe2\xac\x86%s \xe2\xac\x87%s", tx_in, tx_out);
 			}
 
 			g_free(tx_in);
@@ -144,7 +144,7 @@ multiload_tooltip_update(LoadGraph *g)
 											"Write: %s"),
 											disk_read, disk_write);
 			} else {
-				text = g_strdup_printf("⬆%s ⬇%s", disk_read, disk_write);
+				text = g_strdup_printf("\xe2\xac\x86%s \xe2\xac\x87%s", disk_read, disk_write);
 			}
 			g_free(disk_read);
 			g_free(disk_write);
