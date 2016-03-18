@@ -22,6 +22,72 @@
 #include "autoscaler.h"
 
 
+static char* get_cpu0_name() {
+	char *buf = NULL;
+	char *ret = NULL;
+	size_t n = 0;
+
+	FILE *f = fopen("/proc/cpuinfo", "r");
+	if (f != NULL) {
+		while(TRUE) {
+			if (getline(&buf, &n, f) < 0)
+				break;
+			if (strncmp(buf, "model name", 10) == 0) {
+				ret = g_strdup(strchr(buf, ':')+2);
+				n = strlen(ret) - 1;
+				if (ret[n] == '\n')
+					ret[n] = 0;
+				continue;
+			}
+		}
+		free(buf);
+		fclose(f);
+	}
+	return ret;
+}
+
+static void get_cpu0_info(double *mhz, char **governor) {
+	static gboolean have_cpuinfo = TRUE;
+	static gboolean have_governor = TRUE;
+
+	char *buf = NULL;
+	size_t n = 0;
+
+	if (have_cpuinfo) {
+		FILE *f = fopen("/proc/cpuinfo", "r");
+		if (f != NULL) {
+			while(TRUE) {
+				if (getline(&buf, &n, f) < 0)
+					break;
+				if (strncmp(buf, "cpu MHz", 7) == 0) {
+					*mhz = g_ascii_strtod(strchr(buf, ':')+2, NULL);
+					break;
+				}
+			}
+			free(buf);
+			fclose(f);
+		} else {
+			have_cpuinfo = FALSE;
+		}
+	}
+
+	buf = NULL;
+	if (have_governor) {
+		FILE *f = fopen("/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor", "r");
+		if (f != NULL) {
+			if (getline(&buf, &n, f) < 0) {
+				free(buf);
+				have_governor = FALSE;
+			} else {
+				*governor = buf;
+			}
+		} else {
+			have_governor = FALSE;
+		}
+	}
+
+}
+
 void
 GetCpu (int Maximum, int data [4], LoadGraph *g)
 {
@@ -54,6 +120,7 @@ GetCpu (int Maximum, int data [4], LoadGraph *g)
 	CpuData *xd = (CpuData*) g->extra_data;
 	g_assert_nonnull(xd);
 	if (xd->num_cpu == 0) {
+		xd->cpu0_name = get_cpu0_name();
 		xd->num_cpu = 1 + glibtop_global_server->ncpu;
 		first_call = TRUE;
 	}
@@ -62,6 +129,7 @@ GetCpu (int Maximum, int data [4], LoadGraph *g)
 	glibtop_get_cpu (&cpu);
 	g_return_if_fail ((cpu.flags & needed_flags_cpu) == needed_flags_cpu);
 
+	get_cpu0_info(&xd->cpu0_mhz, &xd->cpu0_governor);
 
 	time [CPU_USER]		= cpu.user;
 	time [CPU_NICE]		= cpu.nice;

@@ -16,7 +16,11 @@ typedef struct _CpuData {
 	gfloat iowait;
 	gfloat total_use;
 	gdouble uptime;
+
 	guint64 num_cpu;
+	gchar* cpu0_name;
+	double cpu0_mhz;
+	gchar* cpu0_governor;
 } CpuData;
 
 typedef struct _MemoryData {
