@@ -20,7 +20,7 @@
 #include "util.h"
 
 
-#define PREF_CONTENT_PADDING 6
+#define PREF_CONTENT_PADDING 5
 #define PREF_LABEL_SPACING 3
 
 static GList *warning_bar_widgets = NULL;
@@ -142,7 +142,8 @@ show_hide_warnings(MultiloadPlugin *ma)
 	if (tooltip_timeout == -1)
 		g_object_get(gtk_settings_get_default(), "gtk-tooltip-timeout", &tooltip_timeout, NULL);
 
-	for ( l=warning_bar_widgets; ; l = l->next ) {
+	// skip first element (NULL)
+	for ( l=warning_bar_widgets->next; ; l = l->next ) {
 		if (l == NULL)
 			break;
 		GtkWidget *w = GTK_WIDGET(l->data);
@@ -333,38 +334,38 @@ void
 multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 {
 	guint i, j, k;
-	static GtkVBox *container = NULL;
+	GtkWidget *container;
 	GtkSizeGroup *sizegroup, *sizegroup2;
-	GtkWidget *scroll;
-	GtkWidget *frame, *frame2;
-	GtkWidget *box, *box2, *box3;
+	GtkWidget *frame;
+	GtkWidget *box, *box2, *box3, *box4;
 	GtkWidget *label;
 	GtkWidget *t;
 
 	GtkWidget *contentArea = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 
-	// Delete old container if present
+	// Init warning bar widget list
+	if (warning_bar_widgets != NULL)
+		g_list_free(warning_bar_widgets);
+	warning_bar_widgets = g_list_append(NULL, NULL);
+
+	// Delete existing dialog contents, if present
+	container = GTK_WIDGET(g_object_get_data (G_OBJECT(dialog), "ContentVBox"));
 	if (G_UNLIKELY(container != NULL && GTK_IS_WIDGET(container)))
-		gtk_container_remove(GTK_CONTAINER(contentArea), GTK_WIDGET(container));
+		gtk_widget_destroy(container);
 
 	// Create new container
-	container = GTK_VBOX(gtk_vbox_new(FALSE, PREF_CONTENT_PADDING));
-	gtk_box_pack_start(GTK_BOX(contentArea), GTK_WIDGET(container), TRUE, TRUE, 0);
-
+	container = gtk_vbox_new(FALSE, PREF_CONTENT_PADDING);
+	gtk_box_pack_start(GTK_BOX(contentArea), container, TRUE, TRUE, 0);
+	g_object_set_data (G_OBJECT(dialog), "ContentVBox", container);
 
 
 	// COLORS
-	scroll = gtk_scrolled_window_new(NULL, NULL);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scroll), GTK_POLICY_AUTOMATIC, GTK_POLICY_NEVER);
-	gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scroll), GTK_SHADOW_NONE);
-	gtk_box_pack_start(GTK_BOX(container), scroll, FALSE, FALSE, 0);
-
 	box = gtk_hbox_new(FALSE, PREF_CONTENT_PADDING);
-	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(scroll), box);
+	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
 	sizegroup = gtk_size_group_new(GTK_SIZE_GROUP_BOTH);
 	for( i = 0; i < GRAPH_MAX; i++ ) {
-		// -- -- checkbox
+		// graph enable
 		t = gtk_check_button_new_with_mnemonic(graph_types[i].label_interactive);
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(t),
 							ma->graph_config[i].visible);
@@ -373,16 +374,17 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 		gtk_widget_set_tooltip_text(t, _("Show or hide this graph"));
 		checkbuttons[i] = t;
 
-		// -- -- frame
+		// frame
 		frame = gtk_frame_new(NULL);
+		gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_ETCHED_IN);
 		gtk_frame_set_label_widget(GTK_FRAME(frame), t);
-		gtk_box_pack_start(GTK_BOX(box), GTK_WIDGET(frame), FALSE, FALSE, PREF_CONTENT_PADDING);
+		gtk_box_pack_start(GTK_BOX(box), GTK_WIDGET(frame), FALSE, FALSE, 0);
 
 		box2 = gtk_vbox_new(FALSE, 0);
 		gtk_container_set_border_width(GTK_CONTAINER(box2), PREF_CONTENT_PADDING);
 		gtk_container_add(GTK_CONTAINER(frame), GTK_WIDGET(box2));
 
-		// -- -- colors
+		// colors
 		k = multiload_config_get_num_data(i);
 		for( j=0; j<k; j++ ) {
 			t = color_selector_new(i, j, TRUE, TRUE, ma);
@@ -392,31 +394,49 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 
 
 		// background color
-		frame2 = gtk_frame_new(_("Background"));
-		gtk_box_pack_end(GTK_BOX(box2), frame2, FALSE, FALSE, PREF_LABEL_SPACING);
+		box4 = gtk_vbox_new(FALSE, 0);
+		gtk_box_pack_end(GTK_BOX(box2), box4, FALSE, FALSE, 0);
+
+		t = gtk_hseparator_new();
+		gtk_widget_set_size_request(t, -1, 3);
+		gtk_box_pack_start(GTK_BOX(box4), t, FALSE, FALSE, 2);
+
+		label = gtk_label_new(_("Background"));
+		gtk_misc_set_alignment (GTK_MISC (label), 0.5f, 1.0f);
+		gtk_box_pack_start(GTK_BOX(box4), label, FALSE, FALSE, 0);
 
 		box3 = gtk_hbox_new(FALSE, PREF_CONTENT_PADDING);
 		gtk_container_set_border_width(GTK_CONTAINER(box3), PREF_CONTENT_PADDING);
-		gtk_container_add(GTK_CONTAINER(frame2), GTK_WIDGET(box3));
-
-		k = multiload_colors_get_extra_index(i, EXTRA_COLOR_BACKGROUND_TOP);
-		t = color_selector_new(i, k, FALSE, FALSE, ma);
-		gtk_box_pack_start(GTK_BOX(box3), t, FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(box4), GTK_WIDGET(box3), FALSE, FALSE, 0);
 
 		k = multiload_colors_get_extra_index(i, EXTRA_COLOR_BACKGROUND_BOTTOM);
 		t = color_selector_new(i, k, FALSE, FALSE, ma);
 		gtk_box_pack_start(GTK_BOX(box3), t, FALSE, FALSE, 0);
 
+		k = multiload_colors_get_extra_index(i, EXTRA_COLOR_BACKGROUND_TOP);
+		t = color_selector_new(i, k, FALSE, FALSE, ma);
+		gtk_box_pack_start(GTK_BOX(box3), t, FALSE, FALSE, 0);
 
 		// border
-		k = multiload_colors_get_extra_index(i, EXTRA_COLOR_BORDER);
-		frame2 = gtk_frame_new(graph_types[i].colors[k].label_noninteractive);
-		gtk_box_pack_end(GTK_BOX(box2), frame2, FALSE, FALSE, PREF_LABEL_SPACING);
+		box4 = gtk_vbox_new(FALSE, 0);
+		gtk_box_pack_end(GTK_BOX(box2), box4, FALSE, FALSE, PREF_CONTENT_PADDING);
+
+		label = gtk_label_new(NULL);
+		gtk_box_pack_start(GTK_BOX(box4), label, FALSE, FALSE, PREF_CONTENT_PADDING);
+
+		t = gtk_hseparator_new();
+		gtk_widget_set_size_request(t, -1, 3);
+		gtk_box_pack_start(GTK_BOX(box4), t, FALSE, FALSE, 2);
+
+		label = gtk_label_new(_("Border"));
+		gtk_misc_set_alignment (GTK_MISC (label), 0.5f, 1.0f);
+		gtk_box_pack_start(GTK_BOX(box4), label, FALSE, FALSE, 0);
 
 		box3 = gtk_hbox_new(FALSE, PREF_CONTENT_PADDING);
 		gtk_container_set_border_width(GTK_CONTAINER(box3), PREF_CONTENT_PADDING);
-		gtk_container_add(GTK_CONTAINER(frame2), GTK_WIDGET(box3));
+		gtk_box_pack_start(GTK_BOX(box4), GTK_WIDGET(box3), FALSE, FALSE, 0);
 
+		k = multiload_colors_get_extra_index(i, EXTRA_COLOR_BORDER);
 		t = color_selector_new(i, k, FALSE, FALSE, ma);
 		gtk_box_pack_start(GTK_BOX(box3), t, FALSE, FALSE, 0);
 
@@ -431,7 +451,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	}
 	properties_set_checkboxes_sensitive(ma, FALSE);
 
-	// -- bottom buttons
+	// color theme buttons
 	box = gtk_hbox_new(FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, PREF_CONTENT_PADDING);
 
@@ -479,7 +499,23 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_size_group_add_widget(sizegroup2, t);
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
-	// -- -- row: padding
+	// Spacing
+	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
+	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
+
+	label = gtk_label_new_with_mnemonic(_("S_pacing: "));
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
+	gtk_size_group_add_widget(sizegroup, label);
+	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
+
+	t = gtk_spin_button_new_with_parameters(MIN_SPACING, MAX_SPACING, STEP_SPACING, ma->spacing, _("%d pixel"));
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), t);
+	g_signal_connect(G_OBJECT(t), "value_changed",
+			G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_SPACING));
+	gtk_size_group_add_widget(sizegroup2, t);
+	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
+
+	// Padding
 	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
@@ -499,26 +535,9 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_box_pack_start(GTK_BOX(box), label, TRUE, TRUE, PREF_CONTENT_PADDING);
 	g_object_set_data(G_OBJECT(t), "warning_bar", label);
 	g_object_set_data(G_OBJECT(t), "warning_prop", GINT_TO_POINTER(PROP_PADDING));
-	// first call, store address of the list
-	warning_bar_widgets = g_list_append(warning_bar_widgets, t);
+	g_assert_nonnull(g_list_append(warning_bar_widgets, t));
 
-	// -- -- row: spacing
-	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
-	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
-
-	label = gtk_label_new_with_mnemonic(_("S_pacing: "));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
-	gtk_size_group_add_widget(sizegroup, label);
-	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
-
-	t = gtk_spin_button_new_with_parameters(MIN_SPACING, MAX_SPACING, STEP_SPACING, ma->spacing, _("%d pixel"));
-	gtk_label_set_mnemonic_widget (GTK_LABEL (label), t);
-	g_signal_connect(G_OBJECT(t), "value_changed",
-			G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_SPACING));
-	gtk_size_group_add_widget(sizegroup2, t);
-	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
-
-	// -- -- row: update interval
+	// Update interval
 	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
@@ -534,13 +553,13 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_size_group_add_widget(sizegroup2, t);
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
-	label = gtk_warning_bar_new(_("System settings could sometimes prevent the informative tooltip to show if the update interval is set too short."));
+	label = gtk_warning_bar_new(_("Tooltip may not show if update interval is too short."));
 	gtk_box_pack_start(GTK_BOX(box), label, TRUE, TRUE, PREF_CONTENT_PADDING);
 	g_object_set_data(G_OBJECT(t), "warning_bar", label);
 	g_object_set_data(G_OBJECT(t), "warning_prop", GINT_TO_POINTER(PROP_SPEED));
 	g_assert_nonnull(g_list_append(warning_bar_widgets, t));
 
-	// -- -- row: orientation
+	// Orientation
 	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
@@ -560,14 +579,14 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_size_group_add_widget(sizegroup2, t);
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
-	label = gtk_warning_bar_new(_("Selected orientation is not the same of the panel. Graphs could be very small."));
+	label = gtk_warning_bar_new(_("Selected orientation is not the same of the panel. Graphs may be very small."));
 	gtk_box_pack_start(GTK_BOX(box), label, TRUE, TRUE, PREF_CONTENT_PADDING);
 	g_object_set_data(G_OBJECT(t), "warning_bar", label);
 	g_object_set_data(G_OBJECT(t), "warning_prop", GINT_TO_POINTER(PROP_ORIENTATION));
 	g_assert_nonnull(g_list_append(warning_bar_widgets, t));
 
 
-	// -- checkbox
+	// Fill space between graphs
 	t = gtk_check_button_new_with_mnemonic(_("Fill space between graphs"));
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(t),
 						ma->fill_between);

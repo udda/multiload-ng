@@ -65,7 +65,7 @@ void multiload_config_init()
 			}
 		},
 
-		{	"loadavg",			_("_Load average"),		_("Load average"),	GetLoadAvg,
+		{	"loadavg",			_("_Load avg."),		_("Load average"),	GetLoadAvg,
 			4, { // hue: 0
 				{ _("A_verage")	,				_("Average"),				"#FFD14343" },
 				{ _("Bor_der"),					_("Border"),				"#FF800000" },
