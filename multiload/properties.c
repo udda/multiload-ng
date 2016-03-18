@@ -596,14 +596,14 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(t), ma->fill_between);
 	g_signal_connect(G_OBJECT(t), "toggled",
 						G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_FILLBETWEEN));
-	gtk_box_pack_start(GTK_BOX(container), t, FALSE, FALSE, PREF_CONTENT_PADDING);
+	gtk_box_pack_start(GTK_BOX(container), t, FALSE, FALSE, 0);
 	
 	// Detailed informations in tooltips
 	t = gtk_check_button_new_with_mnemonic(_("_Detailed informations in tooltips"));
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(t), ma->tooltip_details);
 	g_signal_connect(G_OBJECT(t), "toggled",
 						G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_TOOLTIP_DETAILS));
-	gtk_box_pack_start(GTK_BOX(container), t, FALSE, FALSE, PREF_CONTENT_PADDING);
+	gtk_box_pack_start(GTK_BOX(container), t, FALSE, FALSE, 0);
 
 
 	gtk_widget_show_all(GTK_WIDGET(contentArea));
