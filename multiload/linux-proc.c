@@ -33,9 +33,7 @@ static void get_cpu0_name(char* cpuname) {
 				break;
 			if (strncmp(buf, "model name", 10) == 0) {
 				strcpy(cpuname, strchr(buf, ':')+2);
-				n = strlen(cpuname) - 1;
-				if (cpuname[n] == '\n')
-					cpuname[n] = 0;
+				cpuname[strlen(cpuname)-1] = 0;
 				break;
 			}
 		}
@@ -78,6 +76,7 @@ static void get_cpu0_info(double *mhz, char *governor) {
 			else
 				strcpy(governor, buf);
 			free(buf);
+			fclose(f);
 		} else {
 			have_governor = FALSE;
 		}
