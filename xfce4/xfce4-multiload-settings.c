@@ -109,7 +109,7 @@ multiload_read (XfcePanelPlugin *plugin,
 			ma->padding = xfce_rc_read_int_entry(rc, "padding", DEFAULT_PADDING);
 			ma->spacing = xfce_rc_read_int_entry(rc, "spacing", DEFAULT_PADDING);
 			ma->orientation_policy = xfce_rc_read_int_entry (rc, "orientation", DEFAULT_ORIENTATION);
-			ma->orientation_policy = xfce_rc_read_bool_entry (rc, "fill_between", DEFAULT_FILL_BETWEEN);
+			ma->fill_between = xfce_rc_read_bool_entry (rc, "fill_between", DEFAULT_FILL_BETWEEN);
 
 			/* Read visibility and colors for each graph */
 			for ( i = 0; i < GRAPH_MAX; i++ ) {
