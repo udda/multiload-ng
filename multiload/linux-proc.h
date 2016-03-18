@@ -18,9 +18,10 @@ typedef struct _CpuData {
 	gdouble uptime;
 
 	guint64 num_cpu;
-	gchar* cpu0_name;
+	// use oversized buffers (just to be sure)
+	gchar cpu0_name[128];
+	gchar cpu0_governor[32];
 	double cpu0_mhz;
-	gchar* cpu0_governor;
 } CpuData;
 
 typedef struct _MemoryData {
