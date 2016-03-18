@@ -7,10 +7,13 @@
 
 G_BEGIN_DECLS
 
-typedef struct _AutoScaler
-{
-	/* const */ unsigned update_interval;
-	/* const */ unsigned floor;
+/* Seconds after which reevaluate the maximum */
+#define AUTOSCALER_UPDATE_INTERVAL 60
+/* Min value of the the maximum. Note that the autoscaler
+ * is used to represent transfer rates (byte/sec) */
+#define AUTOSCALER_FLOOR 500
+
+typedef struct {
 	unsigned max;
 	unsigned count;
 	time_t last_update;
@@ -19,10 +22,8 @@ typedef struct _AutoScaler
 } AutoScaler;
 
 
-G_GNUC_INTERNAL void
-autoscaler_init(AutoScaler *that, unsigned interval, unsigned floor);
 G_GNUC_INTERNAL unsigned
-autoscaler_get_max(AutoScaler *that, unsigned current);
+autoscaler_get_max(AutoScaler *s, unsigned current);
 
 G_END_DECLS
 

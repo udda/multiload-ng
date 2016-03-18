@@ -219,10 +219,6 @@ GetNet (int Maximum, int data [3], LoadGraph *g)
 	g_assert_nonnull(xd);
 
 
-	if (ticks == 0)
-		autoscaler_init(&xd->scaler, 60, 501);
-
-
 	devices = glibtop_get_netlist(&netlist);
 
 	for ( i=0; i<netlist.number; i++ ) {
@@ -345,7 +341,7 @@ GetDisk (int Maximum, int data [2], LoadGraph *g)
 {
 	glibtop_mountlist mountlist;
 	glibtop_fsusage fsusage;
-	gboolean first_call = FALSE;
+	static gboolean first_call = TRUE;
 
 	static const guint64 needed_flags =
 		(1 << GLIBTOP_FSUSAGE_BLOCK_SIZE) +
@@ -354,10 +350,6 @@ GetDisk (int Maximum, int data [2], LoadGraph *g)
 
 	DiskData *xd = (DiskData*) g->extra_data;
 	g_assert_nonnull(xd);
-	if (xd->scaler.floor == 0) {
-		autoscaler_init(&xd->scaler, 60, 500);
-		first_call = TRUE;
-	}
 
 	guint i;
 	int max;
@@ -391,8 +383,10 @@ GetDisk (int Maximum, int data [2], LoadGraph *g)
 	xd->last_read  = read;
 	xd->last_write = write;
 
-	if (first_call)
+	if (first_call) {
+		first_call = FALSE;
 		return;
+	}
 
 	max = autoscaler_get_max(&xd->scaler, readdiff + writediff);
 
