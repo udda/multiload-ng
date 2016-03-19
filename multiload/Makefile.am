@@ -13,13 +13,13 @@ noinst_LTLIBRARIES = \
 	multiload-core.la
 
 multiload_core_la_SOURCES = \
-	multiload.c multiload.h \
+	autoscaler.c autoscaler.h \
 	linux-proc.c linux-proc.h \
 	load-graph.c load-graph.h \
-	autoscaler.c autoscaler.h \
-	properties.c properties.h \
+	multiload.c multiload.h \
 	multiload-colors.c multiload-colors.h \
 	multiload-config.c multiload-config.h \
+	properties.c properties.h \
 	util.c util.h
 
 multiload_core_la_CFLAGS = \
