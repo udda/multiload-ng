@@ -433,11 +433,11 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 		gtk_container_set_border_width(GTK_CONTAINER(box3), PREF_CONTENT_PADDING);
 		gtk_box_pack_start(GTK_BOX(box4), GTK_WIDGET(box3), FALSE, FALSE, 0);
 
-		k = multiload_colors_get_extra_index(i, EXTRA_COLOR_BACKGROUND_BOTTOM);
+		k = multiload_colors_get_extra_index(i, EXTRA_COLOR_BACKGROUND_TOP);
 		t = color_selector_new(i, k, FALSE, FALSE, ma);
 		gtk_box_pack_start(GTK_BOX(box3), t, FALSE, FALSE, 0);
 
-		k = multiload_colors_get_extra_index(i, EXTRA_COLOR_BACKGROUND_TOP);
+		k = multiload_colors_get_extra_index(i, EXTRA_COLOR_BACKGROUND_BOTTOM);
 		t = color_selector_new(i, k, FALSE, FALSE, ma);
 		gtk_box_pack_start(GTK_BOX(box3), t, FALSE, FALSE, 0);
 
