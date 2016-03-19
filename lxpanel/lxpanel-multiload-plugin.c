@@ -105,12 +105,13 @@ multiload_save(gpointer user_data)
 }
 
 
-
+/*
 gboolean
 multiload_press_event(GtkWidget *ebox, GdkEventButton *event, LXPanel *panel)
 {
 	return TRUE;
 }
+*/
 
 void
 multiload_configure_response (GtkWidget *dialog, gint response, MultiloadLxpanelPlugin *multiload)
@@ -182,8 +183,10 @@ void multiload_configuration_changed(LXPanel *panel, GtkWidget *ebox)
 	/* Determine orientation and size */
 	if ( panel_get_orientation(panel) == GTK_ORIENTATION_VERTICAL ) {
 		multiload->ma.panel_orientation = GTK_ORIENTATION_VERTICAL;
-		gtk_widget_set_size_request (ebox, panel_get_height(panel), -1); //TODO è lo stesso di width?
-	} else { //multiload->ma->panel_orientation can have values other than vert/horiz
+		/* FIXME: lxpanel currently does not have a function to retrieve panel
+		 * width. Is this the same of height in vertical orientation? */
+		gtk_widget_set_size_request (ebox, panel_get_height(panel), -1);
+	} else { /* ma->panel_orientation can have values other than vert/horiz */
 		multiload->ma.panel_orientation = GTK_ORIENTATION_HORIZONTAL;
 		gtk_widget_set_size_request (ebox, -1, panel_get_height(panel));
 	}
@@ -204,7 +207,7 @@ multiload_destructor(gpointer user_data)
 
 
 GtkWidget*
-multiload_constructor(LXPanel *panel, config_setting_t *settings) //char **fp)
+multiload_constructor(LXPanel *panel, config_setting_t *settings)
 {
 	/* allocate our private structure instance */
 	MultiloadLxpanelPlugin *multiload = g_new0(MultiloadLxpanelPlugin, 1);
@@ -223,7 +226,6 @@ multiload_constructor(LXPanel *panel, config_setting_t *settings) //char **fp)
 	lxpanel_plugin_set_data(multiload->ma.container, multiload, multiload_destructor);
 	gtk_widget_show (GTK_WIDGET(multiload->ma.container));
 
-	/* Initialize the applet */
 	/* Set size request and update orientation */
 	multiload_configuration_changed(panel, GTK_WIDGET(multiload->ma.container));
 
@@ -232,7 +234,6 @@ multiload_constructor(LXPanel *panel, config_setting_t *settings) //char **fp)
 
 
 /* Lookup the MultiloadPlugin object from the preferences dialog. */
-/* Called from multiload/properties.c */
 MultiloadPlugin *
 multiload_configure_get_plugin (GtkWidget *widget)
 {

@@ -80,8 +80,6 @@ multiload_free (XfcePanelPlugin *plugin,
 	/* destroy the panel widgets */
 	gtk_widget_destroy (multiload->ebox);
 
-	/* cleanup the settings (FIXME) */
-
 	/* free the plugin structure */
 	panel_slice_free (MultiloadXfcePlugin, multiload);
 }
