@@ -279,7 +279,7 @@ GetNet (int Maximum, int data [3], LoadGraph *g)
 			total += delta[i];
 		}
 
-		max = autoscaler_get_max(&xd->scaler, total);
+		max = autoscaler_get_max(&xd->scaler, g, total);
 
 		xd->in_speed	= calculate_speed(delta[NET_IN], 	g->multiload->speed);
 		xd->out_speed	= calculate_speed(delta[NET_OUT],	g->multiload->speed);
@@ -396,7 +396,7 @@ GetDisk (int Maximum, int data [2], LoadGraph *g)
 		return;
 	}
 
-	max = autoscaler_get_max(&xd->scaler, readdiff + writediff);
+	max = autoscaler_get_max(&xd->scaler, g, readdiff + writediff);
 
 	data[0] = (float)Maximum *  readdiff / (float)max;
 	data[1] = (float)Maximum * writediff / (float)max;

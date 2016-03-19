@@ -4,11 +4,10 @@
 #include <glib.h>
 #include <time.h>
 
+#include "multiload.h"
 
 G_BEGIN_DECLS
 
-/* Seconds after which reevaluate the maximum */
-#define AUTOSCALER_UPDATE_INTERVAL 60
 /* Min value of the the maximum. Note that the autoscaler
  * is used to represent transfer rates (byte/sec) */
 #define AUTOSCALER_FLOOR 500
@@ -23,7 +22,7 @@ typedef struct {
 
 
 G_GNUC_INTERNAL unsigned
-autoscaler_get_max(AutoScaler *s, unsigned current);
+autoscaler_get_max(AutoScaler *s, LoadGraph *g, unsigned current);
 
 G_END_DECLS
 

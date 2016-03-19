@@ -1,10 +1,11 @@
+#include <config.h>
 #include <time.h>
 #include <glib.h>
 
 #include "autoscaler.h"
 
 
-unsigned autoscaler_get_max(AutoScaler *s, unsigned current)
+unsigned autoscaler_get_max(AutoScaler *s, LoadGraph *g, unsigned current)
 {
 	time_t now;
 
@@ -12,7 +13,7 @@ unsigned autoscaler_get_max(AutoScaler *s, unsigned current)
 	s->count++;
 	time(&now);
 
-	if ((float)difftime(now, s->last_update) > AUTOSCALER_UPDATE_INTERVAL) {
+	if ((float)difftime(now, s->last_update) > (g->draw_width * g->multiload->speed / 1000)) {
 		float new_average = s->sum / s->count;
 		float average;
 
