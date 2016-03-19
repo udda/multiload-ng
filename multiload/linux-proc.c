@@ -200,6 +200,7 @@ GetNet (int Maximum, int data [3], LoadGraph *g)
 	gchar path[PATH_MAX];
 	gchar **devices;
 	guint i;
+	guint ifacelen;
 
 	enum {
 		NET_IN		= 0,
@@ -218,6 +219,9 @@ GetNet (int Maximum, int data [3], LoadGraph *g)
 	NetData *xd = (NetData*) g->extra_data;
 	g_assert_nonnull(xd);
 
+
+	ifacelen = sizeof(xd->ifaces)/sizeof(gchar);
+	xd->ifaces[0] = 0;
 
 	devices = glibtop_get_netlist(&netlist);
 
@@ -250,7 +254,11 @@ GetNet (int Maximum, int data [3], LoadGraph *g)
 
 		present[NET_IN] += netload.bytes_in;
 		present[NET_OUT] += netload.bytes_out;
+
+		g_strlcat (xd->ifaces, devices[i], ifacelen);
+		g_strlcat (xd->ifaces, ", ", ifacelen);
 	}
+	xd->ifaces[strlen(xd->ifaces)-2] = 0;
 
 	g_strfreev(devices);
 

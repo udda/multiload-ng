@@ -37,6 +37,8 @@ typedef struct _NetData {
 	guint64 in_speed;
 	guint64 out_speed;
 	guint64 local_speed;
+
+	gchar ifaces[64];
 } NetData;
 
 typedef struct _SwapData {
