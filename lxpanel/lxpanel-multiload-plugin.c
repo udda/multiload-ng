@@ -119,7 +119,6 @@ multiload_configure_response (GtkWidget *dialog, gint response, MultiloadLxpanel
 
 	if (response == GTK_RESPONSE_HELP) {
 		/* show help */
-		/* FIXME: Not all common versions of xdg-open support lxde -2012-06-25 */
 		result = g_spawn_command_line_async ("xdg-open --launch WebBrowser "
 						PLUGIN_WEBSITE, NULL);
 
