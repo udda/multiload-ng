@@ -276,6 +276,7 @@ void multiload_defaults(MultiloadPlugin *ma)
 	ma->padding = DEFAULT_PADDING;
 	ma->spacing = DEFAULT_SPACING;
 	ma->fill_between = DEFAULT_FILL_BETWEEN;
+	ma->tooltip_details = DEFAULT_TOOLTIP_DETAILS;
 	for ( i = 0; i < GRAPH_MAX; i++ ) {
 		ma->graph_config[i].border_width = DEFAULT_BORDER_WIDTH;
 		ma->graph_config[i].visible = i == 0 ? TRUE : FALSE;
