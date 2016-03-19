@@ -161,11 +161,10 @@ load_graph_alloc (LoadGraph *g)
 }
 
 static gint
-load_graph_configure (GtkWidget *widget, GdkEventConfigure *event,
-			  gpointer data_ptr)
+load_graph_configure (GtkWidget *widget, GdkEventConfigure *event, gpointer p)
 {
 	GtkAllocation allocation;
-	LoadGraph *c = (LoadGraph *) data_ptr;
+	LoadGraph *c = (LoadGraph *) p;
 
 	load_graph_unalloc (c);
 
@@ -213,15 +212,19 @@ load_graph_destroy (GtkWidget *widget, gpointer data_ptr)
 	gtk_widget_destroy(widget);
 }
 
-/*
 static gboolean
-load_graph_clicked (GtkWidget *widget, GdkEventButton *event, LoadGraph *load)
+load_graph_clicked (GtkWidget *widget, GdkEventButton *event, LoadGraph *g)
 {
-	// Formerly used to have properties open to this graph.
+	int result;
+	const gchar* cmdline = "xfce4-taskmanager"; // for testing purposes, this will be configurable
+	if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
+		result = g_spawn_command_line_async (cmdline, NULL);
 
+		if (G_UNLIKELY (result == FALSE))
+			g_warning (_("Unable to execute the following command line: '%s'"), cmdline);
+	}
 	return FALSE;
 }
-*/
 
 static gboolean
 load_graph_enter_cb(GtkWidget *widget, GdkEventCrossing *event, gpointer data)
@@ -312,13 +315,13 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 	gtk_widget_set_events (g->disp,
 						GDK_EXPOSURE_MASK |
 						GDK_ENTER_NOTIFY_MASK |
-						GDK_LEAVE_NOTIFY_MASK/* |
-						GDK_BUTTON_PRESS_MASK*/);
+						GDK_LEAVE_NOTIFY_MASK |
+						GDK_BUTTON_PRESS_MASK);
 
 	g_signal_connect (G_OBJECT(g->disp), "expose_event", G_CALLBACK (load_graph_expose), g);
 	g_signal_connect (G_OBJECT(g->disp), "configure_event", G_CALLBACK (load_graph_configure), g);
 	g_signal_connect (G_OBJECT(g->disp), "destroy", G_CALLBACK (load_graph_destroy), g);
-//	g_signal_connect (G_OBJECT(g->disp), "button-press-event", G_CALLBACK (load_graph_clicked), g);
+	g_signal_connect (G_OBJECT(g->disp), "button-press-event", G_CALLBACK (load_graph_clicked), g);
 	g_signal_connect (G_OBJECT(g->disp), "enter-notify-event", G_CALLBACK(load_graph_enter_cb), g);
 	g_signal_connect (G_OBJECT(g->disp), "leave-notify-event", G_CALLBACK(load_graph_leave_cb), g);
 
