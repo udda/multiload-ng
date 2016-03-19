@@ -57,6 +57,8 @@ multiload_save (XfcePanelPlugin *plugin, MultiloadPlugin *ma)
 		xfce_rc_write_int_entry (rc, "orientation", ma->orientation_policy);
 		xfce_rc_write_int_entry (rc, "fill-between", ma->fill_between);
 		xfce_rc_write_int_entry (rc, "tooltip-details", ma->tooltip_details);
+		xfce_rc_write_int_entry (rc, "dblclick-policy", ma->dblclick_policy);
+		xfce_rc_write_entry (rc, "dblclick-cmdline", ma->dblclick_cmdline);
 
 		for ( i = 0; i < GRAPH_MAX; i++ ) {
 			char *key, list[10*MAX_COLORS];
@@ -90,6 +92,7 @@ multiload_read (XfcePanelPlugin *plugin,
 	XfceRc *rc;
 	gchar *file;
 	guint i;
+	gchar *tmp_str;
 
 	multiload_defaults(ma);
 
@@ -112,6 +115,10 @@ multiload_read (XfcePanelPlugin *plugin,
 			ma->orientation_policy = xfce_rc_read_int_entry (rc, "orientation", DEFAULT_ORIENTATION);
 			ma->fill_between = xfce_rc_read_bool_entry (rc, "fill-between", DEFAULT_FILL_BETWEEN);
 			ma->tooltip_details = xfce_rc_read_bool_entry (rc, "tooltip-details", DEFAULT_TOOLTIP_DETAILS);
+			ma->dblclick_policy = xfce_rc_read_int_entry (rc, "dblclick-policy", DEFAULT_DBLCLICK_POLICY);
+			tmp_str = xfce_rc_read_entry (rc, "dblclick-cmdline", NULL);
+			if (tmp_str != NULL)
+				strncpy(ma->dblclick_cmdline, tmp_str, sizeof(ma->dblclick_cmdline)/sizeof(gchar));
 
 			/* Read visibility and colors for each graph */
 			for ( i = 0; i < GRAPH_MAX; i++ ) {

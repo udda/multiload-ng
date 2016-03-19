@@ -23,7 +23,7 @@
 #define PREF_CONTENT_PADDING 5
 #define PREF_LABEL_SPACING 3
 
-static GList *warning_bar_widgets = NULL;
+static GList *dynamic_widgets = NULL;
 static GtkWidget *checkbuttons[GRAPH_MAX];
 
 /* Defined in panel-specific code. */
@@ -132,7 +132,7 @@ action_performed_cb(GtkWidget *widget, gpointer id)
 }
 
 static void
-show_hide_warnings(MultiloadPlugin *ma)
+show_hide_dynamic(MultiloadPlugin *ma)
 {
 	GList* l;
 	int n;
@@ -143,32 +143,38 @@ show_hide_warnings(MultiloadPlugin *ma)
 		g_object_get(gtk_settings_get_default(), "gtk-tooltip-timeout", &tooltip_timeout, NULL);
 
 	// skip first element (NULL)
-	for ( l=warning_bar_widgets->next; ; l = l->next ) {
+	for ( l=dynamic_widgets->next; ; l = l->next ) {
 		if (l == NULL)
 			break;
 		GtkWidget *w = GTK_WIDGET(l->data);
-		GtkWidget *warning_bar = GTK_WIDGET(g_object_get_data (G_OBJECT(w), "warning_bar"));
-		gint prop_type = GPOINTER_TO_INT(g_object_get_data (G_OBJECT(w), "warning_prop"));
+		GtkWidget *target = GTK_WIDGET(g_object_get_data (G_OBJECT(w), "dynamic_target"));
+		gint prop_type = GPOINTER_TO_INT(g_object_get_data (G_OBJECT(w), "dynamic_prop"));
 		switch (prop_type) {
 			case PROP_SPEED:
 				n = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(w));
 				b = (n < tooltip_timeout);
-				gtk_widget_set_visible(warning_bar, b);
 				break;
 
 			case PROP_ORIENTATION:
 				n = gtk_combo_box_get_active(GTK_COMBO_BOX(w));
-				b = ((ma->panel_orientation == GTK_ORIENTATION_HORIZONTAL && n == 2) ||
-					(ma->panel_orientation == GTK_ORIENTATION_VERTICAL && n == 1));
-				gtk_widget_set_visible(warning_bar, b);
+				b = ((ma->panel_orientation == GTK_ORIENTATION_HORIZONTAL && n == MULTILOAD_ORIENTATION_VERTICAL) ||
+					(ma->panel_orientation == GTK_ORIENTATION_VERTICAL && n == MULTILOAD_ORIENTATION_HORIZONTAL));
 				break;
 
 			case PROP_PADDING:
 				n = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(w));
 				b = (n >= 10);
-				gtk_widget_set_visible(warning_bar, b);
 				break;
+
+			case PROP_DBLCLICK_POLICY:
+				n = gtk_combo_box_get_active(GTK_COMBO_BOX(w));
+				b = (n == DBLCLICK_POLICY_CMDLINE);
+				break;
+
+			default:
+				g_assert_not_reached();
 		}
+		gtk_widget_set_visible(target, b);
 	}
 }
 
@@ -180,17 +186,19 @@ property_changed_cb(GtkWidget *widget, gpointer id) {
 	gint prop_type = GPOINTER_TO_INT(id) & 0xFFFF0000;
 	gint prop_data = GPOINTER_TO_INT(id) & 0x0000FFFF;
 
-	gint value;
 	gint graph;
-	gint i;
+	guint i;
+
+	gint val_int;
+	const gchar *val_str;
 
 	switch(prop_type) {
 		case PROP_SHOWGRAPH:
 			g_assert(prop_data>=0 && prop_data<GRAPH_MAX);
-			value = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
-			properties_set_checkboxes_sensitive(ma, value);
-			ma->graph_config[prop_data].visible = value;
-			if (value) {
+			val_int = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
+			properties_set_checkboxes_sensitive(ma, val_int);
+			ma->graph_config[prop_data].visible = val_int;
+			if (val_int != 0) {
 				gtk_widget_show_all (ma->graphs[prop_data]->main_widget);
 				load_graph_start(ma->graphs[prop_data]);
 			} else {
@@ -200,8 +208,8 @@ property_changed_cb(GtkWidget *widget, gpointer id) {
 			break;
 
 		case PROP_SPEED:
-			value = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
-			ma->speed = value;
+			val_int = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
+			ma->speed = val_int;
 			for (i = 0; i < GRAPH_MAX; i++) {
 				load_graph_stop(ma->graphs[i]);
 				if (ma->graph_config[i].visible)
@@ -210,34 +218,34 @@ property_changed_cb(GtkWidget *widget, gpointer id) {
 			break;
 
 		case PROP_SIZE:
-			value = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
-			ma->size = value;
+			val_int = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
+			ma->size = val_int;
 			for (i = 0; i < GRAPH_MAX; i++)
 				load_graph_resize(ma->graphs[i]);
 			break;
 
 		case PROP_PADDING:
-			value = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
-			ma->padding = value;
+			val_int = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
+			ma->padding = val_int;
 			multiload_refresh(ma);
 			break;
 
 		case PROP_SPACING:
-			value = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
-			ma->spacing = value;
+			val_int = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
+			ma->spacing = val_int;
 			multiload_refresh(ma);
 			break;
 
 		case PROP_ORIENTATION:
-			value = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
-			ma->orientation_policy = value;
+			val_int = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
+			ma->orientation_policy = val_int;
 			multiload_refresh(ma);
 			break;
 
 		case PROP_BORDERWIDTH:
 			g_assert(prop_data>=0 && prop_data<GRAPH_MAX);
-			value = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
-			ma->graph_config[prop_data].border_width = value;
+			val_int = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
+			ma->graph_config[prop_data].border_width = val_int;
 			multiload_refresh(ma);
 			break;
 
@@ -257,20 +265,31 @@ property_changed_cb(GtkWidget *widget, gpointer id) {
 			break;
 
 		case PROP_FILLBETWEEN:
-			value = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
-			ma->fill_between = value;
+			val_int = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
+			ma->fill_between = val_int;
 			multiload_refresh(ma);
 			break;
 
 		case PROP_TOOLTIP_DETAILS:
-			value = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
-			ma->tooltip_details = value;
+			val_int = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
+			ma->tooltip_details = val_int;
+			break;
+
+		case PROP_DBLCLICK_POLICY:
+			val_int = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
+			ma->dblclick_policy = val_int;
+			break;
+
+		case PROP_DBLCLICK_CMDLINE:
+			val_str = gtk_entry_get_text(GTK_ENTRY(widget));
+			i = sizeof(ma->dblclick_cmdline)/sizeof(gchar);
+			strncpy(ma->dblclick_cmdline, val_str, i);
 			break;
 
 		default:
 			g_assert_not_reached();
 	}
-	show_hide_warnings(ma);
+	show_hide_dynamic(ma);
 }
 
 /*
@@ -344,14 +363,14 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	GtkWidget *frame;
 	GtkWidget *box, *box2, *box3, *box4;
 	GtkWidget *label;
-	GtkWidget *t;
+	GtkWidget *t, *p;
 
 	GtkWidget *contentArea = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 
 	// Init warning bar widget list
-	if (warning_bar_widgets != NULL)
-		g_list_free(warning_bar_widgets);
-	warning_bar_widgets = g_list_append(NULL, NULL);
+	if (dynamic_widgets != NULL)
+		g_list_free(dynamic_widgets);
+	dynamic_widgets = g_list_append(NULL, NULL);
 
 	// Delete existing dialog contents, if present
 	container = GTK_WIDGET(g_object_get_data (G_OBJECT(dialog), "ContentVBox"));
@@ -538,9 +557,9 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 
 	label = gtk_warning_bar_new(_("If padding is set too large, the graph won't show."));
 	gtk_box_pack_start(GTK_BOX(box), label, TRUE, TRUE, PREF_CONTENT_PADDING);
-	g_object_set_data(G_OBJECT(t), "warning_bar", label);
-	g_object_set_data(G_OBJECT(t), "warning_prop", GINT_TO_POINTER(PROP_PADDING));
-	g_assert_nonnull(g_list_append(warning_bar_widgets, t));
+	g_object_set_data(G_OBJECT(t), "dynamic_target", label);
+	g_object_set_data(G_OBJECT(t), "dynamic_prop", GINT_TO_POINTER(PROP_PADDING));
+	g_assert_nonnull(g_list_append(dynamic_widgets, t));
 
 	// Update interval
 	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
@@ -560,9 +579,9 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 
 	label = gtk_warning_bar_new(_("Tooltip may not show if update interval is too short."));
 	gtk_box_pack_start(GTK_BOX(box), label, TRUE, TRUE, PREF_CONTENT_PADDING);
-	g_object_set_data(G_OBJECT(t), "warning_bar", label);
-	g_object_set_data(G_OBJECT(t), "warning_prop", GINT_TO_POINTER(PROP_SPEED));
-	g_assert_nonnull(g_list_append(warning_bar_widgets, t));
+	g_object_set_data(G_OBJECT(t), "dynamic_target", label);
+	g_object_set_data(G_OBJECT(t), "dynamic_prop", GINT_TO_POINTER(PROP_SPEED));
+	g_assert_nonnull(g_list_append(dynamic_widgets, t));
 
 	// Orientation
 	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
@@ -586,9 +605,39 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 
 	label = gtk_warning_bar_new(_("Selected orientation is not the same of the panel. Graphs may be very small."));
 	gtk_box_pack_start(GTK_BOX(box), label, TRUE, TRUE, PREF_CONTENT_PADDING);
-	g_object_set_data(G_OBJECT(t), "warning_bar", label);
-	g_object_set_data(G_OBJECT(t), "warning_prop", GINT_TO_POINTER(PROP_ORIENTATION));
-	g_assert_nonnull(g_list_append(warning_bar_widgets, t));
+	g_object_set_data(G_OBJECT(t), "dynamic_target", label);
+	g_object_set_data(G_OBJECT(t), "dynamic_prop", GINT_TO_POINTER(PROP_ORIENTATION));
+	g_assert_nonnull(g_list_append(dynamic_widgets, t));
+
+	// Execute application on double click
+	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
+	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
+
+	label = gtk_label_new_with_mnemonic(_("On double clic_k:"));
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
+	gtk_size_group_add_widget(sizegroup, label);
+	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
+
+	t = gtk_combo_box_text_new();
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(t), _("Do nothing"));
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(t), _("Start task manager"));
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(t), _("Execute custom command"));
+	gtk_combo_box_set_active(GTK_COMBO_BOX(t), ma->dblclick_policy);
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), t);
+	g_signal_connect(G_OBJECT(t), "changed",
+			G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_DBLCLICK_POLICY));
+	gtk_size_group_add_widget(sizegroup2, t);
+	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
+
+	p = gtk_entry_new_with_max_length(sizeof(ma->dblclick_cmdline)/sizeof(gchar) - 1);
+	gtk_box_pack_start(GTK_BOX(box), p, FALSE, FALSE, PREF_CONTENT_PADDING);
+	gtk_entry_set_text(GTK_ENTRY(p), ma->dblclick_cmdline);
+	gtk_entry_set_width_chars(GTK_ENTRY(p), 36);
+	g_signal_connect(G_OBJECT(p), "changed",
+			G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_DBLCLICK_CMDLINE));
+	g_object_set_data(G_OBJECT(t), "dynamic_target", p);
+	g_object_set_data(G_OBJECT(t), "dynamic_prop", GINT_TO_POINTER(PROP_DBLCLICK_POLICY));
+	g_assert_nonnull(g_list_append(dynamic_widgets, t));
 
 
 	// Fill space between graphs
@@ -607,5 +656,5 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 
 
 	gtk_widget_show_all(GTK_WIDGET(contentArea));
-	show_hide_warnings(ma);
+	show_hide_dynamic(ma);
 }

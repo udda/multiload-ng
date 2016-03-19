@@ -48,6 +48,10 @@ multiload_read(config_setting_t *settings, MultiloadPlugin *ma)
 		ma->fill_between = tmp_int? TRUE:FALSE;
 	if (config_setting_lookup_int(settings, "tooltip-details", &tmp_int))
 		ma->tooltip_details = tmp_int? TRUE:FALSE;
+	if (config_setting_lookup_int(settings, "dblclick-policy", &tmp_int))
+		ma->dblclick_policy = tmp_int;
+	if (config_setting_lookup_string(settings, "dblclick-cmdline", &tmp_str))
+		strncpy(ma->dblclick_policy, tmp_str, sizeof(ma->dblclick_policy)/sizeof(gchar));
 
 	for ( i = 0; i < GRAPH_MAX; i++ ) {
 		key = g_strdup_printf("%s_visible", graph_types[i].name);
@@ -85,6 +89,8 @@ multiload_save(gpointer user_data)
 	config_group_set_int(multiload->settings, "orientation", ma->orientation_policy);
 	config_group_set_int(multiload->settings, "fill-between", ma->fill_between);
 	config_group_set_int(multiload->settings, "tooltip-details", ma->tooltip_details);
+	config_group_set_int(multiload->settings, "dblclick-policy", ma->dblclick_policy);
+	config_group_set_string(multiload->settings, "dblclick-cmdline", ma->dblclick_cmdline);
 
 	for ( i = 0; i < GRAPH_MAX; i++ ) {
 		char *key, list[10*MAX_COLORS];

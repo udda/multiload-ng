@@ -246,3 +246,30 @@ gchar* gtk_save_file_dialog(GtkWindow *parent, const gchar *title, const gchar *
 	gtk_widget_destroy (dialog);
 	return filename;
 }
+
+
+const gchar* get_system_monitor_executable()
+{
+	static const gchar* sysmon[] = {
+		"ksysguard",
+		"gnome-system-monitor",
+		"xfce4-taskmanager",
+		"lxtask",
+		"gnome-system-monitor",
+		"procexp",
+		NULL
+	};
+
+	guint i=0;
+	gchar* path;
+	for (;;) {
+		if (sysmon[i] == NULL)
+			return NULL;
+
+		path = g_find_program_in_path (sysmon[i]);
+		if (path != NULL)
+			return path;
+
+		i++;
+	}
+}

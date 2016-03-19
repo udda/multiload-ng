@@ -216,8 +216,21 @@ static gboolean
 load_graph_clicked (GtkWidget *widget, GdkEventButton *event, LoadGraph *g)
 {
 	int result;
-	const gchar* cmdline = "xfce4-taskmanager"; // for testing purposes, this will be configurable
+	const gchar* cmdline;
+	/* check if button event is a double click with first mouse button */
 	if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
+		switch(g->multiload->dblclick_policy) {
+			case DBLCLICK_POLICY_TASKMANAGER:
+				cmdline = get_system_monitor_executable();
+				break;
+			case DBLCLICK_POLICY_CMDLINE:
+				cmdline = g->multiload->dblclick_cmdline;
+				break;
+			case DBLCLICK_POLICY_DONOTHING:
+			default:
+				return FALSE;
+		}
+
 		result = g_spawn_command_line_async (cmdline, NULL);
 
 		if (G_UNLIKELY (result == FALSE))

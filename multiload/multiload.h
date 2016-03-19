@@ -27,6 +27,10 @@ enum {
 #define MULTILOAD_ORIENTATION_HORIZONTAL	1
 #define MULTILOAD_ORIENTATION_VERTICAL		2
 
+#define DBLCLICK_POLICY_DONOTHING		0
+#define DBLCLICK_POLICY_TASKMANAGER		1
+#define DBLCLICK_POLICY_CMDLINE			2
+
 #define MIN_SIZE 10
 #define DEFAULT_SIZE 40
 #define MAX_SIZE 400
@@ -53,6 +57,7 @@ enum {
 #define STEP_BORDER_WIDTH 1
 
 #define DEFAULT_ORIENTATION MULTILOAD_ORIENTATION_AUTO
+#define DEFAULT_DBLCLICK_POLICY DBLCLICK_POLICY_DONOTHING
 #define DEFAULT_FILL_BETWEEN FALSE
 #define DEFAULT_TOOLTIP_DETAILS FALSE
 
@@ -81,6 +86,8 @@ typedef struct _MultiloadPlugin {
 	guint spacing;
 	gboolean fill_between;
 	gboolean tooltip_details;
+	guint dblclick_policy;
+	gchar dblclick_cmdline[200];
 } MultiloadPlugin;
 
 
