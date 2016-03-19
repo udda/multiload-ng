@@ -51,7 +51,7 @@ multiload_read(config_setting_t *settings, MultiloadPlugin *ma)
 	if (config_setting_lookup_int(settings, "dblclick-policy", &tmp_int))
 		ma->dblclick_policy = tmp_int;
 	if (config_setting_lookup_string(settings, "dblclick-cmdline", &tmp_str))
-		strncpy(ma->dblclick_policy, tmp_str, sizeof(ma->dblclick_policy)/sizeof(gchar));
+		strncpy(ma->dblclick_cmdline, tmp_str, sizeof(ma->dblclick_cmdline)/sizeof(gchar));
 
 	for ( i = 0; i < GRAPH_MAX; i++ ) {
 		key = g_strdup_printf("%s_visible", graph_types[i].name);
@@ -111,14 +111,6 @@ multiload_save(gpointer user_data)
 }
 
 
-/*
-gboolean
-multiload_press_event(GtkWidget *ebox, GdkEventButton *event, LXPanel *panel)
-{
-	return TRUE;
-}
-*/
-
 void
 multiload_configure_response (GtkWidget *dialog, gint response, MultiloadLxpanelPlugin *multiload)
 {
@@ -139,7 +131,8 @@ multiload_configure_response (GtkWidget *dialog, gint response, MultiloadLxpanel
 	}
 }
 
-GtkWidget* multiload_configure(LXPanel *panel, GtkWidget *ebox)
+GtkWidget*
+multiload_configure(LXPanel *panel, GtkWidget *ebox)
 {
 	MultiloadLxpanelPlugin *multiload = lxpanel_plugin_get_data(ebox);
 
@@ -151,12 +144,11 @@ GtkWidget* multiload_configure(LXPanel *panel, GtkWidget *ebox)
 
 	/* create the dialog */
 	multiload->dlg = gtk_dialog_new_with_buttons(_("Multiload"),
-					GTK_WINDOW(ebox),
+					GTK_WINDOW(gtk_widget_get_toplevel(ebox)),
 					GTK_DIALOG_DESTROY_WITH_PARENT,
 					GTK_STOCK_HELP, GTK_RESPONSE_HELP,
 					GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
 					NULL);
-	multiload->dlg = multiload->dlg;
 
 	/* center dialog on the screen */
 	gtk_window_set_position (GTK_WINDOW (multiload->dlg), GTK_WIN_POS_CENTER);
@@ -177,24 +169,24 @@ GtkWidget* multiload_configure(LXPanel *panel, GtkWidget *ebox)
 	g_signal_connect (G_OBJECT (multiload->dlg), "response",
 					G_CALLBACK(multiload_configure_response), multiload);
 
-//	/* show the entire dialog */
-//	gtk_widget_show (multiload->dlg);
 	return GTK_WIDGET(multiload->dlg);
 }
 
-void multiload_configuration_changed(LXPanel *panel, GtkWidget *ebox)
+void
+multiload_configuration_changed(LXPanel *panel, GtkWidget *ebox)
 {
 	MultiloadLxpanelPlugin *multiload = lxpanel_plugin_get_data(ebox);
+
+	// despite the name, in vertical orientation this is panel width
+	int size = panel_get_height(panel);
 
 	/* Determine orientation and size */
 	if ( panel_get_orientation(panel) == GTK_ORIENTATION_VERTICAL ) {
 		multiload->ma.panel_orientation = GTK_ORIENTATION_VERTICAL;
-		/* FIXME: lxpanel currently does not have a function to retrieve panel
-		 * width. Is this the same of height in vertical orientation? */
-		gtk_widget_set_size_request (ebox, panel_get_height(panel), -1);
+		gtk_widget_set_size_request (ebox, size, -1);
 	} else { /* ma->panel_orientation can have values other than vert/horiz */
 		multiload->ma.panel_orientation = GTK_ORIENTATION_HORIZONTAL;
-		gtk_widget_set_size_request (ebox, -1, panel_get_height(panel));
+		gtk_widget_set_size_request (ebox, -1, size);
 	}
 
 	/* Refresh the panel applet */
@@ -263,12 +255,7 @@ LXPanelPluginInit fm_module_init_lxpanel_gtk = {
 
 	.new_instance = multiload_constructor,
 	.config = multiload_configure,
-	// these fields are not implemented in lxpanel>0.7
-	//.type = "multiload",
-	//.version = PACKAGE_VERSION,
 	.reconfigure = multiload_configuration_changed,
 	.one_per_system = FALSE,
 	.expand_available = FALSE
-//	.button_press_event = multiload_press_event
 };
-

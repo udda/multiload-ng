@@ -14,8 +14,8 @@ System Requirements
 - LibGTop                       >= 2.11.92
 
 For temperature support:
-Linux kernel with CONFIG_THERMAL (Generic Thermal sysfs driver).
-Any modern kernel (since 2010) should be just fine.
+- Linux kernel with CONFIG_THERMAL (Generic Thermal sysfs driver).
+  Any modern kernel (since 2010) should be just fine.
 
 For the Xfce panel plugin:
 
@@ -28,8 +28,3 @@ For the lxpanel plugin:
 - lxpanel                       >= 0.7
 - libmenu-cache     (Required by lxpanel)
 
-the multiload-nandhp lxpanel plugin has been now rewritten to compile
-successfully against lxpanel 0.7 and newer; but lxpanel itself does not
-recognize it as a panel plugin.
-I think the problem is related to compile/link flags, but I'm not sure. There
-is some work to do yet.

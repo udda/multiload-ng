@@ -99,9 +99,9 @@ AC_SUBST(XFCE4UI_LIBS)
 AC_SUBST(XFCEGUI4_CFLAGS)
 AC_SUBST(XFCEGUI4_LIBS)
 
-# lxpanel (disabled by default due to plugin not loading in LxPanel)
+# lxpanel
 AC_ARG_WITH([lxpanel], AS_HELP_STRING([--with-lxpanel], [Build plugin for lxpanel]),
-            [], [with_lxpanel=no])
+            [], [with_lxpanel=check])
 AS_IF([test "x$with_lxpanel" != "xno"], [
     pkg_modules="lxpanel"
     # libmenu-cache is implicitly required; we will fail if it's not present.
