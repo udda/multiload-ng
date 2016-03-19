@@ -167,7 +167,4 @@ multiload_construct (XfcePanelPlugin *plugin)
 	g_signal_connect (G_OBJECT (plugin), "about",
 						G_CALLBACK (multiload_about), NULL);
 
-	/* FIXME: void xfce_panel_plugin_menu_insert_item  (XfcePanelPlugin *plugin,
-						GtkMenuItem *item);
-	*/
 }
