@@ -22,6 +22,10 @@
 #include "autoscaler.h"
 
 
+#define PER_CPU_MAX_LOADAVG 3
+
+
+
 static void get_cpu0_name(char* cpuname) {
 	char *buf = NULL;
 	size_t n = 0;
@@ -323,7 +327,7 @@ void
 GetLoadAvg (int Maximum, int data [1], LoadGraph *g)
 {
 	glibtop_loadavg loadavg;
-	float max;
+	static float max = 0;
 	float current;
 
 	static const guint64 needed_flags =
@@ -335,7 +339,8 @@ GetLoadAvg (int Maximum, int data [1], LoadGraph *g)
 	glibtop_get_loadavg (&loadavg);
 	g_return_if_fail ((loadavg.flags & needed_flags) == needed_flags);
 
-	max = PER_CPU_MAX_LOADAVG * (1 + glibtop_global_server->ncpu);
+	if (max == 0)
+		max = PER_CPU_MAX_LOADAVG * (1 + glibtop_global_server->ncpu);
 	current = MIN(loadavg.loadavg[0], max);
 
 	memcpy(xd->loadavg, loadavg.loadavg, sizeof loadavg.loadavg);

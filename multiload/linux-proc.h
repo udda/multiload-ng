@@ -7,7 +7,6 @@
 
 G_BEGIN_DECLS
 
-#define PER_CPU_MAX_LOADAVG 3
 
 typedef struct _CpuData {
 	guint64 last [5];
