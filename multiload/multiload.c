@@ -295,14 +295,20 @@ multiload_sanitize(MultiloadPlugin *ma)
 	ma->size = CLAMP(ma->size, MIN_SIZE, MAX_SIZE);
 	ma->padding = CLAMP(ma->padding, MIN_PADDING, MAX_PADDING);
 	ma->spacing = CLAMP(ma->spacing, MIN_SPACING, MAX_SPACING);
+	ma->fill_between = ma->fill_between? TRUE:FALSE;
+	ma->tooltip_details = ma->tooltip_details? TRUE:FALSE;
+	ma->orientation_policy = CLAMP(ma->orientation_policy, 0, 2);
+	ma->dblclick_policy = CLAMP(ma->dblclick_policy, 0, 2);
 
 	for ( i=0; i<GRAPH_MAX; i++ ) {
 		ma->graph_config[i].border_width =
 								CLAMP(ma->graph_config[i].border_width,
 								MIN_BORDER_WIDTH, MAX_BORDER_WIDTH);
 
-		if (ma->graph_config[i].visible)
+		if (ma->graph_config[i].visible) {
+			ma->graph_config[i].visible = TRUE;
 			visible_count++;
+		}
 	}
 
 	/* Ensure at lease one graph is visible */

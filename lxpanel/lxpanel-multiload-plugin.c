@@ -26,42 +26,30 @@ multiload_read(config_setting_t *settings, MultiloadPlugin *ma)
 {
 	guint i;
 	gchar *key;
-	int tmp_int;
 	const char *tmp_str;
 
 	multiload_defaults(ma);
 
 	g_assert_nonnull(settings);
 	g_assert_nonnull(ma);
-
-	if (config_setting_lookup_int(settings, "speed", &tmp_int))
-		ma->speed = tmp_int;
-	if (config_setting_lookup_int(settings, "size", &tmp_int))
-		ma->size = tmp_int;
-	if (config_setting_lookup_int(settings, "padding", &tmp_int))
-		ma->padding = tmp_int;
-	if (config_setting_lookup_int(settings, "spacing", &tmp_int))
-		ma->spacing = tmp_int;
-	if (config_setting_lookup_int(settings, "orientation", &tmp_int))
-		ma->orientation_policy = tmp_int;
-	if (config_setting_lookup_int(settings, "fill-between", &tmp_int))
-		ma->fill_between = tmp_int? TRUE:FALSE;
-	if (config_setting_lookup_int(settings, "tooltip-details", &tmp_int))
-		ma->tooltip_details = tmp_int? TRUE:FALSE;
-	if (config_setting_lookup_int(settings, "dblclick-policy", &tmp_int))
-		ma->dblclick_policy = tmp_int;
+	config_setting_lookup_int(settings, "speed", &ma->speed);
+	config_setting_lookup_int(settings, "size", &ma->size);
+	config_setting_lookup_int(settings, "padding", &ma->padding);
+	config_setting_lookup_int(settings, "spacing", &ma->spacing);
+	config_setting_lookup_int(settings, "orientation", &ma->orientation_policy);
+	config_setting_lookup_int(settings, "fill-between", &ma->fill_between);
+	config_setting_lookup_int(settings, "tooltip-details", &ma->tooltip_details);
+	config_setting_lookup_int(settings, "dblclick-policy", &ma->dblclick_policy);
 	if (config_setting_lookup_string(settings, "dblclick-cmdline", &tmp_str))
 		strncpy(ma->dblclick_cmdline, tmp_str, sizeof(ma->dblclick_cmdline)/sizeof(gchar));
 
-	for ( i = 0; i < GRAPH_MAX; i++ ) {
+	for ( i=0; i<GRAPH_MAX; i++ ) {
 		key = g_strdup_printf("%s_visible", graph_types[i].name);
-		if (config_setting_lookup_int(settings, key, &tmp_int))
-			ma->graph_config[i].visible = tmp_int? TRUE:FALSE;
+		config_setting_lookup_int(settings, key, &ma->graph_config[i].visible);
 		g_free (key);
 
 		key = g_strdup_printf("%s_border-width", graph_types[i].name);
-		if (config_setting_lookup_int(settings, key, &tmp_int))
-			ma->graph_config[i].border_width = tmp_int;
+		config_setting_lookup_int(settings, key, &ma->graph_config[i].border_width);
 		g_free (key);
 
 		key = g_strdup_printf("%s_colors", graph_types[i].name);
@@ -74,38 +62,41 @@ multiload_read(config_setting_t *settings, MultiloadPlugin *ma)
 }
 
 
-
 void
 multiload_save(gpointer user_data)
 {
 	MultiloadLxpanelPlugin *multiload = (MultiloadLxpanelPlugin*)user_data;
 	MultiloadPlugin *ma = &multiload->ma;
-	guint i;
+	config_setting_t *s = multiload->settings;
 
-	config_group_set_int(multiload->settings, "speed", ma->speed);
-	config_group_set_int(multiload->settings, "size", ma->size);
-	config_group_set_int(multiload->settings, "padding", ma->padding);
-	config_group_set_int(multiload->settings, "spacing", ma->spacing);
-	config_group_set_int(multiload->settings, "orientation", ma->orientation_policy);
-	config_group_set_int(multiload->settings, "fill-between", ma->fill_between);
-	config_group_set_int(multiload->settings, "tooltip-details", ma->tooltip_details);
-	config_group_set_int(multiload->settings, "dblclick-policy", ma->dblclick_policy);
-	config_group_set_string(multiload->settings, "dblclick-cmdline", ma->dblclick_cmdline);
+	guint i;
+	char *key;
+	char list[10*MAX_COLORS];
+
+	g_assert_nonnull(s);
+
+	config_group_set_int	(s, "speed",			ma->speed);
+	config_group_set_int	(s, "size",				ma->size);
+	config_group_set_int	(s, "padding",			ma->padding);
+	config_group_set_int	(s, "spacing",			ma->spacing);
+	config_group_set_int	(s, "orientation",		ma->orientation_policy);
+	config_group_set_int	(s, "fill-between",		ma->fill_between);
+	config_group_set_int	(s, "tooltip-details",	ma->tooltip_details);
+	config_group_set_int	(s, "dblclick-policy",	ma->dblclick_policy);
+	config_group_set_string	(s, "dblclick-cmdline",	ma->dblclick_cmdline);
 
 	for ( i = 0; i < GRAPH_MAX; i++ ) {
-		char *key, list[10*MAX_COLORS];
-
-		key = g_strdup_printf("%s_visible", graph_types[i].name);
-		config_group_set_int(multiload->settings, key, ma->graph_config[i].visible);
+		key = g_strdup_printf("%s_visible",			graph_types[i].name);
+		config_group_set_int(s, key, ma->graph_config[i].visible);
 		g_free (key);
 
-		key = g_strdup_printf("%s_border-width", graph_types[i].name);
-		config_group_set_int(multiload->settings, key, ma->graph_config[i].border_width);
+		key = g_strdup_printf("%s_border-width",	graph_types[i].name);
+		config_group_set_int(s, key, ma->graph_config[i].border_width);
 		g_free (key);
 
-		key = g_strdup_printf("%s_colors", graph_types[i].name);
 		multiload_colors_stringify (ma, i, list);
-		config_group_set_string(multiload->settings, key, list);
+		key = g_strdup_printf("%s_colors",			graph_types[i].name);
+		config_group_set_string(s, key, list);
 		g_free (key);
 	}
 }
@@ -230,20 +221,6 @@ multiload_constructor(LXPanel *panel, config_setting_t *settings)
 	return GTK_WIDGET(multiload->ma.container);
 }
 
-
-/* Lookup the MultiloadPlugin object from the preferences dialog. */
-MultiloadPlugin *
-multiload_configure_get_plugin (GtkWidget *widget)
-{
-	GtkWidget *toplevel = gtk_widget_get_toplevel (widget);
-	MultiloadPlugin *ma = NULL;
-	if ( G_LIKELY (gtk_widget_is_toplevel (toplevel)) )
-		ma = g_object_get_data(G_OBJECT(toplevel), "MultiloadPlugin");
-	else
-		g_assert_not_reached ();
-	g_assert_nonnull(ma);
-	return ma;
-}
 
 FM_DEFINE_MODULE(lxpanel_gtk, multiload)
 

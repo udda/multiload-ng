@@ -26,9 +26,18 @@
 static GList *dynamic_widgets = NULL;
 static GtkWidget *checkbuttons[GRAPH_MAX];
 
-/* Defined in panel-specific code. */
-extern MultiloadPlugin *
-multiload_configure_get_plugin (GtkWidget *widget);
+static MultiloadPlugin *
+multiload_configure_get_plugin (GtkWidget *widget)
+{
+	GtkWidget *toplevel = gtk_widget_get_toplevel (widget);
+	MultiloadPlugin *ma = NULL;
+	if ( G_LIKELY (gtk_widget_is_toplevel (toplevel)) )
+		ma = g_object_get_data(G_OBJECT(toplevel), "MultiloadPlugin");
+	else
+		g_assert_not_reached ();
+	g_assert_nonnull(ma);
+	return ma;
+}
 
 static void
 properties_set_checkboxes_sensitive(MultiloadPlugin *ma, gboolean sensitive)

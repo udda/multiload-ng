@@ -383,22 +383,7 @@ multiload_construct (XfcePanelPlugin *plugin)
 	xfce_panel_plugin_menu_show_about (plugin);
 	g_signal_connect (G_OBJECT (plugin), "about",
 						G_CALLBACK (multiload_about), NULL);
-
 }
-
-MultiloadPlugin *
-multiload_configure_get_plugin (GtkWidget *widget)
-{
-	GtkWidget *toplevel = gtk_widget_get_toplevel (widget);
-	MultiloadPlugin *ma = NULL;
-	if ( G_LIKELY (gtk_widget_is_toplevel (toplevel)) )
-		ma = g_object_get_data(G_OBJECT(toplevel), "MultiloadPlugin");
-	else
-		g_assert_not_reached ();
-	g_assert_nonnull(ma);
-	return ma;
-}
-
 
 /* register the plugin */
 #ifdef XFCE_PANEL_PLUGIN_REGISTER

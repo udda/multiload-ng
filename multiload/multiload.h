@@ -65,7 +65,7 @@ typedef struct _LoadGraph LoadGraph;
 
 typedef struct _GraphConfig {
 	gboolean visible;
-	guint border_width;
+	gint border_width;
 	GdkColor colors[MAX_COLORS];
 	guint16 alpha[MAX_COLORS];
 } GraphConfig;
@@ -79,14 +79,14 @@ typedef struct _MultiloadPlugin {
 	/* Settings */
 	GtkContainer *container;
 	GraphConfig graph_config[GRAPH_MAX];
-	guint orientation_policy;
-	guint speed;
-	guint size;
-	guint padding;
-	guint spacing;
+	gint speed;
+	gint size;
+	gint padding;
+	gint spacing;
 	gboolean fill_between;
 	gboolean tooltip_details;
-	guint dblclick_policy;
+	gint orientation_policy;
+	gint dblclick_policy;
 	gchar dblclick_cmdline[200];
 } MultiloadPlugin;
 
