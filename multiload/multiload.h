@@ -113,10 +113,6 @@ struct _LoadGraph {
 };
 
 
-//#include "load-graph.h"
-//#include "linux-proc.h"
-
-
 G_BEGIN_DECLS
 
 G_GNUC_INTERNAL void
