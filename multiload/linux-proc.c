@@ -489,7 +489,6 @@ GetTemperature (int Maximum, int data[1], LoadGraph *g)
 				g_free(d_type);
 			}
 			paths[i] = g_strdup_printf("%s/temp", d_thermal);
-		//	printf("[%d] %s :: %d\n", i, paths[i], maxtemps[i]);
 			i++;
 			g_free(d_thermal);
 		}
@@ -504,11 +503,9 @@ GetTemperature (int Maximum, int data[1], LoadGraph *g)
 	// finds max temperature and its index (to use the respective maximum)
 	for (i=0,j=0; i<n_zones; i++) {
 		t = read_int_from_file(paths[i]);
-	//	printf("read %d (%d)\n", i, t);
 		if (t > temp) {
 			temp = t;
 			j = i;
-	//		printf("MAX %d (%d)\n", j, t);
 		}
 	}
 
