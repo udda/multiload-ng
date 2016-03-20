@@ -63,9 +63,8 @@ multiload_read(config_setting_t *settings, MultiloadPlugin *ma)
 
 
 void
-multiload_save(gpointer user_data)
+multiload_save(MultiloadLxpanelPlugin *multiload)
 {
-	MultiloadLxpanelPlugin *multiload = (MultiloadLxpanelPlugin*)user_data;
 	MultiloadPlugin *ma = &multiload->ma;
 	config_setting_t *s = multiload->settings;
 
