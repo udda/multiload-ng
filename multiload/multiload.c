@@ -11,10 +11,12 @@
 
 #include <config.h>
 #include <glibtop.h>
+
+#include "linux-proc.h"
 #include "multiload.h"
 #include "multiload-config.h"
 #include "multiload-colors.h"
-#include "linux-proc.h"
+#include "properties.h"
 #include "util.h"
 
 /* update the tooltip to the graph's current "used" percentage */
@@ -297,8 +299,8 @@ multiload_sanitize(MultiloadPlugin *ma)
 	ma->spacing = CLAMP(ma->spacing, MIN_SPACING, MAX_SPACING);
 	ma->fill_between = ma->fill_between? TRUE:FALSE;
 	ma->tooltip_details = ma->tooltip_details? TRUE:FALSE;
-	ma->orientation_policy = CLAMP(ma->orientation_policy, 0, 2);
-	ma->dblclick_policy = CLAMP(ma->dblclick_policy, 0, 2);
+	ma->orientation_policy = CLAMP(ma->orientation_policy, 0, MULTILOAD_ORIENTATION_N_VALUES);
+	ma->dblclick_policy = CLAMP(ma->dblclick_policy, 0, DBLCLICK_POLICY_N_VALUES);
 
 	for ( i=0; i<GRAPH_MAX; i++ ) {
 		ma->graph_config[i].border_width =

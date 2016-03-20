@@ -11,7 +11,7 @@
 
 #define MAX_COLORS 7
 
-enum {
+enum GraphType {
 	GRAPH_CPULOAD,
 	GRAPH_MEMLOAD,
 	GRAPH_NETLOAD,
@@ -23,43 +23,6 @@ enum {
 	GRAPH_MAX
 };
 
-#define MULTILOAD_ORIENTATION_AUTO			0
-#define MULTILOAD_ORIENTATION_HORIZONTAL	1
-#define MULTILOAD_ORIENTATION_VERTICAL		2
-
-#define DBLCLICK_POLICY_DONOTHING		0
-#define DBLCLICK_POLICY_TASKMANAGER		1
-#define DBLCLICK_POLICY_CMDLINE			2
-
-#define MIN_SIZE 10
-#define DEFAULT_SIZE 40
-#define MAX_SIZE 400
-#define STEP_SIZE 5
-
-#define MIN_SPEED 50
-#define DEFAULT_SPEED 500
-#define MAX_SPEED 20000
-#define STEP_SPEED 50
-
-#define MIN_PADDING 0
-#define DEFAULT_PADDING 2
-#define MAX_PADDING 40
-#define STEP_PADDING 1
-
-#define MIN_SPACING 0
-#define DEFAULT_SPACING 1
-#define MAX_SPACING 40
-#define STEP_SPACING 1
-
-#define MIN_BORDER_WIDTH 0
-#define DEFAULT_BORDER_WIDTH 1
-#define MAX_BORDER_WIDTH 16
-#define STEP_BORDER_WIDTH 1
-
-#define DEFAULT_ORIENTATION MULTILOAD_ORIENTATION_AUTO
-#define DEFAULT_DBLCLICK_POLICY DBLCLICK_POLICY_DONOTHING
-#define DEFAULT_FILL_BETWEEN FALSE
-#define DEFAULT_TOOLTIP_DETAILS FALSE
 
 typedef struct _LoadGraph LoadGraph;
 
@@ -71,13 +34,11 @@ typedef struct _GraphConfig {
 } GraphConfig;
 
 typedef struct _MultiloadPlugin {
-	/* Current state */
+	GtkContainer *container;
 	GtkWidget *box;
 	GtkOrientation panel_orientation;
 	LoadGraph *graphs[GRAPH_MAX];
 
-	/* Settings */
-	GtkContainer *container;
 	GraphConfig graph_config[GRAPH_MAX];
 	gint speed;
 	gint size;

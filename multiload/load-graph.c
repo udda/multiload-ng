@@ -14,6 +14,7 @@
 #include "multiload.h"
 #include "multiload-config.h"
 #include "multiload-colors.h"
+#include "properties.h"
 #include "util.h"
 
 
