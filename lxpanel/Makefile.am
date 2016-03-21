@@ -30,8 +30,6 @@ multiload_la_LDFLAGS = \
        -no-undefined \
        $(PLATFORM_LDFLAGS)
 
-# export-symbols-regex '^multiload_(constructor|destructor|configure|save_configuration|configuration_changed)'
-
 multiload_la_LIBADD = \
 	$(GTK_LIBS) \
 	$(LXPANEL_LIBS) \
