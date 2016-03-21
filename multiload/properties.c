@@ -9,8 +9,7 @@
 
 #include <config.h>
 #include <string.h>
-#include <libintl.h>
-#include <gtk/gtk.h>
+#include <glib/gi18n-lib.h>
 
 #include "load-graph.h"
 #include "multiload.h"

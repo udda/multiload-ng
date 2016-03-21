@@ -10,7 +10,9 @@
  */
 
 #include <config.h>
+
 #include <glibtop.h>
+#include <glib/gi18n-lib.h>
 
 #include "linux-proc.h"
 #include "multiload.h"

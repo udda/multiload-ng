@@ -21,6 +21,8 @@
 #ifndef __PROPERTIES_H__
 #define __PROPERTIES_H__
 
+#include <gtk/gtk.h>
+
 #include "multiload.h"
 
 

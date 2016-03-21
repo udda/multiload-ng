@@ -1,8 +1,6 @@
 #include <config.h>
+
 #include <stdio.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <signal.h>
 #include <dirent.h>
 #include <string.h>
 #include <time.h>

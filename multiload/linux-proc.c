@@ -2,7 +2,6 @@
 #include <config.h>
 
 #include <math.h>
-#include <unistd.h>
 #include <dirent.h>
 
 #include <glibtop.h>
