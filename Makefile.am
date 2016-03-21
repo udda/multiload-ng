@@ -27,11 +27,10 @@ ChangeLog: Makefile
 dist-hook: ChangeLog
 
 BUILT_SOURCES = \
-	about-data.h
+	about-data-authors.h
 
-about-data.h: AUTHORS
-	perl $(top_srcdir)/generate-about-data-header.pl \
-	< $(top_srcdir)/AUTHORS > about-data.h
+about-data-authors.h: AUTHORS
+	$(top_srcdir)/generate-about-data-authors.sh > about-data-authors.h
 
 EXTRA_DIST = \
 	intltool-extract.in \

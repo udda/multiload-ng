@@ -7,8 +7,6 @@
 #include <gtk/gtk.h>
 
 
-#define PLUGIN_WEBSITE "https://github.com/nandhp/multiload-nandhp"
-
 #define MAX_COLORS 7
 
 enum GraphType {

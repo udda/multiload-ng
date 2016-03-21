@@ -6,6 +6,7 @@
 
 #include <lxpanel/plugin.h>
 
+#include "about-data.h"
 #include "multiload/multiload.h"
 #include "multiload/multiload-colors.h"
 #include "multiload/multiload-config.h"
@@ -105,14 +106,14 @@ void
 multiload_configure_response (GtkWidget *dialog, gint response, MultiloadLxpanelPlugin *multiload)
 {
 	gboolean result;
+	gchar* cmdline;
 
 	if (response == GTK_RESPONSE_HELP) {
-		/* show help */
-		result = g_spawn_command_line_async ("xdg-open --launch WebBrowser "
-						PLUGIN_WEBSITE, NULL);
-
+		cmdline = g_strdup_printf("xdg-open --launch WebBrowser %s", about_data_website);
+		result = g_spawn_command_line_async (cmdline, NULL);
+		g_free(cmdline);
 		if (G_UNLIKELY (result == FALSE))
-			g_warning (_("Unable to open the following url: %s"), PLUGIN_WEBSITE);
+			g_warning (_("Unable to open the following url: %s"), about_data_website);
 	} else {
 		/* destroy the properties dialog */
 		multiload_save(multiload);
@@ -225,13 +226,12 @@ FM_DEFINE_MODULE(lxpanel_gtk, multiload)
 
 /* Plugin descriptor. */
 LXPanelPluginInit fm_module_init_lxpanel_gtk = {
-	.name = N_("Multiload"),
-	.description = N_("A system load monitor that graphs processor, memory, "
-					"and swap space use, plus network and disk activity."),
+	.name				= about_data_progname_N,
+	.description		= about_data_description_N,
 
-	.new_instance = multiload_constructor,
-	.config = multiload_configure,
-	.reconfigure = multiload_configuration_changed,
-	.one_per_system = FALSE,
-	.expand_available = FALSE
+	.new_instance		= multiload_constructor,
+	.config				= multiload_configure,
+	.reconfigure		= multiload_configuration_changed,
+	.one_per_system		= FALSE,
+	.expand_available	= FALSE
 };

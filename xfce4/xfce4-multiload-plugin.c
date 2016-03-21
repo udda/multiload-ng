@@ -177,14 +177,15 @@ static void
 multiload_configure_response (GtkWidget *dialog, gint response, MultiloadXfcePlugin *multiload)
 {
 	gboolean result;
+	gchar *cmdline;
 
 	if (response == GTK_RESPONSE_HELP) {
-		/* show help */
-		result = g_spawn_command_line_async ("exo-open --launch WebBrowser "
-		PLUGIN_WEBSITE, NULL);
+		cmdline = g_strdup_printf("xdg-open --launch WebBrowser %s", about_data_website);
+		result = g_spawn_command_line_async (cmdline, NULL);
+		g_free(cmdline);
 
 		if (G_UNLIKELY (result == FALSE))
-			g_warning (_("Unable to open the following url: %s"), PLUGIN_WEBSITE);
+			g_warning (_("Unable to open the following url: %s"), about_data_website);
 	} else {
 		/* remove the dialog data from the plugin */
 		g_object_set_data (G_OBJECT (multiload->plugin), "dialog", NULL);
@@ -280,12 +281,11 @@ multiload_about (XfcePanelPlugin *plugin)
 {
 	gtk_show_about_dialog(NULL,
 	"logo-icon-name",	"utilities-system-monitor",
-	"program-name",		_("Multiload"),
+	"program-name",		about_data_progname,
 	"version",			PACKAGE_VERSION,
-	"comments",			_("A system load monitor that graphs processor, memory, "
-						"and swap space use, plus network and disk activity."),
-	"website",			PLUGIN_WEBSITE,
-	"copyright",		_("Copyright \xC2\xA9 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, and others"),
+	"comments",			about_data_description,
+	"website",			about_data_website,
+	"copyright",		about_data_copyright,
 	"license",			about_data_license,
 	"authors",			about_data_authors,
 	"translator-credits", _("translator-credits"),

@@ -25,5 +25,5 @@ po/POTFILES
 po/LINGUAS
 stamp-*
 *-stamp
-about-data.h
+about-data-*.h
 old

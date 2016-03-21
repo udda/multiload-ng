@@ -1,3 +1,4 @@
+about-data.h
 multiload/multiload.c
 multiload/multiload-config.c
 multiload/multiload-colors.c
