@@ -1,8 +1,7 @@
 /* From wmload.c, v0.9.2, licensed under the GPL. */
 #include <config.h>
-#include <sys/types.h>
+
 #include <math.h>
-#include <fcntl.h>
 #include <unistd.h>
 #include <dirent.h>
 
