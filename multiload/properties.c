@@ -518,9 +518,9 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
 	if (multiload_get_orientation(ma) == GTK_ORIENTATION_HORIZONTAL)
-		label = gtk_label_new_with_mnemonic(_("Wid_th: "));
+		label = gtk_label_new_with_mnemonic(_("Wid_th:"));
 	else
-		label = gtk_label_new_with_mnemonic(_("Heigh_t: "));
+		label = gtk_label_new_with_mnemonic(_("Heigh_t:"));
 	gtk_misc_set_alignment(GTK_MISC(label), 0.0f, 0.5f);
 	gtk_size_group_add_widget(sizegroup, label);
 	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
@@ -536,7 +536,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
-	label = gtk_label_new_with_mnemonic(_("S_pacing: "));
+	label = gtk_label_new_with_mnemonic(_("S_pacing:"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
 	gtk_size_group_add_widget(sizegroup, label);
 	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
@@ -552,7 +552,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
-	label = gtk_label_new_with_mnemonic(_("Pa_dding: "));
+	label = gtk_label_new_with_mnemonic(_("Pa_dding:"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
 	gtk_size_group_add_widget(sizegroup, label);
 	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
@@ -574,7 +574,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
-	label = gtk_label_new_with_mnemonic(_("Upd_ate interval: "));
+	label = gtk_label_new_with_mnemonic(_("Upd_ate interval:"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
 	gtk_size_group_add_widget(sizegroup, label);
 	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
@@ -596,7 +596,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
-	label = gtk_label_new_with_mnemonic(_("_Orientation: "));
+	label = gtk_label_new_with_mnemonic(_("_Orientation:"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
 	gtk_size_group_add_widget(sizegroup, label);
 	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
