@@ -2,7 +2,7 @@
 Type=X-XFCE-PanelPlugin
 Encoding=UTF-8
 _Name=Multiload
-_Comment=A system load monitor that graphs processor, memory, and swap space use, plus network and disk activity.
+_Comment=A system load monitor that graphs processor, memory, and swap space use, plus temperature, network and disk activity.
 Icon=utilities-system-monitor
 X-XFCE-Module=multiload
 X-XFCE-Internal=false
