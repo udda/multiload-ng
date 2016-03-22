@@ -188,15 +188,17 @@ GtkWidget* gtk_spin_button_new_with_parameters(gint min, gint max, gint step, gi
 	return w;
 }
 
-GtkWidget* gtk_warning_bar_new(const gchar *text)
+GtkWidget* gtk_icon_label_new(const gchar* stock_image, const gchar *text)
 {
 	GtkWidget *hbox = gtk_hbox_new(FALSE, 4);
 
-	GtkWidget *image = gtk_image_new_from_stock(GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_SMALL_TOOLBAR);
+	GtkWidget *image = gtk_image_new_from_stock(stock_image, GTK_ICON_SIZE_SMALL_TOOLBAR);
 	gtk_box_pack_start(GTK_BOX(hbox), image, FALSE, FALSE, 0);
 
 	GtkWidget *label = gtk_label_new(text);
 	gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+	g_object_set_data (G_OBJECT(hbox), "label", label);
 
 	return hbox;
 }

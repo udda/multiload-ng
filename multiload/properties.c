@@ -140,11 +140,10 @@ action_performed_cb(GtkWidget *widget, gpointer id)
 }
 
 static void
-show_hide_dynamic(MultiloadPlugin *ma)
+manage_dynamic_widgets(MultiloadPlugin *ma)
 {
 	GList* l;
-	int n;
-	gboolean b;
+	gchar *str1, *str2;
 
 	static int tooltip_timeout = -1;
 	if (tooltip_timeout == -1)
@@ -158,31 +157,40 @@ show_hide_dynamic(MultiloadPlugin *ma)
 		GtkWidget *target = GTK_WIDGET(g_object_get_data (G_OBJECT(w), "dynamic_target"));
 		gint prop_type = GPOINTER_TO_INT(g_object_get_data (G_OBJECT(w), "dynamic_prop"));
 		switch (prop_type) {
+			case PROP_SIZE:
+				str1 = format_time_duration(ma->size * ma->speed / 1000);
+				str2 = g_strdup_printf(_("Graph timespan is %s"), str1);
+				gtk_label_set_text (GTK_LABEL(g_object_get_data (G_OBJECT(target), "label")), str2);
+				g_free(str1);
+				g_free(str2);
+				break;
+
 			case PROP_SPEED:
-				n = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(w));
-				b = (n < tooltip_timeout);
+				gtk_widget_set_visible (target, ma->speed < tooltip_timeout);
 				break;
 
 			case PROP_ORIENTATION:
-				n = gtk_combo_box_get_active(GTK_COMBO_BOX(w));
-				b = ((ma->panel_orientation == GTK_ORIENTATION_HORIZONTAL && n == MULTILOAD_ORIENTATION_VERTICAL) ||
-					(ma->panel_orientation == GTK_ORIENTATION_VERTICAL && n == MULTILOAD_ORIENTATION_HORIZONTAL));
+				gtk_widget_set_visible (target, (
+						ma->panel_orientation == GTK_ORIENTATION_HORIZONTAL &&
+						ma->orientation_policy == MULTILOAD_ORIENTATION_VERTICAL
+					) || (
+						ma->panel_orientation == GTK_ORIENTATION_VERTICAL &&
+						ma->orientation_policy == MULTILOAD_ORIENTATION_HORIZONTAL
+					));
 				break;
 
 			case PROP_PADDING:
-				n = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(w));
-				b = (n >= 10);
+				gtk_widget_set_visible (target, ma->padding >= 10);
 				break;
 
 			case PROP_DBLCLICK_POLICY:
-				n = gtk_combo_box_get_active(GTK_COMBO_BOX(w));
-				b = (n == DBLCLICK_POLICY_CMDLINE);
+				gtk_widget_set_visible (target,
+						ma->dblclick_policy == DBLCLICK_POLICY_CMDLINE);
 				break;
 
 			default:
 				g_assert_not_reached();
 		}
-		gtk_widget_set_visible(target, b);
 	}
 }
 
@@ -297,7 +305,7 @@ property_changed_cb(GtkWidget *widget, gpointer id) {
 		default:
 			g_assert_not_reached();
 	}
-	show_hide_dynamic(ma);
+	manage_dynamic_widgets(ma);
 }
 
 /*
@@ -531,6 +539,12 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_size_group_add_widget(sizegroup2, t);
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
+	label = gtk_icon_label_new(GTK_STOCK_INFO, NULL);
+	gtk_box_pack_start(GTK_BOX(box), label, TRUE, TRUE, PREF_CONTENT_PADDING);
+	g_object_set_data(G_OBJECT(t), "dynamic_target", label);
+	g_object_set_data(G_OBJECT(t), "dynamic_prop", GINT_TO_POINTER(PROP_SIZE));
+	g_assert_nonnull(g_list_append(dynamic_widgets, t));
+
 	// Spacing
 	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
@@ -563,7 +577,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_size_group_add_widget(sizegroup2, t);
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
-	label = gtk_warning_bar_new(_("If padding is set too large, the graph won't show."));
+	label = gtk_icon_label_new(GTK_STOCK_DIALOG_WARNING, _("If padding is set too large, the graph won't show."));
 	gtk_box_pack_start(GTK_BOX(box), label, TRUE, TRUE, PREF_CONTENT_PADDING);
 	g_object_set_data(G_OBJECT(t), "dynamic_target", label);
 	g_object_set_data(G_OBJECT(t), "dynamic_prop", GINT_TO_POINTER(PROP_PADDING));
@@ -585,7 +599,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_size_group_add_widget(sizegroup2, t);
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
-	label = gtk_warning_bar_new(_("Tooltip may not show if update interval is too short."));
+	label = gtk_icon_label_new(GTK_STOCK_DIALOG_WARNING, _("Tooltip may not show if update interval is too short."));
 	gtk_box_pack_start(GTK_BOX(box), label, TRUE, TRUE, PREF_CONTENT_PADDING);
 	g_object_set_data(G_OBJECT(t), "dynamic_target", label);
 	g_object_set_data(G_OBJECT(t), "dynamic_prop", GINT_TO_POINTER(PROP_SPEED));
@@ -611,7 +625,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_size_group_add_widget(sizegroup2, t);
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
-	label = gtk_warning_bar_new(_("Selected orientation is not the same of the panel. Graphs may be very small."));
+	label = gtk_icon_label_new(GTK_STOCK_DIALOG_WARNING, _("Selected orientation is not the same of the panel. Graphs may be very small."));
 	gtk_box_pack_start(GTK_BOX(box), label, TRUE, TRUE, PREF_CONTENT_PADDING);
 	g_object_set_data(G_OBJECT(t), "dynamic_target", label);
 	g_object_set_data(G_OBJECT(t), "dynamic_prop", GINT_TO_POINTER(PROP_ORIENTATION));
@@ -664,5 +678,5 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 
 
 	gtk_widget_show_all(GTK_WIDGET(contentArea));
-	show_hide_dynamic(ma);
+	manage_dynamic_widgets(ma);
 }

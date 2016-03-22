@@ -46,7 +46,7 @@ format_time_duration(gdouble seconds);
 G_GNUC_INTERNAL GtkWidget*
 gtk_spin_button_new_with_parameters(gint min, gint max, gint step, gint start_value, const gchar *format);
 G_GNUC_INTERNAL GtkWidget*
-gtk_warning_bar_new(const gchar *text);
+gtk_icon_label_new(const gchar* stock_image, const gchar *text);
 
 G_GNUC_INTERNAL void
 gtk_error_dialog(GtkWindow *parent, const gchar *message);

@@ -275,6 +275,10 @@ msgstr ""
 "Ripristinare i colori predefiniti?\n"
 "Le modifiche verranno perse."
 
+#, c-format
+msgid "Graph timespan is %s"
+msgstr "Il grafico coprirà un intervallo di %s"
+
 msgid "Import color theme"
 msgstr "Importa tema di colori"
 
