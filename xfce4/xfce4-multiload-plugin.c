@@ -145,8 +145,8 @@ multiload_save (XfcePanelPlugin *plugin, MultiloadPlugin *ma)
 		xfce_rc_write_int_entry (rc, "padding", ma->padding);
 		xfce_rc_write_int_entry (rc, "spacing", ma->spacing);
 		xfce_rc_write_int_entry (rc, "orientation", ma->orientation_policy);
-		xfce_rc_write_int_entry (rc, "fill-between", ma->fill_between);
-		xfce_rc_write_int_entry (rc, "tooltip-details", ma->tooltip_details);
+		xfce_rc_write_bool_entry (rc, "fill-between", ma->fill_between);
+		xfce_rc_write_bool_entry (rc, "tooltip-details", ma->tooltip_details);
 		xfce_rc_write_int_entry (rc, "dblclick-policy", ma->dblclick_policy);
 		xfce_rc_write_entry (rc, "dblclick-cmdline", ma->dblclick_cmdline);
 
