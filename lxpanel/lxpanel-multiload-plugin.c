@@ -26,11 +26,11 @@
 
 #include <lxpanel/plugin.h>
 
-#include "about-data.h"
-#include "multiload/multiload.h"
-#include "multiload/multiload-colors.h"
-#include "multiload/multiload-config.h"
-#include "multiload/properties.h"
+#include "common/about-data.h"
+#include "common/multiload.h"
+#include "common/multiload-colors.h"
+#include "common/multiload-config.h"
+#include "common/properties.h"
 
 
 typedef struct  {

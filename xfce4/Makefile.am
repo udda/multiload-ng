@@ -1,7 +1,6 @@
 # INCLUDES =
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
-	-I$(top_srcdir)/multiload \
 	-DG_LOG_DOMAIN=\"xfce4-multiload-plugin\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	$(PLATFORM_CPPFLAGS)
@@ -16,8 +15,8 @@ plugindir = \
 	$(libdir)/xfce4/panel/plugins
 
 libmultiload_la_SOURCES = \
-	../about-data.h \
-	../about_data-authors.h \
+	../common/about-data.h \
+	../common/about_data-authors.h \
 	xfce4-multiload-plugin.c
 
 libmultiload_la_CFLAGS = \
@@ -34,7 +33,7 @@ libmultiload_la_LDFLAGS = \
 libmultiload_la_LIBADD = \
 	$(GTK_LIBS) \
 	$(XFCE4_LIBS) $(XFCE4UI_LIBS) $(XFCEGUI4_LIBS) \
-	../multiload/multiload-core.la
+	../common/multiload-core.la
 
 #
 # Desktop file

@@ -1,7 +1,6 @@
 # INCLUDES =
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
-	-I$(top_srcdir)/multiload \
 	-DG_LOG_DOMAIN=\"multiload-core\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	$(PLATFORM_CPPFLAGS)

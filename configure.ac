@@ -142,7 +142,7 @@ AC_SUBST([LIBDIR])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
     Makefile
-    multiload/Makefile
+    common/Makefile
     xfce4/Makefile
     xfce4/multiload.desktop.in
     lxpanel/Makefile

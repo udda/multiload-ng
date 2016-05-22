@@ -32,12 +32,12 @@
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 
-#include "about-data.h"
+#include "common/about-data.h"
 
-#include "multiload.h"
-#include "multiload-config.h"
-#include "multiload-colors.h"
-#include "properties.h"
+#include "common/multiload.h"
+#include "common/multiload-config.h"
+#include "common/multiload-colors.h"
+#include "common/properties.h"
 
 
 typedef struct {

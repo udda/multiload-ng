@@ -5,7 +5,7 @@ if HAVE_LXPANEL
 LXPANEL_DIRS = lxpanel
 endif
 SUBDIRS =	\
-	multiload \
+	common \
 	$(XFCE4_DIRS) \
 	$(LXPANEL_DIRS) \
 	po
