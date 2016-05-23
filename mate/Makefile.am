@@ -1,6 +1,7 @@
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"mate-multiload-plugin\" \
+	-DMULTILOAD_MENU_UI_DIR=\""$(uidir)"\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	-DMATELOCALEDIR=\"$(localedir)\" \
 	$(PLATFORM_CPPFLAGS)
@@ -44,6 +45,9 @@ org.mate.panel.applet.MultiloadNandhpFactory.service: $(service_in_files)
 	$(AM_V_GEN)sed \
 		-e "s|\@LOCATION\@|$(mate_multiload_plugin_LOCATION)|" \
 		$< > $@
+
+uidir		= $(datadir)/mate/ui
+ui_DATA		= multiload-applet-menu.xml
 
 @INTLTOOL_XML_NOMERGE_RULE@
 multiload_gschema_in_files = org.mate.panel.applet.multiload-nandhp.gschema.xml.in

@@ -36,7 +36,6 @@ typedef struct
 {
 	MatePanelApplet   *applet;
 	MultiloadPlugin   ma;
-	GtkWidget         *label;
 	GSettings         *settings;
 } MultiloadApplet;
 
@@ -82,6 +81,64 @@ multiload_read(GSettings *settings, MultiloadPlugin *ma)
 }
 
 
+void
+multiload_save(MultiloadApplet *multiload)
+{
+	MultiloadPlugin *ma = &multiload->ma;
+	GSettings *s = multiload->settings;
+
+	guint i;
+	char *key;
+	char list[10*MAX_COLORS];
+
+	g_assert_nonnull(s);
+
+	g_settings_set_int		(s, "speed",			ma->speed);
+	g_settings_set_int		(s, "size",				ma->size);
+	g_settings_set_int		(s, "padding",			ma->padding);
+	g_settings_set_int		(s, "spacing",			ma->spacing);
+	g_settings_set_int		(s, "orientation",		ma->orientation_policy);
+	g_settings_set_boolean	(s, "fill-between",		ma->fill_between);
+	g_settings_set_boolean	(s, "tooltip-details",	ma->tooltip_details);
+	g_settings_set_int		(s, "dblclick-policy",	ma->dblclick_policy);
+	g_settings_set_string	(s, "dblclick-cmdline",	ma->dblclick_cmdline);
+
+	for ( i = 0; i < GRAPH_MAX; i++ ) {
+		key = g_strdup_printf("%s_visible",			graph_types[i].name);
+		g_settings_set_boolean(s, key, ma->graph_config[i].visible);
+		g_free (key);
+
+		key = g_strdup_printf("%s_border-width",	graph_types[i].name);
+		g_settings_set_int(s, key, ma->graph_config[i].border_width);
+		g_free (key);
+
+		multiload_colors_stringify (ma, i, list);
+		key = g_strdup_printf("%s_colors",			graph_types[i].name);
+		g_settings_set_string(s, key, list);
+		g_free (key);
+	}
+}
+
+
+static const GtkActionEntry multiload_menu_actions [] = {
+	{ "MultiLoadProperties", GTK_STOCK_PROPERTIES, N_("_Preferences"),
+	  NULL, NULL,
+	  NULL },
+//	  G_CALLBACK (multiload_properties_cb) },
+	{ "MultiLoadRunProcman", GTK_STOCK_EXECUTE, N_("_Open System Monitor"),
+	  NULL, NULL,
+	  NULL },
+//	  G_CALLBACK (start_procman_cb) },
+	{ "MultiLoadHelp", GTK_STOCK_HELP, N_("_Help"),
+	  NULL, NULL,
+	  NULL },
+//	  G_CALLBACK (help_cb) },
+	{ "MultiLoadAbout", GTK_STOCK_ABOUT, N_("_About"),
+	  NULL, NULL,
+	  NULL },
+//	  G_CALLBACK (about_cb) }
+};
+
 static gboolean
 multiload_fill (MatePanelApplet* applet)
 {
@@ -95,6 +152,14 @@ multiload_fill (MatePanelApplet* applet)
 	multiload = g_malloc0(sizeof(MultiloadApplet));
 	multiload->applet = applet;
 	multiload->settings = mate_panel_applet_settings_new (applet, "org.mate.panel.applet.multiload-nandhp");
+
+	GtkActionGroup *action_group = gtk_action_group_new ("Multiload Applet Actions");
+	gtk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
+	gtk_action_group_add_actions (action_group, multiload_menu_actions, G_N_ELEMENTS (multiload_menu_actions), multiload);
+
+	gchar *ui_path = g_build_filename (MULTILOAD_MENU_UI_DIR, "multiload-applet-menu.xml", NULL);
+	mate_panel_applet_setup_menu_from_file (applet, ui_path, action_group);
+	g_free (ui_path);
 
 	/* Initialize multiload */
 	multiload_init ();
