@@ -2,6 +2,7 @@
 *.gmo
 *.la
 *.lo
+*.o
 *.swp
 *.tar.*
 .deps
@@ -17,6 +18,12 @@ config.*
 build-aux
 intltool*
 libtool
+mate/mate-multiload-plugin
+mate/*.mate-panel-applet
+mate/*.mate-panel-applet.in
+mate/*.service
+mate/*.gschema.valid
+mate/*.gschema.xml
 xfce4/*.desktop
 xfce4/*.desktop.in
 po/.intltool-merge-cache
