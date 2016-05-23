@@ -31,6 +31,8 @@ typedef struct _GraphConfig {
 } GraphConfig;
 
 typedef struct _MultiloadPlugin {
+	gpointer panel_plugin;
+
 	GtkContainer *container;
 	GtkWidget *box;
 	GtkOrientation panel_orientation;

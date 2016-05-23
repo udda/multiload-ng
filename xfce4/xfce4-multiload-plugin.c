@@ -42,136 +42,150 @@
 
 typedef struct {
 	MultiloadPlugin ma;
-
-	/* panel widgets */
-	XfcePanelPlugin *plugin;
 	GtkWidget       *ebox;
-} MultiloadXfcePlugin;
+} MultiloadXfcePlugin; //TODO remove this struct, and other in panel-specific files
+
+gpointer multiload_settings_open_for_read(MultiloadPlugin *ma) {
+	gchar *file;
+	XfceRc *rc;
+	file = xfce_panel_plugin_lookup_rc_file((XfcePanelPlugin*)(ma->panel_plugin));
+	if (G_UNLIKELY(file == NULL))
+		return NULL;
+
+	rc = xfce_rc_simple_open (file, TRUE);
+	g_free(file);
+
+	return (gpointer)rc;
+}
+gpointer multiload_settings_open_for_save(MultiloadPlugin *ma) {
+	gchar *file;
+	XfceRc *rc;
+
+	file = xfce_panel_plugin_save_location((XfcePanelPlugin*)(ma->panel_plugin), TRUE);
+	if (G_UNLIKELY(file == NULL))
+		return NULL;
+
+	rc = xfce_rc_simple_open (file, FALSE);
+	g_free(file);
+
+	return (gpointer)rc;
+}
+
+void multiload_settings_close(gpointer settings) {
+	xfce_rc_close((XfceRc*)settings);
+}
+
+void multiload_settings_get_int(gpointer settings, const gchar *key, int *destination) {
+	*destination = xfce_rc_read_int_entry((XfceRc*)settings, key, *destination);
+}
+void multiload_settings_get_boolean(gpointer settings, const gchar *key, gboolean *destination) {
+	*destination = xfce_rc_read_bool_entry((XfceRc*)settings, key, *destination);
+}
+void multiload_settings_get_string(gpointer settings, const gchar *key, gchar *destination, size_t maxlen) {
+	const gchar* temp = xfce_rc_read_entry((XfceRc*)settings, key, NULL);
+	if (G_LIKELY(temp != NULL))
+		strncpy(destination, temp, maxlen);
+}
+
+void multiload_settings_set_int(gpointer settings, const gchar *key, int value) {
+	xfce_rc_write_int_entry((XfceRc*)settings, key, value);
+}
+void multiload_settings_set_boolean(gpointer settings, const gchar *key, gboolean value) {
+	xfce_rc_write_bool_entry((XfceRc*)settings, key, value);
+}
+void multiload_settings_set_string(gpointer settings, const gchar *key, const gchar *value) {
+	xfce_rc_write_entry((XfceRc*)settings, key, value);
+}
+
 
 
 void
-multiload_read (XfcePanelPlugin *plugin, MultiloadPlugin *ma)
+multiload_read (MultiloadPlugin *ma)
 {
-	XfceRc *rc;
-	gchar *file;
-	guint i;
-	const gchar *tmp_str;
+	gpointer *settings;
+	gchar *key;
+	gchar colors_list[10*MAX_COLORS];
+	int i;
 
 	multiload_defaults(ma);
 
-	/* get the plugin config file location */
-	file = xfce_panel_plugin_lookup_rc_file (plugin);
+	settings = multiload_settings_open_for_read(ma);
+	if (G_LIKELY (settings != NULL)) {
+		multiload_settings_get_int		(settings, "speed",				&ma->speed);
+		multiload_settings_get_int		(settings, "size",				&ma->size);
+		multiload_settings_get_int		(settings, "padding",			&ma->padding);
+		multiload_settings_get_int		(settings, "spacing",			&ma->spacing);
+		multiload_settings_get_int		(settings, "orientation",		&ma->orientation_policy);
+		multiload_settings_get_boolean	(settings, "fill-between",		&ma->fill_between);
+		multiload_settings_get_boolean	(settings, "tooltip-details",	&ma->tooltip_details);
 
-	if (G_LIKELY (file != NULL)) {
-		/* open the config file, readonly */
-		rc = xfce_rc_simple_open (file, TRUE);
+		multiload_settings_get_int		(settings, "dblclick-policy",	&ma->dblclick_policy);
+		multiload_settings_get_string	(settings, "dblclick-cmdline",	ma->dblclick_cmdline, sizeof(ma->dblclick_cmdline)/sizeof(gchar));
 
-		/* cleanup */
-		g_free (file);
+		for ( i = 0; i < GRAPH_MAX; i++ ) {
+			/* Visibility */
+			key = g_strdup_printf("graph-%s-visible", graph_types[i].name);
+			multiload_settings_get_boolean (settings, key, &ma->graph_config[i].visible);
+			g_free (key);
 
-		if (G_LIKELY (rc != NULL)) {
-			/* Read speed and size */
-			ma->speed = xfce_rc_read_int_entry(rc, "speed", DEFAULT_SPEED);
-			ma->size = xfce_rc_read_int_entry(rc, "size", DEFAULT_SIZE);
-			ma->padding = xfce_rc_read_int_entry(rc, "padding", DEFAULT_PADDING);
-			ma->spacing = xfce_rc_read_int_entry(rc, "spacing", DEFAULT_PADDING);
-			ma->orientation_policy = xfce_rc_read_int_entry (rc, "orientation", DEFAULT_ORIENTATION);
-			ma->fill_between = xfce_rc_read_bool_entry (rc, "fill-between", DEFAULT_FILL_BETWEEN);
-			ma->tooltip_details = xfce_rc_read_bool_entry (rc, "tooltip-details", DEFAULT_TOOLTIP_DETAILS);
-			ma->dblclick_policy = xfce_rc_read_int_entry (rc, "dblclick-policy", DEFAULT_DBLCLICK_POLICY);
-			tmp_str = xfce_rc_read_entry (rc, "dblclick-cmdline", NULL);
-			if (tmp_str != NULL)
-				strncpy(ma->dblclick_cmdline, tmp_str, sizeof(ma->dblclick_cmdline)/sizeof(gchar));
+			/* Border width */
+			key = g_strdup_printf("graph-%s-border-width", graph_types[i].name);
+			multiload_settings_get_int (settings, key, &ma->graph_config[i].border_width);
+			g_free (key);
 
-			/* Read visibility and colors for each graph */
-			for ( i = 0; i < GRAPH_MAX; i++ ) {
-				char *key;
-				const char *list;
-
-				/* Visibility */
-				key = g_strdup_printf("%s_visible", graph_types[i].name);
-				ma->graph_config[i].visible = xfce_rc_read_bool_entry(rc, key, (i==0 ? TRUE:FALSE));
-				g_free (key);
-
-				/* Border width */
-				key = g_strdup_printf("%s_border-width", graph_types[i].name);
-				ma->graph_config[i].border_width = xfce_rc_read_int_entry(rc, key, DEFAULT_BORDER_WIDTH);
-				g_free (key);
-
-				/* Colors - Try to load from xfconf */
-				key = g_strdup_printf("%s_colors", graph_types[i].name);
-				list = xfce_rc_read_entry (rc, key, NULL);
-				g_free (key);
-				multiload_colors_unstringify(ma, i, list);
-			}
-
-			/* cleanup */
-			xfce_rc_close (rc);
-
-			multiload_sanitize(ma);
-
-			/* leave the function, everything went well */
-			return;
+			/* Colors */
+			key = g_strdup_printf("graph-%s-colors", graph_types[i].name);
+			colors_list[0] = 0;
+			multiload_settings_get_string (settings, key, colors_list, sizeof(colors_list)/sizeof(gchar));
+			multiload_colors_unstringify(ma, i, colors_list);
+			g_free (key);
 		}
+		multiload_settings_close(settings);
+
+		multiload_sanitize(ma);
+		return;
 	}
 }
 
 void
-multiload_save (XfcePanelPlugin *plugin, MultiloadPlugin *ma)
+multiload_save (MultiloadPlugin *ma)
 {
-	XfceRc *rc;
-	gchar *file;
-	guint i;
+	gpointer *settings;
+	char *key;
+	gchar colors_list[10*MAX_COLORS];
+	int i;
 
-	/* get the config file location */
-	file = xfce_panel_plugin_save_location (plugin, TRUE);
+	settings = multiload_settings_open_for_save(ma);
+	if (G_LIKELY (settings != NULL)) {
+		multiload_settings_set_int		(settings, "speed",				ma->speed);
+		multiload_settings_set_int		(settings, "size",				ma->size);
+		multiload_settings_set_int		(settings, "padding",			ma->padding);
+		multiload_settings_set_int		(settings, "spacing",			ma->spacing);
+		multiload_settings_set_int		(settings, "orientation",		ma->orientation_policy);
+		multiload_settings_set_boolean	(settings, "fill-between",		ma->fill_between);
+		multiload_settings_set_boolean	(settings, "tooltip-details",	ma->tooltip_details);
 
-	if (G_UNLIKELY (file == NULL)) {
-		DBG ("Failed to open config file");
-		return;
-	}
-
-	/* open the config file, read/write */
-	rc = xfce_rc_simple_open (file, FALSE);
-	g_free (file);
-
-	if (G_LIKELY (rc != NULL)) {
-		/* save the settings */
-		DBG(".");
-
-		/* Write common config */
-		xfce_rc_write_int_entry (rc, "speed", ma->speed);
-		xfce_rc_write_int_entry (rc, "size", ma->size);
-		xfce_rc_write_int_entry (rc, "padding", ma->padding);
-		xfce_rc_write_int_entry (rc, "spacing", ma->spacing);
-		xfce_rc_write_int_entry (rc, "orientation", ma->orientation_policy);
-		xfce_rc_write_bool_entry (rc, "fill-between", ma->fill_between);
-		xfce_rc_write_bool_entry (rc, "tooltip-details", ma->tooltip_details);
-		xfce_rc_write_int_entry (rc, "dblclick-policy", ma->dblclick_policy);
-		xfce_rc_write_entry (rc, "dblclick-cmdline", ma->dblclick_cmdline);
+		multiload_settings_set_int		(settings, "dblclick-policy",	ma->dblclick_policy);
+		multiload_settings_set_string	(settings, "dblclick-cmdline",	ma->dblclick_cmdline);
 
 		for ( i = 0; i < GRAPH_MAX; i++ ) {
-			char *key, list[10*MAX_COLORS];
-
 			/* Visibility */
-			key = g_strdup_printf("%s_visible", graph_types[i].name);
-			xfce_rc_write_bool_entry (rc, key, ma->graph_config[i].visible);
+			key = g_strdup_printf("graph-%s-visible", graph_types[i].name);
+			multiload_settings_set_boolean (settings, key, ma->graph_config[i].visible);
 			g_free (key);
 
 			/* Border width */
-			key = g_strdup_printf("%s_border-width", graph_types[i].name);
-			xfce_rc_write_int_entry (rc, key, ma->graph_config[i].border_width);
+			key = g_strdup_printf("graph-%s-border-width", graph_types[i].name);
+			multiload_settings_set_int (settings, key, ma->graph_config[i].border_width);
 			g_free (key);
 
-			/* Save colors */
-			multiload_colors_stringify (ma, i, list);
-			key = g_strdup_printf("%s_colors", graph_types[i].name);
-			xfce_rc_write_entry (rc, key, list);
+			/* Colors */
+			key = g_strdup_printf("graph-%s-colors", graph_types[i].name);
+			multiload_colors_stringify (ma, i, colors_list);
+			multiload_settings_set_string (settings, key, colors_list);
 			g_free (key);
 		}
-
-		/* close the rc file */
-		xfce_rc_close (rc);
+		multiload_settings_close(settings);
 	}
 }
 
@@ -190,13 +204,13 @@ multiload_configure_response (GtkWidget *dialog, gint response, MultiloadXfcePlu
 			g_warning (_("Unable to open the following url: %s"), about_data_website);
 	} else {
 		/* remove the dialog data from the plugin */
-		g_object_set_data (G_OBJECT (multiload->plugin), "dialog", NULL);
+		g_object_set_data (G_OBJECT (multiload->ma.panel_plugin), "dialog", NULL);
 
 		/* unlock the panel menu */
-		xfce_panel_plugin_unblock_menu (multiload->plugin);
+		xfce_panel_plugin_unblock_menu ((XfcePanelPlugin*)(multiload->ma.panel_plugin));
 
 		/* save the plugin */
-		multiload_save (multiload->plugin, &multiload->ma);
+		multiload_save (&multiload->ma);
 
 		/* destroy the properties dialog */
 		gtk_widget_destroy (dialog);
@@ -298,16 +312,13 @@ multiload_about (XfcePanelPlugin *plugin)
 static MultiloadXfcePlugin *
 multiload_new (XfcePanelPlugin *plugin)
 {
-	MultiloadXfcePlugin *multiload;
-
-	/* allocate memory for the plugin structure */
-	multiload = panel_slice_new0 (MultiloadXfcePlugin);
+	MultiloadXfcePlugin *multiload = panel_slice_new0 (MultiloadXfcePlugin);
 
 	/* pointer to plugin */
-	multiload->plugin = plugin;
+	multiload->ma.panel_plugin = plugin;
 
 	/* read the user settings */
-	multiload_read (plugin, &multiload->ma);
+	multiload_read (&multiload->ma);
 
 	/* create a container widget */
 	multiload->ebox = gtk_event_box_new ();
@@ -321,6 +332,12 @@ multiload_new (XfcePanelPlugin *plugin)
 	multiload_refresh(&(multiload->ma));
 
 	return multiload;
+}
+
+static void
+multiload_save_cb (XfcePanelPlugin *plugin, MultiloadPlugin *multiload)
+{
+	multiload_save(multiload);
 }
 
 static void
@@ -368,7 +385,7 @@ multiload_construct (XfcePanelPlugin *plugin)
 						G_CALLBACK (multiload_free), multiload);
 
 	g_signal_connect (G_OBJECT (plugin), "save",
-						G_CALLBACK (multiload_save), &multiload->ma);
+						G_CALLBACK (multiload_save_cb), &multiload->ma);
 
 	g_signal_connect (G_OBJECT (plugin), "size-changed",
 						G_CALLBACK (multiload_size_changed), &multiload->ma);
