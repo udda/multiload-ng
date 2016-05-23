@@ -1,0 +1,10 @@
+[Applet Factory]
+Id=MultiloadNandhpFactory
+Location=@LOCATION@
+_Name=Multiload Nandhp Factory
+_Description=Sample Factory
+
+[MultiloadNandhpApplet]
+_Name=MATE Multiload Plugin
+_Description=Multiload plugin
+Icon=utilities-system-monitor

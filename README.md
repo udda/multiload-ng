@@ -1,10 +1,10 @@
 multiload-nandhp
 ================
 
-multiload-nandhp is a port of the GNOME multiload applet to the Xfce4 and LXDE
-panels.
+multiload-nandhp is a port of the GNOME multiload applet to the Xfce4, LXDE
+and MATE panels.
 
-It supports Xfce 4.6 and above, and lxpanel 0.7 and above.
+It supports Xfce 4.6 and above, lxpanel 0.7 and above, MATE panel 1.7 and above.
 
 System Requirements
 -------------------
@@ -26,5 +26,8 @@ For the Xfce panel plugin:
 For the lxpanel plugin:
 
 - lxpanel                       >= 0.7
-- libmenu-cache     (Required by lxpanel)
+- libmenu-cache                 (Required by lxpanel)
 
+For the MATE panel plugin:
+
+- libmatepanelapplet-4          >= 1.7.0

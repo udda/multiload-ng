@@ -122,8 +122,31 @@ AC_SUBST(LXPANEL_CFLAGS)
 AC_SUBST(LXPANEL_LIBS)
 
 
+# mate
+AC_ARG_WITH([mate], AS_HELP_STRING([--with-mate], [Build plugin for mate-panel]),
+            [], [with_mate=check])
+AS_IF([test "x$with_mate" != "xno"], [
+    GLIB_GSETTINGS
+    pkg_modules="libmatepanelapplet-4.0 >= 1.7.0"
+    PKG_CHECK_MODULES(MATE, [$pkg_modules],
+                      [
+                        AC_DEFINE([HAVE_MATE], [1], [Support for mate-panel])
+                        with_mate=yes
+                      ],[
+                        if test "x$with_mate" != xcheck; then
+                          AC_MSG_FAILURE(
+                           [--with-mate was given, but test failed])
+                        fi
+                        with_mate=no
+                      ])
+])
+AM_CONDITIONAL(HAVE_MATE, test x$with_mate = xyes)
+AC_SUBST(MATE_CFLAGS)
+AC_SUBST(MATE_LIBS)
+
+
 # Checks if at least one build is available
-if test x$with_xfce4 != xyes && test x$with_lxpanel != xyes; then
+if test x$with_xfce4 != xyes && test x$with_lxpanel != xyes && test x$with_mate != xyes; then
     AC_MSG_FAILURE([No supported panels are installed and available.])
 fi
 
@@ -150,6 +173,7 @@ AC_CONFIG_FILES([
     xfce4/Makefile
     xfce4/multiload.desktop.in
     lxpanel/Makefile
+    mate/Makefile
     po/Makefile.in
 ])
 AC_OUTPUT
@@ -160,5 +184,7 @@ echo "Build Configuration:"
 echo
 echo "* xfce4-panel :    $with_xfce4"
 echo
-echo "* lxpanel :        $with_lxpanel"
+echo "* lxpanel     :    $with_lxpanel"
+echo
+echo "* mate-panel  :    $with_mate"
 echo

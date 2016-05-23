@@ -1,0 +1,101 @@
+<schemalist gettext-domain="@GETTEXT_PACKAGE@">
+  <schema id="org.mate.panel.applet.multiload-nandhp">
+    <key name="speed" type="i">
+      <default>500</default>
+    </key>
+    <key name="size" type="i">
+      <default>40</default>
+    </key>
+    <key name="padding" type="i">
+      <default>2</default>
+    </key>
+    <key name="spacing" type="i">
+      <default>1</default>
+    </key>
+    <key name="orientation" type="i">
+      <default>0</default>
+    </key>
+    <key name="fill-between" type="b">
+      <default>false</default>
+    </key>
+    <key name="tooltip-details" type="b">
+      <default>false</default>
+    </key>
+    <key name="dblclick-policy" type="i">
+      <default>0</default>
+    </key>
+    <key name="dblclick-cmdline" type="s">
+      <default>''</default>
+    </key>
+
+    <key name="cpuload-visible" type="b">
+      <default>true</default>
+    </key>
+    <key name="cpuload-border-width" type="i">
+      <default>1</default>
+    </key>
+    <key name="cpuload-colors" type="s">
+      <default>''</default>
+    </key>
+
+    <key name="memload-visible" type="b">
+      <default>false</default>
+    </key>
+    <key name="memload-border-width" type="i">
+      <default>1</default>
+    </key>
+    <key name="memload-colors" type="s">
+      <default>''</default>
+    </key>
+
+    <key name="netload-visible" type="b">
+      <default>false</default>
+    </key>
+    <key name="netload-border-width" type="i">
+      <default>1</default>
+    </key>
+    <key name="netload-colors" type="s">
+      <default>''</default>
+    </key>
+
+    <key name="swapload-visible" type="b">
+      <default>false</default>
+    </key>
+    <key name="swapload-border-width" type="i">
+      <default>1</default>
+    </key>
+    <key name="swapload-colors" type="s">
+      <default>''</default>
+    </key>
+
+    <key name="loadavg-visible" type="b">
+      <default>false</default>
+    </key>
+    <key name="loadavg-border-width" type="i">
+      <default>1</default>
+    </key>
+    <key name="loadavg-colors" type="s">
+      <default>''</default>
+    </key>
+
+    <key name="diskload-visible" type="b">
+      <default>false</default>
+    </key>
+    <key name="diskload-border-width" type="i">
+      <default>1</default>
+    </key>
+    <key name="diskload-colors" type="s">
+      <default>''</default>
+    </key>
+
+    <key name="temperature-visible" type="b">
+      <default>false</default>
+    </key>
+    <key name="temperature-border-width" type="i">
+      <default>1</default>
+    </key>
+    <key name="temperature-colors" type="s">
+      <default>''</default>
+    </key>
+  </schema>
+</schemalist>

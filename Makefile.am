@@ -4,10 +4,14 @@ endif
 if HAVE_LXPANEL
 LXPANEL_DIRS = lxpanel
 endif
+if HAVE_MATE
+MATE_DIRS = mate
+endif
 SUBDIRS =	\
 	common \
 	$(XFCE4_DIRS) \
 	$(LXPANEL_DIRS) \
+	$(MATE_DIRS) \
 	po
 
 distclean-local:
