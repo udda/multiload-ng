@@ -165,7 +165,6 @@ multiload_fill (MatePanelApplet* applet)
 	multiload_init ();
 	/* read the user settings */
 	multiload_read (multiload->settings, &multiload->ma);
-	multiload_sanitize(&multiload->ma);
 
 	/* create a container widget */
 	multiload->ma.container = GTK_CONTAINER(gtk_event_box_new ());
@@ -173,7 +172,7 @@ multiload_fill (MatePanelApplet* applet)
 	gtk_widget_show (GTK_WIDGET(applet));
 	gtk_widget_show (GTK_WIDGET(multiload->ma.container));
 
-	multiload_refresh(&(multiload->ma));
+//TODO do size/orientation changes require g_signal_connect?
 
 	return TRUE;
 }

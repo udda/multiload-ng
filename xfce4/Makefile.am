@@ -15,8 +15,6 @@ plugindir = \
 	$(libdir)/xfce4/panel/plugins
 
 libmultiload_la_SOURCES = \
-	../common/about-data.h \
-	../common/about_data-authors.h \
 	xfce4-multiload-plugin.c
 
 libmultiload_la_CFLAGS = \

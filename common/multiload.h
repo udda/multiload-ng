@@ -31,7 +31,8 @@ typedef struct _GraphConfig {
 } GraphConfig;
 
 typedef struct _MultiloadPlugin {
-	gpointer panel_plugin;
+	gpointer panel_data;
+	GtkWidget *pref_dialog;
 
 	GtkContainer *container;
 	GtkWidget *box;

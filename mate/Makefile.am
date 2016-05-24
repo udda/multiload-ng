@@ -10,8 +10,6 @@ AM_CPPFLAGS = \
 libexec_PROGRAMS = mate-multiload-plugin
 mate_multiload_plugin_LOCATION = $(libexecdir)/mate-multiload-plugin
 mate_multiload_plugin_SOURCES = \
-	../common/about_data.h \
-	../common/about_data-authors.h \
 	mate-multiload-plugin.c
 
 mate_multiload_plugin_CFLAGS = \

@@ -18,6 +18,7 @@ config.*
 build-aux
 intltool*
 libtool
+common/about-data.c
 mate/mate-multiload-plugin
 mate/*.mate-panel-applet
 mate/*.mate-panel-applet.in
@@ -32,5 +33,4 @@ po/POTFILES
 po/LINGUAS
 stamp-*
 *-stamp
-about-data-*.h
 old

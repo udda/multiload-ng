@@ -12,6 +12,7 @@ noinst_LTLIBRARIES = \
 	multiload-core.la
 
 multiload_core_la_SOURCES = \
+	about-data.c about-data.h \
 	autoscaler.c autoscaler.h \
 	linux-proc.c linux-proc.h \
 	load-graph.c load-graph.h \
@@ -19,7 +20,8 @@ multiload_core_la_SOURCES = \
 	multiload-colors.c multiload-colors.h \
 	multiload-config.c multiload-config.h \
 	properties.c properties.h \
-	util.c util.h
+	util.c util.h \
+	ui.c ui.h
 
 multiload_core_la_CFLAGS = \
 	$(GTK_CFLAGS) \

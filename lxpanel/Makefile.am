@@ -15,8 +15,6 @@ plugindir = \
 	$(libdir)/lxpanel/plugins
 
 multiload_la_SOURCES = \
-	../common/about_data.h \
-	../common/about_data-authors.h \
 	lxpanel-multiload-plugin.c
 
 multiload_la_CFLAGS = \

@@ -22,8 +22,6 @@
 #ifndef __ABOUT_DATA_H__
 #define __ABOUT_DATA_H__
 
-#include "about-data-authors.h"
-
 
 #define about_data_progname _("Multiload")
 #define about_data_progname_N N_("Multiload")
@@ -56,5 +54,6 @@
 	"with this program; if not, write to the Free Software Foundation, Inc.,\n" \
 	"51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n"
 
+extern const gchar * const about_data_authors[];
 
 #endif /* __ABOUT_DATA_H__ */
