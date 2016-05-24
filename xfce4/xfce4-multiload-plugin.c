@@ -147,29 +147,8 @@ xfce_free_cb (XfcePanelPlugin *plugin, MultiloadPlugin *multiload)
 	g_slice_free (MultiloadPlugin, multiload);
 }
 
-
-static void
-multiload_orientation_changed (XfcePanelPlugin *plugin, GtkOrientation orientation, MultiloadPlugin *ma)
-{
-	/* Get the plugin's current size request */
-	gint size = -1, size_alt = -1;
-	gtk_widget_get_size_request (GTK_WIDGET (plugin), &size, &size_alt);
-	if ( size < 0 )
-		size = size_alt;
-
-	ma->panel_orientation = orientation;
-
-	/* Rotate the plugin size to the new orientation */
-	if ( orientation == GTK_ORIENTATION_HORIZONTAL)
-		gtk_widget_set_size_request (GTK_WIDGET (plugin), -1, size);
-	else
-		gtk_widget_set_size_request (GTK_WIDGET (plugin), size, -1);
-
-	multiload_refresh(ma);
-}
-
 static gboolean
-multiload_size_changed (XfcePanelPlugin *plugin, gint size, MultiloadPlugin *ma)
+xfce_size_changed_cb (XfcePanelPlugin *plugin, gint size, MultiloadPlugin *ma)
 {
 	/* set the widget size */
 	if ( ma->panel_orientation == GTK_ORIENTATION_HORIZONTAL)
@@ -180,6 +159,17 @@ multiload_size_changed (XfcePanelPlugin *plugin, gint size, MultiloadPlugin *ma)
 	multiload_refresh(ma);
 
 	return TRUE;
+}
+
+static void
+xfce_orientation_changed_cb (XfcePanelPlugin *plugin, GtkOrientation orientation, MultiloadPlugin *ma)
+{
+	gint size[2];
+
+	ma->panel_orientation = orientation;
+
+	gtk_widget_get_size_request (GTK_WIDGET (plugin), size+0, size+1);
+	xfce_size_changed_cb(plugin, MAX(size[0], size[1]), ma);
 }
 
 
@@ -216,10 +206,10 @@ xfce_constructor (XfcePanelPlugin *plugin)
 						G_CALLBACK (xfce_save_cb), multiload);
 
 	g_signal_connect (G_OBJECT (plugin), "size-changed",
-						G_CALLBACK (multiload_size_changed), multiload);
+						G_CALLBACK (xfce_size_changed_cb), multiload);
 
 	g_signal_connect (G_OBJECT (plugin), "orientation-changed",
-						G_CALLBACK (multiload_orientation_changed), multiload);
+						G_CALLBACK (xfce_orientation_changed_cb), multiload);
 
 	/* show the configure menu item and connect signal */
 	xfce_panel_plugin_menu_show_configure (plugin);
