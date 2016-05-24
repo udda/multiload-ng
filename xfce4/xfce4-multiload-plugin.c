@@ -176,47 +176,40 @@ xfce_orientation_changed_cb (XfcePanelPlugin *plugin, GtkOrientation orientation
 static void
 xfce_constructor (XfcePanelPlugin *plugin)
 {
-	MultiloadPlugin *multiload;
+	MultiloadPlugin *multiload = g_slice_new0 (MultiloadPlugin);
 
 	xfce_textdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 	multiload_init ();
 
-	multiload = g_slice_new0 (MultiloadPlugin);
-
 	multiload->panel_data = plugin;
-	multiload_ui_read (multiload);
-
-	multiload->container = GTK_CONTAINER(gtk_event_box_new());
-	gtk_widget_show (GTK_WIDGET(multiload->container));
-
 	multiload->panel_orientation = xfce_panel_plugin_get_orientation (plugin);
 
+	multiload->container = GTK_CONTAINER(gtk_event_box_new());
+	gtk_container_add (GTK_CONTAINER (plugin), GTK_WIDGET(multiload->container));
+	gtk_widget_show (GTK_WIDGET(multiload->container));
+
+	multiload_ui_read (multiload);
 	multiload_refresh(multiload);
 
-	gtk_container_add (GTK_CONTAINER (plugin), GTK_WIDGET(multiload->container));
 
 	/* show the panel's right-click menu on this ebox */
 	xfce_panel_plugin_add_action_widget (plugin, GTK_WIDGET(multiload->container));
 
-	/* connect plugin signals */
+
+	/* plugin signals */
 	g_signal_connect (G_OBJECT (plugin), "free-data",
 						G_CALLBACK (xfce_free_cb), multiload);
-
 	g_signal_connect (G_OBJECT (plugin), "save",
 						G_CALLBACK (xfce_save_cb), multiload);
-
 	g_signal_connect (G_OBJECT (plugin), "size-changed",
 						G_CALLBACK (xfce_size_changed_cb), multiload);
-
 	g_signal_connect (G_OBJECT (plugin), "orientation-changed",
 						G_CALLBACK (xfce_orientation_changed_cb), multiload);
 
-	/* show the configure menu item and connect signal */
+	/* menu items */
 	xfce_panel_plugin_menu_show_configure (plugin);
 	g_signal_connect (G_OBJECT (plugin), "configure-plugin",
 						G_CALLBACK (xfce_configure_cb), multiload);
-
-	/* show the about menu item and connect signal */
 	xfce_panel_plugin_menu_show_about (plugin);
 	g_signal_connect (G_OBJECT (plugin), "about",
 						G_CALLBACK (xfce_about_cb), NULL);
