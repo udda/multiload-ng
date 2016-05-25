@@ -524,7 +524,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
-	if (multiload_get_orientation(ma) == GTK_ORIENTATION_HORIZONTAL)
+	if (ma->panel_orientation == GTK_ORIENTATION_HORIZONTAL)
 		label = gtk_label_new_with_mnemonic(_("Wid_th:"));
 	else
 		label = gtk_label_new_with_mnemonic(_("Heigh_t:"));

@@ -350,7 +350,7 @@ load_graph_resize (LoadGraph *g)
 {
 	guint size = CLAMP(g->multiload->size, MIN_SIZE, MAX_SIZE);
 
-	if ( multiload_get_orientation(g->multiload) == GTK_ORIENTATION_VERTICAL )
+	if ( g->multiload->panel_orientation == GTK_ORIENTATION_VERTICAL )
 		gtk_widget_set_size_request (g->main_widget, -1, size);
 	else /* GTK_ORIENTATION_HORIZONTAL */
 		gtk_widget_set_size_request (g->main_widget, size, -1);
