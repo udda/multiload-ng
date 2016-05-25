@@ -133,22 +133,17 @@ lxpanel_destructor(gpointer user_data)
 GtkWidget*
 lxpanel_constructor(LXPanel *panel, config_setting_t *settings)
 {
-	/* allocate our private structure instance */
 	MultiloadPlugin *multiload = g_slice_new0(MultiloadPlugin);
-
-	multiload->panel_data = settings;
 
 	multiload_init ();
 
-	multiload_ui_read (multiload);
+	multiload->panel_data = settings;
 
-
-	/* create a container widget */
 	multiload->container = GTK_CONTAINER(gtk_event_box_new ());
 	lxpanel_plugin_set_data(multiload->container, multiload, lxpanel_destructor);
 	gtk_widget_show (GTK_WIDGET(multiload->container));
 
-	/* Set size request and update orientation */
+	multiload_ui_read (multiload);
 	lxpanel_reconfigure_cb(panel, GTK_WIDGET(multiload->container));
 
 	return GTK_WIDGET(multiload->container);
