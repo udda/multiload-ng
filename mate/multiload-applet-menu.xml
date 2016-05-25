@@ -1,5 +1,6 @@
-<menuitem name="Procman Item" action="MultiLoadRunProcman" />
+<menuitem name="System Monitor Item" action="MultiLoadRunSysmon" />
 <separator/>
 <menuitem name="Properties Item" action="MultiLoadProperties" />
+<separator/>
 <menuitem name="Help" action="MultiLoadHelp" />
 <menuitem name="About Item" action="MultiLoadAbout" />

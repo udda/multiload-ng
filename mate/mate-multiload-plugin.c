@@ -29,130 +29,145 @@
 
 #include "common/about-data.h"
 #include "common/multiload.h"
-#include "common/multiload-colors.h"
-#include "common/multiload-config.h"
+#include "common/ui.h"
 
-typedef struct
+
+
+gpointer
+multiload_ps_settings_open_for_read(MultiloadPlugin *ma)
 {
-	MatePanelApplet   *applet;
-	MultiloadPlugin   ma;
-	GSettings         *settings;
-} MultiloadApplet;
-
+	return ma->panel_data;
+}
+gpointer
+multiload_ps_settings_open_for_save(MultiloadPlugin *ma)
+{
+	return ma->panel_data;
+}
 
 void
-multiload_read(GSettings *settings, MultiloadPlugin *ma)
+multiload_ps_settings_close(gpointer settings)
 {
-	guint i;
-	gchar *key;
-	const char *tmp_str;
+}
 
-	multiload_defaults(ma);
+void
+multiload_ps_settings_get_int(gpointer settings, const gchar *key, int *destination)
+{
+	*destination = g_settings_get_int((GSettings*)settings, key);
+}
+void
+multiload_ps_settings_get_boolean(gpointer settings, const gchar *key, gboolean *destination)
+{
+	*destination = g_settings_get_boolean((GSettings*)settings, key);
+}
+void
+multiload_ps_settings_get_string(gpointer settings, const gchar *key, gchar *destination, size_t maxlen)
+{
+	const gchar* temp = g_settings_get_string((GSettings*)settings, key);
+	if (G_LIKELY(temp != NULL))
+		strncpy(destination, temp, maxlen);
+}
 
-	g_assert_nonnull(settings);
-	g_assert_nonnull(ma);
-	ma->speed = g_settings_get_int(settings, "speed");
-	ma->size = g_settings_get_int(settings, "size");
-	ma->padding = g_settings_get_int(settings, "padding");
-	ma->spacing = g_settings_get_int(settings, "spacing");
-	ma->orientation_policy = g_settings_get_int(settings, "orientation");
-	ma->fill_between = g_settings_get_boolean(settings, "fill-between");
-	ma->tooltip_details = g_settings_get_boolean(settings, "tooltip-details");
-	ma->dblclick_policy = g_settings_get_int(settings, "dblclick-policy");
-	if ((tmp_str = g_settings_get_string(settings, "dblclick-cmdline")))
-		strncpy(ma->dblclick_cmdline, tmp_str, sizeof(ma->dblclick_cmdline)/sizeof(gchar));
+void
+multiload_ps_settings_set_int(gpointer settings, const gchar *key, int value)
+{
+	g_settings_set_int((GSettings*)settings, key, value);
+}
+void
+multiload_ps_settings_set_boolean(gpointer settings, const gchar *key, gboolean value)
+{
+	g_settings_set_boolean((GSettings*)settings, key, value);
+}
+void
+multiload_ps_settings_set_string(gpointer settings, const gchar *key, const gchar *value)
+{
+	g_settings_set_string((GSettings*)settings, key, value);
+}
 
-	for ( i=0; i<GRAPH_MAX; i++ ) {
-		key = g_strdup_printf("%s-visible", graph_types[i].name);
-		ma->graph_config[i].visible = g_settings_get_boolean(settings, key);
-		g_free (key);
-
-		key = g_strdup_printf("%s-border-width", graph_types[i].name);
-		ma->graph_config[i].border_width = g_settings_get_int(settings, key);
-		g_free (key);
-
-		key = g_strdup_printf("%s-colors", graph_types[i].name);
-		if ((tmp_str = g_settings_get_string(settings, key)))
-			multiload_colors_unstringify(ma, i, tmp_str);
-		g_free (key);
-	}
-
-	multiload_sanitize(ma);
+void
+multiload_ps_preferences_closed_cb(MultiloadPlugin *ma)
+{
 }
 
 
-void
-multiload_save(MultiloadApplet *multiload)
+
+static void
+mate_sysmon_cb (GtkAction *action, MultiloadPlugin *ma)
 {
-	MultiloadPlugin *ma = &multiload->ma;
-	GSettings *s = multiload->settings;
-
-	guint i;
-	char *key;
-	char list[10*MAX_COLORS];
-
-	g_assert_nonnull(s);
-
-	g_settings_set_int		(s, "speed",			ma->speed);
-	g_settings_set_int		(s, "size",				ma->size);
-	g_settings_set_int		(s, "padding",			ma->padding);
-	g_settings_set_int		(s, "spacing",			ma->spacing);
-	g_settings_set_int		(s, "orientation",		ma->orientation_policy);
-	g_settings_set_boolean	(s, "fill-between",		ma->fill_between);
-	g_settings_set_boolean	(s, "tooltip-details",	ma->tooltip_details);
-	g_settings_set_int		(s, "dblclick-policy",	ma->dblclick_policy);
-	g_settings_set_string	(s, "dblclick-cmdline",	ma->dblclick_cmdline);
-
-	for ( i = 0; i < GRAPH_MAX; i++ ) {
-		key = g_strdup_printf("%s_visible",			graph_types[i].name);
-		g_settings_set_boolean(s, key, ma->graph_config[i].visible);
-		g_free (key);
-
-		key = g_strdup_printf("%s_border-width",	graph_types[i].name);
-		g_settings_set_int(s, key, ma->graph_config[i].border_width);
-		g_free (key);
-
-		multiload_colors_stringify (ma, i, list);
-		key = g_strdup_printf("%s_colors",			graph_types[i].name);
-		g_settings_set_string(s, key, list);
-		g_free (key);
-	}
+	multiload_ui_start_system_monitor(ma);
 }
 
+static void
+mate_properties_cb (GtkAction *action, MultiloadPlugin *ma)
+{
+	GtkWidget *dialog = multiload_ui_configure_dialog_new(ma,
+		GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (ma->container))));
+	gtk_widget_show (dialog);
+}
+
+static void
+mate_help_cb (GtkAction *action, gpointer data)
+{
+	multiload_ui_show_help();
+}
+
+static void
+mate_about_cb (GtkAction *action, MultiloadPlugin *ma)
+{
+	multiload_ui_show_about(
+		GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (ma->container))));
+}
+
+static void
+mate_orientation_cb (MatePanelApplet *applet, guint orient, MultiloadPlugin *ma)
+{
+	if (orient == MATE_PANEL_APPLET_ORIENT_UP || orient == MATE_PANEL_APPLET_ORIENT_DOWN)
+		ma->panel_orientation = GTK_ORIENTATION_HORIZONTAL;
+	else // if (orient == MATE_PANEL_APPLET_ORIENT_LEFT || orient == MATE_PANEL_APPLET_ORIENT_RIGHT)
+		ma->panel_orientation = GTK_ORIENTATION_VERTICAL;
+}
+static void
+mate_size_cb (MatePanelApplet *applet, guint size, MultiloadPlugin *ma)
+{
+	
+}
 
 static const GtkActionEntry multiload_menu_actions [] = {
+	{ "MultiLoadRunSysmon", "utilities-system-monitor", N_("Start task manager"),
+			NULL, NULL, G_CALLBACK (mate_sysmon_cb) },
 	{ "MultiLoadProperties", GTK_STOCK_PROPERTIES, N_("_Preferences"),
-	  NULL, NULL,
-	  NULL },
-//	  G_CALLBACK (multiload_properties_cb) },
-	{ "MultiLoadRunProcman", GTK_STOCK_EXECUTE, N_("_Open System Monitor"),
-	  NULL, NULL,
-	  NULL },
-//	  G_CALLBACK (start_procman_cb) },
+			NULL, NULL, G_CALLBACK (mate_properties_cb) },
 	{ "MultiLoadHelp", GTK_STOCK_HELP, N_("_Help"),
-	  NULL, NULL,
-	  NULL },
-//	  G_CALLBACK (help_cb) },
+			NULL, NULL, G_CALLBACK (mate_help_cb) },
 	{ "MultiLoadAbout", GTK_STOCK_ABOUT, N_("_About"),
-	  NULL, NULL,
-	  NULL },
-//	  G_CALLBACK (about_cb) }
+			NULL, NULL, G_CALLBACK (mate_about_cb) }
 };
 
-static gboolean
-multiload_fill (MatePanelApplet* applet)
-{
-	MultiloadApplet *multiload;
 
-	/* set mate-panel applet options */
+static gboolean
+mate_constructor (MatePanelApplet* applet, const char* iid, gpointer data)
+{
+	if (g_strcmp0(iid, "MultiloadNandhpApplet"))
+		return FALSE;
+
+
+	MultiloadPlugin *multiload = g_slice_new0 (MultiloadPlugin);
+
 	mate_panel_applet_set_flags (applet, MATE_PANEL_APPLET_EXPAND_MINOR | MATE_PANEL_APPLET_HAS_HANDLE);
 	mate_panel_applet_set_background_widget(applet, GTK_WIDGET(applet));
+	multiload_init ();
 
-	/* create the MultiloadApplet struct */
-	multiload = g_malloc0(sizeof(MultiloadApplet));
-	multiload->applet = applet;
-	multiload->settings = mate_panel_applet_settings_new (applet, "org.mate.panel.applet.multiload-nandhp");
+	multiload->panel_data = mate_panel_applet_settings_new (applet, "org.mate.panel.applet.multiload-nandhp");
 
+	multiload->container = GTK_CONTAINER(gtk_event_box_new ());
+	gtk_container_add (GTK_CONTAINER(applet), GTK_WIDGET(multiload->container));
+	gtk_widget_show (GTK_WIDGET(applet));
+	gtk_widget_show (GTK_WIDGET(multiload->container));
+
+	multiload_ui_read (multiload);
+	multiload_refresh(multiload);
+
+
+	/* menu items */
 	GtkActionGroup *action_group = gtk_action_group_new ("Multiload Applet Actions");
 	gtk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
 	gtk_action_group_add_actions (action_group, multiload_menu_actions, G_N_ELEMENTS (multiload_menu_actions), multiload);
@@ -161,34 +176,18 @@ multiload_fill (MatePanelApplet* applet)
 	mate_panel_applet_setup_menu_from_file (applet, ui_path, action_group);
 	g_free (ui_path);
 
-	/* Initialize multiload */
-	multiload_init ();
-	/* read the user settings */
-	multiload_read (multiload->settings, &multiload->ma);
 
-	/* create a container widget */
-	multiload->ma.container = GTK_CONTAINER(gtk_event_box_new ());
-	gtk_container_add (GTK_CONTAINER(applet), GTK_WIDGET(multiload->ma.container));
-	gtk_widget_show (GTK_WIDGET(applet));
-	gtk_widget_show (GTK_WIDGET(multiload->ma.container));
-
-//TODO do size/orientation changes require g_signal_connect?
+	/* plugin signals */
+	g_signal_connect (G_OBJECT (applet), "change-orient",
+						G_CALLBACK (mate_orientation_cb), multiload);
+	g_signal_connect (G_OBJECT (applet), "change-size",
+						G_CALLBACK (mate_size_cb), multiload);
 
 	return TRUE;
-}
-
-/* This function, called by mate-panel, will create the applet */
-static gboolean
-multiload_constructor (MatePanelApplet* applet, const char* iid, gpointer data)
-{
-	if (!g_strcmp0(iid, "MultiloadNandhpApplet"))
-		return multiload_fill (applet);
-	else
-		return FALSE;
 }
 
 MATE_PANEL_APPLET_OUT_PROCESS_FACTORY("MultiloadNandhpFactory",
 									  PANEL_TYPE_APPLET,
 									  about_data_description,
-									  multiload_constructor,
+									  mate_constructor,
 									  NULL)

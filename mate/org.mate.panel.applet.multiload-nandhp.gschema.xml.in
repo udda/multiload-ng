@@ -28,73 +28,73 @@
       <default>''</default>
     </key>
 
-    <key name="cpuload-visible" type="b">
+    <key name="graph-cpuload-visible" type="b">
       <default>true</default>
     </key>
-    <key name="cpuload-border-width" type="i">
+    <key name="graph-cpuload-border-width" type="i">
       <default>1</default>
     </key>
-    <key name="cpuload-colors" type="s">
+    <key name="graph-cpuload-colors" type="s">
       <default>''</default>
     </key>
 
-    <key name="memload-visible" type="b">
+    <key name="graph-memload-visible" type="b">
       <default>false</default>
     </key>
-    <key name="memload-border-width" type="i">
+    <key name="graph-memload-border-width" type="i">
       <default>1</default>
     </key>
-    <key name="memload-colors" type="s">
+    <key name="graph-memload-colors" type="s">
       <default>''</default>
     </key>
 
-    <key name="netload-visible" type="b">
+    <key name="graph-netload-visible" type="b">
       <default>false</default>
     </key>
-    <key name="netload-border-width" type="i">
+    <key name="graph-netload-border-width" type="i">
       <default>1</default>
     </key>
-    <key name="netload-colors" type="s">
+    <key name="graph-netload-colors" type="s">
       <default>''</default>
     </key>
 
-    <key name="swapload-visible" type="b">
+    <key name="graph-swapload-visible" type="b">
       <default>false</default>
     </key>
-    <key name="swapload-border-width" type="i">
+    <key name="graph-swapload-border-width" type="i">
       <default>1</default>
     </key>
-    <key name="swapload-colors" type="s">
+    <key name="graph-swapload-colors" type="s">
       <default>''</default>
     </key>
 
-    <key name="loadavg-visible" type="b">
+    <key name="graph-loadavg-visible" type="b">
       <default>false</default>
     </key>
-    <key name="loadavg-border-width" type="i">
+    <key name="graph-loadavg-border-width" type="i">
       <default>1</default>
     </key>
-    <key name="loadavg-colors" type="s">
+    <key name="graph-loadavg-colors" type="s">
       <default>''</default>
     </key>
 
-    <key name="diskload-visible" type="b">
+    <key name="graph-diskload-visible" type="b">
       <default>false</default>
     </key>
-    <key name="diskload-border-width" type="i">
+    <key name="graph-diskload-border-width" type="i">
       <default>1</default>
     </key>
-    <key name="diskload-colors" type="s">
+    <key name="graph-diskload-colors" type="s">
       <default>''</default>
     </key>
 
-    <key name="temperature-visible" type="b">
+    <key name="graph-temperature-visible" type="b">
       <default>false</default>
     </key>
-    <key name="temperature-border-width" type="i">
+    <key name="graph-temperature-border-width" type="i">
       <default>1</default>
     </key>
-    <key name="temperature-colors" type="s">
+    <key name="graph-temperature-colors" type="s">
       <default>''</default>
     </key>
   </schema>
