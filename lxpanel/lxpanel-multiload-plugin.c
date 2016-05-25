@@ -119,7 +119,6 @@ lxpanel_reconfigure_cb(LXPanel *panel, GtkWidget *ebox)
 	multiload_refresh(multiload);
 }
 
-
 void
 lxpanel_destructor(gpointer user_data)
 {
@@ -127,8 +126,6 @@ lxpanel_destructor(gpointer user_data)
 	gtk_widget_destroy (GTK_WIDGET(user_data));
 	g_free(multiload);
 }
-
-
 
 GtkWidget*
 lxpanel_constructor(LXPanel *panel, config_setting_t *settings)
