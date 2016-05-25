@@ -234,10 +234,9 @@ GetNet (int Maximum, int data [3], LoadGraph *g)
 		 * linux kernel or not linux at all). */
 		sprintf(path, "/sys/class/net/%s", devices[i]);
 		if (access(path, F_OK) == 0) {
-			/* Now check for 'device' symlink, present only in physical devices */
 			sprintf(path, "/sys/class/net/%s/device", devices[i]);
 			if (access(path, F_OK) != 0) {
-				/* symlink does not exist, device is virtual */
+				// symlink does not exist, device is virtual
 				continue;
 			}
 		}
@@ -251,11 +250,10 @@ GetNet (int Maximum, int data [3], LoadGraph *g)
 		if (netload.if_flags & (1L << GLIBTOP_IF_FLAGS_LOOPBACK)) {
 			/* for loopback in and out are identical, so only count once */
 			present[NET_LOCAL] += netload.bytes_in;
-			continue;
+		} else {
+			present[NET_IN] += netload.bytes_in;
+			present[NET_OUT] += netload.bytes_out;
 		}
-
-		present[NET_IN] += netload.bytes_in;
-		present[NET_OUT] += netload.bytes_out;
 
 		g_strlcat (xd->ifaces, devices[i], ifacelen);
 		g_strlcat (xd->ifaces, ", ", ifacelen);
