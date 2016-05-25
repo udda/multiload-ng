@@ -270,7 +270,7 @@ gchar* gtk_save_file_dialog(GtkWindow *parent, const gchar *title, const gchar *
 }
 
 
-const gchar* get_system_monitor_executable()
+gchar* get_system_monitor_executable()
 {
 	static const gchar* sysmon[] = {
 		"ksysguard",

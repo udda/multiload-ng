@@ -215,7 +215,7 @@ static gboolean
 load_graph_clicked (GtkWidget *widget, GdkEventButton *event, LoadGraph *g)
 {
 	int result;
-	const gchar* cmdline;
+	gchar* cmdline;
 	/* check if button event is a double click with first mouse button */
 	if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
 		switch(g->multiload->dblclick_policy) {

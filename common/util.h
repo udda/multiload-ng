@@ -57,7 +57,7 @@ gtk_open_file_dialog(GtkWindow *parent, const gchar *title);
 G_GNUC_INTERNAL gchar*
 gtk_save_file_dialog(GtkWindow *parent, const gchar *title, const gchar *current_name);
 
-G_GNUC_INTERNAL const gchar*
+G_GNUC_INTERNAL gchar*
 get_system_monitor_executable();
 
 G_END_DECLS
