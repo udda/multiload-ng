@@ -103,19 +103,11 @@ lxpanel_reconfigure_cb(LXPanel *panel, GtkWidget *ebox)
 {
 	MultiloadPlugin *multiload = lxpanel_plugin_get_data(ebox);
 
-	// despite the name, in vertical orientation this is panel width
-	int size = panel_get_height(panel);
-
-	/* Determine orientation and size */
-	if ( panel_get_orientation(panel) == GTK_ORIENTATION_VERTICAL ) {
+	if ( panel_get_orientation(panel) == GTK_ORIENTATION_VERTICAL )
 		multiload->panel_orientation = GTK_ORIENTATION_VERTICAL;
-		gtk_widget_set_size_request (ebox, size, -1);
-	} else { /* ma->panel_orientation can have values other than vert/horiz */
+	else // lxpanel panel orientation can have values other than vert/horiz
 		multiload->panel_orientation = GTK_ORIENTATION_HORIZONTAL;
-		gtk_widget_set_size_request (ebox, -1, size);
-	}
 
-	/* Refresh the panel applet */
 	multiload_refresh(multiload);
 }
 

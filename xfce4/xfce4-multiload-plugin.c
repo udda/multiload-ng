@@ -147,29 +147,16 @@ xfce_free_cb (XfcePanelPlugin *plugin, MultiloadPlugin *multiload)
 	g_slice_free (MultiloadPlugin, multiload);
 }
 
-static gboolean
-xfce_size_changed_cb (XfcePanelPlugin *plugin, gint size, MultiloadPlugin *ma)
+static void
+xfce_size_changed_cb (XfcePanelPlugin *plugin, int size, MultiloadPlugin *ma)
 {
-	/* set the widget size */
-	if ( ma->panel_orientation == GTK_ORIENTATION_HORIZONTAL)
-		gtk_widget_set_size_request (GTK_WIDGET (plugin), -1, size);
-	else
-		gtk_widget_set_size_request (GTK_WIDGET (plugin), size, -1);
-
 	multiload_refresh(ma);
-
-	return TRUE;
 }
-
 static void
 xfce_orientation_changed_cb (XfcePanelPlugin *plugin, GtkOrientation orientation, MultiloadPlugin *ma)
 {
-	gint size[2];
-
 	ma->panel_orientation = orientation;
-
-	gtk_widget_get_size_request (GTK_WIDGET (plugin), size+0, size+1);
-	xfce_size_changed_cb(plugin, MAX(size[0], size[1]), ma);
+	multiload_refresh(ma);
 }
 
 static void
