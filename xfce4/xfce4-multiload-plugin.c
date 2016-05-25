@@ -172,6 +172,16 @@ xfce_orientation_changed_cb (XfcePanelPlugin *plugin, GtkOrientation orientation
 	xfce_size_changed_cb(plugin, MAX(size[0], size[1]), ma);
 }
 
+static void
+xfce_help_cb(GtkMenuItem *mi, gpointer data)
+{
+	multiload_ui_show_help();
+}
+static void
+xfce_sysmon_cb(GtkMenuItem *mi, gpointer data)
+{
+	multiload_ui_start_system_monitor((MultiloadPlugin*)data);
+}
 
 static void
 xfce_constructor (XfcePanelPlugin *plugin)
@@ -207,12 +217,27 @@ xfce_constructor (XfcePanelPlugin *plugin)
 						G_CALLBACK (xfce_orientation_changed_cb), multiload);
 
 	/* menu items */
+	GtkMenuItem *mi_separator = GTK_MENU_ITEM(gtk_separator_menu_item_new ());
+	GtkMenuItem *mi_help = GTK_MENU_ITEM(gtk_image_menu_item_new_from_stock (GTK_STOCK_HELP, NULL));
+	GtkMenuItem *mi_sysmon = GTK_MENU_ITEM(gtk_image_menu_item_new_with_label(_("Start task manager")));
+	gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(mi_sysmon),
+		GTK_WIDGET(gtk_image_new_from_icon_name("utilities-system-monitor", GTK_ICON_SIZE_MENU)));
 	xfce_panel_plugin_menu_show_configure (plugin);
+	xfce_panel_plugin_menu_show_about (plugin);
+	xfce_panel_plugin_menu_insert_item (plugin, mi_separator);
+	xfce_panel_plugin_menu_insert_item (plugin, mi_help);
+	xfce_panel_plugin_menu_insert_item (plugin, mi_sysmon);
 	g_signal_connect (G_OBJECT (plugin), "configure-plugin",
 						G_CALLBACK (xfce_configure_cb), multiload);
-	xfce_panel_plugin_menu_show_about (plugin);
 	g_signal_connect (G_OBJECT (plugin), "about",
 						G_CALLBACK (xfce_about_cb), NULL);
+	g_signal_connect (G_OBJECT (mi_help), "activate",
+						G_CALLBACK (xfce_help_cb), NULL);
+	g_signal_connect (G_OBJECT (mi_sysmon), "activate",
+						G_CALLBACK (xfce_sysmon_cb), multiload);
+	gtk_widget_show(GTK_WIDGET(mi_separator));
+	gtk_widget_show(GTK_WIDGET(mi_help));
+	gtk_widget_show(GTK_WIDGET(mi_sysmon));
 }
 
 /* register the plugin */

@@ -16,6 +16,8 @@ G_GNUC_INTERNAL void
 multiload_ui_show_about (GtkWindow* parent);
 G_GNUC_INTERNAL GtkWidget *
 multiload_ui_configure_dialog_new (MultiloadPlugin *ma, GtkWindow *parent);
+G_GNUC_INTERNAL void
+multiload_ui_start_system_monitor(MultiloadPlugin *ma);
 
 G_END_DECLS
 

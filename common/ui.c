@@ -187,3 +187,22 @@ multiload_ui_configure_dialog_new(MultiloadPlugin *ma, GtkWindow* parent)
 	ma->pref_dialog = dialog;
 	return dialog;
 }
+
+void
+multiload_ui_start_system_monitor(MultiloadPlugin *ma)
+{
+	gchar *cmdline;
+	gboolean result;
+
+	if (ma->dblclick_policy == DBLCLICK_POLICY_CMDLINE)
+		cmdline = g_strdup(ma->dblclick_cmdline);
+	else
+		cmdline = get_system_monitor_executable();
+
+	result = g_spawn_command_line_async (cmdline, NULL);
+
+	if (G_UNLIKELY (result == FALSE))
+		g_warning (_("Unable to execute the following command line: '%s'"), cmdline);
+
+	g_free(cmdline);
+}
