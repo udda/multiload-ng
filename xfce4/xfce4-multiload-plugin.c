@@ -178,9 +178,9 @@ xfce_help_cb(GtkMenuItem *mi, gpointer data)
 	multiload_ui_show_help();
 }
 static void
-xfce_sysmon_cb(GtkMenuItem *mi, gpointer data)
+xfce_sysmon_cb(GtkMenuItem *mi, MultiloadPlugin *ma)
 {
-	multiload_ui_start_system_monitor((MultiloadPlugin*)data);
+	multiload_ui_start_system_monitor(ma);
 }
 
 static void
