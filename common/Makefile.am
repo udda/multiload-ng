@@ -32,7 +32,6 @@ multiload_core_la_LDFLAGS = \
        -avoid-version \
        -module \
        -no-undefined \
-       -export-symbols-regex '^xfce_panel_module_(preinit|init|construct)' \
        $(PLATFORM_LDFLAGS)
 
 multiload_core_la_LIBADD = \
