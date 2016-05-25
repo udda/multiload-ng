@@ -6,6 +6,7 @@
 #include "common/multiload-config.h"
 #include "common/multiload-colors.h"
 #include "common/properties.h"
+#include "common/util.h"
 
 
 // ps = Panel Specific - implement these for every panel
