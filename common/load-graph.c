@@ -223,7 +223,7 @@ load_graph_clicked (GtkWidget *widget, GdkEventButton *event, LoadGraph *g)
 				cmdline = get_system_monitor_executable();
 				break;
 			case DBLCLICK_POLICY_CMDLINE:
-				cmdline = g->multiload->dblclick_cmdline;
+				cmdline = g_strdup(g->multiload->dblclick_cmdline);
 				break;
 			case DBLCLICK_POLICY_DONOTHING:
 			default:
@@ -234,6 +234,8 @@ load_graph_clicked (GtkWidget *widget, GdkEventButton *event, LoadGraph *g)
 
 		if (G_UNLIKELY (result == FALSE))
 			g_warning (_("Unable to execute the following command line: '%s'"), cmdline);
+
+		g_free(cmdline);
 	}
 	return FALSE;
 }
