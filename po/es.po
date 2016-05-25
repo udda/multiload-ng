@@ -301,10 +301,10 @@ msgstr "Extensión borde"
 msgid "Default colors"
 msgstr "Colores predeterminados"
 
-msgid "Wid_th: "
-msgstr "Ex_tensión"
+msgid "Wid_th:"
+msgstr "Ex_tensión:"
 
-msgid "Heigh_t: "
+msgid "Heigh_t:"
 msgstr "Al_tura:"
 
 #, c-format

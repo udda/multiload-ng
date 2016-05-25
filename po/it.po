@@ -301,11 +301,11 @@ msgstr "Larghezza bordo"
 msgid "Default colors"
 msgstr "Colori predefiniti"
 
-msgid "Wid_th: "
-msgstr "Larghe_zza"
+msgid "Wid_th:"
+msgstr "Larghe_zza:"
 
-msgid "Heigh_t: "
-msgstr "Alte_zza"
+msgid "Heigh_t:"
+msgstr "Altezz_a:"
 
 #, c-format
 msgid "%d pixel"
