@@ -35,7 +35,7 @@ multiload_ui_read (MultiloadPlugin *ma)
 
 	settings = multiload_ps_settings_open_for_read(ma);
 	if (G_LIKELY (settings != NULL)) {
-		multiload_ps_settings_get_int		(settings, "speed",				&ma->speed);
+		multiload_ps_settings_get_int		(settings, "interval",			&ma->interval);
 		multiload_ps_settings_get_int		(settings, "size",				&ma->size);
 		multiload_ps_settings_get_int		(settings, "padding",			&ma->padding);
 		multiload_ps_settings_get_int		(settings, "spacing",			&ma->spacing);
@@ -83,7 +83,7 @@ multiload_ui_save (MultiloadPlugin *ma)
 
 	settings = multiload_ps_settings_open_for_save(ma);
 	if (G_LIKELY (settings != NULL)) {
-		multiload_ps_settings_set_int		(settings, "speed",				ma->speed);
+		multiload_ps_settings_set_int		(settings, "interval",			ma->interval);
 		multiload_ps_settings_set_int		(settings, "size",				ma->size);
 		multiload_ps_settings_set_int		(settings, "padding",			ma->padding);
 		multiload_ps_settings_set_int		(settings, "spacing",			ma->spacing);

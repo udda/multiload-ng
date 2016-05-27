@@ -40,7 +40,7 @@ typedef struct _MultiloadPlugin {
 	LoadGraph *graphs[GRAPH_MAX];
 
 	GraphConfig graph_config[GRAPH_MAX];
-	gint speed;
+	gint interval;
 	gint size;
 	gint padding;
 	gint spacing;

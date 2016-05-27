@@ -275,7 +275,7 @@ void multiload_defaults(MultiloadPlugin *ma)
 	guint i;
 
 	/* default settings */
-	ma->speed = DEFAULT_SPEED;
+	ma->interval = DEFAULT_INTERVAL;
 	ma->size = DEFAULT_SIZE;
 	ma->padding = DEFAULT_PADDING;
 	ma->spacing = DEFAULT_SPACING;
@@ -295,7 +295,7 @@ multiload_sanitize(MultiloadPlugin *ma)
 	guint i, visible_count = 0;
 
 	/* Keep values between max and min */
-	ma->speed = CLAMP(ma->speed, MIN_SPEED, MAX_SPEED);
+	ma->interval = CLAMP(ma->interval, MIN_INTERVAL, MAX_INTERVAL);
 	ma->size = CLAMP(ma->size, MIN_SIZE, MAX_SIZE);
 	ma->padding = CLAMP(ma->padding, MIN_PADDING, MAX_PADDING);
 	ma->spacing = CLAMP(ma->spacing, MIN_SPACING, MAX_SPACING);

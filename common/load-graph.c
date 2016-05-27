@@ -359,9 +359,9 @@ load_graph_resize (LoadGraph *g)
 void
 load_graph_start (LoadGraph *g)
 {
-	guint speed = CLAMP(g->multiload->speed, MIN_SPEED, MAX_SPEED);
+	guint interval = CLAMP(g->multiload->interval, MIN_INTERVAL, MAX_INTERVAL);
 	load_graph_stop(g);
-	g->timer_index = g_timeout_add (speed, (GSourceFunc) load_graph_update, g);
+	g->timer_index = g_timeout_add (interval, (GSourceFunc) load_graph_update, g);
 }
 
 void

@@ -158,15 +158,15 @@ manage_dynamic_widgets(MultiloadPlugin *ma)
 		gint prop_type = GPOINTER_TO_INT(g_object_get_data (G_OBJECT(w), "dynamic_prop"));
 		switch (prop_type) {
 			case PROP_SIZE:
-				str1 = format_time_duration(ma->size * ma->speed / 1000);
+				str1 = format_time_duration(ma->size * ma->interval / 1000);
 				str2 = g_strdup_printf(_("Graph timespan is %s"), str1);
 				gtk_label_set_text (GTK_LABEL(g_object_get_data (G_OBJECT(target), "label")), str2);
 				g_free(str1);
 				g_free(str2);
 				break;
 
-			case PROP_SPEED:
-				gtk_widget_set_visible (target, ma->speed < tooltip_timeout);
+			case PROP_INTERVAL:
+				gtk_widget_set_visible (target, ma->interval < tooltip_timeout);
 				break;
 
 			case PROP_ORIENTATION:
@@ -223,9 +223,9 @@ property_changed_cb(GtkWidget *widget, gpointer id) {
 			}
 			break;
 
-		case PROP_SPEED:
+		case PROP_INTERVAL:
 			val_int = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
-			ma->speed = val_int;
+			ma->interval = val_int;
 			for (i = 0; i < GRAPH_MAX; i++) {
 				load_graph_stop(ma->graphs[i]);
 				if (ma->graph_config[i].visible)
@@ -592,17 +592,17 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_size_group_add_widget(sizegroup, label);
 	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
 
-	t = gtk_spin_button_new_with_parameters(MIN_SPEED, MAX_SPEED, STEP_SPEED, ma->speed, _("%d milliseconds"));
+	t = gtk_spin_button_new_with_parameters(MIN_INTERVAL, MAX_INTERVAL, STEP_INTERVAL, ma->interval, _("%d milliseconds"));
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), t);
 	g_signal_connect(G_OBJECT(t), "value_changed",
-			G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_SPEED));
+			G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_INTERVAL));
 	gtk_size_group_add_widget(sizegroup2, t);
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 	label = gtk_icon_label_new(GTK_STOCK_DIALOG_WARNING, _("Tooltip may not show if update interval is too short."));
 	gtk_box_pack_start(GTK_BOX(box), label, TRUE, TRUE, PREF_CONTENT_PADDING);
 	g_object_set_data(G_OBJECT(t), "dynamic_target", label);
-	g_object_set_data(G_OBJECT(t), "dynamic_prop", GINT_TO_POINTER(PROP_SPEED));
+	g_object_set_data(G_OBJECT(t), "dynamic_prop", GINT_TO_POINTER(PROP_INTERVAL));
 	g_assert_nonnull(g_list_append(dynamic_widgets, t));
 
 	// Orientation

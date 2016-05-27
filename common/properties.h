@@ -33,7 +33,7 @@ G_BEGIN_DECLS
 // properties and actions are all in the first 16 bits; this make room for another 16 bit value
 enum MultiloadProperties {
 	PROP_SHOWGRAPH			= 0x00010000,
-	PROP_SPEED				= 0x00020000,
+	PROP_INTERVAL			= 0x00020000,
 	PROP_SIZE				= 0x00030000,
 	PROP_PADDING			= 0x00040000,
 	PROP_SPACING			= 0x00050000,
@@ -77,8 +77,8 @@ enum MultiloadLimits {
 	MIN_SIZE							= 10,
 	MAX_SIZE							= 400,
 
-	MIN_SPEED							= 50,
-	MAX_SPEED							= 20000,
+	MIN_INTERVAL						= 50,
+	MAX_INTERVAL						= 20000,
 
 	MIN_PADDING							= 0,
 	MAX_PADDING							= 40,
@@ -92,7 +92,7 @@ enum MultiloadLimits {
 
 enum MultiloadStep {
 	STEP_SIZE							= 5,
-	STEP_SPEED							= 50,
+	STEP_INTERVAL						= 50,
 	STEP_PADDING						= 1,
 	STEP_SPACING						= 1,
 	STEP_BORDER_WIDTH					= 1
@@ -100,7 +100,7 @@ enum MultiloadStep {
 
 enum MultiloadDefaults {
 	DEFAULT_SIZE						= 40,
-	DEFAULT_SPEED						= 500,
+	DEFAULT_INTERVAL					= 500,
 	DEFAULT_PADDING						= 2,
 	DEFAULT_SPACING						= 1,
 	DEFAULT_BORDER_WIDTH				= 1,

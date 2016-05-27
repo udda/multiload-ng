@@ -1,6 +1,6 @@
 <schemalist gettext-domain="@GETTEXT_PACKAGE@">
   <schema id="org.mate.panel.applet.multiload-nandhp">
-    <key name="speed" type="i">
+    <key name="interval" type="i">
       <default>500</default>
     </key>
     <key name="size" type="i">

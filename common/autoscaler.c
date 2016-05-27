@@ -13,7 +13,7 @@ unsigned autoscaler_get_max(AutoScaler *s, LoadGraph *g, unsigned current)
 	s->count++;
 	time(&now);
 
-	if ((float)difftime(now, s->last_update) > (g->draw_width * g->multiload->speed / 1000)) {
+	if ((float)difftime(now, s->last_update) > (g->draw_width * g->multiload->interval / 1000)) {
 		float new_average = s->sum / s->count;
 		float average;
 
