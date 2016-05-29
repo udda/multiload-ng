@@ -20,6 +20,7 @@
 
 #include <config.h>
 
+#include <stdlib.h>
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 #include <glib/gi18n-lib.h>
@@ -28,62 +29,123 @@
 #include "common/multiload.h"
 #include "common/ui.h"
 
-/*
+
+#define G_KEY_GROUP_NAME "Multiload"
+
+gchar* standalone_build_config_filename() {
+	return g_build_filename(
+			g_get_tmp_dir (),
+			"gkf-test.multiload",
+			NULL);
+}
+
+
 gpointer
 multiload_ps_settings_open_for_read(MultiloadPlugin *ma)
 {
-	return ma->panel_data;
+	GKeyFile *gkf;
+	GError *err = NULL;
+	gboolean res;
+	gchar* fname = standalone_build_config_filename();
+
+	gkf = g_key_file_new();
+	if (g_file_test(fname, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR)) {
+		res = g_key_file_load_from_file(gkf, fname, G_KEY_FILE_NONE, &err);
+		if (!res) {
+			g_warning("multiload_ps_settings_open_for_read: %s", err->message);
+			g_key_file_free(gkf);
+			gkf = NULL;
+		}
+	}
+
+	g_clear_error(&err);
+	return gkf;
 }
 gpointer
 multiload_ps_settings_open_for_save(MultiloadPlugin *ma)
 {
-	return ma->panel_data;
+	return g_key_file_new();
 }
 
-void
+gboolean
 multiload_ps_settings_save(gpointer settings)
 {
+	GError *err = NULL;
+	gboolean res;
+	gchar* fname = standalone_build_config_filename();
+
+	res = g_key_file_save_to_file((GKeyFile*)settings, fname, &err);
+
+	if (!res)
+		g_warning("multiload_ps_settings_save: %s", err->message);
+
+	g_free(fname);
+	g_clear_error(&err);
+	return res;
 }
 
 void
 multiload_ps_settings_close(gpointer settings)
 {
+	g_key_file_free((GKeyFile*)settings);
 }
 
 void
 multiload_ps_settings_get_int(gpointer settings, const gchar *key, int *destination)
 {
-	config_setting_lookup_int((config_setting_t*)settings, key, destination);
+	GError *err = NULL;
+	int temp;
+
+	temp = g_key_file_get_integer ((GKeyFile*)settings, G_KEY_GROUP_NAME, key, &err);
+	if (G_LIKELY(err == NULL || err->code == 0))
+		*destination = temp;
+
+	g_clear_error(&err);
 }
 void
 multiload_ps_settings_get_boolean(gpointer settings, const gchar *key, gboolean *destination)
 {
-	config_setting_lookup_int((config_setting_t*)settings, key, destination);
-	*destination = (*destination)? TRUE:FALSE;
+	GError *err = NULL;
+	gboolean temp;
+
+	temp = g_key_file_get_boolean ((GKeyFile*)settings, G_KEY_GROUP_NAME, key, &err);
+	if (G_LIKELY(err == NULL || err->code == 0))
+		*destination = temp;
+
+	g_clear_error(&err);
 }
 void
 multiload_ps_settings_get_string(gpointer settings, const gchar *key, gchar *destination, size_t maxlen)
 {
-	const gchar* temp = NULL;
-	config_setting_lookup_string((config_setting_t*)settings, key, &temp);
-	if (G_LIKELY(temp != NULL))
-		strncpy(destination, temp, maxlen);
+	GError *err = NULL;
+	gchar *temp;
+
+	temp = g_key_file_get_string ((GKeyFile*)settings, G_KEY_GROUP_NAME, key, &err);
+	if (G_LIKELY(err == NULL || err->code == 0)) {
+		if (temp == NULL)
+			destination[0] = 0;
+		else
+			strncpy(destination, temp, maxlen);
+	}
+
+	g_clear_error(&err);
+	g_free(temp);
 }
 
 void
 multiload_ps_settings_set_int(gpointer settings, const gchar *key, int value)
 {
-	config_group_set_int((config_setting_t*)settings, key, value);
+	g_key_file_set_integer ((GKeyFile*)settings, G_KEY_GROUP_NAME, key, value);
 }
 void
 multiload_ps_settings_set_boolean(gpointer settings, const gchar *key, gboolean value)
 {
-	config_group_set_int((config_setting_t*)settings, key, value?TRUE:FALSE);
+	g_key_file_set_boolean ((GKeyFile*)settings, G_KEY_GROUP_NAME, key, value);
 }
 void
 multiload_ps_settings_set_string(gpointer settings, const gchar *key, const gchar *value)
 {
-	config_group_set_string((config_setting_t*)settings, key, value);
+	g_key_file_set_string ((GKeyFile*)settings, G_KEY_GROUP_NAME, key, value);
 }
 
 void
@@ -93,36 +155,24 @@ multiload_ps_preferences_closed_cb(MultiloadPlugin *ma)
 
 
 
-GtkWidget*
-standalone_configure_cb(LXPanel *panel, GtkWidget *ebox)
+
+static void
+standalone_destroy_cb(GtkWidget *widget, MultiloadPlugin *multiload)
 {
-	MultiloadPlugin *multiload = lxpanel_plugin_get_data(ebox);
-	return multiload_ui_configure_dialog_new(multiload,
-		GTK_WINDOW(gtk_widget_get_toplevel (GTK_WIDGET(ebox))));
+    gtk_main_quit ();
+    g_free(multiload);
 }
 
 void
-standalone_reconfigure_cb(LXPanel *panel, GtkWidget *ebox)
+standalone_settingsmenu_cb(GtkWidget *widget, MultiloadPlugin *multiload)
 {
-	MultiloadPlugin *multiload = lxpanel_plugin_get_data(ebox);
-
-	if ( panel_get_orientation(panel) == GTK_ORIENTATION_VERTICAL )
-		multiload->panel_orientation = GTK_ORIENTATION_VERTICAL;
-	else // lxpanel panel orientation can have values other than vert/horiz
-		multiload->panel_orientation = GTK_ORIENTATION_HORIZONTAL;
-
-	multiload_refresh(multiload);
+	GtkWindow *window = GTK_WINDOW(gtk_widget_get_toplevel (widget));
+	GtkWidget *dialog = multiload_ui_configure_dialog_new(multiload, window);
+	gtk_window_set_transient_for(window, GTK_WINDOW(dialog));
+	gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
+	gtk_widget_show(dialog);
 }
 
-void
-standalone_destructor(gpointer user_data)
-{
-	MultiloadPlugin *multiload = lxpanel_plugin_get_data(user_data);
-	gtk_widget_destroy (GTK_WIDGET(user_data));
-	g_free(multiload);
-}
-
-*/
 
 
 int main(int argc, char *argv[]) {
@@ -132,9 +182,9 @@ int main(int argc, char *argv[]) {
 	multiload_init ();
 
 	multiload->container = GTK_CONTAINER(gtk_event_box_new ());
-	gtk_widget_show (GTK_WIDGET(multiload->container));
 
-//	multiload_ui_read (multiload);
+	multiload_ui_read (multiload);
+	multiload_refresh(multiload);
 
 	GtkWindow *w = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
 	gtk_window_set_title (w, about_data_progname);
@@ -142,7 +192,21 @@ int main(int argc, char *argv[]) {
 	gtk_window_set_keep_above (w, TRUE);
 	gtk_window_set_icon_name (w, "utilities-system-monitor");
 
-	gtk_container_add(GTK_CONTAINER(w), GTK_WIDGET(multiload->container));
+	GtkWidget *hbox = gtk_hbox_new(FALSE, 1);
+	GtkWidget *btnConfig = gtk_button_new_from_stock(GTK_STOCK_PREFERENCES);
+	gtk_widget_show (GTK_WIDGET(multiload->container));
+	gtk_widget_show (btnConfig);
+	gtk_widget_show (hbox);
+
+	gtk_box_pack_start(GTK_BOX(hbox), GTK_WIDGET(multiload->container), TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(hbox), btnConfig, FALSE, FALSE, 0);
+
+	gtk_container_add(GTK_CONTAINER(w), hbox);
+
+	g_signal_connect (G_OBJECT(w), "destroy", G_CALLBACK(standalone_destroy_cb), multiload);
+	g_signal_connect (G_OBJECT(btnConfig), "clicked", G_CALLBACK(standalone_settingsmenu_cb), multiload);
+	gtk_container_set_border_width (GTK_CONTAINER (w), 0);
+
 
 	gtk_window_present (w);
 
