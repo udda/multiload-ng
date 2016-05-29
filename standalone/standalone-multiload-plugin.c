@@ -131,9 +131,6 @@ int main(int argc, char *argv[]) {
 
 //	multiload_ui_read (multiload);
 
-	multiload_defaults(multiload);
-	multiload_refresh(multiload);
-
 	GtkWindow *w = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
 	gtk_window_set_title (w, about_data_progname);
 	gtk_window_set_decorated (w, TRUE);
@@ -143,7 +140,7 @@ int main(int argc, char *argv[]) {
 	gtk_container_add(GTK_CONTAINER(w), GTK_WIDGET(multiload->container));
 
 	gtk_window_present (w);
-//	gtk_widget_show (GTK_WIDGET(w));
+
 	gtk_main();
 
 	return 0;
