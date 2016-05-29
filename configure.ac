@@ -145,8 +145,19 @@ AC_SUBST(MATE_CFLAGS)
 AC_SUBST(MATE_LIBS)
 
 
+# standalone
+AC_ARG_WITH([standalone], AS_HELP_STRING([--with-standalone], [Build standalone application]),
+            [], [with_standalone=yes])
+AM_CONDITIONAL(HAVE_STANDALONE, test x$with_standalone != xno)
+
+
 # Checks if at least one build is available
-if test x$with_xfce4 != xyes && test x$with_lxpanel != xyes && test x$with_mate != xyes; then
+if \
+    test x$with_xfce4 != xyes && \
+    test x$with_lxpanel != xyes && \
+    test x$with_mate != xyes && \
+    test x$with_standalone != xyes
+  then
     AC_MSG_FAILURE([No supported panels are installed and available.])
 fi
 
@@ -174,6 +185,7 @@ AC_CONFIG_FILES([
     xfce4/multiload.desktop.in
     lxpanel/Makefile
     mate/Makefile
+    standalone/Makefile
     po/Makefile.in
 ])
 AC_OUTPUT
@@ -187,4 +199,6 @@ echo
 echo "* lxpanel     :    $with_lxpanel"
 echo
 echo "* mate-panel  :    $with_mate"
+echo
+echo "* standalone  :    $with_standalone"
 echo

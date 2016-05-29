@@ -7,11 +7,17 @@ endif
 if HAVE_MATE
 MATE_DIRS = mate
 endif
+if HAVE_STANDALONE
+STANDALONE_DIRS = standalone
+endif
+
+
 SUBDIRS =	\
 	common \
 	$(XFCE4_DIRS) \
 	$(LXPANEL_DIRS) \
 	$(MATE_DIRS) \
+	$(STANDALONE_DIRS) \
 	po
 
 distclean-local:
