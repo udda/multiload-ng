@@ -34,8 +34,9 @@
 
 gchar* standalone_build_config_filename() {
 	return g_build_filename(
-			g_get_tmp_dir (),
-			"gkf-test.multiload",
+			g_get_home_dir (),
+			".config",
+			"multiload-standalone",
 			NULL);
 }
 
