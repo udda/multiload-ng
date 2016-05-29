@@ -12,7 +12,7 @@
 // ps = Panel Specific - implement these for every panel
 extern gpointer multiload_ps_settings_open_for_read(MultiloadPlugin *ma);
 extern gpointer multiload_ps_settings_open_for_save(MultiloadPlugin *ma);
-extern void multiload_ps_settings_save(gpointer settings);
+extern gboolean multiload_ps_settings_save(gpointer settings);
 extern void multiload_ps_settings_close(gpointer settings);
 extern void multiload_ps_settings_get_int(gpointer settings, const gchar *key, int *destination);
 extern void multiload_ps_settings_get_boolean(gpointer settings, const gchar *key, gboolean *destination);
@@ -112,7 +112,10 @@ multiload_ui_save (MultiloadPlugin *ma)
 			multiload_ps_settings_set_string (settings, key, colors_list);
 			g_free (key);
 		}
-		multiload_ps_settings_save(settings);
+
+		if (!multiload_ps_settings_save(settings)) {
+			g_warning("multiload_ui_save: PS save failed");
+		}
 		multiload_ps_settings_close(settings);
 	} else {
 		g_warning("multiload_ui_save: settings = NULL");

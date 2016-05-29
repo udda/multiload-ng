@@ -42,9 +42,10 @@ multiload_ps_settings_open_for_save(MultiloadPlugin *ma)
 	return ma->panel_data;
 }
 
-void
+gboolean
 multiload_ps_settings_save(gpointer settings)
 {
+	return TRUE;
 }
 
 void
