@@ -25,6 +25,7 @@ mate/*.mate-panel-applet.in
 mate/*.service
 mate/*.gschema.valid
 mate/*.gschema.xml
+standalone/standalone-multiload
 xfce4/*.desktop
 xfce4/*.desktop.in
 po/.intltool-merge-cache
