@@ -67,6 +67,11 @@ multiload_ps_settings_open_for_save(MultiloadPlugin *ma)
 }
 
 void
+multiload_ps_settings_save(gpointer settings)
+{
+}
+
+void
 multiload_ps_settings_close(gpointer settings)
 {
 	xfce_rc_close((XfceRc*)settings);
