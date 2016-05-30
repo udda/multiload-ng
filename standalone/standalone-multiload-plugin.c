@@ -165,15 +165,20 @@ standalone_destroy_cb(GtkWidget *widget, MultiloadPlugin *multiload)
 }
 
 void
-standalone_settingsmenu_cb(GtkWidget *widget, MultiloadPlugin *multiload)
+standalone_settingsmenu_cb(GtkWidget *widget, GtkMenu *menu)
 {
-	GtkWindow *window = GTK_WINDOW(gtk_widget_get_toplevel (widget));
+	gtk_menu_popup(menu, NULL, NULL, NULL, NULL, 1, 0);
+}
+
+void
+standalone_preferences_cb(GtkWidget *widget, MultiloadPlugin *multiload)
+{
+	GtkWindow *window = multiload->panel_data;
 	GtkWidget *dialog = multiload_ui_configure_dialog_new(multiload, window);
 	gtk_window_set_transient_for(window, GTK_WINDOW(dialog));
 	gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
 	gtk_widget_show(dialog);
 }
-
 
 
 int main(int argc, char *argv[]) {
@@ -192,6 +197,7 @@ int main(int argc, char *argv[]) {
 	gtk_window_set_decorated (w, TRUE);
 	gtk_window_set_keep_above (w, TRUE);
 	gtk_window_set_icon_name (w, "utilities-system-monitor");
+	multiload->panel_data = w;
 
 	GtkWidget *hbox = gtk_hbox_new(FALSE, 1);
 	GtkWidget *btnConfig = gtk_button_new_from_stock(GTK_STOCK_PREFERENCES);
@@ -204,8 +210,40 @@ int main(int argc, char *argv[]) {
 
 	gtk_container_add(GTK_CONTAINER(w), hbox);
 
+
+	GtkMenu *menu = GTK_MENU(gtk_menu_new());
+	GtkWidget *menuitem;
+
+	menuitem = gtk_image_menu_item_new_with_label (_("Start system monitor"));
+	gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM(menuitem), gtk_image_new_from_icon_name("utilities-system-monitor", GTK_ICON_SIZE_MENU));
+	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(multiload_ui_start_system_monitor), multiload);
+	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
+
+	gtk_menu_shell_append (GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
+
+	menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_PREFERENCES, NULL);
+	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(standalone_preferences_cb), multiload);
+	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
+
+	menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_HELP, NULL);
+	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(multiload_ui_show_help), NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
+
+	gtk_menu_shell_append (GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
+
+	menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_ABOUT, NULL);
+	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(multiload_ui_show_about), w);
+	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
+
+	menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, NULL);
+	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(standalone_destroy_cb), multiload);
+	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
+
+	gtk_widget_show_all(GTK_WIDGET(menu));
+
+
 	g_signal_connect (G_OBJECT(w), "destroy", G_CALLBACK(standalone_destroy_cb), multiload);
-	g_signal_connect (G_OBJECT(btnConfig), "clicked", G_CALLBACK(standalone_settingsmenu_cb), multiload);
+	g_signal_connect (G_OBJECT(btnConfig), "clicked", G_CALLBACK(standalone_settingsmenu_cb), menu);
 	gtk_container_set_border_width (GTK_CONTAINER (w), 0);
 
 
