@@ -14,7 +14,7 @@ plugindir = \
 	$(libdir)/xfce4/panel/plugins
 
 libmultiload_ng_la_SOURCES = \
-	xfce4-multiload-plugin.c
+	plugin.c
 
 libmultiload_ng_la_CFLAGS = \
 	$(GTK_CFLAGS) \

@@ -14,7 +14,7 @@ plugindir = \
 	$(libdir)/lxpanel/plugins
 
 multiload_ng_la_SOURCES = \
-	lxpanel-multiload-plugin.c
+	plugin.c
 
 multiload_ng_la_CFLAGS = \
 	$(GTK_CFLAGS) \

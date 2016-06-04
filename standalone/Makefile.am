@@ -10,7 +10,7 @@ AM_CPPFLAGS = \
 bin_PROGRAMS = multiload-ng
 
 multiload_ng_SOURCES = \
-	standalone-multiload-plugin.c
+	plugin.c
 
 multiload_ng_CFLAGS = $(GTK_CFLAGS)
 

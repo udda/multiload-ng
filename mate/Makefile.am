@@ -10,7 +10,7 @@ AM_CPPFLAGS = \
 libexec_PROGRAMS = mate-multiload-ng
 mate_multiload_ng_LOCATION = $(libexecdir)/mate-multiload-ng
 mate_multiload_ng_SOURCES = \
-	mate-multiload-plugin.c
+	plugin.c
 
 mate_multiload_ng_CFLAGS = \
 	$(GTK_CFLAGS) \
