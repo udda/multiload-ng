@@ -151,9 +151,9 @@ static void mate_setup_menu(MatePanelApplet *applet, gpointer data) {
 
 	const GtkActionEntry actions [] = {
 		{ "MultiloadNgSysmon", "utilities-system-monitor", N_("Start task manager"), NULL, NULL, G_CALLBACK (mate_sysmon_cb) },
-		{ "MultiloadNgProperties", GTK_STOCK_PREFERENCES, NULL /*N_("_Preferences")*/, NULL, NULL, G_CALLBACK (mate_properties_cb) },
-		{ "MultiloadNgHelp", GTK_STOCK_HELP, NULL /*N_("_Help")*/, NULL, NULL, G_CALLBACK (mate_help_cb) },
-		{ "MultiloadNgAbout", GTK_STOCK_ABOUT, NULL /*N_("_About")*/, NULL, NULL, G_CALLBACK (mate_about_cb) }
+		{ "MultiloadNgProperties", GTK_STOCK_PREFERENCES, NULL, NULL, NULL, G_CALLBACK (mate_properties_cb) },
+		{ "MultiloadNgHelp", GTK_STOCK_HELP, NULL, NULL, NULL, G_CALLBACK (mate_help_cb) },
+		{ "MultiloadNgAbout", GTK_STOCK_ABOUT, NULL, NULL, NULL, G_CALLBACK (mate_about_cb) }
 	};
 
 	GtkActionGroup *action_group = gtk_action_group_new ("Multiload-ng Actions");

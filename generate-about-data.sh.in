@@ -8,3 +8,6 @@ for line in $(cat AUTHORS); do
 done
 echo "	NULL"
 echo "};"
+echo
+echo "const gchar *about_data_icon = \"@APPICON@\";"
+echo

@@ -1,6 +1,7 @@
 # Initialization
 AC_PREREQ(2.60)
 AC_INIT([multiload-ng], [1.0], [mr.udda@gmail.com])
+AC_SUBST(APPICON, utilities-system-monitor)
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.11 -Wall -Werror no-dist-gzip dist-xz silent-rules foreign])
 AM_SILENT_RULES([yes])
@@ -180,13 +181,15 @@ AC_SUBST([LIBDIR])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
     Makefile
+    generate-about-data.sh
     common/Makefile
-    xfce4/Makefile
-    xfce4/multiload-ng.desktop.in
     lxpanel/Makefile
     mate/Makefile
-    standalone/Makefile
+    mate/org.mate.multiload-ng.Applet.mate-panel-applet.in
     po/Makefile.in
+    standalone/Makefile
+    xfce4/Makefile
+    xfce4/multiload-ng.desktop.in
 ])
 AC_OUTPUT
 

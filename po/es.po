@@ -375,6 +375,3 @@ msgstr "Imposible abrir el siguiente url: %s"
 
 msgid "translator-credits"
 msgstr "Roberta Assennato <r.assennato@gmail.com>"
-
-msgid "utilities-system-monitor"
-msgstr "utilities-system-monitor"

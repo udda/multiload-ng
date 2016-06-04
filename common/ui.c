@@ -160,7 +160,7 @@ void
 multiload_ui_show_about (GtkWindow* parent)
 {
 	gtk_show_about_dialog(parent,
-		"logo-icon-name",		"utilities-system-monitor",
+		"logo-icon-name",		about_data_icon,
 		"program-name",			about_data_progname,
 		"version",				PACKAGE_VERSION,
 		"comments",				about_data_description,
@@ -199,7 +199,7 @@ multiload_ui_configure_dialog_new(MultiloadPlugin *ma, GtkWindow* parent)
 					NULL);
 
 	gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
-	gtk_window_set_icon_name (GTK_WINDOW (dialog), "utilities-system-monitor");
+	gtk_window_set_icon_name (GTK_WINDOW (dialog), about_data_icon);
 
 	// link back the dialog to the plugin
 	g_object_set_data (G_OBJECT (dialog), "MultiloadPlugin", ma);

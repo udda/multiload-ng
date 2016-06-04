@@ -376,6 +376,3 @@ msgstr "Impossibile aprire il seguente url: %s"
 
 msgid "translator-credits"
 msgstr "Mario Cianciolo <mr.udda@gmail.com>"
-
-msgid "utilities-system-monitor"
-msgstr "utilities-system-monitor"

@@ -39,7 +39,8 @@ dist-hook: ChangeLog
 BUILT_SOURCES = \
 	common/about-data.c
 
-common/about-data.c: AUTHORS
+common/about-data.c: AUTHORS $(top_srcdir)/generate-about-data.sh
+	@chmod +x $(top_srcdir)/generate-about-data.sh
 	$(top_srcdir)/generate-about-data.sh > common/about-data.c
 
 EXTRA_DIST = \

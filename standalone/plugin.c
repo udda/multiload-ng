@@ -197,7 +197,7 @@ int main(int argc, char *argv[]) {
 	gtk_window_set_title (w, about_data_progname);
 	gtk_window_set_decorated (w, TRUE);
 	gtk_window_set_keep_above (w, TRUE);
-	gtk_window_set_icon_name (w, "utilities-system-monitor");
+	gtk_window_set_icon_name (w, about_data_icon);
 	multiload->panel_data = w;
 
 	GtkWidget *hbox = gtk_hbox_new(FALSE, 1);

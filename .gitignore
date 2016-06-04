@@ -18,6 +18,7 @@ config.*
 build-aux
 intltool*
 libtool
+generate-about-data.sh
 common/about-data.c
 mate/mate-multiload-ng
 mate/*.mate-panel-applet
