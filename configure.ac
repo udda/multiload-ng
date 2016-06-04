@@ -185,7 +185,7 @@ AC_CONFIG_FILES([
     common/Makefile
     lxpanel/Makefile
     mate/Makefile
-    mate/org.mate.multiload-ng.Applet.mate-panel-applet.in
+    mate/org.mate.multiload-ng.Applet.mate-panel-applet.in.in
     po/Makefile.in
     standalone/Makefile
     xfce4/Makefile

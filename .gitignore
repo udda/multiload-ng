@@ -21,9 +21,10 @@ intltool*
 libtool
 generate-about-data.sh
 common/about-data.c
-mate/mate-multiload-ng
+mate/mate-multiload-ng-applet
 mate/org.mate.*.mate-panel-applet
 mate/org.mate.*.mate-panel-applet.in
+mate/org.mate.*.mate-panel-applet.in.in
 mate/org.mate.panel.applet.*.service
 mate/org.mate.panel.applet.*.gschema.valid
 mate/org.mate.panel.applet.*.gschema.xml

@@ -6,16 +6,18 @@ AM_CPPFLAGS = \
 	$(PLATFORM_CPPFLAGS)
 
 
-libexec_PROGRAMS = mate-multiload-ng
-mate_multiload_ng_LOCATION = $(libexecdir)/mate-multiload-ng
-mate_multiload_ng_SOURCES = \
+libexec_PROGRAMS = mate-multiload-ng-applet
+mate_multiload_ng_applet_LOCATION = \
+	$(libexecdir)/mate-multiload-ng-applet
+
+mate_multiload_ng_applet_SOURCES = \
 	plugin.c
 
-mate_multiload_ng_CFLAGS = \
+mate_multiload_ng_applet_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(MATE_CFLAGS)
 
-mate_multiload_ng_LDADD = \
+mate_multiload_ng_applet_LDADD = \
 	$(GTK_LIBS) \
 	$(MATE_LIBS) \
 	-lm \
@@ -27,9 +29,8 @@ plugin_in_files = org.mate.multiload-ng.Applet.mate-panel-applet.in
 plugin_DATA     = $(plugin_in_files:.mate-panel-applet.in=.mate-panel-applet)
 
 $(plugin_in_files): $(plugin_in_files).in Makefile
-	$(AM_V_GEN)sed \
-		-e "s|\@LOCATION\@|$(mate_multiload_ng_LOCATION)|" \
-		$< > $@
+	$(AM_V_GEN)sed -e "s|\@LOCATION\@|$(mate_multiload_ng_applet_LOCATION)|" $< > $@
+
 org.mate.multiload-ng.Applet.mate-panel-applet: org.mate.multiload-ng.Applet.mate-panel-applet.in
 	$(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 #	$(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po)
@@ -39,7 +40,7 @@ service_in_files = org.mate.panel.applet.MultiloadNgFactory.service.in
 service_DATA     = $(service_in_files:.service.in=.service)
 
 org.mate.panel.applet.MultiloadNgFactory.service: $(service_in_files)
-	$(AM_V_GEN)sed -e "s|\@LOCATION\@|$(mate_multiload_ng_LOCATION)|" $< > $@
+	$(AM_V_GEN)sed -e "s|\@LOCATION\@|$(mate_multiload_ng_applet_LOCATION)|" $< > $@
 
 
 @INTLTOOL_XML_NOMERGE_RULE@
@@ -55,6 +56,7 @@ EXTRA_DIST = \
 CLEANFILES = \
 	org.mate.multiload-ng.Applet.mate-panel-applet \
 	org.mate.panel.applet.MultiloadNgFactory.service \
-	org.mate.panel.applet.multiload-ng.gschema.xml
+	org.mate.panel.applet.multiload-ng.gschema.xml \
+	$(plugin_in_files)
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:
