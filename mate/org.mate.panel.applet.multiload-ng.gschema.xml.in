@@ -1,5 +1,5 @@
 <schemalist gettext-domain="@GETTEXT_PACKAGE@">
-  <schema id="org.mate.panel.applet.multiload-nandhp">
+  <schema id="org.mate.panel.applet.multiload-ng">
     <key name="interval" type="i">
       <default>500</default>
     </key>

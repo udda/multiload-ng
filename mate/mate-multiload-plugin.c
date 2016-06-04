@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2016 Mario Cianciolo <mr.udda@gmail.com>
  *
- * This file is part of multiload-nandhp.
+ * This file is part of multiload-ng.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
+
 
 #include <config.h>
 
@@ -154,7 +155,7 @@ static const GtkActionEntry multiload_menu_actions [] = {
 static gboolean
 mate_constructor (MatePanelApplet* applet, const char* iid, gpointer data)
 {
-	if (g_strcmp0(iid, "MultiloadNandhpApplet"))
+	if (g_strcmp0(iid, "MultiloadNgApplet"))
 		return FALSE;
 
 
@@ -164,7 +165,7 @@ mate_constructor (MatePanelApplet* applet, const char* iid, gpointer data)
 	mate_panel_applet_set_background_widget(applet, GTK_WIDGET(applet));
 	multiload_init ();
 
-	multiload->panel_data = mate_panel_applet_settings_new (applet, "org.mate.panel.applet.multiload-nandhp");
+	multiload->panel_data = mate_panel_applet_settings_new (applet, "org.mate.panel.applet.multiload-ng");
 
 	multiload->container = GTK_CONTAINER(gtk_event_box_new ());
 	gtk_container_add (GTK_CONTAINER(applet), GTK_WIDGET(multiload->container));
@@ -194,7 +195,7 @@ mate_constructor (MatePanelApplet* applet, const char* iid, gpointer data)
 	return TRUE;
 }
 
-MATE_PANEL_APPLET_OUT_PROCESS_FACTORY("MultiloadNandhpFactory",
+MATE_PANEL_APPLET_OUT_PROCESS_FACTORY("MultiloadNgFactory",
 									  PANEL_TYPE_APPLET,
 									  about_data_description,
 									  mate_constructor,

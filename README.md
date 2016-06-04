@@ -1,7 +1,7 @@
-multiload-nandhp
+multiload-ng
 ================
 
-multiload-nandhp is a port of the GNOME multiload applet to the Xfce4, LXDE
+multiload-ng is a port of the GNOME multiload applet to the Xfce4, LXDE
 and MATE panels.
 
 It supports Xfce 4.6 and above, lxpanel 0.7 and above, MATE panel 1.7 and above.

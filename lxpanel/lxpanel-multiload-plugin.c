@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2016 Mario Cianciolo <mr.udda@gmail.com>
  *
- * This file is part of multiload-nandhp.
+ * This file is part of multiload-ng.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
+
 
 #include <config.h>
 
@@ -145,7 +146,7 @@ lxpanel_constructor(LXPanel *panel, config_setting_t *settings)
 }
 
 
-FM_DEFINE_MODULE(lxpanel_gtk, multiload)
+FM_DEFINE_MODULE(lxpanel_gtk, multiload-ng)
 
 /* Plugin descriptor. */
 LXPanelPluginInit fm_module_init_lxpanel_gtk = {

@@ -1,6 +1,6 @@
 # Initialization
 AC_PREREQ(2.60)
-AC_INIT([multiload-nandhp], [0.3], [nandhp@gmail.com])
+AC_INIT([multiload-ng], [1.0], [mr.udda@gmail.com])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.11 -Wall -Werror no-dist-gzip dist-xz silent-rules foreign])
 AM_SILENT_RULES([yes])
@@ -46,7 +46,7 @@ for po_file in `ls $srcdir/po/*.po | sort`; do
     echo "$po_file" | sed "s|.*/po/\(.*\)\.po|\1|g" >> $srcdir/po/LINGUAS
 done
 # Set up gettext
-GETTEXT_PACKAGE=multiload-nandhp
+GETTEXT_PACKAGE=multiload-ng
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package.])
 AM_GLIB_GNU_GETTEXT
@@ -182,7 +182,7 @@ AC_CONFIG_FILES([
     Makefile
     common/Makefile
     xfce4/Makefile
-    xfce4/multiload.desktop.in
+    xfce4/multiload-ng.desktop.in
     lxpanel/Makefile
     mate/Makefile
     standalone/Makefile

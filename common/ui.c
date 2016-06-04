@@ -1,3 +1,24 @@
+/*
+ * Copyright (C) 2016 Mario Cianciolo <mr.udda@gmail.com>
+ *
+ * This file is part of multiload-ng.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
+
 #include <config.h>
 #include "common/ui.h"
 
@@ -170,7 +191,7 @@ multiload_ui_configure_dialog_new(MultiloadPlugin *ma, GtkWindow* parent)
 	if (G_UNLIKELY(ma->pref_dialog != NULL))
 		return ma->pref_dialog;
 
-	GtkWidget *dialog = gtk_dialog_new_with_buttons(_("Multiload"),
+	GtkWidget *dialog = gtk_dialog_new_with_buttons(about_data_progname,
 					parent,
 					GTK_DIALOG_DESTROY_WITH_PARENT,
 					GTK_STOCK_HELP, GTK_RESPONSE_HELP,

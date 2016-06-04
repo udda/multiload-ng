@@ -1,27 +1,27 @@
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
-	-DG_LOG_DOMAIN=\"standalone-multiload-plugin\" \
+	-DG_LOG_DOMAIN=\"multiload-ng-standalone\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	$(PLATFORM_CPPFLAGS)
 
 #
 # multiload plugin
 #
-bin_PROGRAMS = standalone-multiload
+bin_PROGRAMS = multiload-ng
 
-standalone_multiload_SOURCES = \
+multiload_ng_SOURCES = \
 	standalone-multiload-plugin.c
 
-standalone_multiload_CFLAGS = $(GTK_CFLAGS)
+multiload_ng_CFLAGS = $(GTK_CFLAGS)
 
-standalone_multiload_LDFLAGS = \
+multiload_ng_LDFLAGS = \
        -avoid-version \
        -no-undefined \
        $(PLATFORM_LDFLAGS)
 
-standalone_multiload_LDADD = \
+multiload_ng_LDADD = \
 	$(GTK_LIBS) \
 	-lm \
-	../common/multiload-core.la
+	../common/multiload-ng-core.la
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

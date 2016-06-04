@@ -1,5 +1,5 @@
 # Copyright (C) 2016 Roberta Assennato <r.assennato@gmail.com>
-# This file is distributed under the same license as the multiload-nandhp package.
+# This file is distributed under the same license as the multiload-ng package.
 # Roberta Assennato <r.assennato@gmail.com>, 2016.
 #
 msgid ""

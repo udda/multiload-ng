@@ -1,7 +1,6 @@
-# INCLUDES =
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
-	-DG_LOG_DOMAIN=\"multiload-core\" \
+	-DG_LOG_DOMAIN=\"multiload-ng-core\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	$(PLATFORM_CPPFLAGS)
 
@@ -9,9 +8,9 @@ AM_CPPFLAGS = \
 # multiload plugin
 #
 noinst_LTLIBRARIES = \
-	multiload-core.la
+	multiload-ng-core.la
 
-multiload_core_la_SOURCES = \
+multiload_ng_core_la_SOURCES = \
 	about-data.c about-data.h \
 	autoscaler.c autoscaler.h \
 	linux-proc.c linux-proc.h \
@@ -23,18 +22,18 @@ multiload_core_la_SOURCES = \
 	util.c util.h \
 	ui.c ui.h
 
-multiload_core_la_CFLAGS = \
+multiload_ng_core_la_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(CAIRO_CFLAGS) \
 	$(LIBGTOP_CFLAGS)
 
-multiload_core_la_LDFLAGS = \
+multiload_ng_core_la_LDFLAGS = \
        -avoid-version \
        -module \
        -no-undefined \
        $(PLATFORM_LDFLAGS)
 
-multiload_core_la_LIBADD = \
+multiload_ng_core_la_LIBADD = \
 	$(GTK_LIBS) \
 	$(CAIRO_LIBS) \
 	$(LIBGTOP_LIBS)

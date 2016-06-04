@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2016 Mario Cianciolo <mr.udda@gmail.com>
  *
- * This file is part of multiload-nandhp.
+ * This file is part of multiload-ng.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,8 +23,8 @@
 #define __ABOUT_DATA_H__
 
 
-#define about_data_progname _("Multiload")
-#define about_data_progname_N N_("Multiload")
+#define about_data_progname _("Multiload-ng")
+#define about_data_progname_N N_("Multiload-ng")
 
 #define about_data_description \
 	_("A system load monitor that graphs processor, memory, and " \
@@ -33,7 +33,7 @@
 	N_("A system load monitor that graphs processor, memory, and " \
 	"swap space use, plus temperature, network and disk activity.")
 
-#define about_data_website "https://github.com/nandhp/multiload-nandhp"
+#define about_data_website "https://github.com/udda/multiload-ng"
 
 #define about_data_copyright \
 	_("Copyright \xC2\xA9 2016 Mario Cianciolo, " \
