@@ -1,0 +1,2 @@
+CLEANFILES = \
+	LINGUAS

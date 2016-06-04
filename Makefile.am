@@ -49,6 +49,9 @@ EXTRA_DIST = \
 	intltool-update.in \
 	AUTHORS COPYING ChangeLog README.md
 
+CLEANFILES = \
+	common/about-data.c
+
 DISTCLEANFILES = \
 	intltool-extract \
 	intltool-merge \

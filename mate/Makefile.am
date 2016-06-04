@@ -52,5 +52,9 @@ EXTRA_DIST = \
 	$(service_in_files) \
 	$(multiload_gschema_in_files)
 
+CLEANFILES = \
+	org.mate.multiload-ng.Applet.mate-panel-applet \
+	org.mate.panel.applet.MultiloadNgFactory.service \
+	org.mate.panel.applet.multiload-ng.gschema.xml
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:
