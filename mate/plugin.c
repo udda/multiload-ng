@@ -140,16 +140,28 @@ mate_size_cb (MatePanelApplet *applet, guint size, MultiloadPlugin *ma)
 	multiload_refresh(ma);
 }
 
-static const GtkActionEntry multiload_menu_actions [] = {
-	{ "MultiLoadRunSysmon", "utilities-system-monitor", N_("Start task manager"),
-			NULL, NULL, G_CALLBACK (mate_sysmon_cb) },
-	{ "MultiLoadProperties", GTK_STOCK_PROPERTIES, N_("_Preferences"),
-			NULL, NULL, G_CALLBACK (mate_properties_cb) },
-	{ "MultiLoadHelp", GTK_STOCK_HELP, N_("_Help"),
-			NULL, NULL, G_CALLBACK (mate_help_cb) },
-	{ "MultiLoadAbout", GTK_STOCK_ABOUT, N_("_About"),
-			NULL, NULL, G_CALLBACK (mate_about_cb) }
-};
+
+static void mate_setup_menu(MatePanelApplet *applet, gpointer data) {
+	const gchar* xml =
+		"<menuitem action=\"MultiloadNgSysmon\" />"
+		"<menuitem action=\"MultiloadNgProperties\" />"
+		"<separator/>"
+		"<menuitem action=\"MultiloadNgHelp\" />"
+		"<menuitem action=\"MultiloadNgAbout\" />";
+
+	const GtkActionEntry actions [] = {
+		{ "MultiloadNgSysmon", "utilities-system-monitor", N_("Start task manager"), NULL, NULL, G_CALLBACK (mate_sysmon_cb) },
+		{ "MultiloadNgProperties", GTK_STOCK_PREFERENCES, NULL /*N_("_Preferences")*/, NULL, NULL, G_CALLBACK (mate_properties_cb) },
+		{ "MultiloadNgHelp", GTK_STOCK_HELP, NULL /*N_("_Help")*/, NULL, NULL, G_CALLBACK (mate_help_cb) },
+		{ "MultiloadNgAbout", GTK_STOCK_ABOUT, NULL /*N_("_About")*/, NULL, NULL, G_CALLBACK (mate_about_cb) }
+	};
+
+	GtkActionGroup *action_group = gtk_action_group_new ("Multiload-ng Actions");
+	gtk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
+	gtk_action_group_add_actions (action_group, actions, G_N_ELEMENTS (actions), data);
+
+	mate_panel_applet_setup_menu (applet, xml, action_group);
+}
 
 
 static gboolean
@@ -175,15 +187,7 @@ mate_constructor (MatePanelApplet* applet, const char* iid, gpointer data)
 	multiload_ui_read (multiload);
 	multiload_refresh(multiload);
 
-
-	/* menu items */
-	GtkActionGroup *action_group = gtk_action_group_new ("Multiload Applet Actions");
-	gtk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
-	gtk_action_group_add_actions (action_group, multiload_menu_actions, G_N_ELEMENTS (multiload_menu_actions), multiload);
-
-	gchar *ui_path = g_build_filename (MULTILOAD_MENU_UI_DIR, "multiload-applet-menu.xml", NULL);
-	mate_panel_applet_setup_menu_from_file (applet, ui_path, action_group);
-	g_free (ui_path);
+	mate_setup_menu(applet, multiload);
 
 
 	/* plugin signals */

@@ -1,7 +1,6 @@
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"multiload-ng-mate\" \
-	-DMULTILOAD_MENU_UI_DIR=\""$(uidir)"\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	-DMATELOCALEDIR=\"$(localedir)\" \
 	$(PLATFORM_CPPFLAGS)
@@ -40,12 +39,8 @@ service_in_files = org.mate.panel.applet.MultiloadNgFactory.service.in
 service_DATA     = $(service_in_files:.service.in=.service)
 
 org.mate.panel.applet.MultiloadNgFactory.service: $(service_in_files)
-	$(AM_V_GEN)sed \
-		-e "s|\@LOCATION\@|$(mate_multiload_ng_LOCATION)|" \
-		$< > $@
+	$(AM_V_GEN)sed -e "s|\@LOCATION\@|$(mate_multiload_ng_LOCATION)|" $< > $@
 
-uidir		= $(datadir)/mate/ui
-ui_DATA		= multiload-applet-menu.xml
 
 @INTLTOOL_XML_NOMERGE_RULE@
 multiload_gschema_in_files = org.mate.panel.applet.multiload-ng.gschema.xml.in
