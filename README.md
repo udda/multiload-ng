@@ -73,8 +73,12 @@ these packages are required to build LXDE panel plugin:
 
 Package                     | Min version
 :-------------------------- | -------------:
-lxpanel                     | >= 0.7
-libmenu-cache               | (Required by lxpanel)
+lxpanel                     | >= 0.7.0
+libfm                       | >= 1.2.0
+
+Due to an error in lxpanel source, if you are using lxpanel 0.7.0 you will
+need also libmenu-cache. This was fixed in version 0.7.1. Read about this
+[here](http://wiki.lxde.org/en/How_to_write_plugins_for_LXPanel#Preconditions).
 
 Note that LXDE 0.7 or greater is required.
 

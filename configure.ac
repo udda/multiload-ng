@@ -104,7 +104,8 @@ AC_SUBST(XFCEGUI4_LIBS)
 AC_ARG_WITH([lxpanel], AS_HELP_STRING([--with-lxpanel], [Build plugin for lxpanel]),
             [], [with_lxpanel=check])
 AS_IF([test "x$with_lxpanel" != "xno"], [
-    pkg_modules="lxpanel"
+    pkg_modules="lxpanel >= 0.7.0
+                 libfm >= 1.2.0"
     # libmenu-cache is implicitly required; we will fail if it's not present.
     PKG_CHECK_MODULES(LXPANEL, [$pkg_modules],
                       [
