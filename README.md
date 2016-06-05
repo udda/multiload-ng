@@ -51,9 +51,9 @@ See per-panel section below for full list.
 
 Package                     | Min version
 :-------------------------- | -------------:
-GTK+                        | >= 2.18.0
-Cairo                       | (shipped with GTK)
-LibGTop                     | >= 2.11.92
+gtk+                        | >= 2.18.0
+cairo                       | >= 1.0
+libgtop                     | >= 2.11.92
 
 #### Requirements for XFCE4 panel
 In addition to common requirements (see above)

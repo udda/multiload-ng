@@ -54,8 +54,8 @@ AM_GLIB_GNU_GETTEXT
 
 
 # Dependencies
-AM_PATH_GTK_2_0([2.18.0],,AC_MSG_ERROR([Gtk+ 2.18.0 or higher required.]))
-PKG_CHECK_MODULES(CAIRO, [cairo])
+AM_PATH_GTK_2_0([2.18.0],,AC_MSG_ERROR([GTK+ 2.18.0 or higher required.]))
+PKG_CHECK_MODULES(CAIRO, [cairo >= 1.0])
 AC_SUBST(CAIRO_CFLAGS)
 AC_SUBST(CAIRO_LIBS)
 PKG_CHECK_MODULES(LIBGTOP, [libgtop-2.0 >= 2.11.92])
