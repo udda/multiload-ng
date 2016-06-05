@@ -48,6 +48,7 @@ detected among the supported sensors in the system.
 #### Common requirements
 These are the packages required to build any version of the plugin.
 See per-panel section below for full list.
+
 Package                     | Min version
 :-------------------------- | -------------:
 GTK+                        | >= 2.18.0
@@ -55,30 +56,36 @@ Cairo                       | (shipped with GTK)
 LibGTop                     | >= 2.11.92
 
 #### Requirements for XFCE4 panel
-In addition to common requirements (see above <!--TODO link anchor-->)
+In addition to common requirements (see above)
 these packages are required to build XFCE4 panel plugin:
+
 Package                     | Min version
 :-------------------------- | -------------:
 libxfce4panel               | >= 4.6.0
 libxfce4util                | >= 4.6.0
 libxfce4ui-1 OR libxfcegui4 | >= 4.8.0
+
 Note that XFCE 4.6 or greater is required.
 
 #### Requirements for LXDE panel
-In addition to common requirements (see above <!--TODO link anchor-->)
+In addition to common requirements (see above)
 these packages are required to build LXDE panel plugin:
+
 Package                     | Min version
 :-------------------------- | -------------:
 lxpanel                     | >= 0.7
-libmenu-cache               | (Required by lxpanel) <!--TODO is it still true?}-->
+libmenu-cache               | (Required by lxpanel)
+
 Note that LXDE 0.7 or greater is required.
 
 #### Requirements for MATE panel
-In addition to common requirements (see above <!--TODO link anchor-->)
+In addition to common requirements (see above)
 these packages are required to build MATE panel plugin:
+
 Package                     | Min version
 :-------------------------- | -------------:
 libmatepanelapplet-4        | >= 1.7.0
+
 Note that MATE 1.7 or greater is required.
 
 #### Requirements for temperature graph
