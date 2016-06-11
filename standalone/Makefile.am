@@ -24,4 +24,24 @@ multiload_ng_LDADD = \
 	-lm \
 	../common/multiload-ng-core.la
 
+
+#
+# Desktop file
+#
+desktopdir = $(datadir)/applications
+
+desktop_DATA = \
+	multiload-ng.desktop
+
+@INTLTOOL_DESKTOP_RULE@
+
+EXTRA_DIST = \
+	multiload-ng.desktop.in.in
+
+CLEANFILES = \
+	$(desktop_DATA)
+
+DISTCLEANFILES = \
+	multiload-ng.desktop.in
+
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

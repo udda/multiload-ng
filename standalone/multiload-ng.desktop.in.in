@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=X-XFCE-PanelPlugin
+Encoding=UTF-8
+_Name=Multiload-ng
+_Comment=A system load monitor that graphs processor, memory, and swap space use, plus temperature, network and disk activity.
+TryExec=multiload-ng
+Exec=multiload-ng
+Icon=@APPICON@
+Type=Application
+Categories=Utility;System;
