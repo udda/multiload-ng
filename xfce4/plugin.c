@@ -154,10 +154,11 @@ xfce_free_cb (XfcePanelPlugin *plugin, MultiloadPlugin *multiload)
 	g_slice_free (MultiloadPlugin, multiload);
 }
 
-static void
+static gboolean
 xfce_size_changed_cb (XfcePanelPlugin *plugin, int size, MultiloadPlugin *ma)
 {
 	multiload_refresh(ma);
+	return TRUE;
 }
 static void
 xfce_orientation_changed_cb (XfcePanelPlugin *plugin, GtkOrientation orientation, MultiloadPlugin *ma)
