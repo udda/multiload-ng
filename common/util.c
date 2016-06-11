@@ -289,9 +289,13 @@ gchar* get_system_monitor_executable()
 		if (sysmon[i] == NULL)
 			return NULL;
 
+		g_debug("[util] Looking for system monitor: '%s'", sysmon[i]);
+
 		path = g_find_program_in_path (sysmon[i]);
-		if (path != NULL)
+		if (path != NULL) {
+			g_debug("[util] Found system monitor '%s' in '%s'", sysmon[i], path);
 			return path;
+		}
 
 		i++;
 	}

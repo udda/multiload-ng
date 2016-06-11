@@ -222,9 +222,10 @@ void
 multiload_refresh(MultiloadPlugin *ma)
 {
 	gint i;
+	guint n;
 
 	// stop and free the old graphs
-	for (i = 0; i < GRAPH_MAX; i++) {
+	for (n=0, i=0; i < GRAPH_MAX; i++) {
 		if (!ma->graphs[i])
 			continue;
 
@@ -233,7 +234,10 @@ multiload_refresh(MultiloadPlugin *ma)
 
 		load_graph_unalloc(ma->graphs[i]);
 		g_free(ma->graphs[i]);
+
+		n++;
 	}
+
 
 	if (ma->box)
 		gtk_widget_destroy(ma->box);
@@ -254,7 +258,7 @@ multiload_refresh(MultiloadPlugin *ma)
 
 	// Create the GRAPH_MAX graphs, with user properties from ma->graph_config.
 	// Only start and display the graphs the user has turned on
-	for (i = 0; i < GRAPH_MAX; i++) {
+	for (n=0, i=0; i < GRAPH_MAX; i++) {
 		ma->graphs[i] = load_graph_new (ma, i);
 
 		gtk_box_pack_start(GTK_BOX(ma->box),
@@ -264,8 +268,11 @@ multiload_refresh(MultiloadPlugin *ma)
 		if (ma->graph_config[i].visible) {
 			gtk_widget_show_all (ma->graphs[i]->main_widget);
 			load_graph_start(ma->graphs[i]);
+			n++;
 		}
 	}
+
+	g_debug("[multiload] Started %d of %d graphs", n, GRAPH_MAX);
 
 	return;
 }
@@ -282,6 +289,8 @@ multiload_init()
 	g_assert_nonnull(glt);
 
 	multiload_config_init();
+
+	g_debug("[multiload] Initialization complete");
 }
 
 void multiload_defaults(MultiloadPlugin *ma)
@@ -348,7 +357,7 @@ multiload_destroy(MultiloadPlugin *ma)
 		g_free(ma->graphs[i]);
 	}
 
-	return;
+	g_debug("[multiload] Destroyed");
 }
 
 

@@ -56,6 +56,7 @@ multiload_ui_read (MultiloadPlugin *ma)
 	multiload_defaults(ma);
 
 	settings = multiload_ps_settings_open_for_read(ma);
+	g_debug("[ui] Reading settings from object %p", settings);
 	if (G_LIKELY (settings != NULL)) {
 		multiload_ps_settings_get_int		(settings, "interval",			&ma->interval);
 		multiload_ps_settings_get_int		(settings, "size",				&ma->size);
@@ -86,10 +87,10 @@ multiload_ui_read (MultiloadPlugin *ma)
 			multiload_colors_unstringify(ma, i, colors_list);
 			g_free (key);
 		}
+		g_debug("[ui] Done reading settings. Closing object %p", settings);
 		multiload_ps_settings_close(settings);
 
 		multiload_sanitize(ma);
-		return;
 	} else {
 		g_warning("multiload_ui_read: settings = NULL");
 	}
@@ -104,6 +105,7 @@ multiload_ui_save (MultiloadPlugin *ma)
 	int i;
 
 	settings = multiload_ps_settings_open_for_save(ma);
+	g_debug("[ui] Writing settings to object %p", settings);
 	if (G_LIKELY (settings != NULL)) {
 		multiload_ps_settings_set_int		(settings, "interval",			ma->interval);
 		multiload_ps_settings_set_int		(settings, "size",				ma->size);
@@ -137,6 +139,7 @@ multiload_ui_save (MultiloadPlugin *ma)
 		if (!multiload_ps_settings_save(settings)) {
 			g_warning("multiload_ui_save: PS save failed");
 		}
+		g_debug("[ui] Done writing settings. Closing object %p", settings);
 		multiload_ps_settings_close(settings);
 	} else {
 		g_warning("multiload_ui_save: settings = NULL");
@@ -147,6 +150,8 @@ void
 multiload_ui_show_help() {
 	gchar *cmdline;
 	gboolean result;
+
+	g_debug("[ui] Help command triggered");
 
 	cmdline = g_strdup_printf("xdg-open %s", about_data_website);
 	result = g_spawn_command_line_async (cmdline, NULL);
@@ -159,6 +164,7 @@ multiload_ui_show_help() {
 void
 multiload_ui_show_about (GtkWindow* parent)
 {
+	g_debug("[ui] About command triggered");
 	gtk_show_about_dialog(parent,
 		"logo-icon-name",		about_data_icon,
 		"program-name",			about_data_progname,
@@ -188,9 +194,12 @@ multiload_ui_configure_response_cb (GtkWidget *dialog, gint response, MultiloadP
 GtkWidget*
 multiload_ui_configure_dialog_new(MultiloadPlugin *ma, GtkWindow* parent)
 {
-	if (G_UNLIKELY(ma->pref_dialog != NULL))
+	if (G_UNLIKELY(ma->pref_dialog != NULL)) {
+		g_debug("[ui] Configure: using existing dialog");
 		return ma->pref_dialog;
+	}
 
+	g_debug("[ui] Configure: creating new dialog");
 	GtkWidget *dialog = gtk_dialog_new_with_buttons(about_data_progname,
 					parent,
 					GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -226,6 +235,7 @@ multiload_ui_start_system_monitor(MultiloadPlugin *ma)
 	else
 		cmdline = get_system_monitor_executable();
 
+	g_debug("[ui] Executing command line: '%s'", cmdline);
 	result = g_spawn_command_line_async (cmdline, NULL);
 
 	if (G_UNLIKELY (result == FALSE))

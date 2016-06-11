@@ -160,6 +160,7 @@ load_graph_unalloc (LoadGraph *g)
 	}
 
 	g->allocated = FALSE;
+	g_debug("[load-graph] Graph '%s' unallocated", graph_types[g->id].name);
 }
 
 static void
@@ -179,6 +180,7 @@ load_graph_alloc (LoadGraph *g)
 		g->data [i] = g_malloc0 (data_size);
 
 	g->allocated = TRUE;
+	g_debug("[load-graph] Graph '%s' allocated", graph_types[g->id].name);
 }
 
 static gint
@@ -243,11 +245,14 @@ load_graph_clicked (GtkWidget *widget, GdkEventButton *event, LoadGraph *g)
 		switch(g->multiload->dblclick_policy) {
 			case DBLCLICK_POLICY_TASKMANAGER:
 				cmdline = get_system_monitor_executable();
+				g_debug("[load-graph] Detected double click on graph '%s' - action: start task manager (%s)", graph_types[g->id].name, cmdline);
 				break;
 			case DBLCLICK_POLICY_CMDLINE:
 				cmdline = g_strdup(g->multiload->dblclick_cmdline);
+				g_debug("[load-graph] Detected double click on graph '%s' - action: execute command line (%s)", graph_types[g->id].name, cmdline);
 				break;
 			case DBLCLICK_POLICY_DONOTHING:
+				g_debug("[load-graph] Detected double click on graph '%s' - action: none", graph_types[g->id].name);
 			default:
 				return FALSE;
 		}
@@ -384,6 +389,7 @@ load_graph_start (LoadGraph *g)
 	guint interval = CLAMP(g->multiload->interval, MIN_INTERVAL, MAX_INTERVAL);
 	load_graph_stop(g);
 	g->timer_index = g_timeout_add (interval, (GSourceFunc) load_graph_update, g);
+	g_debug("[load-graph] Timer started for graph '%s' (interval: %d ms)", graph_types[g->id].name, interval);
 }
 
 void
@@ -393,4 +399,5 @@ load_graph_stop (LoadGraph *g)
 		g_source_remove (g->timer_index);
 
 	g->timer_index = -1;
+	g_debug("[load-graph] Time stopped for graph '%s'", graph_types[g->id].name);
 }

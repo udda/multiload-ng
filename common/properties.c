@@ -220,6 +220,8 @@ property_changed_cb(GtkWidget *widget, gpointer id) {
 	gint val_int;
 	const gchar *val_str;
 
+	g_debug("[properties] Property changed (type=%d, data=%d)", prop_type, prop_data);
+
 	switch(prop_type) {
 		case PROP_SHOWGRAPH:
 			g_assert(prop_data>=0 && prop_data<GRAPH_MAX);
@@ -691,4 +693,5 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 
 	gtk_widget_show_all(GTK_WIDGET(contentArea));
 	manage_dynamic_widgets(ma);
+	g_debug("[preferences] Initialized");
 }

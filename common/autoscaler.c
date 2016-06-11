@@ -25,6 +25,7 @@
 #include <glib.h>
 
 #include "autoscaler.h"
+#include "multiload-config.h"
 
 
 unsigned autoscaler_get_max(AutoScaler *s, LoadGraph *g, unsigned current)
@@ -50,6 +51,7 @@ unsigned autoscaler_get_max(AutoScaler *s, LoadGraph *g, unsigned current)
 		s->count = 0;
 		s->last_update = now;
 		s->last_average = average;
+		g_debug("[autoscaler] Recalculated max for graph '%s': %d", graph_types[g->id].name, s->max);
 	}
 
 	s->max = MAX(s->max, current);
