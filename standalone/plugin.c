@@ -215,7 +215,7 @@ int main(int argc, char *argv[]) {
 	GtkMenu *menu = GTK_MENU(gtk_menu_new());
 	GtkWidget *menuitem;
 
-	menuitem = gtk_image_menu_item_new_with_label (_("Start system monitor"));
+	menuitem = gtk_image_menu_item_new_with_label (_("Start task manager"));
 	gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM(menuitem), gtk_image_new_from_icon_name("utilities-system-monitor", GTK_ICON_SIZE_MENU));
 	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(multiload_ui_start_system_monitor), multiload);
 	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
