@@ -184,25 +184,26 @@ load_graph_alloc (LoadGraph *g)
 }
 
 static gint
-load_graph_configure (GtkWidget *widget, GdkEventConfigure *event, gpointer p)
+load_graph_configure (GtkWidget *widget, GdkEventConfigure *event, LoadGraph *g)
 {
 	GtkAllocation allocation;
-	LoadGraph *c = (LoadGraph *) p;
 
-	load_graph_unalloc (c);
+	load_graph_unalloc (g);
 
-	gtk_widget_get_allocation (c->disp, &allocation);
+	gtk_widget_get_allocation (g->disp, &allocation);
 
-	c->draw_width = allocation.width;
-	c->draw_height = allocation.height;
-	c->draw_width = MAX (c->draw_width, 1);
-	c->draw_height = MAX (c->draw_height, 1);
+	g->draw_width = allocation.width;
+	g->draw_height = allocation.height;
+	g->draw_width = MAX (g->draw_width, 1);
+	g->draw_height = MAX (g->draw_height, 1);
 
-	load_graph_alloc (c);
+	g_debug("[load-graph] widget allocation for graph '%s': [%d,%d] resulting draw size: [%d,%d]", graph_types[g->id].name, allocation.width, allocation.height, g->draw_width, g->draw_height);
 
-	if (!c->surface)
-		c->surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32,
-												c->draw_width, c->draw_height);
+	load_graph_alloc (g);
+
+	if (!g->surface)
+		g->surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32,
+												g->draw_width, g->draw_height);
 
 	gtk_widget_queue_draw (widget);
 
@@ -376,11 +377,20 @@ void
 load_graph_resize (LoadGraph *g)
 {
 	guint size = CLAMP(g->multiload->size, MIN_SIZE, MAX_SIZE);
+	gint w, h;
 
-	if ( g->multiload->panel_orientation == GTK_ORIENTATION_VERTICAL )
-		gtk_widget_set_size_request (g->main_widget, -1, size);
-	else /* GTK_ORIENTATION_HORIZONTAL */
-		gtk_widget_set_size_request (g->main_widget, size, -1);
+	if ( g->multiload->panel_orientation == GTK_ORIENTATION_VERTICAL ) {
+		w = -1;
+		h = size;
+	}
+	else { /* GTK_ORIENTATION_HORIZONTAL */ 
+		w = size;
+		h = -1;
+	}
+
+	gtk_widget_set_size_request (g->main_widget, w, h);
+
+	g_debug("[load-graph] Set size request of graph '%s' to [%d, %d]", graph_types[g->id].name, w, h);
 }
 
 void
