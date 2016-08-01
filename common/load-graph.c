@@ -112,22 +112,29 @@ load_graph_draw (LoadGraph *g)
 	cairo_destroy (cr);
 }
 
-/* Updates the load graph when the timeout expires */
-static gboolean
-load_graph_update (LoadGraph *g)
+/* Rotates graph data to the right */
+static void
+load_graph_rotate (LoadGraph *g)
 {
 	guint i;
 	gint* tmp;
 
-	if (g->data == NULL)
-		return TRUE;
-
-	// rotate data to the right
 	tmp = g->data[g->draw_width - 1];
 	for(i = g->draw_width - 1; i > 0; --i)
 		g->data[i] = g->data[i-1];
 	g->data[0] = tmp;
+}
 
+
+/* Updates the load graph when the timeout expires */
+static gboolean
+load_graph_update (LoadGraph *g)
+{
+
+	if (g->data == NULL)
+		return TRUE;
+
+	load_graph_rotate(g);
 	graph_types[g->id].get_data(g->draw_height, g->data [0], g);
 
 	if (g->tooltip_update)
