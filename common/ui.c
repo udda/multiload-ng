@@ -235,11 +235,15 @@ multiload_ui_start_system_monitor(MultiloadPlugin *ma)
 	else
 		cmdline = get_system_monitor_executable();
 
-	g_debug("[ui] Executing command line: '%s'", cmdline);
-	result = g_spawn_command_line_async (cmdline, NULL);
+	if (cmdline == NULL || cmdline[0] == '\0') {
+		g_debug("[ui] NULL or empty cmdline for multiload_ui_start_system_monitor()");
+	} else {
+		g_debug("[ui] Executing command line: '%s'", cmdline);
+		result = g_spawn_command_line_async (cmdline, NULL);
 
-	if (G_UNLIKELY (result == FALSE))
-		g_warning (_("Unable to execute the following command line: '%s'"), cmdline);
+		if (G_UNLIKELY (result == FALSE))
+			g_warning (_("Unable to execute the following command line: '%s'"), cmdline);
+	}
 
 	g_free(cmdline);
 }
