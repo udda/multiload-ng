@@ -24,7 +24,7 @@ msgid ""
 "A system load monitor that graphs processor, memory, and swap space use, "
 "plus temperature, network and disk activity."
 msgstr ""
-"Una pantalla de sistema que diseña graficos del uso del procesador, memoria "
+"Un monitor de carga de sistema que diseña graficos del uso del procesador, memoria "
 "y swap, ademas de temperatura e actividades de red y del disco."
 
 msgid "Copyright © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, and others"
