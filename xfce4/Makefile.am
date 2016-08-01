@@ -20,6 +20,9 @@ libmultiload_ng_la_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(XFCE4_CFLAGS) $(XFCE4UI_CFLAGS) $(XFCEGUI4_CFLAGS)
 
+# TESTING CFLAGS: uncomment to enable debugging (gdb) and profiling (gprof)
+#libmultiload_ng_la_CFLAGS += -pg -ggdb -O0
+
 libmultiload_ng_la_LDFLAGS = \
        -avoid-version \
        -module \

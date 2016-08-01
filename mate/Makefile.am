@@ -17,6 +17,9 @@ mate_multiload_ng_applet_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(MATE_CFLAGS)
 
+# TESTING CFLAGS: uncomment to enable debugging (gdb) and profiling (gprof)
+#mate_multiload_ng_applet_CFLAGS += -pg -ggdb -O0
+
 mate_multiload_ng_applet_LDADD = \
 	$(GTK_LIBS) \
 	$(MATE_LIBS) \
