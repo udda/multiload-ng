@@ -20,6 +20,7 @@ build-aux
 intltool*
 libtool
 generate-about-data.sh
+gmon.out
 common/about-data.c
 mate/mate-multiload-ng-applet
 mate/org.mate.*.mate-panel-applet
