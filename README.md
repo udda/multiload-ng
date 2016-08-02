@@ -165,7 +165,7 @@ You can contribute in several ways:
 
 Look at the [Wiki](../../wiki), contains all the informations you will need.
 
-Every pull request will be considered and will get a response.
+Each pull request will be considered and will get a response.
 
 
 
