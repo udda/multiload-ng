@@ -98,3 +98,36 @@ sysfs nodes corresponding to thermal zones, chooses the hottest one and draws it
 in the graph. The only requirement here is a Linux kernel compiled with
 `CONFIG_THERMAL (Generic Thermal sysfs driver)`. Any modern kernel (since 2010)
 sets it automatically, so it should be just fine.
+
+
+
+
+## Build instructions
+
+#### Get the source
+Execute the following command line (you must have git installed)
+`git clone https://github.com/udda/multiload-ng`
+If you don't have git, download the source ZIP [here](https://github.com/udda/multiload-ng/archive/master.zip).
+
+#### Configure
+Move to the directory that contains source code just cloned and run:
+`./autogen.sh`
+Now run configure script:
+`./configure --prefix=/usr`
+Change prefix as needed (/usr is the default of most distros and it's just OK; if not specified it defaults to /usr/local).
+
+Configure script automatically detects installed panels (and related development packages) and enables panel plugins accordingly.
+You can force enable/disable for some panels (and standalone). To learn how, along with other available options, type:
+`./configure --help`
+Then run `./configure` with selected options.
+
+#### Build
+This is simple. Move to the directory that contains source code and execute:
+`make`
+
+#### Install/uninstall
+To install (must run `make` before), execute:
+`sudo make install`
+
+To later uninstall you need source directory. If you deleted it, just download again, and run *Configure* part. Then execute:
+`sudo make uninstall`
