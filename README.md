@@ -22,6 +22,19 @@ In addition it can be built as a standalone window, that is, not embedded in any
 
 
 
+## Screenshots
+![Default configuration](/raw/gh-pages/screenshots/0_default.png)
+
+![Thicker borders](/raw/gh-pages/screenshots/1_borders.png)
+
+![Per-graph border width and gradient background](/raw/gh-pages/2_gradient+singleborders.png)
+
+![Extra margin and padding, no borders](/raw/gh-pages/3_margins+padding+noborder.png)
+
+![Standalone window](/raw/gh-pages/4_standalone.png)
+
+
+
 ## The Graphs
 #### CPU Graph
 Draws CPU usage, differentiating between User/System/Nice/IOWait.
