@@ -201,7 +201,7 @@ A: First of all, this project is *forked* from original Multiload, so they share
 * Multiload-ng is very well documented (see [Wiki](../../wiki))
 * Multiload-ng has additional graphs, and more will be added in the future
 * Multiload-ng has more graphical customizations, like individual colored border
-* Multiload-ng has color themes support
+* Multiload-ng has color schemes support
 * Multiload-ng responds to mouse events with customizable actions
 * Multiload-ng can choose its orientation regardless of panel orientation
 * Multiload-ng can also be run without any panel

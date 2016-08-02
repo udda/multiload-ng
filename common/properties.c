@@ -130,7 +130,7 @@ action_performed_cb(GtkWidget *widget, gpointer id)
 
 		case ACTION_IMPORT_COLORS:
 			filename = gtk_open_file_dialog(GTK_WINDOW(pref_dialog),
-								_("Import color theme"));
+								_("Import color scheme"));
 			if (filename != NULL) {
 				multiload_colors_from_file(filename, ma, GTK_WINDOW(pref_dialog));
 				g_free (filename);
@@ -139,7 +139,7 @@ action_performed_cb(GtkWidget *widget, gpointer id)
 
 		case ACTION_EXPORT_COLORS:
 			filename = gtk_save_file_dialog(GTK_WINDOW(pref_dialog),
-								_("Export color theme"), "multiload.colors");
+								_("Export color scheme"), "multiload.colors");
 			if (filename != NULL) {
 				multiload_colors_to_file(filename, ma, GTK_WINDOW(pref_dialog));
 				g_free (filename);
@@ -505,7 +505,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	}
 	properties_set_checkboxes_sensitive(ma, FALSE);
 
-	// color theme buttons
+	// color scheme buttons
 	box = gtk_hbox_new(FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, PREF_CONTENT_PADDING);
 
@@ -515,13 +515,13 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 							GINT_TO_POINTER(ACTION_DEFAULT_COLORS));
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
-	t = gtk_button_new_with_label(_("Import color theme"));
+	t = gtk_button_new_with_label(_("Import color scheme"));
 	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name(GTK_STOCK_OPEN, GTK_ICON_SIZE_SMALL_TOOLBAR));
 	g_signal_connect(G_OBJECT(t), "clicked", G_CALLBACK(action_performed_cb),
 							GINT_TO_POINTER(ACTION_IMPORT_COLORS));
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
-	t = gtk_button_new_with_label(_("Export color theme"));
+	t = gtk_button_new_with_label(_("Export color scheme"));
 	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name(GTK_STOCK_SAVE_AS, GTK_ICON_SIZE_SMALL_TOOLBAR));
 	g_signal_connect(G_OBJECT(t), "clicked", G_CALLBACK(action_performed_cb),
 							GINT_TO_POINTER(ACTION_EXPORT_COLORS));

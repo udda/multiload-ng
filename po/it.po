@@ -279,11 +279,11 @@ msgstr ""
 msgid "Graph timespan is %s"
 msgstr "Il grafico coprirà un intervallo di %s"
 
-msgid "Import color theme"
-msgstr "Importa tema di colori"
+msgid "Import color scheme"
+msgstr "Importa combinazione di colori"
 
-msgid "Export color theme"
-msgstr "Esporta tema di colori"
+msgid "Export color scheme"
+msgstr "Esporta combinazione di colori"
 
 #, c-format
 msgid "Select color:  %s -> %s"
