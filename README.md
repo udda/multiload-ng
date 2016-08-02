@@ -23,15 +23,15 @@ In addition it can be built as a standalone window, that is, not embedded in any
 
 
 ## Screenshots
-![Default configuration](/raw/gh-pages/screenshots/0_default.png)
+![Default configuration, all graphs visible](../gh-pages/screenshots/0_default.png?raw=true)
 
-![Thicker borders](/raw/gh-pages/screenshots/1_borders.png)
+![All graphs visible, thicker borders](../gh-pages/screenshots/1_borders.png?raw=true)
 
-![Per-graph border width and gradient background](/raw/gh-pages/2_gradient+singleborders.png)
+![Per-graph border width and gradient background](../gh-pages/2_gradient+singleborders.png?raw=true)
 
-![Extra margin and padding, no borders](/raw/gh-pages/3_margins+padding+noborder.png)
+![Extra margin and padding, no borders](../gh-pages/3_margins+padding+noborder.png?raw=true)
 
-![Standalone window](/raw/gh-pages/4_standalone.png)
+![Standalone window, all graphs visible](../gh-pages/4_standalone.png?raw=true)
 
 
 
