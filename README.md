@@ -27,11 +27,11 @@ In addition it can be built as a standalone window, that is, not embedded in any
 
 ![All graphs visible, thicker borders](../gh-pages/screenshots/1_borders.png?raw=true)
 
-![Per-graph border width and gradient background](../gh-pages/2_gradient+singleborders.png?raw=true)
+![Per-graph border width and gradient background](../gh-pages/screenshots/2_gradient+singleborders.png?raw=true)
 
-![Extra margin and padding, no borders](../gh-pages/3_margins+padding+noborder.png?raw=true)
+![Extra margin and padding, no borders](../gh-pages/screenshots/3_margins+padding+noborder.png?raw=true)
 
-![Standalone window, all graphs visible](../gh-pages/4_standalone.png?raw=true)
+![Standalone window, all graphs visible](../gh-pages/screenshots/4_standalone.png?raw=true)
 
 
 
