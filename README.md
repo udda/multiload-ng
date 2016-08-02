@@ -60,6 +60,12 @@ detected among the supported sensors in the system.
 
 
 
+## Help & Troubleshooting
+Read [this](../../wiki/Configuration) for help about plugin configuration.
+All additional documentation is located in the [Wiki](../../wiki).
+
+
+
 ## History
 Multiload-ng started as a simple port of nandhp's source to lxpanel>0.7.
 
