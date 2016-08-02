@@ -152,6 +152,23 @@ To later uninstall you need source directory. If you deleted it, just download a
 
 
 
+## How to contribute
+You can contribute in several ways:
+
+* Suggest new features
+* Translate to new languages
+* Port the plugin to other panels
+* Report bugs
+* Implement something present in the [Wishlist](../../wiki/Wishlist)
+* Fix something present in [Known issues and TODO](../../wiki/Known-issues-and-TODO)
+* ...
+
+Look at the [Wiki](../../wiki), contains all the informations you will need.
+
+Every pull request will be considered and will get a response.
+
+
+
 ## FAQ
 
 #### Q: Which are the differences with original Multiload applet?
