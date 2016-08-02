@@ -2,8 +2,7 @@
 
 ## Overview
 Multiload-ng is a near-complete rewrite of the good old GNOME multiload applet.
-<!--TODO plugin screenshots, into all panels - change shape and colors too, to illustrate every possibility-->
-<!--TODO screenshot of preferences window too-->
+
 It has plugins for the following panels:
 - XFCE 4 (xfce4-panel)
 - LXDE (lxpanel)
@@ -23,15 +22,20 @@ In addition it can be built as a standalone window, that is, not embedded in any
 
 
 ## Screenshots
-![Default configuration, all graphs visible](../gh-pages/screenshots/0_default.png?raw=true)
+![Default configuration, all graphs visible](../gh-pages/screenshots/0_default.png?raw=true)  
+<sup>*Default configuration, all graphs visible*</sup>
 
-![All graphs visible, thicker borders](../gh-pages/screenshots/1_borders.png?raw=true)
+![All graphs visible, thicker borders](../gh-pages/screenshots/1_borders.png?raw=true)  
+<sup>*All graphs visible, thicker borders*</sup>
 
-![Per-graph border width and gradient background](../gh-pages/screenshots/2_gradient+singleborders.png?raw=true)
+![Per-graph border width and gradient background](../gh-pages/screenshots/2_gradient+singleborders.png?raw=true)  
+<sup>*Per-graph border width and gradient background*</sup>
 
-![Extra margin and padding, no borders](../gh-pages/screenshots/3_margins+padding+noborder.png?raw=true)
+![Extra margin and padding, no borders](../gh-pages/screenshots/3_margins+padding+noborder.png?raw=true)  
+<sup>*Extra margin and padding, no borders*</sup>
 
-![Standalone window, all graphs visible](../gh-pages/screenshots/4_standalone.png?raw=true)
+![Standalone window, all graphs visible](../gh-pages/screenshots/4_standalone.png?raw=true)  
+<sup>*Standalone window, all graphs visible*</sup>
 
 
 
