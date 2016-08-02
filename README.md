@@ -149,3 +149,23 @@ To install (must run `make` before), execute:
 
 To later uninstall you need source directory. If you deleted it, just download again, and run *Configure* part. Then execute:  
 `sudo make uninstall`
+
+
+
+## FAQ
+
+#### Q: Which are the differences with original Multiload applet?
+A: First of all, this project is *forked* from original Multiload, so they share the same base. There are some notable differences:
+
+* Original multiload contains old and unmantained code, Multiload-ng is actively mantained
+* Multiload-ng is very well documented (see [Wiki](../../wiki))
+* Multiload-ng has additional graphs, and more will be added in the future
+* Multiload-ng has more graphical customizations, like individual colored border
+* Multiload-ng has color themes support
+* Multiload-ng responds to mouse events with customizable actions
+* Multiload-ng can choose its orientation regardless of panel orientation
+* Multiload-ng can also be run without any panel
+
+#### Q: Doesn't a system monitor use system resources by itself?
+A: Yes. This is true for every system monitor. That's why resources usage from Multiload-ng is kept as low as possible.
+
