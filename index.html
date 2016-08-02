@@ -94,6 +94,22 @@ between input, output and local (loopback, adb, etc) traffic.</p>
 detected among the supported sensors in the system.</p>
 
 <h2>
+<a id="history" class="anchor" href="#history" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>History</h2>
+
+<p>Multiload-ng started as a simple port of nandhp's source to lxpanel&gt;0.7.</p>
+
+<p>As I become familiar with code, I started making other little changes, and cleaning the code.
+I then contacted original author, but received no reply - meanwhile the plugin continued improving.</p>
+
+<p>This came to the point where the changes became many and deep, and I realized that this wasn't the same project anymore.</p>
+
+<p>I knew that a fresh start would give a boost to development, and at the same time it
+would allow to choose future directions with more ease.</p>
+
+<p>For the above reasons, I made Multiload-ng a separate project.
+The name changes too (so the filenames), in order to allow them to be installed together.</p>
+
+<h2>
 <a id="system-requirements" class="anchor" href="#system-requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>System Requirements</h2>
 
 <h4>
@@ -111,15 +127,15 @@ See per-panel section below for full list.</p>
 </thead>
 <tbody>
 <tr>
-<td align="left">GTK+</td>
+<td align="left">gtk+</td>
 <td align="right">&gt;= 2.18.0</td>
 </tr>
 <tr>
-<td align="left">Cairo</td>
-<td align="right">(shipped with GTK)</td>
+<td align="left">cairo</td>
+<td align="right">&gt;= 1.0</td>
 </tr>
 <tr>
-<td align="left">LibGTop</td>
+<td align="left">libgtop</td>
 <td align="right">&gt;= 2.11.92</td>
 </tr>
 </tbody>
@@ -172,14 +188,18 @@ these packages are required to build LXDE panel plugin:</p>
 <tbody>
 <tr>
 <td align="left">lxpanel</td>
-<td align="right">&gt;= 0.7</td>
+<td align="right">&gt;= 0.7.0</td>
 </tr>
 <tr>
-<td align="left">libmenu-cache</td>
-<td align="right">(Required by lxpanel)</td>
+<td align="left">libfm</td>
+<td align="right">&gt;= 1.2.0</td>
 </tr>
 </tbody>
 </table>
+
+<p>Due to an error in lxpanel source, if you are using lxpanel 0.7.0 you will
+need also libmenu-cache. This was fixed in version 0.7.1. Read about this
+<a href="http://wiki.lxde.org/en/How_to_write_plugins_for_LXPanel#Preconditions">here</a>.</p>
 
 <p>Note that LXDE 0.7 or greater is required.</p>
 
@@ -214,6 +234,110 @@ sysfs nodes corresponding to thermal zones, chooses the hottest one and draws it
 in the graph. The only requirement here is a Linux kernel compiled with
 <code>CONFIG_THERMAL (Generic Thermal sysfs driver)</code>. Any modern kernel (since 2010)
 sets it automatically, so it should be just fine.</p>
+
+<h2>
+<a id="build-instructions" class="anchor" href="#build-instructions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Build instructions</h2>
+
+<h4>
+<a id="get-the-source" class="anchor" href="#get-the-source" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Get the source</h4>
+
+<p>Execute the following command line (you must have git installed):<br>
+<code>git clone https://github.com/udda/multiload-ng</code></p>
+
+<p>If you don't have git, download the source ZIP <a href="https://github.com/udda/multiload-ng/archive/master.zip">here</a>.</p>
+
+<h4>
+<a id="configure" class="anchor" href="#configure" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configure</h4>
+
+<p>Move to the directory that contains source code just cloned and run:<br>
+<code>./autogen.sh</code></p>
+
+<p>Now run configure script:<br>
+<code>./configure --prefix=/usr</code>
+Change prefix as needed (/usr is the default of most distros and it's just OK; if not specified it defaults to /usr/local).</p>
+
+<p>Configure script automatically detects installed panels (and related development packages) and enables panel plugins accordingly.<br>
+You can force enable/disable for some panels (and standalone). To learn how, along with other available options, type:<br>
+<code>./configure --help</code></p>
+
+<p>Then run <code>./configure</code> with selected options.</p>
+
+<h4>
+<a id="build" class="anchor" href="#build" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Build</h4>
+
+<p>This is simple. Move to the directory that contains source code and execute:<br>
+<code>make</code></p>
+
+<h4>
+<a id="installuninstall" class="anchor" href="#installuninstall" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install/uninstall</h4>
+
+<p>To install (must run <code>make</code> before), execute:<br>
+<code>sudo make install</code></p>
+
+<p>To later uninstall you need source directory. If you deleted it, just download again, and run <em>Configure</em> part. Then execute:<br>
+<code>sudo make uninstall</code></p>
+
+<h2>
+<a id="how-to-contribute" class="anchor" href="#how-to-contribute" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to contribute</h2>
+
+<p>You can contribute in several ways:</p>
+
+<ul>
+<li>Suggest new features</li>
+<li>Translate to new languages</li>
+<li>Port the plugin to other panels</li>
+<li>Report bugs</li>
+<li>Implement something present in the <a href="../../wiki/Wishlist">Wishlist</a>
+</li>
+<li>Fix something present in <a href="../../wiki/Known-issues-and-TODO">Known issues and TODO</a>
+</li>
+<li>...</li>
+</ul>
+
+<p>Look at the <a href="../../wiki">Wiki</a>, contains all the informations you will need.</p>
+
+<p>Each pull request will be considered and will get a response.</p>
+
+<h2>
+<a id="faq" class="anchor" href="#faq" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>FAQ</h2>
+
+<h4>
+<a id="q-which-are-the-differences-with-original-multiload-applet" class="anchor" href="#q-which-are-the-differences-with-original-multiload-applet" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q: Which are the differences with original Multiload applet?</h4>
+
+<p>A: First of all, this project is <em>forked</em> from original Multiload, so they share the same base. There are some notable differences:</p>
+
+<ul>
+<li>Original multiload contains old and unmantained code, Multiload-ng is actively mantained</li>
+<li>Multiload-ng is very well documented (see <a href="../../wiki">Wiki</a>)</li>
+<li>Multiload-ng has additional graphs, and more will be added in the future</li>
+<li>Multiload-ng has more graphical customizations, like individual colored border</li>
+<li>Multiload-ng has color themes support</li>
+<li>Multiload-ng responds to mouse events with customizable actions</li>
+<li>Multiload-ng can choose its orientation regardless of panel orientation</li>
+<li>Multiload-ng can also be run without any panel</li>
+<li>...and so on</li>
+</ul>
+
+<p>Try it in your system and you won't regret!</p>
+
+<h4>
+<a id="q-doesnt-a-system-monitor-use-system-resources-by-itself" class="anchor" href="#q-doesnt-a-system-monitor-use-system-resources-by-itself" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q: Doesn't a system monitor use system resources by itself?</h4>
+
+<p>A: Yes. This is true for every system monitor. That's why resources usage from Multiload-ng is kept to a negligible level.</p>
+
+<h4>
+<a id="q-i-found-a-bug-how-can-i-report" class="anchor" href="#q-i-found-a-bug-how-can-i-report" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q: I found a bug! How can I report?</h4>
+
+<p>A: First, check wether this bug is already present in <a href="../../issues">issues list</a> or in the appropriate <a href="../../wiki/Known-issues-and-TODO">wiki page</a>.</p>
+
+<p>If not, you can then <a href="../../issues/new">create a new issue</a> or add the bug you found in the <a href="../../wiki/Known-issues-and-TODO">Known issues and TODO wiki page</a>.</p>
+
+<h4>
+<a id="q-i-have-a-suggestion-that-could-be-useful-how-can-i-report" class="anchor" href="#q-i-have-a-suggestion-that-could-be-useful-how-can-i-report" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q: I have a suggestion that could be useful. How can I report?</h4>
+
+<p>A: First, check wether your suggestion is already present in <a href="../../wiki/Wishlist">this list</a>.</p>
+
+<p>If not, you can then add your suggestion in the <a href="../../wiki/Wishlist">Wishlist wiki page</a>.</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/udda/multiload-ng">Multiload-ng</a> is maintained by <a href="https://github.com/udda">udda</a>.</span>
