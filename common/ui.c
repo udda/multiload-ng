@@ -148,17 +148,8 @@ multiload_ui_save (MultiloadPlugin *ma)
 
 void
 multiload_ui_show_help() {
-	gchar *cmdline;
-	gboolean result;
-
 	g_debug("[ui] Help command triggered");
-
-	cmdline = g_strdup_printf("xdg-open %s", about_data_website);
-	result = g_spawn_command_line_async (cmdline, NULL);
-	g_free(cmdline);
-
-	if (G_UNLIKELY (result == FALSE))
-		g_warning (_("Unable to open the following url: %s"), about_data_website);
+	xdg_open_url(about_data_website);
 }
 
 void
@@ -182,7 +173,8 @@ void
 multiload_ui_configure_response_cb (GtkWidget *dialog, gint response, MultiloadPlugin *ma)
 {
 	if (response == GTK_RESPONSE_HELP) {
-		multiload_ui_show_help();
+		g_debug("[ui] Help command triggered from preferences");
+		xdg_open_url(about_data_preferences_website);
 	} else {
 		ma->pref_dialog = NULL;
 		multiload_ui_save (ma);

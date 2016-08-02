@@ -60,6 +60,8 @@ gtk_save_file_dialog(GtkWindow *parent, const gchar *title, const gchar *current
 
 G_GNUC_INTERNAL gchar*
 get_system_monitor_executable();
+G_GNUC_INTERNAL void
+xdg_open_url();
 
 G_END_DECLS
 

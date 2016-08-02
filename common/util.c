@@ -300,3 +300,18 @@ gchar* get_system_monitor_executable()
 		i++;
 	}
 }
+
+void
+xdg_open_url(const gchar* url) {
+	gchar *cmdline;
+	gboolean result;
+
+	g_debug("[util] Trying to open URL '%s' with xdg-open...", url);
+
+	cmdline = g_strdup_printf("xdg-open %s", url);
+	result = g_spawn_command_line_async (cmdline, NULL);
+	g_free(cmdline);
+
+	if (G_UNLIKELY (result == FALSE))
+		g_warning (_("Unable to open the following url: %s"), url);
+}
