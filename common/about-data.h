@@ -33,7 +33,7 @@
 	N_("A system load monitor that graphs processor, memory, and " \
 	"swap space use, plus temperature, network and disk activity.")
 
-#define about_data_website "https://github.com/udda/multiload-ng"
+#define about_data_website "https://udda.github.io/multiload-ng"
 
 #define about_data_copyright \
 	_("Copyright \xC2\xA9 2016 Mario Cianciolo, " \
