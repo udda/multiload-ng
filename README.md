@@ -22,17 +22,17 @@ In addition it can be built as a standalone window, that is, not embedded in any
 
 
 ## Screenshots
-![Default configuration, all graphs visible](../gh-pages/screenshots/0_default.png?raw=true)  
-<sup>*Default configuration, all graphs visible*</sup>
+![Default configuration, small panel. All graphs visible](../gh-pages/screenshots/0_default.png?raw=true)  
+<sup>*Small panel, default configuration. All graphs visible*</sup>
 
-![All graphs visible, thicker borders](../gh-pages/screenshots/1_borders.png?raw=true)  
-<sup>*All graphs visible, thicker borders*</sup>
+![All graphs visible, larger panel. Thicker (2px) borders](../gh-pages/screenshots/1_borders.png?raw=true)  
+<sup>*All graphs visible, larger panel. Thicker (2px) borders*</sup>
 
-![Per-graph border width and gradient background](../gh-pages/screenshots/2_gradient+singleborders.png?raw=true)  
-<sup>*Per-graph border width and gradient background*</sup>
+![Each graph has different border width. CPU graph has grey-blue gradient background](../gh-pages/screenshots/2_gradient+singleborders.png?raw=true)  
+<sup>*Each graph has different border width. CPU graph has grey-blue gradient background*</sup>
 
-![Extra margin and padding, no borders](../gh-pages/screenshots/3_margins+padding+noborder.png?raw=true)  
-<sup>*Extra margin and padding, no borders*</sup>
+![Graphs have no borders. Extra spacing and padding](../gh-pages/screenshots/3_margins+padding+noborder.png?raw=true)  
+<sup>*Graphs have no borders. Extra spacing and padding*</sup>
 
 ![Standalone window, all graphs visible](../gh-pages/screenshots/4_standalone.png?raw=true)  
 <sup>*Standalone window, all graphs visible*</sup>
