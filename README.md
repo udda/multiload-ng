@@ -175,7 +175,7 @@ A: Yes. This is true for every system monitor. That's why resources usage from M
 #### Q: I found a bug! How can I report?
 A: First, check wether this bug is already present in [issues list](../../issues) or in the appropriate [wiki page](../../wiki/Known-issues-and-TODO).
 
-If not, you can then [create a new issue](../../issues) or add the bug you found in the [Known issues and TODO wiki page](../../wiki/Known-issues-and-TODO).
+If not, you can then [create a new issue](../../issues/new) or add the bug you found in the [Known issues and TODO wiki page](../../wiki/Known-issues-and-TODO).
 
 #### Q: I have a suggestion that could be useful. How can I report?
 A: First, check wether your suggestion is already present in [this list](../../wiki/Wishlist).
