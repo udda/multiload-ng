@@ -43,6 +43,21 @@ detected among the supported sensors in the system.
 
 
 
+## History
+Multiload-ng started as a simple port of nandhp's source to lxpanel>0.7.
+
+As I become familiar with code, I started making other little changes, and cleaning the code.
+I then contacted original author, but received no reply - meanwhile the plugin continued improving.
+
+This came to the point where the changes became many and deep, and I realized that this wasn't the same project anymore.
+
+I knew that a fresh start would give a boost to development, and at the same time it
+would allow to choose future directions with more ease.
+
+For the above reasons, I made Multiload-ng a separate project.
+The name changes too (so the filenames), in order to allow them to be installed together.
+
+
 
 ## System Requirements
 #### Common requirements
