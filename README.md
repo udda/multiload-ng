@@ -165,7 +165,20 @@ A: First of all, this project is *forked* from original Multiload, so they share
 * Multiload-ng responds to mouse events with customizable actions
 * Multiload-ng can choose its orientation regardless of panel orientation
 * Multiload-ng can also be run without any panel
+* ...and so on
+
+Try it in your system and you won't regret!
 
 #### Q: Doesn't a system monitor use system resources by itself?
-A: Yes. This is true for every system monitor. That's why resources usage from Multiload-ng is kept as low as possible.
+A: Yes. This is true for every system monitor. That's why resources usage from Multiload-ng is kept to a negligible level.
+
+#### Q: I found a bug! How can I report?
+A: First, check wether this bug is already present in [issues list](../../issues) or in the appropriate [wiki page](../../wiki/Known-issues-and-TODO).
+
+If not, you can then [create a new issue](../../issues) or add the bug you found in the [Known issues and TODO wiki page](../../wiki/Known-issues-and-TODO).
+
+#### Q: I have a suggestion that could be useful. How can I report?
+A: First, check wether your suggestion is already present in [this list](../../wiki/Wishlist).
+
+If not, you can then add your suggestion in the [Wishlist wiki page](../../wiki/Wishlist).
 
