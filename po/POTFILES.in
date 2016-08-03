@@ -1,7 +1,9 @@
-multiload/multiload.c
-multiload/netspeed.c
-multiload/properties.c
+common/about-data.h
+common/multiload.c
+common/multiload-config.c
+common/multiload-colors.c
+common/properties.c
+common/util.c
 xfce4/xfce4-multiload-plugin.c
-xfce4/xfce4-multiload-dialogs.c
 xfce4/multiload.desktop.in
 lxpanel/lxpanel-multiload-plugin.c

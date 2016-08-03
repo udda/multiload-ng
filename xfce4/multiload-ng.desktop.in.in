@@ -1,0 +1,10 @@
+[Xfce Panel]
+Type=X-XFCE-PanelPlugin
+Encoding=UTF-8
+_Name=Multiload-ng
+_Comment=A system load monitor that graphs processor, memory, and swap space use, plus temperature, network and disk activity.
+Icon=@APPICON@
+X-XFCE-Module=multiload-ng
+X-XFCE-Internal=false
+X-XFCE-Unique=false
+X-XFCE-Module-Path=@LIBDIR@/xfce4/panel/plugins

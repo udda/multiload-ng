@@ -1,0 +1,377 @@
+# Copyright (C) 2016 Roberta Assennato <r.assennato@gmail.com>
+# This file is distributed under the same license as the multiload-ng package.
+# Roberta Assennato <r.assennato@gmail.com>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-26 03:29+0100\n"
+"PO-Revision-Date: 2016-04-02 18:00+0200\n"
+"Last-Translator: Roberta Assennato <r.assennato@gmail.com>\n"
+"Language-Team: Español <>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 2.91.7\n"
+
+msgid "Multiload"
+msgstr "Multiload"
+
+msgid ""
+"A system load monitor that graphs processor, memory, and swap space use, "
+"plus temperature, network and disk activity."
+msgstr ""
+"Un monitor de carga de sistema que diseña graficos del uso del procesador, memoria "
+"y swap, ademas de temperatura e actividades de red y del disco."
+
+msgid "Copyright © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, and others"
+msgstr "Copyright © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, y otros"
+
+#, c-format
+msgid ""
+"%ld processors  -  %.2f GHz  -  Governor: %s\n"
+"%.1f%% in use by programs\n"
+"%.1f%% in wait for I/O\n"
+"%.1f%% total CPU use\n"
+"\n"
+"Uptime: %s"
+msgstr ""
+"%ld procesadores  -  %.2f GHz  -  Regulador: %s\n"
+"%.1f%% usado por los programas\n"
+"%.1f%% en espera de I/O\n"
+"%.1f%% uso total UCP\n"
+"\n"
+"Periodo de uso: %s"
+
+#, c-format
+msgid "%s of RAM"
+msgstr "%s di RAM"
+
+#, c-format
+msgid ""
+"%s in use by programs\n"
+"%s in use as cache"
+msgstr ""
+"%s usado por los programas\n"
+"%s usado como cache"
+
+#, c-format
+msgid ""
+"Monitored interfaces: %s\n"
+"\n"
+"Receiving: %s\n"
+"Sending: %s\n"
+"Local: %s"
+msgstr ""
+"Interfazas controladas: %s\n"
+"\n"
+"Recepción: %s\n"
+"Envio: %s\n"
+"Local: %s"
+
+msgid "No swap"
+msgstr "Ninguno swap"
+
+#, c-format
+msgid "%s of swap"
+msgstr "%s de swap"
+
+#, c-format
+msgid "%s used"
+msgstr "%s en uso"
+
+#, c-format
+msgid ""
+"Last minute: %0.02f\n"
+"Last 5 minutes: %0.02f\n"
+"Last 15 minutes: %0.02f"
+msgstr ""
+"Último minudo: %0.02f\n"
+"Últimos 5 minudos: %0.02f\n"
+"Últimos 15 minudos: %0.02f"
+
+#, c-format
+msgid ""
+"Read: %s\n"
+"Write: %s"
+msgstr ""
+"Lectura: %s\n"
+"Escritura: %s"
+
+#, c-format
+msgid ""
+"Current: %.1f °C\n"
+"Critical: %.1f °C"
+msgstr ""
+"Actual: %.1f °C\n"
+"Critica: %.1f °C"
+
+msgid "_Processor"
+msgstr "_Procesador"
+
+msgid "Processor"
+msgstr "Procesador"
+
+msgid "_User"
+msgstr "_Usuario"
+
+msgid "User"
+msgstr "Usuario"
+
+msgid "_System"
+msgstr "_Sistema"
+
+msgid "System"
+msgstr "Sistema"
+
+msgid "N_ice"
+msgstr "N_ice"
+
+msgid "Nice"
+msgstr "Nice"
+
+msgid "I_OWait"
+msgstr "I_OWait"
+
+msgid "IOWait"
+msgstr "IOWait"
+
+msgid "Bor_der"
+msgstr "Bor_de"
+
+msgid "Border"
+msgstr "Borde"
+
+msgid "_Background (top)"
+msgstr "Tra_sfondo (alto)"
+
+msgid "Background (top)"
+msgstr "Trasfondo (alto)"
+
+msgid "_Background (bottom)"
+msgstr "Tra_sfondo (abajo)"
+
+msgid "Background (bottom)"
+msgstr "Trasfondo (abajo)"
+
+msgid "_Memory"
+msgstr "_Memoria"
+
+msgid "Memory"
+msgstr "Memoria"
+
+msgid "_Shared"
+msgstr "Condivi_sa"
+
+msgid "Shared"
+msgstr "Condivisa"
+
+msgid "_Buffers"
+msgstr "_Búfer"
+
+msgid "Buffers"
+msgstr "Búfer"
+
+msgid "Cach_ed"
+msgstr "Cach_e"
+
+msgid "Cached"
+msgstr "Cache"
+
+msgid "_Network"
+msgstr "_Red"
+
+msgid "Network"
+msgstr "Red"
+
+msgid "_In"
+msgstr "Recepc_ión"
+
+msgid "In"
+msgstr "Recepción"
+
+msgid "O_ut"
+msgstr "Envio"
+
+msgid "Out"
+msgstr "Envio"
+
+msgid "L_ocal"
+msgstr "L_ocal"
+
+msgid "Local"
+msgstr "Local"
+
+msgid "S_wap"
+msgstr "S_wap"
+
+msgid "Swap"
+msgstr "Swap"
+
+msgid "_Used"
+msgstr "_Usado"
+
+msgid "Used"
+msgstr "Usado"
+
+msgid "_Load avg."
+msgstr "C_argo medio"
+
+msgid "Load average"
+msgstr "Cargo medio"
+
+msgid "A_verage"
+msgstr "M_edia"
+
+msgid "Average"
+msgstr "Media"
+
+msgid "_Disk"
+msgstr "_Disco"
+
+msgid "Disk"
+msgstr "Disco"
+
+msgid "_Read"
+msgstr "Lec_tura"
+
+msgid "Read"
+msgstr "Lectura"
+
+msgid "Wr_ite"
+msgstr "Esc_ritura"
+
+msgid "Write"
+msgstr "Escritura"
+
+msgid "_Temperature"
+msgstr "_Temperatura"
+
+msgid "Temperature"
+msgstr "Temperatura"
+
+msgid "_Value"
+msgstr "_Valor"
+
+msgid "Value"
+msgstr "Valor"
+
+msgid "Could not open the file."
+msgstr "Imposible abrir el archivo ."
+
+msgid "Wrong file format."
+msgstr "Formato del archivo equivocado."
+
+msgid "Could not save the file."
+msgstr "Imposibile guardar el archivo."
+
+msgid ""
+"Revert to default colors?\n"
+"You will lose any customization."
+msgstr ""
+"Volver a los colores predeterminados?\n"
+"Las customizaciones serán perdidas."
+
+#, c-format
+msgid "Graph timespan is %s"
+msgstr "El gráfico cubrirá un periodo de %s"
+
+msgid "Import color scheme"
+msgstr "Importe combinación de colores"
+
+msgid "Export color scheme"
+msgstr "Exporte combinación de colores"
+
+#, c-format
+msgid "Select color:  %s -> %s"
+msgstr "Seleccione el color:  %s -> %s"
+
+msgid "Show or hide this graph"
+msgstr "Muestre o esconda este gráfico"
+
+msgid "Background"
+msgstr "Trasfondo"
+
+msgid "Border width"
+msgstr "Extensión borde"
+
+msgid "Default colors"
+msgstr "Colores predeterminados"
+
+msgid "Wid_th:"
+msgstr "Ex_tensión:"
+
+msgid "Heigh_t:"
+msgstr "Al_tura:"
+
+#, c-format
+msgid "%d pixel"
+msgstr "%d pixel"
+
+msgid "S_pacing:"
+msgstr "Es_pacio: "
+
+msgid "Pa_dding:"
+msgstr "Relle_no:"
+
+msgid "If padding is set too large, the graph won't show."
+msgstr "Si el relleno es demasiado grande, el gráfico non será visible."
+
+msgid "Upd_ate interval:"
+msgstr "Intervalo de _actualización:"
+
+#, c-format
+msgid "%d milliseconds"
+msgstr "%d milisegundos"
+
+msgid "Tooltip may not show if update interval is too short."
+msgstr "Los tooltip podrían no aparecer si el intervalo es demasiado breve."
+
+msgid "_Orientation:"
+msgstr "_Orientación"
+
+msgid "Automatic"
+msgstr "Automático"
+
+msgid "Horizontal"
+msgstr "Horizontal"
+
+msgid "Vertical"
+msgstr "Vertical"
+
+msgid ""
+"Selected orientation is not the same of the panel. Graphs may be very small."
+msgstr ""
+"La orientación no es la del panel. Los gráficos podrían ser muy pequeños."
+
+msgid "On double clic_k:"
+msgstr "En doble cli_c:"
+
+msgid "Do nothing"
+msgstr "No haga nada"
+
+msgid "Start task manager"
+msgstr "Administrador de tareas"
+
+msgid "Execute custom command"
+msgstr "Mando personalizado"
+
+msgid "_Fill space between graphs"
+msgstr "Rellene espacio entre los grá_ficos"
+
+msgid "_Detailed informations in tooltips"
+msgstr "Informaciones _detalladas en los tooltip"
+
+#, c-format
+msgid "%s/s"
+msgstr "%s/s"
+
+#, c-format
+msgid "Unable to open the following url: %s"
+msgstr "Imposible abrir el siguiente url: %s"
+
+msgid "translator-credits"
+msgstr "Roberta Assennato <r.assennato@gmail.com>"

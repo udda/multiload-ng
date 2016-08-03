@@ -4,10 +4,20 @@ endif
 if HAVE_LXPANEL
 LXPANEL_DIRS = lxpanel
 endif
+if HAVE_MATE
+MATE_DIRS = mate
+endif
+if HAVE_STANDALONE
+STANDALONE_DIRS = standalone
+endif
+
+
 SUBDIRS =	\
-	multiload \
+	common \
 	$(XFCE4_DIRS) \
 	$(LXPANEL_DIRS) \
+	$(MATE_DIRS) \
+	$(STANDALONE_DIRS) \
 	po
 
 distclean-local:
@@ -27,17 +37,20 @@ ChangeLog: Makefile
 dist-hook: ChangeLog
 
 BUILT_SOURCES = \
-	about-data.h
+	common/about-data.c
 
-about-data.h: AUTHORS
-	perl $(top_srcdir)/generate-about-data-header.pl \
-	< $(top_srcdir)/AUTHORS > about-data.h
+common/about-data.c: AUTHORS $(top_srcdir)/generate-about-data.sh
+	@chmod +x $(top_srcdir)/generate-about-data.sh
+	$(top_srcdir)/generate-about-data.sh > common/about-data.c
 
 EXTRA_DIST = \
 	intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in \
 	AUTHORS COPYING ChangeLog README.md
+
+CLEANFILES = \
+	common/about-data.c
 
 DISTCLEANFILES = \
 	intltool-extract \

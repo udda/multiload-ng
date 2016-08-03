@@ -1,8 +1,6 @@
-# INCLUDES =
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
-	-I$(top_srcdir)/multiload \
-	-DG_LOG_DOMAIN=\"lxpanel-multiload-plugin\" \
+	-DG_LOG_DOMAIN=\"multiload-ng-lxpanel\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	$(PLATFORM_CPPFLAGS)
 
@@ -10,33 +8,30 @@ AM_CPPFLAGS = \
 # multiload plugin
 #
 plugin_LTLIBRARIES = \
-	multiload.la
+	multiload-ng.la
 
 plugindir = \
 	$(libdir)/lxpanel/plugins
 
-multiload_la_SOURCES = \
-	../about-data.h \
-	lxpanel-multiload-plugin.c
-# xfce4-multiload-plugin.h
-# xfce4-multiload-dialogs.c xfce4-multiload-dialogs.h
-# xfce4-multiload-settings.c xfce4-multiload-settings.h
+multiload_ng_la_SOURCES = \
+	plugin.c
 
-multiload_la_CFLAGS = \
+multiload_ng_la_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(LXPANEL_CFLAGS)
 
-multiload_la_LDFLAGS = \
+# TESTING CFLAGS: uncomment to enable debugging (gdb) and profiling (gprof)
+#multiload_ng_la_CFLAGS += -pg -ggdb -O0
+
+multiload_ng_la_LDFLAGS = \
        -avoid-version \
        -module \
        -no-undefined \
        $(PLATFORM_LDFLAGS)
 
-# export-symbols-regex '^multiload_(constructor|destructor|configure|save_configuration|configuration_changed)'
-
-multiload_la_LIBADD = \
+multiload_ng_la_LIBADD = \
 	$(GTK_LIBS) \
 	$(LXPANEL_LIBS) \
-	../multiload/multiload-core.la
+	../common/multiload-ng-core.la
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:
