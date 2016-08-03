@@ -15,8 +15,10 @@ In addition it can be built as a standalone window, that is, not embedded in any
 ## Features
 - Draw graphs of system resources
 - Very customizable
+- Color schemes support
 - Automatically adapts to container changes (panel or window)
 - Written in pure C with few dependencies - little CPU/memory footprint
+- Customizable tooltip style
 - Custom actions on double click
 
 
@@ -42,24 +44,15 @@ In addition it can be built as a standalone window, that is, not embedded in any
 
 
 
-## The Graphs
-#### CPU Graph
-Draws CPU usage, differentiating between User/System/Nice/IOWait.
-#### Memory Graph
-Draws RAM usage, differentiating between memory used by the applications
-(directly and through shared modules) and memory used as cache/buffers.
-#### Network Graph
-Draws network I/O of every supported network interface, differentiating
-between input, output and local (loopback, adb, etc) traffic.
-#### Swap Graph
-Draws swap usage, when detected.
-#### Load Average Graph
-Draws load average, as returned by `uptime`.
-#### Disk Graph
-Draws Disk I/O, differentiating between read and write.
-#### Temperature Graph
-Draws temperature of the system, based on the hottest temperature
-detected among the supported sensors in the system.
+## Graphs
+- **CPU Graph**: draws CPU usage, differentiating between User/System/Nice/IOWait.
+- **Memory Graph**: draws RAM usage, differentiating between memory used by the applications (directly and through shared modules) and memory used as cache/buffers.
+- **Network Graph**: draws network I/O of every supported network interface, differentiating between input, output and local (loopback, adb, etc) traffic.
+- **Swap Graph** draws swap usage, when swap is present.
+- **Load Average Graph**: draws load average, as returned by `uptime`.
+- **Disk Graph**: draws Disk I/O, differentiating between read and write.
+- **Temperature Graph**: draws temperature of the system, based on the hottest temperature detected among the supported sensors in the system.
+- ...others coming soon
 
 
 
@@ -70,7 +63,7 @@ All additional documentation is located in the [Wiki](../../wiki).
 
 
 ## History
-Multiload-ng started as a simple port of nandhp's source to lxpanel>0.7.
+Multiload-ng started as a simple port of multiload-nandhp to lxpanel>0.7.
 
 As I become familiar with code, I started making other little changes, and cleaning the code.
 I then contacted original author, but received no reply - meanwhile the plugin continued improving.
