@@ -34,7 +34,10 @@ In addition it can be built as a standalone window, that is, not embedded in any
 ![Graphs have no borders. Extra spacing and padding](../gh-pages/screenshots/3_margins+padding+noborder.png?raw=true)  
 <sup>*Graphs have no borders. Extra spacing and padding*</sup>
 
-![Standalone window, all graphs visible](../gh-pages/screenshots/4_standalone.png?raw=true)  
+![Graph background matches panel background. Very stylish](../gh-pages/screenshots/4_background-match.png?raw=true)  
+<sup>*Graph background matches panel background. Very stylish*</sup>
+
+![Standalone window, all graphs visible](../gh-pages/screenshots/5_standalone.png?raw=true)  
 <sup>*Standalone window, all graphs visible*</sup>
 
 
