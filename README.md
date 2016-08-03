@@ -1,10 +1,10 @@
 # Multiload-ng
 
 ## Overview
-Multiload-ng is a near-complete rewrite of the good old GNOME multiload applet.
+Multiload-ng is a modern graphical system monitor. It's a near-complete rewrite of the good old GNOME multiload applet.
 
-It has plugins for the following panels:
-- XFCE 4 (xfce4-panel)
+It supports the following panels:
+- XFCE (xfce4-panel)
 - LXDE (lxpanel)
 - MATE (mate-panel)
 
@@ -45,13 +45,13 @@ In addition it can be built as a standalone window, that is, not embedded in any
 
 
 ## Graphs
-- **CPU Graph**: draws CPU usage, differentiating between User/System/Nice/IOWait.
-- **Memory Graph**: draws RAM usage, differentiating between memory used by the applications (directly and through shared modules) and memory used as cache/buffers.
-- **Network Graph**: draws network I/O of every supported network interface, differentiating between input, output and local (loopback, adb, etc) traffic.
-- **Swap Graph** draws swap usage, when swap is present.
-- **Load Average Graph**: draws load average, as returned by `uptime`.
-- **Disk Graph**: draws Disk I/O, differentiating between read and write.
-- **Temperature Graph**: draws temperature of the system, based on the hottest temperature detected among the supported sensors in the system.
+- **CPU GRAPH**: draws CPU usage, differentiating between User/System/Nice/IOWait.
+- **MEMORY GRAPH**: draws RAM usage, differentiating between memory used by the applications (directly and through shared modules) and memory used as cache/buffers.
+- **NETWORK GRAPH**: draws network I/O of every supported network interface, differentiating between input, output and local (loopback, adb, etc) traffic.
+- **SWAP GRAPH** draws swap usage, when swap is present.
+- **LOAD AVERAGE GRAPH**: draws load average, as returned by `uptime`.
+- **DISK GRAPH**: draws Disk I/O, differentiating between read and write.
+- **TEMPERATURE GRAPH**: draws temperature of the system, based on the hottest temperature detected among the supported sensors in the system.
 - ...others coming soon
 
 
@@ -64,12 +64,10 @@ All additional documentation is located in the [Wiki](../../wiki).
 
 ## History
 Multiload-ng started as a simple port of multiload-nandhp to lxpanel>0.7.
-
 As I become familiar with code, I started making other little changes, and cleaning the code.
 I then contacted original author, but received no reply - meanwhile the plugin continued improving.
 
 This came to the point where the changes became many and deep, and I realized that this wasn't the same project anymore.
-
 I knew that a fresh start would give a boost to development, and at the same time it
 would allow to choose future directions with more ease.
 
@@ -89,9 +87,9 @@ gtk+                        | >= 2.18.0
 cairo                       | >= 1.0
 libgtop                     | >= 2.11.92
 
-#### Requirements for XFCE4 panel
+#### Requirements for XFCE panel
 In addition to common requirements (see above)
-these packages are required to build XFCE4 panel plugin:
+these packages are required to build XFCE panel plugin:
 
 Package                     | Min version
 :-------------------------- | -------------:
@@ -191,10 +189,12 @@ Each pull request will be considered and will get a response.
 ## FAQ
 
 #### Q: Which are the differences with original Multiload applet?
-A: First of all, this project is *forked* from original Multiload, so they share the same base. There are some notable differences:
+A: First of all, this project is *forked* from original Multiload. Multiload-ng has ALL the features of the original multiload, since they share the same codebase.
+
+There are some notable differences:
 
 * Original multiload contains old and unmantained code, Multiload-ng is actively mantained
-* Multiload-ng is very well documented (see [Wiki](../../wiki))
+* Multiload-ng has a [Wiki](../../wiki)!
 * Multiload-ng has additional graphs, and more will be added in the future
 * Multiload-ng has more graphical customizations, like individual colored border
 * Multiload-ng has color schemes support
@@ -203,7 +203,7 @@ A: First of all, this project is *forked* from original Multiload, so they share
 * Multiload-ng can also be run without any panel
 * ...and so on
 
-Try it in your system and you won't regret!
+Try it in your system and you won't come back!
 
 #### Q: Doesn't a system monitor use system resources by itself?
 A: Yes. This is true for every system monitor. That's why resources usage from Multiload-ng is kept to a negligible level.
@@ -217,4 +217,7 @@ If not, you can then [create a new issue](../../issues/new) or add the bug you f
 A: First, check wether your suggestion is already present in [this list](../../wiki/Wishlist).
 
 If not, you can then add your suggestion in the [Wishlist wiki page](../../wiki/Wishlist).
+
+#### Q: Will you continue the development of Multiload-ng?
+A: Of course! To get an idea of future directions, take a look at the [Wishlist](../../wiki/Wishlist).
 
