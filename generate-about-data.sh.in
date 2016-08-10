@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 echo "#include <glib.h>"
 echo
 echo "const gchar * const about_data_authors[] = {"
