@@ -180,7 +180,7 @@ gboolean multiload_colors_from_file(const gchar *filename, MultiloadPlugin *ma, 
 {
 	char *line = NULL;
 	char *color_str;
-	size_t len = NULL;
+	size_t len = 0;
 	ssize_t read;
 	int graph;
 	gboolean first_line = TRUE;

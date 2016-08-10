@@ -215,7 +215,7 @@ void gtk_error_dialog(GtkWindow *parent, const gchar *message)
 {
 	GtkWidget *dialog = gtk_message_dialog_new(parent,
 						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-						GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, message);
+						GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "%s", message);
 	g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK(close_dialog_cb), NULL);
 	gtk_widget_show(dialog);
 }
@@ -224,7 +224,7 @@ GtkWidget* gtk_yesno_dialog(GtkWindow *parent, const gchar *message, GCallback c
 {
 	GtkWidget *dialog = gtk_message_dialog_new(parent,
 						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-						GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, message);
+						GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, "%s", message);
 	g_signal_connect (G_OBJECT (dialog), "response", cb, data);
 	return dialog;
 }
