@@ -34,6 +34,7 @@ multiload_ng_core_la_LDFLAGS = \
        -avoid-version \
        -module \
        -no-undefined \
+       -lm \
        $(PLATFORM_LDFLAGS)
 
 multiload_ng_core_la_LIBADD = \
