@@ -1,9 +1,14 @@
 common/about-data.h
+common/load-graph.c
 common/multiload.c
 common/multiload-config.c
 common/multiload-colors.c
 common/properties.c
 common/util.c
-xfce4/xfce4-multiload-plugin.c
-xfce4/multiload.desktop.in
-lxpanel/lxpanel-multiload-plugin.c
+common/ui.c
+lxpanel/plugin.c
+mate/plugin.c
+standalone/multiload-ng.desktop.in
+standalone/plugin.c
+xfce4/multiload-ng.desktop.in
+xfce4/plugin.c
