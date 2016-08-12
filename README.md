@@ -147,8 +147,12 @@ Move to the directory that contains source code just cloned and run:
 `./autogen.sh`
 
 Now run configure script:  
-`./configure --prefix=/usr`
+`./configure --prefix=/usr`  
 Change prefix as needed (/usr is the default of most distros and it's just OK; if not specified it defaults to /usr/local).
+
+Lubuntu users (and possibly others) have different libraries location. They may have to set directly *libdir*:  
+`./configure --libdir=/usr/lib/x86_64-linux-gnu`  
+If plugin does not show up in the list of panel plugins, you could try to repeat build process with this configure setting.
 
 Configure script automatically detects installed panels (and related development packages) and enables panel plugins accordingly.  
 You can force enable/disable for some panels (and standalone). To learn how, along with other available options, type:  
