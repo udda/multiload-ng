@@ -256,8 +256,12 @@ sets it automatically, so it should be just fine.</p>
 <code>./autogen.sh</code></p>
 
 <p>Now run configure script:<br>
-<code>./configure --prefix=/usr</code>
+<code>./configure --prefix=/usr</code><br>
 Change prefix as needed (/usr is the default of most distros and it's just OK; if not specified it defaults to /usr/local).</p>
+
+<p>Lubuntu users (and possibly others) have different libraries location. They may have to set directly <em>libdir</em>:<br>
+<code>./configure --libdir=/usr/lib/x86_64-linux-gnu</code><br>
+If plugin does not show up in the list of panel plugins, you could try to repeat build process with this configure setting.</p>
 
 <p>Configure script automatically detects installed panels (and related development packages) and enables panel plugins accordingly.<br>
 You can force enable/disable for some panels (and standalone). To learn how, along with other available options, type:<br>
