@@ -127,12 +127,18 @@ mate_about_cb (GtkAction *action, MultiloadPlugin *ma)
 static void
 mate_orientation_cb (MatePanelApplet *applet, guint orient, MultiloadPlugin *ma)
 {
+	gboolean init = (orient < 0);
+
+	// ignore provided orientation as sometimes at startup has invalid values
+	orient = mate_panel_applet_get_orient(applet);
+
 	if (orient == MATE_PANEL_APPLET_ORIENT_UP || orient == MATE_PANEL_APPLET_ORIENT_DOWN)
 		ma->panel_orientation = GTK_ORIENTATION_HORIZONTAL;
 	else // if (orient == MATE_PANEL_APPLET_ORIENT_LEFT || orient == MATE_PANEL_APPLET_ORIENT_RIGHT)
 		ma->panel_orientation = GTK_ORIENTATION_VERTICAL;
 
-	multiload_refresh(ma);
+	if (!init)
+		multiload_refresh(ma);
 }
 static void
 mate_size_cb (MatePanelApplet *applet, guint size, MultiloadPlugin *ma)
@@ -185,6 +191,8 @@ mate_constructor (MatePanelApplet* applet, const char* iid, gpointer data)
 	gtk_widget_show (GTK_WIDGET(multiload->container));
 
 	multiload_ui_read (multiload);
+	// trigger orientation setup
+	mate_orientation_cb(applet, -1, multiload);
 	multiload_refresh(multiload);
 
 	mate_setup_menu(applet, multiload);
