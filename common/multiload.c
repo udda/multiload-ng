@@ -111,7 +111,7 @@ multiload_tooltip_update(LoadGraph *g)
 											"Local: %s"),
 											xd->ifaces, tx_in, tx_out, tx_local);
 			} else {
-				text = g_strdup_printf("\xe2\xac\x86%s \xe2\xac\x87%s", tx_in, tx_out);
+				text = g_strdup_printf("\xe2\xac\x87%s \xe2\xac\x86%s", tx_in, tx_out);
 			}
 
 			g_free(tx_in);

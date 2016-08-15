@@ -362,7 +362,7 @@ msgstr "Mando personalizado"
 msgid "_Fill space between graphs"
 msgstr "Rellene espacio entre los grá_ficos"
 
-msgid "_Detailed informations in tooltips"
+msgid "_Detailed information in tooltips"
 msgstr "Informaciones _detalladas en los tooltip"
 
 #, c-format
