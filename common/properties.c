@@ -23,6 +23,7 @@
 #include <string.h>
 #include <glib/gi18n-lib.h>
 
+#include "gtk-compat.h"
 #include "load-graph.h"
 #include "multiload.h"
 #include "multiload-config.h"
@@ -330,7 +331,7 @@ add_page(GtkNotebook *notebook, const gchar *label, const gchar *description)
 	GtkWidget *page;
 	GtkWidget *page_label;
 
-	page = gtk_vbox_new(FALSE, 0);
+	page = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 	gtk_container_set_border_width(GTK_CONTAINER(page), PREF_CONTENT_PADDING);
 	page_label = gtk_label_new_with_mnemonic(label);
 	gtk_widget_set_tooltip_text(page_label, description);
@@ -355,7 +356,7 @@ color_selector_new(guint graph, guint index, gboolean use_alpha, gboolean use_la
 					graph_types[graph].label_noninteractive,
 					graph_types[graph].colors[index].label_noninteractive);
 
-	box = gtk_hbox_new (FALSE, PREF_LABEL_SPACING);
+	box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, PREF_LABEL_SPACING);
 
 	// color button
 	color_picker = gtk_color_button_new_with_color(
@@ -408,13 +409,13 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 		gtk_widget_destroy(container);
 
 	// Create new container
-	container = gtk_vbox_new(FALSE, PREF_CONTENT_PADDING);
+	container = gtk_box_new(GTK_ORIENTATION_VERTICAL, PREF_CONTENT_PADDING);
 	gtk_box_pack_start(GTK_BOX(contentArea), container, TRUE, TRUE, 0);
 	g_object_set_data (G_OBJECT(dialog), "ContentVBox", container);
 
 
 	// COLORS
-	box = gtk_hbox_new(FALSE, PREF_CONTENT_PADDING);
+	box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, PREF_CONTENT_PADDING);
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
 	sizegroup = gtk_size_group_new(GTK_SIZE_GROUP_BOTH);
@@ -434,7 +435,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 		gtk_frame_set_label_widget(GTK_FRAME(frame), t);
 		gtk_box_pack_start(GTK_BOX(box), GTK_WIDGET(frame), FALSE, FALSE, 0);
 
-		box2 = gtk_vbox_new(FALSE, 0);
+		box2 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 		gtk_container_set_border_width(GTK_CONTAINER(box2), PREF_CONTENT_PADDING);
 		gtk_container_add(GTK_CONTAINER(frame), GTK_WIDGET(box2));
 
@@ -448,10 +449,10 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 
 
 		// background color
-		box4 = gtk_vbox_new(FALSE, 0);
+		box4 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 		gtk_box_pack_end(GTK_BOX(box2), box4, FALSE, FALSE, 0);
 
-		t = gtk_hseparator_new();
+		t = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
 		gtk_widget_set_size_request(t, -1, 3);
 		gtk_box_pack_start(GTK_BOX(box4), t, FALSE, FALSE, 2);
 
@@ -459,7 +460,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 		gtk_misc_set_alignment (GTK_MISC (label), 0.5f, 1.0f);
 		gtk_box_pack_start(GTK_BOX(box4), label, FALSE, FALSE, 0);
 
-		box3 = gtk_hbox_new(FALSE, PREF_CONTENT_PADDING);
+		box3 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, PREF_CONTENT_PADDING);
 		gtk_container_set_border_width(GTK_CONTAINER(box3), PREF_CONTENT_PADDING);
 		gtk_box_pack_start(GTK_BOX(box4), GTK_WIDGET(box3), FALSE, FALSE, 0);
 
@@ -472,13 +473,13 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 		gtk_box_pack_start(GTK_BOX(box3), t, FALSE, FALSE, 0);
 
 		// border
-		box4 = gtk_vbox_new(FALSE, 0);
+		box4 = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 		gtk_box_pack_end(GTK_BOX(box2), box4, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 		label = gtk_label_new(NULL);
 		gtk_box_pack_start(GTK_BOX(box4), label, FALSE, FALSE, PREF_CONTENT_PADDING);
 
-		t = gtk_hseparator_new();
+		t = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
 		gtk_widget_set_size_request(t, -1, 3);
 		gtk_box_pack_start(GTK_BOX(box4), t, FALSE, FALSE, 2);
 
@@ -486,7 +487,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 		gtk_misc_set_alignment (GTK_MISC (label), 0.5f, 1.0f);
 		gtk_box_pack_start(GTK_BOX(box4), label, FALSE, FALSE, 0);
 
-		box3 = gtk_hbox_new(FALSE, PREF_CONTENT_PADDING);
+		box3 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, PREF_CONTENT_PADDING);
 		gtk_container_set_border_width(GTK_CONTAINER(box3), PREF_CONTENT_PADDING);
 		gtk_box_pack_start(GTK_BOX(box4), GTK_WIDGET(box3), FALSE, FALSE, 0);
 
@@ -506,7 +507,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	properties_set_checkboxes_sensitive(ma, FALSE);
 
 	// color scheme buttons
-	box = gtk_hbox_new(FALSE, 0);
+	box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 	t = gtk_button_new_with_label(_("Default colors"));
@@ -535,7 +536,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	sizegroup2 = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
 
 	// Width / Height
-	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
+	box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, PREF_LABEL_SPACING);
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
 	if (ma->panel_orientation == GTK_ORIENTATION_HORIZONTAL)
@@ -560,7 +561,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	g_assert_nonnull(g_list_append(dynamic_widgets, t));
 
 	// Spacing
-	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
+	box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, PREF_LABEL_SPACING);
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
 	label = gtk_label_new_with_mnemonic(_("S_pacing:"));
@@ -576,7 +577,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 	// Padding
-	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
+	box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, PREF_LABEL_SPACING);
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
 	label = gtk_label_new_with_mnemonic(_("Pa_dding:"));
@@ -598,7 +599,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	g_assert_nonnull(g_list_append(dynamic_widgets, t));
 
 	// Update interval
-	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
+	box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, PREF_LABEL_SPACING);
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
 	label = gtk_label_new_with_mnemonic(_("Upd_ate interval:"));
@@ -620,7 +621,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	g_assert_nonnull(g_list_append(dynamic_widgets, t));
 
 	// Orientation
-	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
+	box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, PREF_LABEL_SPACING);
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
 	label = gtk_label_new_with_mnemonic(_("_Orientation:"));
@@ -646,7 +647,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	g_assert_nonnull(g_list_append(dynamic_widgets, t));
 
 	// Execute application on double click
-	box = gtk_hbox_new(FALSE, PREF_LABEL_SPACING);
+	box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, PREF_LABEL_SPACING);
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
 	label = gtk_label_new_with_mnemonic(_("On double clic_k:"));

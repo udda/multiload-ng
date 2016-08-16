@@ -13,6 +13,7 @@ noinst_LTLIBRARIES = \
 multiload_ng_core_la_SOURCES = \
 	about-data.c about-data.h \
 	autoscaler.c autoscaler.h \
+	gtk-compat.c gtk-compat.h \
 	linux-proc.c linux-proc.h \
 	load-graph.c load-graph.h \
 	multiload.c multiload.h \

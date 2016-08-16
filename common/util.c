@@ -25,6 +25,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "gtk-compat.h"
 #include "util.h"
 
 
@@ -191,7 +192,7 @@ GtkWidget* gtk_spin_button_new_with_parameters(gint min, gint max, gint step, gi
 
 GtkWidget* gtk_icon_label_new(const gchar* stock_image, const gchar *text)
 {
-	GtkWidget *hbox = gtk_hbox_new(FALSE, 4);
+	GtkWidget *hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 4);
 
 	GtkWidget *image = gtk_image_new_from_stock(stock_image, GTK_ICON_SIZE_SMALL_TOOLBAR);
 	gtk_box_pack_start(GTK_BOX(hbox), image, FALSE, FALSE, 0);

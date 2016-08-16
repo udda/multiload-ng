@@ -28,6 +28,7 @@
 #include <glibtop.h>
 #include <glib/gi18n-lib.h>
 
+#include "gtk-compat.h"
 #include "linux-proc.h"
 #include "multiload.h"
 #include "multiload-config.h"
@@ -242,11 +243,8 @@ multiload_refresh(MultiloadPlugin *ma)
 	if (ma->box)
 		gtk_widget_destroy(ma->box);
 
-	ma->box = gtk_vbox_new (FALSE, ma->spacing);
+	ma->box = gtk_box_new (multiload_get_orientation(ma), ma->spacing);
 	gtk_container_set_border_width(GTK_CONTAINER(ma->box), ma->padding);
-
-	// Switch between GtkVBox and GtkHBox depending of orientation
-	gtk_orientable_set_orientation(GTK_ORIENTABLE(ma->box), multiload_get_orientation(ma));
 
 	gtk_event_box_set_visible_window(GTK_EVENT_BOX(ma->container), ma->fill_between);
 

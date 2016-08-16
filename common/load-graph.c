@@ -30,6 +30,7 @@
 #include <gdk/gdkx.h>
 #include <gtk/gtk.h>
 
+#include "gtk-compat.h"
 #include "linux-proc.h"
 #include "multiload.h"
 #include "multiload-config.h"
@@ -339,9 +340,9 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 	g->tooltip_update = FALSE;
 	g->multiload = ma;
 
-	g->main_widget = gtk_vbox_new (FALSE, 0);
+	g->main_widget = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
-	g->box = gtk_vbox_new (FALSE, 0);
+	g->box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
 	if (ma->graph_config[id].border_width > 0) {
 		k = multiload_colors_get_extra_index(id, EXTRA_COLOR_BORDER);

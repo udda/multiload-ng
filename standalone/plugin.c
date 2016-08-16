@@ -27,6 +27,7 @@
 #include <glib/gi18n-lib.h>
 
 #include "common/about-data.h"
+#include "common/gtk-compat.h"
 #include "common/multiload.h"
 #include "common/ui.h"
 
@@ -200,7 +201,7 @@ int main(int argc, char *argv[]) {
 	gtk_window_set_icon_name (w, about_data_icon);
 	multiload->panel_data = w;
 
-	GtkWidget *hbox = gtk_hbox_new(FALSE, 1);
+	GtkWidget *hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 1);
 	GtkWidget *btnConfig = gtk_button_new_from_stock(GTK_STOCK_PREFERENCES);
 	gtk_widget_show (GTK_WIDGET(multiload->container));
 	gtk_widget_show (btnConfig);

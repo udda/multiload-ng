@@ -53,11 +53,40 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package.])
 AM_GLIB_GNU_GETTEXT
 
 
-# Dependencies
-AM_PATH_GTK_2_0([2.18.0],,AC_MSG_ERROR([GTK+ 2.18.0 or higher required.]))
+# Select GTK version
+AC_MSG_CHECKING([which gtk+ version to compile against])
+AC_ARG_WITH([gtk],
+  [AS_HELP_STRING([--with-gtk=2.0|3.0],[which gtk+ version to compile against (default: 2.0)])],
+  [case "$with_gtk" in
+     2.0|3.0) ;;
+     *) AC_MSG_ERROR([invalid gtk version specified]) ;;
+   esac],
+  [with_gtk=2.0])
+AC_MSG_RESULT([$with_gtk])
+
+case "$with_gtk" in
+  2.0)
+    GTK_API=2
+    GTK_REQUIRED=2.18.0
+    ;;
+  3.0)
+    GTK_API=3
+    GTK_REQUIRED=3.0.0
+    ;;
+esac
+AC_SUBST(GTK_API_VERSION)
+AC_DEFINE_UNQUOTED(GTK_API, $GTK_API, [GTK API version to compile against.])
+
+
+PKG_CHECK_MODULES(GTK, gtk+-$GTK_API.0 >= $GTK_REQUIRED)
+AC_SUBST(GTK_FLAGS)
+AC_SUBST(GTK_LIBS)
+
+# Other dependencies
 PKG_CHECK_MODULES(CAIRO, [cairo >= 1.0])
 AC_SUBST(CAIRO_CFLAGS)
 AC_SUBST(CAIRO_LIBS)
+
 PKG_CHECK_MODULES(LIBGTOP, [libgtop-2.0 >= 2.11.92])
 AC_SUBST(LIBGTOP_CFLAGS)
 AC_SUBST(LIBGTOP_LIBS)
