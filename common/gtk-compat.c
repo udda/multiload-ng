@@ -25,6 +25,7 @@
 #include "gtk-compat.h"
 
 
+// Compatibility functions for GTK2
 #if GTK_API == 2
 
 
@@ -45,5 +46,7 @@ gtk_separator_new (GtkOrientation o)
 	else // if (o == GTK_ORIENTATION_VERTICAL)
 		return gtk_vseparator_new();
 }
+
+#else  /* GTK_API == 2 */
 
 #endif /* GTK_API == 2 */

@@ -25,10 +25,11 @@
 
 #include <gtk/gtk.h>
 
+// Compatibility functions for GTK2
+G_BEGIN_DECLS
+
 
 #if GTK_API == 2
-
-G_BEGIN_DECLS
 
 G_GNUC_INTERNAL GtkWidget *
 gtk_box_new (GtkOrientation o, guint spacing);
@@ -36,8 +37,11 @@ gtk_box_new (GtkOrientation o, guint spacing);
 G_GNUC_INTERNAL GtkWidget*
 gtk_separator_new (GtkOrientation o);
 
-G_END_DECLS
+#else  /* GTK_API == 2 */
 
 #endif /* GTK_API == 2 */
+
+
+G_END_DECLS
 
 #endif /* __GTK_COMPAT_H__ */
