@@ -665,7 +665,8 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_size_group_add_widget(sizegroup2, t);
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
-	p = gtk_entry_new_with_max_length(sizeof(ma->dblclick_cmdline)/sizeof(gchar) - 1);
+	p = gtk_entry_new();
+	gtk_entry_set_max_length(GTK_ENTRY(p), sizeof(ma->dblclick_cmdline)/sizeof(gchar) - 1);
 	gtk_box_pack_start(GTK_BOX(box), p, FALSE, FALSE, PREF_CONTENT_PADDING);
 	gtk_entry_set_text(GTK_ENTRY(p), ma->dblclick_cmdline);
 	gtk_entry_set_width_chars(GTK_ENTRY(p), 36);
