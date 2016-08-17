@@ -29,6 +29,46 @@
 #if GTK_API == 2
 
 
+gboolean
+gdk_rgba_parse (GdkRGBA* color, const gchar* gspec) {
+	GdkColor c;
+	gboolean ret;
+	ret = gdk_color_parse(gspec, &c);
+	if (ret)
+		gdk_color_to_rgba(&c, 0xffff, color);
+
+	return ret;
+}
+
+void
+gtk_color_chooser_get_rgba (GtkColorButton *chooser, GdkRGBA *color)
+{
+	GdkColor c;
+	gtk_color_button_get_color(chooser, &c);
+	gdk_color_to_rgba(&c, gtk_color_button_get_alpha(chooser), color);
+}
+
+G_GNUC_INTERNAL void
+gtk_color_chooser_set_use_alpha (GtkColorButton *chooser, gboolean use_alpha)
+{
+	gtk_color_button_set_use_alpha(chooser, use_alpha);
+}
+
+
+GtkWidget *
+gtk_color_button_new_with_rgba (const GdkRGBA *rgba)
+{
+	GdkColor c;
+	guint16 alpha;
+	GtkWidget *ret;
+	gdk_rgba_to_color(rgba, &c, &alpha);
+
+	ret = gtk_color_button_new_with_color(&c);
+	gtk_color_button_set_alpha (GTK_COLOR_BUTTON(ret), alpha);
+	return ret;
+}
+
+
 GtkWidget *
 gtk_box_new (GtkOrientation o, guint spacing)
 {
@@ -38,7 +78,7 @@ gtk_box_new (GtkOrientation o, guint spacing)
 		return gtk_vbox_new(FALSE, spacing);
 }
 
-GtkWidget*
+GtkWidget *
 gtk_separator_new (GtkOrientation o)
 {
 	if (o == GTK_ORIENTATION_HORIZONTAL)
@@ -50,3 +90,24 @@ gtk_separator_new (GtkOrientation o)
 #else  /* GTK_API == 2 */
 
 #endif /* GTK_API == 2 */
+
+
+void
+gdk_color_to_rgba(const GdkColor *color, guint16 alpha, GdkRGBA *rgba)
+{
+	rgba->red = color->red / 65535.0;
+	rgba->green = color->green / 65535.0;
+	rgba->blue = color->blue / 65535.0;
+	rgba->alpha = alpha / 65535.0;
+}
+
+void
+gdk_rgba_to_color(const GdkRGBA *rgba, GdkColor *color, guint16 *alpha)
+{
+	color->red = 65535 * rgba->red;
+	color->green = 65535 * rgba->green;
+	color->blue = 65535 * rgba->blue;
+	if (alpha != NULL)
+		*alpha = 65535 * rgba->alpha;
+}
+

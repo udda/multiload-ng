@@ -28,6 +28,8 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gtk/gtk.h>
 
+#include "gtk-compat.h"
+
 
 #define MAX_COLORS 7
 
@@ -49,8 +51,7 @@ typedef struct _LoadGraph LoadGraph;
 typedef struct _GraphConfig {
 	gboolean visible;
 	gint border_width;
-	GdkColor colors[MAX_COLORS];
-	guint16 alpha[MAX_COLORS];
+	GdkRGBA colors[MAX_COLORS];
 } GraphConfig;
 
 typedef struct _MultiloadPlugin {

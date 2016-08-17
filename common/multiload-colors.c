@@ -27,6 +27,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "gtk-compat.h"
 #include "multiload.h"
 #include "multiload-colors.h"
 #include "multiload-config.h"
@@ -35,24 +36,27 @@
 
 
 static void
-gdk_color_to_argb_string(GdkColor* color, guint16 alpha, gchar *out_str)
+gdk_rgba_to_argb_string(GdkRGBA* color, gchar *out_str)
 {
 	// note: out_str must be at least 10 characters long
 	int rc = snprintf(out_str, 10, "#%02X%02X%02X%02X",
-					alpha / 256,
-					color->red / 256,
-					color->green / 256,
-					color->blue / 256);
+					(guint8)(color->alpha * 255),
+					(guint8)(color->red * 255),
+					(guint8)(color->green * 255),
+					(guint8)(color->blue * 255));
 	g_assert(rc == 9);
 }
 
 static gboolean
-argb_string_to_gdk_color(const gchar *gspec, GdkColor *color, guint16 *alpha)
+argb_string_to_gdk_rgba(const gchar *gspec, GdkRGBA *color)
 {
 	gchar buf[8];
+	guint16 alpha;
+	gboolean ret;
+
 	if (strlen(gspec) == 7) {
-		// may be a standard RGB hex string, fallback to gdk_color_parse
-		return gdk_color_parse(gspec, color);
+		// may be a standard RGB hex string, fallback to standard parse
+		return gdk_rgba_parse(color, gspec);
 	} else if (G_UNLIKELY (strlen(gspec) != 9) ) {
 		return FALSE;
 	}
@@ -62,21 +66,20 @@ argb_string_to_gdk_color(const gchar *gspec, GdkColor *color, guint16 *alpha)
 	buf[1] = gspec[2];
 	buf[2] = 0;
 	errno = 0;
-	*alpha = (guint16)strtol(buf, NULL, 16);
-	if (errno) {
-		// error in strtol, set alpha=max
-		*alpha = 0xFFFF;
-	} else {
-		/* alpha is in the form '0x00jk'. Transform it in the form
-		  '0xjkjk', so the conversion of 8 to 16 bits is proportional. */
-		*alpha |= (*alpha << 8);
-	}
+	alpha = (guint16)strtol(buf, NULL, 16);
+	if (errno)
+		alpha = 0xFF; // error in strtol, set alpha=max
 
 	// color part
 	buf[0] = '#';
 	strncpy(buf+1, gspec+3, 6);
 	buf[7] = 0;
-	return gdk_color_parse(buf, color);
+
+	ret = gdk_rgba_parse(color, buf);
+	if (ret)
+		color->alpha = ((gdouble)alpha)/255.0f;
+
+	return ret;
 }
 
 
@@ -95,8 +98,7 @@ multiload_colors_stringify(MultiloadPlugin *ma, guint i, char *list)
 {
 	guint ncolors = multiload_config_get_num_colors(i);
 	guint j;
-	GdkColor *colors = ma->graph_config[i].colors;
-	guint16 *alphas = ma->graph_config[i].alpha;
+	GdkRGBA *colors = ma->graph_config[i].colors;
 	char *listpos = list;
 
 	if ( G_UNLIKELY (!list) )
@@ -104,7 +106,7 @@ multiload_colors_stringify(MultiloadPlugin *ma, guint i, char *list)
 
 	// Create color list
 	for ( j = 0; j < ncolors; j++ ) {
-		gdk_color_to_argb_string(&colors[j], alphas[j], listpos);
+		gdk_rgba_to_argb_string(&colors[j], listpos);
 		if ( j == ncolors-1 )
 			listpos[9] = 0;
 		else
@@ -121,9 +123,8 @@ multiload_colors_default(MultiloadPlugin *ma, guint i)
 {
 	guint j;
 	for ( j = 0; j < multiload_config_get_num_colors(i); j++ ) {
-		argb_string_to_gdk_color(graph_types[i].colors[j].default_value,
-						&ma->graph_config[i].colors[j],
-						&ma->graph_config[i].alpha[j]);
+		argb_string_to_gdk_rgba(graph_types[i].colors[j].default_value,
+						&ma->graph_config[i].colors[j]);
 	}
 }
 
@@ -133,8 +134,7 @@ multiload_colors_unstringify(MultiloadPlugin *ma, guint i, const char *list)
 {
 	guint ncolors = multiload_config_get_num_colors(i);
 	guint j;
-	GdkColor *colors = ma->graph_config[i].colors;
-	guint16 *alphas = ma->graph_config[i].alpha;
+	GdkRGBA *colors = ma->graph_config[i].colors;
 	const char *listpos = list;
 
 	if ( G_UNLIKELY (!listpos) ) {
@@ -160,7 +160,7 @@ multiload_colors_unstringify(MultiloadPlugin *ma, guint i, const char *list)
 		char buf[10];
 		strncpy(buf, listpos, 9);
 		buf[9] = 0;
-		if ( G_UNLIKELY (argb_string_to_gdk_color(buf, &colors[j], &alphas[j]) != TRUE) ) {
+		if ( G_UNLIKELY (argb_string_to_gdk_rgba(buf, &colors[j]) != TRUE) ) {
 			multiload_colors_default(ma, i);
 			return FALSE;
 		}
@@ -169,8 +169,8 @@ multiload_colors_unstringify(MultiloadPlugin *ma, guint i, const char *list)
 	}
 
 	//ignore alpha value of last two colors (background and border)
-	alphas[ncolors-1] = 0xFFFF;
-	alphas[ncolors-2] = 0xFFFF;
+	colors[ncolors-1].alpha = 1;
+	colors[ncolors-2].alpha = 1;
 
 	return TRUE;
 }

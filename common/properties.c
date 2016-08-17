@@ -287,8 +287,7 @@ property_changed_cb(GtkWidget *widget, gpointer id) {
 			g_assert(graph>=0 && graph<GRAPH_MAX);
 			g_assert(i>=0 && i<multiload_config_get_num_colors(graph));
 
-			gtk_color_button_get_color(GTK_COLOR_BUTTON(widget), &ma->graph_config[graph].colors[i]);
-			ma->graph_config[graph].alpha[i] = gtk_color_button_get_alpha(GTK_COLOR_BUTTON(widget));
+			gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER(widget), &ma->graph_config[graph].colors[i]);
 
 			//border color update needs refresh
 			if (i == multiload_colors_get_extra_index(graph, EXTRA_COLOR_BORDER))
@@ -359,17 +358,11 @@ color_selector_new(guint graph, guint index, gboolean use_alpha, gboolean use_la
 	box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, PREF_LABEL_SPACING);
 
 	// color button
-	color_picker = gtk_color_button_new_with_color(
-					&ma->graph_config[graph].colors[index]);
-	gtk_color_button_set_title (GTK_COLOR_BUTTON(color_picker),	dialog_title);
+	color_picker = gtk_color_button_new_with_rgba(&ma->graph_config[graph].colors[index]);
+	gtk_color_chooser_set_use_alpha (GTK_COLOR_CHOOSER(color_picker), use_alpha);
+	gtk_color_button_set_title (GTK_COLOR_BUTTON(color_picker), dialog_title);
 	gtk_box_pack_start (GTK_BOX(box), color_picker, FALSE, FALSE, 0);
 	gtk_widget_set_tooltip_text(color_picker, tooltip);
-
-	if (use_alpha) {
-		gtk_color_button_set_use_alpha (GTK_COLOR_BUTTON(color_picker), TRUE);
-		gtk_color_button_set_alpha (GTK_COLOR_BUTTON(color_picker),
-					ma->graph_config[graph].alpha[index]);
-	}
 
 	if (use_label) {
 		label = gtk_label_new_with_mnemonic(name);

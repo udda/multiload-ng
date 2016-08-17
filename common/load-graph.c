@@ -43,17 +43,16 @@
 static void
 cairo_set_source_rgba_from_config(cairo_t *cr, GraphConfig *config, guint color_index)
 {
-	GdkColor *c = &(config->colors[color_index]);
-	guint a = config->alpha[color_index];
-	cairo_set_source_rgba(cr, c->red/65535.0, c->green/65535.0, c->blue/65535.0, a/65535.0);
+	GdkRGBA *c = &(config->colors[color_index]);
+	cairo_set_source_rgba(cr, c->red, c->green, c->blue, c->alpha);
 }
 
 static void
-cairo_set_vertical_gradient(cairo_t *cr, double height, GdkColor *a, GdkColor *b)
+cairo_set_vertical_gradient(cairo_t *cr, double height, GdkRGBA *a, GdkRGBA *b)
 {
 	cairo_pattern_t *pat = cairo_pattern_create_linear (0.0, 0.0, 0.0, height);
-	cairo_pattern_add_color_stop_rgb (pat, 0, a->red/65535.0, a->green/65535.0, a->blue/65535.0);
-	cairo_pattern_add_color_stop_rgb (pat, 1, b->red/65535.0, b->green/65535.0, b->blue/65535.0);
+	cairo_pattern_add_color_stop_rgb (pat, 0, a->red, a->green, a->blue);
+	cairo_pattern_add_color_stop_rgb (pat, 1, b->red, b->green, b->blue);
 	cairo_set_source(cr, pat);
 }
 
@@ -65,7 +64,7 @@ load_graph_draw (LoadGraph *g)
 	guint c_top, c_bottom;
 	cairo_t *cr;
 	GraphConfig *config = &(g->multiload->graph_config[g->id]);
-	GdkColor *colors = config->colors;
+	GdkRGBA *colors = config->colors;
 
 	const guint W = g->draw_width;
 	const guint H = g->draw_height;
@@ -347,7 +346,9 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 	if (ma->graph_config[id].border_width > 0) {
 		k = multiload_colors_get_extra_index(id, EXTRA_COLOR_BORDER);
 		g->border = gtk_event_box_new();
-		gtk_widget_modify_bg (g->border, GTK_STATE_NORMAL, &(ma->graph_config[id].colors[k]));
+		GdkColor c;
+		gdk_rgba_to_color(&(ma->graph_config[id].colors[k]), &c, NULL);
+		gtk_widget_modify_bg (g->border, GTK_STATE_NORMAL, &c);
 		gtk_container_set_border_width(GTK_CONTAINER(g->box), ma->graph_config[id].border_width);
 
 		gtk_container_add (GTK_CONTAINER (g->border), g->box);

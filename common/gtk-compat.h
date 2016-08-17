@@ -25,21 +25,49 @@
 
 #include <gtk/gtk.h>
 
-// Compatibility functions for GTK2
+
 G_BEGIN_DECLS
 
-
+// Compatibility functions for GTK2
 #if GTK_API == 2
+
+typedef struct {
+	gdouble red;
+	gdouble green;
+	gdouble blue;
+	gdouble alpha;
+} GdkRGBA;
+#define GTK_COLOR_CHOOSER GTK_COLOR_BUTTON
+
+G_GNUC_INTERNAL gboolean
+gdk_rgba_parse (GdkRGBA* color, const gchar* gspec);
+
+G_GNUC_INTERNAL void
+gtk_color_chooser_get_rgba (GtkColorButton *chooser, GdkRGBA *color);
+
+G_GNUC_INTERNAL void
+gtk_color_chooser_set_use_alpha (GtkColorButton *chooser, gboolean use_alpha);
+
+G_GNUC_INTERNAL GtkWidget *
+gtk_color_button_new_with_rgba (const GdkRGBA *rgba);
+
 
 G_GNUC_INTERNAL GtkWidget *
 gtk_box_new (GtkOrientation o, guint spacing);
 
-G_GNUC_INTERNAL GtkWidget*
+G_GNUC_INTERNAL GtkWidget *
 gtk_separator_new (GtkOrientation o);
 
 #else  /* GTK_API == 2 */
 
 #endif /* GTK_API == 2 */
+
+
+void
+gdk_color_to_rgba(const GdkColor *color, guint16 alpha, GdkRGBA *rgba);
+
+void
+gdk_rgba_to_color(const GdkRGBA *rgba, GdkColor *color, guint16 *alpha);
 
 
 G_END_DECLS
