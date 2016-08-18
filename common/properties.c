@@ -504,19 +504,19 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 	t = gtk_button_new_with_label(_("Default colors"));
-	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name(GTK_STOCK_REVERT_TO_SAVED, GTK_ICON_SIZE_SMALL_TOOLBAR));
+	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name("document-revert", GTK_ICON_SIZE_SMALL_TOOLBAR));
 	g_signal_connect(G_OBJECT(t), "clicked", G_CALLBACK(action_performed_cb),
 							GINT_TO_POINTER(ACTION_DEFAULT_COLORS));
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 	t = gtk_button_new_with_label(_("Import color scheme"));
-	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name(GTK_STOCK_OPEN, GTK_ICON_SIZE_SMALL_TOOLBAR));
+	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name("document-open", GTK_ICON_SIZE_SMALL_TOOLBAR));
 	g_signal_connect(G_OBJECT(t), "clicked", G_CALLBACK(action_performed_cb),
 							GINT_TO_POINTER(ACTION_IMPORT_COLORS));
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
 	t = gtk_button_new_with_label(_("Export color scheme"));
-	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name(GTK_STOCK_SAVE_AS, GTK_ICON_SIZE_SMALL_TOOLBAR));
+	gtk_button_set_image(GTK_BUTTON(t), gtk_image_new_from_icon_name("document-save-as", GTK_ICON_SIZE_SMALL_TOOLBAR));
 	g_signal_connect(G_OBJECT(t), "clicked", G_CALLBACK(action_performed_cb),
 							GINT_TO_POINTER(ACTION_EXPORT_COLORS));
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
@@ -547,7 +547,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_size_group_add_widget(sizegroup2, t);
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
-	label = gtk_icon_label_new(GTK_STOCK_INFO, NULL);
+	label = gtk_icon_label_new("dialog-information", NULL);
 	gtk_box_pack_start(GTK_BOX(box), label, TRUE, TRUE, PREF_CONTENT_PADDING);
 	g_object_set_data(G_OBJECT(t), "dynamic_target", label);
 	g_object_set_data(G_OBJECT(t), "dynamic_prop", GINT_TO_POINTER(PROP_SIZE));
@@ -585,7 +585,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_size_group_add_widget(sizegroup2, t);
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
-	label = gtk_icon_label_new(GTK_STOCK_DIALOG_WARNING, _("If padding is set too large, the graph won't show."));
+	label = gtk_icon_label_new("dialog-warning", _("If padding is set too large, the graph won't show."));
 	gtk_box_pack_start(GTK_BOX(box), label, TRUE, TRUE, PREF_CONTENT_PADDING);
 	g_object_set_data(G_OBJECT(t), "dynamic_target", label);
 	g_object_set_data(G_OBJECT(t), "dynamic_prop", GINT_TO_POINTER(PROP_PADDING));
@@ -607,7 +607,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_size_group_add_widget(sizegroup2, t);
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
-	label = gtk_icon_label_new(GTK_STOCK_DIALOG_WARNING, _("Tooltip may not show if update interval is too short."));
+	label = gtk_icon_label_new("dialog-warning", _("Tooltip may not show if update interval is too short."));
 	gtk_box_pack_start(GTK_BOX(box), label, TRUE, TRUE, PREF_CONTENT_PADDING);
 	g_object_set_data(G_OBJECT(t), "dynamic_target", label);
 	g_object_set_data(G_OBJECT(t), "dynamic_prop", GINT_TO_POINTER(PROP_INTERVAL));
@@ -633,7 +633,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_size_group_add_widget(sizegroup2, t);
 	gtk_box_pack_start(GTK_BOX(box), t, FALSE, FALSE, PREF_CONTENT_PADDING);
 
-	label = gtk_icon_label_new(GTK_STOCK_DIALOG_WARNING, _("Selected orientation is not the same of the panel. Graphs may be very small."));
+	label = gtk_icon_label_new("dialog-warning", _("Selected orientation is not the same of the panel. Graphs may be very small."));
 	gtk_box_pack_start(GTK_BOX(box), label, TRUE, TRUE, PREF_CONTENT_PADDING);
 	g_object_set_data(G_OBJECT(t), "dynamic_target", label);
 	g_object_set_data(G_OBJECT(t), "dynamic_prop", GINT_TO_POINTER(PROP_ORIENTATION));

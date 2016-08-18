@@ -194,7 +194,7 @@ GtkWidget* gtk_icon_label_new(const gchar* stock_image, const gchar *text)
 {
 	GtkWidget *hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 4);
 
-	GtkWidget *image = gtk_image_new_from_stock(stock_image, GTK_ICON_SIZE_SMALL_TOOLBAR);
+	GtkWidget *image = gtk_image_new_from_icon_name(stock_image, GTK_ICON_SIZE_SMALL_TOOLBAR);
 	gtk_box_pack_start(GTK_BOX(hbox), image, FALSE, FALSE, 0);
 
 	GtkWidget *label = gtk_label_new(text);
@@ -236,8 +236,8 @@ gchar* gtk_open_file_dialog(GtkWindow *parent, const gchar *title)
 	char *filename;
 	GtkWidget *dialog = gtk_file_chooser_dialog_new (title, parent,
 										GTK_FILE_CHOOSER_ACTION_OPEN,
-										GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-										GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+										_("_Cancel"), GTK_RESPONSE_CANCEL,
+										_("_Open"), GTK_RESPONSE_ACCEPT,
 										NULL);
 
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
@@ -255,8 +255,8 @@ gchar* gtk_save_file_dialog(GtkWindow *parent, const gchar *title, const gchar *
 	char *filename;
 	GtkWidget *dialog = gtk_file_chooser_dialog_new (title, parent,
 										GTK_FILE_CHOOSER_ACTION_SAVE,
-										GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-										GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
+										_("_Cancel"), GTK_RESPONSE_CANCEL,
+										_("_Save"), GTK_RESPONSE_ACCEPT,
 										NULL);
 	gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog), TRUE);
 	gtk_file_chooser_set_create_folders (GTK_FILE_CHOOSER (dialog), TRUE);

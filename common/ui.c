@@ -195,8 +195,8 @@ multiload_ui_configure_dialog_new(MultiloadPlugin *ma, GtkWindow* parent)
 	GtkWidget *dialog = gtk_dialog_new_with_buttons(about_data_progname,
 					parent,
 					GTK_DIALOG_DESTROY_WITH_PARENT,
-					GTK_STOCK_HELP, GTK_RESPONSE_HELP,
-					GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
+					_("_Help"), GTK_RESPONSE_HELP,
+					_("_Close"), GTK_RESPONSE_OK,
 					NULL);
 
 	gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);

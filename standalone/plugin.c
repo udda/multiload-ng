@@ -202,7 +202,7 @@ int main(int argc, char *argv[]) {
 	multiload->panel_data = w;
 
 	GtkWidget *hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 1);
-	GtkWidget *btnConfig = gtk_button_new_from_stock(GTK_STOCK_PREFERENCES);
+	GtkWidget *btnConfig = gtk_button_new_from_icon_name("preferences-system", GTK_ICON_SIZE_LARGE_TOOLBAR);
 	gtk_widget_show (GTK_WIDGET(multiload->container));
 	gtk_widget_show (btnConfig);
 	gtk_widget_show (hbox);
