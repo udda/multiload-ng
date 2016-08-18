@@ -92,6 +92,13 @@ AC_SUBST(LIBGTOP_CFLAGS)
 AC_SUBST(LIBGTOP_LIBS)
 
 
+# Disable Glib deprecation warnings
+AC_ARG_ENABLE([deprecations], AS_HELP_STRING([--disable-deprecations], [Disable deprecation warnings (useful with -Werror)]),
+  [ if test "x$enableval" = "xno"; then
+    AC_DEFINE([GDK_DISABLE_DEPRECATION_WARNINGS], [1], [Disable GDK/GTK deprecation warnings])
+  fi ])
+
+
 # Xfce
 AC_ARG_WITH([xfce4], AS_HELP_STRING([--with-xfce4], [Build plugin for xfce4-panel]),
             [], [with_xfce4=check])
@@ -231,7 +238,11 @@ echo "* ----------------------"
 echo "*  Build Configuration"
 echo "* ----------------------"
 echo "*"
-echo "*  Global CFLAGS: $CFLAGS"
+echo "*  CFLAGS: $CFLAGS"
+if test "x$enable_deprecations" = "xno"; then
+echo "*"
+echo "*  Disabled GDK/GTK deprecation warnings"
+fi
 echo "*"
 echo "*  Building against GTK$GTK_API"
 echo "*"
