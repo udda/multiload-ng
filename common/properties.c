@@ -450,7 +450,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 		gtk_box_pack_start(GTK_BOX(box4), t, FALSE, FALSE, 2);
 
 		label = gtk_label_new(_("Background"));
-		gtk_misc_set_alignment (GTK_MISC (label), 0.5f, 1.0f);
+		g_object_set(G_OBJECT(label), "yalign", 1.0, NULL, NULL);
 		gtk_box_pack_start(GTK_BOX(box4), label, FALSE, FALSE, 0);
 
 		box3 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, PREF_CONTENT_PADDING);
@@ -477,7 +477,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 		gtk_box_pack_start(GTK_BOX(box4), t, FALSE, FALSE, 2);
 
 		label = gtk_label_new(_("Border"));
-		gtk_misc_set_alignment (GTK_MISC (label), 0.5f, 1.0f);
+		g_object_set(G_OBJECT(label), "yalign", 1.0, NULL);
 		gtk_box_pack_start(GTK_BOX(box4), label, FALSE, FALSE, 0);
 
 		box3 = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, PREF_CONTENT_PADDING);
@@ -536,7 +536,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 		label = gtk_label_new_with_mnemonic(_("Wid_th:"));
 	else
 		label = gtk_label_new_with_mnemonic(_("Heigh_t:"));
-	gtk_misc_set_alignment(GTK_MISC(label), 0.0f, 0.5f);
+	g_object_set(G_OBJECT(label), "xalign", 0.0, NULL);
 	gtk_size_group_add_widget(sizegroup, label);
 	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
 
@@ -558,7 +558,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
 	label = gtk_label_new_with_mnemonic(_("S_pacing:"));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
+	g_object_set(G_OBJECT(label), "xalign", 0.0, NULL);
 	gtk_size_group_add_widget(sizegroup, label);
 	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
 
@@ -574,7 +574,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
 	label = gtk_label_new_with_mnemonic(_("Pa_dding:"));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
+	g_object_set(G_OBJECT(label), "xalign", 0.0, NULL);
 	gtk_size_group_add_widget(sizegroup, label);
 	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
 
@@ -596,7 +596,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
 	label = gtk_label_new_with_mnemonic(_("Upd_ate interval:"));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
+	g_object_set(G_OBJECT(label), "xalign", 0.0, NULL);
 	gtk_size_group_add_widget(sizegroup, label);
 	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
 
@@ -618,7 +618,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
 	label = gtk_label_new_with_mnemonic(_("_Orientation:"));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
+	g_object_set(G_OBJECT(label), "xalign", 0.0, NULL);
 	gtk_size_group_add_widget(sizegroup, label);
 	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
 
@@ -644,7 +644,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_box_pack_start(GTK_BOX(container), box, FALSE, FALSE, 0);
 
 	label = gtk_label_new_with_mnemonic(_("On double clic_k:"));
-	gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
+	g_object_set(G_OBJECT(label), "xalign", 0.0, NULL);
 	gtk_size_group_add_widget(sizegroup, label);
 	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, PREF_CONTENT_PADDING);
 
