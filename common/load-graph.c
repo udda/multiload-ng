@@ -233,6 +233,26 @@ load_graph_expose (GtkWidget *widget, GdkEventExpose *event, gpointer data_ptr)
 	return FALSE;
 }
 
+static gint
+load_graph_border_expose (GtkWidget *widget, GdkEventExpose *event, gpointer data_ptr)
+{
+	GdkRGBA *c = (GdkRGBA *) data_ptr;
+	GtkAllocation allocation;
+	cairo_t *cr;
+
+	cr = gdk_cairo_create (event->window);
+	gtk_widget_get_allocation (widget, &allocation);
+
+	cairo_set_source_rgba(cr, c->red, c->green, c->blue, 1.0);
+	cairo_rectangle(cr, 0, 0, allocation.width, allocation.height);
+	cairo_fill (cr);
+
+	cairo_paint (cr);
+	cairo_destroy (cr);
+
+	return TRUE;
+}
+
 static void
 load_graph_destroy (GtkWidget *widget, gpointer data_ptr)
 {
@@ -346,9 +366,7 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 	if (ma->graph_config[id].border_width > 0) {
 		k = multiload_colors_get_extra_index(id, EXTRA_COLOR_BORDER);
 		g->border = gtk_event_box_new();
-		GdkColor c;
-		gdk_rgba_to_color(&(ma->graph_config[id].colors[k]), &c, NULL);
-		gtk_widget_modify_bg (g->border, GTK_STATE_NORMAL, &c);
+		g_signal_connect (G_OBJECT(g->border), "expose_event", G_CALLBACK (load_graph_border_expose), &(ma->graph_config[id].colors[k]));
 		gtk_container_set_border_width(GTK_CONTAINER(g->box), ma->graph_config[id].border_width);
 
 		gtk_container_add (GTK_CONTAINER (g->border), g->box);
