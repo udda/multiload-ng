@@ -87,6 +87,16 @@ gtk_separator_new (GtkOrientation o)
 		return gtk_vseparator_new();
 }
 
+
+GtkWidget *
+gtk_button_new_from_icon_name (const gchar *icon_name, GtkIconSize size)
+{
+	GtkWidget *ret = gtk_button_new();
+	GtkWidget *image = gtk_image_new_from_icon_name(icon_name, size);
+	gtk_button_set_image(GTK_BUTTON(ret), image);
+	return ret;
+}
+
 #else  /* GTK_API == 2 */
 
 #endif /* GTK_API == 2 */
