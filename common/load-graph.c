@@ -218,9 +218,8 @@ load_graph_configure (GtkWidget *widget, GdkEventConfigure *event, LoadGraph *g)
 }
 
 static gint
-load_graph_expose (GtkWidget *widget, GdkEventExpose *event, gpointer data_ptr)
+load_graph_expose (GtkWidget *widget, GdkEventExpose *event, LoadGraph *g)
 {
-	LoadGraph *g = (LoadGraph *) data_ptr;
 	cairo_t *cr;
 
 	cr = gdk_cairo_create (event->window);
@@ -234,9 +233,8 @@ load_graph_expose (GtkWidget *widget, GdkEventExpose *event, gpointer data_ptr)
 }
 
 static gint
-load_graph_border_expose (GtkWidget *widget, GdkEventExpose *event, gpointer data_ptr)
+load_graph_border_expose (GtkWidget *widget, GdkEventExpose *event, GdkRGBA *c)
 {
-	GdkRGBA *c = (GdkRGBA *) data_ptr;
 	GtkAllocation allocation;
 	cairo_t *cr;
 
@@ -254,10 +252,8 @@ load_graph_border_expose (GtkWidget *widget, GdkEventExpose *event, gpointer dat
 }
 
 static void
-load_graph_destroy (GtkWidget *widget, gpointer data_ptr)
+load_graph_destroy (GtkWidget *widget, LoadGraph *g)
 {
-	LoadGraph *g = (LoadGraph *) data_ptr;
-
 	load_graph_stop (g);
 
 	gtk_widget_destroy(widget);
@@ -296,11 +292,8 @@ load_graph_clicked (GtkWidget *widget, GdkEventButton *event, LoadGraph *g)
 }
 
 static gboolean
-load_graph_enter_cb(GtkWidget *widget, GdkEventCrossing *event, gpointer data)
+load_graph_enter_cb(GtkWidget *widget, GdkEventCrossing *event, LoadGraph *graph)
 {
-	LoadGraph *graph;
-	graph = (LoadGraph *)data;
-
 	graph->tooltip_update = TRUE;
 	multiload_tooltip_update(graph);
 
@@ -308,11 +301,8 @@ load_graph_enter_cb(GtkWidget *widget, GdkEventCrossing *event, gpointer data)
 }
 
 static gboolean
-load_graph_leave_cb(GtkWidget *widget, GdkEventCrossing *event, gpointer data)
+load_graph_leave_cb(GtkWidget *widget, GdkEventCrossing *event, LoadGraph *graph)
 {
-	LoadGraph *graph;
-	graph = (LoadGraph *)data;
-
 	graph->tooltip_update = FALSE;
 
 	return TRUE;
