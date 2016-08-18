@@ -226,13 +226,18 @@ AC_OUTPUT
 
 
 echo
-echo "Build Configuration:"
 echo
-echo "* xfce4-panel :    $with_xfce4"
-echo
-echo "* lxpanel     :    $with_lxpanel"
-echo
-echo "* mate-panel  :    $with_mate"
-echo
-echo "* standalone  :    $with_standalone"
+echo "* ----------------------"
+echo "*  Build Configuration"
+echo "* ----------------------"
+echo "*"
+echo "*  Building against GTK$GTK_API"
+echo "*"
+echo "*  Enabled plugins:"
+echo "*   - xfce4-panel : $with_xfce4"
+echo "*   - lxpanel     : $with_lxpanel"
+echo "*   - mate-panel  : $with_mate"
+echo "*   - standalone  : $with_standalone"
+echo "*"
+echo "* ----------------------"
 echo
