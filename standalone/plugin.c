@@ -38,7 +38,7 @@ gchar* standalone_build_config_filename() {
 	return g_build_filename(
 			g_get_home_dir (),
 			".config",
-			"multiload-standalone",
+			"multiload-ng-standalone",
 			NULL);
 }
 
