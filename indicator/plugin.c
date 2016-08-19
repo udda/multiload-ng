@@ -26,30 +26,36 @@
 #include <gtk/gtk.h>
 #include <libappindicator/app-indicator.h>
 
+#include "common/about-data.h"
 
+/*
+README
 
+This is an empty indicator. At the moment it does nothing. The libappindicator
+structure allows only an icon and a label, so in order to draw the plugin we will
+redraw over the indicator icon. As this requires large modifications in the code,
+indicator plugin is postponed.
+*/
 
 int main (int argc, char **argv)
 {
 	AppIndicator *indicator;
 	GtkWidget *menu;
-	GtkWidget *menu_item;
 
 	gtk_init (&argc, &argv);
 
-	indicator = app_indicator_new ("example-simple-client", "utilities-system-monitor", APP_INDICATOR_CATEGORY_APPLICATION_STATUS);
+	indicator = app_indicator_new ("indicator-multiload-ng", about_data_icon, APP_INDICATOR_CATEGORY_HARDWARE);
 
 	menu = gtk_menu_new();
-	menu_item = gtk_menu_item_new_with_label("Test1");
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
-	menu_item = gtk_menu_item_new_with_label("Test2");
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
-	menu_item = gtk_menu_item_new_with_label("Test3");
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
-	menu_item = gtk_menu_item_new_with_label("Test4");
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), menu_item);
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_menu_item_new_with_label("This"));
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_menu_item_new_with_label("is"));
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_menu_item_new_with_label("not"));
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_menu_item_new_with_label("yet"));
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_menu_item_new_with_label("implemented"));
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_menu_item_new_with_label("sorry!"));
+	gtk_widget_show_all(menu);
 
-	app_indicator_set_label(indicator, "TestLabel", "TestGuide");
+	app_indicator_set_label(indicator, "Multiload-ng", "Multiload-ng");
 	app_indicator_set_status (indicator, APP_INDICATOR_STATUS_ACTIVE);
 
 	app_indicator_set_menu (indicator, GTK_MENU (menu));
