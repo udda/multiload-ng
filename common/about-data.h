@@ -26,12 +26,8 @@
 #define about_data_progname _("Multiload-ng")
 #define about_data_progname_N N_("Multiload-ng")
 
-#define about_data_description \
-	_("A system load monitor that graphs processor, memory, and " \
-	"swap space use, plus temperature, network and disk activity.")
-#define about_data_description_N \
-	N_("A system load monitor that graphs processor, memory, and " \
-	"swap space use, plus temperature, network and disk activity.")
+#define about_data_description		 _("Modern graphical system monitor")
+#define about_data_description_N	N_("Modern graphical system monitor")
 
 #define about_data_website "https://udda.github.io/multiload-ng"
 
