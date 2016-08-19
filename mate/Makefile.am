@@ -30,18 +30,17 @@ plugin_in_files = org.mate.multiload-ng.Applet.mate-panel-applet.in
 plugin_DATA     = $(plugin_in_files:.mate-panel-applet.in=.mate-panel-applet)
 
 $(plugin_in_files): $(plugin_in_files).in Makefile
-	$(AM_V_GEN)sed -e "s|\@LOCATION\@|$(mate_multiload_ng_applet_LOCATION)|" $< > $@
+	@$(AM_V_GEN)sed -e "s|\@LOCATION\@|$(mate_multiload_ng_applet_LOCATION)|" $< > $@
 
 org.mate.multiload-ng.Applet.mate-panel-applet: org.mate.multiload-ng.Applet.mate-panel-applet.in
-	$(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
-#	$(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po)
+	@$(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 
 servicedir       = $(datadir)/dbus-1/services
 service_in_files = org.mate.panel.applet.MultiloadNgFactory.service.in
 service_DATA     = $(service_in_files:.service.in=.service)
 
 org.mate.panel.applet.MultiloadNgFactory.service: $(service_in_files)
-	$(AM_V_GEN)sed -e "s|\@LOCATION\@|$(mate_multiload_ng_applet_LOCATION)|" $< > $@
+	@$(AM_V_GEN)sed -e "s|\@LOCATION\@|$(mate_multiload_ng_applet_LOCATION)|" $< > $@
 
 
 @INTLTOOL_XML_NOMERGE_RULE@
