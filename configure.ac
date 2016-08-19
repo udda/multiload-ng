@@ -106,6 +106,19 @@ AC_ARG_ENABLE([experimental], AS_HELP_STRING([--enable-experimental], [Compile a
 	fi]
 )
 
+# Enable debug CFLAGS
+AC_ARG_ENABLE([debug], AS_HELP_STRING([--enable-debug], [Enable CFLAGS for debugging with GDB.]),
+	[if test "x$enableval" = "xyes"; then
+		CFLAGS+=" -ggdb -O0"
+	fi]
+)
+
+# Enable profiling CFLAGS
+AC_ARG_ENABLE([profiling], AS_HELP_STRING([--enable-profiling], [Enable CFLAGS for profiling with gprof.]),
+	[if test "x$enableval" = "xyes"; then
+		CFLAGS+=" -pg"
+	fi]
+)
 
 
 # Per-panel configure
@@ -158,6 +171,12 @@ echo "*  Build Configuration"
 echo "* ----------------------"
 echo "*"
 echo "*  CFLAGS: $CFLAGS"
+if test "x$enable_debug" = "xyes"; then
+echo "*  Enabled debugging CFLAGS"
+fi
+if test "x$enable_profiling" = "xyes"; then
+echo "*  Enabled profiling CFLAGS"
+fi
 if test "x$enable_deprecations" = "xno"; then
 echo "*"
 echo "*  Disabled GDK/GTK deprecation warnings"

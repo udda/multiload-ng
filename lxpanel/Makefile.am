@@ -20,8 +20,6 @@ multiload_ng_la_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(LXPANEL_CFLAGS)
 
-# TESTING CFLAGS: uncomment to enable debugging (gdb) and profiling (gprof)
-#multiload_ng_la_CFLAGS += -pg -ggdb -O0
 
 multiload_ng_la_LDFLAGS = \
        -avoid-version \

@@ -14,8 +14,6 @@ multiload_ng_SOURCES = \
 
 multiload_ng_CFLAGS = $(GTK_CFLAGS)
 
-# TESTING CFLAGS: uncomment to enable debugging (gdb) and profiling (gprof)
-#multiload_ng_CFLAGS += -pg -ggdb -O0
 
 multiload_ng_LDFLAGS = \
        -avoid-version \
