@@ -226,6 +226,7 @@ load_graph_draw_cb (GtkWidget *widget, cairo_t *cr, LoadGraph *g)
 	return FALSE;
 }
 
+#if GTK_API == 2
 static gboolean
 load_graph_expose (GtkWidget *widget, GdkEventExpose *event, LoadGraph *g)
 {
@@ -234,6 +235,7 @@ load_graph_expose (GtkWidget *widget, GdkEventExpose *event, LoadGraph *g)
 	cairo_destroy (cr);
 	return FALSE;
 }
+#endif
 */
 
 static gboolean
@@ -251,6 +253,7 @@ load_graph_border_draw_cb (GtkWidget *widget, cairo_t *cr, GdkRGBA *color)
 	return TRUE;
 }
 
+#if GTK_API == 2
 static gboolean
 load_graph_border_expose (GtkWidget *widget, GdkEventExpose *event, GdkRGBA *color)
 {
@@ -259,6 +262,7 @@ load_graph_border_expose (GtkWidget *widget, GdkEventExpose *event, GdkRGBA *col
 	cairo_destroy (cr);
 	return TRUE;
 }
+#endif
 
 static void
 load_graph_destroy (GtkWidget *widget, LoadGraph *g)
