@@ -17,3 +17,8 @@ AM_CONDITIONAL(HAVE_MATE, test x$with_mate = xyes)
 
 AC_SUBST(MATE_CFLAGS)
 AC_SUBST(MATE_LIBS)
+
+AC_CONFIG_FILES([
+	mate/Makefile
+	mate/org.mate.multiload-ng.Applet.mate-panel-applet.in.in
+])

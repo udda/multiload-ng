@@ -146,14 +146,7 @@ AC_CONFIG_FILES([
 	Makefile
 	generate-about-data.sh
 	common/Makefile
-	lxpanel/Makefile
-	mate/Makefile
-	mate/org.mate.multiload-ng.Applet.mate-panel-applet.in.in
 	po/Makefile.in
-	standalone/Makefile
-	standalone/multiload-ng.desktop.in
-	xfce4/Makefile
-	xfce4/multiload-ng.desktop.in
 ])
 AC_OUTPUT
 

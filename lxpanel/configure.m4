@@ -16,3 +16,7 @@ AM_CONDITIONAL(HAVE_LXPANEL, test x$with_lxpanel = xyes)
 
 AC_SUBST(LXPANEL_CFLAGS)
 AC_SUBST(LXPANEL_LIBS)
+
+AC_CONFIG_FILES([
+	lxpanel/Makefile
+])
