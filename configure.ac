@@ -44,7 +44,7 @@ AC_CHECK_FUNCS([memset rint strchr strncasecmp strtol])
 # I18n
 rm -f $srcdir/po/LINGUAS
 for po_file in `ls $srcdir/po/*.po | sort`; do
-    echo "$po_file" | sed "s|.*/po/\(.*\)\.po|\1|g" >> $srcdir/po/LINGUAS
+	echo "$po_file" | sed "s|.*/po/\(.*\)\.po|\1|g" >> $srcdir/po/LINGUAS
 done
 # Set up gettext
 GETTEXT_PACKAGE=multiload-ng
@@ -55,24 +55,24 @@ AM_GLIB_GNU_GETTEXT
 
 # Select GTK version
 AC_MSG_CHECKING([which gtk+ version to compile against])
-AC_ARG_WITH([gtk],
-  [AS_HELP_STRING([--with-gtk=2.0|3.0],[which gtk+ version to compile against (default: 2.0)])],
-  [case "$with_gtk" in
-     2.0|3.0) ;;
-     *) AC_MSG_ERROR([invalid gtk version specified]) ;;
-   esac],
-  [with_gtk=2.0])
+AC_ARG_WITH([gtk], [AS_HELP_STRING([--with-gtk=2.0|3.0], [which gtk+ version to compile against (default: 2.0)])],
+	[case "$with_gtk" in
+		2.0|3.0) ;;
+		*) AC_MSG_ERROR([invalid gtk version specified]) ;;
+	esac],
+	[with_gtk=2.0]
+)
 AC_MSG_RESULT([$with_gtk])
 
 case "$with_gtk" in
-  2.0)
-    GTK_API=2
-    GTK_REQUIRED=2.18.0
-    ;;
-  3.0)
-    GTK_API=3
-    GTK_REQUIRED=3.0.0
-    ;;
+	2.0)
+		GTK_API=2
+		GTK_REQUIRED=2.18.0
+		;;
+	3.0)
+		GTK_API=3
+		GTK_REQUIRED=3.0.0
+		;;
 esac
 AC_SUBST(GTK_API_VERSION)
 AC_DEFINE_UNQUOTED(GTK_API, $GTK_API, [GTK API version to compile against.])
@@ -94,115 +94,35 @@ AC_SUBST(LIBGTOP_LIBS)
 
 # Disable Glib deprecation warnings
 AC_ARG_ENABLE([deprecations], AS_HELP_STRING([--disable-deprecations], [Disable GDK/GTK deprecation warnings (useful when compiling with -Werror)]),
-  [ if test "x$enableval" = "xno"; then
-    AC_DEFINE([GDK_DISABLE_DEPRECATION_WARNINGS], [1], [Disable GDK/GTK deprecation warnings])
-  fi ])
+	[if test "x$enableval" = "xno"; then
+		AC_DEFINE([GDK_DISABLE_DEPRECATION_WARNINGS], [1], [Disable GDK/GTK deprecation warnings])
+	fi]
+)
 
 # Experimental code blocks
 AC_ARG_ENABLE([experimental], AS_HELP_STRING([--enable-experimental], [Compile also experimental code blocks. Warning: this is often unstable. Enable only if you are developing new features enclosed between #ifdef MULTILOAD_EXPERIMENTAL_ENABLE.]),
-  [ if test "x$enableval" = "xyes"; then
-    AC_DEFINE([MULTILOAD_EXPERIMENTAL_ENABLE], [1], [Enable testing code (unstable)])
-  fi ])
+	[if test "x$enableval" = "xyes"; then
+		AC_DEFINE([MULTILOAD_EXPERIMENTAL_ENABLE], [1], [Enable testing code (unstable)])
+	fi]
+)
 
 
-# Xfce
-AC_ARG_WITH([xfce4], AS_HELP_STRING([--with-xfce4], [Build plugin for xfce4-panel]),
-            [], [with_xfce4=check])
-AS_IF([test "x$with_xfce4" != "xno"], [
-    pkg_modules="libxfce4util-1.0 >= 4.6.0
-                 libxfce4panel-1.0 >= 4.6.0"
-    PKG_CHECK_MODULES(XFCE4, [$pkg_modules], [
-        AC_DEFINE([HAVE_XFCE4], [1], [Support for xfce4-panel])
-        with_xfce4=yes
-        # Check if we have libxfce4ui or libxfcegui4
-        PKG_CHECK_MODULES([XFCE4UI], [libxfce4ui-1 >= 4.8.0],
-            [
-                AC_DEFINE([HAVE_XFCE4UI], [1], [Have libxfce4ui])
-                xfce_is_4_6=no
-            ],[
-                PKG_CHECK_MODULES([XFCEGUI4], [libxfcegui4-1.0 >= 4.6.0],
-                    [AC_DEFINE([HAVE_XFCEGUI4], [1], [Have libxfcegui4])])
-                xfce_is_4_6=yes
-            ])
-    ],[
-        if test "x$with_xfce4" != xcheck; then
-          AC_MSG_FAILURE(
-           [--with-xfce4 was given, but test failed])
-        fi
-        with_xfce4=no
-    ])
-])
-AM_CONDITIONAL([HAVE_XFCE4], [test x$with_xfce4 = xyes])
-AM_CONDITIONAL([XFCE_IS_4_6], [test x$xfce_is_4_6 = xyes])
-AC_SUBST(XFCE4_CFLAGS)
-AC_SUBST(XFCE4_LIBS)
-AC_SUBST(XFCE4UI_CFLAGS)
-AC_SUBST(XFCE4UI_LIBS)
-AC_SUBST(XFCEGUI4_CFLAGS)
-AC_SUBST(XFCEGUI4_LIBS)
 
-
-# lxpanel
-AC_ARG_WITH([lxpanel], AS_HELP_STRING([--with-lxpanel], [Build plugin for lxpanel]),
-            [], [with_lxpanel=check])
-AS_IF([test "x$with_lxpanel" != "xno"], [
-    pkg_modules="lxpanel >= 0.7.0
-                 libfm >= 1.2.0"
-    # libmenu-cache is implicitly required; we will fail if it's not present.
-    PKG_CHECK_MODULES(LXPANEL, [$pkg_modules],
-                      [
-                        AC_DEFINE([HAVE_LXPANEL], [1], [Support for lxpanel])
-                        with_lxpanel=yes
-                      ],[
-                        if test "x$with_lxpanel" != xcheck; then
-                          AC_MSG_FAILURE(
-                           [--with-lxpanel was given, but test failed])
-                        fi
-                        with_lxpanel=no
-                      ])
-])
-AM_CONDITIONAL(HAVE_LXPANEL, test x$with_lxpanel = xyes)
-AC_SUBST(LXPANEL_CFLAGS)
-AC_SUBST(LXPANEL_LIBS)
-
-
-# mate
-AC_ARG_WITH([mate], AS_HELP_STRING([--with-mate], [Build plugin for mate-panel]),
-            [], [with_mate=check])
-AS_IF([test "x$with_mate" != "xno"], [
-    GLIB_GSETTINGS
-    pkg_modules="libmatepanelapplet-4.0 >= 1.7.0"
-    PKG_CHECK_MODULES(MATE, [$pkg_modules],
-                      [
-                        AC_DEFINE([HAVE_MATE], [1], [Support for mate-panel])
-                        with_mate=yes
-                      ],[
-                        if test "x$with_mate" != xcheck; then
-                          AC_MSG_FAILURE(
-                           [--with-mate was given, but test failed])
-                        fi
-                        with_mate=no
-                      ])
-])
-AM_CONDITIONAL(HAVE_MATE, test x$with_mate = xyes)
-AC_SUBST(MATE_CFLAGS)
-AC_SUBST(MATE_LIBS)
-
-
-# standalone
-AC_ARG_WITH([standalone], AS_HELP_STRING([--with-standalone], [Build standalone application]),
-            [], [with_standalone=yes])
-AM_CONDITIONAL(HAVE_STANDALONE, test x$with_standalone != xno)
+# Per-panel configure
+m4_include([standalone/configure.m4])
+m4_include([lxpanel/configure.m4])
+m4_include([mate/configure.m4])
+m4_include([xfce4/configure.m4])
 
 
 # Checks if at least one build is available
 if \
-    test x$with_xfce4 != xyes && \
-    test x$with_lxpanel != xyes && \
-    test x$with_mate != xyes && \
-    test x$with_standalone != xyes
-  then
-    AC_MSG_FAILURE([No supported panels are installed and available.])
+	test x$with_standalone != xyes && \
+	test x$with_lxpanel != xyes && \
+	test x$with_mate != xyes && \
+	test x$with_xfce4 != xyes
+then
+	AC_MSG_FAILURE([No supported panels are installed and available.])
 fi
 
 
@@ -211,10 +131,10 @@ fi
 # Of course it's worth noting that the patch in that message was to replace
 # this nasty hack with an awk version that runs from the Makefile...
 if test "${prefix}" = "NONE"; then
-    prefix=/usr/local
+	prefix=/usr/local
 fi
 if test "${exec_prefix}" = "NONE"; then
-    exec_prefix=$prefix
+	exec_prefix=$prefix
 fi
 eval LIBDIR="$libdir"
 AC_SUBST([LIBDIR])
@@ -223,17 +143,17 @@ AC_SUBST([LIBDIR])
 # Output files
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
-    Makefile
-    generate-about-data.sh
-    common/Makefile
-    lxpanel/Makefile
-    mate/Makefile
-    mate/org.mate.multiload-ng.Applet.mate-panel-applet.in.in
-    po/Makefile.in
-    standalone/Makefile
-    standalone/multiload-ng.desktop.in
-    xfce4/Makefile
-    xfce4/multiload-ng.desktop.in
+	Makefile
+	generate-about-data.sh
+	common/Makefile
+	lxpanel/Makefile
+	mate/Makefile
+	mate/org.mate.multiload-ng.Applet.mate-panel-applet.in.in
+	po/Makefile.in
+	standalone/Makefile
+	standalone/multiload-ng.desktop.in
+	xfce4/Makefile
+	xfce4/multiload-ng.desktop.in
 ])
 AC_OUTPUT
 
@@ -257,10 +177,10 @@ echo "*"
 echo "*  Building against GTK$GTK_API"
 echo "*"
 echo "*  Enabled plugins:"
-echo "*   - xfce4-panel : $with_xfce4"
+echo "*   - standalone  : $with_standalone"
 echo "*   - lxpanel     : $with_lxpanel"
 echo "*   - mate-panel  : $with_mate"
-echo "*   - standalone  : $with_standalone"
+echo "*   - xfce4-panel : $with_xfce4"
 echo "*"
 echo "* ----------------------"
 echo
