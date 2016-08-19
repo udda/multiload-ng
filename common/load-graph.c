@@ -216,38 +216,47 @@ load_graph_configure (GtkWidget *widget, GdkEventConfigure *event, LoadGraph *g)
 
 	return TRUE;
 }
-
-static gint
-load_graph_expose (GtkWidget *widget, GdkEventExpose *event, LoadGraph *g)
+/*
+static gboolean
+load_graph_draw_cb (GtkWidget *widget, cairo_t *cr, LoadGraph *g)
 {
-	cairo_t *cr;
-
-	cr = gdk_cairo_create (event->window);
-
 	cairo_set_source_surface (cr, g->surface, 0, 0);
 	cairo_paint (cr);
-
-	cairo_destroy (cr);
 
 	return FALSE;
 }
 
-static gint
-load_graph_border_expose (GtkWidget *widget, GdkEventExpose *event, GdkRGBA *c)
+static gboolean
+load_graph_expose (GtkWidget *widget, GdkEventExpose *event, LoadGraph *g)
+{
+	cairo_t *cr = gdk_cairo_create (event->window);
+	load_graph_draw_cb(widget, cr, g);
+	cairo_destroy (cr);
+	return FALSE;
+}
+*/
+
+static gboolean
+load_graph_border_draw_cb (GtkWidget *widget, cairo_t *cr, GdkRGBA *color)
 {
 	GtkAllocation allocation;
-	cairo_t *cr;
-
-	cr = gdk_cairo_create (event->window);
 	gtk_widget_get_allocation (widget, &allocation);
 
-	cairo_set_source_rgba(cr, c->red, c->green, c->blue, 1.0);
+	cairo_set_source_rgba(cr, color->red, color->green, color->blue, 1.0);
 	cairo_rectangle(cr, 0, 0, allocation.width, allocation.height);
 	cairo_fill (cr);
 
 	cairo_paint (cr);
-	cairo_destroy (cr);
 
+	return TRUE;
+}
+
+static gboolean
+load_graph_border_expose (GtkWidget *widget, GdkEventExpose *event, GdkRGBA *color)
+{
+	cairo_t *cr = gdk_cairo_create (event->window);
+	load_graph_border_draw_cb(widget, cr, color);
+	cairo_destroy (cr);
 	return TRUE;
 }
 
@@ -356,7 +365,11 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 	if (ma->graph_config[id].border_width > 0) {
 		k = multiload_colors_get_extra_index(id, EXTRA_COLOR_BORDER);
 		g->border = gtk_event_box_new();
-		g_signal_connect (G_OBJECT(g->border), "expose_event", G_CALLBACK (load_graph_border_expose), &(ma->graph_config[id].colors[k]));
+		#if GTK_API == 2
+			g_signal_connect (G_OBJECT(g->border), "expose_event", G_CALLBACK (load_graph_border_expose), &(ma->graph_config[id].colors[k]));
+		#elif GTK_API == 3
+			g_signal_connect (G_OBJECT(g->border), "draw", G_CALLBACK (load_graph_border_draw_cb), &(ma->graph_config[id].colors[k]));
+		#endif
 		gtk_container_set_border_width(GTK_CONTAINER(g->box), ma->graph_config[id].border_width);
 
 		gtk_container_add (GTK_CONTAINER (g->border), g->box);
@@ -377,7 +390,12 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 						GDK_LEAVE_NOTIFY_MASK |
 						GDK_BUTTON_PRESS_MASK);
 
-	g_signal_connect (G_OBJECT(g->disp), "expose_event", G_CALLBACK (load_graph_expose), g);
+/*	//TODO: is this really needed? Works perfectly without (as drawing is done through timers)
+	#if GTK_API == 2
+		g_signal_connect (G_OBJECT(g->disp), "expose_event", G_CALLBACK (load_graph_expose), g);
+	#elif GTK_API == 3
+		g_signal_connect (G_OBJECT(g->disp), "draw", G_CALLBACK (load_graph_draw_cb), g);
+	#endif */
 	g_signal_connect (G_OBJECT(g->disp), "configure_event", G_CALLBACK (load_graph_configure), g);
 	g_signal_connect (G_OBJECT(g->disp), "destroy", G_CALLBACK (load_graph_destroy), g);
 	g_signal_connect (G_OBJECT(g->disp), "button-press-event", G_CALLBACK (load_graph_clicked), g);
