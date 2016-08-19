@@ -21,11 +21,9 @@ msgid "Multiload"
 msgstr "Multiload"
 
 msgid ""
-"A system load monitor that graphs processor, memory, and swap space use, "
-"plus temperature, network and disk activity."
+"Modern graphical system monitor"
 msgstr ""
-"Un monitor di sistema che disegna grafici dell'uso di processore, memoria e "
-"swap, oltre a temperatura e attività di rete e di disco."
+"Monitor di sistema moderno"
 
 msgid "Copyright © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, and others"
 msgstr "Copyright © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, e altri"

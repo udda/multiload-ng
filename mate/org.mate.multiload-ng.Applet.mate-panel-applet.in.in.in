@@ -6,5 +6,5 @@ _Description=Factory for Multiload-ng
 
 [MultiloadNgApplet]
 _Name=Multiload-ng
-_Description=A system load monitor that graphs processor, memory, and swap space use, plus temperature, network and disk activity.
+_Description=Modern graphical system monitor
 Icon=@APPICON@
