@@ -38,6 +38,7 @@ po/.intltool-merge-cache
 po/POTFILES
 po/multiload-ng.pot
 po/LINGUAS
+po/template.po
 stamp-*
 *-stamp
 old
