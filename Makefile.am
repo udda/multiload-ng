@@ -23,6 +23,9 @@ SUBDIRS =	\
 distclean-local:
 	rm -rf *.cache *~
 
+git-clean:
+	git clean -f -X -d
+
 rpm: dist
 	rpmbuild -ta $(PACKAGE)-$(VERSION).tar.gz
 	@rm -f $(PACKAGE)-$(VERSION).tar.gz
