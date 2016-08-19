@@ -23,8 +23,7 @@
 #define __ABOUT_DATA_H__
 
 
-#define about_data_progname _("Multiload-ng")
-#define about_data_progname_N N_("Multiload-ng")
+#define about_data_progname "Multiload-ng"
 
 #define about_data_description		 _("Modern graphical system monitor")
 #define about_data_description_N	N_("Modern graphical system monitor")

@@ -150,7 +150,7 @@ FM_DEFINE_MODULE(lxpanel_gtk, multiload-ng)
 
 /* Plugin descriptor. */
 LXPanelPluginInit fm_module_init_lxpanel_gtk = {
-	.name				= about_data_progname_N,
+	.name				= about_data_progname,
 	.description		= about_data_description_N,
 
 	.new_instance		= lxpanel_constructor,
