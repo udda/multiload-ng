@@ -28,8 +28,8 @@ multiload_ng_la_LDFLAGS = \
        $(PLATFORM_LDFLAGS)
 
 multiload_ng_la_LIBADD = \
+	../common/multiload-ng-core.la \
 	$(GTK_LIBS) \
-	$(LXPANEL_LIBS) \
-	../common/multiload-ng-core.la
+	$(LXPANEL_LIBS)
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

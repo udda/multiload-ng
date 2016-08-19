@@ -21,9 +21,8 @@ multiload_ng_LDFLAGS = \
        $(PLATFORM_LDFLAGS)
 
 multiload_ng_LDADD = \
-	$(GTK_LIBS) \
-	-lm \
-	../common/multiload-ng-core.la
+	../common/multiload-ng-core.la \
+	$(GTK_LIBS)
 
 
 #

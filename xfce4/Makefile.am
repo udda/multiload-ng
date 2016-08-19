@@ -29,9 +29,9 @@ libmultiload_ng_la_LDFLAGS = \
        $(PLATFORM_LDFLAGS)
 
 libmultiload_ng_la_LIBADD = \
+	../common/multiload-ng-core.la \
 	$(GTK_LIBS) \
-	$(XFCE4_LIBS) $(XFCE4UI_LIBS) $(XFCEGUI4_LIBS) \
-	../common/multiload-ng-core.la
+	$(XFCE4_LIBS) $(XFCE4UI_LIBS) $(XFCEGUI4_LIBS)
 
 
 #

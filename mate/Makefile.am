@@ -19,10 +19,9 @@ mate_multiload_ng_applet_CFLAGS = \
 
 
 mate_multiload_ng_applet_LDADD = \
+	../common/multiload-ng-core.la \
 	$(GTK_LIBS) \
-	$(MATE_LIBS) \
-	-lm \
-	../common/multiload-ng-core.la
+	$(MATE_LIBS)
 
 
 plugindir = $(datadir)/mate-panel/applets

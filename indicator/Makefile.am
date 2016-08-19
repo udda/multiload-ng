@@ -20,10 +20,9 @@ indicator_multiload_ng_LDFLAGS = \
        $(PLATFORM_LDFLAGS)
 
 indicator_multiload_ng_LDADD = \
+	../common/multiload-ng-core.la \
 	$(GTK_LIBS) \
 	$(APPINDICATOR_LIBS)
-	-lm \
-	../common/multiload-ng-core.la
 
 
 #
