@@ -8,7 +8,7 @@ common/util.c
 common/ui.c
 lxpanel/plugin.c
 mate/plugin.c
-standalone/multiload-ng.desktop.in
+standalone/multiload-ng.desktop.in.in
 standalone/plugin.c
-xfce4/multiload-ng.desktop.in
+xfce4/multiload-ng.desktop.in.in
 xfce4/plugin.c
