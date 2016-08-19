@@ -147,7 +147,8 @@ mate_size_cb (MatePanelApplet *applet, guint size, MultiloadPlugin *ma)
 }
 
 
-static void mate_setup_menu(MatePanelApplet *applet, gpointer data) {
+static void
+mate_setup_menu(MatePanelApplet *applet, gpointer data) {
 	const gchar* xml =
 		"<menuitem action=\"MultiloadNgSysmon\" />"
 		"<menuitem action=\"MultiloadNgProperties\" />"
