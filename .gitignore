@@ -22,6 +22,7 @@ libtool
 generate-about-data.sh
 gmon.out
 common/about-data.c
+indicator/indicator-multiload-ng
 mate/mate-multiload-ng-applet
 mate/org.mate.*.mate-panel-applet
 mate/org.mate.*.mate-panel-applet.in
