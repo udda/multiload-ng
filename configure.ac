@@ -123,6 +123,7 @@ AC_ARG_ENABLE([profiling], AS_HELP_STRING([--enable-profiling], [Enable CFLAGS f
 
 # Per-panel configure
 m4_include([standalone/configure.m4])
+m4_include([indicator/configure.m4])
 m4_include([lxpanel/configure.m4])
 m4_include([mate/configure.m4])
 m4_include([xfce4/configure.m4])
@@ -131,6 +132,7 @@ m4_include([xfce4/configure.m4])
 # Checks if at least one build is available
 if \
 	test x$with_standalone != xyes && \
+	test x$with_indicator != xyes && \
 	test x$with_lxpanel != xyes && \
 	test x$with_mate != xyes && \
 	test x$with_xfce4 != xyes
@@ -190,6 +192,7 @@ echo "*  Building against GTK$GTK_API"
 echo "*"
 echo "*  Enabled plugins:"
 echo "*   - standalone  : $with_standalone"
+echo "*   - indicator   : $with_indicator"
 echo "*   - lxpanel     : $with_lxpanel"
 echo "*   - mate-panel  : $with_mate"
 echo "*   - xfce4-panel : $with_xfce4"

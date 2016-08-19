@@ -1,11 +1,14 @@
-if HAVE_XFCE4
-XFCE4_DIRS = xfce4
+if HAVE_APPINDICATOR
+APPINDICATOR_DIRS = indicator
 endif
 if HAVE_LXPANEL
 LXPANEL_DIRS = lxpanel
 endif
 if HAVE_MATE
 MATE_DIRS = mate
+endif
+if HAVE_XFCE4
+XFCE4_DIRS = xfce4
 endif
 if HAVE_STANDALONE
 STANDALONE_DIRS = standalone
@@ -14,9 +17,10 @@ endif
 
 SUBDIRS =	\
 	common \
-	$(XFCE4_DIRS) \
+	$(APPINDICATOR_DIRS) \
 	$(LXPANEL_DIRS) \
 	$(MATE_DIRS) \
+	$(XFCE4_DIRS) \
 	$(STANDALONE_DIRS) \
 	po
 
