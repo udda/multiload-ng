@@ -12,7 +12,9 @@ bin_PROGRAMS = multiload-ng
 multiload_ng_SOURCES = \
 	plugin.c
 
-multiload_ng_CFLAGS = $(GTK_CFLAGS)
+multiload_ng_CFLAGS = \
+	$(GTK_CFLAGS) \
+	-export-dynamic
 
 
 multiload_ng_LDFLAGS = \

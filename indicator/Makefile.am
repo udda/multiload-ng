@@ -11,7 +11,10 @@ bin_PROGRAMS = indicator-multiload-ng
 
 indicator_multiload_ng_SOURCES = plugin.c
 
-indicator_multiload_ng_CFLAGS = $(GTK_CFLAGS) $(APPINDICATOR_CFLAGS)
+indicator_multiload_ng_CFLAGS = \
+	$(GTK_CFLAGS) \
+	$(APPINDICATOR_CFLAGS) \
+	-export-dynamic
 
 
 indicator_multiload_ng_LDFLAGS = \
