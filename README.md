@@ -7,8 +7,9 @@ It supports the following panels:
 - XFCE (xfce4-panel)
 - LXDE (lxpanel)
 - MATE (mate-panel)
+- Standalone (has its own window, not embedded in any panel)
 
-In addition it can be built as a standalone window, that is, not embedded in any panel.
+Multiload-ng can be built with GTK2 and GTK3, so can be embedded within GTK2/GTK3 builds of all the panels above.
 
 
 
@@ -87,17 +88,8 @@ gtk+                        | >= 2.18.0
 cairo                       | >= 1.0
 libgtop                     | >= 2.11.92
 
-#### Requirements for XFCE panel
-In addition to common requirements (see above)
-these packages are required to build XFCE panel plugin:
-
-Package                     | Min version
-:-------------------------- | -------------:
-libxfce4panel               | >= 4.6.0
-libxfce4util                | >= 4.6.0
-libxfce4ui-1 OR libxfcegui4 | >= 4.8.0
-
-Note that XFCE 4.6 or greater is required.
+#### Requirements for standalone window
+Standalone target has no additional requirements.
 
 #### Requirements for LXDE panel
 In addition to common requirements (see above)
@@ -124,6 +116,18 @@ libmatepanelapplet-4        | >= 1.7.0
 
 Note that MATE 1.7 or greater is required.
 
+#### Requirements for XFCE panel
+In addition to common requirements (see above)
+these packages are required to build XFCE panel plugin:
+
+Package                     | Min version
+:-------------------------- | -------------:
+libxfce4panel               | >= 4.6.0
+libxfce4util                | >= 4.6.0
+libxfce4ui-1 OR libxfcegui4 | >= 4.8.0
+
+Note that XFCE 4.6 or greater is required.
+
 #### Requirements for temperature graph
 This is not a build-time requirement, rather a run-time one. The plugin search
 sysfs nodes corresponding to thermal zones, chooses the hottest one and draws it
@@ -140,7 +144,9 @@ sets it automatically, so it should be just fine.
 Execute the following command line (you must have git installed):  
 `git clone https://github.com/udda/multiload-ng`
 
-If you don't have git, download the source ZIP [here](https://github.com/udda/multiload-ng/archive/master.zip).
+If you don't have git, download the lastest source ZIP [here](https://github.com/udda/multiload-ng/archive/master.zip).
+
+Or, if you don't want any surprise, download a stable release [here](https://github.com/udda/multiload-ng/releases).
 
 #### Configure
 Move to the directory that contains source code just cloned and run:  
@@ -154,11 +160,25 @@ Lubuntu users (and possibly others) have different libraries location. They may 
 `./configure --libdir=/usr/lib/x86_64-linux-gnu`  
 If plugin does not show up in the list of panel plugins, you could try to repeat build process with this configure setting.
 
-Configure script automatically detects installed panels (and related development packages) and enables panel plugins accordingly.  
-You can force enable/disable for some panels (and standalone). To learn how, along with other available options, type:  
+#### Advanced configure
+If you are ok with default settings, you can skip this paragraph and head to **Build** section. Otherwise, continue reading.
+
+Configure script automatically detects installed panels (and related development packages) and enables panel plugins accordingly. You can force enable/disable them using `--with-PLUGIN`, `--without-PLUGIN` or `--with-PLUGIN=yes|no` (replace `PLUGIN` accordingly)
+
+Multiload-ng's ./configure has some extra options:  
+
+Option                   | Description                          | Note
+------------------------ | ------------------------------------ | ---------
+`--with-gtk=2.0|3.0`     | GTK+ version to compile against      | Remember to set same GTK+ version of the target panel! Otherwise you could get linking or runtime errors.
+`--disable-deprecations` | Disable GDK/GTK deprecation warnings | Useful when build system enforces *-Werror*. Some deprecated symbols does not have adequate replacement yet.
+`--enable-experimental`  | Compile in experimental code         | May be unstable/malfunctioning. Only for testing/developing purposes.
+`--enable-debug`         | Allows debugging with GDB            | This enables required CFLAGS.
+`--enable-profiling`     | Allows profiling with gprof          | This enables required CFLAGS
+
+To get a list of all available options, type:  
 `./configure --help`
 
-Then run `./configure` with selected options.
+When you are satisfied with your flags, run `./configure` with selected options.
 
 #### Build
 This is simple. Move to the directory that contains source code and execute:  
@@ -225,3 +245,13 @@ If not, you can then add your suggestion in the [Wishlist wiki page](../../wiki/
 #### Q: Will you continue the development of Multiload-ng?
 A: Of course! To get an idea of future directions, take a look at the [Wishlist](../../wiki/Wishlist).
 
+#### Q: Why don't you port to panel *\[insertyourpanelhere\]*?
+A: Because of a number of reasons:
+
+1. I don't have the time -> Will be done when I find some time
+2. I don't have required knowledge -> Will be done when I learn it
+3. I didn't know that *\[insertyourpanelhere\]* existed/supported plugins -> Now I know, I'll investigate and eventually you will have your plugin
+4. Requires too much work -> If it's worth it, see #1
+5. Requires plugins to be written in languages other than C -> Sorry, this would break ALL existing plugins. Unless special cases (like supersets of C or simple wrappers), it's very likely it can't be done.
+
+The best way to get a new port is to suggest it (or code it yourself, of course). Feel free to file an issue about your request, and it will be considered carefully.
