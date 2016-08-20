@@ -1,6 +1,6 @@
 # Initialization
 AC_PREREQ(2.60)
-AC_INIT([multiload-ng], [1.0.1], [mr.udda@gmail.com])
+AC_INIT([multiload-ng], [1.1.0], [mr.udda@gmail.com])
 AC_SUBST(APPICON, utilities-system-monitor)
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([1.11 -Wall -Werror no-dist-gzip dist-xz silent-rules foreign])
