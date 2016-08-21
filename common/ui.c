@@ -220,6 +220,9 @@ multiload_ui_show_about (GtkWindow* parent)
 		"website",				about_data_website,
 		"copyright",			about_data_copyright,
 		"license",				about_data_license,
+	#if GTK_API == 3
+		"license-type",			GTK_LICENSE_GPL_2_0,
+	#endif
 		"authors",				about_data_authors,
 		"translator-credits",	_("translator-credits"),
 		NULL);
