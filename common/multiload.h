@@ -55,7 +55,7 @@ typedef struct _GraphConfig {
 #ifdef MULTILOAD_EXPERIMENTAL_ENABLE
 	gint interval;
 	gint size;
-	gboolean tooltip_details;
+	gint tooltip_style;
 	gint dblclick_policy;
 	gchar dblclick_cmdline[1024];
 #endif
@@ -74,7 +74,7 @@ typedef struct _MultiloadPlugin {
 #ifndef MULTILOAD_EXPERIMENTAL_ENABLE
 	gint interval;
 	gint size;
-	gboolean tooltip_details;
+	gint tooltip_style;
 	gint dblclick_policy;
 	gchar dblclick_cmdline[200];
 #endif

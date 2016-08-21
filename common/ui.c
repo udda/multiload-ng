@@ -61,7 +61,7 @@ multiload_ui_read (MultiloadPlugin *ma)
 #ifndef MULTILOAD_EXPERIMENTAL_ENABLE
 		multiload_ps_settings_get_int		(settings, "interval",			&ma->interval);
 		multiload_ps_settings_get_int		(settings, "size",				&ma->size);
-		multiload_ps_settings_get_boolean	(settings, "tooltip-details",	&ma->tooltip_details);
+		multiload_ps_settings_get_int		(settings, "tooltip-style",		&ma->tooltip_style);
 		multiload_ps_settings_get_int		(settings, "dblclick-policy",	&ma->dblclick_policy);
 		multiload_ps_settings_get_string	(settings, "dblclick-cmdline",	ma->dblclick_cmdline, sizeof(ma->dblclick_cmdline)/sizeof(gchar));
 #endif
@@ -94,7 +94,7 @@ multiload_ui_read (MultiloadPlugin *ma)
 
 			/* Tooltip style */
 			key = g_strdup_printf("graph-%s-tooltip-style", graph_types[i].name);
-			multiload_ps_settings_get_boolean (settings, key, &ma->graph_config[i].tooltip_details);
+			multiload_ps_settings_get_int (settings, key, &ma->graph_config[i].tooltip_style);
 			g_free (key);
 
 			/* Double click policy */
@@ -138,7 +138,7 @@ multiload_ui_save (MultiloadPlugin *ma)
 #ifndef MULTILOAD_EXPERIMENTAL_ENABLE
 		multiload_ps_settings_set_int		(settings, "interval",			ma->interval);
 		multiload_ps_settings_set_int		(settings, "size",				ma->size);
-		multiload_ps_settings_set_boolean	(settings, "tooltip-details",	ma->tooltip_details);
+		multiload_ps_settings_set_int		(settings, "tooltip-style",		ma->tooltip_style);
 		multiload_ps_settings_set_int		(settings, "dblclick-policy",	ma->dblclick_policy);
 		multiload_ps_settings_set_string	(settings, "dblclick-cmdline",	ma->dblclick_cmdline);
 #endif
@@ -171,7 +171,7 @@ multiload_ui_save (MultiloadPlugin *ma)
 
 			/* Tooltip style */
 			key = g_strdup_printf("graph-%s-tooltip-style", graph_types[i].name);
-			multiload_ps_settings_set_boolean (settings, key, ma->graph_config[i].tooltip_details);
+			multiload_ps_settings_set_int (settings, key, ma->graph_config[i].tooltip_style);
 			g_free (key);
 
 			/* Double click policy */

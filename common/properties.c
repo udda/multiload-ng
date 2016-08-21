@@ -437,7 +437,7 @@ tooltip_style_changed_cb (GtkComboBox *combo, MultiloadPlugin *ma)
 	}
 	g_assert(i < GRAPH_MAX);
 
-	ma->graph_config[i].tooltip_details = gtk_combo_box_get_active(combo);
+	ma->graph_config[i].tooltip_style = gtk_combo_box_get_active(combo);
 }
 
 
@@ -549,7 +549,7 @@ multiload_init_preferences (GtkWidget *dialog, MultiloadPlugin *ma)
 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(gtk_builder_get_object(builder, spinbutton_interval_names[i])), ma->graph_config[i].interval*1.00);
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, checkbox_visibility_names[i])), ma->graph_config[i].visible);
 		gtk_entry_set_max_length(GTK_ENTRY(gtk_builder_get_object(builder, dblclick_command_names[i])), sizeof(ma->graph_config[i].dblclick_cmdline));
-		gtk_combo_box_set_active (GTK_COMBO_BOX(gtk_builder_get_object(builder, tooltip_style_names[i])), ma->graph_config[i].tooltip_details);
+		gtk_combo_box_set_active (GTK_COMBO_BOX(gtk_builder_get_object(builder, tooltip_style_names[i])), ma->graph_config[i].tooltip_style);
 		gtk_combo_box_set_active (GTK_COMBO_BOX(gtk_builder_get_object(builder, dblclick_policy_names[i])), ma->graph_config[i].dblclick_policy);
 		gtk_entry_set_text (GTK_ENTRY(gtk_builder_get_object(builder, dblclick_command_names[i])), ma->graph_config[i].dblclick_cmdline);
 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(gtk_builder_get_object(builder, spin_border_names[i])), ma->graph_config[i].border_width*1.00);
@@ -851,9 +851,9 @@ property_changed_cb(GtkWidget *widget, gpointer id) {
 			multiload_refresh(ma);
 			break;
 
-		case PROP_TOOLTIP_DETAILS:
+		case PROP_TOOLTIP_STYLE:
 			val_int = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget));
-			ma->tooltip_details = val_int;
+			ma->tooltip_style = val_int;
 			break;
 
 		case PROP_DBLCLICK_POLICY:
@@ -1231,9 +1231,9 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	
 	// Detailed information in tooltips
 	t = gtk_check_button_new_with_mnemonic(_("_Detailed information in tooltips"));
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(t), ma->tooltip_details);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(t), ma->tooltip_style);
 	g_signal_connect(G_OBJECT(t), "toggled",
-						G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_TOOLTIP_DETAILS));
+						G_CALLBACK(property_changed_cb), GINT_TO_POINTER(PROP_TOOLTIP_STYLE));
 	gtk_box_pack_start(GTK_BOX(container), t, FALSE, FALSE, 0);
 
 
