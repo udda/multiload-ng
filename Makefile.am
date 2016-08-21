@@ -17,6 +17,7 @@ endif
 
 SUBDIRS =	\
 	common \
+	data \
 	$(STANDALONE_DIRS) \
 	$(APPINDICATOR_DIRS) \
 	$(LXPANEL_DIRS) \
