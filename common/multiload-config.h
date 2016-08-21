@@ -35,13 +35,11 @@ typedef void (*LoadGraphDataFunc) (int, int [], LoadGraph *);
 
 typedef struct _GraphType {
 	const char *name;
-	const char *label_interactive;
-	const char *label_noninteractive;
+	const char *label;
 	LoadGraphDataFunc get_data;
 	guint num_colors;
 	const struct {
-		const char *label_interactive;
-		const char *label_noninteractive;
+		const char *label;
 		const char *default_value;
 	} colors[MAX_COLORS];
 } GraphType;

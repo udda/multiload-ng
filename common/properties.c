@@ -900,11 +900,11 @@ color_selector_new(guint graph, guint index, gboolean use_alpha, gboolean use_la
 	GtkWidget *label;
 	GtkWidget *color_picker;
 
-	const gchar *name = graph_types[graph].colors[index].label_interactive;
-	const gchar *tooltip = graph_types[graph].colors[index].label_noninteractive;
+	const gchar *name = graph_types[graph].colors[index].label;
+	const gchar *tooltip = graph_types[graph].colors[index].label;
 	const gchar *dialog_title = g_strdup_printf(_("Select color:  %s -> %s"),
-					graph_types[graph].label_noninteractive,
-					graph_types[graph].colors[index].label_noninteractive);
+					graph_types[graph].label,
+					graph_types[graph].colors[index].label);
 
 	box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, PREF_LABEL_SPACING);
 
@@ -965,7 +965,7 @@ multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma)
 	sizegroup = gtk_size_group_new(GTK_SIZE_GROUP_BOTH);
 	for( i = 0; i < GRAPH_MAX; i++ ) {
 		// graph enable
-		t = gtk_check_button_new_with_mnemonic(graph_types[i].label_interactive);
+		t = gtk_check_button_new_with_mnemonic(graph_types[i].label);
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(t),
 							ma->graph_config[i].visible);
 		g_signal_connect(G_OBJECT(t), "toggled",

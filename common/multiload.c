@@ -221,7 +221,7 @@ multiload_tooltip_update(LoadGraph *g)
 	}
 
 	if (title == NULL)
-		title = g_strdup(graph_types[g->id].label_noninteractive);
+		title = g_strdup(graph_types[g->id].label);
 
 #ifdef MULTILOAD_EXPERIMENTAL_ENABLE
 	if (g->multiload->graph_config[g->id].tooltip_details) {
