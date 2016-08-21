@@ -203,22 +203,22 @@
     <data>
       <row>
         <col id="0" translatable="yes">Default</col>
-        <col id="1" translatable="yes">1</col>
+        <col id="1">1</col>
         <col id="2">True</col>
       </row>
       <row>
         <col id="0" translatable="yes">Tango</col>
-        <col id="1" translatable="yes">2</col>
+        <col id="1">2</col>
         <col id="2">True</col>
       </row>
       <row>
         <col id="0" translatable="yes">Solarized</col>
-        <col id="1" translatable="yes">3</col>
+        <col id="1">3</col>
         <col id="2">True</col>
       </row>
       <row>
         <col id="0" translatable="yes">(Custom)</col>
-        <col id="1" translatable="yes">4</col>
+        <col id="1">4</col>
         <col id="2">False</col>
       </row>
     </data>
@@ -726,12 +726,11 @@
             </child>
             <child>
               <object class="GtkCheckButton" id="cb_visible_cpu">
-                <property name="label" translatable="yes">_Processor</property>
+                <property name="label" translatable="yes">Processor</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
                 <property name="tooltip_text" translatable="yes">Make this graph visible</property>
-                <property name="use_underline">True</property>
                 <property name="image_position">top</property>
                 <property name="active">True</property>
                 <property name="draw_indicator">True</property>
@@ -746,12 +745,11 @@
             </child>
             <child>
               <object class="GtkCheckButton" id="cb_visible_mem">
-                <property name="label" translatable="yes">_Memory</property>
+                <property name="label" translatable="yes">Memory</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
                 <property name="tooltip_text" translatable="yes">Make this graph visible</property>
-                <property name="use_underline">True</property>
                 <property name="draw_indicator">True</property>
                 <signal name="toggled" handler="prop_checkboxes_sensitive_cb" swapped="no"/>
                 <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
@@ -764,12 +762,11 @@
             </child>
             <child>
               <object class="GtkCheckButton" id="cb_visible_net">
-                <property name="label" translatable="yes">_Network</property>
+                <property name="label" translatable="yes">Network</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
                 <property name="tooltip_text" translatable="yes">Make this graph visible</property>
-                <property name="use_underline">True</property>
                 <property name="draw_indicator">True</property>
                 <signal name="toggled" handler="prop_checkboxes_sensitive_cb" swapped="no"/>
                 <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
@@ -782,12 +779,11 @@
             </child>
             <child>
               <object class="GtkCheckButton" id="cb_visible_swap">
-                <property name="label" translatable="yes">S_wap</property>
+                <property name="label" translatable="yes">Swap</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
                 <property name="tooltip_text" translatable="yes">Make this graph visible</property>
-                <property name="use_underline">True</property>
                 <property name="draw_indicator">True</property>
                 <signal name="toggled" handler="prop_checkboxes_sensitive_cb" swapped="no"/>
                 <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
@@ -800,12 +796,11 @@
             </child>
             <child>
               <object class="GtkCheckButton" id="cb_visible_load">
-                <property name="label" translatable="yes">_Load avg.</property>
+                <property name="label" translatable="yes">Load average</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
                 <property name="tooltip_text" translatable="yes">Make this graph visible</property>
-                <property name="use_underline">True</property>
                 <property name="draw_indicator">True</property>
                 <signal name="toggled" handler="prop_checkboxes_sensitive_cb" swapped="no"/>
                 <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
@@ -818,12 +813,11 @@
             </child>
             <child>
               <object class="GtkCheckButton" id="cb_visible_disk">
-                <property name="label" translatable="yes">_Disk</property>
+                <property name="label" translatable="yes">Disk</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
                 <property name="tooltip_text" translatable="yes">Make this graph visible</property>
-                <property name="use_underline">True</property>
                 <property name="draw_indicator">True</property>
                 <signal name="toggled" handler="prop_checkboxes_sensitive_cb" swapped="no"/>
                 <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
@@ -836,12 +830,11 @@
             </child>
             <child>
               <object class="GtkCheckButton" id="cb_visible_temp">
-                <property name="label" translatable="yes">_Temperature</property>
+                <property name="label" translatable="yes">Temperature</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
                 <property name="tooltip_text" translatable="yes">Make this graph visible</property>
-                <property name="use_underline">True</property>
                 <property name="draw_indicator">True</property>
                 <signal name="toggled" handler="prop_checkboxes_sensitive_cb" swapped="no"/>
                 <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
@@ -1332,7 +1325,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Graphs</property>
-                <property name="use_underline">True</property>
                 <property name="track_visited_links">False</property>
               </object>
               <packing>
@@ -1428,7 +1420,6 @@
                             <property name="can_focus">False</property>
                             <property name="tooltip_text" translatable="yes">Create new color scheme</property>
                             <property name="label" translatable="yes">New</property>
-                            <property name="use_underline">True</property>
                             <property name="stock_id">gtk-add</property>
                           </object>
                           <packing>
@@ -1442,7 +1433,6 @@
                             <property name="can_focus">False</property>
                             <property name="tooltip_text" translatable="yes">Delete selected color scheme</property>
                             <property name="label" translatable="yes">Delete</property>
-                            <property name="use_underline">True</property>
                             <property name="stock_id">gtk-remove</property>
                           </object>
                           <packing>
@@ -1456,7 +1446,6 @@
                             <property name="can_focus">False</property>
                             <property name="tooltip_text" translatable="yes">Save current color scheme</property>
                             <property name="label" translatable="yes">Save</property>
-                            <property name="use_underline">True</property>
                             <property name="stock_id">gtk-save</property>
                           </object>
                           <packing>
@@ -1479,7 +1468,6 @@
                             <property name="can_focus">False</property>
                             <property name="tooltip_text" translatable="yes">Import color scheme from file</property>
                             <property name="label" translatable="yes">Import</property>
-                            <property name="use_underline">True</property>
                             <property name="stock_id">gtk-open</property>
                           </object>
                           <packing>
@@ -1493,7 +1481,6 @@
                             <property name="can_focus">False</property>
                             <property name="tooltip_text" translatable="yes">Export color scheme to file</property>
                             <property name="label" translatable="yes">Export</property>
-                            <property name="use_underline">True</property>
                             <property name="stock_id">gtk-save-as</property>
                           </object>
                           <packing>
@@ -1653,8 +1640,7 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="ypad">2</property>
-                        <property name="label" translatable="yes">_Processor</property>
-                        <property name="use_underline">True</property>
+                        <property name="label" translatable="yes">Processor</property>
                       </object>
                       <packing>
                         <property name="right_attach">2</property>
@@ -1819,7 +1805,6 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Background</property>
-                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="right_attach">2</property>
@@ -1882,7 +1867,6 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Border</property>
-                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="right_attach">2</property>
@@ -1922,9 +1906,8 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="ypad">2</property>
-                        <property name="label" translatable="yes">_Memory</property>
+                        <property name="label" translatable="yes">Memory</property>
                         <property name="use_markup">True</property>
-                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">3</property>
@@ -2082,9 +2065,8 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="ypad">2</property>
-                        <property name="label" translatable="yes">_Network</property>
+                        <property name="label" translatable="yes">Network</property>
                         <property name="use_markup">True</property>
-                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">6</property>
@@ -2245,9 +2227,8 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="ypad">2</property>
-                        <property name="label" translatable="yes">S_wap</property>
+                        <property name="label" translatable="yes">Swap</property>
                         <property name="use_markup">True</property>
-                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">9</property>
@@ -2294,9 +2275,8 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="ypad">2</property>
-                        <property name="label" translatable="yes">_Load avg.</property>
+                        <property name="label" translatable="yes">Load average</property>
                         <property name="use_markup">True</property>
-                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">12</property>
@@ -2310,9 +2290,8 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="ypad">2</property>
-                        <property name="label" translatable="yes">_Disk</property>
+                        <property name="label" translatable="yes">Disk</property>
                         <property name="use_markup">True</property>
-                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">15</property>
@@ -2326,9 +2305,8 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="ypad">2</property>
-                        <property name="label" translatable="yes">_Temperature</property>
+                        <property name="label" translatable="yes">Temperature</property>
                         <property name="use_markup">True</property>
-                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">18</property>
@@ -2558,7 +2536,6 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Border</property>
-                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">3</property>
@@ -2574,7 +2551,6 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Border</property>
-                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">6</property>
@@ -2590,7 +2566,6 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Border</property>
-                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">9</property>
@@ -2606,7 +2581,6 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Border</property>
-                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">12</property>
@@ -2622,7 +2596,6 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Border</property>
-                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">18</property>
@@ -2638,7 +2611,6 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Border</property>
-                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">15</property>
@@ -2775,7 +2747,6 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Background</property>
-                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">3</property>
@@ -2791,7 +2762,6 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Background</property>
-                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">6</property>
@@ -2807,7 +2777,6 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Background</property>
-                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">9</property>
@@ -2823,7 +2792,6 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Background</property>
-                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">12</property>
@@ -2839,7 +2807,6 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Background</property>
-                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">15</property>
@@ -2855,7 +2822,6 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">Background</property>
-                        <property name="use_underline">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">18</property>
@@ -3373,7 +3339,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Colors</property>
-                <property name="use_underline">True</property>
                 <property name="track_visited_links">False</property>
               </object>
               <packing>
@@ -3629,8 +3594,7 @@
               <object class="GtkLabel" id="label10">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">_Processor</property>
-                <property name="use_underline">True</property>
+                <property name="label" translatable="yes">Processor</property>
               </object>
               <packing>
                 <property name="tab_fill">False</property>
@@ -3760,8 +3724,7 @@
               <object class="GtkLabel" id="label11">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">_Memory</property>
-                <property name="use_underline">True</property>
+                <property name="label" translatable="yes">Memory</property>
               </object>
               <packing>
                 <property name="position">1</property>
@@ -3892,8 +3855,7 @@
               <object class="GtkLabel" id="label12">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">_Network</property>
-                <property name="use_underline">True</property>
+                <property name="label" translatable="yes">Network</property>
               </object>
               <packing>
                 <property name="position">2</property>
@@ -4024,8 +3986,7 @@
               <object class="GtkLabel" id="label28">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">S_wap</property>
-                <property name="use_underline">True</property>
+                <property name="label" translatable="yes">Swap</property>
               </object>
               <packing>
                 <property name="position">3</property>
@@ -4156,8 +4117,7 @@
               <object class="GtkLabel" id="label29">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">_Load avg.</property>
-                <property name="use_underline">True</property>
+                <property name="label" translatable="yes">Load average</property>
               </object>
               <packing>
                 <property name="position">4</property>
@@ -4288,8 +4248,7 @@
               <object class="GtkLabel" id="label31">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">_Disk</property>
-                <property name="use_underline">True</property>
+                <property name="label" translatable="yes">Disk</property>
               </object>
               <packing>
                 <property name="position">5</property>
@@ -4420,8 +4379,7 @@
               <object class="GtkLabel" id="label32">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">_Temperature</property>
-                <property name="use_underline">True</property>
+                <property name="label" translatable="yes">Temperature</property>
               </object>
               <packing>
                 <property name="position">6</property>
