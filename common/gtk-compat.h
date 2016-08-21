@@ -48,6 +48,9 @@ G_GNUC_INTERNAL void
 gtk_color_chooser_get_rgba (GtkColorButton *chooser, GdkRGBA *color);
 
 G_GNUC_INTERNAL void
+gtk_color_chooser_set_rgba (GtkColorButton *chooser, GdkRGBA *color);
+
+G_GNUC_INTERNAL void
 gtk_color_chooser_set_use_alpha (GtkColorButton *chooser, gboolean use_alpha);
 
 G_GNUC_INTERNAL GtkWidget *

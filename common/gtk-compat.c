@@ -48,6 +48,17 @@ gtk_color_chooser_get_rgba (GtkColorButton *chooser, GdkRGBA *color)
 	gdk_color_to_rgba(&c, gtk_color_button_get_alpha(chooser), color);
 }
 
+void
+gtk_color_chooser_set_rgba (GtkColorButton *chooser, GdkRGBA *color)
+{
+	GdkColor c;
+	guint16 alpha;
+	gdk_rgba_to_color(color, &c, &alpha);
+
+	gtk_color_button_set_color(chooser, &c);
+	gtk_color_button_set_alpha(chooser, alpha);
+}
+
 G_GNUC_INTERNAL void
 gtk_color_chooser_set_use_alpha (GtkColorButton *chooser, gboolean use_alpha)
 {
