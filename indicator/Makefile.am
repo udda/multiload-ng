@@ -44,7 +44,3 @@ indicator_multiload_ng_LDADD = \
 #DISTCLEANFILES = indicator-multiload-ng.desktop.in
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:
-
-
-
-#TODO in configure.m4: quale libindicator? Selezionare in base a GTK_API?
