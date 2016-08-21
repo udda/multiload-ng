@@ -53,7 +53,11 @@ multiload_tooltip_update(LoadGraph *g)
 			g_assert_nonnull(xd);
 
 
+#ifdef MULTILOAD_EXPERIMENTAL_ENABLE
+			if (g->multiload->graph_config[g->id].tooltip_details) {
+#else
 			if (g->multiload->tooltip_details) {
+#endif
 				gchar *uptime = format_time_duration(xd->uptime);
 				title = g_strdup(xd->cpu0_name);
 				text = g_strdup_printf(_(	"%ld processors  -  %.2f GHz  -  Governor: %s\n"
@@ -78,7 +82,11 @@ multiload_tooltip_update(LoadGraph *g)
 			g_assert_nonnull(xd);
 
 
+#ifdef MULTILOAD_EXPERIMENTAL_ENABLE
+			if (g->multiload->graph_config[g->id].tooltip_details) {
+#else
 			if (g->multiload->tooltip_details) {
+#endif
 				gchar *total = g_format_size_full(xd->total, G_FORMAT_SIZE_IEC_UNITS);
 				gchar *user = format_percent(xd->user, xd->total, 1);
 				gchar *cache = format_percent(xd->cache, xd->total, 1);
@@ -104,7 +112,11 @@ multiload_tooltip_update(LoadGraph *g)
 			gchar *tx_out = format_rate_for_display(xd->out_speed);
 			gchar *tx_local = format_rate_for_display(xd->local_speed);
 
+#ifdef MULTILOAD_EXPERIMENTAL_ENABLE
+			if (g->multiload->graph_config[g->id].tooltip_details) {
+#else
 			if (g->multiload->tooltip_details) {
+#endif
 				text = g_strdup_printf(_(	"Monitored interfaces: %s\n"
 											"\n"
 											"Receiving: %s\n"
@@ -130,7 +142,11 @@ multiload_tooltip_update(LoadGraph *g)
 				gchar *used = format_percent(xd->used, xd->total, 0);
 				gchar *total = g_format_size_full(xd->total, G_FORMAT_SIZE_IEC_UNITS);
 
+#ifdef MULTILOAD_EXPERIMENTAL_ENABLE
+				if (g->multiload->graph_config[g->id].tooltip_details) {
+#else
 				if (g->multiload->tooltip_details) {
+#endif
 					title = g_strdup_printf(_("%s of swap"), total);
 					text = g_strdup_printf(_("%s used"), used);
 				} else {
@@ -146,7 +162,11 @@ multiload_tooltip_update(LoadGraph *g)
 			LoadAvgData *xd = (LoadAvgData*) g->extra_data;
 			g_assert_nonnull(xd);
 
+#ifdef MULTILOAD_EXPERIMENTAL_ENABLE
+			if (g->multiload->graph_config[g->id].tooltip_details) {
+#else
 			if (g->multiload->tooltip_details) {
+#endif
 				text = g_strdup_printf(_(	"Last minute: %0.02f\n"
 											"Last 5 minutes: %0.02f\n"
 											"Last 15 minutes: %0.02f"),
@@ -163,7 +183,11 @@ multiload_tooltip_update(LoadGraph *g)
 			gchar *disk_read = format_rate_for_display(xd->read_speed);
 			gchar *disk_write = format_rate_for_display(xd->write_speed);
 
+#ifdef MULTILOAD_EXPERIMENTAL_ENABLE
+			if (g->multiload->graph_config[g->id].tooltip_details) {
+#else
 			if (g->multiload->tooltip_details) {
+#endif
 				text = g_strdup_printf(_(	"Read: %s\n"
 											"Write: %s"),
 											disk_read, disk_write);
@@ -178,7 +202,11 @@ multiload_tooltip_update(LoadGraph *g)
 			TemperatureData *xd = (TemperatureData*) g->extra_data;
 			g_assert_nonnull(xd);
 
+#ifdef MULTILOAD_EXPERIMENTAL_ENABLE
+			if (g->multiload->graph_config[g->id].tooltip_details) {
+#else
 			if (g->multiload->tooltip_details) {
+#endif
 				text = g_strdup_printf(_(	"Current: %.1f °C\n"
 											"Critical: %.1f °C"),
 											(xd->value/1000.0), (xd->max/1000.0));
@@ -195,7 +223,11 @@ multiload_tooltip_update(LoadGraph *g)
 	if (title == NULL)
 		title = g_strdup(graph_types[g->id].label_noninteractive);
 
+#ifdef MULTILOAD_EXPERIMENTAL_ENABLE
+	if (g->multiload->graph_config[g->id].tooltip_details) {
+#else
 	if (g->multiload->tooltip_details) {
+#endif
 		tooltip_markup = g_strdup_printf("<span weight='bold' size='larger'>%s</span>\n%s", title, text);
 	} else {
 		tooltip_markup = g_strdup_printf("%s: %s", title, text);
@@ -296,17 +328,25 @@ void multiload_defaults(MultiloadPlugin *ma)
 	guint i;
 
 	/* default settings */
+#ifndef MULTILOAD_EXPERIMENTAL_ENABLE
 	ma->interval = DEFAULT_INTERVAL;
 	ma->size = DEFAULT_SIZE;
+	ma->tooltip_details = DEFAULT_TOOLTIP_DETAILS;
+	ma->dblclick_policy = DEFAULT_DBLCLICK_POLICY;
+#endif
 	ma->padding = DEFAULT_PADDING;
 	ma->spacing = DEFAULT_SPACING;
 	ma->fill_between = DEFAULT_FILL_BETWEEN;
-	ma->tooltip_details = DEFAULT_TOOLTIP_DETAILS;
-	ma->dblclick_policy = DEFAULT_DBLCLICK_POLICY;
 	for ( i = 0; i < GRAPH_MAX; i++ ) {
 		ma->graph_config[i].border_width = DEFAULT_BORDER_WIDTH;
 		ma->graph_config[i].visible = i == 0 ? TRUE : FALSE;
 		multiload_colors_default(ma, i);
+#ifdef MULTILOAD_EXPERIMENTAL_ENABLE
+		ma->graph_config[i].interval = DEFAULT_INTERVAL;
+		ma->graph_config[i].size = DEFAULT_SIZE;
+		ma->graph_config[i].tooltip_details = DEFAULT_TOOLTIP_DETAILS;
+		ma->graph_config[i].dblclick_policy = DEFAULT_DBLCLICK_POLICY;
+#endif
 	}
 }
 
@@ -316,20 +356,27 @@ multiload_sanitize(MultiloadPlugin *ma)
 	guint i, visible_count = 0;
 
 	/* Keep values between max and min */
+#ifndef MULTILOAD_EXPERIMENTAL_ENABLE
 	ma->interval = CLAMP(ma->interval, MIN_INTERVAL, MAX_INTERVAL);
 	ma->size = CLAMP(ma->size, MIN_SIZE, MAX_SIZE);
+	ma->tooltip_details = ma->tooltip_details? TRUE:FALSE;
+	ma->dblclick_policy = CLAMP(ma->dblclick_policy, 0, DBLCLICK_POLICY_N_VALUES);
+#endif
 	ma->padding = CLAMP(ma->padding, MIN_PADDING, MAX_PADDING);
 	ma->spacing = CLAMP(ma->spacing, MIN_SPACING, MAX_SPACING);
 	ma->fill_between = ma->fill_between? TRUE:FALSE;
-	ma->tooltip_details = ma->tooltip_details? TRUE:FALSE;
 	ma->orientation_policy = CLAMP(ma->orientation_policy, 0, MULTILOAD_ORIENTATION_N_VALUES);
-	ma->dblclick_policy = CLAMP(ma->dblclick_policy, 0, DBLCLICK_POLICY_N_VALUES);
 
 	for ( i=0; i<GRAPH_MAX; i++ ) {
 		ma->graph_config[i].border_width =
 								CLAMP(ma->graph_config[i].border_width,
 								MIN_BORDER_WIDTH, MAX_BORDER_WIDTH);
-
+#ifdef MULTILOAD_EXPERIMENTAL_ENABLE
+		ma->graph_config[i].interval = CLAMP(ma->graph_config[i].interval, MIN_INTERVAL, MAX_INTERVAL);
+		ma->graph_config[i].size = CLAMP(ma->graph_config[i].size, MIN_SIZE, MAX_SIZE);
+		ma->graph_config[i].tooltip_details = ma->graph_config[i].tooltip_details? TRUE:FALSE;
+		ma->graph_config[i].dblclick_policy = CLAMP(ma->graph_config[i].dblclick_policy, 0, DBLCLICK_POLICY_N_VALUES);
+#endif
 		if (ma->graph_config[i].visible) {
 			ma->graph_config[i].visible = TRUE;
 			visible_count++;

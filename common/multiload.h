@@ -52,6 +52,13 @@ typedef struct _GraphConfig {
 	gboolean visible;
 	gint border_width;
 	GdkRGBA colors[MAX_COLORS];
+#ifdef MULTILOAD_EXPERIMENTAL_ENABLE
+	gint interval;
+	gint size;
+	gboolean tooltip_details;
+	gint dblclick_policy;
+	gchar dblclick_cmdline[1024];
+#endif
 } GraphConfig;
 
 typedef struct _MultiloadPlugin {
@@ -64,15 +71,17 @@ typedef struct _MultiloadPlugin {
 	LoadGraph *graphs[GRAPH_MAX];
 
 	GraphConfig graph_config[GRAPH_MAX];
+#ifndef MULTILOAD_EXPERIMENTAL_ENABLE
 	gint interval;
 	gint size;
+	gboolean tooltip_details;
+	gint dblclick_policy;
+	gchar dblclick_cmdline[200];
+#endif
 	gint padding;
 	gint spacing;
 	gboolean fill_between;
-	gboolean tooltip_details;
 	gint orientation_policy;
-	gint dblclick_policy;
-	gchar dblclick_cmdline[200];
 } MultiloadPlugin;
 
 
