@@ -3313,7 +3313,7 @@
                     <property name="can_focus">False</property>
                     <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n	number of graph, starting from 1 (CPU) to 7 (temp)
+%n	number of graph, starting from 1 (CPU) to 7 (temperature)
 %x	short name of the graph - three  to four letters</property>
                     <property name="margin_left">6</property>
                     <property name="hexpand">False</property>
@@ -3442,7 +3442,7 @@
                     <property name="can_focus">False</property>
                     <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n	number of graph, starting from 1 (CPU) to 7 (temp)
+%n	number of graph, starting from 1 (CPU) to 7 (temperature)
 %x	short name of the graph - three  to four letters</property>
                     <property name="margin_left">6</property>
                     <property name="icon_name">dialog-information</property>
@@ -3574,7 +3574,7 @@
                     <property name="can_focus">False</property>
                     <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n	number of graph, starting from 1 (CPU) to 7 (temp)
+%n	number of graph, starting from 1 (CPU) to 7 (temperature)
 %x	short name of the graph - three  to four letters</property>
                     <property name="margin_left">6</property>
                     <property name="icon_name">dialog-information</property>
@@ -3706,7 +3706,7 @@
                     <property name="can_focus">False</property>
                     <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n	number of graph, starting from 1 (CPU) to 7 (temp)
+%n	number of graph, starting from 1 (CPU) to 7 (temperature)
 %x	short name of the graph - three  to four letters</property>
                     <property name="margin_left">6</property>
                     <property name="icon_name">dialog-information</property>
@@ -3838,7 +3838,7 @@
                     <property name="can_focus">False</property>
                     <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n	number of graph, starting from 1 (CPU) to 7 (temp)
+%n	number of graph, starting from 1 (CPU) to 7 (temperature)
 %x	short name of the graph - three  to four letters</property>
                     <property name="margin_left">6</property>
                     <property name="icon_name">dialog-information</property>
@@ -3970,7 +3970,7 @@
                     <property name="can_focus">False</property>
                     <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n	number of graph, starting from 1 (CPU) to 7 (temp)
+%n	number of graph, starting from 1 (CPU) to 7 (temperature)
 %x	short name of the graph - three  to four letters</property>
                     <property name="margin_left">6</property>
                     <property name="icon_name">dialog-information</property>
@@ -4104,7 +4104,7 @@
                     <property name="can_focus">False</property>
                     <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n	number of graph, starting from 1 (CPU) to 7 (temp)
+%n	number of graph, starting from 1 (CPU) to 7 (temperature)
 %x	short name of the graph - three  to four letters</property>
                     <property name="margin_left">6</property>
                     <property name="icon_name">dialog-information</property>
