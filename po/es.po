@@ -375,7 +375,7 @@ msgstr  "Configuracion avanzada"
 #: data/multiload-ng.preferences_gtk2.ui:1116
 #: data/multiload-ng.preferences_gtk3.ui:979
 msgid   "Timespan"
-msgstr  ""
+msgstr  "Lapso de tiempo"
 
 #: data/multiload-ng.preferences_gtk2.ui:1125
 #: data/multiload-ng.preferences_gtk3.ui:989
@@ -427,7 +427,7 @@ msgstr  "Gráficos"
 #: data/multiload-ng.preferences_gtk2.ui:1368
 #: data/multiload-ng.preferences_gtk3.ui:1247
 msgid   "Color scheme"
-msgstr  "Esquema de colores"
+msgstr  "Combinación de colores"
 
 #: data/multiload-ng.preferences_gtk2.ui:1388
 #: data/multiload-ng.preferences_gtk3.ui:1267
@@ -437,7 +437,7 @@ msgstr  "Incorporado"
 #: data/multiload-ng.preferences_gtk2.ui:1421
 #: data/multiload-ng.preferences_gtk3.ui:1300
 msgid   "Create new color scheme"
-msgstr  ""
+msgstr  "Crear nueva combinación de colores"
 
 #: data/multiload-ng.preferences_gtk2.ui:1422
 #: data/multiload-ng.preferences_gtk3.ui:1301
@@ -447,7 +447,7 @@ msgstr  "Nuevo"
 #: data/multiload-ng.preferences_gtk2.ui:1434
 #: data/multiload-ng.preferences_gtk3.ui:1313
 msgid   "Delete selected color scheme"
-msgstr  ""
+msgstr  "Borrar combinación de colores seleccionada"
 
 #: data/multiload-ng.preferences_gtk2.ui:1435
 #: data/multiload-ng.preferences_gtk3.ui:1314
@@ -457,7 +457,7 @@ msgstr  "Borrar"
 #: data/multiload-ng.preferences_gtk2.ui:1447
 #: data/multiload-ng.preferences_gtk3.ui:1326
 msgid   "Save current color scheme"
-msgstr  ""
+msgstr  "Guardar combinación de colores actual"
 
 #: data/multiload-ng.preferences_gtk2.ui:1448
 #: data/multiload-ng.preferences_gtk3.ui:1327
@@ -467,7 +467,7 @@ msgstr  "Guardar"
 #: data/multiload-ng.preferences_gtk2.ui:1469
 #: data/multiload-ng.preferences_gtk3.ui:1349
 msgid   "Import color scheme from file"
-msgstr  ""
+msgstr  "Importar esquema de color desde un archivo"
 
 #: data/multiload-ng.preferences_gtk2.ui:1470
 #: data/multiload-ng.preferences_gtk3.ui:1350
@@ -477,7 +477,7 @@ msgstr  "Importar"
 #: data/multiload-ng.preferences_gtk2.ui:1482
 #: data/multiload-ng.preferences_gtk3.ui:1362
 msgid   "Export color scheme to file"
-msgstr  ""
+msgstr  "Exportar esquema de color a un archivo"
 
 #: data/multiload-ng.preferences_gtk2.ui:1483
 #: data/multiload-ng.preferences_gtk3.ui:1363
