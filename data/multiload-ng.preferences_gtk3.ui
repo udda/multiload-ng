@@ -207,12 +207,12 @@
         <col id="2">True</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Tango</col>
+        <col id="0">Tango</col>
         <col id="1">2</col>
         <col id="2">True</col>
       </row>
       <row>
-        <col id="0" translatable="yes">Solarized</col>
+        <col id="0">Solarized</col>
         <col id="1">3</col>
         <col id="2">True</col>
       </row>
@@ -717,7 +717,7 @@
             </child>
             <child>
               <object class="GtkCheckButton" id="cb_visible_disk">
-                <property name="label" translatable="yes">_Disk</property>
+                <property name="label" translatable="yes">Disk</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
