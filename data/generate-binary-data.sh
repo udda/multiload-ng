@@ -45,7 +45,7 @@ hexdump() {
 strdump() {
 	echo 'const char *'$1' = '
 	while read -r -s line; do
-		echo '"'${line//\"/\\\"}'"'
+		echo '"'${line//\"/\\\"}'\n"'
 	done
 	echo ";"
 }
