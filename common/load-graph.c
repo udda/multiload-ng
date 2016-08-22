@@ -279,21 +279,13 @@ load_graph_clicked (GtkWidget *widget, GdkEventButton *event, LoadGraph *g)
 	gchar* cmdline;
 	/* check if button event is a double click with first mouse button */
 	if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
-#ifdef MULTILOAD_EXPERIMENTAL_ENABLE
 		switch(g->config->dblclick_policy) {
-#else
-		switch(g->multiload->dblclick_policy) {
-#endif
 			case DBLCLICK_POLICY_TASKMANAGER:
 				cmdline = get_system_monitor_executable();
 				g_debug("[load-graph] Detected double click on graph '%s' - action: start task manager (%s)", graph_types[g->id].name, cmdline);
 				break;
 			case DBLCLICK_POLICY_CMDLINE:
-#ifdef MULTILOAD_EXPERIMENTAL_ENABLE
 				cmdline = g_strdup(g->config->dblclick_cmdline);
-#else
-				cmdline = g_strdup(g->multiload->dblclick_cmdline);
-#endif
 				g_debug("[load-graph] Detected double click on graph '%s' - action: execute command line (%s)", graph_types[g->id].name, cmdline);
 				break;
 			case DBLCLICK_POLICY_DONOTHING:
@@ -424,11 +416,7 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 void
 load_graph_resize (LoadGraph *g)
 {
-#ifdef MULTILOAD_EXPERIMENTAL_ENABLE
 	guint size = CLAMP(g->config->size, MIN_SIZE, MAX_SIZE);
-#else
-	guint size = CLAMP(g->multiload->size, MIN_SIZE, MAX_SIZE);
-#endif
 	gint w, h;
 
 	if ( g->multiload->panel_orientation == GTK_ORIENTATION_VERTICAL ) {
@@ -448,11 +436,7 @@ load_graph_resize (LoadGraph *g)
 void
 load_graph_start (LoadGraph *g)
 {
-#ifdef MULTILOAD_EXPERIMENTAL_ENABLE
 	guint interval = CLAMP(g->config->interval, MIN_INTERVAL, MAX_INTERVAL);
-#else
-	guint interval = CLAMP(g->multiload->interval, MIN_INTERVAL, MAX_INTERVAL);
-#endif
 	load_graph_stop(g);
 	g->timer_index = g_timeout_add (interval, (GSourceFunc) load_graph_update, g);
 	g_debug("[load-graph] Timer started for graph '%s' (interval: %d ms)", graph_types[g->id].name, interval);

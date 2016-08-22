@@ -58,13 +58,6 @@ multiload_ui_read (MultiloadPlugin *ma)
 	settings = multiload_ps_settings_open_for_read(ma);
 	g_debug("[ui] Reading settings from object %p", settings);
 	if (G_LIKELY (settings != NULL)) {
-#ifndef MULTILOAD_EXPERIMENTAL_ENABLE
-		multiload_ps_settings_get_int		(settings, "interval",			&ma->interval);
-		multiload_ps_settings_get_int		(settings, "size",				&ma->size);
-		multiload_ps_settings_get_int		(settings, "tooltip-style",		&ma->tooltip_style);
-		multiload_ps_settings_get_int		(settings, "dblclick-policy",	&ma->dblclick_policy);
-		multiload_ps_settings_get_string	(settings, "dblclick-cmdline",	ma->dblclick_cmdline, sizeof(ma->dblclick_cmdline)/sizeof(gchar));
-#endif
 		multiload_ps_settings_get_int		(settings, "padding",			&ma->padding);
 		multiload_ps_settings_get_int		(settings, "spacing",			&ma->spacing);
 		multiload_ps_settings_get_int		(settings, "orientation",		&ma->orientation_policy);
@@ -81,7 +74,6 @@ multiload_ui_read (MultiloadPlugin *ma)
 			multiload_ps_settings_get_int (settings, key, &ma->graph_config[i].border_width);
 			g_free (key);
 
-#ifdef MULTILOAD_EXPERIMENTAL_ENABLE
 			/* Interval */
 			key = g_strdup_printf("graph-%s-interval", graph_types[i].name);
 			multiload_ps_settings_get_int (settings, key, &ma->graph_config[i].interval);
@@ -106,7 +98,6 @@ multiload_ui_read (MultiloadPlugin *ma)
 			key = g_strdup_printf("graph-%s-dblclick-cmdline", graph_types[i].name);
 			multiload_ps_settings_get_string (settings, key, ma->graph_config[i].dblclick_cmdline, sizeof(ma->graph_config[i].dblclick_cmdline));
 			g_free (key);
-#endif
 
 			/* Colors */
 			key = g_strdup_printf("graph-%s-colors", graph_types[i].name);
@@ -135,13 +126,6 @@ multiload_ui_save (MultiloadPlugin *ma)
 	settings = multiload_ps_settings_open_for_save(ma);
 	g_debug("[ui] Writing settings to object %p", settings);
 	if (G_LIKELY (settings != NULL)) {
-#ifndef MULTILOAD_EXPERIMENTAL_ENABLE
-		multiload_ps_settings_set_int		(settings, "interval",			ma->interval);
-		multiload_ps_settings_set_int		(settings, "size",				ma->size);
-		multiload_ps_settings_set_int		(settings, "tooltip-style",		ma->tooltip_style);
-		multiload_ps_settings_set_int		(settings, "dblclick-policy",	ma->dblclick_policy);
-		multiload_ps_settings_set_string	(settings, "dblclick-cmdline",	ma->dblclick_cmdline);
-#endif
 		multiload_ps_settings_set_int		(settings, "padding",			ma->padding);
 		multiload_ps_settings_set_int		(settings, "spacing",			ma->spacing);
 		multiload_ps_settings_set_int		(settings, "orientation",		ma->orientation_policy);
@@ -158,7 +142,6 @@ multiload_ui_save (MultiloadPlugin *ma)
 			multiload_ps_settings_set_int (settings, key, ma->graph_config[i].border_width);
 			g_free (key);
 
-#ifdef MULTILOAD_EXPERIMENTAL_ENABLE
 			/* Interval */
 			key = g_strdup_printf("graph-%s-interval", graph_types[i].name);
 			multiload_ps_settings_set_int (settings, key, ma->graph_config[i].interval);
@@ -183,7 +166,6 @@ multiload_ui_save (MultiloadPlugin *ma)
 			key = g_strdup_printf("graph-%s-dblclick-cmdline", graph_types[i].name);
 			multiload_ps_settings_set_string (settings, key, ma->graph_config[i].dblclick_cmdline);
 			g_free (key);
-#endif
 
 			/* Colors */
 			key = g_strdup_printf("graph-%s-colors", graph_types[i].name);
@@ -278,15 +260,8 @@ multiload_ui_configure_dialog_new(MultiloadPlugin *ma, GtkWindow* parent)
 void
 multiload_ui_start_system_monitor(MultiloadPlugin *ma)
 {
-	gchar *cmdline;
 	gboolean result;
-
-#ifndef MULTILOAD_EXPERIMENTAL_ENABLE
-	if (ma->dblclick_policy == DBLCLICK_POLICY_CMDLINE)
-		cmdline = g_strdup(ma->dblclick_cmdline);
-	else
-#endif
-		cmdline = get_system_monitor_executable();
+	gchar *cmdline = get_system_monitor_executable();
 
 	if (cmdline == NULL || cmdline[0] == '\0') {
 		g_debug("[ui] NULL or empty cmdline for multiload_ui_start_system_monitor()");

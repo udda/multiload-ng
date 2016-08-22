@@ -35,11 +35,7 @@ unsigned autoscaler_get_max(AutoScaler *s, LoadGraph *g, unsigned current)
 	s->sum += current;
 	s->count++;
 	time(&now);
-#ifdef MULTILOAD_EXPERIMENTAL_ENABLE
 	if ((float)difftime(now, s->last_update) > (g->draw_width * g->config->interval / 1000)) {
-#else
-	if ((float)difftime(now, s->last_update) > (g->draw_width * g->multiload->interval / 1000)) {
-#endif
 		float new_average = s->sum / s->count;
 		float average;
 
