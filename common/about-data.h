@@ -51,7 +51,7 @@
 	"with this program; if not, write to the Free Software Foundation, Inc.,\n" \
 	"51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n"
 
-extern const gchar * const about_data_authors[];
-extern const gchar * about_data_icon;
+extern const char * const about_data_authors[];
+extern const char * about_data_icon;
 
 #endif /* __ABOUT_DATA_H__ */

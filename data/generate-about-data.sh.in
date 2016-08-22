@@ -24,9 +24,8 @@ echo "/* Copyright (C) 2016 Mario Cianciolo <mr.udda@gmail.com> */"
 echo "/* This file is part of multiload-ng. */"
 echo
 echo "/* THIS FILE IS GENERATED AUTOMATICALLY. DO NOT EDIT */"
-echo "#include <glib.h>"
 echo
-echo "const gchar * const about_data_authors[] = {"
+echo "const char * const about_data_authors[] = {"
 IFS=$'\n'
 for line in $(cat $1); do
 	echo "	\"$line\","
@@ -34,5 +33,5 @@ done
 echo "	NULL"
 echo "};"
 echo
-echo "const gchar *about_data_icon = \"@APPICON@\";"
+echo "const char *about_data_icon = \"@APPICON@\";"
 echo
