@@ -36,7 +36,7 @@ unsigned autoscaler_get_max(AutoScaler *s, LoadGraph *g, unsigned current)
 	s->count++;
 	time(&now);
 #ifdef MULTILOAD_EXPERIMENTAL_ENABLE
-	if ((float)difftime(now, s->last_update) > (g->draw_width * g->multiload->graph_config[g->id].interval / 1000)) {
+	if ((float)difftime(now, s->last_update) > (g->draw_width * g->config->interval / 1000)) {
 #else
 	if ((float)difftime(now, s->last_update) > (g->draw_width * g->multiload->interval / 1000)) {
 #endif

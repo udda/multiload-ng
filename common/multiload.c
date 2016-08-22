@@ -54,7 +54,7 @@ multiload_tooltip_update(LoadGraph *g)
 
 
 #ifdef MULTILOAD_EXPERIMENTAL_ENABLE
-			if (g->multiload->graph_config[g->id].tooltip_style == TOOLTIP_STYLE_DETAILS) {
+			if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
 #else
 			if (g->multiload->tooltip_style == TOOLTIP_STYLE_DETAILS) {
 #endif
@@ -83,7 +83,7 @@ multiload_tooltip_update(LoadGraph *g)
 
 
 #ifdef MULTILOAD_EXPERIMENTAL_ENABLE
-			if (g->multiload->graph_config[g->id].tooltip_style == TOOLTIP_STYLE_DETAILS) {
+			if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
 #else
 			if (g->multiload->tooltip_style == TOOLTIP_STYLE_DETAILS) {
 #endif
@@ -113,7 +113,7 @@ multiload_tooltip_update(LoadGraph *g)
 			gchar *tx_local = format_rate_for_display(xd->local_speed);
 
 #ifdef MULTILOAD_EXPERIMENTAL_ENABLE
-			if (g->multiload->graph_config[g->id].tooltip_style == TOOLTIP_STYLE_DETAILS) {
+			if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
 #else
 			if (g->multiload->tooltip_style == TOOLTIP_STYLE_DETAILS) {
 #endif
@@ -143,7 +143,7 @@ multiload_tooltip_update(LoadGraph *g)
 				gchar *total = g_format_size_full(xd->total, G_FORMAT_SIZE_IEC_UNITS);
 
 #ifdef MULTILOAD_EXPERIMENTAL_ENABLE
-				if (g->multiload->graph_config[g->id].tooltip_style == TOOLTIP_STYLE_DETAILS) {
+				if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
 #else
 				if (g->multiload->tooltip_style == TOOLTIP_STYLE_DETAILS) {
 #endif
@@ -163,7 +163,7 @@ multiload_tooltip_update(LoadGraph *g)
 			g_assert_nonnull(xd);
 
 #ifdef MULTILOAD_EXPERIMENTAL_ENABLE
-			if (g->multiload->graph_config[g->id].tooltip_style == TOOLTIP_STYLE_DETAILS) {
+			if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
 #else
 			if (g->multiload->tooltip_style == TOOLTIP_STYLE_DETAILS) {
 #endif
@@ -184,7 +184,7 @@ multiload_tooltip_update(LoadGraph *g)
 			gchar *disk_write = format_rate_for_display(xd->write_speed);
 
 #ifdef MULTILOAD_EXPERIMENTAL_ENABLE
-			if (g->multiload->graph_config[g->id].tooltip_style == TOOLTIP_STYLE_DETAILS) {
+			if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
 #else
 			if (g->multiload->tooltip_style == TOOLTIP_STYLE_DETAILS) {
 #endif
@@ -203,7 +203,7 @@ multiload_tooltip_update(LoadGraph *g)
 			g_assert_nonnull(xd);
 
 #ifdef MULTILOAD_EXPERIMENTAL_ENABLE
-			if (g->multiload->graph_config[g->id].tooltip_style == TOOLTIP_STYLE_DETAILS) {
+			if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
 #else
 			if (g->multiload->tooltip_style == TOOLTIP_STYLE_DETAILS) {
 #endif
@@ -224,7 +224,7 @@ multiload_tooltip_update(LoadGraph *g)
 		title = g_strdup(graph_types[g->id].label);
 
 #ifdef MULTILOAD_EXPERIMENTAL_ENABLE
-	if (g->multiload->graph_config[g->id].tooltip_style == TOOLTIP_STYLE_DETAILS) {
+	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
 #else
 	if (g->multiload->tooltip_style == TOOLTIP_STYLE_DETAILS) {
 #endif

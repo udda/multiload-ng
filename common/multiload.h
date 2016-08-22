@@ -102,6 +102,8 @@ struct _LoadGraph {
 	gboolean allocated;
 	gboolean tooltip_update;
 
+	GraphConfig *config;
+
 	// data depend on graph type
 	gpointer *extra_data;
 };

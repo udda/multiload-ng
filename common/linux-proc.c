@@ -305,9 +305,9 @@ GetNet (int Maximum, int data [3], LoadGraph *g)
 		max = autoscaler_get_max(&xd->scaler, g, total);
 
 #ifdef MULTILOAD_EXPERIMENTAL_ENABLE
-		xd->in_speed	= calculate_speed(delta[NET_IN], 	g->multiload->graph_config[g->id].interval);
-		xd->out_speed	= calculate_speed(delta[NET_OUT],	g->multiload->graph_config[g->id].interval);
-		xd->local_speed	= calculate_speed(delta[NET_LOCAL],	g->multiload->graph_config[g->id].interval);
+		xd->in_speed	= calculate_speed(delta[NET_IN], 	g->config->interval);
+		xd->out_speed	= calculate_speed(delta[NET_OUT],	g->config->interval);
+		xd->local_speed	= calculate_speed(delta[NET_LOCAL],	g->config->interval);
 #else
 		xd->in_speed	= calculate_speed(delta[NET_IN], 	g->multiload->interval);
 		xd->out_speed	= calculate_speed(delta[NET_OUT],	g->multiload->interval);
@@ -434,8 +434,8 @@ GetDisk (int Maximum, int data [2], LoadGraph *g)
 	/* read/write are relative to SECTORS (standard 512 byte) and not blocks
 	 * as glibtop documentation states. So multiply value by 512 */
 #ifdef MULTILOAD_EXPERIMENTAL_ENABLE
-	xd->read_speed  = calculate_speed(readdiff  * 512, g->multiload->graph_config[g->id].interval);
-	xd->write_speed = calculate_speed(writediff * 512, g->multiload->graph_config[g->id].interval);
+	xd->read_speed  = calculate_speed(readdiff  * 512, g->config->interval);
+	xd->write_speed = calculate_speed(writediff * 512, g->config->interval);
 #else
 	xd->read_speed  = calculate_speed(readdiff  * 512, g->multiload->interval);
 	xd->write_speed = calculate_speed(writediff * 512, g->multiload->interval);

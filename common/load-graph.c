@@ -280,7 +280,7 @@ load_graph_clicked (GtkWidget *widget, GdkEventButton *event, LoadGraph *g)
 	/* check if button event is a double click with first mouse button */
 	if (event->button == 1 && event->type == GDK_2BUTTON_PRESS) {
 #ifdef MULTILOAD_EXPERIMENTAL_ENABLE
-		switch(g->multiload->graph_config[g->id].dblclick_policy) {
+		switch(g->config->dblclick_policy) {
 #else
 		switch(g->multiload->dblclick_policy) {
 #endif
@@ -290,7 +290,7 @@ load_graph_clicked (GtkWidget *widget, GdkEventButton *event, LoadGraph *g)
 				break;
 			case DBLCLICK_POLICY_CMDLINE:
 #ifdef MULTILOAD_EXPERIMENTAL_ENABLE
-				cmdline = g_strdup(g->multiload->graph_config[g->id].dblclick_cmdline);
+				cmdline = g_strdup(g->config->dblclick_cmdline);
 #else
 				cmdline = g_strdup(g->multiload->dblclick_cmdline);
 #endif
@@ -369,6 +369,7 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 
 	g->tooltip_update = FALSE;
 	g->multiload = ma;
+	g->config = &ma->graph_config[id];
 
 	g->main_widget = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
@@ -424,7 +425,7 @@ void
 load_graph_resize (LoadGraph *g)
 {
 #ifdef MULTILOAD_EXPERIMENTAL_ENABLE
-	guint size = CLAMP(g->multiload->graph_config[g->id].size, MIN_SIZE, MAX_SIZE);
+	guint size = CLAMP(g->config->size, MIN_SIZE, MAX_SIZE);
 #else
 	guint size = CLAMP(g->multiload->size, MIN_SIZE, MAX_SIZE);
 #endif
@@ -448,7 +449,7 @@ void
 load_graph_start (LoadGraph *g)
 {
 #ifdef MULTILOAD_EXPERIMENTAL_ENABLE
-	guint interval = CLAMP(g->multiload->graph_config[g->id].interval, MIN_INTERVAL, MAX_INTERVAL);
+	guint interval = CLAMP(g->config->interval, MIN_INTERVAL, MAX_INTERVAL);
 #else
 	guint interval = CLAMP(g->multiload->interval, MIN_INTERVAL, MAX_INTERVAL);
 #endif
