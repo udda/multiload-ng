@@ -993,7 +993,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">-</property>
+                <property name="label">-</property>
               </object>
               <packing>
                 <property name="left_attach">4</property>
@@ -1007,7 +1007,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">-</property>
+                <property name="label">-</property>
               </object>
               <packing>
                 <property name="left_attach">4</property>
@@ -1021,7 +1021,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">-</property>
+                <property name="label">-</property>
               </object>
               <packing>
                 <property name="left_attach">4</property>
@@ -1035,7 +1035,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">-</property>
+                <property name="label">-</property>
               </object>
               <packing>
                 <property name="left_attach">4</property>
@@ -1049,7 +1049,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">-</property>
+                <property name="label">-</property>
               </object>
               <packing>
                 <property name="left_attach">4</property>
@@ -1063,7 +1063,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">-</property>
+                <property name="label">-</property>
               </object>
               <packing>
                 <property name="left_attach">4</property>
@@ -1077,7 +1077,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">-</property>
+                <property name="label">-</property>
               </object>
               <packing>
                 <property name="left_attach">4</property>

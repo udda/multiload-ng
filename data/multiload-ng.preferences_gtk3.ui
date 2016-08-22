@@ -877,7 +877,7 @@
               <object class="GtkLabel" id="label_timespan_cpu">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">-</property>
+                <property name="label">-</property>
                 <property name="xalign">0</property>
               </object>
               <packing>
@@ -889,7 +889,7 @@
               <object class="GtkLabel" id="label_timespan_mem">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">-</property>
+                <property name="label">-</property>
                 <property name="xalign">0</property>
               </object>
               <packing>
@@ -901,7 +901,7 @@
               <object class="GtkLabel" id="label_timespan_temp">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">-</property>
+                <property name="label">-</property>
                 <property name="xalign">0</property>
               </object>
               <packing>
@@ -913,7 +913,7 @@
               <object class="GtkLabel" id="label_timespan_disk">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">-</property>
+                <property name="label">-</property>
                 <property name="xalign">0</property>
               </object>
               <packing>
@@ -925,7 +925,7 @@
               <object class="GtkLabel" id="label_timespan_load">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">-</property>
+                <property name="label">-</property>
                 <property name="xalign">0</property>
               </object>
               <packing>
@@ -937,7 +937,7 @@
               <object class="GtkLabel" id="label_timespan_swap">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">-</property>
+                <property name="label">-</property>
                 <property name="xalign">0</property>
               </object>
               <packing>
@@ -949,7 +949,7 @@
               <object class="GtkLabel" id="label_timespan_net">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">-</property>
+                <property name="label">-</property>
                 <property name="xalign">0</property>
               </object>
               <packing>
