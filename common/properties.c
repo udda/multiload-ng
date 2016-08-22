@@ -24,6 +24,7 @@
 #include <gtk/gtk.h>
 #include <glib/gi18n-lib.h>
 
+#include "binary-data.h"
 #include "gtk-compat.h"
 #include "load-graph.h"
 #include "multiload.h"
@@ -566,20 +567,10 @@ void
 multiload_init_preferences (GtkWidget *dialog, MultiloadPlugin *ma)
 {
 	guint i, c;
-	gchar *path;
 
 	builder = gtk_builder_new();
 	gtk_builder_set_translation_domain (builder, GETTEXT_PACKAGE);
-
-#if GTK_API == 2
-	path = g_build_filename( UI_DIR, "multiload-ng.preferences_gtk2.ui", NULL);
-#elif GTK_API == 3
-	path = g_build_filename( UI_DIR, "multiload-ng.preferences_gtk3.ui", NULL);
-#else
-	#error No preferences window available.
-#endif
-
-	gtk_builder_add_from_file (builder, path, NULL);
+	gtk_builder_add_from_string (builder, binary_data_preferences_ui, -1, NULL);
 
 	// init values
 	for (i=0; i<GRAPH_MAX; i++) {

@@ -2,7 +2,6 @@ AM_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DG_LOG_DOMAIN=\"multiload-ng-core\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
-	-DUI_DIR=\"$(UIDIR)\"
 	$(PLATFORM_CPPFLAGS)
 
 #
@@ -13,6 +12,7 @@ noinst_LTLIBRARIES = \
 
 multiload_ng_core_la_SOURCES = \
 	about-data.c about-data.h \
+	binary-data.c binary-data.h \
 	autoscaler.c autoscaler.h \
 	gtk-compat.c gtk-compat.h \
 	linux-proc.c linux-proc.h \
@@ -45,13 +45,19 @@ multiload_ng_core_la_LIBADD = \
 
 
 BUILT_SOURCES = \
-	about-data.c
+	about-data.c \
+	binary-data.c
 
 about-data.c: $(top_srcdir)/AUTHORS $(top_srcdir)/data/generate-about-data.sh
 	@chmod +x $(top_srcdir)/data/generate-about-data.sh
-	$(top_srcdir)/data/generate-about-data.sh $(top_srcdir)/AUTHORS > about-data.c
+	( cd $(top_srcdir)/data; ./generate-about-data.sh $(top_srcdir)/AUTHORS ) > about-data.c
+
+binary-data.c: $(top_srcdir)/data/preferences_gtk2.ui $(top_srcdir)/data/preferences_gtk3.ui $(top_srcdir)/data/generate-binary-data.sh
+	@chmod +x $(top_srcdir)/data/generate-binary-data.sh
+	( cd $(top_srcdir)/data; ./generate-binary-data.sh ) > binary-data.c
 
 CLEANFILES = \
-	about-data.c
+	about-data.c \
+	binary-data.c
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

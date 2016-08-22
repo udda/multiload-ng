@@ -20,22 +20,53 @@
 #
 
 
+hexdump() {
+	local BYTES_PER_LINE=16
+	local A=0
+
+	echo "const char $1[] = {"
+	echo -n "    "
+
+	IFS=
+
+	while read -r -s -N 1 char; do
+		printf "0x%02X, " "'$char"
+
+		let A=A+1
+		if [ "$A" = "$BYTES_PER_LINE" ]; then
+			printf "\n    "
+			A=0
+		fi
+	done
+	echo "0x00"
+	echo "};"
+}
+
+strdump() {
+	echo 'const char *'$1' = '
+	while read -r -s line; do
+		echo '"'${line//\"/\\\"}'"'
+	done
+	echo ";"
+}
+
 echo "/* Copyright (C) 2016 Mario Cianciolo <mr.udda@gmail.com> */"
 echo "/* This file is part of multiload-ng. */"
 echo
 echo "/* THIS FILE IS GENERATED AUTOMATICALLY. DO NOT EDIT */"
 echo
-echo "#ifndef NULL"
-echo "#define NULL (char)0x00"
+echo "#include <config.h>"
+echo
+echo
+echo "#if GTK_API == 2"
+echo
+cat preferences_gtk2.ui | strdump "binary_data_preferences_ui"
+echo
+echo "#elif GTK_API == 3"
+echo
+cat preferences_gtk3.ui | strdump "binary_data_preferences_ui"
+echo
+echo "#else"
+echo "#error Invalid GTK_API"
 echo "#endif"
-echo
-echo "const char * const about_data_authors[] = {"
-IFS=$'\n'
-for line in $(cat $1); do
-	echo "	\"$line\","
-done
-echo "	NULL"
-echo "};"
-echo
-echo "const char *about_data_icon = \"@APPICON@\";"
 echo
