@@ -163,7 +163,6 @@ AC_SUBST([UIDIR])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
 	Makefile
-	generate-about-data.sh
 	common/Makefile
 	po/Makefile.in
 ])

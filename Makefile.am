@@ -44,21 +44,11 @@ ChangeLog: Makefile
 
 dist-hook: ChangeLog
 
-BUILT_SOURCES = \
-	common/about-data.c
-
-common/about-data.c: AUTHORS $(top_srcdir)/generate-about-data.sh
-	@chmod +x $(top_srcdir)/generate-about-data.sh
-	$(top_srcdir)/generate-about-data.sh > common/about-data.c
-
 EXTRA_DIST = \
 	intltool-extract.in \
 	intltool-merge.in \
 	intltool-update.in \
 	AUTHORS COPYING ChangeLog README.md
-
-CLEANFILES = \
-	common/about-data.c
 
 DISTCLEANFILES = \
 	intltool-extract \

@@ -42,4 +42,16 @@ multiload_ng_core_la_LIBADD = \
 	$(CAIRO_LIBS) \
 	$(LIBGTOP_LIBS)
 
+
+
+BUILT_SOURCES = \
+	about-data.c
+
+about-data.c: $(top_srcdir)/AUTHORS $(top_srcdir)/data/generate-about-data.sh
+	@chmod +x $(top_srcdir)/data/generate-about-data.sh
+	$(top_srcdir)/data/generate-about-data.sh $(top_srcdir)/AUTHORS > about-data.c
+
+CLEANFILES = \
+	about-data.c
+
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:
