@@ -1,0 +1,198 @@
+<schemalist gettext-domain="@GETTEXT_PACKAGE@">
+  <schema id="org.mate.panel.applet.multiload-ng">
+    <key name="padding" type="i">
+      <default>2</default>
+    </key>
+    <key name="spacing" type="i">
+      <default>1</default>
+    </key>
+    <key name="orientation" type="i">
+      <default>0</default>
+    </key>
+    <key name="fill-between" type="b">
+      <default>false</default>
+    </key>
+
+    <key name="graph-cpu-visible" type="b">
+      <default>true</default>
+    </key>
+    <key name="graph-cpu-border-width" type="i">
+      <default>1</default>
+    </key>
+    <key name="graph-cpu-colors" type="s">
+      <default>''</default>
+    </key>
+    <key name="graph-cpu-size" type="i">
+      <default>40</default>
+    </key>
+    <key name="graph-cpu-interval" type="i">
+      <default>500</default>
+    </key>
+    <key name="graph-cpu-tooltip-style" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-cpu-dblclick-policy" type="i">
+      <default>0</default>
+    </key>
+    <key name="graph-cpu-dblclick-cmdline" type="s">
+      <default>''</default>
+    </key>
+
+
+    <key name="graph-mem-visible" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-mem-border-width" type="i">
+      <default>1</default>
+    </key>
+    <key name="graph-mem-colors" type="s">
+      <default>''</default>
+    </key>
+    <key name="graph-mem-size" type="i">
+      <default>40</default>
+    </key>
+    <key name="graph-mem-interval" type="i">
+      <default>500</default>
+    </key>
+    <key name="graph-mem-tooltip-style" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-mem-dblclick-policy" type="i">
+      <default>0</default>
+    </key>
+    <key name="graph-mem-dblclick-cmdline" type="s">
+      <default>''</default>
+    </key>
+
+
+    <key name="graph-net-visible" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-net-border-width" type="i">
+      <default>1</default>
+    </key>
+    <key name="graph-net-colors" type="s">
+      <default>''</default>
+    </key>
+    <key name="graph-net-size" type="i">
+      <default>40</default>
+    </key>
+    <key name="graph-net-interval" type="i">
+      <default>500</default>
+    </key>
+    <key name="graph-net-tooltip-style" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-net-dblclick-policy" type="i">
+      <default>0</default>
+    </key>
+    <key name="graph-net-dblclick-cmdline" type="s">
+      <default>''</default>
+    </key>
+
+
+    <key name="graph-swap-visible" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-swap-border-width" type="i">
+      <default>1</default>
+    </key>
+    <key name="graph-swap-colors" type="s">
+      <default>''</default>
+    </key>
+    <key name="graph-swap-size" type="i">
+      <default>40</default>
+    </key>
+    <key name="graph-swap-interval" type="i">
+      <default>500</default>
+    </key>
+    <key name="graph-swap-tooltip-style" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-swap-dblclick-policy" type="i">
+      <default>0</default>
+    </key>
+    <key name="graph-swap-dblclick-cmdline" type="s">
+      <default>''</default>
+    </key>
+
+
+    <key name="graph-load-visible" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-load-border-width" type="i">
+      <default>1</default>
+    </key>
+    <key name="graph-load-colors" type="s">
+      <default>''</default>
+    </key>
+    <key name="graph-load-size" type="i">
+      <default>40</default>
+    </key>
+    <key name="graph-load-interval" type="i">
+      <default>500</default>
+    </key>
+    <key name="graph-load-tooltip-style" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-load-dblclick-policy" type="i">
+      <default>0</default>
+    </key>
+    <key name="graph-load-dblclick-cmdline" type="s">
+      <default>''</default>
+    </key>
+
+
+    <key name="graph-disk-visible" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-disk-border-width" type="i">
+      <default>1</default>
+    </key>
+    <key name="graph-disk-colors" type="s">
+      <default>''</default>
+    </key>
+    <key name="graph-disk-size" type="i">
+      <default>40</default>
+    </key>
+    <key name="graph-disk-interval" type="i">
+      <default>500</default>
+    </key>
+    <key name="graph-disk-tooltip-style" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-disk-dblclick-policy" type="i">
+      <default>0</default>
+    </key>
+    <key name="graph-disk-dblclick-cmdline" type="s">
+      <default>''</default>
+    </key>
+
+
+    <key name="graph-temperature-visible" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-temperature-border-width" type="i">
+      <default>1</default>
+    </key>
+    <key name="graph-temperature-colors" type="s">
+      <default>''</default>
+    </key>
+    <key name="graph-temperature-size" type="i">
+      <default>40</default>
+    </key>
+    <key name="graph-temperature-interval" type="i">
+      <default>500</default>
+    </key>
+    <key name="graph-temperature-tooltip-style" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-temperature-dblclick-policy" type="i">
+      <default>0</default>
+    </key>
+    <key name="graph-temperature-dblclick-cmdline" type="s">
+      <default>''</default>
+    </key>
+
+  </schema>
+</schemalist>

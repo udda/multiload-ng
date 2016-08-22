@@ -30,6 +30,7 @@ mate/org.mate.*.mate-panel-applet.in.in
 mate/org.mate.panel.applet.*.service
 mate/org.mate.panel.applet.*.gschema.valid
 mate/org.mate.panel.applet.*.gschema.xml
+mate/org.mate.panel.applet.*.gschema.xml.in
 standalone/multiload-ng
 standalone/*.desktop
 standalone/*.desktop.in

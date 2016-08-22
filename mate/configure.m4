@@ -21,4 +21,5 @@ AC_SUBST(MATE_LIBS)
 AC_CONFIG_FILES([
 	mate/Makefile
 	mate/org.mate.multiload-ng.Applet.mate-panel-applet.in.in
+	mate/org.mate.panel.applet.multiload-ng.gschema.xml.in
 ])

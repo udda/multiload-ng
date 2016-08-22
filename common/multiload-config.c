@@ -43,7 +43,7 @@ guint multiload_config_get_num_data(guint id)
 void multiload_config_init()
 {
 	GraphType temp[] = {
-		{	"cpuload",			_("Processor"),		GetCpu,
+		{	"cpu",				_("Processor"),		GetCpu,
 			7, { // hue: 196
 				{ _("User"),						"#FF036F96" },
 				{ _("System"),						"#FF42ACD1" },
@@ -55,7 +55,7 @@ void multiload_config_init()
 			}
 		},
 
-		{	"memload",			_("Memory"),		GetMemory,
+		{	"mem",				_("Memory"),		GetMemory,
 			7, { // hue: 151
 				{ _("User"),						"#FF03964F" },
 				{ _("Shared"),						"#FF43D18D" },
@@ -67,7 +67,7 @@ void multiload_config_init()
 			}
 		},
 
-		{	"netload",			_("Network"),		GetNet,
+		{	"net",				_("Network"),		GetNet,
 			6, { // hue: 53
 				{ _("In"),							"#FFE2CC05" },
 				{ _("Out"),							"#FF696018" },
@@ -78,7 +78,7 @@ void multiload_config_init()
 			}
 		},
 
-		{	"swapload",			_("Swap"),			GetSwap,
+		{	"swap",				_("Swap"),			GetSwap,
 			4, { // hue: 278
 				{ _("Used"),						"#FF9C43D1" },
 				{ _("Border"),						"#FF510080" },
@@ -87,7 +87,7 @@ void multiload_config_init()
 			}
 		},
 
-		{	"loadavg",			_("Load average"),	GetLoadAvg,
+		{	"load",				_("Load average"),	GetLoadAvg,
 			4, { // hue: 0
 				{ _("Average"),						"#FFD14343" },
 				{ _("Border"),						"#FF800000" },
@@ -96,7 +96,7 @@ void multiload_config_init()
 			}
 		},
 
-		{	"diskload",			_("Disk"),			GetDisk,
+		{	"disk",				_("Disk"),			GetDisk,
 			5, { // hue: 31
 				{ _("Read"),						"#FFED7A00" },
 				{ _("Write"),						"#FFFF6700" },
