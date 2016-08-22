@@ -554,6 +554,9 @@ multiload_preferences_connect_signals (MultiloadPlugin *ma)
 	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "hscale_padding")), "value-changed", G_CALLBACK(spacing_or_padding_changed_cb), ma);
 	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "combo_orientation")), "changed", G_CALLBACK(combo_orientation_changed_cb), ma);
 
+	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "dialog_advanced")), "delete-event", G_CALLBACK(gtk_widget_hide_on_delete), ma);
+	g_signal_connect_swapped(G_OBJECT(gtk_builder_get_object(builder, "button_dialog_advanced_close")), "clicked", G_CALLBACK(gtk_widget_hide), G_OBJECT(gtk_builder_get_object(builder, "dialog_advanced")));
+
 	g_debug("[preferences] Signals connected");
 }
 
