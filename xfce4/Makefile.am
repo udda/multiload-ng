@@ -18,8 +18,7 @@ libmultiload_ng_la_SOURCES = \
 
 libmultiload_ng_la_CFLAGS = \
 	$(GTK_CFLAGS) \
-	$(XFCE4_CFLAGS) $(XFCE4UI_CFLAGS) $(XFCEGUI4_CFLAGS) \
-	-export-dynamic
+	$(XFCE4_CFLAGS) $(XFCE4UI_CFLAGS) $(XFCEGUI4_CFLAGS)
 
 
 libmultiload_ng_la_LDFLAGS = \

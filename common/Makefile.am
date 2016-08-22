@@ -27,8 +27,7 @@ multiload_ng_core_la_SOURCES = \
 multiload_ng_core_la_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(CAIRO_CFLAGS) \
-	$(LIBGTOP_CFLAGS) \
-	-export-dynamic
+	$(LIBGTOP_CFLAGS)
 
 
 multiload_ng_core_la_LDFLAGS = \

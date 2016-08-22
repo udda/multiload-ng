@@ -18,8 +18,7 @@ multiload_ng_la_SOURCES = \
 
 multiload_ng_la_CFLAGS = \
 	$(GTK_CFLAGS) \
-	$(LXPANEL_CFLAGS) \
-	-export-dynamic
+	$(LXPANEL_CFLAGS)
 
 
 multiload_ng_la_LDFLAGS = \

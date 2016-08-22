@@ -15,8 +15,7 @@ mate_multiload_ng_applet_SOURCES = \
 
 mate_multiload_ng_applet_CFLAGS = \
 	$(GTK_CFLAGS) \
-	$(MATE_CFLAGS) \
-	-export-dynamic
+	$(MATE_CFLAGS)
 
 
 mate_multiload_ng_applet_LDADD = \

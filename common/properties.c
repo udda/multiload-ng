@@ -35,9 +35,6 @@
 #ifdef MULTILOAD_EXPERIMENTAL_ENABLE
 // New Glade preferences window (EXPERIMENTAL)
 
-//TODO this must go in configure.ac (depending on GTK_API)
-#define GTK_BUILDER_FILE_PATH "/home/mario/src/multiload-ng/master/data/multiload-ng.preferences_gtk2.ui"
-
 
 static GtkBuilder *builder;
 
@@ -143,7 +140,7 @@ static const gchar* spin_border_names[GRAPH_MAX] = {
 	"sb_border_temp"
 };
 
-static const gchar* color_button_names[][GRAPH_MAX] = {
+static const gchar* color_button_names[GRAPH_MAX][MAX_COLORS] = {
 	{
 		"cb_color_cpu1",
 		"cb_color_cpu2",
@@ -166,28 +163,33 @@ static const gchar* color_button_names[][GRAPH_MAX] = {
 		"cb_color_net3",
 		"cb_color_net_border",
 		"cb_color_net_bg1",
-		"cb_color_net_bg2"
+		"cb_color_net_bg2",
+		NULL
 	}, {
 		"cb_color_swap1",
 		"cb_color_swap_border",
 		"cb_color_swap_bg1",
-		"cb_color_swap_bg2"
+		"cb_color_swap_bg2",
+		NULL
 	}, {
 		"cb_color_load1",
 		"cb_color_load_border",
 		"cb_color_load_bg1",
-		"cb_color_load_bg2"
+		"cb_color_load_bg2",
+		NULL
 	}, {
 		"cb_color_disk1",
 		"cb_color_disk2",
 		"cb_color_disk_border",
 		"cb_color_disk_bg1",
-		"cb_color_disk_bg2"
+		"cb_color_disk_bg2",
+		NULL
 	}, {
 		"cb_color_temp1",
 		"cb_color_temp_border",
 		"cb_color_temp_bg1",
-		"cb_color_temp_bg2"
+		"cb_color_temp_bg2",
+		NULL
 	}
 };
 
@@ -505,6 +507,8 @@ color_set_cb (GtkColorButton *col, MultiloadPlugin *ma)
 	const gchar *name = gtk_buildable_get_name(GTK_BUILDABLE(col));
 	for (graph_index=0; graph_index<GRAPH_MAX; graph_index++) {
 		for (i=0; i<multiload_config_get_num_colors(graph_index); i++) {
+			if (NULL == color_button_names[graph_index][i])
+				break;
 			if (strcmp(color_button_names[graph_index][i], name) == 0) {
 				found = TRUE;
 				break;
@@ -522,6 +526,38 @@ color_set_cb (GtkColorButton *col, MultiloadPlugin *ma)
 	if (i == multiload_colors_get_extra_index(graph_index, EXTRA_COLOR_BORDER))
 		multiload_refresh(ma);
 }
+
+void
+multiload_preferences_connect_signals (MultiloadPlugin *ma)
+{
+	// cannot use gtk_builder_connect_signals because this fails in panel plugins
+	guint i, j;
+
+	for (i=0; i<GRAPH_MAX; i++) {
+		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, spinbutton_size_names[i])), "output", G_CALLBACK(spinbutton_size_output_cb), ma);
+		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, spinbutton_size_names[i])), "value-changed", G_CALLBACK(spinbutton_size_change_cb), ma);
+		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, spinbutton_interval_names[i])), "output", G_CALLBACK(spinbutton_interval_output_cb), ma);
+		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, spinbutton_interval_names[i])), "value-changed", G_CALLBACK(spinbutton_interval_change_cb), ma);
+		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, checkbox_visibility_names[i])), "toggled", G_CALLBACK(prop_graph_visibility_cb), ma);
+		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, checkbox_visibility_names[i])), "toggled", G_CALLBACK(prop_checkboxes_sensitive_cb), ma);
+		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, button_advanced_names[i])), "clicked", G_CALLBACK(button_advanced_clicked_cb), ma);
+		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, tooltip_style_names[i])), "changed", G_CALLBACK(tooltip_style_changed_cb), ma);
+		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, dblclick_policy_names[i])), "changed", G_CALLBACK(dblclick_policy_changed_cb), ma);
+		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, dblclick_command_names[i])), "changed", G_CALLBACK(dblclick_command_changed_cb), ma);
+		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, spin_border_names[i])), "value-changed", G_CALLBACK(border_changed_cb), ma);
+
+		for (j=0; j < G_N_ELEMENTS(color_button_names[i]); j++) {
+			if (NULL == color_button_names[i][j])
+				break;
+			g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, color_button_names[i][j])), "color-set", G_CALLBACK(color_set_cb), ma);
+		}
+	}
+	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "cb_fill_between")), "toggled", G_CALLBACK(fill_between_toggled_cb), ma);
+	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "hscale_spacing")), "value-changed", G_CALLBACK(spacing_or_padding_changed_cb), ma);
+	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "hscale_padding")), "value-changed", G_CALLBACK(spacing_or_padding_changed_cb), ma);
+	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "combo_orientation")), "changed", G_CALLBACK(combo_orientation_changed_cb), ma);
+}
+
 
 // create the properties dialog and initialize it from current configuration
 void
@@ -573,7 +609,7 @@ multiload_init_preferences (GtkWidget *dialog, MultiloadPlugin *ma)
 	GtkWidget *mainwnd_vbox = GTK_WIDGET(gtk_builder_get_object(builder, "mainwnd_vbox"));
 	gtk_container_add(GTK_CONTAINER(gtk_dialog_get_content_area(GTK_DIALOG(dialog))), mainwnd_vbox);
 
-	gtk_builder_connect_signals(builder, ma);
+	multiload_preferences_connect_signals(ma);
 }
 
 

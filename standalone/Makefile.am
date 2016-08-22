@@ -13,8 +13,7 @@ multiload_ng_SOURCES = \
 	plugin.c
 
 multiload_ng_CFLAGS = \
-	$(GTK_CFLAGS) \
-	-export-dynamic
+	$(GTK_CFLAGS)
 
 
 multiload_ng_LDFLAGS = \
