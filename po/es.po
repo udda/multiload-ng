@@ -712,8 +712,8 @@ msgstr  ""
 #, c-format
 msgid   "The following tokens can be used within the command line:\n"
         "\n"
-        "%n\tgraph number, from 1 (CPU) to 7 (temperature)\n"
-        "%x\tshort name of the graph - three  to four letters"
+        "%n - graph number, from 1 (CPU) to 7 (temperature)\n"
+        "%x - short name of the graph - three  to four letters"
 msgstr  ""
 
 #: data/multiload-ng.preferences_gtk3.ui:2836
