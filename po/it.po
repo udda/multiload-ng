@@ -713,10 +713,10 @@ msgstr  "Imposta il comando personalizzato per questo grafico"
 msgid   "The following tokens can be used within the command line:\n"
         "\n"
         "%n - graph number, from 1 (CPU) to 7 (temperature)\n"
-        "%x - short name of the graph - three  to four letters"
+        "%x - short name of the graph - three to four letters"
 msgstr  "I seguenti token possono essere usati all'interno della riga di comando:\n"
         "\n"
-        "%n - numero del grafico, da 1 (CPU) fino a 7 (temperatura)"
+        "%n - numero del grafico, da 1 (CPU) fino a 7 (temperatura)\n"
         "%x - nome breve del grafico - tre o quattro lettere"
 
 #: data/multiload-ng.preferences_gtk3.ui:2836

@@ -3576,7 +3576,7 @@
                     <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
 %n - graph number, from 1 (CPU) to 7 (temperature)
-%x - short name of the graph - three  to four letters</property>
+%x - short name of the graph - three to four letters</property>
                     <property name="icon_name">dialog-information</property>
                   </object>
                   <packing>
@@ -3702,8 +3702,8 @@
                     <property name="can_focus">False</property>
                     <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n	graph number, from 1 (CPU) to 7 (temperature)
-%x	short name of the graph - three  to four letters</property>
+%n - graph number, from 1 (CPU) to 7 (temperature)
+%x - short name of the graph - three to four letters</property>
                     <property name="icon_name">dialog-information</property>
                   </object>
                   <packing>
@@ -3833,8 +3833,8 @@
                     <property name="can_focus">False</property>
                     <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n	graph number, from 1 (CPU) to 7 (temperature)
-%x	short name of the graph - three  to four letters</property>
+%n - graph number, from 1 (CPU) to 7 (temperature)
+%x - short name of the graph - three to four letters</property>
                     <property name="icon_name">dialog-information</property>
                   </object>
                   <packing>
@@ -3964,8 +3964,8 @@
                     <property name="can_focus">False</property>
                     <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n	graph number, from 1 (CPU) to 7 (temperature)
-%x	short name of the graph - three  to four letters</property>
+%n - graph number, from 1 (CPU) to 7 (temperature)
+%x - short name of the graph - three to four letters</property>
                     <property name="icon_name">dialog-information</property>
                   </object>
                   <packing>
@@ -4095,8 +4095,8 @@
                     <property name="can_focus">False</property>
                     <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n	graph number, from 1 (CPU) to 7 (temperature)
-%x	short name of the graph - three  to four letters</property>
+%n - graph number, from 1 (CPU) to 7 (temperature)
+%x - short name of the graph - three to four letters</property>
                     <property name="icon_name">dialog-information</property>
                   </object>
                   <packing>
@@ -4226,8 +4226,8 @@
                     <property name="can_focus">False</property>
                     <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n	graph number, from 1 (CPU) to 7 (temperature)
-%x	short name of the graph - three  to four letters</property>
+%n - graph number, from 1 (CPU) to 7 (temperature)
+%x - short name of the graph - three to four letters</property>
                     <property name="icon_name">dialog-information</property>
                   </object>
                   <packing>
@@ -4357,8 +4357,8 @@
                     <property name="can_focus">False</property>
                     <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n	graph number, from 1 (CPU) to 7 (temperature)
-%x	short name of the graph - three  to four letters</property>
+%n - graph number, from 1 (CPU) to 7 (temperature)
+%x - short name of the graph - three to four letters</property>
                     <property name="icon_name">dialog-information</property>
                   </object>
                   <packing>
