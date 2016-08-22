@@ -122,6 +122,7 @@ AC_ARG_ENABLE([profiling], AS_HELP_STRING([--enable-profiling], [Enable CFLAGS f
 
 
 # Per-panel configure
+m4_include([data/configure.m4])
 m4_include([standalone/configure.m4])
 m4_include([indicator/configure.m4])
 m4_include([lxpanel/configure.m4])
@@ -164,7 +165,6 @@ AC_CONFIG_FILES([
 	Makefile
 	generate-about-data.sh
 	common/Makefile
-	data/Makefile
 	po/Makefile.in
 ])
 AC_OUTPUT
