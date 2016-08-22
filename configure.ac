@@ -53,14 +53,17 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package.])
 AM_GLIB_GNU_GETTEXT
 
 
+# Check highest available GTK version
+PKG_CHECK_EXISTS([gtk+-3.0], [auto_gtk=3.0], [auto_gtk=2.0])
 # Select GTK version
 AC_MSG_CHECKING([which gtk+ version to compile against])
-AC_ARG_WITH([gtk], [AS_HELP_STRING([--with-gtk=2.0|3.0], [which GTK+ version to compile against (default: 2.0)])],
+AC_ARG_WITH([gtk], [AS_HELP_STRING([--with-gtk=2.0|3.0|auto], [which GTK+ version to compile against (default: auto)])],
 	[case "$with_gtk" in
 		2.0|3.0) ;;
+		auto) with_gtk=$auto_gtk ;;
 		*) AC_MSG_ERROR([invalid gtk version specified]) ;;
 	esac],
-	[with_gtk=2.0]
+	[ with_gtk=$auto_gtk ]
 )
 AC_MSG_RESULT([$with_gtk])
 
