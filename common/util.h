@@ -29,7 +29,7 @@
 
 G_BEGIN_DECLS
 
-G_GNUC_INTERNAL gint64
+G_GNUC_INTERNAL guint64
 calculate_speed(guint64 delta, guint period_ms);
 
 G_GNUC_INTERNAL gboolean

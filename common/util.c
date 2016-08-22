@@ -29,7 +29,7 @@
 #include "util.h"
 
 
-gint64
+guint64
 calculate_speed(guint64 delta, guint period_ms)
 {
 	return ( delta * 1000 ) / period_ms;
