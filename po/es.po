@@ -197,15 +197,15 @@ msgstr  "%s/s"
 
 #: common/util.c:239 common/util.c:258
 msgid   "_Cancel"
-msgstr  ""
+msgstr  "_Cancelar"
 
 #: common/util.c:240
 msgid   "_Open"
-msgstr  ""
+msgstr  "_Abrir"
 
 #: common/util.c:259
 msgid   "_Save"
-msgstr  ""
+msgstr  "_Guardar"
 
 #: common/util.c:317
 #, c-format
@@ -218,21 +218,21 @@ msgstr  "Roberta Assennato <r.assennato@gmail.com>"
 
 #: common/ui.c:239
 msgid   "_Help"
-msgstr  ""
+msgstr  "Ay_uda"
 
 #: common/ui.c:240
 msgid   "_Close"
-msgstr  ""
+msgstr  "_Cerrar"
 
 #: data/multiload-ng.preferences_gtk2.ui:205
 #: data/multiload-ng.preferences_gtk3.ui:205
 msgid   "Default"
-msgstr  ""
+msgstr  "Predeterminado"
 
 #: data/multiload-ng.preferences_gtk2.ui:220
 #: data/multiload-ng.preferences_gtk3.ui:220
 msgid   "(Custom)"
-msgstr  ""
+msgstr  "(Personalizado)"
 
 #: data/multiload-ng.preferences_gtk2.ui:233
 #: data/multiload-ng.preferences_gtk3.ui:233
@@ -268,7 +268,7 @@ msgstr  "Vertical"
 #: data/multiload-ng.preferences_gtk2.ui:311
 #: data/multiload-ng.preferences_gtk3.ui:315
 msgid   "Preferences editor"
-msgstr  ""
+msgstr  "Editor de preferencias"
 
 #: data/multiload-ng.preferences_gtk2.ui:381
 #: data/multiload-ng.preferences_gtk2.ui:431
@@ -370,7 +370,7 @@ msgstr  "Intervalo de _actualización"
 #: data/multiload-ng.preferences_gtk3.ui:965
 #: data/multiload-ng.preferences_gtk3.ui:3165
 msgid   "Advanced configuration"
-msgstr  ""
+msgstr  "Configuracion avanzada"
 
 #: data/multiload-ng.preferences_gtk2.ui:1116
 #: data/multiload-ng.preferences_gtk3.ui:979
@@ -385,7 +385,7 @@ msgstr  "Rellene espacio entre los gráficos"
 #: data/multiload-ng.preferences_gtk2.ui:1144
 #: data/multiload-ng.preferences_gtk3.ui:1008
 msgid   "Orientation:"
-msgstr  ""
+msgstr  "Orientación"
 
 #: data/multiload-ng.preferences_gtk2.ui:1159
 #: data/multiload-ng.preferences_gtk3.ui:1021
@@ -422,17 +422,17 @@ msgstr  "La orientación no es la del panel. Los gráficos podrían ser muy "
 #: data/multiload-ng.preferences_gtk2.ui:1327
 #: data/multiload-ng.preferences_gtk3.ui:1201
 msgid   "Graphs"
-msgstr  ""
+msgstr  "Gráficos"
 
 #: data/multiload-ng.preferences_gtk2.ui:1368
 #: data/multiload-ng.preferences_gtk3.ui:1247
 msgid   "Color scheme"
-msgstr  ""
+msgstr  "Esquema de colores"
 
 #: data/multiload-ng.preferences_gtk2.ui:1388
 #: data/multiload-ng.preferences_gtk3.ui:1267
 msgid   "Builtin"
-msgstr  ""
+msgstr  "Incorporado"
 
 #: data/multiload-ng.preferences_gtk2.ui:1421
 #: data/multiload-ng.preferences_gtk3.ui:1300
@@ -442,7 +442,7 @@ msgstr  ""
 #: data/multiload-ng.preferences_gtk2.ui:1422
 #: data/multiload-ng.preferences_gtk3.ui:1301
 msgid   "New"
-msgstr  ""
+msgstr  "Nuevo"
 
 #: data/multiload-ng.preferences_gtk2.ui:1434
 #: data/multiload-ng.preferences_gtk3.ui:1313
@@ -452,7 +452,7 @@ msgstr  ""
 #: data/multiload-ng.preferences_gtk2.ui:1435
 #: data/multiload-ng.preferences_gtk3.ui:1314
 msgid   "Delete"
-msgstr  ""
+msgstr  "Borrar"
 
 #: data/multiload-ng.preferences_gtk2.ui:1447
 #: data/multiload-ng.preferences_gtk3.ui:1326
@@ -462,7 +462,7 @@ msgstr  ""
 #: data/multiload-ng.preferences_gtk2.ui:1448
 #: data/multiload-ng.preferences_gtk3.ui:1327
 msgid   "Save"
-msgstr  ""
+msgstr  "Guardar"
 
 #: data/multiload-ng.preferences_gtk2.ui:1469
 #: data/multiload-ng.preferences_gtk3.ui:1349
@@ -472,7 +472,7 @@ msgstr  ""
 #: data/multiload-ng.preferences_gtk2.ui:1470
 #: data/multiload-ng.preferences_gtk3.ui:1350
 msgid   "Import"
-msgstr  ""
+msgstr  "Importar"
 
 #: data/multiload-ng.preferences_gtk2.ui:1482
 #: data/multiload-ng.preferences_gtk3.ui:1362
@@ -482,7 +482,7 @@ msgstr  ""
 #: data/multiload-ng.preferences_gtk2.ui:1483
 #: data/multiload-ng.preferences_gtk3.ui:1363
 msgid   "Export"
-msgstr  ""
+msgstr  "Exportar"
 
 #: data/multiload-ng.preferences_gtk2.ui:1719
 #: data/multiload-ng.preferences_gtk2.ui:2007
@@ -598,7 +598,7 @@ msgstr  "Valor"
 #: data/multiload-ng.preferences_gtk2.ui:3341
 #: data/multiload-ng.preferences_gtk3.ui:3063
 msgid   "Colors"
-msgstr  ""
+msgstr  "Colores"
 
 #: data/multiload-ng.preferences_gtk2.ui:3419
 #: data/multiload-ng.preferences_gtk3.ui:3155
@@ -608,7 +608,7 @@ msgstr  ""
 #: data/multiload-ng.preferences_gtk2.ui:3422
 #: data/multiload-ng.preferences_gtk3.ui:3158
 msgid   "Detailed"
-msgstr  ""
+msgstr  "Detallado"
 
 #: data/multiload-ng.preferences_gtk2.ui:3490
 #: data/multiload-ng.preferences_gtk2.ui:3617
@@ -724,4 +724,4 @@ msgstr  ""
 #: data/multiload-ng.preferences_gtk3.ui:2896
 #: data/multiload-ng.preferences_gtk3.ui:2908
 msgid   "Color"
-msgstr  ""
+msgstr  "Color"
