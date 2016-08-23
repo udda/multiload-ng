@@ -526,6 +526,36 @@ color_set_cb (GtkColorButton *col, MultiloadPlugin *ma)
 }
 
 void
+colorscheme_new_clicked_cb (GtkToolButton *tb, MultiloadPlugin *ma)
+{
+	printf("NEW\n");
+}
+
+void
+colorscheme_delete_clicked_cb (GtkToolButton *tb, MultiloadPlugin *ma)
+{
+	printf("DELETE\n");
+}
+
+void
+colorscheme_save_clicked_cb (GtkToolButton *tb, MultiloadPlugin *ma)
+{
+	printf("SAVE\n");
+}
+
+void
+colorscheme_import_clicked_cb (GtkToolButton *tb, MultiloadPlugin *ma)
+{
+	printf("IMPORT\n");
+}
+
+void
+colorscheme_export_clicked_cb (GtkToolButton *tb, MultiloadPlugin *ma)
+{
+	printf("EXPORT\n");
+}
+
+void
 multiload_preferences_connect_signals (MultiloadPlugin *ma)
 {
 	// cannot use gtk_builder_connect_signals because this fails in panel plugins
@@ -554,6 +584,11 @@ multiload_preferences_connect_signals (MultiloadPlugin *ma)
 	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "hscale_spacing")), "value-changed", G_CALLBACK(spacing_or_padding_changed_cb), ma);
 	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "hscale_padding")), "value-changed", G_CALLBACK(spacing_or_padding_changed_cb), ma);
 	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "combo_orientation")), "changed", G_CALLBACK(combo_orientation_changed_cb), ma);
+	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "tb_colorscheme_new")), "clicked", G_CALLBACK(colorscheme_new_clicked_cb), ma);
+	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "tb_colorscheme_delete")), "clicked", G_CALLBACK(colorscheme_delete_clicked_cb), ma);
+	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "tb_colorscheme_save")), "clicked", G_CALLBACK(colorscheme_save_clicked_cb), ma);
+	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "tb_colorscheme_import")), "clicked", G_CALLBACK(colorscheme_import_clicked_cb), ma);
+	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "tb_colorscheme_export")), "clicked", G_CALLBACK(colorscheme_export_clicked_cb), ma);
 
 	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "dialog_advanced")), "delete-event", G_CALLBACK(gtk_widget_hide_on_delete), ma);
 	g_signal_connect_swapped(G_OBJECT(gtk_builder_get_object(builder, "button_dialog_advanced_close")), "clicked", G_CALLBACK(gtk_widget_hide), G_OBJECT(gtk_builder_get_object(builder, "dialog_advanced")));

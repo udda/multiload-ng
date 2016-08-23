@@ -1300,6 +1300,7 @@
                             <property name="tooltip_text" translatable="yes">Create new color scheme</property>
                             <property name="label" translatable="yes">New</property>
                             <property name="stock_id">gtk-add</property>
+                            <signal name="clicked" handler="colorscheme_new_clicked_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1313,6 +1314,7 @@
                             <property name="tooltip_text" translatable="yes">Delete selected color scheme</property>
                             <property name="label" translatable="yes">Delete</property>
                             <property name="stock_id">gtk-remove</property>
+                            <signal name="clicked" handler="colorscheme_delete_clicked_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1326,6 +1328,7 @@
                             <property name="tooltip_text" translatable="yes">Save current color scheme</property>
                             <property name="label" translatable="yes">Save</property>
                             <property name="stock_id">gtk-save</property>
+                            <signal name="clicked" handler="colorscheme_save_clicked_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1349,6 +1352,7 @@
                             <property name="tooltip_text" translatable="yes">Import color scheme from file</property>
                             <property name="label" translatable="yes">Import</property>
                             <property name="stock_id">gtk-open</property>
+                            <signal name="clicked" handler="colorscheme_import_clicked_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1362,6 +1366,7 @@
                             <property name="tooltip_text" translatable="yes">Export color scheme to file</property>
                             <property name="label" translatable="yes">Export</property>
                             <property name="stock_id">gtk-save-as</property>
+                            <signal name="clicked" handler="colorscheme_export_clicked_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
