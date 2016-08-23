@@ -6,8 +6,8 @@ common/multiload-colors.c
 common/properties.c
 common/util.c
 common/ui.c
-data/multiload-ng.preferences_gtk2.ui
-data/multiload-ng.preferences_gtk3.ui
+data/preferences_gtk2.ui
+data/preferences_gtk3.ui
 lxpanel/plugin.c
 mate/plugin.c
 standalone/multiload-ng.desktop.in.in
