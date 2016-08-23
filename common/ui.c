@@ -215,7 +215,7 @@ multiload_ui_configure_response_cb (GtkWidget *dialog, gint response, MultiloadP
 {
 	if (response == GTK_RESPONSE_HELP) {
 		g_debug("[ui] Help command triggered from preferences");
-		xdg_open_url(about_data_preferences_website);
+		xdg_open_url(about_data_website);
 	} else {
 		ma->pref_dialog = NULL;
 		multiload_ui_save (ma);

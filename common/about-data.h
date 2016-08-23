@@ -30,8 +30,6 @@
 
 #define about_data_website "https://udda.github.io/multiload-ng"
 
-#define about_data_preferences_website "https://github.com/udda/multiload-ng/wiki/Configuration"
-
 #define about_data_copyright \
 	_("Copyright \xC2\xA9 2016 Mario Cianciolo, " \
 	"1999-2012 nandhp, FSF, and others")
