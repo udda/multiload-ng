@@ -272,6 +272,29 @@ load_graph_destroy (GtkWidget *widget, LoadGraph *g)
 	gtk_widget_destroy(widget);
 }
 
+static gchar* parse_cmdline(const gchar* cmdline, guint n_graph) {
+	g_assert(n_graph <= GRAPH_MAX);
+
+	guint i;
+	gchar *ret, *tmp;
+
+	gchar number[2] = {'1'+n_graph, '\0'};
+
+	const gchar *subst_table[][2] = {
+		{ "%n", number },
+		{ "%x", graph_types[n_graph].name }
+	};
+
+	ret = g_strdup(cmdline);
+	for (i=0; i<G_N_ELEMENTS(subst_table); i++) {
+		tmp = str_replace(ret, subst_table[i][0], subst_table[i][1]);
+		g_free(ret);
+		ret = tmp;
+	}
+
+	return ret;
+}
+
 static gboolean
 load_graph_clicked (GtkWidget *widget, GdkEventButton *event, LoadGraph *g)
 {
@@ -285,7 +308,7 @@ load_graph_clicked (GtkWidget *widget, GdkEventButton *event, LoadGraph *g)
 				g_debug("[load-graph] Detected double click on graph '%s' - action: start task manager (%s)", graph_types[g->id].name, cmdline);
 				break;
 			case DBLCLICK_POLICY_CMDLINE:
-				cmdline = g_strdup(g->config->dblclick_cmdline);
+				cmdline = parse_cmdline(g->config->dblclick_cmdline, g->id);
 				g_debug("[load-graph] Detected double click on graph '%s' - action: execute command line (%s)", graph_types[g->id].name, cmdline);
 				break;
 			case DBLCLICK_POLICY_DONOTHING:

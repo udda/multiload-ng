@@ -31,6 +31,9 @@ G_BEGIN_DECLS
 
 G_GNUC_INTERNAL guint64
 calculate_speed(guint64 delta, guint period_ms);
+G_GNUC_INTERNAL char*
+str_replace(const char *string, const char *needle, const char *replacement);
+
 
 G_GNUC_INTERNAL gboolean
 file_check_contents(FILE *f, const gchar *string);
