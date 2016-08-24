@@ -546,13 +546,17 @@ colorscheme_save_clicked_cb (GtkToolButton *tb, MultiloadPlugin *ma)
 static void
 colorscheme_import_clicked_cb (GtkWidget *tb, MultiloadPlugin *ma)
 {
-	printf("IMPORT (not yet implemented)\n");
+	GtkWindow *parent = GTK_WINDOW(gtk_widget_get_toplevel(tb));
+	gchar *filename = gtk_open_file_dialog(parent, _("Import color scheme"));
+	multiload_colors_from_file(filename, ma, parent);
 }
 
 static void
 colorscheme_export_clicked_cb (GtkWidget *tb, MultiloadPlugin *ma)
 {
-	printf("EXPORT (not yet implemented)\n");
+	GtkWindow *parent = GTK_WINDOW(gtk_widget_get_toplevel(tb));
+	gchar *filename = gtk_save_file_dialog(parent, _("Export color scheme"), "multiload-ng.colors");
+	multiload_colors_to_file(filename, ma, parent);
 }
 
 static void
