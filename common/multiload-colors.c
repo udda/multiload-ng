@@ -216,7 +216,7 @@ gboolean multiload_colors_from_file(const gchar *filename, MultiloadPlugin *ma, 
 			status = FALSE;
 			break;
 		}
-		multiload_init_preferences(GTK_WIDGET(parent), ma);
+		multiload_fill_color_buttons(ma);
 		multiload_refresh(ma);
 	}
 

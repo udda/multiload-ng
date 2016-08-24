@@ -222,7 +222,7 @@ update_dynamic_widgets(MultiloadPlugin *ma)
 }
 
 
-void
+static void
 prop_checkboxes_sensitive_cb (GtkToggleButton *checkbox, gpointer user_data)
 {
 	guint i;
@@ -256,7 +256,7 @@ prop_checkboxes_sensitive_cb (GtkToggleButton *checkbox, gpointer user_data)
 }
 
 
-void
+static void
 prop_graph_visibility_cb (GtkToggleButton *checkbox, MultiloadPlugin *ma)
 {
 	guint i;
@@ -282,7 +282,7 @@ prop_graph_visibility_cb (GtkToggleButton *checkbox, MultiloadPlugin *ma)
 }
 
 
-void
+static void
 button_advanced_clicked_cb (GtkWidget *button, MultiloadPlugin *ma)
 {
 	guint i;
@@ -304,7 +304,7 @@ button_advanced_clicked_cb (GtkWidget *button, MultiloadPlugin *ma)
 }
 
 
-gint
+static gint
 spinbutton_size_output_cb (GtkSpinButton *spin, gpointer p)
 {
 	const gchar *format = _("%d pixel");
@@ -320,7 +320,7 @@ spinbutton_size_output_cb (GtkSpinButton *spin, gpointer p)
 }
 
 
-void
+static void
 spinbutton_size_change_cb (GtkSpinButton *spin, MultiloadPlugin *ma)
 {
 	guint i;
@@ -340,7 +340,7 @@ spinbutton_size_change_cb (GtkSpinButton *spin, MultiloadPlugin *ma)
 }
 
 
-gint
+static gint
 spinbutton_interval_output_cb (GtkSpinButton *spin, gpointer p)
 {
 	static int tooltip_timeout = -1;
@@ -366,7 +366,7 @@ spinbutton_interval_output_cb (GtkSpinButton *spin, gpointer p)
 }
 
 
-void
+static void
 spinbutton_interval_change_cb (GtkSpinButton *spin, MultiloadPlugin *ma)
 {
 	guint i;
@@ -389,7 +389,7 @@ spinbutton_interval_change_cb (GtkSpinButton *spin, MultiloadPlugin *ma)
 }
 
 
-void
+static void
 spacing_or_padding_changed_cb (GtkRange *scale, MultiloadPlugin *ma)
 {
 	guint value = (guint)gtk_range_get_value(scale);
@@ -407,7 +407,7 @@ spacing_or_padding_changed_cb (GtkRange *scale, MultiloadPlugin *ma)
 }
 
 
-void
+static void
 combo_orientation_changed_cb (GtkComboBox *combo, MultiloadPlugin *ma)
 {
 	ma->orientation_policy = gtk_combo_box_get_active (combo);
@@ -416,7 +416,7 @@ combo_orientation_changed_cb (GtkComboBox *combo, MultiloadPlugin *ma)
 }
 
 
-void
+static void
 fill_between_toggled_cb (GtkToggleButton *toggle, MultiloadPlugin *ma)
 {
 	ma->fill_between = gtk_toggle_button_get_active(toggle);
@@ -424,7 +424,7 @@ fill_between_toggled_cb (GtkToggleButton *toggle, MultiloadPlugin *ma)
 }
 
 
-void
+static void
 tooltip_style_changed_cb (GtkComboBox *combo, MultiloadPlugin *ma)
 {
 	guint i;
@@ -441,7 +441,7 @@ tooltip_style_changed_cb (GtkComboBox *combo, MultiloadPlugin *ma)
 }
 
 
-void
+static void
 dblclick_policy_changed_cb (GtkComboBox *combo, MultiloadPlugin *ma)
 {
 	guint i;
@@ -460,7 +460,7 @@ dblclick_policy_changed_cb (GtkComboBox *combo, MultiloadPlugin *ma)
 }
 
 
-void
+static void
 dblclick_command_changed_cb (GtkEntry *entry, MultiloadPlugin *ma)
 {
 	guint i;
@@ -477,7 +477,7 @@ dblclick_command_changed_cb (GtkEntry *entry, MultiloadPlugin *ma)
 }
 
 
-void
+static void
 border_changed_cb (GtkSpinButton *spin, MultiloadPlugin *ma)
 {
 	guint i;
@@ -494,7 +494,7 @@ border_changed_cb (GtkSpinButton *spin, MultiloadPlugin *ma)
 	multiload_refresh(ma);
 }
 
-void
+static void
 color_set_cb (GtkColorButton *col, MultiloadPlugin *ma)
 {
 	guint i;
@@ -525,37 +525,37 @@ color_set_cb (GtkColorButton *col, MultiloadPlugin *ma)
 		multiload_refresh(ma);
 }
 
-void
+static void
 colorscheme_new_clicked_cb (GtkToolButton *tb, MultiloadPlugin *ma)
 {
-	printf("NEW\n");
+	printf("NEW (not yet implemented)\n");
 }
 
-void
+static void
 colorscheme_delete_clicked_cb (GtkToolButton *tb, MultiloadPlugin *ma)
 {
-	printf("DELETE\n");
+	printf("DELETE (not yet implemented)\n");
 }
 
-void
+static void
 colorscheme_save_clicked_cb (GtkToolButton *tb, MultiloadPlugin *ma)
 {
-	printf("SAVE\n");
+	printf("SAVE (not yet implemented)\n");
 }
 
-void
-colorscheme_import_clicked_cb (GtkToolButton *tb, MultiloadPlugin *ma)
+static void
+colorscheme_import_clicked_cb (GtkWidget *tb, MultiloadPlugin *ma)
 {
-	printf("IMPORT\n");
+	printf("IMPORT (not yet implemented)\n");
 }
 
-void
-colorscheme_export_clicked_cb (GtkToolButton *tb, MultiloadPlugin *ma)
+static void
+colorscheme_export_clicked_cb (GtkWidget *tb, MultiloadPlugin *ma)
 {
-	printf("EXPORT\n");
+	printf("EXPORT (not yet implemented)\n");
 }
 
-void
+static void
 multiload_preferences_connect_signals (MultiloadPlugin *ma)
 {
 	// cannot use gtk_builder_connect_signals because this fails in panel plugins
@@ -597,11 +597,21 @@ multiload_preferences_connect_signals (MultiloadPlugin *ma)
 }
 
 
+void
+multiload_fill_color_buttons (MultiloadPlugin *ma)
+{
+	guint i, c;
+	for (i=0; i<GRAPH_MAX; i++)
+		for (c=0; c<multiload_config_get_num_colors(i); c++)
+			gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(gtk_builder_get_object(builder, color_button_names[i][c])), &ma->graph_config[i].colors[c]);
+}
+
+
 // create the properties dialog and initialize it from current configuration
 void
 multiload_init_preferences (GtkWidget *dialog, MultiloadPlugin *ma)
 {
-	guint i, c;
+	guint i;
 
 	builder = gtk_builder_new();
 	gtk_builder_set_translation_domain (builder, GETTEXT_PACKAGE);
@@ -617,21 +627,16 @@ multiload_init_preferences (GtkWidget *dialog, MultiloadPlugin *ma)
 		gtk_combo_box_set_active (GTK_COMBO_BOX(gtk_builder_get_object(builder, dblclick_policy_names[i])), ma->graph_config[i].dblclick_policy);
 		gtk_entry_set_text (GTK_ENTRY(gtk_builder_get_object(builder, dblclick_command_names[i])), ma->graph_config[i].dblclick_cmdline);
 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(gtk_builder_get_object(builder, spin_border_names[i])), ma->graph_config[i].border_width*1.00);
-
-		// colors
-		for (c=0; c<multiload_config_get_num_colors(i); c++)
-			gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(gtk_builder_get_object(builder, color_button_names[i][c])), &ma->graph_config[i].colors[c]);
 	}
 	gtk_range_set_value(GTK_RANGE(gtk_builder_get_object(builder, "hscale_spacing")), (gdouble)ma->spacing);
 	gtk_range_set_value(GTK_RANGE(gtk_builder_get_object(builder, "hscale_padding")), (gdouble)ma->padding);
 	gtk_combo_box_set_active (GTK_COMBO_BOX(gtk_builder_get_object(builder, "combo_orientation")), ma->orientation_policy);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "cb_fill_between")), ma->fill_between);
 
+	multiload_fill_color_buttons(ma);
+
 	update_dynamic_widgets(ma);
 
-
-	// TEMPORARY: disable color scheme frame (not yet implemented)
-	gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, "frame_color_scheme")), FALSE);
 
 	// main window
 	GtkWidget *mainwnd_vbox = GTK_WIDGET(gtk_builder_get_object(builder, "mainwnd_vbox"));

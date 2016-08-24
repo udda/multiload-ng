@@ -121,6 +121,9 @@ enum MultiloadDefaults {
 
 
 G_GNUC_INTERNAL void
+multiload_fill_color_buttons(MultiloadPlugin *ma);
+
+G_GNUC_INTERNAL void
 multiload_init_preferences(GtkWidget *dialog, MultiloadPlugin *ma);
 
 G_END_DECLS
