@@ -199,7 +199,7 @@ gboolean multiload_colors_from_file(const gchar *filename, MultiloadPlugin *ma, 
 
 		if (first_line) {
 			first_line = FALSE;
-			if (strcmp(line, "MULTILOAD") != 0) {
+			if (strcmp(line, "MULTILOAD-NG") != 0) {
 				gtk_error_dialog(parent, _("Wrong file format."));
 				status = FALSE;
 				break;
@@ -236,7 +236,7 @@ gboolean multiload_colors_to_file(const gchar *filename, MultiloadPlugin *ma, Gt
 		gtk_error_dialog(parent, _("Could not save the file."));
 		return FALSE;
 	}
-	fprintf(f, "MULTILOAD\n");
+	fprintf(f, "MULTILOAD-NG\n");
 	for ( i=0; i<GRAPH_MAX; i++) {
 		multiload_colors_stringify (ma, i, color_str);
 		fprintf(f, "%s %s\n", graph_types[i].name, color_str);
