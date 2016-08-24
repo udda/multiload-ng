@@ -122,10 +122,8 @@ void
 multiload_colors_default(MultiloadPlugin *ma, guint i)
 {
 	guint j;
-	for ( j = 0; j < multiload_config_get_num_colors(i); j++ ) {
-		argb_string_to_gdk_rgba(graph_types[i].default_colors[j],
-						&ma->graph_config[i].colors[j]);
-	}
+	for ( j = 0; j < multiload_config_get_num_colors(i); j++ )
+		memcpy(&ma->graph_config[i].colors[j], &graph_types[i].default_colors[j], sizeof(GdkRGBA));
 }
 
 /* Set graph colors from a string, as produced by multiload_colors_stringify */

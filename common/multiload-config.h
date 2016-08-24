@@ -25,7 +25,9 @@
 
 #include <glib.h>
 #include <glib/gi18n-lib.h>
+#include <gtk/gtk.h>
 
+#include "gtk-compat.h"
 #include "multiload.h"
 
 
@@ -36,10 +38,10 @@ typedef void (*LoadGraphDataFunc) (int, int [], LoadGraph *);
 typedef struct _GraphType {
 	const char *name;
 	const char *label;
-	LoadGraphDataFunc get_data;
+	const LoadGraphDataFunc get_data;
 
-	guint num_colors;
-	const char *default_colors[MAX_COLORS];
+	const guint num_colors;
+	const GdkRGBA default_colors[MAX_COLORS];
 } GraphType;
 
 
