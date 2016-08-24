@@ -195,33 +195,9 @@
     <columns>
       <!-- column-name Description -->
       <column type="gchararray"/>
-      <!-- column-name ColorString -->
-      <column type="gchararray"/>
-      <!-- column-name Builtin -->
-      <column type="gboolean"/>
+      <!-- column-name Index -->
+      <column type="guint"/>
     </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Default</col>
-        <col id="1">1</col>
-        <col id="2">True</col>
-      </row>
-      <row>
-        <col id="0">Tango</col>
-        <col id="1">2</col>
-        <col id="2">True</col>
-      </row>
-      <row>
-        <col id="0">Solarized</col>
-        <col id="1">3</col>
-        <col id="2">True</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">(Custom)</col>
-        <col id="1">4</col>
-        <col id="2">False</col>
-      </row>
-    </data>
   </object>
   <object class="GtkListStore" id="liststore_dblclick">
     <columns>
@@ -1359,6 +1335,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="model">liststore_colors</property>
+                        <property name="headers_clickable">False</property>
                         <property name="search_column">0</property>
                         <property name="show_expanders">False</property>
                         <property name="tooltip_column">0</property>
@@ -1379,20 +1356,6 @@
                                 <attribute name="family">0</attribute>
                                 <attribute name="style">2</attribute>
                                 <attribute name="text">0</attribute>
-                              </attributes>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkTreeViewColumn" id="treeviewcolumn2">
-                            <property name="title" translatable="yes">Builtin</property>
-                            <child>
-                              <object class="GtkCellRendererToggle" id="cellrenderertoggle1">
-                                <property name="sensitive">False</property>
-                                <property name="activatable">False</property>
-                              </object>
-                              <attributes>
-                                <attribute name="active">2</attribute>
                               </attributes>
                             </child>
                           </object>
