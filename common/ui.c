@@ -243,9 +243,6 @@ multiload_ui_configure_dialog_new(MultiloadPlugin *ma, GtkWindow* parent)
 	gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
 	gtk_window_set_icon_name (GTK_WINDOW (dialog), about_data_icon);
 
-	// link back the dialog to the plugin
-	g_object_set_data (G_OBJECT (dialog), "MultiloadPlugin", ma);
-
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 	multiload_init_preferences(dialog, ma);
