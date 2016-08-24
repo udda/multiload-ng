@@ -38,7 +38,7 @@ guint multiload_config_get_num_data(guint id)
 	return multiload_config_get_num_colors(id) - EXTRA_COLORS;
 }
 
-#define HEX_TO_RGBA (r, g, b, a) {(gdouble)(0x##r)/255.0, (gdouble)(0x##g)/255.0, (gdouble)(0x##b)/255.0, (gdouble)(0x##a)/255.0}
+#define HEX_TO_RGBA(r, g, b, a) {(gdouble)(0x##r)/255.0, (gdouble)(0x##g)/255.0, (gdouble)(0x##b)/255.0, (gdouble)(0x##a)/255.0}
 
 
 void multiload_config_init()
