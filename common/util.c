@@ -189,52 +189,6 @@ format_time_duration(gdouble seconds) {
 }
 
 
-static gint
-spin_button_output_cb (GtkSpinButton *spin, const gchar *format)
-{
-	gint n = gtk_spin_button_get_value_as_int(spin);
-	gchar *s = g_strdup_printf(format, n);
-
-	gtk_entry_set_text(GTK_ENTRY(spin), s);
-	g_free(s);
-
-	// block the default output
-	return TRUE;
-}
-
-GtkWidget* gtk_spin_button_new_with_parameters(gint min, gint max, gint step, gint start_value, const gchar* format)
-{
-	GtkWidget *w = gtk_spin_button_new_with_range(min, max, step);
-
-	gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(w), FALSE);
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(w), (gdouble)start_value);
-	gtk_entry_set_alignment(GTK_ENTRY(w), 1.0);
-
-	if (format != NULL) {
-		gtk_entry_set_width_chars(GTK_ENTRY(w), strlen(format));
-		g_signal_connect(G_OBJECT(w), "output", G_CALLBACK(spin_button_output_cb), (gpointer)format);
-	}
-
-	return w;
-}
-
-GtkWidget* gtk_icon_label_new(const gchar* stock_image, const gchar *text)
-{
-	GtkWidget *hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 4);
-
-	GtkWidget *image = gtk_image_new_from_icon_name(stock_image, GTK_ICON_SIZE_SMALL_TOOLBAR);
-	gtk_box_pack_start(GTK_BOX(hbox), image, FALSE, FALSE, 0);
-
-	GtkWidget *label = gtk_label_new(text);
-	gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-
-	g_object_set_data (G_OBJECT(hbox), "label", label);
-
-	return hbox;
-}
-
-
-
 static void
 close_dialog_cb(GtkWidget *dialog, gint response, gpointer id) {
 	gtk_widget_destroy(dialog);
