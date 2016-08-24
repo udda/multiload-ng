@@ -5,9 +5,9 @@
 #, fuzzy
 msgid   ""
 msgstr  "Project-Id-Version: multiload-ng\n"
-        "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2016-08-23 10:13+0300\n"
-        "PO-Revision-Date: 2016-08-23 10:13+0300\n"
+        "Report-Msgid-Bugs-To: Alexander <sfslinux@gmail.com>\n"
+        "POT-Creation-Date: 2016-08-24 10:13+0300\n"
+        "PO-Revision-Date: 2016-08-24 10:13+0300\n"
         "Last-Translator: Alexander <sfslinux@gmail.com>\n"
         "Language-Team: puppyrus.org\n"
         "Language: ru\n"
@@ -21,7 +21,7 @@ msgstr  "Графическая система мониторинга"
 
 #: common/about-data.h:36 common/about-data.h:34
 msgid   "Copyright © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, and others"
-msgstr  ""
+msgstr  "Авторские права © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, и другие"
 
 #: common/load-graph.c:300 common/ui.c:273 common/load-graph.c:323
 #, c-format
@@ -36,7 +36,12 @@ msgid   "%ld processors  -  %.2f GHz  -  Governor: %s\n"
         "%.1f%% total CPU use\n"
         "\n"
         "Uptime: %s"
-msgstr  ""
+msgstr  "%ld процессоров  -  %.2f GHz  -  Governor: %s\n"
+        "%.1f%% используется программами\n"
+        "%.1f%% ожидает I/O\n"
+        "%.1f%% использования CPU итого\n"
+        "\n"
+        "Uptime: %s"
 
 #: common/multiload.c:85
 #, c-format
@@ -550,7 +555,10 @@ msgid   "The following tokens can be used within the command line:\n"
         "\n"
         "%n - graph number, from 1 (CPU) to 7 (temperature)\n"
         "%x - short name of the graph - three to four letters"
-msgstr  ""
+msgstr  "В команде можно использовать переменные:\n"
+        "\n"
+        "%n - номер графика, 1 (CPU) - 7 (температура)\n"
+        "%x - короткое имя графика - 3 или 4 буквы"
 
 #: data/preferences_gtk3.ui:2836 data/preferences_gtk3.ui:2848
 #: data/preferences_gtk3.ui:2860 data/preferences_gtk3.ui:2872
