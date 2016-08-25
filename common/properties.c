@@ -679,6 +679,7 @@ multiload_init_preferences (GtkWidget *dialog, MultiloadPlugin *ma)
 			-1
 		);
 	}
+	gtk_list_store_insert_with_values(ls_colors, NULL, -1, 0, _("(Custom)"), 1, i, -1 );
 
 	update_dynamic_widgets(ma);
 
