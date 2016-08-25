@@ -549,24 +549,6 @@ color_set_cb (GtkColorButton *col, MultiloadPlugin *ma)
 }
 
 static void
-colorscheme_new_clicked_cb (GtkToolButton *tb, MultiloadPlugin *ma)
-{
-	printf("NEW (not yet implemented)\n");
-}
-
-static void
-colorscheme_delete_clicked_cb (GtkToolButton *tb, MultiloadPlugin *ma)
-{
-	printf("DELETE (not yet implemented)\n");
-}
-
-static void
-colorscheme_save_clicked_cb (GtkToolButton *tb, MultiloadPlugin *ma)
-{
-	printf("SAVE (not yet implemented)\n");
-}
-
-static void
 colorscheme_import_clicked_cb (GtkWidget *tb, MultiloadPlugin *ma)
 {
 	GtkWindow *parent = GTK_WINDOW(gtk_widget_get_toplevel(tb));
@@ -649,9 +631,6 @@ multiload_preferences_connect_signals (MultiloadPlugin *ma)
 	g_signal_connect(G_OBJECT(OB("hscale_spacing")), "value-changed", G_CALLBACK(spacing_or_padding_changed_cb), ma);
 	g_signal_connect(G_OBJECT(OB("hscale_padding")), "value-changed", G_CALLBACK(spacing_or_padding_changed_cb), ma);
 	g_signal_connect(G_OBJECT(OB("combo_orientation")), "changed", G_CALLBACK(combo_orientation_changed_cb), ma);
-	g_signal_connect(G_OBJECT(OB("tb_colorscheme_new")), "clicked", G_CALLBACK(colorscheme_new_clicked_cb), ma);
-	g_signal_connect(G_OBJECT(OB("tb_colorscheme_delete")), "clicked", G_CALLBACK(colorscheme_delete_clicked_cb), ma);
-	g_signal_connect(G_OBJECT(OB("tb_colorscheme_save")), "clicked", G_CALLBACK(colorscheme_save_clicked_cb), ma);
 	g_signal_connect(G_OBJECT(OB("tb_colorscheme_import")), "clicked", G_CALLBACK(colorscheme_import_clicked_cb), ma);
 	g_signal_connect(G_OBJECT(OB("tb_colorscheme_export")), "clicked", G_CALLBACK(colorscheme_export_clicked_cb), ma);
 

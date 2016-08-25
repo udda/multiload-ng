@@ -1256,58 +1256,6 @@
                         <property name="show_arrow">False</property>
                         <property name="icon_size">1</property>
                         <child>
-                          <object class="GtkToolButton" id="tb_colorscheme_new">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="tooltip_text" translatable="yes">Create new color scheme</property>
-                            <property name="label" translatable="yes">New</property>
-                            <property name="stock_id">gtk-add</property>
-                            <signal name="clicked" handler="colorscheme_new_clicked_cb" swapped="no"/>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="homogeneous">True</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkToolButton" id="tb_colorscheme_delete">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="tooltip_text" translatable="yes">Delete selected color scheme</property>
-                            <property name="label" translatable="yes">Delete</property>
-                            <property name="stock_id">gtk-remove</property>
-                            <signal name="clicked" handler="colorscheme_delete_clicked_cb" swapped="no"/>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="homogeneous">True</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkToolButton" id="tb_colorscheme_save">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="tooltip_text" translatable="yes">Save current color scheme</property>
-                            <property name="label" translatable="yes">Save</property>
-                            <property name="stock_id">gtk-save</property>
-                            <signal name="clicked" handler="colorscheme_save_clicked_cb" swapped="no"/>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="homogeneous">True</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkSeparatorToolItem" id="tb_colorscheme_separator1">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="homogeneous">False</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="GtkToolButton" id="tb_colorscheme_import">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
