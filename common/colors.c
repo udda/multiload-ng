@@ -87,6 +87,9 @@ multiload_color_scheme_to_file(const gchar *filename, MultiloadPlugin *ma)
 	multiload_color_scheme_init(&header);
 	multiload_color_scheme_fill(&scheme, ma);
 
+	// at the moment, name field is unused in files
+	strcpy(scheme.name, "User scheme");
+
 	FILE *f = fopen(filename, "wb");
 	if (f == NULL)
 		return FALSE;
