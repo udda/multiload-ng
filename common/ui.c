@@ -247,7 +247,7 @@ multiload_ui_configure_dialog_new(MultiloadPlugin *ma, GtkWindow* parent)
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-	multiload_init_preferences(dialog, ma);
+	multiload_preferences_fill_dialog(dialog, ma);
 
 	g_signal_connect (G_OBJECT (dialog), "response",
 					G_CALLBACK(multiload_ui_configure_response_cb), ma);

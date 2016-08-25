@@ -37,6 +37,8 @@
 
 static GtkBuilder *builder = NULL;
 
+#define OB(name) (gtk_builder_get_object(builder, name))
+
 
 
 static const gchar* checkbox_visibility_names[GRAPH_MAX] = {
@@ -203,20 +205,20 @@ update_dynamic_widgets(MultiloadPlugin *ma)
 
 		// timespan
 		gchar *timespan = format_time_duration(gc->size * gc->interval / 1000);
-		gtk_label_set_text (GTK_LABEL(gtk_builder_get_object(builder, label_timespan_names[i])), timespan);
+		gtk_label_set_text (GTK_LABEL(OB(label_timespan_names[i])), timespan);
 		g_free(timespan);
 
 		// cmdline enable
 		gboolean cmdline_enabled = (gc->dblclick_policy == DBLCLICK_POLICY_CMDLINE);
-		gtk_widget_set_sensitive (GTK_WIDGET(gtk_builder_get_object(builder, dblclick_command_names[i])), cmdline_enabled);
-		gtk_widget_set_visible (GTK_WIDGET(gtk_builder_get_object(builder, info_dblclick_command_names[i])), cmdline_enabled);
+		gtk_widget_set_sensitive (GTK_WIDGET(OB(dblclick_command_names[i])), cmdline_enabled);
+		gtk_widget_set_visible (GTK_WIDGET(OB(info_dblclick_command_names[i])), cmdline_enabled);
 	}
 
 	// padding warning
-	gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(builder, "image_warning_padding")), (ma->padding >= 10));
+	gtk_widget_set_visible(GTK_WIDGET(OB("image_warning_padding")), (ma->padding >= 10));
 
 	// orientation warning
-	gtk_widget_set_visible (GTK_WIDGET(gtk_builder_get_object(builder, "image_warning_orientation")),
+	gtk_widget_set_visible (GTK_WIDGET(OB("image_warning_orientation")),
 		( ma->panel_orientation == GTK_ORIENTATION_HORIZONTAL && ma->orientation_policy == MULTILOAD_ORIENTATION_VERTICAL) ||
 		( ma->panel_orientation == GTK_ORIENTATION_VERTICAL &&   ma->orientation_policy == MULTILOAD_ORIENTATION_HORIZONTAL)
 	);
@@ -235,7 +237,7 @@ prop_checkboxes_sensitive_cb (GtkToggleButton *checkbox, gpointer user_data)
 
 	if (!active) {
 		for (i = 0; i < GRAPH_MAX; i++) {
-			if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, checkbox_visibility_names[i])))) {
+			if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(OB(checkbox_visibility_names[i])))) {
 				last_graph = i;
 				visible_count ++;
 			}
@@ -246,10 +248,10 @@ prop_checkboxes_sensitive_cb (GtkToggleButton *checkbox, gpointer user_data)
 		if (active) {
 			// Enable all checkboxes
 			for (i = 0; i < GRAPH_MAX; i++)
-				gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, checkbox_visibility_names[i])), TRUE);
+				gtk_widget_set_sensitive(GTK_WIDGET(OB(checkbox_visibility_names[i])), TRUE);
 		} else {
 			// Disable last remaining checkbox
-			gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(builder, checkbox_visibility_names[last_graph])), FALSE);
+			gtk_widget_set_sensitive(GTK_WIDGET(OB(checkbox_visibility_names[last_graph])), FALSE);
 		}
 	}
 
@@ -296,10 +298,10 @@ button_advanced_clicked_cb (GtkWidget *button, MultiloadPlugin *ma)
 	}
 	g_assert(i < GRAPH_MAX);
 
-	GtkWidget *dialog_config = GTK_WIDGET(gtk_builder_get_object(builder, "dialog_advanced"));
+	GtkWidget *dialog_config = GTK_WIDGET(OB("dialog_advanced"));
 	gtk_window_set_transient_for(GTK_WINDOW(dialog_config), GTK_WINDOW(gtk_widget_get_toplevel(button)));
 
-	GtkWidget *notebook = GTK_WIDGET(gtk_builder_get_object(builder, "advanced_notebook"));
+	GtkWidget *notebook = GTK_WIDGET(OB("advanced_notebook"));
 	gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook), i);
 	gtk_widget_show(dialog_config);
 }
@@ -496,6 +498,23 @@ border_changed_cb (GtkSpinButton *spin, MultiloadPlugin *ma)
 }
 
 static void
+color_scheme_select (gint index)
+{
+	GtkTreePath *path = gtk_tree_path_new_from_indices(index, -1);
+	gtk_tree_view_set_cursor(GTK_TREE_VIEW(OB("treeview_colors")), path, NULL, FALSE);
+	gtk_tree_path_free(path);
+}
+
+static void
+color_scheme_select_last ()
+{
+	GtkTreeModel *model = gtk_tree_view_get_model(GTK_TREE_VIEW(OB("treeview_colors")));
+	guint n = gtk_tree_model_iter_n_children(model, NULL);
+	if (n > 0)
+		color_scheme_select(n-1);
+}
+
+static void
 color_set_cb (GtkColorButton *col, MultiloadPlugin *ma)
 {
 	guint i;
@@ -521,9 +540,12 @@ color_set_cb (GtkColorButton *col, MultiloadPlugin *ma)
 
 	gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER(col), &ma->graph_config[graph_index].colors[i]);
 
-	//border color update needs refresh
+	// border color update needs refresh
 	if (i == multiload_colors_get_extra_index(graph_index, EXTRA_COLOR_BORDER))
 		multiload_refresh(ma);
+
+	// every color-set event changes the color scheme to (Custom)
+	color_scheme_select_last();
 }
 
 static void
@@ -550,7 +572,7 @@ colorscheme_import_clicked_cb (GtkWidget *tb, MultiloadPlugin *ma)
 	GtkWindow *parent = GTK_WINDOW(gtk_widget_get_toplevel(tb));
 	gchar *filename = gtk_open_file_dialog(parent, _("Import color scheme"));
 	MultiloadColorSchemeStatus result = multiload_color_scheme_from_file(filename, ma);
-	multiload_fill_color_buttons(ma);
+	multiload_preferences_update_color_buttons(ma);
 	multiload_refresh(ma);
 
 	printf("IMPORT = %d\n", result);
@@ -567,26 +589,36 @@ colorscheme_export_clicked_cb (GtkWidget *tb, MultiloadPlugin *ma)
 }
 
 static void
-color_scheme_selected_cb (GtkTreeSelection *sel, MultiloadPlugin *ma)
+multiload_preferences_color_scheme_selected_cb (GtkTreeSelection *sel, MultiloadPlugin *ma)
 {
-	GList *rows = gtk_tree_selection_get_selected_rows(sel, NULL);
+	const MultiloadColorScheme *scheme;
+	GList *rows;
+	GtkTreePath *path;
+	gint *ii;
+
+	rows = gtk_tree_selection_get_selected_rows(sel, NULL);
 	if (rows == NULL)
 		return;
 
-	GtkTreePath *path = rows->data;
-	gint *indices = gtk_tree_path_get_indices(path);
+	path = rows->data;
+	ii = gtk_tree_path_get_indices(path);
 
-	if (indices != NULL) {
-		printf("Selected color scheme #%d\n", indices[0]);
-		multiload_color_scheme_apply(&multiload_builtin_color_schemes[indices[0]], ma);
-		multiload_fill_color_buttons(ma);
-		multiload_refresh(ma);
+	if (ii != NULL) {
+		scheme = &multiload_builtin_color_schemes[ii[0]];
+
+		if (scheme->name[0] == '\0') {
+			strncpy(ma->color_scheme, "-", sizeof(ma->color_scheme));
+		} else {
+			strncpy(ma->color_scheme, scheme->name, sizeof(ma->color_scheme));
+			multiload_color_scheme_apply(scheme, ma);
+			multiload_preferences_update_color_buttons(ma);
+			multiload_refresh(ma);
+		}
 	}
 
 	g_list_foreach (rows, (GFunc)gtk_tree_path_free, NULL);
 	g_list_free (rows);
 }
-
 
 static void
 multiload_preferences_connect_signals (MultiloadPlugin *ma)
@@ -595,97 +627,129 @@ multiload_preferences_connect_signals (MultiloadPlugin *ma)
 	guint i, j;
 
 	for (i=0; i<GRAPH_MAX; i++) {
-		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, spinbutton_size_names[i])), "output", G_CALLBACK(spinbutton_size_output_cb), ma);
-		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, spinbutton_size_names[i])), "value-changed", G_CALLBACK(spinbutton_size_change_cb), ma);
-		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, spinbutton_interval_names[i])), "output", G_CALLBACK(spinbutton_interval_output_cb), ma);
-		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, spinbutton_interval_names[i])), "value-changed", G_CALLBACK(spinbutton_interval_change_cb), ma);
-		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, checkbox_visibility_names[i])), "toggled", G_CALLBACK(prop_graph_visibility_cb), ma);
-		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, checkbox_visibility_names[i])), "toggled", G_CALLBACK(prop_checkboxes_sensitive_cb), ma);
-		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, button_advanced_names[i])), "clicked", G_CALLBACK(button_advanced_clicked_cb), ma);
-		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, tooltip_style_names[i])), "changed", G_CALLBACK(tooltip_style_changed_cb), ma);
-		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, dblclick_policy_names[i])), "changed", G_CALLBACK(dblclick_policy_changed_cb), ma);
-		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, dblclick_command_names[i])), "changed", G_CALLBACK(dblclick_command_changed_cb), ma);
-		g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, spin_border_names[i])), "value-changed", G_CALLBACK(border_changed_cb), ma);
+		g_signal_connect(G_OBJECT(OB(spinbutton_size_names[i])), "output", G_CALLBACK(spinbutton_size_output_cb), ma);
+		g_signal_connect(G_OBJECT(OB(spinbutton_size_names[i])), "value-changed", G_CALLBACK(spinbutton_size_change_cb), ma);
+		g_signal_connect(G_OBJECT(OB(spinbutton_interval_names[i])), "output", G_CALLBACK(spinbutton_interval_output_cb), ma);
+		g_signal_connect(G_OBJECT(OB(spinbutton_interval_names[i])), "value-changed", G_CALLBACK(spinbutton_interval_change_cb), ma);
+		g_signal_connect(G_OBJECT(OB(checkbox_visibility_names[i])), "toggled", G_CALLBACK(prop_graph_visibility_cb), ma);
+		g_signal_connect(G_OBJECT(OB(checkbox_visibility_names[i])), "toggled", G_CALLBACK(prop_checkboxes_sensitive_cb), ma);
+		g_signal_connect(G_OBJECT(OB(button_advanced_names[i])), "clicked", G_CALLBACK(button_advanced_clicked_cb), ma);
+		g_signal_connect(G_OBJECT(OB(tooltip_style_names[i])), "changed", G_CALLBACK(tooltip_style_changed_cb), ma);
+		g_signal_connect(G_OBJECT(OB(dblclick_policy_names[i])), "changed", G_CALLBACK(dblclick_policy_changed_cb), ma);
+		g_signal_connect(G_OBJECT(OB(dblclick_command_names[i])), "changed", G_CALLBACK(dblclick_command_changed_cb), ma);
+		g_signal_connect(G_OBJECT(OB(spin_border_names[i])), "value-changed", G_CALLBACK(border_changed_cb), ma);
 
 		for (j=0; j < G_N_ELEMENTS(color_button_names[i]); j++) {
 			if (NULL == color_button_names[i][j])
 				break;
-			g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, color_button_names[i][j])), "color-set", G_CALLBACK(color_set_cb), ma);
+			g_signal_connect(G_OBJECT(OB(color_button_names[i][j])), "color-set", G_CALLBACK(color_set_cb), ma);
 		}
 	}
-	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "cb_fill_between")), "toggled", G_CALLBACK(fill_between_toggled_cb), ma);
-	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "hscale_spacing")), "value-changed", G_CALLBACK(spacing_or_padding_changed_cb), ma);
-	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "hscale_padding")), "value-changed", G_CALLBACK(spacing_or_padding_changed_cb), ma);
-	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "combo_orientation")), "changed", G_CALLBACK(combo_orientation_changed_cb), ma);
-	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "tb_colorscheme_new")), "clicked", G_CALLBACK(colorscheme_new_clicked_cb), ma);
-	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "tb_colorscheme_delete")), "clicked", G_CALLBACK(colorscheme_delete_clicked_cb), ma);
-	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "tb_colorscheme_save")), "clicked", G_CALLBACK(colorscheme_save_clicked_cb), ma);
-	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "tb_colorscheme_import")), "clicked", G_CALLBACK(colorscheme_import_clicked_cb), ma);
-	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "tb_colorscheme_export")), "clicked", G_CALLBACK(colorscheme_export_clicked_cb), ma);
+	g_signal_connect(G_OBJECT(OB("cb_fill_between")), "toggled", G_CALLBACK(fill_between_toggled_cb), ma);
+	g_signal_connect(G_OBJECT(OB("hscale_spacing")), "value-changed", G_CALLBACK(spacing_or_padding_changed_cb), ma);
+	g_signal_connect(G_OBJECT(OB("hscale_padding")), "value-changed", G_CALLBACK(spacing_or_padding_changed_cb), ma);
+	g_signal_connect(G_OBJECT(OB("combo_orientation")), "changed", G_CALLBACK(combo_orientation_changed_cb), ma);
+	g_signal_connect(G_OBJECT(OB("tb_colorscheme_new")), "clicked", G_CALLBACK(colorscheme_new_clicked_cb), ma);
+	g_signal_connect(G_OBJECT(OB("tb_colorscheme_delete")), "clicked", G_CALLBACK(colorscheme_delete_clicked_cb), ma);
+	g_signal_connect(G_OBJECT(OB("tb_colorscheme_save")), "clicked", G_CALLBACK(colorscheme_save_clicked_cb), ma);
+	g_signal_connect(G_OBJECT(OB("tb_colorscheme_import")), "clicked", G_CALLBACK(colorscheme_import_clicked_cb), ma);
+	g_signal_connect(G_OBJECT(OB("tb_colorscheme_export")), "clicked", G_CALLBACK(colorscheme_export_clicked_cb), ma);
 
-	GtkTreeSelection *sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(gtk_builder_get_object(builder, "treeview_colors")));
-	g_signal_connect(G_OBJECT(sel), "changed", G_CALLBACK(color_scheme_selected_cb), ma);
+	GtkTreeSelection *sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(OB("treeview_colors")));
+	g_signal_connect(G_OBJECT(sel), "changed", G_CALLBACK(multiload_preferences_color_scheme_selected_cb), ma);
 
-	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "dialog_advanced")), "delete-event", G_CALLBACK(gtk_widget_hide_on_delete), ma);
-	g_signal_connect_swapped(G_OBJECT(gtk_builder_get_object(builder, "button_dialog_advanced_close")), "clicked", G_CALLBACK(gtk_widget_hide), G_OBJECT(gtk_builder_get_object(builder, "dialog_advanced")));
+	g_signal_connect(G_OBJECT(OB("dialog_advanced")), "delete-event", G_CALLBACK(gtk_widget_hide_on_delete), ma);
+	g_signal_connect_swapped(G_OBJECT(OB("button_dialog_advanced_close")), "clicked", G_CALLBACK(gtk_widget_hide), G_OBJECT(OB("dialog_advanced")));
 
 	g_debug("[preferences] Signals connected");
 }
 
 
-void
-multiload_fill_color_buttons (MultiloadPlugin *ma)
+static void
+multiload_preferences_destroy ()
 {
-	guint i, c;
-	for (i=0; i<GRAPH_MAX; i++)
-		for (c=0; c<multiload_config_get_num_colors(i); c++)
-			gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(gtk_builder_get_object(builder, color_button_names[i][c])), &ma->graph_config[i].colors[c]);
+	if (builder == NULL)
+		return;
+
+	// top level windows must be explicitly destroyed
+	gtk_widget_destroy(GTK_WIDGET(OB("dialog_advanced")));
+	g_object_unref (G_OBJECT (builder));
+	builder = NULL;
 }
 
-
-// create the properties dialog and initialize it from current configuration
-void
-multiload_init_preferences (GtkWidget *dialog, MultiloadPlugin *ma)
+static void
+multiload_preferences_init ()
 {
-	guint i;
+	if (builder != NULL)
+		multiload_preferences_destroy();
 
 	builder = gtk_builder_new();
 	gtk_builder_set_translation_domain (builder, GETTEXT_PACKAGE);
 	gtk_builder_add_from_string (builder, binary_data_preferences_ui, -1, NULL);
+}
+
+
+void
+multiload_preferences_update_color_buttons (MultiloadPlugin *ma)
+{
+	guint i, c;
+	for (i=0; i<GRAPH_MAX; i++)
+		for (c=0; c<multiload_config_get_num_colors(i); c++)
+			gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(OB(color_button_names[i][c])), &ma->graph_config[i].colors[c]);
+}
+
+
+void
+multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
+{
+	guint i;
+	gboolean color_scheme_is_set = FALSE;
+
+	multiload_preferences_init();
 
 	// init values
 	for (i=0; i<GRAPH_MAX; i++) {
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON(gtk_builder_get_object(builder, spinbutton_size_names[i])), ma->graph_config[i].size*1.00);
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON(gtk_builder_get_object(builder, spinbutton_interval_names[i])), ma->graph_config[i].interval*1.00);
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, checkbox_visibility_names[i])), ma->graph_config[i].visible);
-		gtk_entry_set_max_length(GTK_ENTRY(gtk_builder_get_object(builder, dblclick_command_names[i])), sizeof(ma->graph_config[i].dblclick_cmdline));
-		gtk_combo_box_set_active (GTK_COMBO_BOX(gtk_builder_get_object(builder, tooltip_style_names[i])), ma->graph_config[i].tooltip_style);
-		gtk_combo_box_set_active (GTK_COMBO_BOX(gtk_builder_get_object(builder, dblclick_policy_names[i])), ma->graph_config[i].dblclick_policy);
-		gtk_entry_set_text (GTK_ENTRY(gtk_builder_get_object(builder, dblclick_command_names[i])), ma->graph_config[i].dblclick_cmdline);
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON(gtk_builder_get_object(builder, spin_border_names[i])), ma->graph_config[i].border_width*1.00);
+		gtk_spin_button_set_value(GTK_SPIN_BUTTON(OB(spinbutton_size_names[i])), ma->graph_config[i].size*1.00);
+		gtk_spin_button_set_value(GTK_SPIN_BUTTON(OB(spinbutton_interval_names[i])), ma->graph_config[i].interval*1.00);
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(OB(checkbox_visibility_names[i])), ma->graph_config[i].visible);
+		gtk_entry_set_max_length(GTK_ENTRY(OB(dblclick_command_names[i])), sizeof(ma->graph_config[i].dblclick_cmdline));
+		gtk_combo_box_set_active (GTK_COMBO_BOX(OB(tooltip_style_names[i])), ma->graph_config[i].tooltip_style);
+		gtk_combo_box_set_active (GTK_COMBO_BOX(OB(dblclick_policy_names[i])), ma->graph_config[i].dblclick_policy);
+		gtk_entry_set_text (GTK_ENTRY(OB(dblclick_command_names[i])), ma->graph_config[i].dblclick_cmdline);
+		gtk_spin_button_set_value(GTK_SPIN_BUTTON(OB(spin_border_names[i])), ma->graph_config[i].border_width*1.00);
 	}
-	gtk_range_set_value(GTK_RANGE(gtk_builder_get_object(builder, "hscale_spacing")), (gdouble)ma->spacing);
-	gtk_range_set_value(GTK_RANGE(gtk_builder_get_object(builder, "hscale_padding")), (gdouble)ma->padding);
-	gtk_combo_box_set_active (GTK_COMBO_BOX(gtk_builder_get_object(builder, "combo_orientation")), ma->orientation_policy);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "cb_fill_between")), ma->fill_between);
+	gtk_range_set_value(GTK_RANGE(OB("hscale_spacing")), (gdouble)ma->spacing);
+	gtk_range_set_value(GTK_RANGE(OB("hscale_padding")), (gdouble)ma->padding);
+	gtk_combo_box_set_active (GTK_COMBO_BOX(OB("combo_orientation")), ma->orientation_policy);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(OB("cb_fill_between")), ma->fill_between);
 
-	multiload_fill_color_buttons(ma);
+	multiload_preferences_update_color_buttons(ma);
 
-	GtkListStore *ls_colors = GTK_LIST_STORE(gtk_builder_get_object(builder, "liststore_colors"));
+	// color schemes list
+	GtkListStore *ls_colors = GTK_LIST_STORE(OB("liststore_colors"));
 	for (i=0; multiload_builtin_color_schemes[i].name[0] != '\0'; i++) {
-		gtk_list_store_insert_with_values(ls_colors, NULL, -1,
-			0, multiload_builtin_color_schemes[i].name,
-			1, i,
-			-1
-		);
+		const gchar *name = multiload_builtin_color_schemes[i].name;
+
+		// insert color scheme
+		gtk_list_store_insert_with_values(ls_colors, NULL, -1, 0, name, 1, i, -1 );
+
+		// if it's the current color scheme, select it
+		if (strcmp(ma->color_scheme, name) == 0) {
+			color_scheme_select(i);
+			color_scheme_is_set = TRUE;
+		}
 	}
+	// insert (Custon) entry
 	gtk_list_store_insert_with_values(ls_colors, NULL, -1, 0, _("(Custom)"), 1, i, -1 );
+
+	// no current color scheme, select last entry (Custom)
+	if (!color_scheme_is_set)
+		color_scheme_select_last();
 
 	update_dynamic_widgets(ma);
 
-
 	// main window
-	GtkWidget *mainwnd_vbox = GTK_WIDGET(gtk_builder_get_object(builder, "mainwnd_vbox"));
+	GtkWidget *mainwnd_vbox = GTK_WIDGET(OB("mainwnd_vbox"));
 	gtk_container_add(GTK_CONTAINER(gtk_dialog_get_content_area(GTK_DIALOG(dialog))), mainwnd_vbox);
 
 	multiload_preferences_connect_signals(ma);
