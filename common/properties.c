@@ -220,8 +220,9 @@ multiload_preferences_color_scheme_select (gint index)
 }
 
 static void
-multiload_preferences_color_scheme_select_last ()
+multiload_preferences_color_scheme_select_custom ()
 {
+	// Custom color scheme is the last entry
 	GtkTreeModel *model = gtk_tree_view_get_model(GTK_TREE_VIEW(OB("treeview_colors")));
 	guint n = gtk_tree_model_iter_n_children(model, NULL);
 	if (n > 0)
@@ -483,29 +484,77 @@ multiload_preferences_color_set_cb (GtkColorButton *col, MultiloadPlugin *ma)
 		multiload_refresh(ma);
 
 	// every color-set event changes the color scheme to (Custom)
-	multiload_preferences_color_scheme_select_last();
+	multiload_preferences_color_scheme_select_custom();
 }
 
 static void
-colorscheme_import_clicked_cb (GtkWidget *tb, MultiloadPlugin *ma)
+multiload_preferences_colorscheme_import_clicked_cb (GtkWidget *tb, MultiloadPlugin *ma)
 {
-	GtkWindow *parent = GTK_WINDOW(gtk_widget_get_toplevel(tb));
-	gchar *filename = gtk_open_file_dialog(parent, _("Import color scheme"));
-	MultiloadColorSchemeStatus result = multiload_color_scheme_from_file(filename, ma);
-	multiload_preferences_update_color_buttons(ma);
-	multiload_refresh(ma);
+	int response;
+	char *filename;
+	MultiloadColorSchemeStatus result;
 
-	printf("IMPORT = %d\n", result);
+	GtkWindow *parent = GTK_WINDOW(gtk_widget_get_toplevel(tb));
+	GtkWidget *dialog = gtk_file_chooser_dialog_new (_("Import color scheme"), parent,
+										GTK_FILE_CHOOSER_ACTION_OPEN,
+										_("_Cancel"), GTK_RESPONSE_CANCEL,
+										_("_Open"), GTK_RESPONSE_ACCEPT,
+										NULL);
+
+//	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER(dialog), config_path); //TODO make it standard
+
+	response = gtk_dialog_run (GTK_DIALOG (dialog));
+
+	if (response == GTK_RESPONSE_ACCEPT) {
+		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+		result = multiload_color_scheme_from_file(filename, ma);
+
+		switch(result) {
+			case MULTILOAD_COLOR_SCHEME_STATUS_VALID:
+				multiload_preferences_update_color_buttons(ma);
+				multiload_preferences_color_scheme_select_custom();
+				multiload_refresh(ma);
+				break;
+			case MULTILOAD_COLOR_SCHEME_STATUS_WRONG_FORMAT:
+				gtk_error_dialog(parent, _("Color scheme format is incorrect. Unable to import."));
+				break;
+			case MULTILOAD_COLOR_SCHEME_STATUS_WRONG_VERSION:
+				gtk_error_dialog(parent, _("Color scheme was created by an incompatible version of Multiload-ng. Unable to import."));
+				break;
+		}
+	}
+
+	gtk_widget_destroy (dialog);
 }
 
 static void
-colorscheme_export_clicked_cb (GtkWidget *tb, MultiloadPlugin *ma)
+multiload_preferences_colorscheme_export_clicked_cb (GtkWidget *tb, MultiloadPlugin *ma)
 {
-	GtkWindow *parent = GTK_WINDOW(gtk_widget_get_toplevel(tb));
-	gchar *filename = gtk_save_file_dialog(parent, _("Export color scheme"), "multiload-ng.colors");
-	gboolean result = multiload_color_scheme_to_file(filename, ma);
+	int response;
+	char *filename;
+	gboolean result;
 
-	printf("EXPORT = %d\n", result);
+	GtkWindow *parent = GTK_WINDOW(gtk_widget_get_toplevel(tb));
+	GtkWidget *dialog = gtk_file_chooser_dialog_new (_("Export color scheme"), parent,
+										GTK_FILE_CHOOSER_ACTION_SAVE,
+										_("_Cancel"), GTK_RESPONSE_CANCEL,
+										_("_Save"), GTK_RESPONSE_ACCEPT,
+										NULL);
+
+	gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog), TRUE);
+	gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (dialog), "multiload-ng.colors");
+//	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER(dialog), config_path); //TODO make it standard
+
+	response = gtk_dialog_run (GTK_DIALOG (dialog));
+
+	if (response == GTK_RESPONSE_ACCEPT) {
+		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+		result = multiload_color_scheme_to_file(filename, ma);
+		if (!result)
+			gtk_error_dialog(parent, _("Unable to export file."));
+	}
+
+	gtk_widget_destroy (dialog);
 }
 
 static void
@@ -593,8 +642,8 @@ multiload_preferences_connect_signals (MultiloadPlugin *ma)
 	g_signal_connect(G_OBJECT(OB("hscale_spacing")), "value-changed", G_CALLBACK(multiload_preferences_spacing_or_padding_changed_cb), ma);
 	g_signal_connect(G_OBJECT(OB("hscale_padding")), "value-changed", G_CALLBACK(multiload_preferences_spacing_or_padding_changed_cb), ma);
 	g_signal_connect(G_OBJECT(OB("combo_orientation")), "changed", G_CALLBACK(multiload_preferences_orientation_changed_cb), ma);
-	g_signal_connect(G_OBJECT(OB("tb_colorscheme_import")), "clicked", G_CALLBACK(colorscheme_import_clicked_cb), ma);
-	g_signal_connect(G_OBJECT(OB("tb_colorscheme_export")), "clicked", G_CALLBACK(colorscheme_export_clicked_cb), ma);
+	g_signal_connect(G_OBJECT(OB("tb_colorscheme_import")), "clicked", G_CALLBACK(multiload_preferences_colorscheme_import_clicked_cb), ma);
+	g_signal_connect(G_OBJECT(OB("tb_colorscheme_export")), "clicked", G_CALLBACK(multiload_preferences_colorscheme_export_clicked_cb), ma);
 
 	GtkTreeSelection *sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(OB("treeview_colors")));
 	g_signal_connect(G_OBJECT(sel), "changed", G_CALLBACK(multiload_preferences_color_scheme_selected_cb), ma);
@@ -660,7 +709,7 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 
 	// no current color scheme, select last entry (Custom)
 	if (!color_scheme_is_set)
-		multiload_preferences_color_scheme_select_last();
+		multiload_preferences_color_scheme_select_custom();
 
 	multiload_preferences_update_dynamic_widgets(ma);
 
