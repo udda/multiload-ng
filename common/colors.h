@@ -75,6 +75,9 @@ multiload_color_scheme_to_file(const gchar *filename, MultiloadPlugin *ma);
 G_GNUC_INTERNAL MultiloadColorSchemeStatus
 multiload_color_scheme_from_file(const gchar *filename, MultiloadPlugin *ma);
 
+G_GNUC_INTERNAL const MultiloadColorScheme*
+multiload_color_scheme_find_by_name (const gchar *name);
+
 G_END_DECLS
 
 #endif /* __COLORS_H__ */

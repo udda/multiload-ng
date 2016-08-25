@@ -23,6 +23,7 @@
 #include "common/ui.h"
 
 #include "common/about-data.h"
+#include "common/colors.h"
 #include "common/multiload.h"
 #include "common/multiload-config.h"
 #include "common/multiload-colors.h"
@@ -51,6 +52,7 @@ multiload_ui_read (MultiloadPlugin *ma)
 	gpointer *settings;
 	gchar *key;
 	gchar colors_list[10*MAX_COLORS];
+	gboolean color_scheme_valid;
 	int i;
 
 	multiload_defaults(ma);
@@ -62,7 +64,13 @@ multiload_ui_read (MultiloadPlugin *ma)
 		multiload_ps_settings_get_int		(settings, "spacing",			&ma->spacing);
 		multiload_ps_settings_get_int		(settings, "orientation",		&ma->orientation_policy);
 		multiload_ps_settings_get_boolean	(settings, "fill-between",		&ma->fill_between);
+
+		/* Color scheme */
 		multiload_ps_settings_get_string	(settings, "color-scheme",		ma->color_scheme, sizeof(ma->color_scheme));
+		const MultiloadColorScheme *scheme = multiload_color_scheme_find_by_name(ma->color_scheme);
+		color_scheme_valid = (scheme != NULL);
+		if (color_scheme_valid)
+			multiload_color_scheme_apply(scheme, ma);
 
 		for ( i = 0; i < GRAPH_MAX; i++ ) {
 			/* Visibility */
@@ -101,11 +109,13 @@ multiload_ui_read (MultiloadPlugin *ma)
 			g_free (key);
 
 			/* Colors */
-			key = g_strdup_printf("graph-%s-colors", graph_types[i].name);
-			colors_list[0] = 0;
-			multiload_ps_settings_get_string (settings, key, colors_list, sizeof(colors_list)/sizeof(gchar));
-			multiload_colors_unstringify(ma, i, colors_list);
-			g_free (key);
+			if (!color_scheme_valid) {
+				key = g_strdup_printf("graph-%s-colors", graph_types[i].name);
+				colors_list[0] = 0;
+				multiload_ps_settings_get_string (settings, key, colors_list, sizeof(colors_list)/sizeof(gchar));
+				multiload_colors_unstringify(ma, i, colors_list);
+				g_free (key);
+			}
 		}
 		g_debug("[ui] Done reading settings. Closing object %p", settings);
 		multiload_ps_settings_close(settings);

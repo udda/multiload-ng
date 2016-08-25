@@ -147,6 +147,20 @@ multiload_color_scheme_from_file(const gchar *filename, MultiloadPlugin *ma)
 	return MULTILOAD_COLOR_SCHEME_STATUS_VALID;
 }
 
+const MultiloadColorScheme*
+multiload_color_scheme_find_by_name (const gchar *name)
+{
+	guint i;
+
+	if (name == NULL)
+		return NULL;
+
+	for (i=0; multiload_builtin_color_schemes[i].name[0] != '\0'; i++) {
+		if (strcmp(multiload_builtin_color_schemes[i].name, name) == 0)
+			return &multiload_builtin_color_schemes[i];
+	}
+	return NULL;
+}
 
 const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 	{ DEFAULT_COLOR_SCHEME,
