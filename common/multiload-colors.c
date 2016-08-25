@@ -32,7 +32,7 @@
 #include "multiload.h"
 #include "multiload-colors.h"
 #include "multiload-config.h"
-#include "properties.h"
+#include "preferences.h"
 #include "util.h"
 
 

@@ -3,7 +3,7 @@ common/load-graph.c
 common/multiload.c
 common/multiload-config.c
 common/multiload-colors.c
-common/properties.c
+common/preferences.c
 common/util.c
 common/ui.c
 data/preferences_gtk2.ui

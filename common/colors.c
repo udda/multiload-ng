@@ -25,7 +25,7 @@
 #include <glib/gi18n-lib.h>
 
 #include "colors.h"
-#include "properties.h"
+#include "preferences.h"
 
 
 static const gchar magic_header[MULTILOAD_COLOR_SCHEME_HEADER_SIZE] = "MULTILOAD-NG";

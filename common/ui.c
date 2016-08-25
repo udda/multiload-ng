@@ -26,7 +26,7 @@
 #include "common/multiload.h"
 #include "common/multiload-config.h"
 #include "common/multiload-colors.h"
-#include "common/properties.h"
+#include "common/preferences.h"
 #include "common/util.h"
 
 

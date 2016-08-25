@@ -21,7 +21,7 @@ multiload_ng_core_la_SOURCES = \
 	multiload.c multiload.h \
 	multiload-colors.c multiload-colors.h \
 	multiload-config.c multiload-config.h \
-	properties.c properties.h \
+	preferences.c preferences.h \
 	util.c util.h \
 	ui.c ui.h
 
