@@ -530,8 +530,6 @@ static void
 colorscheme_new_clicked_cb (GtkToolButton *tb, MultiloadPlugin *ma)
 {
 	printf("NEW (not yet implemented)\n");
-	multiload_color_scheme_apply(&multiload_builtin_color_schemes[0], ma);
-	multiload_fill_color_buttons(ma);
 }
 
 static void
