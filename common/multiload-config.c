@@ -41,13 +41,13 @@ guint multiload_config_get_num_data(guint id)
 void multiload_config_init()
 {
 	GraphType temp[] = {
-		{	"cpu",			_("Processor"),		GetCpu,			7 },
-		{	"mem",			_("Memory"),		GetMemory,		7 },
-		{	"net",			_("Network"),		GetNet,			6 },
-		{	"swap",			_("Swap"),			GetSwap,		4 },
-		{	"load",			_("Load average"),	GetLoadAvg,		4 },
-		{	"disk",			_("Disk"),			GetDisk,		5 },
-		{	"temperature",	_("Temperature"),	GetTemperature,	4 }
+		{ "cpu",			_("Processor"),		GetCpu,			7 },
+		{ "mem",			_("Memory"),		GetMemory,		7 },
+		{ "net",			_("Network"),		GetNet,			6 },
+		{ "swap",			_("Swap"),			GetSwap,		4 },
+		{ "load",			_("Load average"),	GetLoadAvg,		4 },
+		{ "disk",			_("Disk"),			GetDisk,		5 },
+		{ "temperature",	_("Temperature"),	GetTemperature,	4 }
 	};
 
 	memcpy(&graph_types, &temp, sizeof(graph_types));
