@@ -39,9 +39,7 @@ typedef struct _GraphType {
 	const char *name;
 	const char *label;
 	const LoadGraphDataFunc get_data;
-
 	const guint num_colors;
-	const GdkRGBA default_colors[MAX_COLORS];
 } GraphType;
 
 

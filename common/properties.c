@@ -25,6 +25,7 @@
 #include <glib/gi18n-lib.h>
 
 #include "binary-data.h"
+#include "colors.h"
 #include "gtk-compat.h"
 #include "load-graph.h"
 #include "multiload.h"
@@ -34,7 +35,7 @@
 #include "util.h"
 
 
-static GtkBuilder *builder;
+static GtkBuilder *builder = NULL;
 
 
 
@@ -529,6 +530,8 @@ static void
 colorscheme_new_clicked_cb (GtkToolButton *tb, MultiloadPlugin *ma)
 {
 	printf("NEW (not yet implemented)\n");
+	multiload_color_scheme_apply(&multiload_builtin_color_schemes[0], ma);
+	multiload_fill_color_buttons(ma);
 }
 
 static void
@@ -548,7 +551,11 @@ colorscheme_import_clicked_cb (GtkWidget *tb, MultiloadPlugin *ma)
 {
 	GtkWindow *parent = GTK_WINDOW(gtk_widget_get_toplevel(tb));
 	gchar *filename = gtk_open_file_dialog(parent, _("Import color scheme"));
-	multiload_colors_from_file(filename, ma, parent);
+	MultiloadColorSchemeStatus result = multiload_color_scheme_from_file(filename, ma);
+	multiload_fill_color_buttons(ma);
+	multiload_refresh(ma);
+
+	printf("IMPORT = %d\n", result);
 }
 
 static void
@@ -556,8 +563,32 @@ colorscheme_export_clicked_cb (GtkWidget *tb, MultiloadPlugin *ma)
 {
 	GtkWindow *parent = GTK_WINDOW(gtk_widget_get_toplevel(tb));
 	gchar *filename = gtk_save_file_dialog(parent, _("Export color scheme"), "multiload-ng.colors");
-	multiload_colors_to_file(filename, ma, parent);
+	gboolean result = multiload_color_scheme_to_file(filename, ma);
+
+	printf("EXPORT = %d\n", result);
 }
+
+static void
+color_scheme_selected_cb (GtkTreeSelection *sel, MultiloadPlugin *ma)
+{
+	GList *rows = gtk_tree_selection_get_selected_rows(sel, NULL);
+	if (rows == NULL)
+		return;
+
+	GtkTreePath *path = rows->data;
+	gint *indices = gtk_tree_path_get_indices(path);
+
+	if (indices != NULL) {
+		printf("Selected color scheme #%d\n", indices[0]);
+		multiload_color_scheme_apply(&multiload_builtin_color_schemes[indices[0]], ma);
+		multiload_fill_color_buttons(ma);
+		multiload_refresh(ma);
+	}
+
+	g_list_foreach (rows, (GFunc)gtk_tree_path_free, NULL);
+	g_list_free (rows);
+}
+
 
 static void
 multiload_preferences_connect_signals (MultiloadPlugin *ma)
@@ -593,6 +624,9 @@ multiload_preferences_connect_signals (MultiloadPlugin *ma)
 	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "tb_colorscheme_save")), "clicked", G_CALLBACK(colorscheme_save_clicked_cb), ma);
 	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "tb_colorscheme_import")), "clicked", G_CALLBACK(colorscheme_import_clicked_cb), ma);
 	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "tb_colorscheme_export")), "clicked", G_CALLBACK(colorscheme_export_clicked_cb), ma);
+
+	GtkTreeSelection *sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(gtk_builder_get_object(builder, "treeview_colors")));
+	g_signal_connect(G_OBJECT(sel), "changed", G_CALLBACK(color_scheme_selected_cb), ma);
 
 	g_signal_connect(G_OBJECT(gtk_builder_get_object(builder, "dialog_advanced")), "delete-event", G_CALLBACK(gtk_widget_hide_on_delete), ma);
 	g_signal_connect_swapped(G_OBJECT(gtk_builder_get_object(builder, "button_dialog_advanced_close")), "clicked", G_CALLBACK(gtk_widget_hide), G_OBJECT(gtk_builder_get_object(builder, "dialog_advanced")));
@@ -638,6 +672,15 @@ multiload_init_preferences (GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder, "cb_fill_between")), ma->fill_between);
 
 	multiload_fill_color_buttons(ma);
+
+	GtkListStore *ls_colors = GTK_LIST_STORE(gtk_builder_get_object(builder, "liststore_colors"));
+	for (i=0; multiload_builtin_color_schemes[i].name[0] != '\0'; i++) {
+		gtk_list_store_insert_with_values(ls_colors, NULL, -1,
+			0, multiload_builtin_color_schemes[i].name,
+			1, i,
+			-1
+		);
+	}
 
 	update_dynamic_widgets(ma);
 

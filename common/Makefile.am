@@ -12,8 +12,9 @@ noinst_LTLIBRARIES = \
 
 multiload_ng_core_la_SOURCES = \
 	about-data.c about-data.h \
-	binary-data.c binary-data.h \
 	autoscaler.c autoscaler.h \
+	binary-data.c binary-data.h \
+	colors.c colors.h \
 	gtk-compat.c gtk-compat.h \
 	linux-proc.c linux-proc.h \
 	load-graph.c load-graph.h \

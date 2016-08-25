@@ -27,6 +27,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "colors.h"
 #include "gtk-compat.h"
 #include "multiload.h"
 #include "multiload-colors.h"
@@ -83,7 +84,6 @@ argb_string_to_gdk_rgba(const gchar *gspec, GdkRGBA *color)
 }
 
 
-
 guint multiload_colors_get_extra_index(guint i, MultiloadExtraColor col)
 {
 	g_assert(col >= 0 && col < EXTRA_COLORS);
@@ -121,9 +121,7 @@ multiload_colors_stringify(MultiloadPlugin *ma, guint i, char *list)
 void
 multiload_colors_default(MultiloadPlugin *ma, guint i)
 {
-	guint j;
-	for ( j = 0; j < multiload_config_get_num_colors(i); j++ )
-		memcpy(&ma->graph_config[i].colors[j], &graph_types[i].default_colors[j], sizeof(GdkRGBA));
+	multiload_color_scheme_apply_single(&multiload_builtin_color_schemes[0], ma, i);
 }
 
 /* Set graph colors from a string, as produced by multiload_colors_stringify */
@@ -172,74 +170,3 @@ multiload_colors_unstringify(MultiloadPlugin *ma, guint i, const char *list)
 
 	return TRUE;
 }
-
-
-gboolean multiload_colors_from_file(const gchar *filename, MultiloadPlugin *ma, GtkWindow *parent)
-{
-	char *line = NULL;
-	char *color_str;
-	size_t len = 0;
-	ssize_t read;
-	int graph;
-	gboolean first_line = TRUE;
-	gboolean status = TRUE;
-	FILE *f = fopen(filename, "r");
-
-	if (f == NULL) {
-		gtk_error_dialog(parent, _("Could not open the file."));
-		return FALSE;
-	}
-
-	while ((read = getline(&line, &len, f)) != -1) {
-		// remove newline
-		if (line[read-1] == '\n')
-			line[read-1] = 0;
-
-		if (first_line) {
-			first_line = FALSE;
-			if (strcmp(line, "MULTILOAD-NG") != 0) {
-				gtk_error_dialog(parent, _("Wrong file format."));
-				status = FALSE;
-				break;
-			}
-			continue;
-		}
-
-		graph = multiload_find_graph_by_name(line, &color_str);
-		// remove leading space
-		color_str++;
-
-		if (multiload_colors_unstringify(ma, graph, color_str) != TRUE) {
-			gtk_error_dialog(parent, _("Wrong file format."));
-			status = FALSE;
-			break;
-		}
-		multiload_fill_color_buttons(ma);
-		multiload_refresh(ma);
-	}
-
-	fclose(f);
-	if (line)
-		g_free(line);
-
-	return status;
-}
-
-gboolean multiload_colors_to_file(const gchar *filename, MultiloadPlugin *ma, GtkWindow *parent)
-{
-	gint i;
-	FILE *f = fopen(filename, "w");
-	gchar color_str[10 * MAX_COLORS];
-	if (f == NULL) {
-		gtk_error_dialog(parent, _("Could not save the file."));
-		return FALSE;
-	}
-	fprintf(f, "MULTILOAD-NG\n");
-	for ( i=0; i<GRAPH_MAX; i++) {
-		multiload_colors_stringify (ma, i, color_str);
-		fprintf(f, "%s %s\n", graph_types[i].name, color_str);
-	}
-	fclose(f);
-	return TRUE;
-}
-
