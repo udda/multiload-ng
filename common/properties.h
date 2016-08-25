@@ -118,6 +118,7 @@ enum MultiloadDefaults {
 	DEFAULT_FILL_BETWEEN				= FALSE,
 	DEFAULT_TOOLTIP_STYLE				= TOOLTIP_STYLE_SIMPLE
 };
+#define DEFAULT_COLOR_SCHEME "Multiload-ng"
 
 
 G_GNUC_INTERNAL void

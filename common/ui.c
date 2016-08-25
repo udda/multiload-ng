@@ -62,6 +62,7 @@ multiload_ui_read (MultiloadPlugin *ma)
 		multiload_ps_settings_get_int		(settings, "spacing",			&ma->spacing);
 		multiload_ps_settings_get_int		(settings, "orientation",		&ma->orientation_policy);
 		multiload_ps_settings_get_boolean	(settings, "fill-between",		&ma->fill_between);
+		multiload_ps_settings_get_string	(settings, "color-scheme",		&ma->color_scheme, sizeof(ma->color_scheme));
 
 		for ( i = 0; i < GRAPH_MAX; i++ ) {
 			/* Visibility */
@@ -130,6 +131,7 @@ multiload_ui_save (MultiloadPlugin *ma)
 		multiload_ps_settings_set_int		(settings, "spacing",			ma->spacing);
 		multiload_ps_settings_set_int		(settings, "orientation",		ma->orientation_policy);
 		multiload_ps_settings_set_boolean	(settings, "fill-between",		ma->fill_between);
+		multiload_ps_settings_set_string	(settings, "color-scheme",		ma->color_scheme);
 
 		for ( i = 0; i < GRAPH_MAX; i++ ) {
 			/* Visibility */

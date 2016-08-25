@@ -25,6 +25,7 @@
 #include <glib/gi18n-lib.h>
 
 #include "colors.h"
+#include "properties.h"
 
 
 static const gchar magic_header[MULTILOAD_COLOR_SCHEME_HEADER_SIZE] = "MULTILOAD-NG";
@@ -145,7 +146,7 @@ multiload_color_scheme_from_file(const gchar *filename, MultiloadPlugin *ma)
 
 
 const MultiloadColorScheme multiload_builtin_color_schemes[] = {
-	{ "Multiload-ng",
+	{ DEFAULT_COLOR_SCHEME,
 			{  { // CPU  - hue: 196
 				HEX_TO_RGBA(03,6F,96, FF),		// User
 				HEX_TO_RGBA(48,BD,E6, FF),		// System

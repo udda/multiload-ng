@@ -75,6 +75,7 @@ typedef struct _MultiloadPlugin {
 	gint spacing;
 	gboolean fill_between;
 	gint orientation_policy;
+	gchar color_scheme[20];
 } MultiloadPlugin;
 
 

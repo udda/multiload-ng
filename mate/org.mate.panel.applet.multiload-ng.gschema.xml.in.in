@@ -12,6 +12,9 @@
     <key name="fill-between" type="b">
       <default>false</default>
     </key>
+    <key name="color-scheme" type="s">
+      <default>'Multiload-ng'</default>
+    </key>
 
     <key name="graph-cpu-visible" type="b">
       <default>true</default>

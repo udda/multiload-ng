@@ -299,6 +299,7 @@ void multiload_defaults(MultiloadPlugin *ma)
 	ma->padding = DEFAULT_PADDING;
 	ma->spacing = DEFAULT_SPACING;
 	ma->fill_between = DEFAULT_FILL_BETWEEN;
+	strncpy(ma->color_scheme, DEFAULT_COLOR_SCHEME, sizeof(ma->color_scheme));
 	for ( i = 0; i < GRAPH_MAX; i++ ) {
 		ma->graph_config[i].border_width = DEFAULT_BORDER_WIDTH;
 		ma->graph_config[i].visible = i == 0 ? TRUE : FALSE;
