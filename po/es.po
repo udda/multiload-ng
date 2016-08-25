@@ -6,8 +6,8 @@
 msgid   ""
 msgstr  "Project-Id-Version: multiload-ng\n"
         "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2016-08-22 21:20+0200\n"
-        "PO-Revision-Date: 2016-08-22 21:20+0200\n"
+        "POT-Creation-Date: 2016-08-25 13:55+0200\n"
+        "PO-Revision-Date: 2016-08-25 13:55+0200\n"
         "Last-Translator: Roberta Assennato <r.assennato@gmail.com>\n"
         "Language-Team: Español\n"
         "Language: es\n"
@@ -15,6 +15,7 @@ msgstr  "Project-Id-Version: multiload-ng\n"
         "Content-Type: text/plain; charset=UTF-8\n"
         "Content-Transfer-Encoding: 8bit\n"
         "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+        "X-Generator: Vé 0.1.4\n"
 
 #: common/about-data.h:28
 msgid   "Modern graphical system monitor"
@@ -27,7 +28,7 @@ msgstr  "Copyright © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, y otros"
 #: common/load-graph.c:300 common/ui.c:273 common/load-graph.c:323
 #, c-format
 msgid   "Unable to execute the following command line: '%s'"
-msgstr  "Impossibile eseguire la seguente riga di comando: '%s'"
+msgstr  "Imposible efectuar la siguiente línea de comando: '%s'"
 
 #: common/multiload.c:59
 #, c-format
@@ -164,7 +165,7 @@ msgstr  "Swap"
 #: data/preferences_gtk3.ui:703 data/preferences_gtk3.ui:1964
 #: data/preferences_gtk3.ui:3863
 msgid   "Load average"
-msgstr  "Cargo medio"
+msgstr  "Carga media"
 
 #: common/multiload-config.c:99 data/multiload-ng.preferences_gtk2.ui:816
 #: data/multiload-ng.preferences_gtk2.ui:2293
@@ -392,7 +393,7 @@ msgstr  "Los tooltip podrían no aparecer si el intervalo es demasiado breve."
 #: data/preferences_gtk3.ui:707 data/preferences_gtk3.ui:724
 #: data/preferences_gtk3.ui:741
 msgid   "Make this graph visible"
-msgstr  "Rendi il grafico visibile"
+msgstr  "Rinda el gráfico visible"
 
 #: data/multiload-ng.preferences_gtk2.ui:854
 #: data/multiload-ng.preferences_gtk3.ui:757 data/preferences_gtk2.ui:854
@@ -404,7 +405,7 @@ msgstr  "Gráfico"
 #: data/multiload-ng.preferences_gtk3.ui:771 data/preferences_gtk2.ui:863
 #: data/preferences_gtk3.ui:771
 msgid   "Size"
-msgstr  "Dimensione"
+msgstr  "Tamaño"
 
 #: data/multiload-ng.preferences_gtk2.ui:876
 #: data/multiload-ng.preferences_gtk3.ui:784 data/preferences_gtk2.ui:876
@@ -437,7 +438,7 @@ msgstr  "Intervalo de actualización"
 #: data/preferences_gtk3.ui:867 data/preferences_gtk3.ui:965
 #: data/preferences_gtk3.ui:3165
 msgid   "Advanced configuration"
-msgstr  "Configuracion avanzada"
+msgstr  "Configuración avanzada"
 
 #: data/multiload-ng.preferences_gtk2.ui:1116
 #: data/multiload-ng.preferences_gtk3.ui:979 data/preferences_gtk2.ui:1116
@@ -449,7 +450,7 @@ msgstr  "Lapso de tiempo"
 #: data/multiload-ng.preferences_gtk3.ui:989 data/preferences_gtk2.ui:1125
 #: data/preferences_gtk3.ui:989
 msgid   "Fill space between graphs"
-msgstr  "Rellene espacio entre los gráficos"
+msgstr  "Rellene el espacio entre los gráficos"
 
 #: data/multiload-ng.preferences_gtk2.ui:1144
 #: data/multiload-ng.preferences_gtk3.ui:1008 data/preferences_gtk2.ui:1144
@@ -492,8 +493,8 @@ msgstr  "Si el relleno es demasiado grande, el gráfico non será visible."
 #: data/preferences_gtk3.ui:1129
 msgid   "Selected orientation is not the same of the panel. Graphs may be "
         "very small."
-msgstr  "La orientación no es la del panel. Los gráficos podrían ser muy "
-        "pequeños."
+msgstr  "La orientación seleccionada no es la misma del panel. Los gráficos "
+        "podrían ser muy pequeños."
 
 #: data/multiload-ng.preferences_gtk2.ui:1327
 #: data/multiload-ng.preferences_gtk3.ui:1201 data/preferences_gtk2.ui:1327
@@ -529,7 +530,7 @@ msgstr  "Nuevo"
 #: data/multiload-ng.preferences_gtk3.ui:1313 data/preferences_gtk2.ui:1434
 #: data/preferences_gtk3.ui:1313
 msgid   "Delete selected color scheme"
-msgstr  "Borrar combinación de colores seleccionada"
+msgstr  "Borre la combinación de colores seleccionada"
 
 #: data/multiload-ng.preferences_gtk2.ui:1435
 #: data/multiload-ng.preferences_gtk3.ui:1314 data/preferences_gtk2.ui:1435
@@ -541,7 +542,7 @@ msgstr  "Borrar"
 #: data/multiload-ng.preferences_gtk3.ui:1326 data/preferences_gtk2.ui:1447
 #: data/preferences_gtk3.ui:1326
 msgid   "Save current color scheme"
-msgstr  "Guardar combinación de colores actual"
+msgstr  "Guarde la combinación de colores actual"
 
 #: data/multiload-ng.preferences_gtk2.ui:1448
 #: data/multiload-ng.preferences_gtk3.ui:1327 data/preferences_gtk2.ui:1448
@@ -553,7 +554,7 @@ msgstr  "Guardar"
 #: data/multiload-ng.preferences_gtk3.ui:1349 data/preferences_gtk2.ui:1469
 #: data/preferences_gtk3.ui:1349
 msgid   "Import color scheme from file"
-msgstr  "Importar esquema de color desde un archivo"
+msgstr  "Importe el esquema de color de un archivo"
 
 #: data/multiload-ng.preferences_gtk2.ui:1470
 #: data/multiload-ng.preferences_gtk3.ui:1350 data/preferences_gtk2.ui:1470
@@ -565,7 +566,7 @@ msgstr  "Importar"
 #: data/multiload-ng.preferences_gtk3.ui:1362 data/preferences_gtk2.ui:1482
 #: data/preferences_gtk3.ui:1362
 msgid   "Export color scheme to file"
-msgstr  "Exportar esquema de color a un archivo"
+msgstr  "Exporte el esquema de color en un archivo"
 
 #: data/multiload-ng.preferences_gtk2.ui:1483
 #: data/multiload-ng.preferences_gtk3.ui:1363 data/preferences_gtk2.ui:1483
@@ -826,7 +827,7 @@ msgstr  "Cambie el estilo de tooltip de este gráfico"
 #: data/preferences_gtk3.ui:3798 data/preferences_gtk3.ui:3930
 #: data/preferences_gtk3.ui:4064
 msgid   "Choose what to do when double clicking on this graph"
-msgstr  "Elige lo que hacer cuando hacer doble clic en este gráfico"
+msgstr  "Elija qué hacer cuando hacer doble clic en este gráfico"
 
 #: data/multiload-ng.preferences_gtk2.ui:3555
 #: data/multiload-ng.preferences_gtk2.ui:3682
@@ -850,7 +851,7 @@ msgstr  "Elige lo que hacer cuando hacer doble clic en este gráfico"
 #: data/preferences_gtk3.ui:3822 data/preferences_gtk3.ui:3954
 #: data/preferences_gtk3.ui:4088
 msgid   "Set custom action of this graph"
-msgstr  "Configurar la acción personalizada de este gráfico"
+msgstr  "Configure la acción personalizada de este gráfico"
 
 #: data/multiload-ng.preferences_gtk2.ui:3576
 #: data/multiload-ng.preferences_gtk2.ui:3703
