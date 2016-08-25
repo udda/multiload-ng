@@ -35,11 +35,7 @@
 #define G_KEY_GROUP_NAME "Multiload"
 
 gchar* standalone_build_config_filename() {
-	return g_build_filename(
-			g_get_home_dir (),
-			".config",
-			"multiload-ng-standalone",
-			NULL);
+	return g_build_filename(MULTILOAD_CONFIG_PATH, "standalone.conf", NULL);
 }
 
 

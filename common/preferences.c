@@ -33,6 +33,7 @@
 #include "multiload-config.h"
 #include "preferences.h"
 #include "util.h"
+#include "ui.h"
 
 
 static GtkBuilder *builder = NULL;
@@ -501,7 +502,7 @@ multiload_preferences_colorscheme_import_clicked_cb (GtkWidget *tb, MultiloadPlu
 										_("_Open"), GTK_RESPONSE_ACCEPT,
 										NULL);
 
-//	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER(dialog), config_path); //TODO make it standard
+	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER(dialog), MULTILOAD_CONFIG_PATH);
 
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
 
@@ -543,7 +544,7 @@ multiload_preferences_colorscheme_export_clicked_cb (GtkWidget *tb, MultiloadPlu
 
 	gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog), TRUE);
 	gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (dialog), "multiload-ng.colors");
-//	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER(dialog), config_path); //TODO make it standard
+	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER(dialog), MULTILOAD_CONFIG_PATH);
 
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
 

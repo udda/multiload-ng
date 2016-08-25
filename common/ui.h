@@ -40,6 +40,8 @@ multiload_ui_configure_dialog_new (MultiloadPlugin *ma, GtkWindow *parent);
 G_GNUC_INTERNAL void
 multiload_ui_start_system_monitor(MultiloadPlugin *ma);
 
+extern const char* MULTILOAD_CONFIG_PATH;
+
 G_END_DECLS
 
 #endif /* __UI_H__ */

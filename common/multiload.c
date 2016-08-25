@@ -36,6 +36,9 @@
 #include "preferences.h"
 #include "util.h"
 
+
+const char* MULTILOAD_CONFIG_PATH;
+
 /* update the tooltip to the graph's current "used" percentage */
 void
 multiload_tooltip_update(LoadGraph *g)
@@ -285,6 +288,17 @@ multiload_init()
 
 	glibtop *glt = glibtop_init();
 	g_assert_nonnull(glt);
+
+
+	MULTILOAD_CONFIG_PATH = g_build_filename(
+			g_get_home_dir (),
+			".config",
+			"multiload-ng",
+			NULL);
+
+	if (g_mkdir_with_parents (MULTILOAD_CONFIG_PATH, 0755) != 0)
+		g_error("[multiload] Error creating directory '%s'", MULTILOAD_CONFIG_PATH);
+
 
 	multiload_config_init();
 

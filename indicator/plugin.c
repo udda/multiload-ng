@@ -36,11 +36,7 @@
 #define G_KEY_GROUP_NAME "Multiload"
 
 gchar* indicator_build_config_filename() {
-	return g_build_filename(
-			g_get_home_dir (),
-			".config",
-			"indicator-multiload-ng",
-			NULL);
+	return g_build_filename(MULTILOAD_CONFIG_PATH, "indicator.conf", NULL);
 }
 
 
