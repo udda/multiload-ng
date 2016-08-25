@@ -348,7 +348,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(68,CA,FB, FF),		// Nice
 				HEX_TO_RGBA(04,23,5A, FF),		// IOWait
 				HEX_TO_RGBA(40,40,40, FF),		// Border
-				HEX_TO_RGBA(F0,F0,F0, FF),		// Background (top)
+				HEX_TO_RGBA(D7,D7,E7, FF),		// Background (top)
 				HEX_TO_RGBA(E8,F6,FC, FF)		// Background (bottom)
 			}, { // MEM  - Kiwi
 				HEX_TO_RGBA(55,64,1F, FF),		// User
@@ -356,8 +356,8 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(9A,B4,52, FF),		// Buffers
 				HEX_TO_RGBA(27,2C,1E, FF),		// Cached
 				HEX_TO_RGBA(40,40,40, FF),		// Border
-				HEX_TO_RGBA(80,97,58, FF),		// Background (top)
-				HEX_TO_RGBA(72,51,1E, FF)		// Background (bottom)
+				HEX_TO_RGBA(72,51,1E, FF),		// Background (top)
+				HEX_TO_RGBA(80,97,58, FF)		// Background (bottom)
 			}, { // NET  - Lemons
 				HEX_TO_RGBA(EE,CB,13, FF),		// In
 				HEX_TO_RGBA(B0,83,09, FF),		// Out
@@ -369,7 +369,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(5A,23,26, FF),		// Used
 				HEX_TO_RGBA(40,40,40, FF),		// Border
 				HEX_TO_RGBA(4B,38,39, FF),		// Background (top)
-				HEX_TO_RGBA(24,1D,1E, FF)		// Background (bottom)
+				HEX_TO_RGBA(1F,1C,1E, FF)		// Background (bottom)
 			}, { // LOAD - Cherries
 				HEX_TO_RGBA(8A,0C,0D, FF),		// Average
 				HEX_TO_RGBA(40,40,40, FF),		// Border
