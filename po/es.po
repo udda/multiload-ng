@@ -882,7 +882,7 @@ msgid   "The following tokens can be used within the command line:\n"
 msgstr  "Los símbolos siguientes se pueden usar en la línea de comando:\n"
         "\n"
         "%n - número del gráfico, de 1 (UCP) a 7 (temperatura)\n"
-        "%x - nombre abreviado del gráfico, de tres a cuatro letras"
+        "%x - nombre abreviado del gráfico, desde tres hasta cuatro letras"
 
 #: data/multiload-ng.preferences_gtk3.ui:2836
 #: data/multiload-ng.preferences_gtk3.ui:2848
