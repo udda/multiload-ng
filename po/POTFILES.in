@@ -8,6 +8,7 @@ common/util.c
 common/ui.c
 data/preferences_gtk2.ui
 data/preferences_gtk3.ui
+indicator/plugin.c
 lxpanel/plugin.c
 mate/plugin.c
 standalone/multiload-ng.desktop.in.in
