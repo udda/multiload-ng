@@ -145,7 +145,7 @@ multiload_color_scheme_from_file(const gchar *filename, MultiloadPlugin *ma)
 
 
 const MultiloadColorScheme multiload_builtin_color_schemes[] = {
-	{ N_("Default"),
+	{ "Multiload-ng",
 			{  { // CPU  - hue: 196
 				HEX_TO_RGBA(03,6F,96, FF),		// User
 				HEX_TO_RGBA(48,BD,E6, FF),		// System
