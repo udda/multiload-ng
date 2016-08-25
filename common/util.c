@@ -189,68 +189,13 @@ format_time_duration(gdouble seconds) {
 }
 
 
-static void
-close_dialog_cb(GtkWidget *dialog, gint response, gpointer id) {
-	gtk_widget_destroy(dialog);
-}
-
 void gtk_error_dialog(GtkWindow *parent, const gchar *message)
 {
 	GtkWidget *dialog = gtk_message_dialog_new(parent,
 						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 						GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "%s", message);
-	g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK(close_dialog_cb), NULL);
+	g_signal_connect (G_OBJECT (dialog), "response", (GCallback)gtk_widget_destroy, NULL);
 	gtk_widget_show(dialog);
-}
-
-GtkWidget* gtk_yesno_dialog(GtkWindow *parent, const gchar *message, GCallback cb, gpointer data)
-{
-	GtkWidget *dialog = gtk_message_dialog_new(parent,
-						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-						GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, "%s", message);
-	g_signal_connect (G_OBJECT (dialog), "response", cb, data);
-	return dialog;
-}
-
-gchar* gtk_open_file_dialog(GtkWindow *parent, const gchar *title)
-{
-	int response;
-	char *filename;
-	GtkWidget *dialog = gtk_file_chooser_dialog_new (title, parent,
-										GTK_FILE_CHOOSER_ACTION_OPEN,
-										_("_Cancel"), GTK_RESPONSE_CANCEL,
-										_("_Open"), GTK_RESPONSE_ACCEPT,
-										NULL);
-
-	response = gtk_dialog_run (GTK_DIALOG (dialog));
-	if (response == GTK_RESPONSE_ACCEPT)
-		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-	else
-		filename = NULL;
-	gtk_widget_destroy (dialog);
-	return filename;
-}
-
-gchar* gtk_save_file_dialog(GtkWindow *parent, const gchar *title, const gchar *current_name)
-{
-	int response;
-	char *filename;
-	GtkWidget *dialog = gtk_file_chooser_dialog_new (title, parent,
-										GTK_FILE_CHOOSER_ACTION_SAVE,
-										_("_Cancel"), GTK_RESPONSE_CANCEL,
-										_("_Save"), GTK_RESPONSE_ACCEPT,
-										NULL);
-	gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog), TRUE);
-	gtk_file_chooser_set_create_folders (GTK_FILE_CHOOSER (dialog), TRUE);
-	gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (dialog), current_name);
-
-	response = gtk_dialog_run (GTK_DIALOG (dialog));
-	if (response == GTK_RESPONSE_ACCEPT)
-		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-	else
-		filename = NULL;
-	gtk_widget_destroy (dialog);
-	return filename;
 }
 
 

@@ -49,12 +49,6 @@ format_time_duration(gdouble seconds);
 
 G_GNUC_INTERNAL void
 gtk_error_dialog(GtkWindow *parent, const gchar *message);
-G_GNUC_INTERNAL GtkWidget*
-gtk_yesno_dialog(GtkWindow *parent, const gchar *message, GCallback cb, gpointer data);
-G_GNUC_INTERNAL gchar*
-gtk_open_file_dialog(GtkWindow *parent, const gchar *title);
-G_GNUC_INTERNAL gchar*
-gtk_save_file_dialog(GtkWindow *parent, const gchar *title, const gchar *current_name);
 
 G_GNUC_INTERNAL gchar*
 get_system_monitor_executable();
