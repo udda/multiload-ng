@@ -19,8 +19,8 @@ Multiload-ng can be built with GTK2 and GTK3, so can be embedded within GTK2/GTK
 - Color schemes support
 - Automatically adapts to container changes (panel or window)
 - Written in pure C with few dependencies - little CPU/memory footprint
-- Customizable tooltip style
-- Custom actions on double click
+- Customizable tooltips
+- Custom mouse actions
 
 
 
@@ -196,9 +196,9 @@ To later uninstall you need source directory. If you deleted it, just download a
 You can contribute in several ways:
 
 * Suggest new features
+* Report bugs
 * Translate to new languages
 * Port the plugin to other panels
-* Report bugs
 * Implement something present in the [Wishlist](../../wiki/Wishlist)
 * Fix something present in [Known issues and TODO](../../wiki/Known-issues-and-TODO)
 * ...
@@ -218,11 +218,13 @@ There are some notable differences:
 
 * Original multiload contains old and unmantained code, Multiload-ng is actively mantained
 * Multiload-ng has a [Wiki](../../wiki)!
+* Multiload-ng runs on a variety of panels, including those of the original multiload
 * Multiload-ng has additional graphs, and more will be added in the future
-* Multiload-ng has more graphical customizations, like individual colored border
+* Multiload-ng has more graphical customizations, like individual size/interval/border
 * Multiload-ng has color schemes support
-* Multiload-ng responds to mouse events with customizable actions
+* Multiload-ng responds to mouse events with per-graph customizable actions
 * Multiload-ng can choose its orientation regardless of panel orientation
+* Multiload-ng has higher limits for graph size and update interval
 * Multiload-ng can also be run without any panel
 * ...and so on
 
@@ -232,14 +234,16 @@ Try it in your system and you won't come back!
 A: Yes. This is true for every system monitor. That's why resources usage from Multiload-ng is kept to a negligible level.
 
 #### Q: I found a bug! How can I report?
-A: First, check wether this bug is already present in [issues list](../../issues) or in the appropriate [wiki page](../../wiki/Known-issues-and-TODO).
+A: The preferred way to report a bug is by [creating a new issue](../../issues/new).
 
-If not, you can then [create a new issue](../../issues/new) or add the bug you found in the [Known issues and TODO wiki page](../../wiki/Known-issues-and-TODO).
+First, check wether the bug is already present in [issues list](../../issues) or in the appropriate [wiki page](../../wiki/Known-issues-and-TODO).
+If it's not, you should [create a new issue](../../issues/new).
 
 #### Q: I have a suggestion that could be useful. How can I report?
-A: First, check wether your suggestion is already present in [this list](../../wiki/Wishlist).
+A: The preferred way to suggest a new features is by [creating a new issue](../../issues/new).
 
-If not, you can then add your suggestion in the [Wishlist wiki page](../../wiki/Wishlist).
+First, check wether your suggestion is already present in [issues list](../../issues) or in the project [Wishlist](../../wiki/Wishlist).
+If it's not, you should [create a new issue](../../issues/new).
 
 #### Q: Will you continue the development of Multiload-ng?
 A: Of course! To get an idea of future directions, take a look at the [Wishlist](../../wiki/Wishlist).
@@ -253,4 +257,4 @@ A: Because of a number of reasons:
 4. Requires too much work -> If it's worth it, see #1
 5. Requires plugins to be written in languages other than C -> Sorry, this would break ALL existing plugins. Unless special cases (like supersets of C or simple wrappers), it's very likely it can't be done.
 
-The best way to get a new port is to suggest it (or code it yourself, of course). Feel free to file an issue about your request, and it will be considered carefully.
+The best way to get a new port is to suggest it (or code it yourself, of course). Feel free to submit an issue about your request, it will be considered carefully.
