@@ -241,5 +241,5 @@ xdg_open_url(const gchar* url) {
 	g_free(cmdline);
 
 	if (G_UNLIKELY (result == FALSE))
-		g_warning (_("Unable to open the following url: %s"), url);
+		g_warning (_("Unable to open the following url: '%s'"), url);
 }

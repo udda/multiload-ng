@@ -552,7 +552,7 @@ multiload_preferences_colorscheme_export_clicked_cb (GtkWidget *tb, MultiloadPlu
 		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
 		result = multiload_color_scheme_to_file(filename, ma);
 		if (!result)
-			gtk_error_dialog(parent, _("Unable to export file."));
+			gtk_error_dialog(parent, _("Error exporting color scheme."));
 	}
 
 	gtk_widget_destroy (dialog);
