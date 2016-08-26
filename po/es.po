@@ -5,9 +5,9 @@
 #, fuzzy
 msgid   ""
 msgstr  "Project-Id-Version: multiload-ng\n"
-        "Report-Msgid-Bugs-To: \n"
-        "POT-Creation-Date: 2016-08-25 13:55+0200\n"
-        "PO-Revision-Date: 2016-08-25 13:55+0200\n"
+        "Report-Msgid-Bugs-To: Roberta Assennato <r.assennato@gmail.com>\n"
+        "POT-Creation-Date: 2016-08-27 01:18+0200\n"
+        "PO-Revision-Date: 2016-08-27 01:18+0200\n"
         "Last-Translator: Roberta Assennato <r.assennato@gmail.com>\n"
         "Language-Team: Español\n"
         "Language: es\n"
@@ -21,16 +21,16 @@ msgstr  "Project-Id-Version: multiload-ng\n"
 msgid   "Modern graphical system monitor"
 msgstr  "Monitor de carga de sistema moderno"
 
-#: common/about-data.h:36 common/about-data.h:34
+#: common/about-data.h:34
 msgid   "Copyright © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, and others"
 msgstr  "Copyright © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, y otros"
 
-#: common/load-graph.c:300 common/ui.c:273 common/load-graph.c:323
+#: common/load-graph.c:323 common/ui.c:282
 #, c-format
 msgid   "Unable to execute the following command line: '%s'"
 msgstr  "Imposible efectuar la siguiente línea de comando: '%s'"
 
-#: common/multiload.c:59
+#: common/multiload.c:62
 #, c-format
 msgid   "%ld processors  -  %.2f GHz  -  Governor: %s\n"
         "%.1f%% in use by programs\n"
@@ -45,19 +45,19 @@ msgstr  "%ld procesadores  -  %.2f GHz  -  Regulador: %s\n"
         "\n"
         "Uptime: %s"
 
-#: common/multiload.c:85
+#: common/multiload.c:88
 #, c-format
 msgid   "%s of RAM"
 msgstr  "%s de RAM"
 
-#: common/multiload.c:86
+#: common/multiload.c:89
 #, c-format
 msgid   "%s in use by programs\n"
         "%s in use as cache"
 msgstr  "%s usado por los programas\n"
         "%s usado como cache"
 
-#: common/multiload.c:108
+#: common/multiload.c:111
 #, c-format
 msgid   "Monitored interfaces: %s\n"
         "\n"
@@ -70,21 +70,21 @@ msgstr  "Interfazas controladas: %s\n"
         "Envio: %s\n"
         "Local: %s"
 
-#: common/multiload.c:128
+#: common/multiload.c:131
 msgid   "No swap"
 msgstr  "Ninguno swap"
 
-#: common/multiload.c:134
+#: common/multiload.c:137
 #, c-format
 msgid   "%s of swap"
 msgstr  "%s de swap"
 
-#: common/multiload.c:135
+#: common/multiload.c:138
 #, c-format
 msgid   "%s used"
 msgstr  "%s en uso"
 
-#: common/multiload.c:150
+#: common/multiload.c:153
 #, c-format
 msgid   "Last minute: %0.02f\n"
         "Last 5 minutes: %0.02f\n"
@@ -93,787 +93,445 @@ msgstr  "Último minudo: %0.02f\n"
         "Últimos 5 minudos: %0.02f\n"
         "Últimos 15 minudos: %0.02f"
 
-#: common/multiload.c:167
+#: common/multiload.c:170
 #, c-format
 msgid   "Read: %s\n"
         "Write: %s"
 msgstr  "Lectura: %s\n"
         "Escritura: %s"
 
-#: common/multiload.c:182
+#: common/multiload.c:185
 #, c-format
 msgid   "Current: %.1f °C\n"
         "Critical: %.1f °C"
 msgstr  "Actual: %.1f °C\n"
         "Critica: %.1f °C"
 
-#: common/multiload-config.c:46 data/multiload-ng.preferences_gtk2.ui:729
-#: data/multiload-ng.preferences_gtk2.ui:1643
-#: data/multiload-ng.preferences_gtk2.ui:3597
-#: data/multiload-ng.preferences_gtk3.ui:633
-#: data/multiload-ng.preferences_gtk3.ui:1409
-#: data/multiload-ng.preferences_gtk3.ui:3336 data/preferences_gtk2.ui:729
-#: data/preferences_gtk2.ui:1643 data/preferences_gtk2.ui:3597
-#: data/preferences_gtk3.ui:633 data/preferences_gtk3.ui:1409
-#: data/preferences_gtk3.ui:3336
+#: common/multiload-config.c:44 data/preferences_gtk2.ui:705
+#: data/preferences_gtk2.ui:1559 data/preferences_gtk2.ui:3513
+#: data/preferences_gtk3.ui:609 data/preferences_gtk3.ui:1325
+#: data/preferences_gtk3.ui:3252
 msgid   "Processor"
 msgstr  "Procesador"
 
-#: common/multiload-config.c:58 data/multiload-ng.preferences_gtk2.ui:748
-#: data/multiload-ng.preferences_gtk2.ui:1909
-#: data/multiload-ng.preferences_gtk2.ui:3727
-#: data/multiload-ng.preferences_gtk3.ui:652
-#: data/multiload-ng.preferences_gtk3.ui:1646
-#: data/multiload-ng.preferences_gtk3.ui:3467 data/preferences_gtk2.ui:748
-#: data/preferences_gtk2.ui:1909 data/preferences_gtk2.ui:3727
-#: data/preferences_gtk3.ui:652 data/preferences_gtk3.ui:1646
-#: data/preferences_gtk3.ui:3467
+#: common/multiload-config.c:45 data/preferences_gtk2.ui:724
+#: data/preferences_gtk2.ui:1825 data/preferences_gtk2.ui:3643
+#: data/preferences_gtk3.ui:628 data/preferences_gtk3.ui:1562
+#: data/preferences_gtk3.ui:3383
 msgid   "Memory"
 msgstr  "Memoria"
 
-#: common/multiload-config.c:70 data/multiload-ng.preferences_gtk2.ui:765
-#: data/multiload-ng.preferences_gtk2.ui:2068
-#: data/multiload-ng.preferences_gtk2.ui:3858
-#: data/multiload-ng.preferences_gtk3.ui:669
-#: data/multiload-ng.preferences_gtk3.ui:1778
-#: data/multiload-ng.preferences_gtk3.ui:3599 data/preferences_gtk2.ui:765
-#: data/preferences_gtk2.ui:2068 data/preferences_gtk2.ui:3858
-#: data/preferences_gtk3.ui:669 data/preferences_gtk3.ui:1778
-#: data/preferences_gtk3.ui:3599
+#: common/multiload-config.c:46 data/preferences_gtk2.ui:741
+#: data/preferences_gtk2.ui:1984 data/preferences_gtk2.ui:3774
+#: data/preferences_gtk3.ui:645 data/preferences_gtk3.ui:1694
+#: data/preferences_gtk3.ui:3515
 msgid   "Network"
 msgstr  "Red"
 
-#: common/multiload-config.c:81 data/multiload-ng.preferences_gtk2.ui:782
-#: data/multiload-ng.preferences_gtk2.ui:2230
-#: data/multiload-ng.preferences_gtk2.ui:3989
-#: data/multiload-ng.preferences_gtk3.ui:686
-#: data/multiload-ng.preferences_gtk3.ui:1923
-#: data/multiload-ng.preferences_gtk3.ui:3731 data/preferences_gtk2.ui:782
-#: data/preferences_gtk2.ui:2230 data/preferences_gtk2.ui:3989
-#: data/preferences_gtk3.ui:686 data/preferences_gtk3.ui:1923
-#: data/preferences_gtk3.ui:3731
+#: common/multiload-config.c:47 data/preferences_gtk2.ui:758
+#: data/preferences_gtk2.ui:2146 data/preferences_gtk2.ui:3905
+#: data/preferences_gtk3.ui:662 data/preferences_gtk3.ui:1839
+#: data/preferences_gtk3.ui:3647
 msgid   "Swap"
 msgstr  "Swap"
 
-#: common/multiload-config.c:90 data/multiload-ng.preferences_gtk2.ui:799
-#: data/multiload-ng.preferences_gtk2.ui:2278
-#: data/multiload-ng.preferences_gtk2.ui:4120
-#: data/multiload-ng.preferences_gtk3.ui:703
-#: data/multiload-ng.preferences_gtk3.ui:1964
-#: data/multiload-ng.preferences_gtk3.ui:3863 data/preferences_gtk2.ui:799
-#: data/preferences_gtk2.ui:2278 data/preferences_gtk2.ui:4120
-#: data/preferences_gtk3.ui:703 data/preferences_gtk3.ui:1964
-#: data/preferences_gtk3.ui:3863
+#: common/multiload-config.c:48 data/preferences_gtk2.ui:775
+#: data/preferences_gtk2.ui:2194 data/preferences_gtk2.ui:4036
+#: data/preferences_gtk3.ui:679 data/preferences_gtk3.ui:1880
+#: data/preferences_gtk3.ui:3779
 msgid   "Load average"
 msgstr  "Carga media"
 
-#: common/multiload-config.c:99 data/multiload-ng.preferences_gtk2.ui:816
-#: data/multiload-ng.preferences_gtk2.ui:2293
-#: data/multiload-ng.preferences_gtk2.ui:4251 data/preferences_gtk2.ui:816
-#: data/preferences_gtk2.ui:2293 data/preferences_gtk2.ui:4251
-#: data/preferences_gtk3.ui:720 data/preferences_gtk3.ui:1979
-#: data/preferences_gtk3.ui:3995
+#: common/multiload-config.c:49 data/preferences_gtk2.ui:792
+#: data/preferences_gtk2.ui:2209 data/preferences_gtk2.ui:4167
+#: data/preferences_gtk3.ui:696 data/preferences_gtk3.ui:1895
+#: data/preferences_gtk3.ui:3911
 msgid   "Disk"
 msgstr  "Disco"
 
-#: common/multiload-config.c:109 data/multiload-ng.preferences_gtk2.ui:833
-#: data/multiload-ng.preferences_gtk2.ui:2308
-#: data/multiload-ng.preferences_gtk2.ui:4382
-#: data/multiload-ng.preferences_gtk3.ui:737
-#: data/multiload-ng.preferences_gtk3.ui:1994
-#: data/multiload-ng.preferences_gtk3.ui:4129 data/preferences_gtk2.ui:833
-#: data/preferences_gtk2.ui:2308 data/preferences_gtk2.ui:4382
-#: data/preferences_gtk3.ui:737 data/preferences_gtk3.ui:1994
-#: data/preferences_gtk3.ui:4129
+#: common/multiload-config.c:50 data/preferences_gtk2.ui:809
+#: data/preferences_gtk2.ui:2224 data/preferences_gtk2.ui:4298
+#: data/preferences_gtk3.ui:713 data/preferences_gtk3.ui:1910
+#: data/preferences_gtk3.ui:4045
 msgid   "Temperature"
 msgstr  "Temperatura"
 
-#: common/multiload-colors.c:191
-msgid   "Could not open the file."
-msgstr  "Imposible abrir el archivo."
-
-#: common/multiload-colors.c:203 common/multiload-colors.c:215
-msgid   "Wrong file format."
-msgstr  "Formato del archivo equivocado."
-
-#: common/multiload-colors.c:236
-msgid   "Could not save the file."
-msgstr  "Imposibile guardar el archivo."
-
-#: common/properties.c:309 common/properties.c:310
+#: common/preferences.c:330
 #, c-format
 msgid   "%d pixel"
 msgstr  "%d pixel"
 
-#: common/properties.c:350 common/properties.c:351
+#: common/preferences.c:356
 #, c-format
 msgid   "%d milliseconds"
 msgstr  "%d milisegundos"
 
+#: common/preferences.c:499
+msgid   "Import color scheme"
+msgstr  "Importe combinación de colores"
+
+#: common/preferences.c:501 common/preferences.c:541
+msgid   "_Cancel"
+msgstr  "_Cancelar"
+
+#: common/preferences.c:502
+msgid   "_Open"
+msgstr  "_Abrir"
+
+#: common/preferences.c:520
+msgid   "Color scheme format is incorrect. Unable to import."
+msgstr  "El formato de la combinación de colores es incorecto. Imposible "
+        "importar."
+
+#: common/preferences.c:523
+msgid   "Color scheme was created by an incompatible version of Multiload-ng. "
+        "Unable to import."
+msgstr  "La combinación de colores fue creada por una versión incompatible de "
+        "Multiload-ng. Imposible importar."
+
+#: common/preferences.c:539
+msgid   "Export color scheme"
+msgstr  "Exporte combinación de colores"
+
+#: common/preferences.c:542
+msgid   "_Save"
+msgstr  "_Guardar"
+
+#: common/preferences.c:555
+msgid   "Error exporting color scheme."
+msgstr  "Error en exportar la combinación de colores."
+
+#: common/preferences.c:709
+msgid   "(Custom)"
+msgstr  "(Personalizado)"
+
 #. xgettext: this is a rate format (eg. 2 MiB/s)
-#: common/util.c:88 common/util.c:116
+#: common/util.c:116
 #, c-format
 msgid   "%s/s"
 msgstr  "%s/s"
 
-#: common/util.c:239 common/util.c:258 common/util.c:267 common/util.c:286
-msgid   "_Cancel"
-msgstr  "_Cancelar"
-
-#: common/util.c:240 common/util.c:268
-msgid   "_Open"
-msgstr  "_Abrir"
-
-#: common/util.c:259 common/util.c:287
-msgid   "_Save"
-msgstr  "_Guardar"
-
-#: common/util.c:317 common/util.c:345
+#: common/util.c:244
 #, c-format
-msgid   "Unable to open the following url: %s"
-msgstr  "Imposible abrir el siguiente url: %s"
+msgid   "Unable to open the following url: '%s'"
+msgstr  "Imposible abrir el siguiente url: '%s'"
 
-#: common/ui.c:209
+#: common/ui.c:221
 msgid   "translator-credits"
 msgstr  "Roberta Assennato <r.assennato@gmail.com>"
 
-#: common/ui.c:239
+#: common/ui.c:251
 msgid   "_Help"
 msgstr  "Ay_uda"
 
-#: common/ui.c:240
+#: common/ui.c:252
 msgid   "_Close"
 msgstr  "_Cerrar"
 
-#: data/multiload-ng.preferences_gtk2.ui:205
-#: data/multiload-ng.preferences_gtk3.ui:205 data/preferences_gtk2.ui:205
-#: data/preferences_gtk3.ui:205
-msgid   "Default"
-msgstr  "Predeterminado"
-
-#: data/multiload-ng.preferences_gtk2.ui:220
-#: data/multiload-ng.preferences_gtk3.ui:220 data/preferences_gtk2.ui:220
-#: data/preferences_gtk3.ui:220
-msgid   "(Custom)"
-msgstr  "(Personalizado)"
-
-#: data/multiload-ng.preferences_gtk2.ui:233
-#: data/multiload-ng.preferences_gtk3.ui:233 data/preferences_gtk2.ui:233
-#: data/preferences_gtk3.ui:233
+#: data/preferences_gtk2.ui:209 data/preferences_gtk3.ui:209
 msgid   "Do nothing"
 msgstr  "No haga nada"
 
-#: data/multiload-ng.preferences_gtk2.ui:236
-#: data/multiload-ng.preferences_gtk3.ui:236 standalone/plugin.c:219
-#: xfce4/plugin.c:217 data/preferences_gtk2.ui:236 data/preferences_gtk3.ui:236
+#: data/preferences_gtk2.ui:212 data/preferences_gtk3.ui:212
+#: indicator/plugin.c:204 standalone/plugin.c:215 xfce4/plugin.c:217
 msgid   "Start task manager"
 msgstr  "Administrador de tareas"
 
-#: data/multiload-ng.preferences_gtk2.ui:239
-#: data/multiload-ng.preferences_gtk3.ui:239 data/preferences_gtk2.ui:239
-#: data/preferences_gtk3.ui:239
+#: data/preferences_gtk2.ui:215 data/preferences_gtk3.ui:215
 msgid   "Execute custom command"
 msgstr  "Mando personalizado"
 
-#: data/multiload-ng.preferences_gtk2.ui:250
-#: data/multiload-ng.preferences_gtk3.ui:250 data/preferences_gtk2.ui:250
-#: data/preferences_gtk3.ui:250
+#: data/preferences_gtk2.ui:226 data/preferences_gtk3.ui:226
 msgid   "Automatic"
 msgstr  "Automático"
 
-#: data/multiload-ng.preferences_gtk2.ui:253
-#: data/multiload-ng.preferences_gtk3.ui:253 data/preferences_gtk2.ui:253
-#: data/preferences_gtk3.ui:253
+#: data/preferences_gtk2.ui:229 data/preferences_gtk3.ui:229
 msgid   "Horizontal"
 msgstr  "Horizontal"
 
-#: data/multiload-ng.preferences_gtk2.ui:256
-#: data/multiload-ng.preferences_gtk3.ui:256 data/preferences_gtk2.ui:256
-#: data/preferences_gtk3.ui:256
+#: data/preferences_gtk2.ui:232 data/preferences_gtk3.ui:232
 msgid   "Vertical"
 msgstr  "Vertical"
 
-#: data/multiload-ng.preferences_gtk2.ui:311
-#: data/multiload-ng.preferences_gtk3.ui:315 data/preferences_gtk2.ui:311
-#: data/preferences_gtk3.ui:315
+#: data/preferences_gtk2.ui:287 data/preferences_gtk3.ui:291
 msgid   "Preferences editor"
 msgstr  "Editor de preferencias"
 
-#: data/multiload-ng.preferences_gtk2.ui:381
-#: data/multiload-ng.preferences_gtk2.ui:431
-#: data/multiload-ng.preferences_gtk2.ui:507
-#: data/multiload-ng.preferences_gtk2.ui:531
-#: data/multiload-ng.preferences_gtk2.ui:581
-#: data/multiload-ng.preferences_gtk2.ui:631
-#: data/multiload-ng.preferences_gtk2.ui:681
-#: data/multiload-ng.preferences_gtk3.ui:355
-#: data/multiload-ng.preferences_gtk3.ui:395
-#: data/multiload-ng.preferences_gtk3.ui:456
-#: data/multiload-ng.preferences_gtk3.ui:475
-#: data/multiload-ng.preferences_gtk3.ui:515
-#: data/multiload-ng.preferences_gtk3.ui:555
-#: data/multiload-ng.preferences_gtk3.ui:595 data/preferences_gtk2.ui:381
-#: data/preferences_gtk2.ui:431 data/preferences_gtk2.ui:507
-#: data/preferences_gtk2.ui:531 data/preferences_gtk2.ui:581
-#: data/preferences_gtk2.ui:631 data/preferences_gtk2.ui:681
-#: data/preferences_gtk3.ui:355 data/preferences_gtk3.ui:395
-#: data/preferences_gtk3.ui:456 data/preferences_gtk3.ui:475
-#: data/preferences_gtk3.ui:515 data/preferences_gtk3.ui:555
-#: data/preferences_gtk3.ui:595
+#: data/preferences_gtk2.ui:357 data/preferences_gtk2.ui:407
+#: data/preferences_gtk2.ui:483 data/preferences_gtk2.ui:507
+#: data/preferences_gtk2.ui:557 data/preferences_gtk2.ui:607
+#: data/preferences_gtk2.ui:657 data/preferences_gtk3.ui:331
+#: data/preferences_gtk3.ui:371 data/preferences_gtk3.ui:432
+#: data/preferences_gtk3.ui:451 data/preferences_gtk3.ui:491
+#: data/preferences_gtk3.ui:531 data/preferences_gtk3.ui:571
 msgid   "Set the size of this graph"
 msgstr  "Ajuste el tamaño del gráfico"
 
-#: data/multiload-ng.preferences_gtk2.ui:405
-#: data/multiload-ng.preferences_gtk2.ui:455
-#: data/multiload-ng.preferences_gtk2.ui:481
-#: data/multiload-ng.preferences_gtk2.ui:555
-#: data/multiload-ng.preferences_gtk2.ui:605
-#: data/multiload-ng.preferences_gtk2.ui:655
-#: data/multiload-ng.preferences_gtk2.ui:705
-#: data/multiload-ng.preferences_gtk3.ui:374
-#: data/multiload-ng.preferences_gtk3.ui:414
-#: data/multiload-ng.preferences_gtk3.ui:435
-#: data/multiload-ng.preferences_gtk3.ui:494
-#: data/multiload-ng.preferences_gtk3.ui:534
-#: data/multiload-ng.preferences_gtk3.ui:574
-#: data/multiload-ng.preferences_gtk3.ui:614 data/preferences_gtk2.ui:405
-#: data/preferences_gtk2.ui:455 data/preferences_gtk2.ui:481
-#: data/preferences_gtk2.ui:555 data/preferences_gtk2.ui:605
-#: data/preferences_gtk2.ui:655 data/preferences_gtk2.ui:705
-#: data/preferences_gtk3.ui:374 data/preferences_gtk3.ui:414
-#: data/preferences_gtk3.ui:435 data/preferences_gtk3.ui:494
-#: data/preferences_gtk3.ui:534 data/preferences_gtk3.ui:574
-#: data/preferences_gtk3.ui:614
+#: data/preferences_gtk2.ui:381 data/preferences_gtk2.ui:431
+#: data/preferences_gtk2.ui:457 data/preferences_gtk2.ui:531
+#: data/preferences_gtk2.ui:581 data/preferences_gtk2.ui:631
+#: data/preferences_gtk2.ui:681 data/preferences_gtk3.ui:350
+#: data/preferences_gtk3.ui:390 data/preferences_gtk3.ui:411
+#: data/preferences_gtk3.ui:470 data/preferences_gtk3.ui:510
+#: data/preferences_gtk3.ui:550 data/preferences_gtk3.ui:590
 msgid   "Set the time between updates of this graph"
 msgstr  "Ajuste el tiempo entre dos actualizaciones de este gráfico"
 
-#: data/multiload-ng.preferences_gtk2.ui:413
-#: data/multiload-ng.preferences_gtk2.ui:463
-#: data/multiload-ng.preferences_gtk2.ui:489
-#: data/multiload-ng.preferences_gtk2.ui:563
-#: data/multiload-ng.preferences_gtk2.ui:613
-#: data/multiload-ng.preferences_gtk2.ui:663
-#: data/multiload-ng.preferences_gtk2.ui:713
-#: data/multiload-ng.preferences_gtk3.ui:380
-#: data/multiload-ng.preferences_gtk3.ui:420
-#: data/multiload-ng.preferences_gtk3.ui:441
-#: data/multiload-ng.preferences_gtk3.ui:500
-#: data/multiload-ng.preferences_gtk3.ui:540
-#: data/multiload-ng.preferences_gtk3.ui:580
-#: data/multiload-ng.preferences_gtk3.ui:620 data/preferences_gtk2.ui:413
-#: data/preferences_gtk2.ui:463 data/preferences_gtk2.ui:489
-#: data/preferences_gtk2.ui:563 data/preferences_gtk2.ui:613
-#: data/preferences_gtk2.ui:663 data/preferences_gtk2.ui:713
-#: data/preferences_gtk3.ui:380 data/preferences_gtk3.ui:420
-#: data/preferences_gtk3.ui:441 data/preferences_gtk3.ui:500
-#: data/preferences_gtk3.ui:540 data/preferences_gtk3.ui:580
-#: data/preferences_gtk3.ui:620
+#: data/preferences_gtk2.ui:389 data/preferences_gtk2.ui:439
+#: data/preferences_gtk2.ui:465 data/preferences_gtk2.ui:539
+#: data/preferences_gtk2.ui:589 data/preferences_gtk2.ui:639
+#: data/preferences_gtk2.ui:689 data/preferences_gtk3.ui:356
+#: data/preferences_gtk3.ui:396 data/preferences_gtk3.ui:417
+#: data/preferences_gtk3.ui:476 data/preferences_gtk3.ui:516
+#: data/preferences_gtk3.ui:556 data/preferences_gtk3.ui:596
 msgid   "Tooltip may not show if update interval is too short."
 msgstr  "Los tooltip podrían no aparecer si el intervalo es demasiado breve."
 
-#: data/multiload-ng.preferences_gtk2.ui:733
-#: data/multiload-ng.preferences_gtk2.ui:752
-#: data/multiload-ng.preferences_gtk2.ui:769
-#: data/multiload-ng.preferences_gtk2.ui:786
-#: data/multiload-ng.preferences_gtk2.ui:803
-#: data/multiload-ng.preferences_gtk2.ui:820
-#: data/multiload-ng.preferences_gtk2.ui:837
-#: data/multiload-ng.preferences_gtk3.ui:637
-#: data/multiload-ng.preferences_gtk3.ui:656
-#: data/multiload-ng.preferences_gtk3.ui:673
-#: data/multiload-ng.preferences_gtk3.ui:690
-#: data/multiload-ng.preferences_gtk3.ui:707
-#: data/multiload-ng.preferences_gtk3.ui:724
-#: data/multiload-ng.preferences_gtk3.ui:741 data/preferences_gtk2.ui:733
-#: data/preferences_gtk2.ui:752 data/preferences_gtk2.ui:769
-#: data/preferences_gtk2.ui:786 data/preferences_gtk2.ui:803
-#: data/preferences_gtk2.ui:820 data/preferences_gtk2.ui:837
-#: data/preferences_gtk3.ui:637 data/preferences_gtk3.ui:656
-#: data/preferences_gtk3.ui:673 data/preferences_gtk3.ui:690
-#: data/preferences_gtk3.ui:707 data/preferences_gtk3.ui:724
-#: data/preferences_gtk3.ui:741
+#: data/preferences_gtk2.ui:709 data/preferences_gtk2.ui:728
+#: data/preferences_gtk2.ui:745 data/preferences_gtk2.ui:762
+#: data/preferences_gtk2.ui:779 data/preferences_gtk2.ui:796
+#: data/preferences_gtk2.ui:813 data/preferences_gtk3.ui:613
+#: data/preferences_gtk3.ui:632 data/preferences_gtk3.ui:649
+#: data/preferences_gtk3.ui:666 data/preferences_gtk3.ui:683
+#: data/preferences_gtk3.ui:700 data/preferences_gtk3.ui:717
 msgid   "Make this graph visible"
 msgstr  "Rinda el gráfico visible"
 
-#: data/multiload-ng.preferences_gtk2.ui:854
-#: data/multiload-ng.preferences_gtk3.ui:757 data/preferences_gtk2.ui:854
-#: data/preferences_gtk3.ui:757
+#: data/preferences_gtk2.ui:830 data/preferences_gtk3.ui:733
 msgid   "Graph"
 msgstr  "Gráfico"
 
-#: data/multiload-ng.preferences_gtk2.ui:863
-#: data/multiload-ng.preferences_gtk3.ui:771 data/preferences_gtk2.ui:863
-#: data/preferences_gtk3.ui:771
+#: data/preferences_gtk2.ui:839 data/preferences_gtk3.ui:747
 msgid   "Size"
 msgstr  "Tamaño"
 
-#: data/multiload-ng.preferences_gtk2.ui:876
-#: data/multiload-ng.preferences_gtk3.ui:784 data/preferences_gtk2.ui:876
-#: data/preferences_gtk3.ui:784
+#: data/preferences_gtk2.ui:852 data/preferences_gtk3.ui:760
 msgid   "Update interval"
 msgstr  "Intervalo de actualización"
 
-#: data/multiload-ng.preferences_gtk2.ui:888
-#: data/multiload-ng.preferences_gtk2.ui:906
-#: data/multiload-ng.preferences_gtk2.ui:924
-#: data/multiload-ng.preferences_gtk2.ui:942
-#: data/multiload-ng.preferences_gtk2.ui:960
-#: data/multiload-ng.preferences_gtk2.ui:978
-#: data/multiload-ng.preferences_gtk2.ui:1094
-#: data/multiload-ng.preferences_gtk2.ui:3429
-#: data/multiload-ng.preferences_gtk3.ui:797
-#: data/multiload-ng.preferences_gtk3.ui:811
-#: data/multiload-ng.preferences_gtk3.ui:825
-#: data/multiload-ng.preferences_gtk3.ui:839
-#: data/multiload-ng.preferences_gtk3.ui:853
-#: data/multiload-ng.preferences_gtk3.ui:867
-#: data/multiload-ng.preferences_gtk3.ui:965
-#: data/multiload-ng.preferences_gtk3.ui:3165 data/preferences_gtk2.ui:888
-#: data/preferences_gtk2.ui:906 data/preferences_gtk2.ui:924
-#: data/preferences_gtk2.ui:942 data/preferences_gtk2.ui:960
-#: data/preferences_gtk2.ui:978 data/preferences_gtk2.ui:1094
-#: data/preferences_gtk2.ui:3429 data/preferences_gtk3.ui:797
-#: data/preferences_gtk3.ui:811 data/preferences_gtk3.ui:825
-#: data/preferences_gtk3.ui:839 data/preferences_gtk3.ui:853
-#: data/preferences_gtk3.ui:867 data/preferences_gtk3.ui:965
-#: data/preferences_gtk3.ui:3165
+#: data/preferences_gtk2.ui:864 data/preferences_gtk2.ui:882
+#: data/preferences_gtk2.ui:900 data/preferences_gtk2.ui:918
+#: data/preferences_gtk2.ui:936 data/preferences_gtk2.ui:954
+#: data/preferences_gtk2.ui:1070 data/preferences_gtk2.ui:3345
+#: data/preferences_gtk3.ui:773 data/preferences_gtk3.ui:787
+#: data/preferences_gtk3.ui:801 data/preferences_gtk3.ui:815
+#: data/preferences_gtk3.ui:829 data/preferences_gtk3.ui:843
+#: data/preferences_gtk3.ui:941 data/preferences_gtk3.ui:3081
 msgid   "Advanced configuration"
 msgstr  "Configuración avanzada"
 
-#: data/multiload-ng.preferences_gtk2.ui:1116
-#: data/multiload-ng.preferences_gtk3.ui:979 data/preferences_gtk2.ui:1116
-#: data/preferences_gtk3.ui:979
+#: data/preferences_gtk2.ui:1092 data/preferences_gtk3.ui:955
 msgid   "Timespan"
 msgstr  "Lapso de tiempo"
 
-#: data/multiload-ng.preferences_gtk2.ui:1125
-#: data/multiload-ng.preferences_gtk3.ui:989 data/preferences_gtk2.ui:1125
-#: data/preferences_gtk3.ui:989
+#: data/preferences_gtk2.ui:1101 data/preferences_gtk3.ui:965
 msgid   "Fill space between graphs"
 msgstr  "Rellene el espacio entre los gráficos"
 
-#: data/multiload-ng.preferences_gtk2.ui:1144
-#: data/multiload-ng.preferences_gtk3.ui:1008 data/preferences_gtk2.ui:1144
-#: data/preferences_gtk3.ui:1008
+#: data/preferences_gtk2.ui:1120 data/preferences_gtk3.ui:984
 msgid   "Orientation:"
 msgstr  "Orientación"
 
-#: data/multiload-ng.preferences_gtk2.ui:1159
-#: data/multiload-ng.preferences_gtk3.ui:1021 data/preferences_gtk2.ui:1159
-#: data/preferences_gtk3.ui:1021
+#: data/preferences_gtk2.ui:1135 data/preferences_gtk3.ui:997
 msgid   "Padding:"
 msgstr  "Relleno:"
 
-#: data/multiload-ng.preferences_gtk2.ui:1174
-#: data/multiload-ng.preferences_gtk3.ui:1034 data/preferences_gtk2.ui:1174
-#: data/preferences_gtk3.ui:1034
+#: data/preferences_gtk2.ui:1150 data/preferences_gtk3.ui:1010
 msgid   "Spacing:"
 msgstr  "Espacio:"
 
-#: data/multiload-ng.preferences_gtk2.ui:1191
-#: data/multiload-ng.preferences_gtk3.ui:1046 data/preferences_gtk2.ui:1191
-#: data/preferences_gtk3.ui:1046
+#: data/preferences_gtk2.ui:1167 data/preferences_gtk3.ui:1022
 msgid   "Set space between graphs"
 msgstr  "Ajuste el espacio entre los gráficos"
 
-#: data/multiload-ng.preferences_gtk2.ui:1210
-#: data/multiload-ng.preferences_gtk3.ui:1064 data/preferences_gtk2.ui:1210
-#: data/preferences_gtk3.ui:1064
+#: data/preferences_gtk2.ui:1186 data/preferences_gtk3.ui:1040
 msgid   "Set padding width"
 msgstr  "Ajuste la anchura del relleno"
 
-#: data/multiload-ng.preferences_gtk2.ui:1254
-#: data/multiload-ng.preferences_gtk3.ui:1102 data/preferences_gtk2.ui:1254
-#: data/preferences_gtk3.ui:1102
+#: data/preferences_gtk2.ui:1230 data/preferences_gtk3.ui:1078
 msgid   "If padding is set too large, the graph won't show."
 msgstr  "Si el relleno es demasiado grande, el gráfico non será visible."
 
-#: data/multiload-ng.preferences_gtk2.ui:1287
-#: data/multiload-ng.preferences_gtk3.ui:1129 data/preferences_gtk2.ui:1287
-#: data/preferences_gtk3.ui:1129
+#: data/preferences_gtk2.ui:1263 data/preferences_gtk3.ui:1105
 msgid   "Selected orientation is not the same of the panel. Graphs may be "
         "very small."
 msgstr  "La orientación seleccionada no es la misma del panel. Los gráficos "
         "podrían ser muy pequeños."
 
-#: data/multiload-ng.preferences_gtk2.ui:1327
-#: data/multiload-ng.preferences_gtk3.ui:1201 data/preferences_gtk2.ui:1327
-#: data/preferences_gtk3.ui:1201
+#: data/preferences_gtk2.ui:1303 data/preferences_gtk3.ui:1177
 msgid   "Graphs"
 msgstr  "Gráficos"
 
-#: data/multiload-ng.preferences_gtk2.ui:1368
-#: data/multiload-ng.preferences_gtk3.ui:1247 data/preferences_gtk2.ui:1368
-#: data/preferences_gtk3.ui:1247
+#: data/preferences_gtk2.ui:1352 data/preferences_gtk3.ui:1232
 msgid   "Color scheme"
 msgstr  "Combinación de colores"
 
-#: data/multiload-ng.preferences_gtk2.ui:1388
-#: data/multiload-ng.preferences_gtk3.ui:1267 data/preferences_gtk2.ui:1388
-#: data/preferences_gtk3.ui:1267
-msgid   "Builtin"
-msgstr  "Incorporado"
-
-#: data/multiload-ng.preferences_gtk2.ui:1421
-#: data/multiload-ng.preferences_gtk3.ui:1300 data/preferences_gtk2.ui:1421
-#: data/preferences_gtk3.ui:1300
-msgid   "Create new color scheme"
-msgstr  "Crear nueva combinación de colores"
-
-#: data/multiload-ng.preferences_gtk2.ui:1422
-#: data/multiload-ng.preferences_gtk3.ui:1301 data/preferences_gtk2.ui:1422
-#: data/preferences_gtk3.ui:1301
-msgid   "New"
-msgstr  "Nuevo"
-
-#: data/multiload-ng.preferences_gtk2.ui:1434
-#: data/multiload-ng.preferences_gtk3.ui:1313 data/preferences_gtk2.ui:1434
-#: data/preferences_gtk3.ui:1313
-msgid   "Delete selected color scheme"
-msgstr  "Borre la combinación de colores seleccionada"
-
-#: data/multiload-ng.preferences_gtk2.ui:1435
-#: data/multiload-ng.preferences_gtk3.ui:1314 data/preferences_gtk2.ui:1435
-#: data/preferences_gtk3.ui:1314
-msgid   "Delete"
-msgstr  "Borrar"
-
-#: data/multiload-ng.preferences_gtk2.ui:1447
-#: data/multiload-ng.preferences_gtk3.ui:1326 data/preferences_gtk2.ui:1447
-#: data/preferences_gtk3.ui:1326
-msgid   "Save current color scheme"
-msgstr  "Guarde la combinación de colores actual"
-
-#: data/multiload-ng.preferences_gtk2.ui:1448
-#: data/multiload-ng.preferences_gtk3.ui:1327 data/preferences_gtk2.ui:1448
-#: data/preferences_gtk3.ui:1327
-msgid   "Save"
-msgstr  "Guardar"
-
-#: data/multiload-ng.preferences_gtk2.ui:1469
-#: data/multiload-ng.preferences_gtk3.ui:1349 data/preferences_gtk2.ui:1469
-#: data/preferences_gtk3.ui:1349
+#: data/preferences_gtk2.ui:1383 data/preferences_gtk3.ui:1263
 msgid   "Import color scheme from file"
 msgstr  "Importe el esquema de color de un archivo"
 
-#: data/multiload-ng.preferences_gtk2.ui:1470
-#: data/multiload-ng.preferences_gtk3.ui:1350 data/preferences_gtk2.ui:1470
-#: data/preferences_gtk3.ui:1350
+#: data/preferences_gtk2.ui:1384 data/preferences_gtk3.ui:1264
 msgid   "Import"
 msgstr  "Importar"
 
-#: data/multiload-ng.preferences_gtk2.ui:1482
-#: data/multiload-ng.preferences_gtk3.ui:1362 data/preferences_gtk2.ui:1482
-#: data/preferences_gtk3.ui:1362
+#: data/preferences_gtk2.ui:1397 data/preferences_gtk3.ui:1277
 msgid   "Export color scheme to file"
 msgstr  "Exporte el esquema de color en un archivo"
 
-#: data/multiload-ng.preferences_gtk2.ui:1483
-#: data/multiload-ng.preferences_gtk3.ui:1363 data/preferences_gtk2.ui:1483
-#: data/preferences_gtk3.ui:1363
+#: data/preferences_gtk2.ui:1398 data/preferences_gtk3.ui:1278
 msgid   "Export"
 msgstr  "Exportar"
 
-#: data/multiload-ng.preferences_gtk2.ui:1719
-#: data/multiload-ng.preferences_gtk2.ui:2007
-#: data/multiload-ng.preferences_gtk3.ui:1477
-#: data/multiload-ng.preferences_gtk3.ui:1728 data/preferences_gtk2.ui:1719
-#: data/preferences_gtk2.ui:2007 data/preferences_gtk3.ui:1477
-#: data/preferences_gtk3.ui:1728
+#: data/preferences_gtk2.ui:1635 data/preferences_gtk2.ui:1923
+#: data/preferences_gtk3.ui:1393 data/preferences_gtk3.ui:1644
 msgid   "User"
 msgstr  "Usuario"
 
-#: data/multiload-ng.preferences_gtk2.ui:1734
-#: data/multiload-ng.preferences_gtk3.ui:1489 data/preferences_gtk2.ui:1734
-#: data/preferences_gtk3.ui:1489
+#: data/preferences_gtk2.ui:1650 data/preferences_gtk3.ui:1405
 msgid   "System"
 msgstr  "Sistema"
 
-#: data/multiload-ng.preferences_gtk2.ui:1749
-#: data/multiload-ng.preferences_gtk3.ui:1501 data/preferences_gtk2.ui:1749
-#: data/preferences_gtk3.ui:1501
+#: data/preferences_gtk2.ui:1665 data/preferences_gtk3.ui:1417
 msgid   "Nice"
 msgstr  "Nice"
 
-#: data/multiload-ng.preferences_gtk2.ui:1764
-#: data/multiload-ng.preferences_gtk3.ui:1513 data/preferences_gtk2.ui:1764
-#: data/preferences_gtk3.ui:1513
+#: data/preferences_gtk2.ui:1680 data/preferences_gtk3.ui:1429
 msgid   "IOWait"
 msgstr  "IOWait"
 
-#: data/multiload-ng.preferences_gtk2.ui:1807
-#: data/multiload-ng.preferences_gtk2.ui:2749
-#: data/multiload-ng.preferences_gtk2.ui:2764
-#: data/multiload-ng.preferences_gtk2.ui:2779
-#: data/multiload-ng.preferences_gtk2.ui:2794
-#: data/multiload-ng.preferences_gtk2.ui:2809
-#: data/multiload-ng.preferences_gtk2.ui:2824
-#: data/multiload-ng.preferences_gtk3.ui:1552
-#: data/multiload-ng.preferences_gtk3.ui:2364
-#: data/multiload-ng.preferences_gtk3.ui:2377
-#: data/multiload-ng.preferences_gtk3.ui:2390
-#: data/multiload-ng.preferences_gtk3.ui:2403
-#: data/multiload-ng.preferences_gtk3.ui:2416
-#: data/multiload-ng.preferences_gtk3.ui:2429 data/preferences_gtk2.ui:1807
-#: data/preferences_gtk2.ui:2749 data/preferences_gtk2.ui:2764
-#: data/preferences_gtk2.ui:2779 data/preferences_gtk2.ui:2794
-#: data/preferences_gtk2.ui:2809 data/preferences_gtk2.ui:2824
-#: data/preferences_gtk3.ui:1552 data/preferences_gtk3.ui:2364
-#: data/preferences_gtk3.ui:2377 data/preferences_gtk3.ui:2390
-#: data/preferences_gtk3.ui:2403 data/preferences_gtk3.ui:2416
-#: data/preferences_gtk3.ui:2429
+#: data/preferences_gtk2.ui:1723 data/preferences_gtk2.ui:2665
+#: data/preferences_gtk2.ui:2680 data/preferences_gtk2.ui:2695
+#: data/preferences_gtk2.ui:2710 data/preferences_gtk2.ui:2725
+#: data/preferences_gtk2.ui:2740 data/preferences_gtk3.ui:1468
+#: data/preferences_gtk3.ui:2280 data/preferences_gtk3.ui:2293
+#: data/preferences_gtk3.ui:2306 data/preferences_gtk3.ui:2319
+#: data/preferences_gtk3.ui:2332 data/preferences_gtk3.ui:2345
 msgid   "Background"
 msgstr  "Trasfondo"
 
-#: data/multiload-ng.preferences_gtk2.ui:1869
-#: data/multiload-ng.preferences_gtk2.ui:2538
-#: data/multiload-ng.preferences_gtk2.ui:2553
-#: data/multiload-ng.preferences_gtk2.ui:2568
-#: data/multiload-ng.preferences_gtk2.ui:2583
-#: data/multiload-ng.preferences_gtk2.ui:2598
-#: data/multiload-ng.preferences_gtk2.ui:2613
-#: data/multiload-ng.preferences_gtk3.ui:1607
-#: data/multiload-ng.preferences_gtk3.ui:2184
-#: data/multiload-ng.preferences_gtk3.ui:2197
-#: data/multiload-ng.preferences_gtk3.ui:2210
-#: data/multiload-ng.preferences_gtk3.ui:2223
-#: data/multiload-ng.preferences_gtk3.ui:2236
-#: data/multiload-ng.preferences_gtk3.ui:2249 data/preferences_gtk2.ui:1869
-#: data/preferences_gtk2.ui:2538 data/preferences_gtk2.ui:2553
-#: data/preferences_gtk2.ui:2568 data/preferences_gtk2.ui:2583
-#: data/preferences_gtk2.ui:2598 data/preferences_gtk2.ui:2613
-#: data/preferences_gtk3.ui:1607 data/preferences_gtk3.ui:2184
-#: data/preferences_gtk3.ui:2197 data/preferences_gtk3.ui:2210
-#: data/preferences_gtk3.ui:2223 data/preferences_gtk3.ui:2236
-#: data/preferences_gtk3.ui:2249
+#: data/preferences_gtk2.ui:1785 data/preferences_gtk2.ui:2454
+#: data/preferences_gtk2.ui:2469 data/preferences_gtk2.ui:2484
+#: data/preferences_gtk2.ui:2499 data/preferences_gtk2.ui:2514
+#: data/preferences_gtk2.ui:2529 data/preferences_gtk3.ui:1523
+#: data/preferences_gtk3.ui:2100 data/preferences_gtk3.ui:2113
+#: data/preferences_gtk3.ui:2126 data/preferences_gtk3.ui:2139
+#: data/preferences_gtk3.ui:2152 data/preferences_gtk3.ui:2165
 msgid   "Border"
 msgstr  "Borde"
 
-#: data/multiload-ng.preferences_gtk2.ui:2022
-#: data/multiload-ng.preferences_gtk3.ui:1740 data/preferences_gtk2.ui:2022
-#: data/preferences_gtk3.ui:1740
+#: data/preferences_gtk2.ui:1938 data/preferences_gtk3.ui:1656
 msgid   "Shared"
 msgstr  "Condivisa"
 
-#: data/multiload-ng.preferences_gtk2.ui:2037
-#: data/multiload-ng.preferences_gtk3.ui:1752 data/preferences_gtk2.ui:2037
-#: data/preferences_gtk3.ui:1752
+#: data/preferences_gtk2.ui:1953 data/preferences_gtk3.ui:1668
 msgid   "Buffer"
 msgstr  "Búfer"
 
-#: data/multiload-ng.preferences_gtk2.ui:2052
-#: data/multiload-ng.preferences_gtk3.ui:1764 data/preferences_gtk2.ui:2052
-#: data/preferences_gtk3.ui:1764
+#: data/preferences_gtk2.ui:1968 data/preferences_gtk3.ui:1680
 msgid   "Cache"
 msgstr  "Cache"
 
-#: data/multiload-ng.preferences_gtk2.ui:2136
-#: data/multiload-ng.preferences_gtk3.ui:1833 data/preferences_gtk2.ui:2136
-#: data/preferences_gtk3.ui:1833
+#: data/preferences_gtk2.ui:2052 data/preferences_gtk3.ui:1749
 msgid   "Receiving"
 msgstr  "Recepción"
 
-#: data/multiload-ng.preferences_gtk2.ui:2151
-#: data/multiload-ng.preferences_gtk3.ui:1845 data/preferences_gtk2.ui:2151
-#: data/preferences_gtk3.ui:1845
+#: data/preferences_gtk2.ui:2067 data/preferences_gtk3.ui:1761
 msgid   "Sending"
 msgstr  "Envio"
 
-#: data/multiload-ng.preferences_gtk2.ui:2166
-#: data/multiload-ng.preferences_gtk3.ui:1857 data/preferences_gtk2.ui:2166
-#: data/preferences_gtk3.ui:1857
+#: data/preferences_gtk2.ui:2082 data/preferences_gtk3.ui:1773
 msgid   "Local"
 msgstr  "Local"
 
-#: data/multiload-ng.preferences_gtk2.ui:2262
-#: data/multiload-ng.preferences_gtk3.ui:1950 data/preferences_gtk2.ui:2262
-#: data/preferences_gtk3.ui:1950
+#: data/preferences_gtk2.ui:2178 data/preferences_gtk3.ui:1866
 msgid   "Used"
 msgstr  "Usado"
 
-#: data/multiload-ng.preferences_gtk2.ui:2340
-#: data/multiload-ng.preferences_gtk3.ui:2021 data/preferences_gtk2.ui:2340
-#: data/preferences_gtk3.ui:2021
+#: data/preferences_gtk2.ui:2256 data/preferences_gtk3.ui:1937
 msgid   "Average"
 msgstr  "Media"
 
-#: data/multiload-ng.preferences_gtk2.ui:2409
-#: data/multiload-ng.preferences_gtk3.ui:2075 data/preferences_gtk2.ui:2409
-#: data/preferences_gtk3.ui:2075
+#: data/preferences_gtk2.ui:2325 data/preferences_gtk3.ui:1991
 msgid   "Read"
 msgstr  "Lectura"
 
-#: data/multiload-ng.preferences_gtk2.ui:2424
-#: data/multiload-ng.preferences_gtk3.ui:2087 data/preferences_gtk2.ui:2424
-#: data/preferences_gtk3.ui:2087
+#: data/preferences_gtk2.ui:2340 data/preferences_gtk3.ui:2003
 msgid   "Write"
 msgstr  "Escritura"
 
-#: data/multiload-ng.preferences_gtk2.ui:2439
-#: data/multiload-ng.preferences_gtk3.ui:2099 data/preferences_gtk2.ui:2439
-#: data/preferences_gtk3.ui:2099
+#: data/preferences_gtk2.ui:2355 data/preferences_gtk3.ui:2015
 msgid   "Value"
 msgstr  "Valor"
 
-#: data/multiload-ng.preferences_gtk2.ui:3341
-#: data/multiload-ng.preferences_gtk3.ui:3063 data/preferences_gtk2.ui:3341
-#: data/preferences_gtk3.ui:3063
+#: data/preferences_gtk2.ui:3257 data/preferences_gtk3.ui:2979
 msgid   "Colors"
 msgstr  "Colores"
 
-#: data/multiload-ng.preferences_gtk2.ui:3419
-#: data/multiload-ng.preferences_gtk3.ui:3155 data/preferences_gtk2.ui:3419
-#: data/preferences_gtk3.ui:3155
+#: data/preferences_gtk2.ui:3335 data/preferences_gtk3.ui:3071
 msgid   "Simple"
 msgstr  "Simple"
 
-#: data/multiload-ng.preferences_gtk2.ui:3422
-#: data/multiload-ng.preferences_gtk3.ui:3158 data/preferences_gtk2.ui:3422
-#: data/preferences_gtk3.ui:3158
+#: data/preferences_gtk2.ui:3338 data/preferences_gtk3.ui:3074
 msgid   "Detailed"
 msgstr  "Detallado"
 
-#: data/multiload-ng.preferences_gtk2.ui:3490
-#: data/multiload-ng.preferences_gtk2.ui:3617
-#: data/multiload-ng.preferences_gtk2.ui:3748
-#: data/multiload-ng.preferences_gtk2.ui:3879
-#: data/multiload-ng.preferences_gtk2.ui:4010
-#: data/multiload-ng.preferences_gtk2.ui:4141
-#: data/multiload-ng.preferences_gtk2.ui:4272
-#: data/multiload-ng.preferences_gtk3.ui:3227
-#: data/multiload-ng.preferences_gtk3.ui:3356
-#: data/multiload-ng.preferences_gtk3.ui:3488
-#: data/multiload-ng.preferences_gtk3.ui:3620
-#: data/multiload-ng.preferences_gtk3.ui:3752
-#: data/multiload-ng.preferences_gtk3.ui:3884
-#: data/multiload-ng.preferences_gtk3.ui:4017 data/preferences_gtk2.ui:3490
-#: data/preferences_gtk2.ui:3617 data/preferences_gtk2.ui:3748
-#: data/preferences_gtk2.ui:3879 data/preferences_gtk2.ui:4010
-#: data/preferences_gtk2.ui:4141 data/preferences_gtk2.ui:4272
-#: data/preferences_gtk3.ui:3227 data/preferences_gtk3.ui:3356
-#: data/preferences_gtk3.ui:3488 data/preferences_gtk3.ui:3620
-#: data/preferences_gtk3.ui:3752 data/preferences_gtk3.ui:3884
-#: data/preferences_gtk3.ui:4017
+#: data/preferences_gtk2.ui:3406 data/preferences_gtk2.ui:3533
+#: data/preferences_gtk2.ui:3664 data/preferences_gtk2.ui:3795
+#: data/preferences_gtk2.ui:3926 data/preferences_gtk2.ui:4057
+#: data/preferences_gtk2.ui:4188 data/preferences_gtk3.ui:3143
+#: data/preferences_gtk3.ui:3272 data/preferences_gtk3.ui:3404
+#: data/preferences_gtk3.ui:3536 data/preferences_gtk3.ui:3668
+#: data/preferences_gtk3.ui:3800 data/preferences_gtk3.ui:3933
 msgid   "Tooltip style:"
 msgstr  "Estilo de tooltip:"
 
-#: data/multiload-ng.preferences_gtk2.ui:3498
-#: data/multiload-ng.preferences_gtk2.ui:3625
-#: data/multiload-ng.preferences_gtk2.ui:3756
-#: data/multiload-ng.preferences_gtk2.ui:3887
-#: data/multiload-ng.preferences_gtk2.ui:4018
-#: data/multiload-ng.preferences_gtk2.ui:4149
-#: data/multiload-ng.preferences_gtk2.ui:4280
-#: data/multiload-ng.preferences_gtk3.ui:3239
-#: data/multiload-ng.preferences_gtk3.ui:3368
-#: data/multiload-ng.preferences_gtk3.ui:3500
-#: data/multiload-ng.preferences_gtk3.ui:3632
-#: data/multiload-ng.preferences_gtk3.ui:3764
-#: data/multiload-ng.preferences_gtk3.ui:3896
-#: data/multiload-ng.preferences_gtk3.ui:4030 data/preferences_gtk2.ui:3498
-#: data/preferences_gtk2.ui:3625 data/preferences_gtk2.ui:3756
-#: data/preferences_gtk2.ui:3887 data/preferences_gtk2.ui:4018
-#: data/preferences_gtk2.ui:4149 data/preferences_gtk2.ui:4280
-#: data/preferences_gtk3.ui:3239 data/preferences_gtk3.ui:3368
-#: data/preferences_gtk3.ui:3500 data/preferences_gtk3.ui:3632
-#: data/preferences_gtk3.ui:3764 data/preferences_gtk3.ui:3896
-#: data/preferences_gtk3.ui:4030
+#: data/preferences_gtk2.ui:3414 data/preferences_gtk2.ui:3541
+#: data/preferences_gtk2.ui:3672 data/preferences_gtk2.ui:3803
+#: data/preferences_gtk2.ui:3934 data/preferences_gtk2.ui:4065
+#: data/preferences_gtk2.ui:4196 data/preferences_gtk3.ui:3155
+#: data/preferences_gtk3.ui:3284 data/preferences_gtk3.ui:3416
+#: data/preferences_gtk3.ui:3548 data/preferences_gtk3.ui:3680
+#: data/preferences_gtk3.ui:3812 data/preferences_gtk3.ui:3946
 msgid   "Double click action:"
 msgstr  "Acción al hacer doble clic:"
 
-#: data/multiload-ng.preferences_gtk2.ui:3509
-#: data/multiload-ng.preferences_gtk2.ui:3636
-#: data/multiload-ng.preferences_gtk2.ui:3767
-#: data/multiload-ng.preferences_gtk2.ui:3898
-#: data/multiload-ng.preferences_gtk2.ui:4029
-#: data/multiload-ng.preferences_gtk2.ui:4160
-#: data/multiload-ng.preferences_gtk2.ui:4291
-#: data/multiload-ng.preferences_gtk3.ui:3251
-#: data/multiload-ng.preferences_gtk3.ui:3380
-#: data/multiload-ng.preferences_gtk3.ui:3512
-#: data/multiload-ng.preferences_gtk3.ui:3644
-#: data/multiload-ng.preferences_gtk3.ui:3776
-#: data/multiload-ng.preferences_gtk3.ui:3908
-#: data/multiload-ng.preferences_gtk3.ui:4042 data/preferences_gtk2.ui:3509
-#: data/preferences_gtk2.ui:3636 data/preferences_gtk2.ui:3767
-#: data/preferences_gtk2.ui:3898 data/preferences_gtk2.ui:4029
-#: data/preferences_gtk2.ui:4160 data/preferences_gtk2.ui:4291
-#: data/preferences_gtk3.ui:3251 data/preferences_gtk3.ui:3380
-#: data/preferences_gtk3.ui:3512 data/preferences_gtk3.ui:3644
-#: data/preferences_gtk3.ui:3776 data/preferences_gtk3.ui:3908
-#: data/preferences_gtk3.ui:4042
+#: data/preferences_gtk2.ui:3425 data/preferences_gtk2.ui:3552
+#: data/preferences_gtk2.ui:3683 data/preferences_gtk2.ui:3814
+#: data/preferences_gtk2.ui:3945 data/preferences_gtk2.ui:4076
+#: data/preferences_gtk2.ui:4207 data/preferences_gtk3.ui:3167
+#: data/preferences_gtk3.ui:3296 data/preferences_gtk3.ui:3428
+#: data/preferences_gtk3.ui:3560 data/preferences_gtk3.ui:3692
+#: data/preferences_gtk3.ui:3824 data/preferences_gtk3.ui:3958
 msgid   "Set tooltip style of this graph"
 msgstr  "Cambie el estilo de tooltip de este gráfico"
 
-#: data/multiload-ng.preferences_gtk2.ui:3530
-#: data/multiload-ng.preferences_gtk2.ui:3657
-#: data/multiload-ng.preferences_gtk2.ui:3788
-#: data/multiload-ng.preferences_gtk2.ui:3919
-#: data/multiload-ng.preferences_gtk2.ui:4050
-#: data/multiload-ng.preferences_gtk2.ui:4181
-#: data/multiload-ng.preferences_gtk2.ui:4312
-#: data/multiload-ng.preferences_gtk3.ui:3273
-#: data/multiload-ng.preferences_gtk3.ui:3402
-#: data/multiload-ng.preferences_gtk3.ui:3534
-#: data/multiload-ng.preferences_gtk3.ui:3666
-#: data/multiload-ng.preferences_gtk3.ui:3798
-#: data/multiload-ng.preferences_gtk3.ui:3930
-#: data/multiload-ng.preferences_gtk3.ui:4064 data/preferences_gtk2.ui:3530
-#: data/preferences_gtk2.ui:3657 data/preferences_gtk2.ui:3788
-#: data/preferences_gtk2.ui:3919 data/preferences_gtk2.ui:4050
-#: data/preferences_gtk2.ui:4181 data/preferences_gtk2.ui:4312
-#: data/preferences_gtk3.ui:3273 data/preferences_gtk3.ui:3402
-#: data/preferences_gtk3.ui:3534 data/preferences_gtk3.ui:3666
-#: data/preferences_gtk3.ui:3798 data/preferences_gtk3.ui:3930
-#: data/preferences_gtk3.ui:4064
+#: data/preferences_gtk2.ui:3446 data/preferences_gtk2.ui:3573
+#: data/preferences_gtk2.ui:3704 data/preferences_gtk2.ui:3835
+#: data/preferences_gtk2.ui:3966 data/preferences_gtk2.ui:4097
+#: data/preferences_gtk2.ui:4228 data/preferences_gtk3.ui:3189
+#: data/preferences_gtk3.ui:3318 data/preferences_gtk3.ui:3450
+#: data/preferences_gtk3.ui:3582 data/preferences_gtk3.ui:3714
+#: data/preferences_gtk3.ui:3846 data/preferences_gtk3.ui:3980
 msgid   "Choose what to do when double clicking on this graph"
 msgstr  "Elija qué hacer cuando hacer doble clic en este gráfico"
 
-#: data/multiload-ng.preferences_gtk2.ui:3555
-#: data/multiload-ng.preferences_gtk2.ui:3682
-#: data/multiload-ng.preferences_gtk2.ui:3813
-#: data/multiload-ng.preferences_gtk2.ui:3944
-#: data/multiload-ng.preferences_gtk2.ui:4075
-#: data/multiload-ng.preferences_gtk2.ui:4206
-#: data/multiload-ng.preferences_gtk2.ui:4337
-#: data/multiload-ng.preferences_gtk3.ui:3297
-#: data/multiload-ng.preferences_gtk3.ui:3426
-#: data/multiload-ng.preferences_gtk3.ui:3558
-#: data/multiload-ng.preferences_gtk3.ui:3690
-#: data/multiload-ng.preferences_gtk3.ui:3822
-#: data/multiload-ng.preferences_gtk3.ui:3954
-#: data/multiload-ng.preferences_gtk3.ui:4088 data/preferences_gtk2.ui:3555
-#: data/preferences_gtk2.ui:3682 data/preferences_gtk2.ui:3813
-#: data/preferences_gtk2.ui:3944 data/preferences_gtk2.ui:4075
-#: data/preferences_gtk2.ui:4206 data/preferences_gtk2.ui:4337
-#: data/preferences_gtk3.ui:3297 data/preferences_gtk3.ui:3426
-#: data/preferences_gtk3.ui:3558 data/preferences_gtk3.ui:3690
-#: data/preferences_gtk3.ui:3822 data/preferences_gtk3.ui:3954
-#: data/preferences_gtk3.ui:4088
+#: data/preferences_gtk2.ui:3471 data/preferences_gtk2.ui:3598
+#: data/preferences_gtk2.ui:3729 data/preferences_gtk2.ui:3860
+#: data/preferences_gtk2.ui:3991 data/preferences_gtk2.ui:4122
+#: data/preferences_gtk2.ui:4253 data/preferences_gtk3.ui:3213
+#: data/preferences_gtk3.ui:3342 data/preferences_gtk3.ui:3474
+#: data/preferences_gtk3.ui:3606 data/preferences_gtk3.ui:3738
+#: data/preferences_gtk3.ui:3870 data/preferences_gtk3.ui:4004
 msgid   "Set custom action of this graph"
 msgstr  "Configure la acción personalizada de este gráfico"
 
-#: data/multiload-ng.preferences_gtk2.ui:3576
-#: data/multiload-ng.preferences_gtk2.ui:3703
-#: data/multiload-ng.preferences_gtk2.ui:3834
-#: data/multiload-ng.preferences_gtk2.ui:3965
-#: data/multiload-ng.preferences_gtk2.ui:4096
-#: data/multiload-ng.preferences_gtk2.ui:4227
-#: data/multiload-ng.preferences_gtk2.ui:4358
-#: data/multiload-ng.preferences_gtk3.ui:3314
-#: data/multiload-ng.preferences_gtk3.ui:3443
-#: data/multiload-ng.preferences_gtk3.ui:3575
-#: data/multiload-ng.preferences_gtk3.ui:3707
-#: data/multiload-ng.preferences_gtk3.ui:3839
-#: data/multiload-ng.preferences_gtk3.ui:3971
-#: data/multiload-ng.preferences_gtk3.ui:4105 data/preferences_gtk2.ui:3576
-#: data/preferences_gtk2.ui:3703 data/preferences_gtk2.ui:3834
-#: data/preferences_gtk2.ui:3965 data/preferences_gtk2.ui:4096
-#: data/preferences_gtk2.ui:4227 data/preferences_gtk2.ui:4358
-#: data/preferences_gtk3.ui:3314 data/preferences_gtk3.ui:3443
-#: data/preferences_gtk3.ui:3575 data/preferences_gtk3.ui:3707
-#: data/preferences_gtk3.ui:3839 data/preferences_gtk3.ui:3971
-#: data/preferences_gtk3.ui:4105
+#: data/preferences_gtk2.ui:3492 data/preferences_gtk2.ui:3619
+#: data/preferences_gtk2.ui:3750 data/preferences_gtk2.ui:3881
+#: data/preferences_gtk2.ui:4012 data/preferences_gtk2.ui:4143
+#: data/preferences_gtk2.ui:4274 data/preferences_gtk3.ui:3230
+#: data/preferences_gtk3.ui:3359 data/preferences_gtk3.ui:3491
+#: data/preferences_gtk3.ui:3623 data/preferences_gtk3.ui:3755
+#: data/preferences_gtk3.ui:3887 data/preferences_gtk3.ui:4021
 #, c-format
 msgid   "The following tokens can be used within the command line:\n"
         "\n"
@@ -884,15 +542,9 @@ msgstr  "Los símbolos siguientes se pueden usar en la línea de comando:\n"
         "%n - número del gráfico, de 1 (UCP) a 7 (temperatura)\n"
         "%x - nombre abreviado del gráfico, desde tres hasta cuatro letras"
 
-#: data/multiload-ng.preferences_gtk3.ui:2836
-#: data/multiload-ng.preferences_gtk3.ui:2848
-#: data/multiload-ng.preferences_gtk3.ui:2860
-#: data/multiload-ng.preferences_gtk3.ui:2872
-#: data/multiload-ng.preferences_gtk3.ui:2884
-#: data/multiload-ng.preferences_gtk3.ui:2896
-#: data/multiload-ng.preferences_gtk3.ui:2908 data/preferences_gtk3.ui:2836
-#: data/preferences_gtk3.ui:2848 data/preferences_gtk3.ui:2860
-#: data/preferences_gtk3.ui:2872 data/preferences_gtk3.ui:2884
-#: data/preferences_gtk3.ui:2896 data/preferences_gtk3.ui:2908
+#: data/preferences_gtk3.ui:2752 data/preferences_gtk3.ui:2764
+#: data/preferences_gtk3.ui:2776 data/preferences_gtk3.ui:2788
+#: data/preferences_gtk3.ui:2800 data/preferences_gtk3.ui:2812
+#: data/preferences_gtk3.ui:2824
 msgid   "Color"
 msgstr  "Color"
