@@ -421,7 +421,7 @@ msgstr  "Borde"
 
 #: data/preferences_gtk2.ui:1938 data/preferences_gtk3.ui:1656
 msgid   "Shared"
-msgstr  "Condivisa"
+msgstr  "Compartida"
 
 #: data/preferences_gtk2.ui:1953 data/preferences_gtk3.ui:1668
 msgid   "Buffer"
