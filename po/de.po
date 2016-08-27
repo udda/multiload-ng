@@ -167,7 +167,7 @@ msgstr  "%d Millisekunden"
 
 #: common/preferences.c:499
 msgid   "Import color scheme"
-msgstr  ""
+msgstr  "Farbschema importieren"
 
 #: common/preferences.c:501 common/preferences.c:541
 msgid   "_Cancel"
@@ -179,16 +179,17 @@ msgstr  "Ö_ffnen"
 
 #: common/preferences.c:520
 msgid   "Color scheme format is incorrect. Unable to import."
-msgstr  ""
+msgstr  "Format des Farbschemas ungültig. Importieren fehlgeschlagen."
 
 #: common/preferences.c:523
 msgid   "Color scheme was created by an incompatible version of Multiload-ng. "
         "Unable to import."
-msgstr  ""
+msgstr  "Farbschema wurde mit einer inkompatiblen Version von Multiload-ng "
+        "erstellt. Importieren fehlgeschlagen."
 
 #: common/preferences.c:539
 msgid   "Export color scheme"
-msgstr  ""
+msgstr  "Farbschema exportieren"
 
 #: common/preferences.c:542
 msgid   "_Save"
@@ -196,7 +197,7 @@ msgstr  "_Speichern"
 
 #: common/preferences.c:555
 msgid   "Error exporting color scheme."
-msgstr  ""
+msgstr  "Fehler beim Exportieren des Farbschemas."
 
 #: common/preferences.c:709
 msgid   "(Custom)"
