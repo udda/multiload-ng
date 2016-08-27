@@ -39,11 +39,11 @@ msgid   "%ld processors  -  %.2f GHz  -  Governor: %s\n"
         "\n"
         "Uptime: %s"
 msgstr  "%ld processeur  -  %.2f GHz  -  Regulateur: %s\n"
-        ""
-        ""
-        ""
+        "%.1f%% usé par les programmes\n"
+        "%.1f%% en attendant I/O"
+        "%.1f%% usage total de UC"
         "\n"
-        ""
+        "Uptime: %s"
 
 #: common/multiload.c:88
 #, c-format
@@ -55,7 +55,7 @@ msgstr  "%s de RAM"
 msgid   "%s in use by programs\n"
         "%s in use as cache"
 msgstr  "%s usé par les programmes"
-        ""
+        "%s usé comme cache"
 
 #: common/multiload.c:111
 #, c-format
@@ -66,9 +66,9 @@ msgid   "Monitored interfaces: %s\n"
         "Local: %s"
 msgstr  "Interface contrôlée: %s\n"
         "\n"
-        ""
-        ""
-        ""
+        "Réception: %s\n"
+        "Expédition: %s\n"
+        "Local: %s"
 
 #: common/multiload.c:131
 msgid   "No swap"
@@ -90,22 +90,22 @@ msgid   "Last minute: %0.02f\n"
         "Last 5 minutes: %0.02f\n"
         "Last 15 minutes: %0.02f"
 msgstr  "Dernier minute: %0.02f\n"
-        ""
-        ""
+        "Dernier 5 minutes: %0.02f\n"
+        "Dernier 15 minutes: %0.02f"
 
 #: common/multiload.c:170
 #, c-format
 msgid   "Read: %s\n"
         "Write: %s"
 msgstr  "Lecture: %s\n"
-        ""
+        "Écriture: %s"
 
 #: common/multiload.c:185
 #, c-format
 msgid   "Current: %.1f °C\n"
         "Critical: %.1f °C"
 msgstr  "Actuel: %.1f °C\n"
-        ""
+        "Critique: %.1f °C"
 
 #: common/multiload-config.c:44 data/preferences_gtk2.ui:705
 #: data/preferences_gtk2.ui:1559 data/preferences_gtk2.ui:3513
@@ -355,7 +355,7 @@ msgstr  "Si le rempli est trop grande, le graphique ne sera pas visible."
 msgid   "Selected orientation is not the same of the panel. Graphs may be "
         "very small."
 msgstr  "La orientation sélectionnée n'est pas la même du tableau de bord. "
-        ""
+        "Les graphiques peuvent être trop petits."
 
 #: data/preferences_gtk2.ui:1303 data/preferences_gtk3.ui:1177
 msgid   "Graphs"
@@ -406,7 +406,7 @@ msgstr  "IOWait"
 #: data/preferences_gtk3.ui:2306 data/preferences_gtk3.ui:2319
 #: data/preferences_gtk3.ui:2332 data/preferences_gtk3.ui:2345
 msgid   "Background"
-msgstr  ""
+msgstr  "Arrière-plan"
 
 #: data/preferences_gtk2.ui:1785 data/preferences_gtk2.ui:2454
 #: data/preferences_gtk2.ui:2469 data/preferences_gtk2.ui:2484
@@ -538,8 +538,8 @@ msgid   "The following tokens can be used within the command line:\n"
         "%x - short name of the graph - three to four letters"
 msgstr  "Les symboles suivants peuvent être usés dans la ligne de commando:\n"
         "\n"
-        ""
-        ""
+        "%n - nombre du graphique, de 1 (UC) à 7 (température)\n"
+        "%x - bref nom du graphique - de trois à quatre lettres"
 
 #: data/preferences_gtk3.ui:2752 data/preferences_gtk3.ui:2764
 #: data/preferences_gtk3.ui:2776 data/preferences_gtk3.ui:2788
