@@ -355,8 +355,8 @@ msgstr  "Si el relleno es demasiado grande, el gráfico non será visible."
 #: data/preferences_gtk2.ui:1263 data/preferences_gtk3.ui:1105
 msgid   "Selected orientation is not the same of the panel. Graphs may be "
         "very small."
-msgstr  "La orientación seleccionada no es la misma del panel. Los gráficos "
-        "podrían ser muy pequeños."
+msgstr  "La orientación seleccionada no es la misma del escritorio. Los "
+        "gráficos podrían ser muy pequeños."
 
 #: data/preferences_gtk2.ui:1303 data/preferences_gtk3.ui:1177
 msgid   "Graphs"
