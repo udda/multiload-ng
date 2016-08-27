@@ -109,6 +109,13 @@ AC_ARG_ENABLE([experimental], AS_HELP_STRING([--enable-experimental], [Compile a
 	fi]
 )
 
+# Developer mode (additional checks/logs)
+AC_ARG_ENABLE([developer-mode], AS_HELP_STRING([--enable-developer-mode], [Enable additional checks/logs/internal stuff useful to plugin developers. Do not enable this.]),
+	[if test "x$enableval" = "xyes"; then
+		AC_DEFINE([MULTILOAD_DEVELOPER_MODE], [1], [Enable developer mode])
+	fi]
+)
+
 # Enable debug CFLAGS
 AC_ARG_ENABLE([debug], AS_HELP_STRING([--enable-debug], [Enable CFLAGS for debugging with GDB.]),
 	[if test "x$enableval" = "xyes"; then
