@@ -194,7 +194,12 @@ echo "*"
 echo "*  Enabled experimental code (WARNING: this is unstable)"
 fi
 echo "*"
-echo "*  Building against GTK$GTK_API"
+if test "x$with_gtk" = "xauto"; then
+echo "*  Building against GTK+$GTK_API (detected automatically)"
+echo "*  Please make sure that your panel supports GTK+$GTK_API plugins."
+else
+echo "*  Building against GTK+$GTK_API (set by command line option)"
+fi
 echo "*"
 echo "*  Enabled plugins:"
 echo "*   - standalone  : $with_standalone"
