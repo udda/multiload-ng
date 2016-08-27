@@ -112,6 +112,8 @@ Due to an error in lxpanel source, if you are using lxpanel 0.7.0 you will
 need also libmenu-cache. This was fixed in version 0.7.1. Read about this
 [here](http://wiki.lxde.org/en/How_to_write_plugins_for_LXPanel#Preconditions).
 
+You will have to force GTK+2 build (see [here](#gtk-version) for instructions).
+
 Note that LXDE 0.7 or greater is required.
 
 #### Requirements for MATE panel
@@ -121,6 +123,10 @@ these packages are required to build MATE panel plugin:
 Package                     | Min version
 :-------------------------- | -------------:
 libmatepanelapplet-4        | >= 1.7.0
+
+Check which GTK+ version is supported by your panel: mate-panel used to be GTK+2,
+newer versions of mate-panel are GTK+3. You may have to set correct GTK+ version
+(see [here](#gtk-version) for instructions).
 
 Note that MATE 1.7 or greater is required.
 
@@ -133,6 +139,10 @@ Package                     | Min version
 libxfce4panel               | >= 4.6.0
 libxfce4util                | >= 4.6.0
 libxfce4ui-1 OR libxfcegui4 | >= 4.8.0
+
+Check which GTK+ version is supported by your panel: xfce4-panel used to be GTK+2
+only, newer versions of xfce4-panel supports GTK+3 too. You may have to set
+correct GTK+ version (see [here](#gtk-version) for instructions).
 
 Note that XFCE 4.6 or greater is required.
 
