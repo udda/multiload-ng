@@ -67,7 +67,7 @@ Multiload-ng can be built with GTK2 and GTK3, so can be embedded within GTK2/GTK
 
 
 ## Help & Troubleshooting
-All additional documentation is located in the [Wiki](../../wiki).
+Look at the [FAQ](#faq) for some common pitfalls. All additional documentation is located in the [Wiki](../../wiki).
 
 
 
