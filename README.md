@@ -180,12 +180,12 @@ If plugin does not show up in the list of panel plugins, you could try to repeat
 
 #### GTK version
 Build system automatically selects highest GTK+ version available. If you need to build against a lower version, you have to
-set it manually (see next section, **Advanced configure**)
+set it manually (see next section, [Advanced configure](#advanced-configure))
 
 For example, XFCE and LXDE users need GTK2 version of the plugin. They need to add option `--with-gtk=2.0` to *./configure*.
 
 #### Advanced configure
-If you are ok with default settings, you can skip this paragraph and head to **Build** section. Otherwise, continue reading.
+If you are ok with default settings, you can skip this paragraph and head to [Build](#build) section. Otherwise, continue reading.
 
 Configure script automatically detects installed panels (and related development packages) and enables panel plugins accordingly. You can force enable/disable them using `--with-PLUGIN`, `--without-PLUGIN` or `--with-PLUGIN=yes|no` (replace `PLUGIN` accordingly)
 
@@ -212,7 +212,7 @@ This is simple. Move to the directory that contains source code and execute:
 To install (must run `make` before), execute:  
 `sudo make install`
 
-To later uninstall you need source directory. If you deleted it, just download again, and run *Configure* part. Then execute:  
+To later uninstall you need source directory. If you deleted it, just download again, and run [Configure](#configure) part. Then execute:  
 `sudo make uninstall`
 
 
@@ -259,7 +259,7 @@ Try it in your system and you won't come back!
 A: Probably you compiled against the wrong GTK version. E.g: XFCE and LXDE panels are still GTK2-based, and
 Multiload-ng build system automatically selects GTK3 if available.
 
-Try running Configure with the right options (see *Configure* section above)
+Try running Configure with the right options (see [Configure](#configure) section above)
 
 #### Q: Doesn't a system monitor use system resources by itself?
 A: Yes. This is true for every system monitor. That's why resources usage from Multiload-ng is kept to a negligible level.
