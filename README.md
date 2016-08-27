@@ -168,6 +168,12 @@ Lubuntu users (and possibly others) have different libraries location. They may 
 `./configure --libdir=/usr/lib/x86_64-linux-gnu`  
 If plugin does not show up in the list of panel plugins, you could try to repeat build process with this configure setting.
 
+#### GTK version
+Build system automatically selects highest GTK+ version available. If you need to build against a lower version, you have to
+set it manually (see next section, **Advanced configure**)
+
+For example, XFCE and LXDE users need GTK2 version of the plugin. They need to add option `--with-gtk=2.0` to *./configure*.
+
 #### Advanced configure
 If you are ok with default settings, you can skip this paragraph and head to **Build** section. Otherwise, continue reading.
 
@@ -238,6 +244,12 @@ There are some notable differences:
 * ...and so on
 
 Try it in your system and you won't come back!
+
+#### Q: I tried to compile plugin for *\[insertyourpanelhere\]*, but it shows just a vertical blank line. Why?
+A: Probably you compiled against the wrong GTK version. E.g: XFCE and LXDE panels are still GTK2-based, and
+Multiload-ng build system automatically selects GTK3 if available.
+
+Try running Configure with the right options (see *Configure* section above)
 
 #### Q: Doesn't a system monitor use system resources by itself?
 A: Yes. This is true for every system monitor. That's why resources usage from Multiload-ng is kept to a negligible level.
