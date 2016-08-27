@@ -415,44 +415,44 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(E9,6F,20, FF),		// Nice
 				HEX_TO_RGBA(E9,6F,20, FF),		// IOWait
 				HEX_TO_RGBA(37,37,37, FF),		// Border
-				HEX_TO_RGBA(45,45,45, FF),		// Background (top)
-				HEX_TO_RGBA(45,45,45, FF)		// Background (bottom)
+				HEX_TO_RGBA(30,0A,24, FF),		// Background (top)
+				HEX_TO_RGBA(30,0A,24, FF)		// Background (bottom)
 			}, { // MEM
 				HEX_TO_RGBA(E9,6F,20, FF),		// User
 				HEX_TO_RGBA(E9,6F,20, FF),		// Shared
 				HEX_TO_RGBA(E9,6F,20, FF),		// Buffers
 				HEX_TO_RGBA(E9,6F,20, FF),		// Cached
 				HEX_TO_RGBA(37,37,37, FF),		// Border
-				HEX_TO_RGBA(45,45,45, FF),		// Background (top)
-				HEX_TO_RGBA(45,45,45, FF)		// Background (bottom)
+				HEX_TO_RGBA(30,0A,24, FF),		// Background (top)
+				HEX_TO_RGBA(30,0A,24, FF)		// Background (bottom)
 			}, { // NET
 				HEX_TO_RGBA(E9,6F,20, FF),		// In
 				HEX_TO_RGBA(E9,6F,20, FF),		// Out
 				HEX_TO_RGBA(E9,6F,20, FF),		// Local
 				HEX_TO_RGBA(37,37,37, FF),		// Border
-				HEX_TO_RGBA(45,45,45, FF),		// Background (top)
-				HEX_TO_RGBA(45,45,45, FF)		// Background (bottom)
+				HEX_TO_RGBA(30,0A,24, FF),		// Background (top)
+				HEX_TO_RGBA(30,0A,24, FF)		// Background (bottom)
 			}, { // SWAP
 				HEX_TO_RGBA(E9,6F,20, FF),		// Used
 				HEX_TO_RGBA(37,37,37, FF),		// Border
-				HEX_TO_RGBA(45,45,45, FF),		// Background (top)
-				HEX_TO_RGBA(45,45,45, FF)		// Background (bottom)
+				HEX_TO_RGBA(30,0A,24, FF),		// Background (top)
+				HEX_TO_RGBA(30,0A,24, FF)		// Background (bottom)
 			}, { // LOAD
 				HEX_TO_RGBA(E9,6F,20, FF),		// Average
 				HEX_TO_RGBA(37,37,37, FF),		// Border
-				HEX_TO_RGBA(45,45,45, FF),		// Background (top)
-				HEX_TO_RGBA(45,45,45, FF)		// Background (bottom)
+				HEX_TO_RGBA(30,0A,24, FF),		// Background (top)
+				HEX_TO_RGBA(30,0A,24, FF)		// Background (bottom)
 			}, { // DISK
 				HEX_TO_RGBA(E9,6F,20, FF),		// Read
 				HEX_TO_RGBA(E9,6F,20, FF),		// Write
 				HEX_TO_RGBA(37,37,37, FF),		// Border
-				HEX_TO_RGBA(45,45,45, FF),		// Background (top)
-				HEX_TO_RGBA(45,45,45, FF)		// Background (bottom)
+				HEX_TO_RGBA(30,0A,24, FF),		// Background (top)
+				HEX_TO_RGBA(30,0A,24, FF)		// Background (bottom)
 			}, { // TEMP
 				HEX_TO_RGBA(E9,6F,20, FF),		// Value
 				HEX_TO_RGBA(37,37,37, FF),		// Border
-				HEX_TO_RGBA(45,45,45, FF),		// Background (top)
-				HEX_TO_RGBA(45,45,45, FF)		// Background (bottom)
+				HEX_TO_RGBA(30,0A,24, FF),		// Background (top)
+				HEX_TO_RGBA(30,0A,24, FF)		// Background (bottom)
 			}
 		}
 	},
