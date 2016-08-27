@@ -40,8 +40,17 @@ Multiload-ng can be built with GTK2 and GTK3, so can be embedded within GTK2/GTK
 ![Graph background matches panel background. Very stylish](../gh-pages/screenshots/4_background-match.png?raw=true)  
 <sup>*Graph background matches panel background. Very stylish*</sup>
 
-![Standalone window, all graphs visible](../gh-pages/screenshots/5_standalone.png?raw=true)  
-<sup>*Standalone window, all graphs visible*</sup>
+![Graphs have different sizes. Color scheme: Solarized Light](../gh-pages/screenshots/5_sizes_solarized.png?raw=true)  
+<sup>*Graphs have different sizes. Color scheme: **Solarized Light** *</sup>
+
+![Color scheme: Ubuntu Ambiance](../gh-pages/screenshots/6_ambiance.png?raw=true)  
+<sup>*Color scheme: **Ubuntu Ambiance** *</sup>
+
+![Standalone window, horizontal layout. Color scheme: Earth](../gh-pages/screenshots/7_standalone_horiz_earth.png?raw=true)  
+<sup>*Standalone window, horizontal layout. Color scheme: **Earth** *</sup>
+
+![Standalone window, vertical layout. Color scheme: Solarized Dark](../gh-pages/screenshots/8_standalone_vert_solarized.png?raw=true)  
+<sup>*Standalone window, vertical layout. Color scheme: **Solarized Dark** *</sup>
 
 
 
