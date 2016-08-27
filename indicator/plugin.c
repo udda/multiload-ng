@@ -21,7 +21,7 @@
 
 #include <config.h>
 
-#ifdef MULTILOAD_EXPERIMENTAL_ENABLE
+#ifdef MULTILOAD_EXPERIMENTAL
 
 #include <string.h>
 #include <gtk/gtk.h>
@@ -239,4 +239,4 @@ int main (int argc, char **argv)
 	return 0;
 }
 
-#endif /* def MULTILOAD_EXPERIMENTAL_ENABLE */
+#endif /* def MULTILOAD_EXPERIMENTAL */

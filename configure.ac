@@ -103,9 +103,9 @@ AC_ARG_ENABLE([deprecations], AS_HELP_STRING([--disable-deprecations], [Disable 
 )
 
 # Experimental code blocks
-AC_ARG_ENABLE([experimental], AS_HELP_STRING([--enable-experimental], [Compile also experimental code blocks. Warning: this is often unstable. Enable only if you are developing new features enclosed between #ifdef MULTILOAD_EXPERIMENTAL_ENABLE.]),
+AC_ARG_ENABLE([experimental], AS_HELP_STRING([--enable-experimental], [Compile also experimental code blocks. Warning: this is often unstable. Enable only if you are developing new features enclosed between #ifdef MULTILOAD_EXPERIMENTAL.]),
 	[if test "x$enableval" = "xyes"; then
-		AC_DEFINE([MULTILOAD_EXPERIMENTAL_ENABLE], [1], [Enable testing code (unstable)])
+		AC_DEFINE([MULTILOAD_EXPERIMENTAL], [1], [Enable testing code (unstable)])
 	fi]
 )
 
