@@ -493,6 +493,8 @@ GetTemperature (int Maximum, int data[1], LoadGraph *g)
 			for (j=0; ; j++) {
 				gchar *d_type = g_strdup_printf("%s/trip_point_%d_type", d_thermal, j);
 				FILE *f_type = fopen(d_type, "r");
+				g_free(d_type);
+
 				if (!f_type)
 					break; //no more trip point files, stop searching
 				gboolean found = file_check_contents(f_type, "critical");
@@ -505,7 +507,6 @@ GetTemperature (int Maximum, int data[1], LoadGraph *g)
 					if (t > maxtemps[i])
 						maxtemps[i] = t;
 				}
-				g_free(d_type);
 			}
 			paths[i] = g_strdup_printf("%s/temp", d_thermal);
 			i++;
@@ -528,7 +529,12 @@ GetTemperature (int Maximum, int data[1], LoadGraph *g)
 		}
 	}
 
-	data[0] = (float)Maximum * temp / (float)maxtemps[j];
+	if (maxtemps[j] > 0 && maxtemps[j] > temp)
+		data[0] = (float)Maximum * temp / (float)maxtemps[j];
+	else {
+		int max = autoscaler_get_max(&xd->scaler, g, temp);
+		data[0] = rint (Maximum * (float)temp / max);
+	}
 
 	xd->value = temp;
 	xd->max = maxtemps[j];

@@ -83,6 +83,7 @@ typedef struct _DiskData {
 typedef struct _TemperatureData {
 	guint value;
 	guint max;
+	AutoScaler scaler;
 } TemperatureData;
 
 
