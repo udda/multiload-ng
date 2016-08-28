@@ -38,7 +38,7 @@ typedef struct _CpuData {
 	gfloat total_use;
 	gdouble uptime;
 
-	guint64 num_cpu;
+	gulong num_cpu;
 	gchar cpu0_name[64];
 	// use oversized buffers (just to be sure)
 	gchar cpu0_governor[32];
