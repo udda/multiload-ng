@@ -47,7 +47,7 @@ void multiload_config_init()
 		{ "swap",			_("Swap"),			GetSwap,		4 },
 		{ "load",			_("Load average"),	GetLoadAvg,		4 },
 		{ "disk",			_("Disk"),			GetDisk,		5 },
-		{ "temperature",	_("Temperature"),	GetTemperature,	4 }
+		{ "temp",			_("Temperature"),	GetTemperature,	4 }
 	};
 
 	memcpy(&graph_types, &temp, sizeof(graph_types));
