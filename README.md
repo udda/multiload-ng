@@ -224,6 +224,7 @@ You can contribute in several ways:
 * Report bugs
 * Translate to new languages
 * Port the plugin to other panels
+* Submit your personal color scheme
 * Implement something present in the [Wishlist](../../wiki/Wishlist)
 * Fix something present in [Known issues and TODO](../../wiki/Known-issues-and-TODO)
 * ...
