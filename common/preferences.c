@@ -705,7 +705,7 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 			color_scheme_is_set = TRUE;
 		}
 	}
-	// insert (Custon) entry
+	// insert (Custom) entry
 	gtk_list_store_insert_with_values(ls_colors, NULL, -1, 0, _("(Custom)"), 1, i, -1 );
 
 	// no current color scheme, select last entry (Custom)
