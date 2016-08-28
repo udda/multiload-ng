@@ -31,13 +31,13 @@ msgstr  "Folgender Befehl konnte nicht ausgeführt werden: '%s'"
 
 #: common/multiload.c:62
 #, c-format
-msgid   "%ld processors  -  %.2f GHz  -  Governor: %s\n"
+msgid   "%lu processors  -  %.2f GHz  -  Governor: %s\n"
         "%.1f%% in use by programs\n"
         "%.1f%% in wait for I/O\n"
         "%.1f%% total CPU use\n"
         "\n"
         "Uptime: %s"
-msgstr  "%ld Kerne  -  %.2f GHz  -  Governor: %s\n"
+msgstr  "%lu Kerne  -  %.2f GHz  -  Governor: %s\n"
         "%.1f%% von Programmen benutzt\n"
         "%.1f%% wartend auf I/O\n"
         "%.1f%% gesamte CPU Nutzung\n"

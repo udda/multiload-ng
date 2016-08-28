@@ -59,7 +59,7 @@ multiload_tooltip_update(LoadGraph *g)
 			if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
 				gchar *uptime = format_time_duration(xd->uptime);
 				title = g_strdup(xd->cpu0_name);
-				text = g_strdup_printf(_(	"%ld processors  -  %.2f GHz  -  Governor: %s\n"
+				text = g_strdup_printf(_(	"%lu processors  -  %.2f GHz  -  Governor: %s\n"
 											"%.1f%% in use by programs\n"
 											"%.1f%% in wait for I/O\n"
 											"%.1f%% total CPU use\n"

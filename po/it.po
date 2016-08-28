@@ -30,13 +30,13 @@ msgstr  "Impossibile eseguire la seguente riga di comando: '%s'"
 
 #: common/multiload.c:62
 #, c-format
-msgid   "%ld processors  -  %.2f GHz  -  Governor: %s\n"
+msgid   "%lu processors  -  %.2f GHz  -  Governor: %s\n"
         "%.1f%% in use by programs\n"
         "%.1f%% in wait for I/O\n"
         "%.1f%% total CPU use\n"
         "\n"
         "Uptime: %s"
-msgstr  "%ld processori  -  %.2f GHz  -  Governor: %s\n"
+msgstr  "%lu processori  -  %.2f GHz  -  Governor: %s\n"
         "%.1f%% usato dai programmi\n"
         "%.1f%% in attesa di I/O\n"
         "%.1f%% uso totale CPU\n"

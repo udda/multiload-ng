@@ -30,13 +30,13 @@ msgstr  "Команда не запускается: '%s'"
 
 #: common/multiload.c:62
 #, c-format
-msgid   "%ld processors  -  %.2f GHz  -  Governor: %s\n"
+msgid   "%lu processors  -  %.2f GHz  -  Governor: %s\n"
         "%.1f%% in use by programs\n"
         "%.1f%% in wait for I/O\n"
         "%.1f%% total CPU use\n"
         "\n"
         "Uptime: %s"
-msgstr  "%ld процессоров  -  %.2f GHz  -  Governor: %s\n"
+msgstr  "%lu процессоров  -  %.2f GHz  -  Governor: %s\n"
         "%.1f%% используется программами\n"
         "%.1f%% ожидает I/O\n"
         "%.1f%% использования CPU итого\n"
