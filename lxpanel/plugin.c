@@ -32,15 +32,21 @@
 #include "common/ui.h"
 
 
+typedef struct {
+	LXPanel *panel;
+	config_setting_t *settings;
+} PanelData;
+
+
 gpointer
 multiload_ps_settings_open_for_read(MultiloadPlugin *ma)
 {
-	return ma->panel_data;
+	return ((PanelData*)ma->panel_data)->settings;
 }
 gpointer
 multiload_ps_settings_open_for_save(MultiloadPlugin *ma)
 {
-	return ma->panel_data;
+	return ((PanelData*)ma->panel_data)->settings;
 }
 
 gboolean
@@ -93,6 +99,9 @@ multiload_ps_settings_set_string(gpointer settings, const gchar *key, const gcha
 void
 multiload_ps_preferences_closed_cb(MultiloadPlugin *ma)
 {
+	//force settings update
+	LXPanel *panel = ((PanelData*)ma->panel_data)->panel;
+	lxpanel_config_save(panel);
 }
 
 
@@ -123,6 +132,7 @@ lxpanel_destructor(gpointer user_data)
 {
 	MultiloadPlugin *multiload = lxpanel_plugin_get_data(user_data);
 	gtk_widget_destroy (GTK_WIDGET(user_data));
+	g_free(multiload->panel_data);
 	g_free(multiload);
 }
 
@@ -133,7 +143,9 @@ lxpanel_constructor(LXPanel *panel, config_setting_t *settings)
 
 	multiload_init ();
 
-	multiload->panel_data = settings;
+	multiload->panel_data = g_slice_new0(PanelData);
+	((PanelData*)multiload->panel_data)->panel = panel;
+	((PanelData*)multiload->panel_data)->settings = settings;
 
 	multiload->container = GTK_CONTAINER(gtk_event_box_new ());
 	lxpanel_plugin_set_data(multiload->container, multiload, lxpanel_destructor);
