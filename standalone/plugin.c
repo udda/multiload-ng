@@ -32,7 +32,7 @@
 #include "common/ui.h"
 
 
-#define G_KEY_GROUP_NAME "Multiload"
+#define G_KEY_GROUP_NAME "Multiload-ng"
 
 gchar* standalone_build_config_filename() {
 	return g_build_filename(MULTILOAD_CONFIG_PATH, "standalone.conf", NULL);
