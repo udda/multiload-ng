@@ -86,6 +86,16 @@ typedef struct _TemperatureData {
 	AutoScaler scaler;
 } TemperatureData;
 
+#ifdef MULTILOAD_EXPERIMENTAL
+typedef struct _ParametricData {
+	gchar command[512];
+	gchar message[512];
+	gboolean error;
+	guint64 result;
+	AutoScaler scaler;
+} ParametricData;
+#endif
+
 
 G_GNUC_INTERNAL void
 GetCpu (int Maximum, int data [5], LoadGraph *g);
@@ -101,6 +111,10 @@ G_GNUC_INTERNAL void
 GetDisk (int Maximum, int data [3], LoadGraph *g);
 G_GNUC_INTERNAL void
 GetTemperature (int Maximum, int data [2], LoadGraph *g);
+#ifdef MULTILOAD_EXPERIMENTAL
+G_GNUC_INTERNAL void
+GetParametric (int Maximum, int data[1], LoadGraph *g);
+#endif
 
 G_END_DECLS
 

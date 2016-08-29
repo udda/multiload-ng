@@ -208,6 +208,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(80,00,6B, FF),		// Border
 				HEX_TO_RGBA(26,13,23, FF),		// Background (top)
 				HEX_TO_RGBA(00,00,00, FF)		// Background (bottom)
+#ifdef MULTILOAD_EXPERIMENTAL
+			}, { // PARM hue: (gray)
+				HEX_TO_RGBA(E4,E4,E4, FF),		// Value
+				HEX_TO_RGBA(80,80,80, FF),		// Border
+				HEX_TO_RGBA(26,26,26, FF),		// Background (top)
+				HEX_TO_RGBA(00,00,00, FF)		// Background (bottom)
+#endif
 			}
 		}
 	},
@@ -236,7 +243,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(2E,34,36, FF),		// Border
 				HEX_TO_RGBA(88,8A,85, FF),		// Background (top)
 				HEX_TO_RGBA(55,57,53, FF)		// Background (bottom)
-			}, { // SWAP - Tango Plum
+			}, { // SWAP - Tango Plum (dark)
 				HEX_TO_RGBA(5C,25,66, FF),		// Used
 				HEX_TO_RGBA(2E,34,36, FF),		// Border
 				HEX_TO_RGBA(88,8A,85, FF),		// Background (top)
@@ -252,11 +259,18 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(2E,34,36, FF),		// Border
 				HEX_TO_RGBA(88,8A,85, FF),		// Background (top)
 				HEX_TO_RGBA(55,57,53, FF)		// Background (bottom)
-			}, { // TEMP - Tango Aluminium
+			}, { // TEMP - Tango Plum (light)
+				HEX_TO_RGBA(AD,7F,A8, FF),		// Value
+				HEX_TO_RGBA(2E,34,36, FF),		// Border
+				HEX_TO_RGBA(88,8A,85, FF),		// Background (top)
+				HEX_TO_RGBA(55,57,53, FF)		// Background (bottom)
+#ifdef MULTILOAD_EXPERIMENTAL
+			}, { // PARM - Tango Aluminium
 				HEX_TO_RGBA(BA,BD,B6, FF),		// Value
 				HEX_TO_RGBA(2E,34,36, FF),		// Border
 				HEX_TO_RGBA(88,8A,85, FF),		// Background (top)
 				HEX_TO_RGBA(55,57,53, FF)		// Background (bottom)
+#endif
 			}
 		}
 	},
@@ -306,6 +320,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(58,6E,75, FF),		// Border
 				HEX_TO_RGBA(07,36,42, FF),		// Background (top)
 				HEX_TO_RGBA(00,2B,36, FF)		// Background (bottom)
+#ifdef MULTILOAD_EXPERIMENTAL
+			}, { // PARM - Solarized Base00
+				HEX_TO_RGBA(65,7B,83, FF),		// Value
+				HEX_TO_RGBA(58,6E,75, FF),		// Border
+				HEX_TO_RGBA(07,36,42, FF),		// Background (top)
+				HEX_TO_RGBA(00,2B,36, FF)		// Background (bottom)
+#endif
 			}
 		}
 	},
@@ -355,6 +376,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(58,6E,75, FF),		// Border
 				HEX_TO_RGBA(FD,F6,E3, FF),		// Background (top)
 				HEX_TO_RGBA(EE,E8,D5, FF)		// Background (bottom)
+#ifdef MULTILOAD_EXPERIMENTAL
+			}, { // PARM - Solarized Base00
+				HEX_TO_RGBA(65,7B,83, FF),		// Value
+				HEX_TO_RGBA(58,6E,75, FF),		// Border
+				HEX_TO_RGBA(FD,F6,E3, FF),		// Background (top)
+				HEX_TO_RGBA(EE,E8,D5, FF)		// Background (bottom)
+#endif
 			}
 		}
 	},
@@ -404,6 +432,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(40,40,40, FF),		// Border
 				HEX_TO_RGBA(E3,8B,5E, FF),		// Background (top)
 				HEX_TO_RGBA(D5,29,0C, FF)		// Background (bottom)
+#ifdef MULTILOAD_EXPERIMENTAL
+			}, { // PARM
+				HEX_TO_RGBA(90,9E,92, FF),		// Value
+				HEX_TO_RGBA(40,40,40, FF),		// Border
+				HEX_TO_RGBA(E2,EB,E3, FF),		// Background (top)
+				HEX_TO_RGBA(A0,A7,A1, FF)		// Background (bottom)
+#endif
 			}
 		}
 	},
@@ -453,6 +488,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(37,37,37, FF),		// Border
 				HEX_TO_RGBA(30,0A,24, FF),		// Background (top)
 				HEX_TO_RGBA(30,0A,24, FF)		// Background (bottom)
+#ifdef MULTILOAD_EXPERIMENTAL
+			}, { // PARM
+				HEX_TO_RGBA(E9,6F,20, FF),		// Value
+				HEX_TO_RGBA(37,37,37, FF),		// Border
+				HEX_TO_RGBA(30,0A,24, FF),		// Background (top)
+				HEX_TO_RGBA(30,0A,24, FF)		// Background (bottom)
+#endif
 			}
 		}
 	},
@@ -502,6 +544,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(D6,D6,D6, FF),		// Border
 				HEX_TO_RGBA(E8,E8,E8, FF),		// Background (top)
 				HEX_TO_RGBA(E8,E8,E8, FF)		// Background (bottom)
+#ifdef MULTILOAD_EXPERIMENTAL
+			}, { // PARM
+				HEX_TO_RGBA(E9,6F,20, FF),		// Value
+				HEX_TO_RGBA(D6,D6,D6, FF),		// Border
+				HEX_TO_RGBA(E8,E8,E8, FF),		// Background (top)
+				HEX_TO_RGBA(E8,E8,E8, FF)		// Background (bottom)
+#endif
 			}
 		}
 	},
@@ -551,6 +600,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(3C,3C,3C, FF),		// Border
 				HEX_TO_RGBA(48,48,48, FF),		// Background (top)
 				HEX_TO_RGBA(39,39,39, FF)		// Background (bottom)
+#ifdef MULTILOAD_EXPERIMENTAL
+			}, { // PARM
+				HEX_TO_RGBA(97,BF,60, FF),		// Value
+				HEX_TO_RGBA(3C,3C,3C, FF),		// Border
+				HEX_TO_RGBA(48,48,48, FF),		// Background (top)
+				HEX_TO_RGBA(39,39,39, FF)		// Background (bottom)
+#endif
 			}
 		}
 	},
@@ -600,6 +656,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(1B,1E,24, FF),		// Border
 				HEX_TO_RGBA(38,3C,4A, FF),		// Background (top)
 				HEX_TO_RGBA(38,3C,4A, FF)		// Background (bottom)
+#ifdef MULTILOAD_EXPERIMENTAL
+			}, { // PARM
+				HEX_TO_RGBA(59,24,E2, FF),		// Value
+				HEX_TO_RGBA(1B,1E,24, FF),		// Border
+				HEX_TO_RGBA(38,3C,4A, FF),		// Background (top)
+				HEX_TO_RGBA(38,3C,4A, FF)		// Background (bottom)
+#endif
 			}
 		}
 	},
@@ -649,6 +712,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(DE,DE,DE, FF),		// Border
 				HEX_TO_RGBA(33,33,33, FF),		// Background (top)
 				HEX_TO_RGBA(33,33,33, FF)		// Background (bottom)
+#ifdef MULTILOAD_EXPERIMENTAL
+			}, { // PARM
+				HEX_TO_RGBA(D6,49,37, FF),		// Value
+				HEX_TO_RGBA(DE,DE,DE, FF),		// Border
+				HEX_TO_RGBA(33,33,33, FF),		// Background (top)
+				HEX_TO_RGBA(33,33,33, FF)		// Background (bottom)
+#endif
 			}
 		}
 	},
@@ -698,6 +768,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(33,33,33, FF),		// Border
 				HEX_TO_RGBA(DE,DE,DE, FF),		// Background (top)
 				HEX_TO_RGBA(DE,DE,DE, FF)		// Background (bottom)
+#ifdef MULTILOAD_EXPERIMENTAL
+			}, { // PARM
+				HEX_TO_RGBA(D6,49,37, FF),		// Value
+				HEX_TO_RGBA(33,33,33, FF),		// Border
+				HEX_TO_RGBA(DE,DE,DE, FF),		// Background (top)
+				HEX_TO_RGBA(DE,DE,DE, FF)		// Background (bottom)
+#endif
 			}
 		}
 	},
@@ -738,7 +815,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(B5,B5,B5, FF)		// Background (bottom)
 			}, { // DISK
 				HEX_TO_RGBA(61,61,61, FF),		// Read
-				HEX_TO_RGBA(05,9F,E5, FF),		// Write
+				HEX_TO_RGBA(61,61,61, FF),		// Write
 				HEX_TO_RGBA(14,23,39, FF),		// Border
 				HEX_TO_RGBA(CB,CB,CB, FF),		// Background (top)
 				HEX_TO_RGBA(B5,B5,B5, FF)		// Background (bottom)
@@ -747,6 +824,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(14,23,39, FF),		// Border
 				HEX_TO_RGBA(CB,CB,CB, FF),		// Background (top)
 				HEX_TO_RGBA(B5,B5,B5, FF)		// Background (bottom)
+#ifdef MULTILOAD_EXPERIMENTAL
+			}, { // PARM
+				HEX_TO_RGBA(95,95,95, FF),		// Value
+				HEX_TO_RGBA(14,23,39, FF),		// Border
+				HEX_TO_RGBA(CB,CB,CB, FF),		// Background (top)
+				HEX_TO_RGBA(B5,B5,B5, FF)		// Background (bottom)
+#endif
 			}
 		}
 	},
@@ -796,6 +880,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(E3,9E,1C, FF),		// Border
 				HEX_TO_RGBA(C1,8F,17, FF),		// Background (top)
 				HEX_TO_RGBA(A5,7C,1B, FF)		// Background (bottom)
+#ifdef MULTILOAD_EXPERIMENTAL
+			}, { // PARM
+				HEX_TO_RGBA(E6,D8,7E, FF),		// Value
+				HEX_TO_RGBA(E3,9E,1C, FF),		// Border
+				HEX_TO_RGBA(C1,8F,17, FF),		// Background (top)
+				HEX_TO_RGBA(A5,7C,1B, FF)		// Background (bottom)
+#endif
 			}
 		}
 	},
@@ -845,6 +936,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(24,31,3A, FF),		// Border
 				HEX_TO_RGBA(79,BD,D8, FF),		// Background (top)
 				HEX_TO_RGBA(00,62,87, FF)		// Background (bottom)
+#ifdef MULTILOAD_EXPERIMENTAL
+			}, { // PARM
+				HEX_TO_RGBA(54,50,7C, FF),		// Value
+				HEX_TO_RGBA(24,31,3A, FF),		// Border
+				HEX_TO_RGBA(79,BD,D8, FF),		// Background (top)
+				HEX_TO_RGBA(00,62,87, FF)		// Background (bottom)
+#endif
 			}
 		}
 	},
@@ -894,6 +992,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(73,3E,34, FF),		// Border
 				HEX_TO_RGBA(A2,76,43, FF),		// Background (top)
 				HEX_TO_RGBA(45,41,3F, FF)		// Background (bottom)
+#ifdef MULTILOAD_EXPERIMENTAL
+			}, { // PARM
+				HEX_TO_RGBA(72,05,03, FF),		// Value
+				HEX_TO_RGBA(73,3E,34, FF),		// Border
+				HEX_TO_RGBA(A2,76,43, FF),		// Background (top)
+				HEX_TO_RGBA(45,41,3F, FF)		// Background (bottom)
+#endif
 			}
 		}
 	},
@@ -943,6 +1048,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(3B,76,3B, FF),		// Border
 				HEX_TO_RGBA(C5,C0,AA, FF),		// Background (top)
 				HEX_TO_RGBA(06,3D,06, FF)		// Background (bottom)
+#ifdef MULTILOAD_EXPERIMENTAL
+			}, { // PARM
+				HEX_TO_RGBA(4D,7A,55, FF),		// Value
+				HEX_TO_RGBA(3B,76,3B, FF),		// Border
+				HEX_TO_RGBA(C5,C0,AA, FF),		// Background (top)
+				HEX_TO_RGBA(06,3D,06, FF)		// Background (bottom)
+#endif
 			}
 		}
 	},
@@ -992,6 +1104,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(10,10,10, FF),		// Border
 				HEX_TO_RGBA(22,84,99, FF),		// Background (top)
 				HEX_TO_RGBA(03,44,4A, FF)		// Background (bottom)
+#ifdef MULTILOAD_EXPERIMENTAL
+			}, { // PARM
+				HEX_TO_RGBA(4B,9C,DE, FF),		// Value
+				HEX_TO_RGBA(10,10,10, FF),		// Border
+				HEX_TO_RGBA(22,84,99, FF),		// Background (top)
+				HEX_TO_RGBA(03,44,4A, FF)		// Background (bottom)
+#endif
 			}
 		}
 	},
@@ -1041,6 +1160,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(14,23,39, FF),		// Border
 				HEX_TO_RGBA(64,59,CA, FF),		// Background (top)
 				HEX_TO_RGBA(3D,2B,67, FF)		// Background (bottom)
+#ifdef MULTILOAD_EXPERIMENTAL
+			}, { // PARM
+				HEX_TO_RGBA(71,80,91, FF),		// Value
+				HEX_TO_RGBA(14,23,39, FF),		// Border
+				HEX_TO_RGBA(64,59,CA, FF),		// Background (top)
+				HEX_TO_RGBA(3D,2B,67, FF)		// Background (bottom)
+#endif
 			}
 		}
 	},

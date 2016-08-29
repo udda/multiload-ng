@@ -30,6 +30,10 @@
 #include "common/preferences.h"
 #include "common/util.h"
 
+#ifdef MULTILOAD_EXPERIMENTAL
+#include "linux-proc.h"
+#endif
+
 
 // ps = Panel Specific - implement these for every panel
 extern gpointer multiload_ps_settings_open_for_read(MultiloadPlugin *ma);
@@ -71,6 +75,15 @@ multiload_ui_read (MultiloadPlugin *ma)
 		color_scheme_valid = (scheme != NULL);
 		if (color_scheme_valid)
 			multiload_color_scheme_apply(scheme, ma);
+
+#ifdef MULTILOAD_EXPERIMENTAL
+		/* Parametric graph */
+/*		ParametricData* xd = (ParametricData*)ma->graphs[GRAPH_PARAMETRIC]->extra_data;
+		key = g_strdup_printf("graph-%s-command", graph_types[GRAPH_PARAMETRIC].name);
+		multiload_ps_settings_get_string (settings, key, xd->command, sizeof(xd->command));
+		g_free (key);
+*/
+#endif
 
 		for ( i = 0; i < GRAPH_MAX; i++ ) {
 			/* Visibility */
@@ -142,6 +155,15 @@ multiload_ui_save (MultiloadPlugin *ma)
 		multiload_ps_settings_set_int		(settings, "orientation",		ma->orientation_policy);
 		multiload_ps_settings_set_boolean	(settings, "fill-between",		ma->fill_between);
 		multiload_ps_settings_set_string	(settings, "color-scheme",		ma->color_scheme);
+
+#ifdef MULTILOAD_EXPERIMENTAL
+		/* Parametric graph */
+/*		ParametricData* xd = (ParametricData*)ma->graphs[GRAPH_PARAMETRIC]->extra_data;
+		key = g_strdup_printf("graph-%s-command", graph_types[GRAPH_PARAMETRIC].name);
+		multiload_ps_settings_set_string (settings, key, xd->command);
+		g_free (key);
+*/
+#endif
 
 		for ( i = 0; i < GRAPH_MAX; i++ ) {
 			/* Visibility */

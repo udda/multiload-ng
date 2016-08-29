@@ -190,6 +190,27 @@ multiload_tooltip_update(LoadGraph *g)
 			}
 		}	break;
 
+#ifdef MULTILOAD_EXPERIMENTAL
+		case GRAPH_PARAMETRIC: {
+			ParametricData *xd = (ParametricData*) g->extra_data;
+			g_assert_nonnull(xd);
+
+			if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
+				if (xd->error)
+					text = g_strdup_printf(_(	"Command: %s\n"
+												"ERROR: %s"),
+												xd->command, xd->message);
+				else
+					text = g_strdup_printf(_(	"Command: %s\n"
+												"Result: %lu\n"
+												"Message: %s"),
+												xd->command, xd->result, xd->message);
+			} else {
+				text = g_strdup_printf("%lu", xd->result);
+			}
+		}	break;
+#endif
+
 		default: {
 			g_assert_not_reached();
 		}	break;

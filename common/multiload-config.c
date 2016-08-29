@@ -48,6 +48,10 @@ void multiload_config_init()
 		{ "load",			_("Load average"),	GetLoadAvg,		4 },
 		{ "disk",			_("Disk"),			GetDisk,		5 },
 		{ "temp",			_("Temperature"),	GetTemperature,	4 }
+#ifdef MULTILOAD_EXPERIMENTAL
+		,
+		{ "parm",			_("Parametric"),	GetParametric,	4 }
+#endif
 	};
 
 	memcpy(&graph_types, &temp, sizeof(graph_types));

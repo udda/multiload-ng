@@ -368,7 +368,11 @@ load_graph_extra_data_init(LoadGraph *g) {
 			break;
 		case GRAPH_TEMPERATURE:
 			g->extra_data = (gpointer)g_new0(TemperatureData, 1);
+#ifdef MULTILOAD_EXPERIMENTAL
+		case GRAPH_PARAMETRIC:
+			g->extra_data = (gpointer)g_new0(ParametricData, 1);
 			break;
+#endif
 	}
 }
 
