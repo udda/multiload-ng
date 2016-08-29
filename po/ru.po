@@ -36,12 +36,12 @@ msgid   "%lu processors  -  %.2f GHz  -  Governor: %s\n"
         "%.1f%% total CPU use\n"
         "\n"
         "Uptime: %s"
-msgstr  "%lu процессоров  -  %.2f GHz  -  Governor: %s\n"
+msgstr  "%lu процессора  -  %.2f GHz  -  Governor: %s\n"
         "%.1f%% используется программами\n"
         "%.1f%% ожидает I/O\n"
-        "%.1f%% использования CPU итого\n"
+        "%.1f%% Итого\n"
         "\n"
-        "Uptime: %s"
+        "Время работы системы: %s"
 
 #: common/multiload.c:88
 #, c-format
