@@ -43,7 +43,7 @@ read_int_from_file(const gchar *path);
 G_GNUC_INTERNAL gchar*
 format_rate_for_display (guint rate);
 G_GNUC_INTERNAL gchar*
-format_percent(guint value, guint total, guint ndigits);
+format_percent(guint64 value, guint64 total, guint ndigits);
 G_GNUC_INTERNAL gchar*
 format_time_duration(gdouble seconds);
 

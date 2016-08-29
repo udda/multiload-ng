@@ -120,7 +120,7 @@ format_rate_for_display(guint rate)
 }
 
 gchar*
-format_percent(guint value, guint total, guint ndigits)
+format_percent(guint64 value, guint64 total, guint ndigits)
 {
 	gchar *ret;
 	gchar *format;
