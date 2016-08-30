@@ -569,7 +569,7 @@ GetParametric (int Maximum, int data[1], LoadGraph *g)
 	} else if (exit_status != 0) {
 		xd->error = TRUE;
 		xd->result = 0;
-		snprintf(xd->message, sizeof(xd->message), _("Command returned exit code %d."), exit_status);
+		snprintf(xd->message, sizeof(xd->message), _("Command has exited with status code %d."), exit_status);
 	} else {
 		/* child process:
 		 * - MUST 'exit 0'

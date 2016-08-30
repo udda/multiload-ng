@@ -6,8 +6,8 @@
 msgid   ""
 msgstr  "Project-Id-Version: multiload-ng\n"
         "Report-Msgid-Bugs-To: Alexander <sfslinux@gmail.com>\n"
-        "POT-Creation-Date: 2016-08-27 01:31+0200\n"
-        "PO-Revision-Date: 2016-08-27 01:31+0200\n"
+        "POT-Creation-Date: 2016-08-30 16:19+0200\n"
+        "PO-Revision-Date: 2016-08-30 16:19+0200\n"
         "Last-Translator: Alexander <sfslinux@gmail.com>\n"
         "Language-Team: puppyrus.org\n"
         "Language: ru\n"
@@ -15,20 +15,17 @@ msgstr  "Project-Id-Version: multiload-ng\n"
         "Content-Type: text/plain; charset=UTF-8\n"
         "Content-Transfer-Encoding: 8bit\n"
 
-#: common/about-data.h:28
 msgid   "Modern graphical system monitor"
 msgstr  "Графическая система мониторинга"
 
-#: common/about-data.h:34
 msgid   "Copyright © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, and others"
-msgstr  "Авторские права © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, и другие"
+msgstr  "Авторские права © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, и "
+        "другие"
 
-#: common/load-graph.c:323 common/ui.c:282
 #, c-format
 msgid   "Unable to execute the following command line: '%s'"
 msgstr  "Команда не запускается: '%s'"
 
-#: common/multiload.c:62
 #, c-format
 msgid   "%lu processors  -  %.2f GHz  -  Governor: %s\n"
         "%.1f%% in use by programs\n"
@@ -43,19 +40,16 @@ msgstr  "%lu процессора  -  %.2f GHz  -  Governor: %s\n"
         "\n"
         "Время работы системы: %s"
 
-#: common/multiload.c:88
 #, c-format
 msgid   "%s of RAM"
 msgstr  "%s памяти"
 
-#: common/multiload.c:89
 #, c-format
 msgid   "%s in use by programs\n"
         "%s in use as cache"
 msgstr  "%s используется программами\n"
         "%s используется как кэш"
 
-#: common/multiload.c:111
 #, c-format
 msgid   "Monitored interfaces: %s\n"
         "\n"
@@ -68,21 +62,17 @@ msgstr  "Интерфейс: %s\n"
         "Передача: %s\n"
         "Локально: %s"
 
-#: common/multiload.c:131
 msgid   "No swap"
 msgstr  "нет"
 
-#: common/multiload.c:137
 #, c-format
 msgid   "%s of swap"
 msgstr  ""
 
-#: common/multiload.c:138
 #, c-format
 msgid   "%s used"
 msgstr  "%s используется"
 
-#: common/multiload.c:153
 #, c-format
 msgid   "Last minute: %0.02f\n"
         "Last 5 minutes: %0.02f\n"
@@ -91,442 +81,259 @@ msgstr  "Последняя минута: %0.02f\n"
         "Последние 5 мин.: %0.02f\n"
         "Последние 15 мин.: %0.02f"
 
-#: common/multiload.c:170
 #, c-format
 msgid   "Read: %s\n"
         "Write: %s"
 msgstr  "Чтение: %s\n"
         "Запись: %s"
 
-#: common/multiload.c:185
 #, c-format
 msgid   "Current: %.1f °C\n"
         "Critical: %.1f °C"
 msgstr  "Текушая: %.1f °C\n"
         "Критическая: %.1f °C"
 
-#: common/multiload-config.c:44 data/preferences_gtk2.ui:705
-#: data/preferences_gtk2.ui:1559 data/preferences_gtk2.ui:3513
-#: data/preferences_gtk3.ui:609 data/preferences_gtk3.ui:1325
-#: data/preferences_gtk3.ui:3252
 msgid   "Processor"
 msgstr  "Процессор"
 
-#: common/multiload-config.c:45 data/preferences_gtk2.ui:724
-#: data/preferences_gtk2.ui:1825 data/preferences_gtk2.ui:3643
-#: data/preferences_gtk3.ui:628 data/preferences_gtk3.ui:1562
-#: data/preferences_gtk3.ui:3383
 msgid   "Memory"
 msgstr  "Память"
 
-#: common/multiload-config.c:46 data/preferences_gtk2.ui:741
-#: data/preferences_gtk2.ui:1984 data/preferences_gtk2.ui:3774
-#: data/preferences_gtk3.ui:645 data/preferences_gtk3.ui:1694
-#: data/preferences_gtk3.ui:3515
 msgid   "Network"
 msgstr  "Сеть"
 
-#: common/multiload-config.c:47 data/preferences_gtk2.ui:758
-#: data/preferences_gtk2.ui:2146 data/preferences_gtk2.ui:3905
-#: data/preferences_gtk3.ui:662 data/preferences_gtk3.ui:1839
-#: data/preferences_gtk3.ui:3647
 msgid   "Swap"
 msgstr  ""
 
-#: common/multiload-config.c:48 data/preferences_gtk2.ui:775
-#: data/preferences_gtk2.ui:2194 data/preferences_gtk2.ui:4036
-#: data/preferences_gtk3.ui:679 data/preferences_gtk3.ui:1880
-#: data/preferences_gtk3.ui:3779
 msgid   "Load average"
 msgstr  "Нагрузка"
 
-#: common/multiload-config.c:49 data/preferences_gtk2.ui:792
-#: data/preferences_gtk2.ui:2209 data/preferences_gtk2.ui:4167
-#: data/preferences_gtk3.ui:696 data/preferences_gtk3.ui:1895
-#: data/preferences_gtk3.ui:3911
 msgid   "Disk"
 msgstr  "Диск"
 
-#: common/multiload-config.c:50 data/preferences_gtk2.ui:809
-#: data/preferences_gtk2.ui:2224 data/preferences_gtk2.ui:4298
-#: data/preferences_gtk3.ui:713 data/preferences_gtk3.ui:1910
-#: data/preferences_gtk3.ui:4045
 msgid   "Temperature"
 msgstr  "Температура"
 
-#: common/preferences.c:330
 #, c-format
 msgid   "%d pixel"
 msgstr  "%d пикселей"
 
-#: common/preferences.c:356
 #, c-format
 msgid   "%d milliseconds"
 msgstr  "%d миллисекунд"
 
-#: common/preferences.c:499
 msgid   "Import color scheme"
 msgstr  ""
 
-#: common/preferences.c:501 common/preferences.c:541
 msgid   "_Cancel"
 msgstr  "_Отмена"
 
-#: common/preferences.c:502
 msgid   "_Open"
 msgstr  "_Открыть"
 
-#: common/preferences.c:520
 msgid   "Color scheme format is incorrect. Unable to import."
 msgstr  ""
 
-#: common/preferences.c:523
 msgid   "Color scheme was created by an incompatible version of Multiload-ng. "
         "Unable to import."
 msgstr  ""
 
-#: common/preferences.c:539
 msgid   "Export color scheme"
 msgstr  ""
 
-#: common/preferences.c:542
 msgid   "_Save"
 msgstr  "_Сохранить"
 
-#: common/preferences.c:555
 msgid   "Error exporting color scheme."
 msgstr  ""
 
-#: common/preferences.c:709
 msgid   "(Custom)"
 msgstr  "(Пользовательские)"
 
 #. xgettext: this is a rate format (eg. 2 MiB/s)
-#: common/util.c:116
 #, c-format
 msgid   "%s/s"
 msgstr  "%s/с"
 
-#: common/util.c:244
 #, c-format
 msgid   "Unable to open the following url: '%s'"
 msgstr  "'%s' не открывается"
 
-#: common/ui.c:221
 msgid   "translator-credits"
 msgstr  "Alexander <sfslinux@gmail.com>"
 
-#: common/ui.c:251
 msgid   "_Help"
 msgstr  "_Помощь"
 
-#: common/ui.c:252
 msgid   "_Close"
 msgstr  "_Закрыть"
 
-#: data/preferences_gtk2.ui:209 data/preferences_gtk3.ui:209
 msgid   "Do nothing"
 msgstr  "Ничего не делать"
 
-#: data/preferences_gtk2.ui:212 data/preferences_gtk3.ui:212
-#: indicator/plugin.c:204 standalone/plugin.c:215 xfce4/plugin.c:217
 msgid   "Start task manager"
 msgstr  "Запустить диспетчер задач"
 
-#: data/preferences_gtk2.ui:215 data/preferences_gtk3.ui:215
 msgid   "Execute custom command"
 msgstr  "Выполнить команду"
 
-#: data/preferences_gtk2.ui:226 data/preferences_gtk3.ui:226
 msgid   "Automatic"
 msgstr  "Автоматически"
 
-#: data/preferences_gtk2.ui:229 data/preferences_gtk3.ui:229
 msgid   "Horizontal"
 msgstr  "Горизонтально"
 
-#: data/preferences_gtk2.ui:232 data/preferences_gtk3.ui:232
 msgid   "Vertical"
 msgstr  "Вертикально"
 
-#: data/preferences_gtk2.ui:287 data/preferences_gtk3.ui:291
 msgid   "Preferences editor"
 msgstr  "Редактор настроек"
 
-#: data/preferences_gtk2.ui:357 data/preferences_gtk2.ui:407
-#: data/preferences_gtk2.ui:483 data/preferences_gtk2.ui:507
-#: data/preferences_gtk2.ui:557 data/preferences_gtk2.ui:607
-#: data/preferences_gtk2.ui:657 data/preferences_gtk3.ui:331
-#: data/preferences_gtk3.ui:371 data/preferences_gtk3.ui:432
-#: data/preferences_gtk3.ui:451 data/preferences_gtk3.ui:491
-#: data/preferences_gtk3.ui:531 data/preferences_gtk3.ui:571
 msgid   "Set the size of this graph"
 msgstr  "Показывать или скрыть этот график"
 
-#: data/preferences_gtk2.ui:381 data/preferences_gtk2.ui:431
-#: data/preferences_gtk2.ui:457 data/preferences_gtk2.ui:531
-#: data/preferences_gtk2.ui:581 data/preferences_gtk2.ui:631
-#: data/preferences_gtk2.ui:681 data/preferences_gtk3.ui:350
-#: data/preferences_gtk3.ui:390 data/preferences_gtk3.ui:411
-#: data/preferences_gtk3.ui:470 data/preferences_gtk3.ui:510
-#: data/preferences_gtk3.ui:550 data/preferences_gtk3.ui:590
 msgid   "Set the time between updates of this graph"
 msgstr  "Установите вмемя обновления этого графика"
 
-#: data/preferences_gtk2.ui:389 data/preferences_gtk2.ui:439
-#: data/preferences_gtk2.ui:465 data/preferences_gtk2.ui:539
-#: data/preferences_gtk2.ui:589 data/preferences_gtk2.ui:639
-#: data/preferences_gtk2.ui:689 data/preferences_gtk3.ui:356
-#: data/preferences_gtk3.ui:396 data/preferences_gtk3.ui:417
-#: data/preferences_gtk3.ui:476 data/preferences_gtk3.ui:516
-#: data/preferences_gtk3.ui:556 data/preferences_gtk3.ui:596
 msgid   "Tooltip may not show if update interval is too short."
 msgstr  "При маленьком интервале обновления, подсказки могут не появиться"
 
-#: data/preferences_gtk2.ui:709 data/preferences_gtk2.ui:728
-#: data/preferences_gtk2.ui:745 data/preferences_gtk2.ui:762
-#: data/preferences_gtk2.ui:779 data/preferences_gtk2.ui:796
-#: data/preferences_gtk2.ui:813 data/preferences_gtk3.ui:613
-#: data/preferences_gtk3.ui:632 data/preferences_gtk3.ui:649
-#: data/preferences_gtk3.ui:666 data/preferences_gtk3.ui:683
-#: data/preferences_gtk3.ui:700 data/preferences_gtk3.ui:717
 msgid   "Make this graph visible"
 msgstr  "Вкл./выкл. график"
 
-#: data/preferences_gtk2.ui:830 data/preferences_gtk3.ui:733
 msgid   "Graph"
 msgstr  "График"
 
-#: data/preferences_gtk2.ui:839 data/preferences_gtk3.ui:747
 msgid   "Size"
 msgstr  "Размер"
 
-#: data/preferences_gtk2.ui:852 data/preferences_gtk3.ui:760
 msgid   "Update interval"
 msgstr  "Интервалы: обновления и"
 
-#: data/preferences_gtk2.ui:864 data/preferences_gtk2.ui:882
-#: data/preferences_gtk2.ui:900 data/preferences_gtk2.ui:918
-#: data/preferences_gtk2.ui:936 data/preferences_gtk2.ui:954
-#: data/preferences_gtk2.ui:1070 data/preferences_gtk2.ui:3345
-#: data/preferences_gtk3.ui:773 data/preferences_gtk3.ui:787
-#: data/preferences_gtk3.ui:801 data/preferences_gtk3.ui:815
-#: data/preferences_gtk3.ui:829 data/preferences_gtk3.ui:843
-#: data/preferences_gtk3.ui:941 data/preferences_gtk3.ui:3081
 msgid   "Advanced configuration"
 msgstr  "Расширенные настройки"
 
-#: data/preferences_gtk2.ui:1092 data/preferences_gtk3.ui:955
 msgid   "Timespan"
 msgstr  "времени"
 
-#: data/preferences_gtk2.ui:1101 data/preferences_gtk3.ui:965
 msgid   "Fill space between graphs"
 msgstr  "Заполнить место между графиками"
 
-#: data/preferences_gtk2.ui:1120 data/preferences_gtk3.ui:984
 msgid   "Orientation:"
 msgstr  "Ориентация:"
 
-#: data/preferences_gtk2.ui:1135 data/preferences_gtk3.ui:997
 msgid   "Padding:"
 msgstr  "Отступы:"
 
-#: data/preferences_gtk2.ui:1150 data/preferences_gtk3.ui:1010
 msgid   "Spacing:"
 msgstr  "Промежуток:"
 
-#: data/preferences_gtk2.ui:1167 data/preferences_gtk3.ui:1022
 msgid   "Set space between graphs"
 msgstr  "Заполнить место между графиками"
 
-#: data/preferences_gtk2.ui:1186 data/preferences_gtk3.ui:1040
 msgid   "Set padding width"
 msgstr  "Установить ширину отступов от краев"
 
-#: data/preferences_gtk2.ui:1230 data/preferences_gtk3.ui:1078
 msgid   "If padding is set too large, the graph won't show."
 msgstr  "При больших отступах, графики не будут видны"
 
-#: data/preferences_gtk2.ui:1263 data/preferences_gtk3.ui:1105
 msgid   "Selected orientation is not the same of the panel. Graphs may be "
         "very small."
 msgstr  "Графики будут очень маленькими"
 
-#: data/preferences_gtk2.ui:1303 data/preferences_gtk3.ui:1177
 msgid   "Graphs"
 msgstr  "Графики"
 
-#: data/preferences_gtk2.ui:1352 data/preferences_gtk3.ui:1232
 msgid   "Color scheme"
 msgstr  "Цветовая схема"
 
-#: data/preferences_gtk2.ui:1383 data/preferences_gtk3.ui:1263
 msgid   "Import color scheme from file"
 msgstr  "Загрузить цветовую схему из файла"
 
-#: data/preferences_gtk2.ui:1384 data/preferences_gtk3.ui:1264
 msgid   "Import"
 msgstr  "Загрузить"
 
-#: data/preferences_gtk2.ui:1397 data/preferences_gtk3.ui:1277
 msgid   "Export color scheme to file"
 msgstr  "Сохранить цветовую схему в файл"
 
-#: data/preferences_gtk2.ui:1398 data/preferences_gtk3.ui:1278
 msgid   "Export"
 msgstr  "Экспорт"
 
-#: data/preferences_gtk2.ui:1635 data/preferences_gtk2.ui:1923
-#: data/preferences_gtk3.ui:1393 data/preferences_gtk3.ui:1644
 msgid   "User"
 msgstr  ""
 
-#: data/preferences_gtk2.ui:1650 data/preferences_gtk3.ui:1405
 msgid   "System"
 msgstr  ""
 
-#: data/preferences_gtk2.ui:1665 data/preferences_gtk3.ui:1417
 msgid   "Nice"
 msgstr  ""
 
-#: data/preferences_gtk2.ui:1680 data/preferences_gtk3.ui:1429
 msgid   "IOWait"
 msgstr  ""
 
-#: data/preferences_gtk2.ui:1723 data/preferences_gtk2.ui:2665
-#: data/preferences_gtk2.ui:2680 data/preferences_gtk2.ui:2695
-#: data/preferences_gtk2.ui:2710 data/preferences_gtk2.ui:2725
-#: data/preferences_gtk2.ui:2740 data/preferences_gtk3.ui:1468
-#: data/preferences_gtk3.ui:2280 data/preferences_gtk3.ui:2293
-#: data/preferences_gtk3.ui:2306 data/preferences_gtk3.ui:2319
-#: data/preferences_gtk3.ui:2332 data/preferences_gtk3.ui:2345
 msgid   "Background"
 msgstr  "Фон"
 
-#: data/preferences_gtk2.ui:1785 data/preferences_gtk2.ui:2454
-#: data/preferences_gtk2.ui:2469 data/preferences_gtk2.ui:2484
-#: data/preferences_gtk2.ui:2499 data/preferences_gtk2.ui:2514
-#: data/preferences_gtk2.ui:2529 data/preferences_gtk3.ui:1523
-#: data/preferences_gtk3.ui:2100 data/preferences_gtk3.ui:2113
-#: data/preferences_gtk3.ui:2126 data/preferences_gtk3.ui:2139
-#: data/preferences_gtk3.ui:2152 data/preferences_gtk3.ui:2165
 msgid   "Border"
 msgstr  "Рамка"
 
-#: data/preferences_gtk2.ui:1938 data/preferences_gtk3.ui:1656
 msgid   "Shared"
 msgstr  ""
 
-#: data/preferences_gtk2.ui:1953 data/preferences_gtk3.ui:1668
 msgid   "Buffer"
 msgstr  ""
 
-#: data/preferences_gtk2.ui:1968 data/preferences_gtk3.ui:1680
 msgid   "Cache"
 msgstr  ""
 
-#: data/preferences_gtk2.ui:2052 data/preferences_gtk3.ui:1749
 msgid   "Receiving"
 msgstr  "Прием"
 
-#: data/preferences_gtk2.ui:2067 data/preferences_gtk3.ui:1761
 msgid   "Sending"
 msgstr  "Передача"
 
-#: data/preferences_gtk2.ui:2082 data/preferences_gtk3.ui:1773
 msgid   "Local"
 msgstr  "Локально"
 
-#: data/preferences_gtk2.ui:2178 data/preferences_gtk3.ui:1866
 msgid   "Used"
 msgstr  "Занято"
 
-#: data/preferences_gtk2.ui:2256 data/preferences_gtk3.ui:1937
 msgid   "Average"
 msgstr  "Средняя"
 
-#: data/preferences_gtk2.ui:2325 data/preferences_gtk3.ui:1991
 msgid   "Read"
 msgstr  "Чтение"
 
-#: data/preferences_gtk2.ui:2340 data/preferences_gtk3.ui:2003
 msgid   "Write"
 msgstr  "Запись"
 
-#: data/preferences_gtk2.ui:2355 data/preferences_gtk3.ui:2015
 msgid   "Value"
 msgstr  "величина"
 
-#: data/preferences_gtk2.ui:3257 data/preferences_gtk3.ui:2979
 msgid   "Colors"
 msgstr  "Запись"
 
-#: data/preferences_gtk2.ui:3335 data/preferences_gtk3.ui:3071
 msgid   "Simple"
 msgstr  "Простой"
 
-#: data/preferences_gtk2.ui:3338 data/preferences_gtk3.ui:3074
 msgid   "Detailed"
 msgstr  "Подробный"
 
-#: data/preferences_gtk2.ui:3406 data/preferences_gtk2.ui:3533
-#: data/preferences_gtk2.ui:3664 data/preferences_gtk2.ui:3795
-#: data/preferences_gtk2.ui:3926 data/preferences_gtk2.ui:4057
-#: data/preferences_gtk2.ui:4188 data/preferences_gtk3.ui:3143
-#: data/preferences_gtk3.ui:3272 data/preferences_gtk3.ui:3404
-#: data/preferences_gtk3.ui:3536 data/preferences_gtk3.ui:3668
-#: data/preferences_gtk3.ui:3800 data/preferences_gtk3.ui:3933
 msgid   "Tooltip style:"
 msgstr  "Стиль подсказок"
 
-#: data/preferences_gtk2.ui:3414 data/preferences_gtk2.ui:3541
-#: data/preferences_gtk2.ui:3672 data/preferences_gtk2.ui:3803
-#: data/preferences_gtk2.ui:3934 data/preferences_gtk2.ui:4065
-#: data/preferences_gtk2.ui:4196 data/preferences_gtk3.ui:3155
-#: data/preferences_gtk3.ui:3284 data/preferences_gtk3.ui:3416
-#: data/preferences_gtk3.ui:3548 data/preferences_gtk3.ui:3680
-#: data/preferences_gtk3.ui:3812 data/preferences_gtk3.ui:3946
 msgid   "Double click action:"
 msgstr  "При двойном клике:"
 
-#: data/preferences_gtk2.ui:3425 data/preferences_gtk2.ui:3552
-#: data/preferences_gtk2.ui:3683 data/preferences_gtk2.ui:3814
-#: data/preferences_gtk2.ui:3945 data/preferences_gtk2.ui:4076
-#: data/preferences_gtk2.ui:4207 data/preferences_gtk3.ui:3167
-#: data/preferences_gtk3.ui:3296 data/preferences_gtk3.ui:3428
-#: data/preferences_gtk3.ui:3560 data/preferences_gtk3.ui:3692
-#: data/preferences_gtk3.ui:3824 data/preferences_gtk3.ui:3958
 msgid   "Set tooltip style of this graph"
 msgstr  "Установите стиль подсказок этого графика"
 
-#: data/preferences_gtk2.ui:3446 data/preferences_gtk2.ui:3573
-#: data/preferences_gtk2.ui:3704 data/preferences_gtk2.ui:3835
-#: data/preferences_gtk2.ui:3966 data/preferences_gtk2.ui:4097
-#: data/preferences_gtk2.ui:4228 data/preferences_gtk3.ui:3189
-#: data/preferences_gtk3.ui:3318 data/preferences_gtk3.ui:3450
-#: data/preferences_gtk3.ui:3582 data/preferences_gtk3.ui:3714
-#: data/preferences_gtk3.ui:3846 data/preferences_gtk3.ui:3980
 msgid   "Choose what to do when double clicking on this graph"
 msgstr  "Выберите действие при двойном клике на этом графике"
 
-#: data/preferences_gtk2.ui:3471 data/preferences_gtk2.ui:3598
-#: data/preferences_gtk2.ui:3729 data/preferences_gtk2.ui:3860
-#: data/preferences_gtk2.ui:3991 data/preferences_gtk2.ui:4122
-#: data/preferences_gtk2.ui:4253 data/preferences_gtk3.ui:3213
-#: data/preferences_gtk3.ui:3342 data/preferences_gtk3.ui:3474
-#: data/preferences_gtk3.ui:3606 data/preferences_gtk3.ui:3738
-#: data/preferences_gtk3.ui:3870 data/preferences_gtk3.ui:4004
 msgid   "Set custom action of this graph"
 msgstr  "Настройте действие"
 
-#: data/preferences_gtk2.ui:3492 data/preferences_gtk2.ui:3619
-#: data/preferences_gtk2.ui:3750 data/preferences_gtk2.ui:3881
-#: data/preferences_gtk2.ui:4012 data/preferences_gtk2.ui:4143
-#: data/preferences_gtk2.ui:4274 data/preferences_gtk3.ui:3230
-#: data/preferences_gtk3.ui:3359 data/preferences_gtk3.ui:3491
-#: data/preferences_gtk3.ui:3623 data/preferences_gtk3.ui:3755
-#: data/preferences_gtk3.ui:3887 data/preferences_gtk3.ui:4021
 #, c-format
 msgid   "The following tokens can be used within the command line:\n"
         "\n"
@@ -537,9 +344,47 @@ msgstr  "В команде можно использовать переменн�
         "%n - номер графика, 1 (CPU) - 7 (температура)\n"
         "%x - короткое имя графика - 3 или 4 буквы"
 
-#: data/preferences_gtk3.ui:2752 data/preferences_gtk3.ui:2764
-#: data/preferences_gtk3.ui:2776 data/preferences_gtk3.ui:2788
-#: data/preferences_gtk3.ui:2800 data/preferences_gtk3.ui:2812
-#: data/preferences_gtk3.ui:2824
 msgid   "Color"
 msgstr  "Цвет"
+
+#, c-format
+msgid   "Command: %s\n"
+        "ERROR: %s"
+msgstr  ""
+
+#, c-format
+msgid   "Command: %s\n"
+        "Result: %lu\n"
+        "Message: %s"
+msgstr  ""
+
+msgid   "Parametric"
+msgstr  ""
+
+msgid   "Command line is empty."
+msgstr  ""
+
+msgid   "Unable to execute command."
+msgstr  ""
+
+#, c-format
+msgid   "Command has exited with status code %d."
+msgstr  ""
+
+msgid   "Command did not return a valid number."
+msgstr  ""
+
+msgid   "Command line is valid."
+msgstr  ""
+
+msgid   "Result"
+msgstr  ""
+
+msgid   "Double click command:"
+msgstr  ""
+
+msgid   "Graph command:"
+msgstr  ""
+
+msgid   "Test"
+msgstr  ""

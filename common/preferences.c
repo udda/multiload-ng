@@ -661,7 +661,7 @@ multiload_preferences_parm_command_test_clicked_cb (GtkWidget *button, Multiload
 		return;
 	} else if (exit_status != 0) {
 		//TODO printf!
-		gtk_error_dialog(GTK_WINDOW(gtk_widget_get_toplevel(button)), _("Command returned exit code %d.")/*, exit_status*/);
+		gtk_error_dialog(GTK_WINDOW(gtk_widget_get_toplevel(button)), _("Command has exited with status code %d.")/*, exit_status*/);
 		return;
 	}
 
