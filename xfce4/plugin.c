@@ -183,7 +183,7 @@ xfce_constructor (XfcePanelPlugin *plugin)
 {
 	MultiloadPlugin *multiload = g_slice_new0 (MultiloadPlugin);
 
-	xfce_textdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
+//	xfce_textdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 	multiload_init ();
 
 	multiload->panel_data = plugin;
