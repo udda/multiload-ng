@@ -660,8 +660,10 @@ multiload_preferences_parm_command_test_clicked_cb (GtkWidget *button, Multiload
 		gtk_error_dialog(GTK_WINDOW(gtk_widget_get_toplevel(button)), _("Unable to execute command."));
 		return;
 	} else if (exit_status != 0) {
-		//TODO printf!
-		gtk_error_dialog(GTK_WINDOW(gtk_widget_get_toplevel(button)), _("Command has exited with status code %d.")/*, exit_status*/);
+		//TODO better message
+		gchar *err_str = g_strdup_printf(_("Command has exited with status code %d."), exit_status);
+		gtk_error_dialog(GTK_WINDOW(gtk_widget_get_toplevel(button)), err_str);
+		g_free(err_str);
 		return;
 	}
 
