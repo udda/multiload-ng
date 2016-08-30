@@ -394,22 +394,19 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 
 	g->box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
-	if (ma->graph_config[id].border_width > 0) {
-		k = multiload_colors_get_extra_index(id, EXTRA_COLOR_BORDER);
-		g->border = gtk_event_box_new();
-		#if GTK_API == 2
-			g_signal_connect (G_OBJECT(g->border), "expose_event", G_CALLBACK (load_graph_border_expose), &(ma->graph_config[id].colors[k]));
-		#elif GTK_API == 3
-			g_signal_connect (G_OBJECT(g->border), "draw", G_CALLBACK (load_graph_border_draw_cb), &(ma->graph_config[id].colors[k]));
-		#endif
-		gtk_container_set_border_width(GTK_CONTAINER(g->box), ma->graph_config[id].border_width);
 
-		gtk_container_add (GTK_CONTAINER (g->border), g->box);
-		gtk_box_pack_start (GTK_BOX (g->main_widget), g->border, TRUE, TRUE, 0);
-	} else {
-		g->border = NULL;
-		gtk_box_pack_start (GTK_BOX (g->main_widget), g->box, TRUE, TRUE, 0);
-	}
+	k = multiload_colors_get_extra_index(id, EXTRA_COLOR_BORDER);
+	g->border = gtk_event_box_new();
+	#if GTK_API == 2
+		g_signal_connect (G_OBJECT(g->border), "expose_event", G_CALLBACK (load_graph_border_expose), &(ma->graph_config[id].colors[k]));
+	#elif GTK_API == 3
+		g_signal_connect (G_OBJECT(g->border), "draw", G_CALLBACK (load_graph_border_draw_cb), &(ma->graph_config[id].colors[k]));
+	#endif
+	gtk_container_set_border_width(GTK_CONTAINER(g->box), ma->graph_config[id].border_width);
+
+	gtk_container_add (GTK_CONTAINER (g->border), g->box);
+	gtk_box_pack_start (GTK_BOX (g->main_widget), g->border, TRUE, TRUE, 0);
+
 
 	g->timer_index = -1;
 

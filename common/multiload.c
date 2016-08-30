@@ -318,6 +318,22 @@ multiload_set_padding (MultiloadPlugin *ma, gint val)
 }
 
 void
+multiload_set_border_width (MultiloadPlugin *ma, guint graph_id, gint val)
+{
+	gtk_container_set_border_width(GTK_CONTAINER(ma->graphs[graph_id]->box), val);
+}
+
+void
+multiload_refresh_colors (MultiloadPlugin *ma, guint graph_id) {
+	if (graph_id < GRAPH_MAX)
+		gtk_widget_queue_draw(ma->graphs[graph_id]->border);
+	else {
+		for (graph_id=0; graph_id<GRAPH_MAX; graph_id++)
+			gtk_widget_queue_draw(ma->graphs[graph_id]->border);
+	}
+}
+
+void
 multiload_init()
 {
 	static int initialized = 0;

@@ -143,7 +143,7 @@ multiload_color_scheme_from_file(const gchar *filename, MultiloadPlugin *ma)
 	fclose(f);
 
 	multiload_color_scheme_apply(&scheme, ma);
-	multiload_refresh(ma);
+	multiload_refresh_colors(ma, -1);
 	return MULTILOAD_COLOR_SCHEME_STATUS_VALID;
 }
 
