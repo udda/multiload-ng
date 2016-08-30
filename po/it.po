@@ -65,7 +65,7 @@ msgstr  "Nessuno swap"
 
 #, c-format
 msgid   "%s of swap"
-msgstr  "%s in uso"
+msgstr  "%s di swap"
 
 #, c-format
 msgid   "%s used"
