@@ -164,7 +164,7 @@ static void
 xfce_orientation_changed_cb (XfcePanelPlugin *plugin, GtkOrientation orientation, MultiloadPlugin *ma)
 {
 	ma->panel_orientation = orientation;
-	multiload_refresh(ma);
+	multiload_refresh_orientation(ma);
 }
 
 static void
