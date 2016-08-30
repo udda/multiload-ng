@@ -453,7 +453,7 @@ multiload_preferences_orientation_changed_cb (GtkComboBox *combo, MultiloadPlugi
 {
 	ma->orientation_policy = gtk_combo_box_get_active (combo);
 	multiload_preferences_update_dynamic_widgets(ma);
-	multiload_refresh(ma);
+	multiload_refresh_orientation(ma);
 }
 
 static void

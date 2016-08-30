@@ -267,10 +267,12 @@ multiload_refresh(MultiloadPlugin *ma)
 	if (ma->box)
 		gtk_widget_destroy(ma->box);
 
-	ma->box = gtk_box_new (multiload_get_orientation(ma), ma->spacing);
+	ma->box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 
+	multiload_set_spacing(ma, ma->spacing);
 	multiload_set_padding(ma, ma->padding);
 	multiload_set_fill_between(ma, ma->fill_between);
+	multiload_refresh_orientation(ma);
 
 	gtk_widget_show (ma->box);
 	gtk_container_add (ma->container, ma->box);
@@ -324,7 +326,8 @@ multiload_set_border_width (MultiloadPlugin *ma, guint graph_id, gint val)
 }
 
 void
-multiload_refresh_colors (MultiloadPlugin *ma, guint graph_id) {
+multiload_refresh_colors (MultiloadPlugin *ma, guint graph_id)
+{
 	if (graph_id < GRAPH_MAX)
 		gtk_widget_queue_draw(ma->graphs[graph_id]->border);
 	else {
@@ -332,6 +335,13 @@ multiload_refresh_colors (MultiloadPlugin *ma, guint graph_id) {
 			gtk_widget_queue_draw(ma->graphs[graph_id]->border);
 	}
 }
+
+void
+multiload_refresh_orientation (MultiloadPlugin *ma)
+{
+	gtk_orientable_set_orientation(GTK_ORIENTABLE(ma->box), multiload_get_orientation(ma));
+}
+
 
 void
 multiload_init()

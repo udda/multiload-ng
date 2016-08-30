@@ -125,6 +125,8 @@ multiload_set_border_width (MultiloadPlugin *ma, guint graph_id, gint val);
 G_GNUC_INTERNAL void
 multiload_refresh_colors (MultiloadPlugin *ma, guint graph_id);
 G_GNUC_INTERNAL void
+multiload_refresh_orientation (MultiloadPlugin *ma);
+G_GNUC_INTERNAL void
 multiload_init();
 G_GNUC_INTERNAL void
 multiload_sanitize(MultiloadPlugin *ma);
