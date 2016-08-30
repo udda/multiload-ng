@@ -27,6 +27,8 @@
 
 #include "graph-data.h"
 #include "autoscaler.h"
+#include "preferences.h"
+#include "util.h"
 
 
 void
@@ -90,4 +92,22 @@ multiload_graph_parm_get_data (int Maximum, int data[1], LoadGraph *g)
 
 	max = autoscaler_get_max(&xd->scaler, g, xd->result);
 	data[0] = rint (Maximum * (float)xd->result / max);
+}
+
+void
+multiload_graph_parm_tooltip_update (char **title, char **text, LoadGraph *g, ParametricData *xd)
+{
+	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
+		if (xd->error)
+			*text = g_strdup_printf(_(	"Command: %s\n"
+										"ERROR: %s"),
+										xd->command, xd->message);
+		else
+			*text = g_strdup_printf(_(	"Command: %s\n"
+										"Result: %lu\n"
+										"Message: %s"),
+										xd->command, xd->result, xd->message);
+	} else {
+		*text = g_strdup_printf("%lu", xd->result);
+	}
 }

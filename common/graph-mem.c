@@ -26,6 +26,8 @@
 #include <glibtop/mem.h>
 
 #include "graph-data.h"
+#include "preferences.h"
+#include "util.h"
 
 void
 multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g)
@@ -55,4 +57,25 @@ multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g)
 	data [1] = rint (Maximum * (float)mem.shared / (float)mem.total);
 	data [2] = rint (Maximum * (float)mem.buffer / (float)mem.total);
 	data [3] = rint (Maximum * (float)mem.cached / (float)mem.total);
+}
+
+void
+multiload_graph_mem_tooltip_update (char **title, char **text, LoadGraph *g, MemoryData *xd)
+{
+	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
+		gchar *total = g_format_size_full(xd->total, G_FORMAT_SIZE_IEC_UNITS);
+		gchar *user = format_percent(xd->user, xd->total, 1);
+		gchar *cache = format_percent(xd->cache, xd->total, 1);
+		*title = g_strdup_printf(_("%s of RAM"), total);
+		*text = g_strdup_printf(_(	"%s in use by programs\n"
+									"%s in use as cache"),
+									user, cache);
+		g_free(total);
+		g_free(user);
+		g_free(cache);
+	} else {
+		gchar *use = format_percent(xd->user+xd->cache, xd->total, 0);
+		*text = g_strdup_printf("%s", use);
+		g_free(use);
+	}
 }

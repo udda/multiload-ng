@@ -28,6 +28,7 @@
 
 #include "graph-data.h"
 #include "autoscaler.h"
+#include "preferences.h"
 #include "util.h"
 
 
@@ -92,4 +93,21 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g)
 	 * as glibtop documentation states. So multiply value by 512 */
 	xd->read_speed  = calculate_speed(readdiff  * 512, g->config->interval);
 	xd->write_speed = calculate_speed(writediff * 512, g->config->interval);
+}
+
+void
+multiload_graph_disk_tooltip_update (char **title, char **text, LoadGraph *g, DiskData *xd)
+{
+	gchar *disk_read = format_rate_for_display(xd->read_speed);
+	gchar *disk_write = format_rate_for_display(xd->write_speed);
+
+	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
+		*text = g_strdup_printf(_(	"Read: %s\n"
+									"Write: %s"),
+									disk_read, disk_write);
+	} else {
+		*text = g_strdup_printf("\xe2\xac\x86%s \xe2\xac\x87%s", disk_read, disk_write);
+	}
+	g_free(disk_read);
+	g_free(disk_write);
 }

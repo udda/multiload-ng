@@ -41,6 +41,7 @@
 const char* MULTILOAD_CONFIG_PATH;
 
 /* update the tooltip to the graph's current "used" percentage */
+/*
 void
 multiload_tooltip_update(LoadGraph *g)
 {
@@ -216,6 +217,35 @@ multiload_tooltip_update(LoadGraph *g)
 			g_assert_not_reached();
 		}	break;
 	}
+
+	if (title == NULL)
+		title = g_strdup(graph_types[g->id].label);
+
+	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
+		tooltip_markup = g_strdup_printf("<span weight='bold' size='larger'>%s</span>\n%s", title, text);
+	} else {
+		tooltip_markup = g_strdup_printf("%s: %s", title, text);
+	}
+
+	gtk_widget_set_tooltip_markup(g->disp, tooltip_markup);
+	g_free(title);
+	g_free(text);
+	g_free(tooltip_markup);
+}
+*/
+
+void
+multiload_tooltip_update (LoadGraph *g)
+{
+	gchar *title = NULL;
+	gchar *text = NULL;
+	gchar *tooltip_markup;
+
+	g_assert_nonnull(g);
+	g_assert_nonnull(g->extra_data);
+	g_assert(g->id >= 0 && g->id < GRAPH_MAX);
+
+	graph_types[g->id].tooltip_update(&title, &text, g, g->extra_data);
 
 	if (title == NULL)
 		title = g_strdup(graph_types[g->id].label);

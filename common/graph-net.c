@@ -28,6 +28,7 @@
 
 #include "graph-data.h"
 #include "autoscaler.h"
+#include "preferences.h"
 #include "util.h"
 
 
@@ -128,4 +129,27 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g)
 	}
 
 	memcpy(xd->last, present, sizeof xd->last);
+}
+
+void
+multiload_graph_net_tooltip_update (char **title, char **text, LoadGraph *g, NetData *xd)
+{
+	gchar *tx_in = format_rate_for_display(xd->in_speed);
+	gchar *tx_out = format_rate_for_display(xd->out_speed);
+	gchar *tx_local = format_rate_for_display(xd->local_speed);
+
+	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
+		*text = g_strdup_printf(_(	"Monitored interfaces: %s\n"
+									"\n"
+									"Receiving: %s\n"
+									"Sending: %s\n"
+									"Local: %s"),
+									xd->ifaces, tx_in, tx_out, tx_local);
+	} else {
+		*text = g_strdup_printf("\xe2\xac\x87%s \xe2\xac\x86%s", tx_in, tx_out);
+	}
+
+	g_free(tx_in);
+	g_free(tx_out);
+	g_free(tx_local);
 }

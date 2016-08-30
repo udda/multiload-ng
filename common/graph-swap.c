@@ -26,6 +26,8 @@
 #include <glibtop/swap.h>
 
 #include "graph-data.h"
+#include "preferences.h"
+#include "util.h"
 
 void
 multiload_graph_swap_get_data (int Maximum, int data [1], LoadGraph *g)
@@ -52,3 +54,23 @@ multiload_graph_swap_get_data (int Maximum, int data [1], LoadGraph *g)
 	   data [0] = rint (Maximum * (float)swap.used / swap.total);
 }
 
+void
+multiload_graph_swap_tooltip_update (char **title, char **text, LoadGraph *g, SwapData *xd)
+{
+	if (xd->total == 0) {
+		*text = g_strdup_printf(_("No swap"));
+	} else {
+		gchar *used = format_percent(xd->used, xd->total, 0);
+		gchar *total = g_format_size_full(xd->total, G_FORMAT_SIZE_IEC_UNITS);
+
+		if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
+			*title = g_strdup_printf(_("%s of swap"), total);
+			*text = g_strdup_printf(_("%s used"), used);
+		} else {
+			*text = g_strdup_printf("%s", used);
+		}
+
+		g_free(used);
+		g_free(total);
+	}
+}

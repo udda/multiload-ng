@@ -26,6 +26,8 @@
 #include <glibtop/loadavg.h>
 
 #include "graph-data.h"
+#include "preferences.h"
+#include "util.h"
 
 #define PER_CPU_MAX_LOADAVG 3
 
@@ -53,4 +55,17 @@ multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g)
 	memcpy(xd->loadavg, loadavg.loadavg, sizeof loadavg.loadavg);
 
 	data [0] = rint ((float) Maximum * current / max);
+}
+
+void
+multiload_graph_load_tooltip_update (char **title, char **text, LoadGraph *g, LoadData *xd)
+{
+	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
+		*text = g_strdup_printf(_(	"Last minute: %0.02f\n"
+									"Last 5 minutes: %0.02f\n"
+									"Last 15 minutes: %0.02f"),
+									xd->loadavg[0], xd->loadavg[1], xd->loadavg[2]);
+	} else {
+		*text = g_strdup_printf("%0.02f", xd->loadavg[0]);
+	}
 }
