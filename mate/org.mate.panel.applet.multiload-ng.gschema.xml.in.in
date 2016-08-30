@@ -172,28 +172,54 @@
     </key>
 
 
-    <key name="graph-temperature-visible" type="b">
+    <key name="graph-temp-visible" type="b">
       <default>false</default>
     </key>
-    <key name="graph-temperature-border-width" type="i">
+    <key name="graph-temp-border-width" type="i">
       <default>1</default>
     </key>
-    <key name="graph-temperature-colors" type="s">
+    <key name="graph-temp-colors" type="s">
       <default>''</default>
     </key>
-    <key name="graph-temperature-size" type="i">
+    <key name="graph-temp-size" type="i">
       <default>40</default>
     </key>
-    <key name="graph-temperature-interval" type="i">
+    <key name="graph-temp-interval" type="i">
       <default>500</default>
     </key>
-    <key name="graph-temperature-tooltip-style" type="b">
+    <key name="graph-temp-tooltip-style" type="b">
       <default>false</default>
     </key>
-    <key name="graph-temperature-dblclick-policy" type="i">
+    <key name="graph-temp-dblclick-policy" type="i">
       <default>0</default>
     </key>
-    <key name="graph-temperature-dblclick-cmdline" type="s">
+    <key name="graph-temp-dblclick-cmdline" type="s">
+      <default>''</default>
+    </key>
+
+
+    <key name="graph-parm-visible" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-parm-border-width" type="i">
+      <default>1</default>
+    </key>
+    <key name="graph-parm-colors" type="s">
+      <default>''</default>
+    </key>
+    <key name="graph-parm-size" type="i">
+      <default>40</default>
+    </key>
+    <key name="graph-parm-interval" type="i">
+      <default>500</default>
+    </key>
+    <key name="graph-parm-tooltip-style" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-parm-dblclick-policy" type="i">
+      <default>0</default>
+    </key>
+    <key name="graph-parm-dblclick-cmdline" type="s">
       <default>''</default>
     </key>
 
