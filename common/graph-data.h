@@ -20,11 +20,10 @@
  */
 
 
-#ifndef __LINUX_PROC_H__
-#define __LINUX_PROC_H__
+#ifndef __GRAPH_DATA_H__
+#define __GRAPH_DATA_H__
 
 #include "autoscaler.h"
-#include "load-graph.h"
 
 
 G_BEGIN_DECLS
@@ -67,9 +66,9 @@ typedef struct _SwapData {
 	guint64 total;
 } SwapData;
 
-typedef struct _LoadAvgData {
+typedef struct _LoadData {
 	double loadavg[3];
-} LoadAvgData;
+} LoadData;
 
 typedef struct _DiskData {
 	guint64 last_read;
@@ -98,24 +97,24 @@ typedef struct _ParametricData {
 
 
 G_GNUC_INTERNAL void
-GetCpu (int Maximum, int data [5], LoadGraph *g);
+multiload_graph_cpu_get_data (int Maximum, int data [5], LoadGraph *g);
 G_GNUC_INTERNAL void
-GetMemory (int Maximum, int data [4], LoadGraph *g);
+multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g);
 G_GNUC_INTERNAL void
-GetNet (int Maximum, int data [4], LoadGraph *g);
+multiload_graph_net_get_data (int Maximum, int data [4], LoadGraph *g);
 G_GNUC_INTERNAL void
-GetSwap (int Maximum, int data [2], LoadGraph *g);
+multiload_graph_swap_get_data (int Maximum, int data [2], LoadGraph *g);
 G_GNUC_INTERNAL void
-GetLoadAvg (int Maximum, int data [2], LoadGraph *g);
+multiload_graph_load_get_data (int Maximum, int data [2], LoadGraph *g);
 G_GNUC_INTERNAL void
-GetDisk (int Maximum, int data [3], LoadGraph *g);
+multiload_graph_disk_get_data (int Maximum, int data [3], LoadGraph *g);
 G_GNUC_INTERNAL void
-GetTemperature (int Maximum, int data [2], LoadGraph *g);
+multiload_graph_temp_get_data (int Maximum, int data [2], LoadGraph *g);
 #ifdef MULTILOAD_EXPERIMENTAL
 G_GNUC_INTERNAL void
-GetParametric (int Maximum, int data[1], LoadGraph *g);
+multiload_graph_parm_get_data (int Maximum, int data[1], LoadGraph *g);
 #endif
 
 G_END_DECLS
 
-#endif /* __LINUX_PROC_H__ */
+#endif /* __GRAPH_DATA_H__ */

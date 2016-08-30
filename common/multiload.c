@@ -29,7 +29,8 @@
 #include <glib/gi18n-lib.h>
 
 #include "gtk-compat.h"
-#include "linux-proc.h"
+#include "graph-data.h"
+#include "load-graph.h"
 #include "multiload.h"
 #include "multiload-config.h"
 #include "multiload-colors.h"
@@ -146,7 +147,7 @@ multiload_tooltip_update(LoadGraph *g)
 		}	break;
 
 		case GRAPH_LOADAVG: {
-			LoadAvgData *xd = (LoadAvgData*) g->extra_data;
+			LoadData *xd = (LoadData*) g->extra_data;
 			g_assert_nonnull(xd);
 
 			if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {

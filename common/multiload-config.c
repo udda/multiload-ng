@@ -22,7 +22,7 @@
 
 #include <config.h>
 
-#include "linux-proc.h"
+#include "graph-data.h"
 #include "multiload-colors.h"
 #include "multiload-config.h"
 
@@ -41,16 +41,16 @@ guint multiload_config_get_num_data(guint id)
 void multiload_config_init()
 {
 	GraphType temp[] = {
-		{ "cpu",			_("Processor"),		GetCpu,			7 },
-		{ "mem",			_("Memory"),		GetMemory,		7 },
-		{ "net",			_("Network"),		GetNet,			6 },
-		{ "swap",			_("Swap"),			GetSwap,		4 },
-		{ "load",			_("Load average"),	GetLoadAvg,		4 },
-		{ "disk",			_("Disk"),			GetDisk,		5 },
-		{ "temp",			_("Temperature"),	GetTemperature,	4 }
+		{ "cpu",			_("Processor"),		multiload_graph_cpu_get_data,	7 },
+		{ "mem",			_("Memory"),		multiload_graph_mem_get_data,	7 },
+		{ "net",			_("Network"),		multiload_graph_net_get_data,	6 },
+		{ "swap",			_("Swap"),			multiload_graph_swap_get_data,	4 },
+		{ "load",			_("Load average"),	multiload_graph_load_get_data,	4 },
+		{ "disk",			_("Disk"),			multiload_graph_disk_get_data,	5 },
+		{ "temp",			_("Temperature"),	multiload_graph_temp_get_data,	4 }
 #ifdef MULTILOAD_EXPERIMENTAL
 		,
-		{ "parm",			_("Parametric"),	GetParametric,	4 }
+		{ "parm",			_("Parametric"),	multiload_graph_parm_get_data,	4 }
 #endif
 	};
 

@@ -31,7 +31,8 @@
 #include <gtk/gtk.h>
 
 #include "gtk-compat.h"
-#include "linux-proc.h"
+#include "graph-data.h"
+#include "load-graph.h"
 #include "multiload.h"
 #include "multiload-config.h"
 #include "multiload-colors.h"
@@ -361,7 +362,7 @@ load_graph_extra_data_init(LoadGraph *g) {
 			g->extra_data = (gpointer)g_new0(SwapData, 1);
 			break;
 		case GRAPH_LOADAVG:
-			g->extra_data = (gpointer)g_new0(LoadAvgData, 1);
+			g->extra_data = (gpointer)g_new0(LoadData, 1);
 			break;
 		case GRAPH_DISKLOAD:
 			g->extra_data = (gpointer)g_new0(DiskData, 1);

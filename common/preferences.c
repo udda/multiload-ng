@@ -37,7 +37,7 @@
 
 #ifdef MULTILOAD_EXPERIMENTAL
 #include <errno.h>
-#include "linux-proc.h"
+#include "graph-data.h"
 #endif
 
 static GtkBuilder *builder = NULL;

@@ -16,7 +16,9 @@ multiload_ng_core_la_SOURCES = \
 	binary-data.c binary-data.h \
 	colors.c colors.h \
 	gtk-compat.c gtk-compat.h \
-	linux-proc.c linux-proc.h \
+	graph-cpu.c graph-mem.c graph-net.c graph-swap.c \
+	graph-load.c graph-disk.c graph-temp.c graph-parm.c \
+	graph-data.h \
 	load-graph.c load-graph.h \
 	multiload.c multiload.h \
 	multiload-colors.c multiload-colors.h \

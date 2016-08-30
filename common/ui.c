@@ -31,7 +31,7 @@
 #include "common/util.h"
 
 #ifdef MULTILOAD_EXPERIMENTAL
-#include "linux-proc.h"
+#include "graph-data.h"
 #endif
 
 
