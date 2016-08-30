@@ -41,16 +41,40 @@ guint multiload_config_get_num_data(guint id)
 void multiload_config_init()
 {
 	GraphType temp[] = {
-		{ "cpu",			_("Processor"),		multiload_graph_cpu_get_data,	(GraphTooltipUpdateFunc)multiload_graph_cpu_tooltip_update,		7 },
-		{ "mem",			_("Memory"),		multiload_graph_mem_get_data,	(GraphTooltipUpdateFunc)multiload_graph_mem_tooltip_update,		7 },
-		{ "net",			_("Network"),		multiload_graph_net_get_data,	(GraphTooltipUpdateFunc)multiload_graph_net_tooltip_update,		6 },
-		{ "swap",			_("Swap"),			multiload_graph_swap_get_data,	(GraphTooltipUpdateFunc)multiload_graph_swap_tooltip_update,	4 },
-		{ "load",			_("Load average"),	multiload_graph_load_get_data,	(GraphTooltipUpdateFunc)multiload_graph_load_tooltip_update,	4 },
-		{ "disk",			_("Disk"),			multiload_graph_disk_get_data,	(GraphTooltipUpdateFunc)multiload_graph_disk_tooltip_update,	5 },
-		{ "temp",			_("Temperature"),	multiload_graph_temp_get_data,	(GraphTooltipUpdateFunc)multiload_graph_temp_tooltip_update,	4 }
+		{	"cpu",	_("Processor"),		7,
+			(GraphGetDataFunc)			multiload_graph_cpu_get_data,
+			(GraphTooltipUpdateFunc)	multiload_graph_cpu_tooltip_update
+		},
+		{	"mem",	_("Memory"),		7,
+			(GraphGetDataFunc)			multiload_graph_mem_get_data,
+			(GraphTooltipUpdateFunc)	multiload_graph_mem_tooltip_update
+		},
+		{	"net",	_("Network"),		6,
+			(GraphGetDataFunc)			multiload_graph_net_get_data,
+			(GraphTooltipUpdateFunc)	multiload_graph_net_tooltip_update
+		},
+		{	"swap",	_("Swap"),			4,
+			(GraphGetDataFunc)			multiload_graph_swap_get_data,
+			(GraphTooltipUpdateFunc)	multiload_graph_swap_tooltip_update
+		},
+		{	"load",	_("Load average"),	4,
+			(GraphGetDataFunc)			multiload_graph_load_get_data,
+			(GraphTooltipUpdateFunc)	multiload_graph_load_tooltip_update
+		},
+		{	"disk",	_("Disk"),			5,
+			(GraphGetDataFunc)			multiload_graph_disk_get_data,
+			(GraphTooltipUpdateFunc)	multiload_graph_disk_tooltip_update
+		},
+		{	"temp",	_("Temperature"),	4,
+			(GraphGetDataFunc)			multiload_graph_temp_get_data,
+			(GraphTooltipUpdateFunc)	multiload_graph_temp_tooltip_update
+		}
 #ifdef MULTILOAD_EXPERIMENTAL
 		,
-		{ "parm",			_("Parametric"),	multiload_graph_parm_get_data,	(GraphTooltipUpdateFunc)multiload_graph_parm_tooltip_update,	4 }
+		{	"parm",	_("Parametric"),	4,
+			(GraphGetDataFunc)			multiload_graph_parm_get_data,
+			(GraphTooltipUpdateFunc)	multiload_graph_parm_tooltip_update
+		}
 #endif
 	};
 

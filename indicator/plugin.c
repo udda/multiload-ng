@@ -175,16 +175,13 @@ indicator_preferences_cb(GtkWidget *widget, MultiloadPlugin *ma)
 
 int main (int argc, char **argv)
 {
-	MultiloadPlugin *multiload = g_slice_new0(MultiloadPlugin);
-
 	AppIndicator *indicator;
 	GtkWidget *menu;
 	GtkWidget *menuitem;
 
 	gtk_init (&argc, &argv);
-	multiload_init ();
 
-	multiload->container = GTK_CONTAINER(gtk_event_box_new ());
+	MultiloadPlugin *multiload = multiload_new();
 	gtk_widget_set_size_request(GTK_WIDGET(multiload->container), -1, 30);
 
 	multiload_ui_read (multiload);

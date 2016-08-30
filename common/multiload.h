@@ -73,6 +73,7 @@ typedef struct _MultiloadPlugin {
 
 	LoadGraph *graphs[GRAPH_MAX];
 	GraphConfig graph_config[GRAPH_MAX];
+	gpointer extra_data[GRAPH_MAX]; // data depend on graph type
 
 	gint padding;
 	gint spacing;
@@ -100,9 +101,6 @@ struct _LoadGraph {
 	gboolean tooltip_update;
 
 	GraphConfig *config;
-
-	// data depend on graph type
-	gpointer *extra_data;
 };
 
 
@@ -132,6 +130,8 @@ G_GNUC_INTERNAL void
 multiload_sanitize(MultiloadPlugin *ma);
 G_GNUC_INTERNAL void
 multiload_defaults(MultiloadPlugin *ma);
+G_GNUC_INTERNAL MultiloadPlugin*
+multiload_new();
 G_GNUC_INTERNAL void
 multiload_destroy(MultiloadPlugin *ma);
 G_GNUC_INTERNAL int

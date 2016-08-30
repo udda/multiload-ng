@@ -33,7 +33,7 @@
 
 
 void
-multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g)
+multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *xd)
 {
 	glibtop_netlist netlist;
 	glibtop_netload netload;
@@ -56,9 +56,6 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g)
 	static const unsigned needed_flags =
 		(1 << GLIBTOP_NETLOAD_IF_FLAGS) +
 		(1 << GLIBTOP_NETLOAD_BYTES_TOTAL);
-
-	NetData *xd = (NetData*) g->extra_data;
-	g_assert_nonnull(xd);
 
 
 	ifacelen = sizeof(xd->ifaces)/sizeof(gchar);

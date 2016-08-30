@@ -30,17 +30,13 @@
 #include "util.h"
 
 void
-multiload_graph_swap_get_data (int Maximum, int data [1], LoadGraph *g)
+multiload_graph_swap_get_data (int Maximum, int data [1], LoadGraph *g, SwapData *xd)
 {
 	glibtop_swap swap;
 
 	static const guint64 needed_flags =
 		(1 << GLIBTOP_SWAP_USED) +
 		(1 << GLIBTOP_SWAP_FREE);
-
-	SwapData *xd = (SwapData*) g->extra_data;
-	g_assert_nonnull(xd);
-
 
 	glibtop_get_swap (&swap);
 	g_return_if_fail ((swap.flags & needed_flags) == needed_flags);

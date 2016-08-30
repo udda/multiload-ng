@@ -33,7 +33,7 @@
 
 
 void
-multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g)
+multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData *xd)
 {
 	glibtop_mountlist mountlist;
 	glibtop_fsusage fsusage;
@@ -43,9 +43,6 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g)
 		(1 << GLIBTOP_FSUSAGE_BLOCK_SIZE) +
 		(1 << GLIBTOP_FSUSAGE_READ) +
 		(1 << GLIBTOP_FSUSAGE_WRITE);
-
-	DiskData *xd = (DiskData*) g->extra_data;
-	g_assert_nonnull(xd);
 
 	guint i;
 	int max;

@@ -181,17 +181,12 @@ xfce_sysmon_cb(GtkMenuItem *mi, MultiloadPlugin *ma)
 static void
 xfce_constructor (XfcePanelPlugin *plugin)
 {
-	MultiloadPlugin *multiload = g_slice_new0 (MultiloadPlugin);
-
-//	xfce_textdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
-	multiload_init ();
+	MultiloadPlugin *multiload = multiload_new();
 
 	multiload->panel_data = plugin;
 	multiload->panel_orientation = xfce_panel_plugin_get_orientation (plugin);
 
-	multiload->container = GTK_CONTAINER(gtk_event_box_new());
 	gtk_container_add (GTK_CONTAINER (plugin), GTK_WIDGET(multiload->container));
-	gtk_widget_show (GTK_WIDGET(multiload->container));
 
 	multiload_ui_read (multiload);
 	multiload_refresh(multiload);

@@ -32,7 +32,7 @@
 
 
 void
-multiload_graph_parm_get_data (int Maximum, int data[1], LoadGraph *g)
+multiload_graph_parm_get_data (int Maximum, int data[1], LoadGraph *g, ParametricData *xd)
 {
 	int max;
 	gboolean spawn_success;
@@ -40,9 +40,6 @@ multiload_graph_parm_get_data (int Maximum, int data[1], LoadGraph *g)
 	gchar *stdout = NULL;
 	gchar *stderr = NULL;
 	int exit_status;
-
-	ParametricData *xd = (ParametricData*) g->extra_data;
-	g_assert_nonnull(xd);
 
 	if (xd->command[0] == '\0') {
 		xd->error = TRUE;

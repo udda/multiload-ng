@@ -136,7 +136,9 @@ load_graph_update (LoadGraph *g)
 		return TRUE;
 
 	load_graph_rotate(g);
-	graph_types[g->id].get_data(g->draw_height, g->data [0], g);
+
+	g_assert_nonnull(g->multiload->extra_data);
+	graph_types[g->id].get_data(g->draw_height, g->data [0], g, g->multiload->extra_data[g->id]);
 
 	if (g->tooltip_update)
 		multiload_tooltip_update(g);
@@ -345,38 +347,6 @@ load_graph_leave_cb(GtkWidget *widget, GdkEventCrossing *event, LoadGraph *graph
 	return TRUE;
 }
 
-static void
-load_graph_extra_data_init(LoadGraph *g) {
-	g_assert_nonnull(g);
-	switch(g->id) {
-		case GRAPH_CPULOAD:
-			g->extra_data = (gpointer)g_new0(CpuData, 1);
-			break;
-		case GRAPH_MEMLOAD:
-			g->extra_data = (gpointer)g_new0(MemoryData, 1);
-			break;
-		case GRAPH_NETLOAD:
-			g->extra_data = (gpointer)g_new0(NetData, 1);
-			break;
-		case GRAPH_SWAPLOAD:
-			g->extra_data = (gpointer)g_new0(SwapData, 1);
-			break;
-		case GRAPH_LOADAVG:
-			g->extra_data = (gpointer)g_new0(LoadData, 1);
-			break;
-		case GRAPH_DISKLOAD:
-			g->extra_data = (gpointer)g_new0(DiskData, 1);
-			break;
-		case GRAPH_TEMPERATURE:
-			g->extra_data = (gpointer)g_new0(TemperatureData, 1);
-#ifdef MULTILOAD_EXPERIMENTAL
-		case GRAPH_PARAMETRIC:
-			g->extra_data = (gpointer)g_new0(ParametricData, 1);
-			break;
-#endif
-	}
-}
-
 LoadGraph *
 load_graph_new (MultiloadPlugin *ma, guint id)
 {
@@ -385,7 +355,6 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 
 	g = g_new0 (LoadGraph, 1);
 	g->id = id;
-	load_graph_extra_data_init(g);
 
 	g->tooltip_update = FALSE;
 	g->multiload = ma;

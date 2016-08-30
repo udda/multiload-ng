@@ -30,7 +30,7 @@
 #include "util.h"
 
 void
-multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g)
+multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryData *xd)
 {
 	glibtop_mem mem;
 
@@ -41,9 +41,6 @@ multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g)
 		(1 << GLIBTOP_MEM_CACHED) +
 		(1 << GLIBTOP_MEM_FREE) +
 		(1 << GLIBTOP_MEM_TOTAL);
-
-	MemoryData *xd = (MemoryData*) g->extra_data;
-	g_assert_nonnull(xd);
 
 
 	glibtop_get_mem (&mem);

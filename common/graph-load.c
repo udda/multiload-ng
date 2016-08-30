@@ -33,7 +33,7 @@
 
 
 void
-multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g)
+multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData *xd)
 {
 	glibtop_loadavg loadavg;
 	static float max = 0;
@@ -41,9 +41,6 @@ multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g)
 
 	static const guint64 needed_flags =
 		(1 << GLIBTOP_LOADAVG_LOADAVG);
-
-	LoadData *xd = (LoadData*) g->extra_data;
-	g_assert_nonnull(xd);
 
 	glibtop_get_loadavg (&loadavg);
 	g_return_if_fail ((loadavg.flags & needed_flags) == needed_flags);

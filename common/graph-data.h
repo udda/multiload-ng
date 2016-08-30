@@ -97,43 +97,43 @@ typedef struct _ParametricData {
 
 
 G_GNUC_INTERNAL void
-multiload_graph_cpu_get_data (int Maximum, int data [5], LoadGraph *g);
+multiload_graph_cpu_get_data (int Maximum, int data [5], LoadGraph *g, CpuData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_cpu_tooltip_update (char **title, char **text, LoadGraph *g, CpuData *xd);
 
 G_GNUC_INTERNAL void
-multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g);
+multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_mem_tooltip_update (char **title, char **text, LoadGraph *g, MemoryData *xd);
 
 G_GNUC_INTERNAL void
-multiload_graph_net_get_data (int Maximum, int data [4], LoadGraph *g);
+multiload_graph_net_get_data (int Maximum, int data [4], LoadGraph *g, NetData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_net_tooltip_update (char **title, char **text, LoadGraph *g, NetData *xd);
 
 G_GNUC_INTERNAL void
-multiload_graph_swap_get_data (int Maximum, int data [2], LoadGraph *g);
+multiload_graph_swap_get_data (int Maximum, int data [2], LoadGraph *g, SwapData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_swap_tooltip_update (char **title, char **text, LoadGraph *g, SwapData *xd);
 
 G_GNUC_INTERNAL void
-multiload_graph_load_get_data (int Maximum, int data [2], LoadGraph *g);
+multiload_graph_load_get_data (int Maximum, int data [2], LoadGraph *g, LoadData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_load_tooltip_update (char **title, char **text, LoadGraph *g, LoadData *xd);
 
 G_GNUC_INTERNAL void
-multiload_graph_disk_get_data (int Maximum, int data [3], LoadGraph *g);
+multiload_graph_disk_get_data (int Maximum, int data [3], LoadGraph *g, DiskData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_disk_tooltip_update (char **title, char **text, LoadGraph *g, DiskData *xd);
 
 G_GNUC_INTERNAL void
-multiload_graph_temp_get_data (int Maximum, int data [2], LoadGraph *g);
+multiload_graph_temp_get_data (int Maximum, int data [2], LoadGraph *g, TemperatureData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_temp_tooltip_update (char **title, char **text, LoadGraph *g, TemperatureData *xd);
 
 #ifdef MULTILOAD_EXPERIMENTAL
 G_GNUC_INTERNAL void
-multiload_graph_parm_get_data (int Maximum, int data[1], LoadGraph *g);
+multiload_graph_parm_get_data (int Maximum, int data[1], LoadGraph *g, ParametricData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_parm_tooltip_update (char **title, char **text, LoadGraph *g, ParametricData *xd);
 #endif

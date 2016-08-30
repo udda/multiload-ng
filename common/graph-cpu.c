@@ -93,7 +93,7 @@ static void get_cpu0_info(double *mhz, char *governor) {
 }
 
 void
-multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g)
+multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *xd)
 {
 	guint32 user, nice, sys, iowait, idle, total;
 	gboolean first_call = FALSE;
@@ -121,8 +121,6 @@ multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g)
 	static const guint64 needed_flags_uptime =
 		(1 << GLIBTOP_UPTIME_UPTIME);
 
-	CpuData *xd = (CpuData*) g->extra_data;
-	g_assert_nonnull(xd);
 	if (xd->num_cpu == 0) {
 		get_cpu0_name(xd->cpu0_name);
 		xd->num_cpu = 1 + glibtop_global_server->ncpu;

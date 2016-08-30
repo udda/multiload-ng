@@ -636,7 +636,7 @@ multiload_preferences_color_scheme_selected_cb (GtkTreeSelection *sel, Multiload
 static void
 multiload_preferences_parm_command_changed_cb (GtkEntry *entry, MultiloadPlugin *ma)
 {
-	ParametricData *xd = (ParametricData*)ma->graphs[GRAPH_PARAMETRIC]->extra_data;
+	ParametricData *xd = (ParametricData*)ma->extra_data[GRAPH_PARAMETRIC];
 	strncpy(xd->command, gtk_entry_get_text(entry), sizeof(xd->command));
 }
 
@@ -646,7 +646,7 @@ multiload_preferences_parm_command_test_clicked_cb (GtkWidget *button, Multiload
 	gchar *stdout, *stderr;
 	gint exit_status;
 
-	ParametricData *xd = (ParametricData*)ma->graphs[GRAPH_PARAMETRIC]->extra_data;
+	ParametricData *xd = (ParametricData*)ma->extra_data[GRAPH_PARAMETRIC];
 
 	if (xd->command[0] == '\0') {
 		//TODO better message
@@ -784,7 +784,7 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(OB("cb_fill_between")), ma->fill_between);
 
 #ifdef MULTILOAD_EXPERIMENTAL
-	gtk_entry_set_text(GTK_ENTRY(OB("entry_parm_command")), ((ParametricData*)ma->graphs[GRAPH_PARAMETRIC]->extra_data)->command);
+	gtk_entry_set_text(GTK_ENTRY(OB("entry_parm_command")), ((ParametricData*)ma->extra_data[GRAPH_PARAMETRIC])->command);
 #endif
 
 	multiload_preferences_update_color_buttons(ma);

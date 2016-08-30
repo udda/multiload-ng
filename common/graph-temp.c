@@ -32,17 +32,13 @@
 
 
 void
-multiload_graph_temp_get_data (int Maximum, int data[1], LoadGraph *g)
+multiload_graph_temp_get_data (int Maximum, int data[1], LoadGraph *g, TemperatureData *xd)
 {
 	guint temp = 0;
 	guint i, j, t;
 
 	DIR *dir;
 	struct dirent *entry;
-
-	TemperatureData *xd = (TemperatureData*) g->extra_data;
-	g_assert_nonnull(xd);
-
 
 	static gboolean first_call = TRUE;
 	static gboolean support = FALSE;

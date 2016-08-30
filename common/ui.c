@@ -31,7 +31,7 @@
 #include "common/util.h"
 
 #ifdef MULTILOAD_EXPERIMENTAL
-#include "graph-data.h"
+#include "common/graph-data.h"
 #endif
 
 

@@ -178,18 +178,15 @@ mate_constructor (MatePanelApplet* applet, const char* iid, gpointer data)
 		return FALSE;
 
 
-	MultiloadPlugin *multiload = g_slice_new0 (MultiloadPlugin);
+	MultiloadPlugin *multiload = multiload_new();
 
 	mate_panel_applet_set_flags (applet, MATE_PANEL_APPLET_EXPAND_MINOR | MATE_PANEL_APPLET_HAS_HANDLE);
 	mate_panel_applet_set_background_widget(applet, GTK_WIDGET(applet));
-	multiload_init ();
 
 	multiload->panel_data = mate_panel_applet_settings_new (applet, "org.mate.panel.applet.multiload-ng");
 
-	multiload->container = GTK_CONTAINER(gtk_event_box_new ());
 	gtk_container_add (GTK_CONTAINER(applet), GTK_WIDGET(multiload->container));
 	gtk_widget_show (GTK_WIDGET(applet));
-	gtk_widget_show (GTK_WIDGET(multiload->container));
 
 	multiload_ui_read (multiload);
 	// trigger orientation setup
