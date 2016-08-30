@@ -115,6 +115,12 @@ multiload_get_orientation(MultiloadPlugin *ma);
 G_GNUC_INTERNAL void
 multiload_tooltip_update(LoadGraph *g);
 G_GNUC_INTERNAL void
+multiload_set_fill_between (MultiloadPlugin *ma, gboolean fill);
+G_GNUC_INTERNAL void
+multiload_set_spacing (MultiloadPlugin *ma, gint val);
+G_GNUC_INTERNAL void
+multiload_set_padding (MultiloadPlugin *ma, gint val);
+G_GNUC_INTERNAL void
 multiload_init();
 G_GNUC_INTERNAL void
 multiload_sanitize(MultiloadPlugin *ma);

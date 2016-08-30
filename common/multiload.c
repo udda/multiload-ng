@@ -268,9 +268,9 @@ multiload_refresh(MultiloadPlugin *ma)
 		gtk_widget_destroy(ma->box);
 
 	ma->box = gtk_box_new (multiload_get_orientation(ma), ma->spacing);
-	gtk_container_set_border_width(GTK_CONTAINER(ma->box), ma->padding);
 
-	gtk_event_box_set_visible_window(GTK_EVENT_BOX(ma->container), ma->fill_between);
+	multiload_set_padding(ma, ma->padding);
+	multiload_set_fill_between(ma, ma->fill_between);
 
 	gtk_widget_show (ma->box);
 	gtk_container_add (ma->container, ma->box);
@@ -297,6 +297,24 @@ multiload_refresh(MultiloadPlugin *ma)
 	g_debug("[multiload] Started %d of %d graphs", n, GRAPH_MAX);
 
 	return;
+}
+
+void
+multiload_set_fill_between (MultiloadPlugin *ma, gboolean fill)
+{
+	gtk_event_box_set_visible_window(GTK_EVENT_BOX(ma->container), fill);
+}
+
+void
+multiload_set_spacing (MultiloadPlugin *ma, gint val)
+{
+	gtk_box_set_spacing(GTK_BOX(ma->box), val);
+}
+
+void
+multiload_set_padding (MultiloadPlugin *ma, gint val)
+{
+	gtk_container_set_border_width(GTK_CONTAINER(ma->box), val);
 }
 
 void

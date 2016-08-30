@@ -436,15 +436,16 @@ multiload_preferences_spacing_or_padding_changed_cb (GtkRange *scale, MultiloadP
 	guint value = (guint)gtk_range_get_value(scale);
 	const gchar *name = gtk_buildable_get_name(GTK_BUILDABLE(scale));
 
-	if (strcmp(name, "hscale_spacing") == 0)
+	if (strcmp(name, "hscale_spacing") == 0) {
 		ma->spacing = value;
-	else if (strcmp(name, "hscale_padding") == 0)
+		multiload_set_spacing(ma, value);
+	} else if (strcmp(name, "hscale_padding") == 0) {
 		ma->padding = value;
-	else
+		multiload_set_padding(ma, value);
+	} else
 		g_assert_not_reached();
 
 	multiload_preferences_update_dynamic_widgets(ma);
-	multiload_refresh(ma);
 }
 
 static void
@@ -459,7 +460,7 @@ static void
 multiload_preferences_fill_between_toggled_cb (GtkToggleButton *toggle, MultiloadPlugin *ma)
 {
 	ma->fill_between = gtk_toggle_button_get_active(toggle);
-	multiload_refresh(ma);
+	multiload_set_fill_between(ma, ma->fill_between);
 }
 
 static void
