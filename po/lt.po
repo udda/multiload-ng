@@ -1,0 +1,396 @@
+# Copyright (C) 2016 Mario Cianciolo <mr.udda@gmail.com>
+# This file is distributed under the same license as the multiload-ng package.
+# Moo <hazap@hotmail.com>, 2016.
+#
+#, fuzzy
+msgid   ""
+msgstr  "Project-Id-Version: multiload-ng\n"
+        "Report-Msgid-Bugs-To: \n"
+        "POT-Creation-Date: 2016-08-31 15:54+0200\n"
+        "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+        "Last-Translator: Moo <hazap@hotmail.com>\n"
+        "Language-Team: Lithuanian\n"
+        "Language: lt\n"
+        "MIME-Version: 1.0\n"
+        "Content-Type: text/plain; charset=UTF-8\n"
+        "Content-Transfer-Encoding: 8bit\n"
+        "X-Generator: Poedit 1.8.8\n"
+
+msgid   "Modern graphical system monitor"
+msgstr  "Šiuolaikinis grafinis sistemos monitorius"
+
+msgid   "Copyright © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, and others"
+msgstr  "Autorių teisės © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, ir kiti"
+
+#, c-format
+msgid   "Unable to execute the following command line: '%s'"
+msgstr  "Nepavyko vykdyti šios komandų eilutės: \"%s\""
+
+#, c-format
+msgid   "%lu processors  -  %.2f GHz  -  Governor: %s\n"
+        "%.1f%% in use by programs\n"
+        "%.1f%% in wait for I/O\n"
+        "%.1f%% total CPU use\n"
+        "\n"
+        "Uptime: %s"
+msgstr  "%lu procesoriai  -  %.2f GHz  -  Reguliatorius: %s\n"
+        "%.1f%% yra naudojama programų\n"
+        "%.1f%% laukiant I/O\n"
+        "%.1f%% bendras centrinio procesoriaus naudojimas\n"
+        "\n"
+        "Sistemos veikimo trukmė: %s"
+
+#, c-format
+msgid   "%s of RAM"
+msgstr  "%s RAM atminties"
+
+#, c-format
+msgid   "%s in use by programs\n"
+        "%s in use as cache"
+msgstr  "%s yra naudojama programų\n"
+        "%s yra naudojama kaip podėlis"
+
+#, c-format
+msgid   "Monitored interfaces: %s\n"
+        "\n"
+        "Receiving: %s\n"
+        "Sending: %s\n"
+        "Local: %s"
+msgstr  "Stebimos sąsajos: %s\n"
+        "\n"
+        "Gaunama: %s\n"
+        "Siunčiama: %s\n"
+        "Vietoje: %s"
+
+msgid   "No swap"
+msgstr  "Nėra sukeitimų skaidinio"
+
+#, c-format
+msgid   "%s of swap"
+msgstr  "%s sukeitimų skaidinio"
+
+#, c-format
+msgid   "%s used"
+msgstr  "%s naudojama"
+
+#, c-format
+msgid   "Last minute: %0.02f\n"
+        "Last 5 minutes: %0.02f\n"
+        "Last 15 minutes: %0.02f"
+msgstr  "Paskutinės minutės: %0.02f\n"
+        "Paskutinių 5 minučių: %0.02f\n"
+        "Paskutinių 15 minučių: %0.02f"
+
+#, c-format
+msgid   "Read: %s\n"
+        "Write: %s"
+msgstr  "Skaitymas: %s\n"
+        "Rašymas: %s"
+
+#, c-format
+msgid   "Current: %.1f °C\n"
+        "Critical: %.1f °C"
+msgstr  "Esama: %.1f °C\n"
+        "Kritinė: %.1f °C"
+
+#, c-format
+msgid   "Command: %s\n"
+        "ERROR: %s"
+msgstr  "Komanda: %s\n"
+        "KLAIDA: %s"
+
+#, c-format
+msgid   "Command: %s\n"
+        "Result: %lu\n"
+        "Message: %s"
+msgstr  "Komanda: %s\n"
+        "Rezultatas: %lu\n"
+        "Pranešimas: %s"
+
+msgid   "Processor"
+msgstr  "Procesorius"
+
+msgid   "Memory"
+msgstr  "Atmintis"
+
+msgid   "Network"
+msgstr  "Tinklas"
+
+msgid   "Swap"
+msgstr  "Sukeitimų skaidinys"
+
+msgid   "Load average"
+msgstr  "Apkrovos vidurkis"
+
+msgid   "Disk"
+msgstr  "Diskas"
+
+msgid   "Temperature"
+msgstr  "Temperatūra"
+
+msgid   "Parametric"
+msgstr  "Parametrinis"
+
+#, c-format
+msgid   "%d pixel"
+msgstr  "%d pikselių"
+
+#, c-format
+msgid   "%d milliseconds"
+msgstr  "%d milisekundžių"
+
+msgid   "Import color scheme"
+msgstr  "Importuoti spalvų rinkinį"
+
+msgid   "_Cancel"
+msgstr  "_Atsisakyti"
+
+msgid   "_Open"
+msgstr  "A_tverti"
+
+msgid   "Color scheme format is incorrect. Unable to import."
+msgstr  "Spalvų rinkinio formatas yra neteisingas. Importuoti nepavyko."
+
+msgid   "Color scheme was created by an incompatible version of Multiload-ng. "
+        "Unable to import."
+msgstr  "Spalvų rinkinys buvo sukurtas nesuderinamos Multiload-ng versijos. "
+        "Importuoti nepavyko."
+
+msgid   "Export color scheme"
+msgstr  "Eksportuoti spalvų rinkinį"
+
+msgid   "_Save"
+msgstr  "Į_rašyti"
+
+msgid   "Error exporting color scheme."
+msgstr  "Klaida, eksportuojant spalvų rinkinį."
+
+msgid   "Command line is empty."
+msgstr  "Komandų eilutė tuščia."
+
+msgid   "Unable to execute command."
+msgstr  "Nepavyko vykdyti komandos."
+
+#, c-format
+msgid   "Command has exited with status code %d."
+msgstr  "Komanda išėjo su būsenos kodu %d."
+
+msgid   "Command did not return a valid number."
+msgstr  "Komanda negrąžino taisyklingo skaičiaus."
+
+msgid   "Command line is valid."
+msgstr  "Komandų eilutė yra taisyklinga."
+
+msgid   "(Custom)"
+msgstr  "(Tinkintas)"
+
+#. xgettext: this is a rate format (eg. 2 MiB/s)
+#, c-format
+msgid   "%s/s"
+msgstr  "%s/s"
+
+#, c-format
+msgid   "Unable to open the following url: '%s'"
+msgstr  "Nepavyko atverti šio url: '%s'"
+
+msgid   "translator-credits"
+msgstr  "Moo <hazap@hotmail.com>"
+
+msgid   "_Help"
+msgstr  "Ž_inynas"
+
+msgid   "_Close"
+msgstr  "_Užverti"
+
+msgid   "Do nothing"
+msgstr  "Nieko nedaryti"
+
+msgid   "Start task manager"
+msgstr  "Paleisti užduočių tvarkytuvę"
+
+msgid   "Execute custom command"
+msgstr  "Vykdyti tinkintą komandą"
+
+msgid   "Automatic"
+msgstr  "Automatinė"
+
+msgid   "Horizontal"
+msgstr  "Horizontali"
+
+msgid   "Vertical"
+msgstr  "Vertikali"
+
+msgid   "Preferences editor"
+msgstr  "Nuostatų redaktorius"
+
+msgid   "Set the size of this graph"
+msgstr  "Nustatykite šio grafiko dydį"
+
+msgid   "Set the time between updates of this graph"
+msgstr  "Nustatykite laiko tarpą tarp šio grafiko atnaujinimų"
+
+msgid   "Tooltip may not show if update interval is too short."
+msgstr  "Paaiškinimas gali būti nerodomas, jeigu atnaujinimo intervalas yra "
+        "per trumpas."
+
+msgid   "Make this graph visible"
+msgstr  "Padaryti šį grafiką matomą"
+
+msgid   "Graph"
+msgstr  "Grafikas"
+
+msgid   "Size"
+msgstr  "Dydis"
+
+msgid   "Update interval"
+msgstr  "Atnaujinimo intervalas"
+
+msgid   "Advanced configuration"
+msgstr  "Išplėstinė konfigūracija"
+
+msgid   "Timespan"
+msgstr  "Laiko periodas"
+
+msgid   "Fill space between graphs"
+msgstr  "Užpildyti vietą tarp grafikų"
+
+msgid   "Orientation:"
+msgstr  "Orientacija:"
+
+msgid   "Padding:"
+msgstr  "Užpildymas:"
+
+msgid   "Spacing:"
+msgstr  "Atstumas:"
+
+msgid   "Set space between graphs"
+msgstr  "Nustatykite atstumą tarp grafikų"
+
+msgid   "Set padding width"
+msgstr  "Nustatykite užpildymo plotį"
+
+msgid   "If padding is set too large, the graph won't show."
+msgstr  "Jeigu yra nustatytas per didelis užpildymas, grafikas nebus rodomas."
+
+msgid   "Selected orientation is not the same of the panel. Graphs may be "
+        "very small."
+msgstr  "Pasirinkta orientacija nėra tokia pati kaip skydelio. Grafikai gali "
+        "būti labai maži."
+
+msgid   "Graphs"
+msgstr  "Grafikai"
+
+msgid   "Color scheme"
+msgstr  "Spalvų rinkinys"
+
+msgid   "Import color scheme from file"
+msgstr  "Importuoti spalvų rinkinį iš failo"
+
+msgid   "Import"
+msgstr  "Importuoti"
+
+msgid   "Export color scheme to file"
+msgstr  "Eksportuoti spalvų rinkinį į failą"
+
+msgid   "Export"
+msgstr  "Eksportuoti"
+
+msgid   "User"
+msgstr  "Naudotojas"
+
+msgid   "System"
+msgstr  "Sistema"
+
+msgid   "Nice"
+msgstr  "\"Nice\" reikšmė"
+
+msgid   "IOWait"
+msgstr  "IO laukimas"
+
+msgid   "Background"
+msgstr  "Fonas"
+
+msgid   "Border"
+msgstr  "Rėmelis"
+
+msgid   "Shared"
+msgstr  "Bendrinama"
+
+msgid   "Buffer"
+msgstr  "Buferis"
+
+msgid   "Cache"
+msgstr  "Podėlis"
+
+msgid   "Receiving"
+msgstr  "Gaunama"
+
+msgid   "Sending"
+msgstr  "Siunčiama"
+
+msgid   "Local"
+msgstr  "Vietoje"
+
+msgid   "Used"
+msgstr  "Naudojama"
+
+msgid   "Average"
+msgstr  "Vidurkis"
+
+msgid   "Read"
+msgstr  "Skaitymas"
+
+msgid   "Write"
+msgstr  "Rašymas"
+
+msgid   "Value"
+msgstr  "Reikšmė"
+
+msgid   "Result"
+msgstr  "Rezultatas"
+
+msgid   "Colors"
+msgstr  "Spalvos"
+
+msgid   "Simple"
+msgstr  "Paprastas"
+
+msgid   "Detailed"
+msgstr  "Išsamus"
+
+msgid   "Tooltip style:"
+msgstr  "Paaiškinimo stilius:"
+
+msgid   "Double click action:"
+msgstr  "Dvikarčio spustelėjimo veiksmas:"
+
+msgid   "Set tooltip style of this graph"
+msgstr  "Nustatykite šio grafiko stilių"
+
+msgid   "Choose what to do when double clicking on this graph"
+msgstr  "Pasirinkite ką daryti du kartus spustelėjus ant šio grafiko"
+
+msgid   "Set custom action of this graph"
+msgstr  "Nustatykite tinkintą grafiko veiksmą"
+
+#, c-format
+msgid   "The following tokens can be used within the command line:\n"
+        "\n"
+        "%n - graph number, from 1 (CPU) to 7 (temperature)\n"
+        "%x - short name of the graph - three to four letters"
+msgstr  "Su komandų eilute gali būti naudojami šie požymiai:\n"
+        "\n"
+        "%n - grafiko numeris, nuo 1 (Procesorius) iki 7 (temperatūra)\n"
+        "%x - trumpas grafiko pavadinimas - nuo trijų iki keturių raidžių"
+
+msgid   "Double click command:"
+msgstr  "Dvikarčio spustelėjimo komanda:"
+
+msgid   "Graph command:"
+msgstr  "Grafiko komanda:"
+
+msgid   "Test"
+msgstr  "Išbandyti"
+
+msgid   "Color"
+msgstr  "Spalva"
