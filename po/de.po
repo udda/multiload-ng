@@ -6,8 +6,8 @@
 msgid   ""
 msgstr  "Project-Id-Version: multiload-ng\n"
         "Report-Msgid-Bugs-To: Michael Kogan <michael.kogan@gmx.net>\n"
-        "POT-Creation-Date: 2016-08-30 16:34+0200\n"
-        "PO-Revision-Date: 2016-08-30 16:34+0200\n"
+        "POT-Creation-Date: 2016-08-31 15:52+0200\n"
+        "PO-Revision-Date: 2016-08-31 15:52+0200\n"
         "Last-Translator: Michael Kogan <michael.kogan@gmx.net>\n"
         "Language-Team: Deutsche\n"
         "Language: de\n"
@@ -355,41 +355,44 @@ msgstr  "Farbe"
 #, c-format
 msgid   "Command: %s\n"
         "ERROR: %s"
-msgstr  ""
+msgstr  "Befehl: %s\n"
+        "FEHLER: %s"
 
 #, c-format
 msgid   "Command: %s\n"
         "Result: %lu\n"
         "Message: %s"
-msgstr  ""
+msgstr  "Befehl: %s\n"
+        "Ergebnis: %lu\n"
+        "Nachricht: %s"
 
 msgid   "Parametric"
-msgstr  ""
+msgstr  "Parametrisch"
 
 msgid   "Command line is empty."
-msgstr  ""
+msgstr  "Kommandozeile ist leer."
 
 msgid   "Unable to execute command."
-msgstr  ""
+msgstr  "Befehl konnte nicht ausgeführt werden."
 
 #, c-format
 msgid   "Command has exited with status code %d."
-msgstr  ""
+msgstr  "Befehl wurde mit Statuscode %d beendet."
 
 msgid   "Command did not return a valid number."
-msgstr  ""
+msgstr  "Befehl gab keine gültige Zahl aus."
 
 msgid   "Command line is valid."
-msgstr  ""
+msgstr  "Befehlszeile ist gültig."
 
 msgid   "Result"
-msgstr  ""
+msgstr  "Ergebnis"
 
 msgid   "Double click command:"
-msgstr  ""
+msgstr  "Doppelklick-Befehl:"
 
 msgid   "Graph command:"
-msgstr  ""
+msgstr  "Graf-Befehl:"
 
 msgid   "Test"
-msgstr  ""
+msgstr  "Test"
