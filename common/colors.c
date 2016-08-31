@@ -211,7 +211,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 #ifdef MULTILOAD_EXPERIMENTAL
 			}, { // PARM hue: (gray)
 				HEX_TO_RGBA(E4,E4,E4, FF),		// Value
-				HEX_TO_RGBA(80,80,80, FF),		// Border
+				HEX_TO_RGBA(61,61,61, FF),		// Border
 				HEX_TO_RGBA(26,26,26, FF),		// Background (top)
 				HEX_TO_RGBA(00,00,00, FF)		// Background (bottom)
 #endif
