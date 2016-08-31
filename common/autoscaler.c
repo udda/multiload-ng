@@ -55,7 +55,7 @@ autoscaler_get_max(AutoScaler *s, LoadGraph *g, int current)
 			s->count = 0;
 			s->last_update = now;
 			s->last_average = average;
-			g_debug("[autoscaler] Recalculated max for graph '%s': %ld", graph_types[g->id].name, s->max);
+			g_debug("[autoscaler] Recalculated max for graph '%s': %d", graph_types[g->id].name, s->max);
 		}
 
 		s->max = MAX(s->max, current);
