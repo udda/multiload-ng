@@ -352,41 +352,44 @@ msgstr  "Colore"
 #, c-format
 msgid   "Command: %s\n"
         "ERROR: %s"
-msgstr  ""
+msgstr  "Comando: %s\n"
+        "ERRORE: %s"
 
 #, c-format
 msgid   "Command: %s\n"
         "Result: %lu\n"
         "Message: %s"
-msgstr  ""
+msgstr  "Comando: %s\n"
+        "Risultato: %lu\n"
+        "Messaggio: %s"
 
 msgid   "Parametric"
-msgstr  ""
+msgstr  "Parametrico"
 
 msgid   "Command line is empty."
-msgstr  ""
+msgstr  "La riga di comando è vuota."
 
 msgid   "Unable to execute command."
-msgstr  ""
+msgstr  "Impossibile eseguire il comando."
 
 #, c-format
 msgid   "Command has exited with status code %d."
-msgstr  ""
+msgstr  "Il comando è uscito con codice di stato %d."
 
 msgid   "Command did not return a valid number."
-msgstr  ""
+msgstr  "Il comando non ha restituito un numero valido."
 
 msgid   "Command line is valid."
-msgstr  ""
+msgstr  "La riga di comando è valida."
 
 msgid   "Result"
-msgstr  ""
+msgstr  "Risultato"
 
 msgid   "Double click command:"
-msgstr  ""
+msgstr  "Comando al doppio clic:"
 
 msgid   "Graph command:"
-msgstr  ""
+msgstr  "Comando del grafico:"
 
 msgid   "Test"
-msgstr  ""
+msgstr  "Prova"
