@@ -44,6 +44,34 @@
     <property name="step_increment">1</property>
     <property name="page_increment">4</property>
   </object>
+  <object class="GtkAdjustment" id="adjustment_ceil_disk">
+    <property name="lower">10</property>
+    <property name="upper">2000000</property>
+    <property name="value">10</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment_ceil_net">
+    <property name="lower">10</property>
+    <property name="upper">2000000</property>
+    <property name="value">10</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment_ceil_parm">
+    <property name="lower">10</property>
+    <property name="upper">2000000</property>
+    <property name="value">10</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment_ceil_temp">
+    <property name="lower">10</property>
+    <property name="upper">2000000</property>
+    <property name="value">10</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
   <object class="GtkAdjustment" id="adjustment_interval_cpu">
     <property name="lower">50</property>
     <property name="upper">20000</property>
@@ -3975,10 +4003,11 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkSpinButton" id="sb_floor_net">
+                      <object class="GtkSpinButton" id="sb_ceil_net">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
+                        <property name="adjustment">adjustment_ceil_net</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -4562,10 +4591,11 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkSpinButton" id="sb_floor_disk">
+                      <object class="GtkSpinButton" id="sb_ceil_disk">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
+                        <property name="adjustment">adjustment_ceil_disk</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -4804,10 +4834,11 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkSpinButton" id="sb_floor_">
+                      <object class="GtkSpinButton" id="sb_ceil_temp">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
+                        <property name="adjustment">adjustment_ceil_temp</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -5046,10 +5077,11 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkSpinButton" id="sb_floor_parm">
+                      <object class="GtkSpinButton" id="sb_ceil_parm">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
+                        <property name="adjustment">adjustment_ceil_parm</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
