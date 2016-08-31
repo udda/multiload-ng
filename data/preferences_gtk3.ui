@@ -47,30 +47,30 @@
   <object class="GtkAdjustment" id="adjustment_ceil_disk">
     <property name="lower">10</property>
     <property name="upper">2000000</property>
-    <property name="value">10</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
+    <property name="value">500</property>
+    <property name="step_increment">50</property>
+    <property name="page_increment">1000</property>
   </object>
   <object class="GtkAdjustment" id="adjustment_ceil_net">
     <property name="lower">10</property>
     <property name="upper">2000000</property>
-    <property name="value">10</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
+    <property name="value">500</property>
+    <property name="step_increment">50</property>
+    <property name="page_increment">1000</property>
   </object>
   <object class="GtkAdjustment" id="adjustment_ceil_parm">
     <property name="lower">10</property>
     <property name="upper">2000000</property>
-    <property name="value">10</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
+    <property name="value">500</property>
+    <property name="step_increment">50</property>
+    <property name="page_increment">1000</property>
   </object>
   <object class="GtkAdjustment" id="adjustment_ceil_temp">
     <property name="lower">10</property>
     <property name="upper">2000000</property>
-    <property name="value">10</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
+    <property name="value">500</property>
+    <property name="step_increment">50</property>
+    <property name="page_increment">1000</property>
   </object>
   <object class="GtkAdjustment" id="adjustment_interval_cpu">
     <property name="lower">50</property>
@@ -3445,7 +3445,6 @@
     <property name="icon_name">preferences-system</property>
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="skip_pager_hint">True</property>
     <property name="urgency_hint">True</property>
     <signal name="delete-event" handler="gtk_widget_hide_on_delete" swapped="no"/>
     <child internal-child="vbox">
@@ -4008,6 +4007,7 @@
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
                         <property name="adjustment">adjustment_ceil_net</property>
+                        <property name="numeric">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -4596,6 +4596,7 @@
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
                         <property name="adjustment">adjustment_ceil_disk</property>
+                        <property name="numeric">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -4839,6 +4840,7 @@
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
                         <property name="adjustment">adjustment_ceil_temp</property>
+                        <property name="numeric">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -5082,6 +5084,7 @@
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
                         <property name="adjustment">adjustment_ceil_parm</property>
+                        <property name="numeric">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -5173,10 +5176,6 @@
                       <object class="GtkImage" id="image_info_parm_command">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
-
-%n - graph number, from 1 (CPU) to 7 (temperature)
-%x - short name of the graph - three to four letters</property>
                         <property name="icon_name">dialog-information</property>
                       </object>
                       <packing>

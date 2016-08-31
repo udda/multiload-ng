@@ -40,6 +40,9 @@
     <key name="graph-cpu-dblclick-cmdline" type="s">
       <default>''</default>
     </key>
+    <key name="graph-cpu-max" type="i">
+      <default>500</default>
+    </key>
 
 
     <key name="graph-mem-visible" type="b">
@@ -65,6 +68,9 @@
     </key>
     <key name="graph-mem-dblclick-cmdline" type="s">
       <default>''</default>
+    </key>
+    <key name="graph-mem-max" type="i">
+      <default>500</default>
     </key>
 
 
@@ -92,6 +98,9 @@
     <key name="graph-net-dblclick-cmdline" type="s">
       <default>''</default>
     </key>
+    <key name="graph-net-max" type="i">
+      <default>500</default>
+    </key>
 
 
     <key name="graph-swap-visible" type="b">
@@ -117,6 +126,9 @@
     </key>
     <key name="graph-swap-dblclick-cmdline" type="s">
       <default>''</default>
+    </key>
+    <key name="graph-swap-max" type="i">
+      <default>500</default>
     </key>
 
 
@@ -144,6 +156,9 @@
     <key name="graph-load-dblclick-cmdline" type="s">
       <default>''</default>
     </key>
+    <key name="graph-load-max" type="i">
+      <default>500</default>
+    </key>
 
 
     <key name="graph-disk-visible" type="b">
@@ -169,6 +184,9 @@
     </key>
     <key name="graph-disk-dblclick-cmdline" type="s">
       <default>''</default>
+    </key>
+    <key name="graph-disk-max" type="i">
+      <default>500</default>
     </key>
 
 
@@ -196,6 +214,9 @@
     <key name="graph-temp-dblclick-cmdline" type="s">
       <default>''</default>
     </key>
+    <key name="graph-temp-max" type="i">
+      <default>500</default>
+    </key>
 
 
     <key name="graph-parm-visible" type="b">
@@ -221,6 +242,9 @@
     </key>
     <key name="graph-parm-dblclick-cmdline" type="s">
       <default>''</default>
+    </key>
+    <key name="graph-parm-max" type="i">
+      <default>500</default>
     </key>
 
     <key name="graph-parm-command" type="s">

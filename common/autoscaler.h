@@ -30,29 +30,31 @@
 
 G_BEGIN_DECLS
 
-/* Min value of the the maximum. Note that the autoscaler
- * is used to represent transfer rates (byte/sec) */
-#define AUTOSCALER_FLOOR 500
+/* Min value of the the maximum */
+#define AUTOSCALER_FLOOR 40
 
 typedef struct {
 	gboolean enable;
-	guint64 max;
-	guint64 count;
+	int max;
+	guint count;
 	time_t last_update;
 	gdouble sum;
 	gdouble last_average;
 } AutoScaler;
 
 
-G_GNUC_INTERNAL guint64
-autoscaler_get_max(AutoScaler *s, LoadGraph *g, guint64 current);
+G_GNUC_INTERNAL int
+autoscaler_get_max(AutoScaler *s, LoadGraph *g, int current);
 G_GNUC_INTERNAL void
-autoscaler_set_max(AutoScaler *s, guint64 max);
+autoscaler_set_max(AutoScaler *s, int max);
 
 G_GNUC_INTERNAL void
 autoscaler_set_enabled(AutoScaler *s, gboolean enable);
 G_GNUC_INTERNAL gboolean
 autoscaler_get_enabled(AutoScaler *s);
+
+G_GNUC_INTERNAL AutoScaler*
+multiload_get_scaler (MultiloadPlugin *ma, guint graph_id);
 
 G_END_DECLS
 

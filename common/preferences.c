@@ -154,6 +154,28 @@ static const gchar* spin_border_names[GRAPH_MAX] = {
 	"sb_border_parm"
 };
 
+static const gchar* spin_ceil_names[GRAPH_MAX] = {
+	"",
+	"",
+	"sb_ceil_net",
+	"",
+	"",
+	"sb_ceil_disk",
+	"sb_ceil_temp",
+	"sb_ceil_parm"
+};
+
+static const gchar* cb_autoscaler_enable_names[GRAPH_MAX] = {
+	"",
+	"",
+	"cb_autoscaler_net",
+	"",
+	"",
+	"cb_autoscaler_disk",
+	"cb_autoscaler_temp",
+	"cb_autoscaler_parm"
+};
+
 static const gchar* color_button_names[GRAPH_MAX][MAX_COLORS] = {
 	{
 		"cb_color_cpu1",
@@ -266,6 +288,12 @@ multiload_preferences_update_dynamic_widgets(MultiloadPlugin *ma)
 		gboolean cmdline_enabled = (gc->dblclick_policy == DBLCLICK_POLICY_CMDLINE);
 		gtk_widget_set_sensitive (GTK_WIDGET(OB(dblclick_command_names[i])), cmdline_enabled);
 		gtk_widget_set_visible (GTK_WIDGET(OB(info_dblclick_command_names[i])), cmdline_enabled);
+
+		// autoscaler
+		if (strcmp(cb_autoscaler_enable_names[i], "") != 0) {
+			gtk_widget_set_sensitive(GTK_WIDGET(OB(spin_ceil_names[i])),
+					!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(OB(cb_autoscaler_enable_names[i]))));
+		}
 	}
 
 	// padding warning
@@ -655,6 +683,37 @@ multiload_preferences_parm_command_test_clicked_cb (GtkWidget *button, Multiload
 
 }
 
+static void
+multiload_preferences_autoscaler_toggled_cb (GtkToggleButton *toggle, MultiloadPlugin *ma)
+{
+	guint i = multiload_preferences_get_graph_index(GTK_WIDGET(toggle), cb_autoscaler_enable_names);
+	AutoScaler *scaler = multiload_get_scaler(ma, i);
+	if (scaler == NULL)
+		return;
+
+	gboolean enable = gtk_toggle_button_get_active(toggle);
+	autoscaler_set_enabled(scaler, enable);
+
+	if (!enable) {
+		// "Automatic" disabled; copy last automatic max to spin button
+		gtk_spin_button_set_value(GTK_SPIN_BUTTON(OB(spin_ceil_names[i])),
+			autoscaler_get_max(scaler, ma->graphs[i], 0));
+	}
+
+	multiload_preferences_update_dynamic_widgets(ma);
+}
+
+static void
+multiload_preferences_ceil_changed_cb (GtkSpinButton *spin, MultiloadPlugin *ma)
+{
+	guint i = multiload_preferences_get_graph_index(GTK_WIDGET(spin), spin_ceil_names);
+	AutoScaler *scaler = multiload_get_scaler(ma, i);
+	if (scaler == NULL)
+		return;
+
+	int value = gtk_spin_button_get_value_as_int(spin);
+	autoscaler_set_max(scaler, value);
+}
 
 static void
 multiload_preferences_destroy ()
@@ -698,6 +757,11 @@ multiload_preferences_connect_signals (MultiloadPlugin *ma)
 		g_signal_connect(G_OBJECT(OB(dblclick_command_names[i])), "changed", G_CALLBACK(multiload_preferences_dblclick_command_changed_cb), ma);
 		g_signal_connect(G_OBJECT(OB(spin_border_names[i])), "value-changed", G_CALLBACK(multiload_preferences_border_changed_cb), ma);
 
+		if (strcmp(cb_autoscaler_enable_names[i], "") != 0) {
+			g_signal_connect(G_OBJECT(OB(cb_autoscaler_enable_names[i])), "toggled", G_CALLBACK(multiload_preferences_autoscaler_toggled_cb), ma);
+			g_signal_connect(G_OBJECT(OB(spin_ceil_names[i])), "value-changed", G_CALLBACK(multiload_preferences_ceil_changed_cb), ma);
+		}
+
 		for (j=0; j < G_N_ELEMENTS(color_button_names[i]); j++) {
 			if (NULL == color_button_names[i][j])
 				break;
@@ -736,6 +800,7 @@ void
 multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 {
 	guint i;
+	gint tmp;
 	gboolean color_scheme_is_set = FALSE;
 
 	multiload_preferences_init();
@@ -750,6 +815,13 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 		gtk_combo_box_set_active (GTK_COMBO_BOX(OB(dblclick_policy_names[i])), ma->graph_config[i].dblclick_policy);
 		gtk_entry_set_text (GTK_ENTRY(OB(dblclick_command_names[i])), ma->graph_config[i].dblclick_cmdline);
 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(OB(spin_border_names[i])), ma->graph_config[i].border_width*1.00);
+
+		//autoscaler
+		if (strcmp(cb_autoscaler_enable_names[i], "") != 0) {
+			tmp = multiload_get_max_value(ma, i);
+			gtk_spin_button_set_value(GTK_SPIN_BUTTON(OB(spin_ceil_names[i])), tmp*1.00);
+			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(OB(cb_autoscaler_enable_names[i])), (tmp<0));
+		}
 	}
 	gtk_range_set_value(GTK_RANGE(OB("hscale_spacing")), (gdouble)ma->spacing);
 	gtk_range_set_value(GTK_RANGE(OB("hscale_padding")), (gdouble)ma->padding);

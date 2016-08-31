@@ -25,16 +25,16 @@
 #include <glib.h>
 
 #include "autoscaler.h"
+#include "graph-data.h"
 #include "multiload-config.h"
 
 
-guint64
-autoscaler_get_max(AutoScaler *s, LoadGraph *g, guint64 current)
+int
+autoscaler_get_max(AutoScaler *s, LoadGraph *g, int current)
 {
 	time_t now;
-
-	//TEMPORARY: autoscaler always enabled
-	s->enable = TRUE;
+	if (current < 0)
+		current = 0;
 
 	if (s->enable) {
 		s->sum += current;
@@ -66,7 +66,7 @@ autoscaler_get_max(AutoScaler *s, LoadGraph *g, guint64 current)
 }
 
 void
-autoscaler_set_max(AutoScaler *s, guint64 max)
+autoscaler_set_max(AutoScaler *s, int max)
 {
 	if (s->enable == FALSE)
 		s->max = max;
@@ -82,4 +82,32 @@ gboolean
 autoscaler_get_enabled(AutoScaler *s)
 {
 	return s->enable;
+}
+
+
+AutoScaler*
+multiload_get_scaler (MultiloadPlugin *ma, guint graph_id)
+{
+	gpointer xd = ma->extra_data[graph_id];
+
+	switch(graph_id) {
+		case GRAPH_CPULOAD:
+		case GRAPH_MEMLOAD:
+		case GRAPH_SWAPLOAD:
+			// no autoscaler
+			return NULL;
+		case GRAPH_NETLOAD:
+			return &((NetData*)xd)->scaler;
+		case GRAPH_LOADAVG:
+//			return &((LoadData*)xd)->scaler;
+			return NULL;
+		case GRAPH_DISKLOAD:
+			return &((DiskData*)xd)->scaler;
+		case GRAPH_TEMPERATURE:
+			return &((TemperatureData*)xd)->scaler;
+		case GRAPH_PARAMETRIC:
+			return &((ParametricData*)xd)->scaler;
+		default:
+			g_assert_not_reached();
+	}
 }

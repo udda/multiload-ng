@@ -168,6 +168,32 @@ multiload_set_border_width (MultiloadPlugin *ma, guint graph_id, gint val)
 }
 
 void
+multiload_set_max_value (MultiloadPlugin *ma, guint graph_id, int val)
+{
+	AutoScaler *scaler = multiload_get_scaler(ma, graph_id);
+	if (scaler == NULL)
+		return;
+
+	gboolean enable_autoscaler = (val<0);
+
+	autoscaler_set_enabled(scaler, enable_autoscaler);
+	autoscaler_set_max(scaler, val);
+}
+
+int
+multiload_get_max_value(MultiloadPlugin *ma, guint graph_id)
+{
+	AutoScaler *scaler = multiload_get_scaler(ma, graph_id);
+	if (scaler == NULL)
+		return -1;
+
+	if (autoscaler_get_enabled(scaler))
+		return -1;
+	else
+		return autoscaler_get_max(scaler, NULL, 0);
+}
+
+void
 multiload_refresh_colors (MultiloadPlugin *ma, guint graph_id)
 {
 	if (graph_id < GRAPH_MAX)
@@ -229,6 +255,13 @@ void multiload_defaults(MultiloadPlugin *ma)
 		ma->graph_config[i].tooltip_style = DEFAULT_TOOLTIP_STYLE;
 		ma->graph_config[i].dblclick_policy = DEFAULT_DBLCLICK_POLICY;
 		multiload_colors_default(ma, i);
+
+		if (i == GRAPH_LOADAVG)
+			multiload_set_max_value(ma, i, DEFAULT_MAX_VALUE_LOAD);
+		else if (i == GRAPH_TEMPERATURE)
+			multiload_set_max_value(ma, i, DEFAULT_MAX_VALUE_TEMP);
+		else
+			multiload_set_max_value(ma, i, DEFAULT_MAX_VALUE);
 	}
 }
 
