@@ -6,8 +6,8 @@
 msgid   ""
 msgstr  "Project-Id-Version: multiload-ng\n"
         "Report-Msgid-Bugs-To: Alexander <sfslinux@gmail.com>\n"
-        "POT-Creation-Date: 2016-08-30 16:19+0200\n"
-        "PO-Revision-Date: 2016-08-30 16:19+0200\n"
+        "POT-Creation-Date: 2016-08-31 14:07+0200\n"
+        "PO-Revision-Date: 2016-08-31 14:07+0200\n"
         "Last-Translator: Alexander <sfslinux@gmail.com>\n"
         "Language-Team: puppyrus.org\n"
         "Language: ru\n"
@@ -123,7 +123,7 @@ msgid   "%d milliseconds"
 msgstr  "%d миллисекунд"
 
 msgid   "Import color scheme"
-msgstr  ""
+msgstr  "Загрузить цветовую схему"
 
 msgid   "_Cancel"
 msgstr  "_Отмена"
@@ -132,20 +132,21 @@ msgid   "_Open"
 msgstr  "_Открыть"
 
 msgid   "Color scheme format is incorrect. Unable to import."
-msgstr  ""
+msgstr  "Неправильный формат цветовой схемы. Не загружается."
 
 msgid   "Color scheme was created by an incompatible version of Multiload-ng. "
         "Unable to import."
-msgstr  ""
+msgstr  "Цветовая схема создана в несовместимой версии Multiload-ng. "
+        "Не загружается."
 
 msgid   "Export color scheme"
-msgstr  ""
+msgstr  "Сохранить цветовую схему"
 
 msgid   "_Save"
 msgstr  "_Сохранить"
 
 msgid   "Error exporting color scheme."
-msgstr  ""
+msgstr  "Ошибка при экспорте цветовой схемы"
 
 msgid   "(Custom)"
 msgstr  "(Пользовательские)"
@@ -239,7 +240,7 @@ msgstr  "При больших отступах, графики не будут 
 
 msgid   "Selected orientation is not the same of the panel. Graphs may be "
         "very small."
-msgstr  "Графики будут очень маленькими"
+msgstr  "При такой ориентации графики будут очень маленькими."
 
 msgid   "Graphs"
 msgstr  "Графики"
@@ -308,10 +309,10 @@ msgid   "Write"
 msgstr  "Запись"
 
 msgid   "Value"
-msgstr  "величина"
+msgstr  "°C"
 
 msgid   "Colors"
-msgstr  "Запись"
+msgstr  "Цвета"
 
 msgid   "Simple"
 msgstr  "Простой"
@@ -350,41 +351,44 @@ msgstr  "Цвет"
 #, c-format
 msgid   "Command: %s\n"
         "ERROR: %s"
-msgstr  ""
+msgstr  "Команда: %s\n"
+        "ОШИБКА: %s"
 
 #, c-format
 msgid   "Command: %s\n"
         "Result: %lu\n"
         "Message: %s"
-msgstr  ""
+msgstr  "Команда: %s\n"
+        "Результат: %lu\n"
+        "Сообщение: %s"
 
 msgid   "Parametric"
-msgstr  ""
+msgstr  "Параметр"
 
 msgid   "Command line is empty."
-msgstr  ""
+msgstr  "Командная строка пуста."
 
 msgid   "Unable to execute command."
-msgstr  ""
+msgstr  "Невозможно выполнить команду."
 
 #, c-format
 msgid   "Command has exited with status code %d."
-msgstr  ""
+msgstr  "Команда выполнена с кодом завершения %d."
 
 msgid   "Command did not return a valid number."
-msgstr  ""
+msgstr  "Команда не выдала годное числою"
 
 msgid   "Command line is valid."
-msgstr  ""
+msgstr  "Подходящая команда"
 
 msgid   "Result"
-msgstr  ""
+msgstr  "Результат"
 
 msgid   "Double click command:"
-msgstr  ""
+msgstr  "Каманда при двойном нажатии"
 
 msgid   "Graph command:"
-msgstr  ""
+msgstr  "Команда графика"
 
 msgid   "Test"
-msgstr  ""
+msgstr  "Тест"
