@@ -78,11 +78,10 @@ multiload_ui_read (MultiloadPlugin *ma)
 
 #ifdef MULTILOAD_EXPERIMENTAL
 		/* Parametric graph */
-/*		ParametricData* xd = (ParametricData*)ma->graphs[GRAPH_PARAMETRIC]->extra_data;
+		ParametricData* xd = (ParametricData*)ma->extra_data[GRAPH_PARAMETRIC];
 		key = g_strdup_printf("graph-%s-command", graph_types[GRAPH_PARAMETRIC].name);
 		multiload_ps_settings_get_string (settings, key, xd->command, sizeof(xd->command));
 		g_free (key);
-*/
 #endif
 
 		for ( i = 0; i < GRAPH_MAX; i++ ) {
@@ -158,11 +157,10 @@ multiload_ui_save (MultiloadPlugin *ma)
 
 #ifdef MULTILOAD_EXPERIMENTAL
 		/* Parametric graph */
-/*		ParametricData* xd = (ParametricData*)ma->graphs[GRAPH_PARAMETRIC]->extra_data;
+		ParametricData* xd = (ParametricData*)ma->extra_data[GRAPH_PARAMETRIC];
 		key = g_strdup_printf("graph-%s-command", graph_types[GRAPH_PARAMETRIC].name);
 		multiload_ps_settings_set_string (settings, key, xd->command);
 		g_free (key);
-*/
 #endif
 
 		for ( i = 0; i < GRAPH_MAX; i++ ) {

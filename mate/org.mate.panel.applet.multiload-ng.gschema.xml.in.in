@@ -223,5 +223,9 @@
       <default>''</default>
     </key>
 
+    <key name="graph-parm-command" type="s">
+      <default>''</default>
+    </key>
+
   </schema>
 </schemalist>
