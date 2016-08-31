@@ -35,16 +35,24 @@ G_BEGIN_DECLS
 #define AUTOSCALER_FLOOR 500
 
 typedef struct {
-	unsigned max;
-	unsigned count;
+	gboolean enable;
+	guint64 max;
+	guint64 count;
 	time_t last_update;
-	float sum;
-	float last_average;
+	gdouble sum;
+	gdouble last_average;
 } AutoScaler;
 
 
-G_GNUC_INTERNAL unsigned
-autoscaler_get_max(AutoScaler *s, LoadGraph *g, unsigned current);
+G_GNUC_INTERNAL guint64
+autoscaler_get_max(AutoScaler *s, LoadGraph *g, guint64 current);
+G_GNUC_INTERNAL void
+autoscaler_set_max(AutoScaler *s, guint64 max);
+
+G_GNUC_INTERNAL void
+autoscaler_set_enabled(AutoScaler *s, gboolean enable);
+G_GNUC_INTERNAL gboolean
+autoscaler_get_enabled(AutoScaler *s);
 
 G_END_DECLS
 
