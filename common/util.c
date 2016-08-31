@@ -36,30 +36,48 @@ calculate_speed(guint64 delta, guint period_ms)
 }
 
 gchar *
-str_replace (const gchar *string, const gchar *needle, const gchar *replacement)
+str_replace(const char *string , const char *needle , const char *replacement)
 {
-	gchar *tok = NULL;
-	gchar *newstr = NULL;
-	gchar *oldstr = NULL;
+	char  *p = NULL;
+	const char *oldstr = NULL;
+	char *newstr = NULL;
+	size_t c = 0;
+
+	size_t s_string = strlen(string);
+	size_t s_needle = strlen(needle);
+	size_t s_replacement = strlen(replacement);
 
 	if (needle == NULL || replacement == NULL)
-		return g_strdup (string);
+		return g_strdup(string);
 
-	newstr = g_strdup (string);
-	while ( (tok = strstr(newstr, needle)) != NULL ) {
-		oldstr = newstr;
-		newstr = malloc ( strlen(oldstr) - strlen(needle) + strlen(replacement) + 1 );
-		if ( newstr == NULL ) {
-			g_free (oldstr);
-			return NULL;
-		}
+	// count how many occurences
+	for(p = strstr(string, needle); p != NULL; p = strstr(p+s_needle, needle))
+		c++;
 
-		memcpy ( newstr, oldstr, tok - oldstr );
-		memcpy ( newstr + (tok-oldstr), replacement, strlen(replacement) );
-		memcpy ( newstr + (tok-oldstr) + strlen(replacement), tok + strlen(needle), strlen(oldstr) - strlen(needle) - (tok-oldstr) );
-		memset ( newstr + strlen(oldstr) - strlen(needle) + strlen(replacement) , 0, 1 );
-		g_free (oldstr);
+	if (c == 0)
+		return g_strdup(string);
+
+	// final size
+	c = s_string + (s_replacement-s_needle)*c;
+
+	// new string with new size
+	newstr = g_malloc0( c );
+
+	oldstr = string;
+	for(p = strstr(string, needle); p != NULL; p = strstr(p+s_needle, needle)) {
+		// move ahead and copy some text from original string, from a certain position
+		strncpy(newstr + strlen(newstr) , oldstr , p - oldstr);
+
+		// move ahead and copy the replacement text
+		strcpy(newstr + strlen(newstr) , replacement);
+
+		// the new start position after this search match
+		oldstr = p + s_needle;
 	}
+
+	// copy the part after the last search match
+	strcpy(newstr + strlen(newstr) , oldstr);
+
 	return newstr;
 }
 
