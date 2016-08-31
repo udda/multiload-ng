@@ -68,14 +68,11 @@ void multiload_config_init()
 		{	"temp",	_("Temperature"),	4,
 			(GraphGetDataFunc)			multiload_graph_temp_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_temp_tooltip_update
-		}
-#ifdef MULTILOAD_EXPERIMENTAL
-		,
+		},
 		{	"parm",	_("Parametric"),	4,
 			(GraphGetDataFunc)			multiload_graph_parm_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_parm_tooltip_update
 		}
-#endif
 	};
 
 	memcpy(&graph_types, &temp, sizeof(graph_types));

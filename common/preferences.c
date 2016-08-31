@@ -35,10 +35,8 @@
 #include "util.h"
 #include "ui.h"
 
-#ifdef MULTILOAD_EXPERIMENTAL
 #include <errno.h>
 #include "graph-data.h"
-#endif
 
 static GtkBuilder *builder = NULL;
 
@@ -53,10 +51,8 @@ static const gchar* checkbox_visibility_names[GRAPH_MAX] = {
 	"cb_visible_swap",
 	"cb_visible_load",
 	"cb_visible_disk",
-	"cb_visible_temp"
-#ifdef MULTILOAD_EXPERIMENTAL
-	,"cb_visible_parm"
-#endif
+	"cb_visible_temp",
+	"cb_visible_parm"
 };
 
 static const gchar* button_advanced_names[GRAPH_MAX] = {
@@ -66,10 +62,8 @@ static const gchar* button_advanced_names[GRAPH_MAX] = {
 	"button_advanced_swap",
 	"button_advanced_load",
 	"button_advanced_disk",
-	"button_advanced_temp"
-#ifdef MULTILOAD_EXPERIMENTAL
-	,"button_advanced_parm"
-#endif
+	"button_advanced_temp",
+	"button_advanced_parm"
 };
 
 static const gchar* spinbutton_size_names[GRAPH_MAX] = {
@@ -79,10 +73,8 @@ static const gchar* spinbutton_size_names[GRAPH_MAX] = {
 	"sb_size_swap",
 	"sb_size_load",
 	"sb_size_disk",
-	"sb_size_temp"
-#ifdef MULTILOAD_EXPERIMENTAL
-	,"sb_size_parm"
-#endif
+	"sb_size_temp",
+	"sb_size_parm"
 };
 
 static const gchar* spinbutton_interval_names[GRAPH_MAX] = {
@@ -92,10 +84,8 @@ static const gchar* spinbutton_interval_names[GRAPH_MAX] = {
 	"sb_interval_swap",
 	"sb_interval_load",
 	"sb_interval_disk",
-	"sb_interval_temp"
-#ifdef MULTILOAD_EXPERIMENTAL
-	,"sb_interval_parm"
-#endif
+	"sb_interval_temp",
+	"sb_interval_parm"
 };
 
 static const gchar* label_timespan_names[GRAPH_MAX] = {
@@ -105,10 +95,8 @@ static const gchar* label_timespan_names[GRAPH_MAX] = {
 	"label_timespan_swap",
 	"label_timespan_load",
 	"label_timespan_disk",
-	"label_timespan_temp"
-#ifdef MULTILOAD_EXPERIMENTAL
-	,"label_timespan_parm"
-#endif
+	"label_timespan_temp",
+	"label_timespan_parm"
 };
 
 static const gchar* tooltip_style_names[GRAPH_MAX] = {
@@ -118,10 +106,8 @@ static const gchar* tooltip_style_names[GRAPH_MAX] = {
 	"combo_tooltip_swap",
 	"combo_tooltip_load",
 	"combo_tooltip_disk",
-	"combo_tooltip_temp"
-#ifdef MULTILOAD_EXPERIMENTAL
-	,"combo_tooltip_parm"
-#endif
+	"combo_tooltip_temp",
+	"combo_tooltip_parm"
 };
 
 static const gchar* dblclick_policy_names[GRAPH_MAX] = {
@@ -131,10 +117,8 @@ static const gchar* dblclick_policy_names[GRAPH_MAX] = {
 	"combo_dblclick_swap",
 	"combo_dblclick_load",
 	"combo_dblclick_disk",
-	"combo_dblclick_temp"
-#ifdef MULTILOAD_EXPERIMENTAL
-	,"combo_dblclick_parm"
-#endif
+	"combo_dblclick_temp",
+	"combo_dblclick_parm"
 };
 
 static const gchar* dblclick_command_names[GRAPH_MAX] = {
@@ -144,10 +128,8 @@ static const gchar* dblclick_command_names[GRAPH_MAX] = {
 	"entry_dblclick_command_swap",
 	"entry_dblclick_command_load",
 	"entry_dblclick_command_disk",
-	"entry_dblclick_command_temp"
-#ifdef MULTILOAD_EXPERIMENTAL
-	,"entry_dblclick_command_parm"
-#endif
+	"entry_dblclick_command_temp",
+	"entry_dblclick_command_parm"
 };
 
 static const gchar* info_dblclick_command_names[GRAPH_MAX] = {
@@ -157,10 +139,8 @@ static const gchar* info_dblclick_command_names[GRAPH_MAX] = {
 	"image_info_dblclick_command_swap",
 	"image_info_dblclick_command_load",
 	"image_info_dblclick_command_disk",
-	"image_info_dblclick_command_temp"
-#ifdef MULTILOAD_EXPERIMENTAL
-	,"image_info_dblclick_command_parm"
-#endif
+	"image_info_dblclick_command_temp",
+	"image_info_dblclick_command_parm"
 };
 
 static const gchar* spin_border_names[GRAPH_MAX] = {
@@ -170,10 +150,8 @@ static const gchar* spin_border_names[GRAPH_MAX] = {
 	"sb_border_swap",
 	"sb_border_load",
 	"sb_border_disk",
-	"sb_border_temp"
-#ifdef MULTILOAD_EXPERIMENTAL
-	,"sb_border_parm"
-#endif
+	"sb_border_temp",
+	"sb_border_parm"
 };
 
 static const gchar* color_button_names[GRAPH_MAX][MAX_COLORS] = {
@@ -226,14 +204,12 @@ static const gchar* color_button_names[GRAPH_MAX][MAX_COLORS] = {
 		"cb_color_temp_bg1",
 		"cb_color_temp_bg2",
 		NULL
-#ifdef MULTILOAD_EXPERIMENTAL
 	}, {
 		"cb_color_parm1",
 		"cb_color_parm_border",
 		"cb_color_parm_bg1",
 		"cb_color_parm_bg2",
 		NULL
-#endif
 	}
 };
 
@@ -632,7 +608,6 @@ multiload_preferences_color_scheme_selected_cb (GtkTreeSelection *sel, Multiload
 	g_list_free (rows);
 }
 
-#ifdef MULTILOAD_EXPERIMENTAL
 static void
 multiload_preferences_parm_command_changed_cb (GtkEntry *entry, MultiloadPlugin *ma)
 {
@@ -679,7 +654,7 @@ multiload_preferences_parm_command_test_clicked_cb (GtkWidget *button, Multiload
 	}
 
 }
-#endif
+
 
 static void
 multiload_preferences_destroy ()
@@ -735,11 +710,9 @@ multiload_preferences_connect_signals (MultiloadPlugin *ma)
 	g_signal_connect(G_OBJECT(OB("combo_orientation")), "changed", G_CALLBACK(multiload_preferences_orientation_changed_cb), ma);
 	g_signal_connect(G_OBJECT(OB("tb_colorscheme_import")), "clicked", G_CALLBACK(multiload_preferences_colorscheme_import_clicked_cb), ma);
 	g_signal_connect(G_OBJECT(OB("tb_colorscheme_export")), "clicked", G_CALLBACK(multiload_preferences_colorscheme_export_clicked_cb), ma);
-
-#ifdef MULTILOAD_EXPERIMENTAL
 	g_signal_connect(G_OBJECT(OB("entry_parm_command")), "changed", G_CALLBACK(multiload_preferences_parm_command_changed_cb), ma);
 	g_signal_connect(G_OBJECT(OB("button_parm_command_test")), "clicked", G_CALLBACK(multiload_preferences_parm_command_test_clicked_cb), ma);
-#endif
+
 	GtkTreeSelection *sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(OB("treeview_colors")));
 	g_signal_connect(G_OBJECT(sel), "changed", G_CALLBACK(multiload_preferences_color_scheme_selected_cb), ma);
 
@@ -782,10 +755,7 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_range_set_value(GTK_RANGE(OB("hscale_padding")), (gdouble)ma->padding);
 	gtk_combo_box_set_active (GTK_COMBO_BOX(OB("combo_orientation")), ma->orientation_policy);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(OB("cb_fill_between")), ma->fill_between);
-
-#ifdef MULTILOAD_EXPERIMENTAL
 	gtk_entry_set_text(GTK_ENTRY(OB("entry_parm_command")), ((ParametricData*)ma->extra_data[GRAPH_PARAMETRIC])->command);
-#endif
 
 	multiload_preferences_update_color_buttons(ma);
 
@@ -818,9 +788,6 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 
 	multiload_preferences_connect_signals(ma);
 
-#ifndef MULTILOAD_EXPERIMENTAL
-	gtk_widget_hide(GTK_WIDGET(OB("table_parm_command")));
-#endif
 	g_debug("[preferences] Initialized");
 }
 

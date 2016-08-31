@@ -36,11 +36,7 @@ G_BEGIN_DECLS
 #define HEX_TO_RGBA(r, g, b, a) {(gdouble)(0x##r)/255.0, (gdouble)(0x##g)/255.0, (gdouble)(0x##b)/255.0, (gdouble)(0x##a)/255.0}
 
 // Format version. Increment this every time color scheme format changes.
-#ifdef MULTILOAD_EXPERIMENTAL
 #define MULTILOAD_COLOR_SCHEME_VERSION 2
-#else
-#define MULTILOAD_COLOR_SCHEME_VERSION 1
-#endif
 
 // Header of the color scheme file. This must never change.
 #define MULTILOAD_COLOR_SCHEME_HEADER_SIZE 12

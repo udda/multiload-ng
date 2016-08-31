@@ -85,7 +85,6 @@ typedef struct _TemperatureData {
 	AutoScaler scaler;
 } TemperatureData;
 
-#ifdef MULTILOAD_EXPERIMENTAL
 typedef struct _ParametricData {
 	gchar command[512];
 	gchar message[512];
@@ -93,7 +92,6 @@ typedef struct _ParametricData {
 	guint64 result;
 	AutoScaler scaler;
 } ParametricData;
-#endif
 
 
 G_GNUC_INTERNAL void
@@ -131,12 +129,10 @@ multiload_graph_temp_get_data (int Maximum, int data [2], LoadGraph *g, Temperat
 G_GNUC_INTERNAL void
 multiload_graph_temp_tooltip_update (char **title, char **text, LoadGraph *g, TemperatureData *xd);
 
-#ifdef MULTILOAD_EXPERIMENTAL
 G_GNUC_INTERNAL void
 multiload_graph_parm_get_data (int Maximum, int data[1], LoadGraph *g, ParametricData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_parm_tooltip_update (char **title, char **text, LoadGraph *g, ParametricData *xd);
-#endif
 
 G_END_DECLS
 

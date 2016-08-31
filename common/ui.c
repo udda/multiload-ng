@@ -24,15 +24,12 @@
 
 #include "common/about-data.h"
 #include "common/colors.h"
+#include "common/graph-data.h"
 #include "common/multiload.h"
 #include "common/multiload-config.h"
 #include "common/multiload-colors.h"
 #include "common/preferences.h"
 #include "common/util.h"
-
-#ifdef MULTILOAD_EXPERIMENTAL
-#include "common/graph-data.h"
-#endif
 
 
 // ps = Panel Specific - implement these for every panel
@@ -76,13 +73,11 @@ multiload_ui_read (MultiloadPlugin *ma)
 		if (color_scheme_valid)
 			multiload_color_scheme_apply(scheme, ma);
 
-#ifdef MULTILOAD_EXPERIMENTAL
 		/* Parametric graph */
 		ParametricData* xd = (ParametricData*)ma->extra_data[GRAPH_PARAMETRIC];
 		key = g_strdup_printf("graph-%s-command", graph_types[GRAPH_PARAMETRIC].name);
 		multiload_ps_settings_get_string (settings, key, xd->command, sizeof(xd->command));
 		g_free (key);
-#endif
 
 		for ( i = 0; i < GRAPH_MAX; i++ ) {
 			/* Visibility */
@@ -155,13 +150,11 @@ multiload_ui_save (MultiloadPlugin *ma)
 		multiload_ps_settings_set_boolean	(settings, "fill-between",		ma->fill_between);
 		multiload_ps_settings_set_string	(settings, "color-scheme",		ma->color_scheme);
 
-#ifdef MULTILOAD_EXPERIMENTAL
 		/* Parametric graph */
 		ParametricData* xd = (ParametricData*)ma->extra_data[GRAPH_PARAMETRIC];
 		key = g_strdup_printf("graph-%s-command", graph_types[GRAPH_PARAMETRIC].name);
 		multiload_ps_settings_set_string (settings, key, xd->command);
 		g_free (key);
-#endif
 
 		for ( i = 0; i < GRAPH_MAX; i++ ) {
 			/* Visibility */

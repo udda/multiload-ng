@@ -45,6 +45,7 @@ multiload_tooltip_update (LoadGraph *g)
 {
 	gchar *title = NULL;
 	gchar *text = NULL;
+	gchar *text_sanitized = NULL;
 	gchar *tooltip_markup;
 
 	g_assert_nonnull(g);
@@ -57,15 +58,18 @@ multiload_tooltip_update (LoadGraph *g)
 	if (title == NULL)
 		title = g_strdup(graph_types[g->id].label);
 
+	text_sanitized = str_replace(text, "&", "&amp;");
+
 	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
-		tooltip_markup = g_strdup_printf("<span weight='bold' size='larger'>%s</span>\n%s", title, text);
+		tooltip_markup = g_strdup_printf("<span weight='bold' size='larger'>%s</span>\n%s", title, text_sanitized);
 	} else {
-		tooltip_markup = g_strdup_printf("%s: %s", title, text);
+		tooltip_markup = g_strdup_printf("%s: %s", title, text_sanitized);
 	}
 
 	gtk_widget_set_tooltip_markup(g->disp, tooltip_markup);
 	g_free(title);
 	g_free(text);
+	g_free(text_sanitized);
 	g_free(tooltip_markup);
 }
 
