@@ -32,7 +32,7 @@
 
 
 void
-multiload_graph_temp_get_data (int Maximum, int data[1], LoadGraph *g, TemperatureData *xd)
+multiload_graph_temp_get_data (int Maximum, int data[2], LoadGraph *g, TemperatureData *xd)
 {
 	guint temp = 0;
 	guint i, j, t;
@@ -49,7 +49,7 @@ multiload_graph_temp_get_data (int Maximum, int data[1], LoadGraph *g, Temperatu
 	static guint *maxtemps = NULL;
 
 	// handle errors by providing empty data if something goes wrong
-	memset(data, 0, 1 * sizeof data[0]);
+	memset(data, 0, 2 * sizeof data[0]);
 
 	if (G_UNLIKELY(first_call)) {
 		first_call = FALSE;
@@ -124,11 +124,14 @@ multiload_graph_temp_get_data (int Maximum, int data[1], LoadGraph *g, Temperatu
 		}
 	}
 
-	if (maxtemps[j] > 0 && maxtemps[j] > temp)
-		data[0] = (float)Maximum * temp / (float)maxtemps[j];
-	else {
-		int max = autoscaler_get_max(&xd->scaler, g, temp);
+	int max = autoscaler_get_max(&xd->scaler, g, temp);
+
+	if (maxtemps[j] > 0 && maxtemps[j] < temp) {
+		data[0] = rint (Maximum * (float)(maxtemps[j]) / max);
+		data[1] = rint (Maximum * (float)(temp-maxtemps[j]) / max);
+	} else {
 		data[0] = rint (Maximum * (float)temp / max);
+		data[1] = 0;
 	}
 
 	xd->value = temp;

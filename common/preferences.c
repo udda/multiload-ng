@@ -222,6 +222,7 @@ static const gchar* color_button_names[GRAPH_MAX][MAX_COLORS] = {
 		NULL
 	}, {
 		"cb_color_temp1",
+		"cb_color_temp2",
 		"cb_color_temp_border",
 		"cb_color_temp_bg1",
 		"cb_color_temp_bg2",
