@@ -31,7 +31,7 @@
 G_BEGIN_DECLS
 
 /* Min value of the the maximum */
-#define AUTOSCALER_FLOOR 40
+#define AUTOSCALER_FLOOR 10
 
 typedef struct {
 	gboolean enable;
