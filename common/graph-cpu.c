@@ -22,17 +22,28 @@
 #include <config.h>
 
 #include <math.h>
-#include <glibtop.h>
-#include <glibtop/cpu.h>
-#include <glibtop/uptime.h>
+#include <stdlib.h>
 
 #include "graph-data.h"
 #include "preferences.h"
 #include "util.h"
 
-static void get_cpu0_name(char* cpuname) {
+
+enum {
+	CPU_USER	= 0,
+	CPU_NICE	= 1,
+	CPU_SYS		= 2,
+	CPU_IOWAIT	= 3,
+	CPU_IDLE	= 4,
+
+	CPU_MAX		= 5
+};
+
+
+static void get_cpu0_static(char* cpuname, gulong *num_cpu) {
 	char *buf = NULL;
 	size_t n = 0;
+	gulong ncpu = 0;
 
 	FILE *f = fopen("/proc/cpuinfo", "r");
 	if (f != NULL) {
@@ -41,13 +52,17 @@ static void get_cpu0_name(char* cpuname) {
 				break;
 			if (strncmp(buf, "model name", 10) == 0) {
 				strcpy(cpuname, strchr(buf, ':')+2);
-				cpuname[strlen(cpuname)-1] = 0;
-				break;
+				cpuname[strlen(cpuname)-1] = '\0'; //remove newline
 			}
+			else if (strncmp(buf, "processor", 9) == 0)
+				ncpu++;
 		}
 		free(buf);
 		fclose(f);
 	}
+
+	if (ncpu > 0)
+		*num_cpu = ncpu;
 }
 
 static void get_cpu0_info(double *mhz, char *governor) {
@@ -95,71 +110,56 @@ static void get_cpu0_info(double *mhz, char *governor) {
 void
 multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *xd)
 {
-	guint32 user, nice, sys, iowait, idle, total;
+	FILE *f;
+	guint64 irq, softirq, total;
 	gboolean first_call = FALSE;
-	glibtop_cpu cpu;
-	glibtop_uptime uptime;
-
-	enum {
-		CPU_USER	= 0,
-		CPU_NICE	= 1,
-		CPU_SYS		= 2,
-		CPU_IOWAIT	= 3,
-		CPU_IDLE	= 4,
-
-		CPU_MAX		= 5
-	};
+	guint i;
 
 	guint64 time[CPU_MAX];
-
-	static const guint64 needed_flags_cpu =
-		(1 << GLIBTOP_CPU_USER) +
-		(1 << GLIBTOP_CPU_IDLE) +
-		(1 << GLIBTOP_CPU_SYS) +
-		(1 << GLIBTOP_CPU_NICE);
-
-	static const guint64 needed_flags_uptime =
-		(1 << GLIBTOP_UPTIME_UPTIME);
+	guint64 diff[CPU_MAX];
 
 	if (xd->num_cpu == 0) {
-		get_cpu0_name(xd->cpu0_name);
-		xd->num_cpu = 1 + glibtop_global_server->ncpu;
+		get_cpu0_static(xd->cpu0_name, &xd->num_cpu);
 		first_call = TRUE;
 	}
 
-
-	glibtop_get_cpu (&cpu);
-	g_return_if_fail ((cpu.flags & needed_flags_cpu) == needed_flags_cpu);
-
 	get_cpu0_info(&xd->cpu0_mhz, xd->cpu0_governor);
 
-	time [CPU_USER]		= cpu.user;
-	time [CPU_NICE]		= cpu.nice;
-	time [CPU_SYS]		= cpu.sys;
-	time [CPU_IOWAIT]	= cpu.iowait + cpu.irq + cpu.softirq;
-	time [CPU_IDLE]		= cpu.idle;
+	f = fopen("/proc/uptime", "r");
+	if (f != NULL) {
+		// some countries use commas instead of points for floats
+		char *savelocale = strdup(setlocale(LC_NUMERIC, NULL));
+		setlocale(LC_NUMERIC, "C");
 
-	glibtop_get_uptime(&uptime);
-	if ((uptime.flags & needed_flags_uptime) == needed_flags_uptime)
-		xd->uptime = uptime.uptime;
+		fscanf(f, "%lf %*f", &xd->uptime);
+
+		// restore default locale for numbers
+		setlocale(LC_NUMERIC, savelocale);
+		free(savelocale);
+
+		fclose(f);
+	}
+
+	f = fopen("/proc/stat", "r");
+	if (f != NULL) {
+		fscanf(f, "cpu %ld %ld %ld %ld %ld %ld %ld", time+CPU_USER, time+CPU_NICE, time+CPU_SYS, time+CPU_IDLE, time+CPU_IOWAIT, &irq, &softirq);
+
+		time[CPU_IOWAIT] += irq+softirq;
+		fclose(f);
+	}
 
 	if (!first_call) {
-		user	= time [CPU_USER]	- xd->last [CPU_USER];
-		nice	= time [CPU_NICE]	- xd->last [CPU_NICE];
-		sys		= time [CPU_SYS]	- xd->last [CPU_SYS];
-		iowait	= time [CPU_IOWAIT]	- xd->last [CPU_IOWAIT];
-		idle	= time [CPU_IDLE]	- xd->last [CPU_IDLE];
+		for (i=0, total=0; i<CPU_MAX; i++) {
+			diff[i] = time[i] - xd->last[i];
+			total += diff[i];
+		}
 
-		total = user + nice + sys + iowait + idle;
+		xd->user			= (float)(diff[CPU_USER]) / total;
+		xd->iowait			= (float)(diff[CPU_IOWAIT]) / total;
+		xd->total_use		= (float)(total-diff[CPU_IDLE]) / total;
 
-		xd->user			= (float)(user) / total;
-		xd->iowait			= (float)(iowait) / total;
-		xd->total_use		= (float)(total-idle) / total;
-
-		data [CPU_USER]		= rint (Maximum * (float)(user)   / total);
-		data [CPU_NICE]		= rint (Maximum * (float)(nice)   / total);
-		data [CPU_SYS]		= rint (Maximum * (float)(sys)    / total);
-		data [CPU_IOWAIT]	= rint (Maximum * (float)(iowait) / total);
+		for (i=0; i<CPU_MAX; i++)
+			data[i] = rint (Maximum * (float)diff[i] / total);
 	}
 
 	memcpy(xd->last, time, sizeof xd->last);
