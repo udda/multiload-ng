@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2016 Mario Cianciolo <mr.udda@gmail.com>
- *                    The Free Software Foundation
  *
  * This file is part of multiload-ng.
  *
