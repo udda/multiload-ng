@@ -32,9 +32,6 @@
 void
 multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData *xd)
 {
-	float loadavg_1, loadavg_5, loadavg_15;
-	guint proc_active, proc_count;
-
 	int result;
 	char *savelocale;
 
@@ -44,7 +41,7 @@ multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData
 		savelocale = strdup(setlocale(LC_NUMERIC, NULL));
 		setlocale(LC_NUMERIC, "C");
 
-		result = fscanf(f, "%f %f %f %d/%d", &loadavg_1, &loadavg_5, &loadavg_15, &proc_active, &proc_count);
+		result = fscanf(f, "%f %f %f %d/%d", &xd->loadavg_1, &xd->loadavg_5, &xd->loadavg_15, &xd->proc_active, &xd->proc_count);
 
 		// restore default locale for numbers
 		setlocale(LC_NUMERIC, savelocale);
@@ -53,18 +50,8 @@ multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData
 		fclose(f);
 	}
 
-//TODO process list
-
-	int max = autoscaler_get_max(&xd->scaler, g, rint(loadavg_1));
-
-	xd->loadavg_1 = loadavg_1;
-	xd->loadavg_5 = loadavg_5;
-	xd->loadavg_15 = loadavg_15;
-
-//	xd->process_active = proc_active;
-//	xd->process_count = proc_count;
-
-	data [0] = rint ((float) Maximum * loadavg_1 / max);
+	int max = autoscaler_get_max(&xd->scaler, g, rint(xd->loadavg_1));
+	data [0] = rint ((float) Maximum * xd->loadavg_1 / max);
 }
 
 void
@@ -73,8 +60,10 @@ multiload_graph_load_tooltip_update (char **title, char **text, LoadGraph *g, Lo
 	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
 		*text = g_strdup_printf(_(	"Last minute: %0.02f\n"
 									"Last 5 minutes: %0.02f\n"
-									"Last 15 minutes: %0.02f"),
-									xd->loadavg_1, xd->loadavg_5, xd->loadavg_15);
+									"Last 15 minutes: %0.02f\n"
+									"Processes/threads: %d active out of %d."),
+									xd->loadavg_1, xd->loadavg_5, xd->loadavg_15,
+									xd->proc_active, xd->proc_count);
 	} else {
 		*text = g_strdup_printf("%0.02f", xd->loadavg_1);
 	}

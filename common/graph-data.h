@@ -72,6 +72,9 @@ typedef struct _LoadData {
 	float loadavg_15;
 
 	AutoScaler scaler;
+
+	guint proc_active;
+	guint proc_count;
 } LoadData;
 
 typedef struct _DiskData {
