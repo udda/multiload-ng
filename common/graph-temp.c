@@ -54,7 +54,7 @@ multiload_graph_temp_get_data (int Maximum, int data[2], LoadGraph *g, Temperatu
 	if (G_UNLIKELY(first_call)) {
 		first_call = FALSE;
 
-		gchar *d_base = g_strdup("/sys/class/thermal");
+		gchar *d_base = "/sys/class/thermal";
 
 		// check if /sys path exists
 		dir = opendir(d_base);
@@ -108,7 +108,6 @@ multiload_graph_temp_get_data (int Maximum, int data[2], LoadGraph *g, Temperatu
 			g_free(d_thermal);
 		}
 		closedir(dir);
-		g_free(d_base);
 	}
 
 	// check if we have sysfs thermal support
