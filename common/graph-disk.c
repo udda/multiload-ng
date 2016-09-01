@@ -22,9 +22,9 @@
 #include <config.h>
 
 #include <math.h>
-#include <glibtop.h>
-#include <glibtop/fsusage.h>
-#include <glibtop/mountlist.h>
+#include <ctype.h>
+#include <mntent.h>
+#include <stdlib.h>
 
 #include "graph-data.h"
 #include "autoscaler.h"
@@ -35,48 +35,88 @@
 void
 multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData *xd)
 {
-	glibtop_mountlist mountlist;
-	glibtop_fsusage fsusage;
 	static gboolean first_call = TRUE;
+	const static char *fstype_ignore_list[] = { "rootfs", "smbfs", "nfs", "cifs", "fuse.", NULL };
 
-	static const guint64 needed_flags =
-		(1 << GLIBTOP_FSUSAGE_BLOCK_SIZE) +
-		(1 << GLIBTOP_FSUSAGE_READ) +
-		(1 << GLIBTOP_FSUSAGE_WRITE);
+	FILE *f_mntent;
+	FILE *f_stat;
+	struct mntent *mnt;
 
 	guint i;
 	int max;
 
-	guint64 read = 0;
-	guint64 write = 0;
+	char *sysfs_path, *device, *prefix;
+	guint64 read, write;
+	guint64 read_total = 0, write_total = 0;
 	guint64 readdiff, writediff;
 
-	glibtop_mountentry *mountentries = glibtop_get_mountlist (&mountlist, FALSE);
 
-	for (i = 0; i < mountlist.number; i++) {
-		if (   strcmp (mountentries[i].type, "smbfs") == 0
-			|| strcmp (mountentries[i].type, "nfs") == 0
-			|| strcmp (mountentries[i].type, "cifs") == 0
-			|| strncmp(mountentries[i].type, "fuse.", 5) == 0)
+	if ((f_mntent = setmntent(MOUNTED, "r")) == NULL)
+		return;
+
+	// loop through mountpoints
+	while ((mnt = getmntent(f_mntent)) != NULL) {
+
+		// skip filesystens that do not have a block device
+		if (strncmp (mnt->mnt_fsname, "/dev/", 5) != 0)
 			continue;
 
-		glibtop_get_fsusage(&fsusage, mountentries[i].mountdir);
-		if ((fsusage.flags & needed_flags) != needed_flags)
-			continue; // FS does not have required capabilities
+		// skip filesystems of certain types, defined in fstype_ignore_list[]
+		gboolean ignore = FALSE;
+		for (i=0; fstype_ignore_list[i] != NULL; i++) {
+			if (strncmp (mnt->mnt_type, fstype_ignore_list[i], strlen(fstype_ignore_list[i])) == 0) {
+				ignore = TRUE;
+				break;
+			}
 
-		read  += fsusage.read;
-		write += fsusage.write;
+		}
+		if (ignore)
+			continue;
+
+		// extract block device and partition names
+		gboolean is_partition = FALSE;
+		device = g_strdup(&mnt->mnt_fsname[5]);
+		prefix = g_strdup(device);
+		for (i=0; prefix[i] != '\0'; i++) {
+			if (isdigit(prefix[i])) {
+				prefix[i] = '\0';
+				is_partition = TRUE;
+				break;
+			}
+		}
+
+		// generate sysfs path
+		if (is_partition)
+			sysfs_path = g_strdup_printf("/sys/block/%s/%s/stat", prefix, device);
+		else
+			sysfs_path = g_strdup_printf("/sys/block/%s/stat", device);
+		g_free(device);
+		g_free(prefix);
+
+		// read data from sysfs
+		f_stat = fopen(sysfs_path, "r");
+		g_free(sysfs_path);
+		if (f_stat == NULL)
+			continue;
+		int result = fscanf(f_stat, "%*u %*u %lu %*u %*u %*u %lu %*u", &read, &write);
+		fclose(f_stat);
+		if (result != 2)
+			continue;
+
+		// data gathered - add to totals
+		read_total += read;
+		write_total += write;
 	}
+	endmntent(f_mntent);
 
-	g_free(mountentries);
+	readdiff  = read_total  - xd->last_read;
+	writediff = write_total - xd->last_write;
 
-	readdiff  = read  - xd->last_read;
-	writediff = write - xd->last_write;
-
-	xd->last_read  = read;
-	xd->last_write = write;
+	xd->last_read  = read_total;
+	xd->last_write = write_total;
 
 	if (first_call) {
+		// cannot calculate diff on first call
 		first_call = FALSE;
 		return;
 	}
@@ -86,8 +126,7 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 	data[0] = (float)Maximum *  readdiff / (float)max;
 	data[1] = (float)Maximum * writediff / (float)max;
 
-	/* read/write are relative to SECTORS (standard 512 byte) and not blocks
-	 * as glibtop documentation states. So multiply value by 512 */
+	// read/write are relative to standard linux sectors (512 bytes, fixed)
 	xd->read_speed  = calculate_speed(readdiff  * 512, g->config->interval);
 	xd->write_speed = calculate_speed(writediff * 512, g->config->interval);
 }
