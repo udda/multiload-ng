@@ -142,9 +142,13 @@ void
 multiload_graph_temp_tooltip_update (char **title, char **text, LoadGraph *g, TemperatureData *xd)
 {
 	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
-		*text = g_strdup_printf(_(	"Current: %.1f °C\n"
-									"Critical: %.1f °C"),
-									(xd->value/1000.0), (xd->max/1000.0));
+		if (xd->max > 0)
+			*text = g_strdup_printf(_(	"Current: %.1f °C\n"
+										"Critical: %.1f °C"),
+										(xd->value/1000.0), (xd->max/1000.0));
+		else
+			*text = g_strdup_printf(_(	"Current: %.1f °C"),
+										(xd->value/1000.0));
 	} else {
 		*text = g_strdup_printf("%.1f °C", xd->value/1000.0);
 	}
