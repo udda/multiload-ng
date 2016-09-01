@@ -99,8 +99,7 @@ multiload_get_scaler (MultiloadPlugin *ma, guint graph_id)
 		case GRAPH_NETLOAD:
 			return &((NetData*)xd)->scaler;
 		case GRAPH_LOADAVG:
-//			return &((LoadData*)xd)->scaler;
-			return NULL;
+			return &((LoadData*)xd)->scaler;
 		case GRAPH_DISKLOAD:
 			return &((DiskData*)xd)->scaler;
 		case GRAPH_TEMPERATURE:

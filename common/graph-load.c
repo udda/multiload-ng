@@ -28,8 +28,6 @@
 #include "preferences.h"
 #include "util.h"
 
-//TODO remove this
-#define MAX_LOADAVG 10
 
 void
 multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData *xd)
@@ -55,15 +53,9 @@ multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData
 		fclose(f);
 	}
 
-//TODO autoscaler
 //TODO process list
 
-	static float max = 0;
-	float current;
-
-	if (max == 0)
-		max = MAX_LOADAVG;
-	current = MIN(loadavg_1, max);
+	int max = autoscaler_get_max(&xd->scaler, g, rint(loadavg_1));
 
 	xd->loadavg_1 = loadavg_1;
 	xd->loadavg_5 = loadavg_5;
@@ -72,7 +64,7 @@ multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData
 //	xd->process_active = proc_active;
 //	xd->process_count = proc_count;
 
-	data [0] = rint ((float) Maximum * current / max);
+	data [0] = rint ((float) Maximum * loadavg_1 / max);
 }
 
 void

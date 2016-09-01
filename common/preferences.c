@@ -159,7 +159,7 @@ static const gchar* spin_ceil_names[GRAPH_MAX] = {
 	"",
 	"sb_ceil_net",
 	"",
-	"",
+	"sb_ceil_load",
 	"sb_ceil_disk",
 	"sb_ceil_temp",
 	"sb_ceil_parm"
@@ -170,7 +170,7 @@ static const gchar* cb_autoscaler_enable_names[GRAPH_MAX] = {
 	"",
 	"cb_autoscaler_net",
 	"",
-	"",
+	"cb_autoscaler_load",
 	"cb_autoscaler_disk",
 	"cb_autoscaler_temp",
 	"cb_autoscaler_parm"
