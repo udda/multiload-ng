@@ -21,33 +21,68 @@
 
 #include <config.h>
 
+#include <ctype.h>
 #include <math.h>
-#include <glibtop.h>
-#include <glibtop/swap.h>
+#include <stdlib.h>
 
 #include "graph-data.h"
 #include "preferences.h"
 #include "util.h"
 
+typedef struct {
+	char key[20];
+	guint64 *address;
+} meminfo_mapping_table;
+
 void
 multiload_graph_swap_get_data (int Maximum, int data [1], LoadGraph *g, SwapData *xd)
 {
-	glibtop_swap swap;
+	// displayed keys
+	static guint64 kb_swap_total = 0;
+	static guint64 kb_swap_free = 0;
 
-	static const guint64 needed_flags =
-		(1 << GLIBTOP_SWAP_USED) +
-		(1 << GLIBTOP_SWAP_FREE);
+	const static meminfo_mapping_table table[] = {
+		{ "SwapTotal",		&kb_swap_total },
+		{ "SwapFree",		&kb_swap_free },
+		{ "",				NULL }
+	};
 
-	glibtop_get_swap (&swap);
-	g_return_if_fail ((swap.flags & needed_flags) == needed_flags);
+	char *buf = NULL;
+	char *tmp;
+	size_t n = 0;
+	guint i;
 
-	xd->used = swap.used;
-	xd->total = swap.total;
+	FILE *f = fopen("/proc/meminfo", "r");
+	if (f != NULL) {
+		while(TRUE) {
+			if (getline(&buf, &n, f) < 0)
+				break;
 
-	if (swap.total == 0)
+			for (i=0; table[i].address != NULL; i++) {
+				if (strncmp(buf, table[i].key, strlen(table[i].key)) == 0) {
+					tmp = buf + strlen(table[i].key);
+					do
+						tmp++;
+					while (isspace(tmp[0]));
+
+					*(table[i].address) = g_ascii_strtoull(tmp, NULL, 0);
+					//TODO errno
+					break;
+				}
+			}
+		}
+		free(buf);
+		fclose(f);
+	}
+
+
+	xd->used = (kb_swap_total - kb_swap_free) * 1024;
+	xd->total = kb_swap_total * 1024;
+
+	if (kb_swap_total == 0)
 	   data [0] = 0;
 	else
-	   data [0] = rint (Maximum * (float)swap.used / swap.total);
+	   data [0] = rint (Maximum * (float)(kb_swap_total - kb_swap_free) / kb_swap_total);
 }
 
 void

@@ -21,39 +21,88 @@
 
 #include <config.h>
 
+#include <ctype.h>
 #include <math.h>
-#include <glibtop.h>
-#include <glibtop/mem.h>
+#include <stdlib.h>
 
 #include "graph-data.h"
 #include "preferences.h"
 #include "util.h"
 
+typedef struct {
+	char key[20];
+	guint64 *address;
+} meminfo_mapping_table;
+
 void
 multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryData *xd)
 {
-	glibtop_mem mem;
+	// displayed keys
+	static guint64 kb_main_total = 0;
+	static guint64 kb_main_buffers = 0;
+	static guint64 kb_main_shared = 0;
+	static guint64 kb_main_cached = 0;
+	static guint64 kb_main_used = 0;
 
-	static const guint64 needed_flags =
-		(1 << GLIBTOP_MEM_USER) +
-		(1 << GLIBTOP_MEM_SHARED) +
-		(1 << GLIBTOP_MEM_BUFFER) +
-		(1 << GLIBTOP_MEM_CACHED) +
-		(1 << GLIBTOP_MEM_FREE) +
-		(1 << GLIBTOP_MEM_TOTAL);
+	// auxiliary keys
+	static guint64 kb_main_available = 0;
+	static guint64 kb_main_free = 0;
+	static guint64 kb_page_cache = 0;
+	static guint64 kb_slab = 0;
 
+	const static meminfo_mapping_table table[] = {
+		{ "MemTotal",		&kb_main_total },
+		{ "MemAvailable",	&kb_main_available},
+		{ "MemFree",		&kb_main_free},
+		{ "Buffers",		&kb_main_buffers },
+		{ "Shmem",			&kb_main_shared },
+		{ "Cached",			&kb_page_cache },
+		{ "Slab",			&kb_slab },
+		{ "",				NULL }
+	};
 
-	glibtop_get_mem (&mem);
-	g_return_if_fail ((mem.flags & needed_flags) == needed_flags);
+	char *buf = NULL;
+	char *tmp;
+	size_t n = 0;
+	guint i;
 
-	xd->user = mem.user;
-	xd->cache = mem.shared + mem.buffer + mem.cached;
-	xd->total = mem.total;
+	FILE *f = fopen("/proc/meminfo", "r");
+	if (f != NULL) {
+		while(TRUE) {
+			if (getline(&buf, &n, f) < 0)
+				break;
 
-	data [0] = rint (Maximum * (float)mem.user   / (float)mem.total);
-	data [1] = rint (Maximum * (float)mem.shared / (float)mem.total);
-	data [2] = rint (Maximum * (float)mem.buffer / (float)mem.total);
-	data [3] = rint (Maximum * (float)mem.cached / (float)mem.total);
+			for (i=0; table[i].address != NULL; i++) {
+				if (strncmp(buf, table[i].key, strlen(table[i].key)) == 0) {
+					tmp = buf + strlen(table[i].key);
+					do
+						tmp++;
+					while (isspace(tmp[0]));
+
+					*(table[i].address) = g_ascii_strtoull(tmp, NULL, 0);
+					//TODO errno
+					break;
+				}
+			}
+		}
+		free(buf);
+		fclose(f);
+	}
+
+	kb_main_cached = kb_page_cache + kb_slab;
+
+	kb_main_used = kb_main_total - kb_main_free - kb_main_cached - kb_main_buffers;
+	if (kb_main_used < 0)
+		kb_main_used = kb_main_total - kb_main_free;
+
+	xd->user = kb_main_used * 1024;
+	xd->cache = (kb_main_shared + kb_main_buffers + kb_main_cached) * 1024;
+	xd->total = kb_main_total * 1024;
+
+	data [0] = rint (Maximum * (float)kb_main_used   / (float)kb_main_total);
+	data [1] = rint (Maximum * (float)kb_main_shared / (float)kb_main_total);
+	data [2] = rint (Maximum * (float)kb_main_buffers / (float)kb_main_total);
+	data [3] = rint (Maximum * (float)kb_main_cached / (float)kb_main_total);
 }
 
 void

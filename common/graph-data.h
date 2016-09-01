@@ -67,7 +67,9 @@ typedef struct _SwapData {
 } SwapData;
 
 typedef struct _LoadData {
-	double loadavg[3];
+	float loadavg_1;
+	float loadavg_5;
+	float loadavg_15;
 } LoadData;
 
 typedef struct _DiskData {
