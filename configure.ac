@@ -23,7 +23,7 @@ AC_PROG_INTLTOOL(, [no-xml])
 
 # Check for header files.
 AC_HEADER_STDC
-AC_CHECK_HEADERS([time.h glib.h math.h dirent.h stdio.h errno.h])
+AC_CHECK_HEADERS([time.h glib.h math.h dirent.h mntent.h ctype.h stdio.h errno.h])
 
 
 # Checks for typedefs, structures, and compiler characteristics.
