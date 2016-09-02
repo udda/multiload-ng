@@ -90,10 +90,6 @@ PKG_CHECK_MODULES(CAIRO, [cairo >= 1.0])
 AC_SUBST(CAIRO_CFLAGS)
 AC_SUBST(CAIRO_LIBS)
 
-PKG_CHECK_MODULES(LIBGTOP, [libgtop-2.0 >= 2.11.92])
-AC_SUBST(LIBGTOP_CFLAGS)
-AC_SUBST(LIBGTOP_LIBS)
-
 
 # Disable Glib deprecation warnings
 AC_ARG_ENABLE([deprecations], AS_HELP_STRING([--disable-deprecations], [Disable GDK/GTK deprecation warnings (useful when compiling with -Werror)]),

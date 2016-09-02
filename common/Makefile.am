@@ -29,8 +29,7 @@ multiload_ng_core_la_SOURCES = \
 
 multiload_ng_core_la_CFLAGS = \
 	$(GTK_CFLAGS) \
-	$(CAIRO_CFLAGS) \
-	$(LIBGTOP_CFLAGS)
+	$(CAIRO_CFLAGS)
 
 
 multiload_ng_core_la_LDFLAGS = \
@@ -42,8 +41,7 @@ multiload_ng_core_la_LDFLAGS = \
 
 multiload_ng_core_la_LIBADD = \
 	$(GTK_LIBS) \
-	$(CAIRO_LIBS) \
-	$(LIBGTOP_LIBS)
+	$(CAIRO_LIBS)
 
 
 

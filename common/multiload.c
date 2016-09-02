@@ -25,7 +25,6 @@
 
 #include <config.h>
 
-#include <glibtop.h>
 #include <glib/gi18n-lib.h>
 
 #include "gtk-compat.h"
@@ -214,13 +213,10 @@ multiload_refresh_orientation (MultiloadPlugin *ma)
 void
 multiload_init()
 {
-	static int initialized = 0;
-	if ( initialized )
+	static gboolean initialized = FALSE;
+	if (initialized)
 		return;
-	initialized = 1;
-
-	glibtop *glt = glibtop_init();
-	g_assert_nonnull(glt);
+	initialized = TRUE;
 
 
 	MULTILOAD_CONFIG_PATH = g_build_filename(

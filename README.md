@@ -94,7 +94,6 @@ Package                     | Min version
 :-------------------------- | -------------:
 gtk+                        | >= 2.18.0
 cairo                       | >= 1.0
-libgtop                     | >= 2.11.92
 
 #### Requirements for standalone window
 Standalone target has no additional requirements.
