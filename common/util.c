@@ -42,6 +42,7 @@ str_replace(const char *string , const char *needle , const char *replacement)
 	const char *oldstr = NULL;
 	char *newstr = NULL;
 	size_t c = 0;
+	size_t final;
 
 	size_t s_string = strlen(string);
 	size_t s_needle = strlen(needle);
@@ -65,18 +66,17 @@ str_replace(const char *string , const char *needle , const char *replacement)
 
 	oldstr = string;
 	for(p = strstr(string, needle); p != NULL; p = strstr(p+s_needle, needle)) {
-		// move ahead and copy some text from original string, from a certain position
-		strncpy(newstr + strlen(newstr) , oldstr , p - oldstr);
+		strncat(newstr, oldstr , p-oldstr);
+		g_strlcat(newstr, replacement, c);
 
-		// move ahead and copy the replacement text
-		strcpy(newstr + strlen(newstr) , replacement);
-
-		// the new start position after this search match
 		oldstr = p + s_needle;
 	}
 
 	// copy the part after the last search match
-	strcpy(newstr + strlen(newstr) , oldstr);
+	final = g_strlcat(newstr, oldstr, c);
+
+	if (final != c)
+		g_warning("[util] Failed prediction of replaced string length (%zu, actually %zu)", c, final);
 
 	return newstr;
 }
