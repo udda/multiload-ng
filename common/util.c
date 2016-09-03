@@ -248,7 +248,8 @@ gchar* get_system_monitor_executable()
 }
 
 void
-xdg_open_url(const gchar* url) {
+xdg_open_url(const gchar* url)
+{
 	gchar *cmdline;
 	gboolean result;
 
@@ -260,4 +261,29 @@ xdg_open_url(const gchar* url) {
 
 	if (G_UNLIKELY (result == FALSE))
 		g_warning (_("Unable to open the following url: '%s'"), url);
+}
+
+// return a file pointer that does not need to be closed
+FILE*
+cached_fopen_r(gchar* path, gboolean reopen)
+{
+	static GHashTable *table = NULL;
+	FILE *f;
+
+	if (table == NULL)
+		table = g_hash_table_new (g_str_hash, g_str_equal);
+
+	f = (FILE*)g_hash_table_lookup(table, path);
+	if (f != NULL && reopen) {
+		fclose(f);
+		f = NULL;
+	}
+	if (f == NULL) {
+		f = fopen(path, "r");
+		g_assert(f != NULL);
+		g_hash_table_insert(table, path, f);
+	}
+
+	rewind(f);
+	return f;
 }

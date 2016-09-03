@@ -21,6 +21,7 @@
 
 #include <config.h>
 
+#include <errno.h>
 #include <math.h>
 #include <stdlib.h>
 
@@ -40,73 +41,6 @@ enum {
 };
 
 
-static void get_cpu0_static(char* cpuname, gulong *num_cpu) {
-	char *buf = NULL;
-	size_t n = 0;
-	gulong ncpu = 0;
-
-	FILE *f = fopen("/proc/cpuinfo", "r");
-	if (f != NULL) {
-		while(TRUE) {
-			if (getline(&buf, &n, f) < 0)
-				break;
-			if (strncmp(buf, "model name", 10) == 0) {
-				strcpy(cpuname, strchr(buf, ':')+2);
-				cpuname[strlen(cpuname)-1] = '\0'; //remove newline
-			}
-			else if (strncmp(buf, "processor", 9) == 0)
-				ncpu++;
-		}
-		free(buf);
-		fclose(f);
-	}
-
-	if (ncpu > 0)
-		*num_cpu = ncpu;
-}
-
-static void get_cpu0_info(double *mhz, char *governor) {
-	static gboolean have_cpuinfo = TRUE;
-	static gboolean have_governor = TRUE;
-
-	char *buf = NULL;
-	size_t n = 0;
-
-	if (have_cpuinfo) {
-		FILE *f = fopen("/proc/cpuinfo", "r");
-		if (f != NULL) {
-			while(TRUE) {
-				if (getline(&buf, &n, f) < 0)
-					break;
-				if (strncmp(buf, "cpu MHz", 7) == 0) {
-					*mhz = g_ascii_strtod(strchr(buf, ':')+2, NULL);
-					break;
-				}
-			}
-			free(buf);
-			fclose(f);
-		} else {
-			have_cpuinfo = FALSE;
-		}
-	}
-
-	buf = NULL;
-	if (have_governor) {
-		FILE *f = fopen("/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor", "r");
-		if (f != NULL) {
-			if (getline(&buf, &n, f) < 0)
-				have_governor = FALSE;
-			else
-				strcpy(governor, buf);
-			free(buf);
-			fclose(f);
-		} else {
-			have_governor = FALSE;
-		}
-	}
-
-}
-
 void
 multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *xd)
 {
@@ -118,35 +52,58 @@ multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *
 	guint64 time[CPU_MAX];
 	guint64 diff[CPU_MAX];
 
+	char *buf;
+	size_t n;
+
 	if (xd->num_cpu == 0) {
-		get_cpu0_static(xd->cpu0_name, &xd->num_cpu);
+		// CPU name and number of CPUs
+		buf = NULL; n = 0;
+		f = cached_fopen_r("/proc/cpuinfo", TRUE);
+		while(getline(&buf, &n, f) >= 0) {
+			if (strncmp(buf, "model name", 10) == 0) {
+				strcpy(xd->cpu0_name, strchr(buf, ':')+2);
+				xd->cpu0_name[strlen(xd->cpu0_name)-1] = '\0'; //remove newline
+			} else if (strncmp(buf, "processor", 9) == 0) {
+				xd->num_cpu++;
+			}
+		}
+		free(buf);
 		first_call = TRUE;
 	}
 
-	get_cpu0_info(&xd->cpu0_mhz, xd->cpu0_governor);
-
-	f = fopen("/proc/uptime", "r");
-	if (f != NULL) {
-		// some countries use commas instead of points for floats
-		char *savelocale = strdup(setlocale(LC_NUMERIC, NULL));
-		setlocale(LC_NUMERIC, "C");
-
-		fscanf(f, "%lf %*f", &xd->uptime);
-
-		// restore default locale for numbers
-		setlocale(LC_NUMERIC, savelocale);
-		free(savelocale);
-
-		fclose(f);
+	// MHz
+	buf = NULL; n = 0;
+	f = cached_fopen_r("/proc/cpuinfo", TRUE);
+	while(getline(&buf, &n, f) >= 0) {
+		if (strncmp(buf, "cpu MHz", 7) == 0) {
+			xd->cpu0_mhz = g_ascii_strtod(strchr(buf, ':')+2, NULL);
+			if (errno != 0)
+				g_warning("[graph-cpu] Parsing of cpu0_mhz failed");
+			break;
+		}
 	}
+	free(buf);
 
-	f = fopen("/proc/stat", "r");
-	if (f != NULL) {
-		fscanf(f, "cpu %ld %ld %ld %ld %ld %ld %ld", time+CPU_USER, time+CPU_NICE, time+CPU_SYS, time+CPU_IDLE, time+CPU_IOWAIT, &irq, &softirq);
+	// governor
+	f = cached_fopen_r("/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor", TRUE);
+	if(1 != fscanf(f, "%s", xd->cpu0_governor));
 
-		time[CPU_IOWAIT] += irq+softirq;
-		fclose(f);
+	// uptime
+	f = cached_fopen_r("/proc/uptime", TRUE);
+	buf = (char*)malloc(12);
+	if (1 != fscanf(f, "%s", buf))
+		g_warning("[graph-cpu] Parsing of uptime failed (s)");
+	else {
+		xd->uptime = g_ascii_strtod(buf, NULL);
+		if (errno != 0)
+			g_warning("[graph-cpu] Parsing of uptime failed (d)");
 	}
+	free(buf);
+
+	// CPU stats
+	f = cached_fopen_r("/proc/stat", TRUE);
+	g_assert(7 == fscanf(f, "cpu %ld %ld %ld %ld %ld %ld %ld", time+CPU_USER, time+CPU_NICE, time+CPU_SYS, time+CPU_IDLE, time+CPU_IOWAIT, &irq, &softirq));
+	time[CPU_IOWAIT] += irq+softirq;
 
 	if (!first_call) {
 		for (i=0, total=0; i<CPU_MAX; i++) {

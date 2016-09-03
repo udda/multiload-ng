@@ -22,6 +22,7 @@
 #include <config.h>
 
 #include <ctype.h>
+#include <errno.h>
 #include <math.h>
 #include <stdlib.h>
 
@@ -52,28 +53,23 @@ multiload_graph_swap_get_data (int Maximum, int data [1], LoadGraph *g, SwapData
 	size_t n = 0;
 	guint i;
 
-	FILE *f = fopen("/proc/meminfo", "r");
-	if (f != NULL) {
-		while(TRUE) {
-			if (getline(&buf, &n, f) < 0)
+	FILE *f = cached_fopen_r("/proc/meminfo", FALSE);
+	while(getline(&buf, &n, f) >= 0) {
+		for (i=0; table[i].address != NULL; i++) {
+			if (strncmp(buf, table[i].key, strlen(table[i].key)) == 0) {
+				// tmp will start with numeric value
+				for (tmp = buf+strlen(table[i].key)+1; isspace(tmp[0]); tmp++);
+
+				errno = 0;
+				*(table[i].address) = g_ascii_strtoull(tmp, NULL, 0);
+				if (errno != 0)
+					g_warning("[graph-mem] Parsing of key %s failed", table[i].key);
+
 				break;
-
-			for (i=0; table[i].address != NULL; i++) {
-				if (strncmp(buf, table[i].key, strlen(table[i].key)) == 0) {
-					tmp = buf + strlen(table[i].key);
-					do
-						tmp++;
-					while (isspace(tmp[0]));
-
-					*(table[i].address) = g_ascii_strtoull(tmp, NULL, 0);
-					//TODO errno
-					break;
-				}
 			}
 		}
-		free(buf);
-		fclose(f);
 	}
+	free(buf);
 
 
 	xd->used = (kb_swap_total - kb_swap_free) * 1024;

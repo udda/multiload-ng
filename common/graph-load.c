@@ -32,23 +32,20 @@
 void
 multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData *xd)
 {
-	int result;
 	char *savelocale;
 
-	FILE *f = fopen("/proc/loadavg", "r");
-	if (f != NULL) {
-		// some countries use commas instead of points for floats
-		savelocale = strdup(setlocale(LC_NUMERIC, NULL));
-		setlocale(LC_NUMERIC, "C");
+	FILE *f = cached_fopen_r("/proc/loadavg", TRUE);
 
-		result = fscanf(f, "%f %f %f %d/%d", &xd->loadavg_1, &xd->loadavg_5, &xd->loadavg_15, &xd->proc_active, &xd->proc_count);
+	// some countries use commas instead of points for floats
+	savelocale = strdup(setlocale(LC_NUMERIC, NULL));
+	setlocale(LC_NUMERIC, "C");
 
-		// restore default locale for numbers
-		setlocale(LC_NUMERIC, savelocale);
-		free(savelocale);
+	g_assert(5 == fscanf(f, "%f %f %f %d/%d", &xd->loadavg_1, &xd->loadavg_5, &xd->loadavg_15, &xd->proc_active, &xd->proc_count));
 
-		fclose(f);
-	}
+	// restore default locale for numbers
+	setlocale(LC_NUMERIC, savelocale);
+	free(savelocale);
+
 
 	int max = autoscaler_get_max(&xd->scaler, g, rint(xd->loadavg_1));
 	data [0] = rint ((float) Maximum * xd->loadavg_1 / max);

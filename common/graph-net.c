@@ -69,7 +69,6 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 	};
 
 	static GHashTable *table = NULL;
-	static FILE *f_net = NULL;
 	static int ticks = 0;
 
 	char *buf = NULL;
@@ -77,6 +76,7 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 	size_t n = 0;
 	uint i,j;
 	ulong valid_ifaces_len=0;
+	FILE *f_net;
 
 	guint64 present[NET_MAX] = { 0, 0, 0 };
 	gint64 delta[NET_MAX];
@@ -90,15 +90,10 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 	if (table == NULL) {
 		table = g_hash_table_new (g_str_hash, g_str_equal);
 	}
-	if (f_net == NULL) {
-		f_net = fopen("/proc/net/dev", "r");
-		if (f_net == NULL)
-			return; //TODO report error
-	}
 
 	xd->ifaces[0] = 0;
 
-	rewind(f_net);
+	f_net = cached_fopen_r("/proc/net/dev", FALSE);
 	while (getline(&buf, &n, f_net) >= 0) {
 		// skip header lines of /proc/net/dev
 		if (strchr(buf, ':') == NULL)
@@ -112,9 +107,6 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 		d_ptr = (if_data*)g_hash_table_lookup(table, d.name);
 		if (d_ptr == NULL) {
 			d_ptr = g_new(if_data,1);
-			if (d_ptr == NULL)
-				continue;
-
 			strcpy(d_ptr->name, d.name);
 
 			sprintf(tmp, "/sys/class/net/%s/address", d_ptr->name);

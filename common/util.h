@@ -55,6 +55,9 @@ get_system_monitor_executable();
 G_GNUC_INTERNAL void
 xdg_open_url();
 
+G_GNUC_INTERNAL FILE*
+cached_fopen_r(gchar* path, gboolean reopen);
+
 G_END_DECLS
 
 #endif /* __UTIL_H__ */
