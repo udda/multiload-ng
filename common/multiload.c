@@ -57,7 +57,13 @@ multiload_tooltip_update (LoadGraph *g)
 	if (title == NULL)
 		title = g_strdup(graph_types[g->id].label);
 
-	text_sanitized = str_replace(text, "&", "&amp;");
+	if (text == NULL) {
+		text_sanitized = g_strdup("");
+		g_warning("[multiload] Empty text for tooltip #%d", g->id);
+	} else {
+		text_sanitized = str_replace(text, "&", "&amp;");
+		g_free(text);
+	}
 
 	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
 		tooltip_markup = g_strdup_printf("<span weight='bold' size='larger'>%s</span>\n%s", title, text_sanitized);
@@ -67,9 +73,9 @@ multiload_tooltip_update (LoadGraph *g)
 
 	gtk_widget_set_tooltip_markup(g->disp, tooltip_markup);
 	g_free(title);
-	g_free(text);
 	g_free(text_sanitized);
 	g_free(tooltip_markup);
+
 }
 
 /* get current orientation */
