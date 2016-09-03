@@ -54,6 +54,8 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 	if ((f_mntent = setmntent(MOUNTED, "r")) == NULL)
 		return;
 
+	xd->partitions[0] = '\0';
+
 	// loop through mountpoints
 	while ((mnt = getmntent(f_mntent)) != NULL) {
 
@@ -75,7 +77,7 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 
 		// extract block device and partition names
 		gboolean is_partition = FALSE;
-		device = g_strdup(&mnt->mnt_fsname[5]);
+		device = &mnt->mnt_fsname[5];
 		prefix = g_strdup(device);
 		for (i=0; prefix[i] != '\0'; i++) {
 			if (isdigit(prefix[i])) {
@@ -90,7 +92,6 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 			sysfs_path = g_strdup_printf("/sys/block/%s/%s/stat", prefix, device);
 		else
 			sysfs_path = g_strdup_printf("/sys/block/%s/stat", device);
-		g_free(device);
 		g_free(prefix);
 
 		// read data from sysfs
@@ -106,8 +107,12 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 		// data gathered - add to totals
 		read_total += read;
 		write_total += write;
+
+		g_strlcat (xd->partitions, device, sizeof(xd->partitions));
+		g_strlcat (xd->partitions, ", ", sizeof(xd->partitions));
 	}
 	endmntent(f_mntent);
+	xd->partitions[strlen(xd->partitions)-2] = 0;
 
 	readdiff  = read_total  - xd->last_read;
 	writediff = write_total - xd->last_write;
@@ -138,9 +143,11 @@ multiload_graph_disk_tooltip_update (char **title, char **text, LoadGraph *g, Di
 	gchar *disk_write = format_rate_for_display(xd->write_speed);
 
 	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
-		*text = g_strdup_printf(_(	"Read: %s\n"
+		*text = g_strdup_printf(_(	"Monitored partitions: %s\n"
+									"\n"
+									"Read: %s\n"
 									"Write: %s"),
-									disk_read, disk_write);
+									xd->partitions, disk_read, disk_write);
 	} else {
 		*text = g_strdup_printf("\xe2\xac\x86%s \xe2\xac\x87%s", disk_read, disk_write);
 	}

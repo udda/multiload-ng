@@ -83,6 +83,8 @@ typedef struct _DiskData {
 
 	guint64 read_speed;
 	guint64 write_speed;
+
+	gchar partitions[128];
 } DiskData;
 
 typedef struct _TemperatureData {
