@@ -32,6 +32,8 @@ typedef struct _CpuData {
 	guint64 last [5];
 
 	gfloat user;
+	gfloat nice;
+	gfloat system;
 	gfloat iowait;
 	gfloat total_use;
 	gdouble uptime;

@@ -112,6 +112,8 @@ multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *
 		}
 
 		xd->user			= (float)(diff[CPU_USER]) / total;
+		xd->nice			= (float)(diff[CPU_NICE]) / total;
+		xd->system			= (float)(diff[CPU_SYS]) / total;
 		xd->iowait			= (float)(diff[CPU_IOWAIT]) / total;
 		xd->total_use		= (float)(total-diff[CPU_IDLE]) / total;
 
@@ -131,12 +133,16 @@ multiload_graph_cpu_tooltip_update (char **title, char **text, LoadGraph *g, Cpu
 		*title = g_strdup(xd->cpu0_name);
 		*text = g_strdup_printf(_(	"%lu processors  -  %.2f GHz  -  Governor: %s\n"
 									"%.1f%% in use by programs\n"
+									"%.1f%% in use by low priority programs\n"
+									"%.1f%% in use by the kernel\n"
 									"%.1f%% in wait for I/O\n"
 									"%.1f%% total CPU use\n"
 									"\n"
 									"Uptime: %s"),
 									xd->num_cpu, xd->cpu0_mhz/1000.0, xd->cpu0_governor,
 									(xd->user*100),
+									(xd->nice*100),
+									(xd->system*100),
 									(xd->iowait*100),
 									(xd->total_use*100),
 									uptime);
