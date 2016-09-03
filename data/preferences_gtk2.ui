@@ -1719,24 +1719,6 @@
                       <placeholder/>
                     </child>
                     <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
                       <object class="GtkLabel" id="colors_label_cpu">
                         <property name="visible">True</property>
                         <property name="sensitive">False</property>
@@ -3452,7 +3434,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="xalign">0</property>
-                        <property name="label" translatable="yes">Result</property>
+                        <property name="label" translatable="yes">Result 1</property>
                       </object>
                       <packing>
                         <property name="left_attach">22</property>
@@ -3635,6 +3617,105 @@
                         <property name="right_attach">20</property>
                         <property name="top_attach">2</property>
                         <property name="bottom_attach">3</property>
+                        <property name="y_options">GTK_SHRINK</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkColorButton" id="cb_color_parm2">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="relief">none</property>
+                        <property name="use_alpha">True</property>
+                        <property name="color">#000000000000</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">21</property>
+                        <property name="right_attach">22</property>
+                        <property name="top_attach">2</property>
+                        <property name="bottom_attach">3</property>
+                        <property name="x_options"/>
+                        <property name="y_options">GTK_SHRINK</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkColorButton" id="cb_color_parm3">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="relief">none</property>
+                        <property name="use_alpha">True</property>
+                        <property name="color">#000000000000</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">21</property>
+                        <property name="right_attach">22</property>
+                        <property name="top_attach">3</property>
+                        <property name="bottom_attach">4</property>
+                        <property name="x_options"/>
+                        <property name="y_options">GTK_SHRINK</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkColorButton" id="cb_color_parm4">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="relief">none</property>
+                        <property name="use_alpha">True</property>
+                        <property name="color">#000000000000</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">21</property>
+                        <property name="right_attach">22</property>
+                        <property name="top_attach">4</property>
+                        <property name="bottom_attach">5</property>
+                        <property name="x_options"/>
+                        <property name="y_options">GTK_SHRINK</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label55">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Result 2</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">22</property>
+                        <property name="right_attach">23</property>
+                        <property name="top_attach">2</property>
+                        <property name="bottom_attach">3</property>
+                        <property name="y_options">GTK_SHRINK</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label56">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Result 3</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">22</property>
+                        <property name="right_attach">23</property>
+                        <property name="top_attach">3</property>
+                        <property name="bottom_attach">4</property>
+                        <property name="y_options">GTK_SHRINK</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label57">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Result 4</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">22</property>
+                        <property name="right_attach">23</property>
+                        <property name="top_attach">4</property>
+                        <property name="bottom_attach">5</property>
                         <property name="y_options">GTK_SHRINK</property>
                       </packing>
                     </child>

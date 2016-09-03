@@ -229,10 +229,12 @@ static const gchar* color_button_names[GRAPH_MAX][MAX_COLORS] = {
 		NULL
 	}, {
 		"cb_color_parm1",
+		"cb_color_parm2",
+		"cb_color_parm3",
+		"cb_color_parm4",
 		"cb_color_parm_border",
 		"cb_color_parm_bg1",
-		"cb_color_parm_bg2",
-		NULL
+		"cb_color_parm_bg2"
 	}
 };
 

@@ -210,9 +210,12 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(26,13,23, FF),		// Background (top)
 				HEX_TO_RGBA(00,00,00, FF)		// Background (bottom)
 			}, { // PARM hue: (gray)
-				HEX_TO_RGBA(E4,E4,E4, FF),		// Result
-				HEX_TO_RGBA(61,61,61, FF),		// Border
-				HEX_TO_RGBA(26,26,26, FF),		// Background (top)
+				HEX_TO_RGBA(4C,4C,4C, FF),		// Result 1
+				HEX_TO_RGBA(84,84,84, FF),		// Result 2
+				HEX_TO_RGBA(B7,B7,B7, FF),		// Result 3
+				HEX_TO_RGBA(F1,F1,F1, FF),		// Result 4
+				HEX_TO_RGBA(80,80,80, FF),		// Border
+				HEX_TO_RGBA(00,00,00, FF),		// Background (top)
 				HEX_TO_RGBA(00,00,00, FF)		// Background (bottom)
 			}
 		}
@@ -264,8 +267,11 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(2E,34,36, FF),		// Border
 				HEX_TO_RGBA(88,8A,85, FF),		// Background (top)
 				HEX_TO_RGBA(55,57,53, FF)		// Background (bottom)
-			}, { // PARM - Tango Aluminium
-				HEX_TO_RGBA(BA,BD,B6, FF),		// Result
+			}, { // PARM - Tango Aluminium (with some addition)
+				HEX_TO_RGBA(2E,34,36, FF),		// Result 1
+				HEX_TO_RGBA(70,7A,7D, FF),		// Result 2
+				HEX_TO_RGBA(93,B1,BA, FF),		// Result 3
+				HEX_TO_RGBA(E6,F3,F7, FF),		// Result 4
 				HEX_TO_RGBA(2E,34,36, FF),		// Border
 				HEX_TO_RGBA(88,8A,85, FF),		// Background (top)
 				HEX_TO_RGBA(55,57,53, FF)		// Background (bottom)
@@ -319,8 +325,11 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(58,6E,75, FF),		// Border
 				HEX_TO_RGBA(07,36,42, FF),		// Background (top)
 				HEX_TO_RGBA(00,2B,36, FF)		// Background (bottom)
-			}, { // PARM - Solarized Base00
-				HEX_TO_RGBA(65,7B,83, FF),		// Result
+			}, { // PARM - Solarized Base01
+				HEX_TO_RGBA(58,6E,75, FF),		// Result 1
+				HEX_TO_RGBA(65,7B,83, FF),		// Result 2
+				HEX_TO_RGBA(83,94,96, FF),		// Result 3
+				HEX_TO_RGBA(93,A1,A1, FF),		// Result 4
 				HEX_TO_RGBA(58,6E,75, FF),		// Border
 				HEX_TO_RGBA(07,36,42, FF),		// Background (top)
 				HEX_TO_RGBA(00,2B,36, FF)		// Background (bottom)
@@ -374,8 +383,11 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(58,6E,75, FF),		// Border
 				HEX_TO_RGBA(FD,F6,E3, FF),		// Background (top)
 				HEX_TO_RGBA(EE,E8,D5, FF)		// Background (bottom)
-			}, { // PARM - Solarized Base00
-				HEX_TO_RGBA(65,7B,83, FF),		// Result
+			}, { // PARM - Solarized Base01
+				HEX_TO_RGBA(58,6E,75, FF),		// Result 1
+				HEX_TO_RGBA(65,7B,83, FF),		// Result 2
+				HEX_TO_RGBA(83,94,96, FF),		// Result 3
+				HEX_TO_RGBA(93,A1,A1, FF),		// Result 4
 				HEX_TO_RGBA(58,6E,75, FF),		// Border
 				HEX_TO_RGBA(FD,F6,E3, FF),		// Background (top)
 				HEX_TO_RGBA(EE,E8,D5, FF)		// Background (bottom)
@@ -430,7 +442,10 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(E3,8B,5E, FF),		// Background (top)
 				HEX_TO_RGBA(D5,29,0C, FF)		// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(90,9E,92, FF),		// Result
+				HEX_TO_RGBA(46,4D,47, FF),		// Result 1
+				HEX_TO_RGBA(6B,75,6C, FF),		// Result 2
+				HEX_TO_RGBA(90,9E,92, FF),		// Result 3
+				HEX_TO_RGBA(B3,C4,B5, FF),		// Result 4
 				HEX_TO_RGBA(40,40,40, FF),		// Border
 				HEX_TO_RGBA(E2,EB,E3, FF),		// Background (top)
 				HEX_TO_RGBA(A0,A7,A1, FF)		// Background (bottom)
@@ -485,7 +500,10 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(30,0A,24, FF),		// Background (top)
 				HEX_TO_RGBA(30,0A,24, FF)		// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(E9,6F,20, FF),		// Result
+				HEX_TO_RGBA(E9,6F,20, FF),		// Result 1
+				HEX_TO_RGBA(E9,6F,20, FF),		// Result 2
+				HEX_TO_RGBA(E9,6F,20, FF),		// Result 3
+				HEX_TO_RGBA(E9,6F,20, FF),		// Result 4
 				HEX_TO_RGBA(37,37,37, FF),		// Border
 				HEX_TO_RGBA(30,0A,24, FF),		// Background (top)
 				HEX_TO_RGBA(30,0A,24, FF)		// Background (bottom)
@@ -540,7 +558,10 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(E8,E8,E8, FF),		// Background (top)
 				HEX_TO_RGBA(E8,E8,E8, FF)		// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(E9,6F,20, FF),		// Result
+				HEX_TO_RGBA(E9,6F,20, FF),		// Result 1
+				HEX_TO_RGBA(E9,6F,20, FF),		// Result 2
+				HEX_TO_RGBA(E9,6F,20, FF),		// Result 3
+				HEX_TO_RGBA(E9,6F,20, FF),		// Result 4
 				HEX_TO_RGBA(D6,D6,D6, FF),		// Border
 				HEX_TO_RGBA(E8,E8,E8, FF),		// Background (top)
 				HEX_TO_RGBA(E8,E8,E8, FF)		// Background (bottom)
@@ -595,7 +616,10 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(48,48,48, FF),		// Background (top)
 				HEX_TO_RGBA(39,39,39, FF)		// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(97,BF,60, FF),		// Result
+				HEX_TO_RGBA(97,BF,60, FF),		// Result 1
+				HEX_TO_RGBA(97,BF,60, FF),		// Result 2
+				HEX_TO_RGBA(97,BF,60, FF),		// Result 3
+				HEX_TO_RGBA(97,BF,60, FF),		// Result 4
 				HEX_TO_RGBA(3C,3C,3C, FF),		// Border
 				HEX_TO_RGBA(48,48,48, FF),		// Background (top)
 				HEX_TO_RGBA(39,39,39, FF)		// Background (bottom)
@@ -650,7 +674,10 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(38,3C,4A, FF),		// Background (top)
 				HEX_TO_RGBA(38,3C,4A, FF)		// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(59,24,E2, FF),		// Result
+				HEX_TO_RGBA(59,24,E2, FF),		// Result 1
+				HEX_TO_RGBA(59,24,E2, FF),		// Result 2
+				HEX_TO_RGBA(59,24,E2, FF),		// Result 3
+				HEX_TO_RGBA(59,24,E2, FF),		// Result 4
 				HEX_TO_RGBA(1B,1E,24, FF),		// Border
 				HEX_TO_RGBA(38,3C,4A, FF),		// Background (top)
 				HEX_TO_RGBA(38,3C,4A, FF)		// Background (bottom)
@@ -705,7 +732,10 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(33,33,33, FF),		// Background (top)
 				HEX_TO_RGBA(33,33,33, FF)		// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(D6,49,37, FF),		// Result
+				HEX_TO_RGBA(D6,49,37, FF),		// Result 1
+				HEX_TO_RGBA(D6,49,37, FF),		// Result 2
+				HEX_TO_RGBA(D6,49,37, FF),		// Result 3
+				HEX_TO_RGBA(D6,49,37, FF),		// Result 4
 				HEX_TO_RGBA(DE,DE,DE, FF),		// Border
 				HEX_TO_RGBA(33,33,33, FF),		// Background (top)
 				HEX_TO_RGBA(33,33,33, FF)		// Background (bottom)
@@ -760,7 +790,10 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(DE,DE,DE, FF),		// Background (top)
 				HEX_TO_RGBA(DE,DE,DE, FF)		// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(D6,49,37, FF),		// Result
+				HEX_TO_RGBA(D6,49,37, FF),		// Result 1
+				HEX_TO_RGBA(D6,49,37, FF),		// Result 2
+				HEX_TO_RGBA(D6,49,37, FF),		// Result 3
+				HEX_TO_RGBA(D6,49,37, FF),		// Result 4
 				HEX_TO_RGBA(33,33,33, FF),		// Border
 				HEX_TO_RGBA(DE,DE,DE, FF),		// Background (top)
 				HEX_TO_RGBA(DE,DE,DE, FF)		// Background (bottom)
@@ -815,7 +848,10 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(CB,CB,CB, FF),		// Background (top)
 				HEX_TO_RGBA(B5,B5,B5, FF)		// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(95,95,95, FF),		// Result
+				HEX_TO_RGBA(95,95,95, FF),		// Result 1
+				HEX_TO_RGBA(95,95,95, FF),		// Result 2
+				HEX_TO_RGBA(95,95,95, FF),		// Result 3
+				HEX_TO_RGBA(95,95,95, FF),		// Result 4
 				HEX_TO_RGBA(14,23,39, FF),		// Border
 				HEX_TO_RGBA(CB,CB,CB, FF),		// Background (top)
 				HEX_TO_RGBA(B5,B5,B5, FF)		// Background (bottom)
@@ -870,7 +906,10 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(C1,8F,17, FF),		// Background (top)
 				HEX_TO_RGBA(A5,7C,1B, FF)		// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(E6,D8,7E, FF),		// Result
+				HEX_TO_RGBA(E6,D8,7E, FF),		// Result 1
+				HEX_TO_RGBA(E6,D8,7E, FF),		// Result 2
+				HEX_TO_RGBA(E6,D8,7E, FF),		// Result 3
+				HEX_TO_RGBA(E6,D8,7E, FF),		// Result 4
 				HEX_TO_RGBA(E3,9E,1C, FF),		// Border
 				HEX_TO_RGBA(C1,8F,17, FF),		// Background (top)
 				HEX_TO_RGBA(A5,7C,1B, FF)		// Background (bottom)
@@ -925,7 +964,10 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(79,BD,D8, FF),		// Background (top)
 				HEX_TO_RGBA(00,62,87, FF)		// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(54,50,7C, FF),		// Result
+				HEX_TO_RGBA(20,1E,36, FF),		// Result 1
+				HEX_TO_RGBA(5D,57,9C, FF),		// Result 2
+				HEX_TO_RGBA(9C,99,BA, FF),		// Result 3
+				HEX_TO_RGBA(F1,F0,FF, FF),		// Result 4
 				HEX_TO_RGBA(24,31,3A, FF),		// Border
 				HEX_TO_RGBA(79,BD,D8, FF),		// Background (top)
 				HEX_TO_RGBA(00,62,87, FF)		// Background (bottom)
@@ -980,7 +1022,10 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(A2,76,43, FF),		// Background (top)
 				HEX_TO_RGBA(45,41,3F, FF)		// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(72,05,03, FF),		// Result
+				HEX_TO_RGBA(72,05,03, FF),		// Result 1
+				HEX_TO_RGBA(72,05,03, FF),		// Result 2
+				HEX_TO_RGBA(72,05,03, FF),		// Result 3
+				HEX_TO_RGBA(72,05,03, FF),		// Result 4
 				HEX_TO_RGBA(73,3E,34, FF),		// Border
 				HEX_TO_RGBA(A2,76,43, FF),		// Background (top)
 				HEX_TO_RGBA(45,41,3F, FF)		// Background (bottom)
@@ -1035,7 +1080,10 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(C5,C0,AA, FF),		// Background (top)
 				HEX_TO_RGBA(06,3D,06, FF)		// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(4D,7A,55, FF),		// Result
+				HEX_TO_RGBA(4D,7A,55, FF),		// Result 1
+				HEX_TO_RGBA(4D,7A,55, FF),		// Result 2
+				HEX_TO_RGBA(4D,7A,55, FF),		// Result 3
+				HEX_TO_RGBA(4D,7A,55, FF),		// Result 4
 				HEX_TO_RGBA(3B,76,3B, FF),		// Border
 				HEX_TO_RGBA(C5,C0,AA, FF),		// Background (top)
 				HEX_TO_RGBA(06,3D,06, FF)		// Background (bottom)
@@ -1090,7 +1138,10 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(22,84,99, FF),		// Background (top)
 				HEX_TO_RGBA(03,44,4A, FF)		// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(4B,9C,DE, FF),		// Result
+				HEX_TO_RGBA(4B,9C,DE, FF),		// Result 1
+				HEX_TO_RGBA(4B,9C,DE, FF),		// Result 2
+				HEX_TO_RGBA(4B,9C,DE, FF),		// Result 3
+				HEX_TO_RGBA(4B,9C,DE, FF),		// Result 4
 				HEX_TO_RGBA(10,10,10, FF),		// Border
 				HEX_TO_RGBA(22,84,99, FF),		// Background (top)
 				HEX_TO_RGBA(03,44,4A, FF)		// Background (bottom)
@@ -1145,7 +1196,10 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(64,59,CA, FF),		// Background (top)
 				HEX_TO_RGBA(3D,2B,67, FF)		// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(71,80,91, FF),		// Result
+				HEX_TO_RGBA(71,80,91, FF),		// Result 1
+				HEX_TO_RGBA(71,80,91, FF),		// Result 2
+				HEX_TO_RGBA(71,80,91, FF),		// Result 3
+				HEX_TO_RGBA(71,80,91, FF),		// Result 4
 				HEX_TO_RGBA(14,23,39, FF),		// Border
 				HEX_TO_RGBA(64,59,CA, FF),		// Background (top)
 				HEX_TO_RGBA(3D,2B,67, FF)		// Background (bottom)

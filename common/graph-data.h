@@ -99,7 +99,7 @@ typedef struct _ParametricData {
 	gchar command[512];
 	gchar message[512];
 	gboolean error;
-	guint64 result;
+	gdouble result[4];
 	AutoScaler scaler;
 } ParametricData;
 

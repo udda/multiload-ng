@@ -21,7 +21,6 @@
 
 #include <config.h>
 
-#include <errno.h>
 #include <math.h>
 #include <glib/gi18n-lib.h>
 
@@ -41,6 +40,9 @@ multiload_graph_parm_get_data (int Maximum, int data[1], LoadGraph *g, Parametri
 	gchar *stderr = NULL;
 	int exit_status;
 
+	guint i;
+	gdouble total = 0;
+
 	if (xd->command[0] == '\0') {
 		xd->error = TRUE;
 		snprintf(xd->message, sizeof(xd->message), _("Command line is empty."));
@@ -49,30 +51,28 @@ multiload_graph_parm_get_data (int Maximum, int data[1], LoadGraph *g, Parametri
 	spawn_success= g_spawn_command_line_sync (xd->command, &stdout, &stderr, &exit_status, NULL);
 	if (!spawn_success) {
 		xd->error = TRUE;
-		xd->result = 0;
 		snprintf(xd->message, sizeof(xd->message), _("Unable to execute command."));
 	} else if (exit_status != 0) {
 		xd->error = TRUE;
-		xd->result = 0;
 		snprintf(xd->message, sizeof(xd->message), _("Command has exited with status code %d."), exit_status);
 	} else {
 		/* child process:
 		 * - MUST 'exit 0'
-		 * - MUST print a single POSITIVE number on stdout, or at least output must start with a number - unsigned 64 bit - can prefix with 0 (octal) or 0x (hex)
-		 * - CAN print some text on stderr, only the first line will be displayed
+		 * - MUST print to stdout from 1 up to 4 POSITIVE doubles, separated by spaces or newline.
+		 *   They can be prefix with 0 (octal) or 0x (hex). Negative numbers will be set to 0.
+		 +   Any additional content after the numbers is ignored. Point/comma depends on locale settings.
+		 * - CAN print some text on stderr. Any additional content after the first line is ignored
 		 */
 
-		errno = 0;
-		xd->result = g_ascii_strtoull (stdout, NULL, 0);
-		if (errno != 0) {
+		if (sscanf(stdout, "%lf %lf %lf %lf", xd->result+0, xd->result+1, xd->result+2, xd->result+3) < 1) {
 			xd->error = TRUE;
-			snprintf(xd->message, sizeof(xd->message), _("Command did not return a valid number."));
+			snprintf(xd->message, sizeof(xd->message), _("Command did not return valid numbers."));
 		} else {
 			xd->error = FALSE;
 			//copy first line of stderr to xd->message
 			if (stderr != NULL) {
 				guint i;
-				for (i=0; i<sizeof(xd->message); i++) {
+				for (i=0; i<sizeof(xd->message)-1; i++) {
 					if (stderr[i] == '\n' || stderr[i] == '\r')
 						stderr[i] = '\0';
 
@@ -85,10 +85,23 @@ multiload_graph_parm_get_data (int Maximum, int data[1], LoadGraph *g, Parametri
 			} else
 				xd->message[0] = '\0';
 		}
+
 	}
 
-	max = autoscaler_get_max(&xd->scaler, g, xd->result);
-	data[0] = rint (Maximum * (float)xd->result / max);
+	if (xd->error == TRUE) {
+		memset(xd->result, 0, 4*sizeof(xd->result[0]));
+	} else {
+		for (i=0; i<4; i++) {
+			if (xd->result[i] < 0)
+				xd->result[i] = 0;
+			else
+				total += xd->result[i];
+		}
+	}
+
+	max = autoscaler_get_max(&xd->scaler, g, rint(total));
+	for (i=0; i<4; i++)
+		data[i] = rint (Maximum * (float)xd->result[i] / max);
 }
 
 void
@@ -99,12 +112,21 @@ multiload_graph_parm_tooltip_update (char **title, char **text, LoadGraph *g, Pa
 			*text = g_strdup_printf(_(	"Command: %s\n"
 										"ERROR: %s"),
 										xd->command, xd->message);
-		else
+		else {
+			*title = g_strdup(xd->message);
 			*text = g_strdup_printf(_(	"Command: %s\n"
-										"Result: %lu\n"
-										"Message: %s"),
-										xd->command, xd->result, xd->message);
+										"Results: (%.3lf, %.3lf, %.3lf, %.3lf)"),
+										xd->command, xd->result[0], xd->result[1],
+										xd->result[2], xd->result[3]);
+		}
 	} else {
-		*text = g_strdup_printf("%lu", xd->result);
+		if (xd->error)
+			*text = g_strdup_printf(_(	"ERROR: %s"), xd->message);
+		else if (xd->message[0] != '\0')
+			*text = g_strdup(xd->message);
+		else
+			*text = g_strdup_printf("(%lf, %lf, %lf, %lf)",
+										xd->result[0], xd->result[1],
+										xd->result[2], xd->result[3]);
 	}
 }

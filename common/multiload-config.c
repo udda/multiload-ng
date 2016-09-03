@@ -69,7 +69,7 @@ void multiload_config_init()
 			(GraphGetDataFunc)			multiload_graph_temp_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_temp_tooltip_update
 		},
-		{	"parm",	_("Parametric"),	4,
+		{	"parm",	_("Parametric"),	7,
 			(GraphGetDataFunc)			multiload_graph_parm_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_parm_tooltip_update
 		}
