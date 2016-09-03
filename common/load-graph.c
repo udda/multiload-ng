@@ -331,19 +331,9 @@ load_graph_clicked (GtkWidget *widget, GdkEventButton *event, LoadGraph *g)
 }
 
 static gboolean
-load_graph_enter_cb(GtkWidget *widget, GdkEventCrossing *event, LoadGraph *graph)
+load_graph_mouse_move_cb(GtkWidget *widget, GdkEventCrossing *event, LoadGraph *graph)
 {
-	graph->tooltip_update = TRUE;
-	multiload_tooltip_update(graph);
-
-	return TRUE;
-}
-
-static gboolean
-load_graph_leave_cb(GtkWidget *widget, GdkEventCrossing *event, LoadGraph *graph)
-{
-	graph->tooltip_update = FALSE;
-
+	graph->tooltip_update = (event->type == GDK_ENTER_NOTIFY);
 	return TRUE;
 }
 
@@ -398,8 +388,8 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 	g_signal_connect (G_OBJECT(g->disp), "configure_event", G_CALLBACK (load_graph_configure), g);
 	g_signal_connect (G_OBJECT(g->disp), "destroy", G_CALLBACK (load_graph_destroy), g);
 	g_signal_connect (G_OBJECT(g->disp), "button-press-event", G_CALLBACK (load_graph_clicked), g);
-	g_signal_connect (G_OBJECT(g->disp), "enter-notify-event", G_CALLBACK(load_graph_enter_cb), g);
-	g_signal_connect (G_OBJECT(g->disp), "leave-notify-event", G_CALLBACK(load_graph_leave_cb), g);
+	g_signal_connect (G_OBJECT(g->disp), "enter-notify-event", G_CALLBACK(load_graph_mouse_move_cb), g);
+	g_signal_connect (G_OBJECT(g->disp), "leave-notify-event", G_CALLBACK(load_graph_mouse_move_cb), g);
 
 	gtk_box_pack_start (GTK_BOX (g->box), g->disp, TRUE, TRUE, 0);    
 	gtk_widget_show_all(g->box);
