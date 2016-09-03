@@ -60,7 +60,7 @@ multiload_graph_parm_get_data (int Maximum, int data[1], LoadGraph *g, Parametri
 		 * - MUST 'exit 0'
 		 * - MUST print to stdout from 1 up to 4 POSITIVE doubles, separated by spaces or newline.
 		 *   They can be prefix with 0 (octal) or 0x (hex). Negative numbers will be set to 0.
-		 +   Any additional content after the numbers is ignored. Point/comma depends on locale settings.
+		 *   Any additional content after the numbers is ignored. Point/comma depends on locale settings.
 		 * - CAN print some text on stderr. Any additional content after the first line is ignored
 		 */
 
