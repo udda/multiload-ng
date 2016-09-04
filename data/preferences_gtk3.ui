@@ -3697,7 +3697,7 @@
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
 %n - graph number - counting left to right, starting from 1
-%x - short name of the graph - three to four lowercase characters
+%x - graph short name - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
 %2 - second value of graph data - depends on the graph
@@ -3874,7 +3874,7 @@
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
 %n - graph number - counting left to right, starting from 1
-%x - short name of the graph - three to four lowercase characters
+%x - graph short name - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
 %2 - second value of graph data - depends on the graph
@@ -4055,7 +4055,7 @@
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
 %n - graph number - counting left to right, starting from 1
-%x - short name of the graph - three to four lowercase characters
+%x - graph short name - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
 %2 - second value of graph data - depends on the graph
@@ -4308,7 +4308,7 @@
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
 %n - graph number - counting left to right, starting from 1
-%x - short name of the graph - three to four lowercase characters
+%x - graph short name - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
 %2 - second value of graph data - depends on the graph
@@ -4488,7 +4488,7 @@
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
 %n - graph number - counting left to right, starting from 1
-%x - short name of the graph - three to four lowercase characters
+%x - graph short name - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
 %2 - second value of graph data - depends on the graph
@@ -4737,7 +4737,7 @@
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
 %n - graph number - counting left to right, starting from 1
-%x - short name of the graph - three to four lowercase characters
+%x - graph short name - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
 %2 - second value of graph data - depends on the graph
@@ -4988,7 +4988,7 @@
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
 %n - graph number - counting left to right, starting from 1
-%x - short name of the graph - three to four lowercase characters
+%x - graph short name - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
 %2 - second value of graph data - depends on the graph
@@ -5240,7 +5240,7 @@
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
 %n - graph number - counting left to right, starting from 1
-%x - short name of the graph - three to four lowercase characters
+%x - graph short name - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
 %2 - second value of graph data - depends on the graph
