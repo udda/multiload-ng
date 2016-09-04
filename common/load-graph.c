@@ -275,17 +275,20 @@ load_graph_destroy (GtkWidget *widget, LoadGraph *g)
 	gtk_widget_destroy(widget);
 }
 
-static gchar* parse_cmdline(const gchar* cmdline, guint n_graph) {
-	g_assert(n_graph <= GRAPH_MAX);
-
+static gchar* parse_cmdline(const gchar* cmdline, LoadGraph *g) {
 	guint i;
 	gchar *ret, *tmp;
 
-	gchar number[2] = {'1'+n_graph, '\0'};
+	gchar number[2] = {'1'+g->id, '\0'};
+	// Convert escaped percent to UTF-8 invalid byte (so it isn't parsed by other means).
+	// Once other replacements are done, convert back invalid UTF-8 character to escaped percent
+	gchar percent_escape[] = "\xff";
 
 	const gchar *subst_table[][2] = {
-		{ "%n", number },
-		{ "%x", graph_types[n_graph].name }
+		{ "%%",				percent_escape },
+		{ "%n",				number },
+		{ "%x",				graph_types[g->id].name },
+		{ percent_escape,	"%" }
 	};
 
 	ret = g_strdup(cmdline);
@@ -311,7 +314,7 @@ load_graph_clicked (GtkWidget *widget, GdkEventButton *event, LoadGraph *g)
 				g_debug("[load-graph] Detected double click on graph '%s' - action: start task manager (%s)", graph_types[g->id].name, cmdline);
 				break;
 			case DBLCLICK_POLICY_CMDLINE:
-				cmdline = parse_cmdline(g->config->dblclick_cmdline, g->id);
+				cmdline = parse_cmdline(g->config->dblclick_cmdline, g);
 				g_debug("[load-graph] Detected double click on graph '%s' - action: execute command line (%s)", graph_types[g->id].name, cmdline);
 				break;
 			case DBLCLICK_POLICY_DONOTHING:
