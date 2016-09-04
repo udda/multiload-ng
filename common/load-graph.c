@@ -62,13 +62,17 @@ static void
 load_graph_draw (LoadGraph *g)
 {
 	guint i, j;
-	guint c_top, c_bottom;
+	guint c_top, c_bottom, c_border;
 	cairo_t *cr;
 	GraphConfig *config = &(g->multiload->graph_config[g->id]);
 	GdkRGBA *colors = config->colors;
 
-	const guint W = g->draw_width;
-	const guint H = g->draw_height;
+	guint x = 0;
+	guint y = 0;
+	guint W = g->draw_width;
+	guint H = g->draw_height;
+
+	double line_x, line_y, line_y_dest;
 
 	/* we might get called before the configure event so that
 	 * g->disp->allocation may not have the correct size
@@ -81,28 +85,64 @@ load_graph_draw (LoadGraph *g)
 	cairo_set_line_width (cr, 1.0);
 	cairo_set_line_cap (cr, CAIRO_LINE_CAP_SQUARE);
 
-	for (i = 0; i < W; i++)
-		g->pos[i] = H - 1;
-
 	c_top = multiload_colors_get_extra_index(g->id, EXTRA_COLOR_BACKGROUND_TOP);
 	c_bottom = multiload_colors_get_extra_index(g->id, EXTRA_COLOR_BACKGROUND_BOTTOM);
-	cairo_set_vertical_gradient(cr, g->draw_height, &(colors[c_top]), &(colors[c_bottom]));
-	cairo_rectangle(cr, 0, 0, g->draw_width, g->draw_height);
-	cairo_fill(cr);
+	c_border = multiload_colors_get_extra_index(g->id, EXTRA_COLOR_BORDER);
 
-	for (j = 0; j < multiload_config_get_num_data(g->id); j++) {
-		cairo_set_source_rgba_from_config(cr, config, j);
 
-		for (i = 0; i < W; i++) {
-			if (g->data[i][j] == 0)
-				continue;
-			cairo_move_to (cr, W - i - 0.5, g->pos[i] + 0.5);
-			cairo_line_to (cr, W - i - 0.5, g->pos[i] + 0.5 - g->data[i][j]);
+	// border
+	if (config->border_width > 0) {
+		cairo_set_source_rgba_from_config(cr, config, c_border);
+		cairo_rectangle(cr, 0, 0, W, H);
+		cairo_fill(cr);
 
-			g->pos[i] -= g->data[i][j];
+		if (2*config->border_width < W)
+			W -= 2*config->border_width;
+		else
+			W=0;
+
+		if (2*config->border_width < H)
+			H -= 2*config->border_width;
+		else
+			H=0;
+
+		x = config->border_width;
+		y = config->border_width;
+	}
+
+	if (W > 0 && H > 0) {
+		// background
+		cairo_set_vertical_gradient(cr, W, &(colors[c_top]), &(colors[c_bottom]));
+		cairo_rectangle(cr, x, y, W, H);
+		cairo_fill(cr);
+
+		// graph data
+		for (i = 0; i < W; i++)
+			g->pos[i] = H;
+
+		for (j = 0; j < multiload_config_get_num_data(g->id); j++) {
+			cairo_set_source_rgba_from_config(cr, config, j);
+			for (i = 0; i < W; i++) {
+				if (g->data[i][j] == 0)
+					continue;
+
+				line_x = x + W - i - 0.5;
+				line_y = y + g->pos[i] - 0.5;
+				line_y_dest = line_y - g->data[i][j] + 1;
+
+				if (line_y > y) { // don't even begin to draw out of scale values
+					if (line_y_dest < y) // makes sure that line ends to graph border
+						line_y_dest = y + 0.5;
+
+					cairo_move_to (cr, line_x, line_y);
+					cairo_line_to (cr, line_x, line_y_dest);
+				}
+
+				g->pos[i] -= g->data[i][j];
+			}
+
+			cairo_stroke (cr);
 		}
-
-		cairo_stroke (cr);
 	}
 
 	cairo_destroy (cr);
@@ -138,7 +178,8 @@ load_graph_update (LoadGraph *g)
 	load_graph_rotate(g);
 
 	g_assert_nonnull(g->multiload->extra_data);
-	graph_types[g->id].get_data(g->draw_height, g->data [0], g, g->multiload->extra_data[g->id]);
+	guint H = g->draw_height - 2 * (g->multiload->graph_config[g->id].border_width);
+	graph_types[g->id].get_data(H, g->data [0], g, g->multiload->extra_data[g->id]);
 
 	if (g->tooltip_update)
 		multiload_tooltip_update(g);
@@ -241,32 +282,6 @@ load_graph_expose (GtkWidget *widget, GdkEventExpose *event, LoadGraph *g)
 #endif
 */
 
-static gboolean
-load_graph_border_draw_cb (GtkWidget *widget, cairo_t *cr, GdkRGBA *color)
-{
-	GtkAllocation allocation;
-	gtk_widget_get_allocation (widget, &allocation);
-
-	cairo_set_source_rgba(cr, color->red, color->green, color->blue, 1.0);
-	cairo_rectangle(cr, 0, 0, allocation.width, allocation.height);
-	cairo_fill (cr);
-
-	cairo_paint (cr);
-
-	return TRUE;
-}
-
-#if GTK_API == 2
-static gboolean
-load_graph_border_expose (GtkWidget *widget, GdkEventExpose *event, GdkRGBA *color)
-{
-	cairo_t *cr = gdk_cairo_create (event->window);
-	load_graph_border_draw_cb(widget, cr, color);
-	cairo_destroy (cr);
-	return TRUE;
-}
-#endif
-
 static void
 load_graph_destroy (GtkWidget *widget, LoadGraph *g)
 {
@@ -352,7 +367,6 @@ LoadGraph *
 load_graph_new (MultiloadPlugin *ma, guint id)
 {
 	LoadGraph *g;
-	guint k;
 
 	g = g_new0 (LoadGraph, 1);
 	g->id = id;
@@ -364,20 +378,7 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 	g->main_widget = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
 	g->box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-
-
-	k = multiload_colors_get_extra_index(id, EXTRA_COLOR_BORDER);
-	g->border = gtk_event_box_new();
-	#if GTK_API == 2
-		g_signal_connect (G_OBJECT(g->border), "expose_event", G_CALLBACK (load_graph_border_expose), &(ma->graph_config[id].colors[k]));
-	#elif GTK_API == 3
-		g_signal_connect (G_OBJECT(g->border), "draw", G_CALLBACK (load_graph_border_draw_cb), &(ma->graph_config[id].colors[k]));
-	#endif
-	gtk_container_set_border_width(GTK_CONTAINER(g->box), ma->graph_config[id].border_width);
-
-	gtk_container_add (GTK_CONTAINER (g->border), g->box);
-	gtk_box_pack_start (GTK_BOX (g->main_widget), g->border, TRUE, TRUE, 0);
-
+	gtk_box_pack_start (GTK_BOX (g->main_widget), g->box, TRUE, TRUE, 0);
 
 	g->timer_index = -1;
 

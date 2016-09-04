@@ -502,7 +502,6 @@ multiload_preferences_border_changed_cb (GtkSpinButton *spin, MultiloadPlugin *m
 	guint value = gtk_spin_button_get_value_as_int(spin);
 
 	ma->graph_config[i].border_width = value;
-	multiload_set_border_width(ma, i, value);
 }
 
 static void
@@ -530,8 +529,6 @@ multiload_preferences_color_set_cb (GtkColorButton *col, MultiloadPlugin *ma)
 	g_assert(found == TRUE);
 
 	gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER(col), &ma->graph_config[graph_index].colors[i]);
-
-	multiload_refresh_colors(ma, graph_index);
 
 	// every color-set event changes the color scheme to (Custom)
 	multiload_preferences_color_scheme_select_custom();
@@ -563,7 +560,6 @@ multiload_preferences_colorscheme_import_clicked_cb (GtkWidget *tb, MultiloadPlu
 			case MULTILOAD_COLOR_SCHEME_STATUS_VALID:
 				multiload_preferences_update_color_buttons(ma);
 				multiload_preferences_color_scheme_select_custom();
-				multiload_refresh_colors(ma, -1);
 				break;
 			case MULTILOAD_COLOR_SCHEME_STATUS_WRONG_FORMAT:
 				show_modal_info_dialog(parent, GTK_MESSAGE_ERROR, _("Color scheme format is incorrect. Unable to import."));
@@ -631,7 +627,6 @@ multiload_preferences_color_scheme_selected_cb (GtkTreeSelection *sel, Multiload
 			strncpy(ma->color_scheme, scheme->name, sizeof(ma->color_scheme));
 			multiload_color_scheme_apply(scheme, ma);
 			multiload_preferences_update_color_buttons(ma);
-			multiload_refresh_colors(ma, -1);
 		}
 	}
 

@@ -94,7 +94,7 @@ struct _LoadGraph {
 	char output_unit[8];
 
 	GtkWidget *main_widget;
-	GtkWidget *border, *box, *disp;
+	GtkWidget *box, *disp;
 	cairo_surface_t *surface;
 	int timer_index;
 
@@ -120,13 +120,9 @@ multiload_set_spacing (MultiloadPlugin *ma, gint val);
 G_GNUC_INTERNAL void
 multiload_set_padding (MultiloadPlugin *ma, gint val);
 G_GNUC_INTERNAL void
-multiload_set_border_width (MultiloadPlugin *ma, guint graph_id, gint val);
-G_GNUC_INTERNAL void
 multiload_set_max_value (MultiloadPlugin *ma, guint graph_id, int val);
 G_GNUC_INTERNAL int
 multiload_get_max_value (MultiloadPlugin *ma, guint graph_id);
-G_GNUC_INTERNAL void
-multiload_refresh_colors (MultiloadPlugin *ma, guint graph_id);
 G_GNUC_INTERNAL void
 multiload_refresh_orientation (MultiloadPlugin *ma);
 G_GNUC_INTERNAL void
