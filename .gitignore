@@ -22,6 +22,7 @@ libtool
 gmon.out
 common/about-data.c
 common/binary-data.c
+common/color-scheme-icons.inc
 data/generate-about-data.sh
 indicator/indicator-multiload-ng
 mate/mate-multiload-ng-applet
