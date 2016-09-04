@@ -71,7 +71,6 @@ multiload_graph_swap_get_data (int Maximum, int data [1], LoadGraph *g, SwapData
 	}
 	free(buf);
 
-
 	xd->used = (kb_swap_total - kb_swap_free) * 1024;
 	xd->total = kb_swap_total * 1024;
 
@@ -79,17 +78,15 @@ multiload_graph_swap_get_data (int Maximum, int data [1], LoadGraph *g, SwapData
 	   data [0] = 0;
 	else
 	   data [0] = rint (Maximum * (float)(kb_swap_total - kb_swap_free) / kb_swap_total);
-
-	// output for command line
-	if (g->output_unit[0] == '\0')
-		g_strlcpy(g->output_unit, "KiB", sizeof(g->output_unit));
-	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%ld", kb_swap_total - kb_swap_free);
 }
 
 
 void
 multiload_graph_swap_cmdline_output (LoadGraph *g, SwapData *xd)
 {
+	if (g->output_unit[0] == '\0')
+		g_strlcpy(g->output_unit, "KiB", sizeof(g->output_unit));
+	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%ld", xd->used);
 }
 
 
