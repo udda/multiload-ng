@@ -99,6 +99,9 @@ multiload_graph_parm_get_data (int Maximum, int data[1], LoadGraph *g, Parametri
 		}
 	}
 
+	if (g == NULL || data == NULL || Maximum == 0)
+		return; // allow this function to be used just to test command lines
+
 	max = autoscaler_get_max(&xd->scaler, g, rint(total));
 	for (i=0; i<4; i++)
 		data[i] = rint (Maximum * (float)xd->result[i] / max);
