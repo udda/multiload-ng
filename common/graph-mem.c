@@ -134,10 +134,10 @@ multiload_graph_mem_tooltip_update (char **title, char **text, LoadGraph *g, Mem
 		gchar *cache_percent = format_percent(xd->cache, xd->total, 1);
 
 		*title = g_strdup_printf(_("%s of RAM"), total);
-		*text = g_strdup_printf(_(	"%s (%s) in use by programs\n"
-									"%s (%s) in use as shared memory\n"
-									"%s (%s) in use as buffers\n"
-									"%s (%s) in use as cache"),
+		*text = g_strdup_printf(_(	"%s (%s) used by programs\n"
+									"%s (%s) used by shared memory\n"
+									"%s (%s) used for buffers\n"
+									"%s (%s) used as cache"),
 									user, user_percent,
 									shared, shared_percent,
 									buffers, buffers_percent,
