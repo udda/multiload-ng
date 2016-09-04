@@ -92,27 +92,27 @@ multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryDat
 		kb_main_used = kb_main_total - kb_main_free;
 
 	xd->user = kb_main_used * 1024;
-	xd->cache = (kb_main_shared + kb_main_buffers + kb_main_cached) * 1024;
+	xd->shared = kb_main_shared * 1024;
+	xd->buffers = kb_main_buffers * 1024;
+	xd->cache = kb_main_cached * 1024;
 	xd->total = kb_main_total * 1024;
 
 	data [0] = rint (Maximum * (float)kb_main_used   / (float)kb_main_total);
 	data [1] = rint (Maximum * (float)kb_main_shared / (float)kb_main_total);
 	data [2] = rint (Maximum * (float)kb_main_buffers / (float)kb_main_total);
 	data [3] = rint (Maximum * (float)kb_main_cached / (float)kb_main_total);
-
-	// output for command line
-	if (g->output_unit[0] == '\0')
-		g_strlcpy(g->output_unit, "KiB", sizeof(g->output_unit));
-	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%ld", kb_main_used);
-	g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "%ld", kb_main_shared);
-	g_snprintf(g->output_str[2], sizeof(g->output_str[2]), "%ld", kb_main_buffers);
-	g_snprintf(g->output_str[3], sizeof(g->output_str[3]), "%ld", kb_main_cached);
 }
 
 
 void
 multiload_graph_mem_cmdline_output (LoadGraph *g, MemoryData *xd)
 {
+	if (g->output_unit[0] == '\0')
+		g_strlcpy(g->output_unit, "byte", sizeof(g->output_unit));
+	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%ld", xd->user);
+	g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "%ld", xd->shared);
+	g_snprintf(g->output_str[2], sizeof(g->output_str[2]), "%ld", xd->buffers);
+	g_snprintf(g->output_str[3], sizeof(g->output_str[3]), "%ld", xd->cache);
 }
 
 void
@@ -120,15 +120,37 @@ multiload_graph_mem_tooltip_update (char **title, char **text, LoadGraph *g, Mem
 {
 	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
 		gchar *total = g_format_size_full(xd->total, G_FORMAT_SIZE_IEC_UNITS);
-		gchar *user = format_percent(xd->user, xd->total, 1);
-		gchar *cache = format_percent(xd->cache, xd->total, 1);
+
+		gchar *user = g_format_size_full(xd->user, G_FORMAT_SIZE_IEC_UNITS);
+		gchar *user_percent = format_percent(xd->user, xd->total, 1);
+
+		gchar *shared = g_format_size_full(xd->shared, G_FORMAT_SIZE_IEC_UNITS);
+		gchar *shared_percent = format_percent(xd->shared, xd->total, 1);
+
+		gchar *buffers = g_format_size_full(xd->buffers, G_FORMAT_SIZE_IEC_UNITS);
+		gchar *buffers_percent = format_percent(xd->buffers, xd->total, 1);
+
+		gchar *cache = g_format_size_full(xd->cache, G_FORMAT_SIZE_IEC_UNITS);
+		gchar *cache_percent = format_percent(xd->cache, xd->total, 1);
+
 		*title = g_strdup_printf(_("%s of RAM"), total);
-		*text = g_strdup_printf(_(	"%s in use by programs\n"
-									"%s in use as cache"),
-									user, cache);
+		*text = g_strdup_printf(_(	"%s (%s) in use by programs\n"
+									"%s (%s) in use as shared memory\n"
+									"%s (%s) in use as buffers\n"
+									"%s (%s) in use as cache"),
+									user, user_percent,
+									shared, shared_percent,
+									buffers, buffers_percent,
+									cache, cache_percent);
 		g_free(total);
 		g_free(user);
+		g_free(user_percent);
+		g_free(shared);
+		g_free(shared_percent);
+		g_free(buffers);
+		g_free(buffers_percent);
 		g_free(cache);
+		g_free(cache_percent);
 	} else {
 		gchar *use = format_percent(xd->user+xd->cache, xd->total, 0);
 		*text = g_strdup_printf("%s", use);
