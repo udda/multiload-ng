@@ -58,8 +58,8 @@ str_replace(const char *string , const char *needle , const char *replacement)
 	if (c == 0)
 		return g_strdup(string);
 
-	// final size
-	c = s_string + (s_replacement-s_needle)*c;
+	// final size (add 1 for the ending NULL byte)
+	c = s_string + (s_replacement-s_needle)*c + 1;
 
 	// new string with new size
 	newstr = g_malloc0( c );
@@ -75,8 +75,8 @@ str_replace(const char *string , const char *needle , const char *replacement)
 	// copy the part after the last search match
 	final = g_strlcat(newstr, oldstr, c);
 
-	if (final != c)
-		g_warning("[util] Failed prediction of replaced string length (%zu, actually %zu)", c, final);
+	if (final+1 != c)
+		g_warning("[util] Failed prediction of replaced string length (allocated %zu, used %zu)", c, final+1);
 
 	return newstr;
 }
