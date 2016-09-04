@@ -3995,8 +3995,8 @@
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n - graph number, from 1 (CPU) to 7 (temperature)
-%x - short name of the graph - three to four letters
+%n - graph number - counting left to right, starting from 1
+%x - short name of the graph - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
 %2 - second value of graph data - depends on the graph
@@ -4173,8 +4173,8 @@
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n - graph number, from 1 (CPU) to 7 (temperature)
-%x - short name of the graph - three to four letters
+%n - graph number - counting left to right, starting from 1
+%x - short name of the graph - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
 %2 - second value of graph data - depends on the graph
@@ -4355,8 +4355,8 @@
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n - graph number, from 1 (CPU) to 7 (temperature)
-%x - short name of the graph - three to four letters
+%n - graph number - counting left to right, starting from 1
+%x - short name of the graph - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
 %2 - second value of graph data - depends on the graph
@@ -4608,8 +4608,8 @@
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n - graph number, from 1 (CPU) to 7 (temperature)
-%x - short name of the graph - three to four letters
+%n - graph number - counting left to right, starting from 1
+%x - short name of the graph - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
 %2 - second value of graph data - depends on the graph
@@ -4790,8 +4790,8 @@
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n - graph number, from 1 (CPU) to 7 (temperature)
-%x - short name of the graph - three to four letters
+%n - graph number - counting left to right, starting from 1
+%x - short name of the graph - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
 %2 - second value of graph data - depends on the graph
@@ -5043,8 +5043,8 @@
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n - graph number, from 1 (CPU) to 7 (temperature)
-%x - short name of the graph - three to four letters
+%n - graph number - counting left to right, starting from 1
+%x - short name of the graph - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
 %2 - second value of graph data - depends on the graph
@@ -5296,8 +5296,8 @@
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n - graph number, from 1 (CPU) to 7 (temperature)
-%x - short name of the graph - three to four letters
+%n - graph number - counting left to right, starting from 1
+%x - short name of the graph - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
 %2 - second value of graph data - depends on the graph
@@ -5549,8 +5549,8 @@
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n - graph number, from 1 (CPU) to 7 (temperature)
-%x - short name of the graph - three to four letters
+%n - graph number - counting left to right, starting from 1
+%x - short name of the graph - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
 %2 - second value of graph data - depends on the graph
