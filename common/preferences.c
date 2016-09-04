@@ -319,7 +319,9 @@ multiload_preferences_checkboxes_sensitive_cb (GtkToggleButton *checkbox, gpoint
 	// Count the number of visible graphs
 	gint visible_count = 0;
 	gint last_graph = 0;
-	gboolean active = gtk_toggle_button_get_active(checkbox);
+	gboolean active = FALSE;
+	if (checkbox != NULL)
+		active = gtk_toggle_button_get_active(checkbox);
 
 	if (!active) {
 		for (i = 0; i < GRAPH_MAX; i++) {
@@ -807,6 +809,7 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_entry_set_text(GTK_ENTRY(OB("entry_parm_command")), ((ParametricData*)ma->extra_data[GRAPH_PARAMETRIC])->command);
 
 	multiload_preferences_update_color_buttons(ma);
+	multiload_preferences_checkboxes_sensitive_cb(NULL, NULL);
 
 	// color schemes list
 	GtkListStore *ls_colors = GTK_LIST_STORE(OB("liststore_colors"));
