@@ -656,11 +656,9 @@ multiload_preferences_parm_command_test_clicked_cb (GtkWidget *button, Multiload
 	GtkWindow *parent = GTK_WINDOW(gtk_widget_get_toplevel(button));
 
 	if (xd->error == TRUE) {
-		//TODO better message
 		show_modal_info_dialog(parent, GTK_MESSAGE_ERROR, xd->message);
 	} else {
 		g_snprintf(xd->message, sizeof(xd->message), _("Command line is valid. Retrieved %d numbers."), xd->nvalues);
-		//TODO this is not an error!
 		show_modal_info_dialog(parent, GTK_MESSAGE_INFO, xd->message);
 	}
 }
