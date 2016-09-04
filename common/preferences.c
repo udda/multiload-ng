@@ -806,6 +806,8 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 	gint tmp;
 	gboolean color_scheme_is_set = FALSE;
 
+	GdkPixbuf *pix;
+
 	multiload_preferences_init();
 
 	// init values
@@ -839,8 +841,13 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 	for (i=0; multiload_builtin_color_schemes[i].name[0] != '\0'; i++) {
 		const gchar *name = multiload_builtin_color_schemes[i].name;
 
+		if (multiload_builtin_color_schemes[i].xpm_data != NULL)
+			pix = gdk_pixbuf_new_from_xpm_data((const char**)multiload_builtin_color_schemes[i].xpm_data);
+		else
+			pix = NULL;
+
 		// insert color scheme
-		gtk_list_store_insert_with_values(ls_colors, NULL, -1, 0, name, 1, i, -1 );
+		gtk_list_store_insert_with_values( ls_colors, NULL, -1, 0, name, 1, i, 2, pix, -1 );
 
 		// if it's the current color scheme, select it
 		if (strcmp(ma->color_scheme, name) == 0) {

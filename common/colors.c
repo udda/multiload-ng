@@ -28,6 +28,8 @@
 #include "preferences.h"
 
 
+#include "color-scheme-icons.inc"
+
 static const gchar magic_header[MULTILOAD_COLOR_SCHEME_HEADER_SIZE] = "MULTILOAD-NG";
 
 
@@ -163,7 +165,7 @@ multiload_color_scheme_find_by_name (const gchar *name)
 }
 
 const MultiloadColorScheme multiload_builtin_color_schemes[] = {
-	{ DEFAULT_COLOR_SCHEME,
+	{ DEFAULT_COLOR_SCHEME, color_scheme_default_xpm,
 			{  { // CPU  - hue: 196
 				HEX_TO_RGBA(03,6F,96, FF),		// User
 				HEX_TO_RGBA(48,BD,E6, FF),		// System
@@ -221,7 +223,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
-	{ "Tango",
+	{ "Tango", color_scheme_tango_xpm,
 			{  { // CPU  - Tango Sky Blue
 				HEX_TO_RGBA(20,4A,87, FF),		// User
 				HEX_TO_RGBA(34,65,A4, FF),		// System
@@ -279,7 +281,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
-	{ "Solarized Dark",
+	{ "Solarized Dark", color_scheme_solarized_dark_xpm,
 			{  { // CPU  - Solarized Blue
 				HEX_TO_RGBA(26,8B,D2, FF),		// User
 				HEX_TO_RGBA(65,7B,83, FF),		// System
@@ -337,7 +339,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
-	{ "Solarized Light",
+	{ "Solarized Light", color_scheme_solarized_light_xpm,
 			{  { // CPU  - Solarized Blue
 				HEX_TO_RGBA(26,8B,D2, FF),		// User
 				HEX_TO_RGBA(65,7B,83, FF),		// System
@@ -395,7 +397,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
-	{ "Fruity", // http://allfreedesigns.com/bright-color-palettes/
+	{ "Fruity", color_scheme_fruity_xpm, // http://allfreedesigns.com/bright-color-palettes/
 			{  { // CPU  - Blueberries
 				HEX_TO_RGBA(06,44,90, FF),		// User
 				HEX_TO_RGBA(26,86,E0, FF),		// System
@@ -453,7 +455,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
-	{ "Ubuntu Ambiance",
+	{ "Ubuntu Ambiance", color_scheme_ubuntu_ambiance_xpm,
 			{  { // CPU
 				HEX_TO_RGBA(E9,6F,20, FF),		// User
 				HEX_TO_RGBA(E9,6F,20, FF),		// System
@@ -511,7 +513,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
-	{ "Ubuntu Radiance",
+	{ "Ubuntu Radiance", color_scheme_ubuntu_radiance_xpm,
 			{  { // CPU
 				HEX_TO_RGBA(E9,6F,20, FF),		// User
 				HEX_TO_RGBA(E9,6F,20, FF),		// System
@@ -569,7 +571,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
-	{ "Linux Mint",
+	{ "Linux Mint", color_scheme_linux_mint_xpm,
 			{  { // CPU
 				HEX_TO_RGBA(97,BF,60, FF),		// User
 				HEX_TO_RGBA(97,BF,60, FF),		// System
@@ -627,7 +629,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
-	{ "Arc",
+	{ "Arc", color_scheme_arc_xpm,
 			{  { // CPU
 				HEX_TO_RGBA(59,24,E2, FF),		// User
 				HEX_TO_RGBA(59,24,E2, FF),		// System
@@ -685,7 +687,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
-	{ "Numix Dark",
+	{ "Numix Dark", color_scheme_numix_dark_xpm,
 			{  { // CPU
 				HEX_TO_RGBA(D6,49,37, FF),		// User
 				HEX_TO_RGBA(D6,49,37, FF),		// System
@@ -743,7 +745,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
-	{ "Numix Light",
+	{ "Numix Light", color_scheme_numix_light_xpm,
 			{  { // CPU
 				HEX_TO_RGBA(D6,49,37, FF),		// User
 				HEX_TO_RGBA(D6,49,37, FF),		// System
@@ -801,7 +803,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
-	{ "Moon",
+	{ "Moon", color_scheme_moon_xpm,
 			{  { // CPU
 				HEX_TO_RGBA(50,50,50, FF),		// User
 				HEX_TO_RGBA(50,50,50, FF),		// System
@@ -859,7 +861,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
-	{ "Venus",
+	{ "Venus", color_scheme_venus_xpm,
 			{  { // CPU
 				HEX_TO_RGBA(F9,C2,1A, FF),		// User
 				HEX_TO_RGBA(F9,C2,1A, FF),		// System
@@ -917,7 +919,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
-	{ "Earth",
+	{ "Earth", color_scheme_earth_xpm,
 			{  { // CPU
 				HEX_TO_RGBA(33,8C,2E, FF),		// User
 				HEX_TO_RGBA(81,D0,9B, FF),		// System
@@ -975,7 +977,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
-	{ "Mars",
+	{ "Mars", color_scheme_mars_xpm,
 			{  { // CPU
 				HEX_TO_RGBA(DC,AC,9E, FF),		// User
 				HEX_TO_RGBA(DC,AC,9E, FF),		// System
@@ -1033,7 +1035,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
-	{ "Jupiter",
+	{ "Jupiter", color_scheme_jupiter_xpm,
 			{  { // CPU
 				HEX_TO_RGBA(86,CF,80, FF),		// User
 				HEX_TO_RGBA(86,CF,80, FF),		// System
@@ -1091,7 +1093,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
-	{ "Uranus",
+	{ "Uranus", color_scheme_uranus_xpm,
 			{  { // CPU
 				HEX_TO_RGBA(5E,85,87, FF),		// User
 				HEX_TO_RGBA(5E,85,87, FF),		// System
@@ -1149,7 +1151,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
-	{ "Neptune",
+	{ "Neptune", color_scheme_neptune_xpm,
 			{  { // CPU
 				HEX_TO_RGBA(6D,AF,CF, FF),		// User
 				HEX_TO_RGBA(6D,AF,CF, FF),		// System
