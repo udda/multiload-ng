@@ -48,7 +48,7 @@ G_GNUC_INTERNAL gchar*
 format_time_duration(gdouble seconds);
 
 G_GNUC_INTERNAL void
-gtk_error_dialog(GtkWindow *parent, const gchar *message);
+show_modal_info_dialog(GtkWindow *parent, GtkMessageType type, const gchar *message);
 
 G_GNUC_INTERNAL gchar*
 get_system_monitor_executable();

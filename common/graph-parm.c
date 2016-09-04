@@ -64,7 +64,8 @@ multiload_graph_parm_get_data (int Maximum, int data[1], LoadGraph *g, Parametri
 		 * - CAN print some text on stderr. Any additional content after the first line is ignored
 		 */
 
-		if (sscanf(stdout, "%lf %lf %lf %lf", xd->result+0, xd->result+1, xd->result+2, xd->result+3) < 1) {
+		xd->nvalues = sscanf(stdout, "%lf %lf %lf %lf", xd->result+0, xd->result+1, xd->result+2, xd->result+3);
+		if (xd->nvalues < 1) {
 			xd->error = TRUE;
 			snprintf(xd->message, sizeof(xd->message), _("Command did not return valid numbers."));
 		} else {

@@ -102,6 +102,7 @@ typedef struct _ParametricData {
 	gchar message[512];
 	gboolean error;
 	gdouble result[4];
+	int nvalues;
 	AutoScaler scaler;
 } ParametricData;
 

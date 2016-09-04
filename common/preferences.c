@@ -566,10 +566,10 @@ multiload_preferences_colorscheme_import_clicked_cb (GtkWidget *tb, MultiloadPlu
 				multiload_refresh_colors(ma, -1);
 				break;
 			case MULTILOAD_COLOR_SCHEME_STATUS_WRONG_FORMAT:
-				gtk_error_dialog(parent, _("Color scheme format is incorrect. Unable to import."));
+				show_modal_info_dialog(parent, GTK_MESSAGE_ERROR, _("Color scheme format is incorrect. Unable to import."));
 				break;
 			case MULTILOAD_COLOR_SCHEME_STATUS_WRONG_VERSION:
-				gtk_error_dialog(parent, _("Color scheme was created by an incompatible version of Multiload-ng. Unable to import."));
+				show_modal_info_dialog(parent, GTK_MESSAGE_ERROR, _("Color scheme was created by an incompatible version of Multiload-ng. Unable to import."));
 				break;
 		}
 	}
@@ -601,7 +601,7 @@ multiload_preferences_colorscheme_export_clicked_cb (GtkWidget *tb, MultiloadPlu
 		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
 		result = multiload_color_scheme_to_file(filename, ma);
 		if (!result)
-			gtk_error_dialog(parent, _("Error exporting color scheme."));
+			show_modal_info_dialog(parent, GTK_MESSAGE_ERROR, _("Error exporting color scheme."));
 	}
 
 	gtk_widget_destroy (dialog);
@@ -649,41 +649,20 @@ multiload_preferences_parm_command_changed_cb (GtkEntry *entry, MultiloadPlugin 
 static void
 multiload_preferences_parm_command_test_clicked_cb (GtkWidget *button, MultiloadPlugin *ma)
 {
-	gchar *stdout, *stderr;
-	gint exit_status;
-
 	ParametricData *xd = (ParametricData*)ma->extra_data[GRAPH_PARAMETRIC];
+	// test command line and fill structure with result
+	multiload_graph_parm_get_data(0, NULL, NULL, xd);
 
-	if (xd->command[0] == '\0') {
-		//TODO better message
-		gtk_error_dialog(GTK_WINDOW(gtk_widget_get_toplevel(button)), _("Command line is empty."));
-		return;
-	}
+	GtkWindow *parent = GTK_WINDOW(gtk_widget_get_toplevel(button));
 
-	gboolean spawn_success= g_spawn_command_line_sync (xd->command, &stdout, &stderr, &exit_status, NULL);
-	if (!spawn_success) {
+	if (xd->error == TRUE) {
 		//TODO better message
-		gtk_error_dialog(GTK_WINDOW(gtk_widget_get_toplevel(button)), _("Unable to execute command."));
-		return;
-	} else if (exit_status != 0) {
-		//TODO better message
-		gchar *err_str = g_strdup_printf(_("Command has exited with status code %d."), exit_status);
-		gtk_error_dialog(GTK_WINDOW(gtk_widget_get_toplevel(button)), err_str);
-		g_free(err_str);
-		return;
-	}
-
-	errno = 0;
-	g_ascii_strtoull (stdout, NULL, 0);
-	if (errno != 0) {
-		//TODO better message
-		gtk_error_dialog(GTK_WINDOW(gtk_widget_get_toplevel(button)), _("Command did not return a valid number."));
-		return;
+		show_modal_info_dialog(parent, GTK_MESSAGE_ERROR, xd->message);
 	} else {
+		g_snprintf(xd->message, sizeof(xd->message), _("Command line is valid. Retrieved %d numbers."), xd->nvalues);
 		//TODO this is not an error!
-		gtk_error_dialog(GTK_WINDOW(gtk_widget_get_toplevel(button)), _("Command line is valid."));
+		show_modal_info_dialog(parent, GTK_MESSAGE_INFO, xd->message);
 	}
-
 }
 
 static void

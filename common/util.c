@@ -207,11 +207,11 @@ format_time_duration(gdouble seconds) {
 }
 
 
-void gtk_error_dialog(GtkWindow *parent, const gchar *message)
+void show_modal_info_dialog(GtkWindow *parent, GtkMessageType type, const gchar *message)
 {
 	GtkWidget *dialog = gtk_message_dialog_new(parent,
 						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-						GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "%s", message);
+						type, GTK_BUTTONS_CLOSE, "%s", message);
 	g_signal_connect (G_OBJECT (dialog), "response", (GCallback)gtk_widget_destroy, NULL);
 	gtk_widget_show(dialog);
 }
