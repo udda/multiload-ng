@@ -46,9 +46,17 @@ multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData
 	setlocale(LC_NUMERIC, savelocale);
 	free(savelocale);
 
-
 	int max = autoscaler_get_max(&xd->scaler, g, rint(xd->loadavg_1));
 	data [0] = rint ((float) Maximum * xd->loadavg_1 / max);
+}
+
+void
+multiload_graph_load_cmdline_output (LoadGraph *g, LoadData *xd)
+{
+	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%.02f", xd->loadavg_1);
+	g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "%.02f", xd->loadavg_5);
+	g_snprintf(g->output_str[2], sizeof(g->output_str[2]), "%.02f", xd->loadavg_15);
+	g_snprintf(g->output_str[3], sizeof(g->output_str[3]), "%u/%u", xd->proc_active, xd->proc_count);
 }
 
 void

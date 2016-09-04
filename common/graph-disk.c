@@ -120,21 +120,30 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 	xd->last_read  = read_total;
 	xd->last_write = write_total;
 
-	if (first_call) {
-		// cannot calculate diff on first call
+	if (first_call) { // cannot calculate diff on first call
 		first_call = FALSE;
-		return;
+	} else {
+		max = autoscaler_get_max(&xd->scaler, g, readdiff + writediff);
+
+		data[0] = (float)Maximum *  readdiff / (float)max;
+		data[1] = (float)Maximum * writediff / (float)max;
+
+		// read/write are relative to standard linux sectors (512 bytes, fixed)
+		xd->read_speed  = calculate_speed(readdiff  * 512, g->config->interval);
+		xd->write_speed = calculate_speed(writediff * 512, g->config->interval);
 	}
-
-	max = autoscaler_get_max(&xd->scaler, g, readdiff + writediff);
-
-	data[0] = (float)Maximum *  readdiff / (float)max;
-	data[1] = (float)Maximum * writediff / (float)max;
-
-	// read/write are relative to standard linux sectors (512 bytes, fixed)
-	xd->read_speed  = calculate_speed(readdiff  * 512, g->config->interval);
-	xd->write_speed = calculate_speed(writediff * 512, g->config->interval);
 }
+
+
+void
+multiload_graph_disk_cmdline_output (LoadGraph *g, DiskData *xd)
+{
+	if (g->output_unit[0] == '\0')
+		g_strlcpy(g->output_unit, "Bps", sizeof(g->output_unit));
+	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%ld", xd->read_speed);
+	g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "%ld", xd->write_speed);
+}
+
 
 void
 multiload_graph_disk_tooltip_update (char **title, char **text, LoadGraph *g, DiskData *xd)

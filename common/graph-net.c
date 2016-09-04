@@ -217,6 +217,18 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 	memcpy(xd->last, present, sizeof xd->last);
 }
 
+
+void
+multiload_graph_net_cmdline_output (LoadGraph *g, NetData *xd)
+{
+	if (g->output_unit[0] == '\0')
+		g_strlcpy(g->output_unit, "Bps", sizeof(g->output_unit));
+	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%ld", xd->in_speed);
+	g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "%ld", xd->out_speed);
+	g_snprintf(g->output_str[2], sizeof(g->output_str[2]), "%ld", xd->local_speed);
+}
+
+
 void
 multiload_graph_net_tooltip_update (char **title, char **text, LoadGraph *g, NetData *xd)
 {

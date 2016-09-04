@@ -104,6 +104,16 @@ multiload_graph_parm_get_data (int Maximum, int data[1], LoadGraph *g, Parametri
 		data[i] = rint (Maximum * (float)xd->result[i] / max);
 }
 
+
+void
+multiload_graph_parm_cmdline_output (LoadGraph *g, ParametricData *xd)
+{
+	guint i;
+	for (i=0; i<4; i++)
+		g_snprintf(g->output_str[i], sizeof(g->output_str[i]), "%lf", xd->result[i]);
+}
+
+
 void
 multiload_graph_parm_tooltip_update (char **title, char **text, LoadGraph *g, ParametricData *xd)
 {

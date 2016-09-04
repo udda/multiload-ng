@@ -111,17 +111,29 @@ multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *
 			total += diff[i];
 		}
 
-		xd->user			= (float)(diff[CPU_USER]) / total;
-		xd->nice			= (float)(diff[CPU_NICE]) / total;
-		xd->system			= (float)(diff[CPU_SYS]) / total;
-		xd->iowait			= (float)(diff[CPU_IOWAIT]) / total;
-		xd->total_use		= (float)(total-diff[CPU_IDLE]) / total;
+		xd->user			= 100.0 * (float)(diff[CPU_USER]) / total;
+		xd->nice			= 100.0 * (float)(diff[CPU_NICE]) / total;
+		xd->system			= 100.0 * (float)(diff[CPU_SYS]) / total;
+		xd->iowait			= 100.0 * (float)(diff[CPU_IOWAIT]) / total;
+		xd->total_use		= 100.0 * (float)(total-diff[CPU_IDLE]) / total;
 
 		for (i=0; i<CPU_MAX; i++)
 			data[i] = rint (Maximum * (float)diff[i] / total);
 	}
 
 	memcpy(xd->last, time, sizeof xd->last);
+}
+
+
+void
+multiload_graph_cpu_cmdline_output (LoadGraph *g, CpuData *xd)
+{
+	if (g->output_unit[0] == '\0')
+		g_strlcpy(g->output_unit, "%", sizeof(g->output_unit));
+	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%.03f", xd->user);
+	g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "%.03f", xd->nice);
+	g_snprintf(g->output_str[2], sizeof(g->output_str[2]), "%.03f", xd->system);
+	g_snprintf(g->output_str[3], sizeof(g->output_str[3]), "%.03f", xd->iowait);
 }
 
 
@@ -140,11 +152,7 @@ multiload_graph_cpu_tooltip_update (char **title, char **text, LoadGraph *g, Cpu
 									"\n"
 									"Uptime: %s"),
 									xd->num_cpu, xd->cpu0_mhz/1000.0, xd->cpu0_governor,
-									(xd->user*100),
-									(xd->nice*100),
-									(xd->system*100),
-									(xd->iowait*100),
-									(xd->total_use*100),
+									xd->user, xd->nice, xd->system, xd->iowait, xd->total_use,
 									uptime);
 		g_free(uptime);
 	} else {

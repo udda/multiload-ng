@@ -3997,6 +3997,13 @@
 
 %n - graph number, from 1 (CPU) to 7 (temperature)
 %x - short name of the graph - three to four letters
+
+%1 - first value of graph data - depends on the graph
+%2 - second value of graph data - depends on the graph
+%3 - third value of graph data - depends on the graph
+%4 - fourth value of graph data - depends on the graph
+%u - measure unit in which graph data values are measured
+
 %% - inserts a literal percent sign</property>
                         <property name="icon_name">dialog-information</property>
                       </object>
@@ -4168,6 +4175,13 @@
 
 %n - graph number, from 1 (CPU) to 7 (temperature)
 %x - short name of the graph - three to four letters
+
+%1 - first value of graph data - depends on the graph
+%2 - second value of graph data - depends on the graph
+%3 - third value of graph data - depends on the graph
+%4 - fourth value of graph data - depends on the graph
+%u - measure unit in which graph data values are measured
+
 %% - inserts a literal percent sign</property>
                         <property name="icon_name">dialog-information</property>
                       </object>
@@ -4343,6 +4357,13 @@
 
 %n - graph number, from 1 (CPU) to 7 (temperature)
 %x - short name of the graph - three to four letters
+
+%1 - first value of graph data - depends on the graph
+%2 - second value of graph data - depends on the graph
+%3 - third value of graph data - depends on the graph
+%4 - fourth value of graph data - depends on the graph
+%u - measure unit in which graph data values are measured
+
 %% - inserts a literal percent sign</property>
                         <property name="icon_name">dialog-information</property>
                       </object>
@@ -4589,6 +4610,13 @@
 
 %n - graph number, from 1 (CPU) to 7 (temperature)
 %x - short name of the graph - three to four letters
+
+%1 - first value of graph data - depends on the graph
+%2 - second value of graph data - depends on the graph
+%3 - third value of graph data - depends on the graph
+%4 - fourth value of graph data - depends on the graph
+%u - measure unit in which graph data values are measured
+
 %% - inserts a literal percent sign</property>
                         <property name="icon_name">dialog-information</property>
                       </object>
@@ -4764,6 +4792,13 @@
 
 %n - graph number, from 1 (CPU) to 7 (temperature)
 %x - short name of the graph - three to four letters
+
+%1 - first value of graph data - depends on the graph
+%2 - second value of graph data - depends on the graph
+%3 - third value of graph data - depends on the graph
+%4 - fourth value of graph data - depends on the graph
+%u - measure unit in which graph data values are measured
+
 %% - inserts a literal percent sign</property>
                         <property name="icon_name">dialog-information</property>
                       </object>
@@ -5010,6 +5045,13 @@
 
 %n - graph number, from 1 (CPU) to 7 (temperature)
 %x - short name of the graph - three to four letters
+
+%1 - first value of graph data - depends on the graph
+%2 - second value of graph data - depends on the graph
+%3 - third value of graph data - depends on the graph
+%4 - fourth value of graph data - depends on the graph
+%u - measure unit in which graph data values are measured
+
 %% - inserts a literal percent sign</property>
                         <property name="icon_name">dialog-information</property>
                       </object>
@@ -5256,6 +5298,13 @@
 
 %n - graph number, from 1 (CPU) to 7 (temperature)
 %x - short name of the graph - three to four letters
+
+%1 - first value of graph data - depends on the graph
+%2 - second value of graph data - depends on the graph
+%3 - third value of graph data - depends on the graph
+%4 - fourth value of graph data - depends on the graph
+%u - measure unit in which graph data values are measured
+
 %% - inserts a literal percent sign</property>
                         <property name="icon_name">dialog-information</property>
                       </object>
@@ -5502,6 +5551,13 @@
 
 %n - graph number, from 1 (CPU) to 7 (temperature)
 %x - short name of the graph - three to four letters
+
+%1 - first value of graph data - depends on the graph
+%2 - second value of graph data - depends on the graph
+%3 - third value of graph data - depends on the graph
+%4 - fourth value of graph data - depends on the graph
+%u - measure unit in which graph data values are measured
+
 %% - inserts a literal percent sign</property>
                         <property name="icon_name">dialog-information</property>
                       </object>

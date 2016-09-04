@@ -99,6 +99,20 @@ multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryDat
 	data [1] = rint (Maximum * (float)kb_main_shared / (float)kb_main_total);
 	data [2] = rint (Maximum * (float)kb_main_buffers / (float)kb_main_total);
 	data [3] = rint (Maximum * (float)kb_main_cached / (float)kb_main_total);
+
+	// output for command line
+	if (g->output_unit[0] == '\0')
+		g_strlcpy(g->output_unit, "KiB", sizeof(g->output_unit));
+	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%ld", kb_main_used);
+	g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "%ld", kb_main_shared);
+	g_snprintf(g->output_str[2], sizeof(g->output_str[2]), "%ld", kb_main_buffers);
+	g_snprintf(g->output_str[3], sizeof(g->output_str[3]), "%ld", kb_main_cached);
+}
+
+
+void
+multiload_graph_mem_cmdline_output (LoadGraph *g, MemoryData *xd)
+{
 }
 
 void
