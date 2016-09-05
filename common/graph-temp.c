@@ -24,6 +24,7 @@
 #include <dirent.h>
 #include <math.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "graph-data.h"
 #include "autoscaler.h"

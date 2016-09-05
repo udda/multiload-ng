@@ -21,6 +21,7 @@
 
 #include <config.h>
 
+#include <locale.h>
 #include <math.h>
 #include <stdlib.h>
 
