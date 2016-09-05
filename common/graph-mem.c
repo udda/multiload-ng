@@ -138,10 +138,10 @@ multiload_graph_mem_tooltip_update (char **title, char **text, LoadGraph *g, Mem
 									"%s (%s) used by shared memory\n"
 									"%s (%s) used for buffers\n"
 									"%s (%s) used as cache"),
-									user, user_percent,
-									shared, shared_percent,
-									buffers, buffers_percent,
-									cache, cache_percent);
+									user_percent, user,
+									shared_percent, shared,
+									buffers_percent, buffers,
+									cache_percent, cache);
 		g_free(total);
 		g_free(user);
 		g_free(user_percent);
