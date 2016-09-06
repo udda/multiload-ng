@@ -127,7 +127,8 @@ multiload_graph_parm_tooltip_update (char **title, char **text, LoadGraph *g, Pa
 										"ERROR: %s"),
 										xd->command, xd->message);
 		else {
-			*title = g_strdup(xd->message);
+			if (xd->message[0] != '\0')
+				*title = g_strdup(xd->message);
 			*text = g_strdup_printf(_(	"Command: %s\n"
 										"Results: (%.3lf, %.3lf, %.3lf, %.3lf)"),
 										xd->command, xd->result[0], xd->result[1],
