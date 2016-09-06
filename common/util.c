@@ -88,20 +88,22 @@ file_check_contents(FILE *f, const gchar *string)
 	size_t n;
 	size_t s;
 	gchar *buf;
+	gboolean result;
 
 	n = strlen(string);
 	buf = (gchar*)malloc(n);
 
 	s = fread(buf, 1, n, f);
-	g_free(buf);
 
 	if (s != n)
-		return FALSE;
+		result = FALSE;
+	else if (strncmp(buf, string, n) != 0)
+		result = FALSE;
+	else
+		result = TRUE;
 
-	if (strncmp(buf, string, n) != 0)
-		return FALSE;
-
-	return TRUE;
+	g_free(buf);
+	return result;
 }
 
 gint64
