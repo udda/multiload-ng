@@ -32,110 +32,304 @@
 #include "util.h"
 
 
-void
-multiload_graph_temp_get_data (int Maximum, int data[2], LoadGraph *g, TemperatureData *xd)
+typedef struct {
+	char name[20];
+	char node_path[PATH_MAX];
+	char temp_path[PATH_MAX];
+
+	gint64 temp;
+	gint64 critical;
+} TemperatureSourceData;
+
+typedef enum {
+	TEMP_SOURCE_SUPPORT_UNINITIALIZED,
+
+	TEMP_SOURCE_SUPPORT_HWMON,
+	TEMP_SOURCE_SUPPORT_ACPITZ,
+	// TODO: if other sources are added, this enum should become a bitmask, as they might not be mutually exclusive
+
+	TEMP_SOURCE_NO_SUPPORT
+} TemperatureSourceSupport;
+
+
+static gboolean
+list_temp_acpitz(TemperatureSourceData **list, gboolean init)
 {
-	guint temp = 0;
-	guint i, j, t;
+	static const char *root_node = "/sys/class/thermal";
 
+	FILE *f;
 	DIR *dir;
-	struct dirent *entry;
+	struct dirent *dirent;
 
-	static gboolean first_call = TRUE;
-	static gboolean support = FALSE;
+	guint n_zones = 0;
 
-	// hold path and max temp for each thermal zone, filled on first call
-	static guint n_zones = 0;
-	static gchar **paths = NULL;
-	static guint *maxtemps = NULL;
+	gchar buf[PATH_MAX];
+	guint i, j;
+	size_t s;
 
-	// handle errors by providing empty data if something goes wrong
-	memset(data, 0, 2 * sizeof data[0]);
 
-	if (G_UNLIKELY(first_call)) {
-		first_call = FALSE;
+	if (init) {
+		// check if /sys node exists, otherwise means no acpitz support
+		dir = opendir(root_node);
+		if (dir == NULL)
+			return FALSE;
 
-		gchar *d_base = "/sys/class/thermal";
-
-		// check if /sys path exists
-		dir = opendir(d_base);
-		if (!dir)
-			return;
-
-		// count thermal_zoneX dirs
-		while ((entry = readdir(dir)) != NULL) {
-			if (strncmp(entry->d_name, "thermal_zone", 12) == 0)
+		// count thermal_zone* dirs
+		while ((dirent = readdir(dir)) != NULL) {
+			if (strncmp(dirent->d_name, "thermal_zone", 12) == 0)
 				n_zones++;
 		}
 
-		// if there is at least one thermal zone, we can proceed
-		if (n_zones > 0)
-			support = TRUE;
+		// check whether there is at least one thermal zone, otherwise means no acpitz support
+		if (n_zones == 0)
+			return FALSE;
 
-		// allocate buffers
-		paths    = (gchar**) malloc( n_zones * sizeof (gchar*) );
-		maxtemps = g_new0(guint, n_zones);
+		// allocate data (plus guard item to the end, with temp_path="")
+		*list = g_new0(TemperatureSourceData, n_zones+1);
 
-		// fill buffers
+		// fill static data (do not read actual temperature in init phase)
 		i=0;
 		rewinddir(dir);
-		while ((entry = readdir(dir)) != NULL) {
-			if (strncmp(entry->d_name, "thermal_zone", 12) != 0)
+		while ((dirent = readdir(dir)) != NULL) {
+			if (strncmp(dirent->d_name, "thermal_zone", 12) != 0)
 				continue;
 
-			gchar *d_thermal = g_strdup_printf("%s/%s", d_base, entry->d_name);
+			// fill paths
+			g_snprintf((*list)[i].node_path, sizeof((*list)[i].node_path), "%s/%s", root_node, dirent->d_name);
+			g_snprintf((*list)[i].temp_path, sizeof((*list)[i].temp_path), "%s/temp", (*list)[i].node_path);
 
-			// find "critical" (max) temperature searching in trip points
-			for (j=0; ; j++) {
-				gchar *d_type = g_strdup_printf("%s/trip_point_%d_type", d_thermal, j);
-				FILE *f_type = fopen(d_type, "r");
-				g_free(d_type);
+			// fill name from device path if present, else generate unique name
+			g_snprintf(buf, PATH_MAX, "%s/device/path", (*list)[i].node_path);
+			if ((f = fopen(buf, "r")) != NULL) {
+				s = fscanf(f, "%s", buf);
+				fclose(f);
 
-				if (!f_type)
-					break; //no more trip point files, stop searching
-				gboolean found = file_check_contents(f_type, "critical");
-				fclose(f_type);
-
-				if (found) { // found critical temp
-					gchar *d_temp = g_strdup_printf("%s/trip_point_%d_temp", d_thermal, j);
-					t = read_int_from_file(d_temp);
-					g_free(d_temp);
-					if (t > maxtemps[i])
-						maxtemps[i] = t;
-				}
+				// remove leading path prefix
+				if (strncmp(buf, "\\_TZ_.", 6) == 0)
+					strncpy((*list)[i].name, buf+6, sizeof((*list)[i].name));
+				else
+					strncpy((*list)[i].name, buf, sizeof((*list)[i].name));
 			}
-			paths[i] = g_strdup_printf("%s/temp", d_thermal);
+			if ((*list)[i].name[0] == '\0')
+				g_snprintf((*list)[i].name, sizeof((*list)[i].name), "thermal_zone%d (ACPI)", i);
+
+			// find "critical" temperature searching in trip points
+			for (j=0; ; j++) {
+				g_snprintf(buf, PATH_MAX, "%s/trip_point_%d_type", (*list)[i].node_path, j);
+
+				if ((f = fopen(buf, "r")) == NULL)
+					break; //no more trip point files, stop searching
+
+				if (file_check_contents(f, "critical")) { // found critical temp
+					g_snprintf(buf, PATH_MAX, "%s/trip_point_%d_temp", (*list)[i].node_path, j);
+					(*list)[i].critical = read_int_from_file(buf);
+				}
+
+				fclose(f);
+			}
 			i++;
-			g_free(d_thermal);
 		}
 		closedir(dir);
+		return TRUE;
 	}
 
-	// check if we have sysfs thermal support
-	if (!support)
+	// read phase - always return TRUE
+	for (i=0; (*list)[i].temp_path[0] != '\0'; i++)
+		(*list)[i].temp = read_int_from_file((*list)[i].temp_path);
+
+	return TRUE;
+}
+
+static gboolean
+list_temp_hwmon(TemperatureSourceData **list, gboolean init)
+{
+	static const char *root_node = "/sys/class/hwmon";
+
+	FILE *f;
+	DIR *dir;
+	DIR *subdir;
+	struct dirent *dirent;
+	struct dirent *subdirent;
+
+	guint n_zones = 0;
+
+	char name[60];
+	char buf[PATH_MAX];
+	char *tmp;
+	size_t s;
+	guint i, n;
+
+
+	if (init) {
+		// check if /sys node exists, otherwise means no hwmon support
+		dir = opendir(root_node);
+		if (dir == NULL)
+			return FALSE;
+
+		// count thermal_zone* dirs
+		while ((dirent = readdir(dir)) != NULL) {
+			if (!strcmp(dirent->d_name, ".") || !strcmp(dirent->d_name, ".."))
+				continue;
+
+			g_snprintf(buf, PATH_MAX, "%s/%s", root_node, dirent->d_name);
+
+			subdir = opendir(buf);
+			if (subdir == NULL)
+				continue;
+
+			while ((subdirent = readdir(subdir)) != NULL) {
+				if (!strcmp(subdirent->d_name, ".") || !strcmp(subdirent->d_name, ".."))
+					continue;
+				if (g_regex_match_simple("^temp[0-9]+_input$", subdirent->d_name, 0, 0))
+					n_zones++;
+			}
+			closedir(subdir);
+		}
+
+		// check whether there is at least one thermal zone, otherwise means no hwmon support
+		if (n_zones == 0)
+			return FALSE;
+
+		// allocate data (plus guard item to the end, with temp_path="")
+		*list = g_new0(TemperatureSourceData, n_zones+1);
+
+		// fill static data (do not read actual temperature in init phase)
+		i=0;
+		rewinddir(dir);
+		while ((dirent = readdir(dir)) != NULL) {
+			if (!strcmp(dirent->d_name, ".") || !strcmp(dirent->d_name, ".."))
+				continue;
+			g_snprintf(buf, PATH_MAX, "%s/%s", root_node, dirent->d_name);
+
+			subdir = opendir(buf);
+			if (subdir == NULL)
+				continue;
+
+			while ((subdirent = readdir(subdir)) != NULL) {
+				if (!strcmp(subdirent->d_name, ".") || !strcmp(subdirent->d_name, ".."))
+					continue;
+				if (g_regex_match_simple("^temp[0-9]+_input$", subdirent->d_name, 0, 0) == FALSE)
+					continue;
+
+				// get hwmon driver name
+				g_snprintf(buf, PATH_MAX, "%s/%s/name", root_node, dirent->d_name);
+				f  = fopen(buf, "r");
+				if (f != NULL) {
+					s = fscanf(f, "%s", name);
+					fclose(f);
+				}
+
+				// fill name - search for temp*_label, else generate unique name
+				tmp = str_replace(subdirent->d_name, "_input", "_label");
+				g_snprintf(buf, PATH_MAX, "%s/%s/%s", root_node, dirent->d_name, tmp);
+				g_free(tmp);
+				f  = fopen(buf, "r");
+				if (f != NULL) {
+					s = fscanf(f, "%s", buf);
+					fclose(f);
+					g_snprintf((*list)[i].name, sizeof((*list)[i].name), "%s (%s)", buf, name);
+				} else {
+					n = atoi(&subdirent->d_name[4]);
+					g_snprintf((*list)[i].name, sizeof((*list)[i].name), "#%d (%s)", n, name);
+				}
+
+				// fill paths
+				g_snprintf((*list)[i].node_path, sizeof((*list)[i].node_path), "%s/%s", root_node, dirent->d_name);
+				g_snprintf((*list)[i].temp_path, sizeof((*list)[i].temp_path), "%s/%s", (*list)[i].node_path, subdirent->d_name);
+
+				// look first for temp*_crit, then for temp*_max, else set critical = 0
+				tmp = str_replace(subdirent->d_name, "_input", "_crit");
+				g_snprintf(buf, PATH_MAX, "%s/%s/%s", root_node, dirent->d_name, tmp);
+				g_free(tmp);
+				(*list)[i].critical = read_int_from_file(buf);
+				if ((*list)[i].critical == 0) {
+					tmp = str_replace(subdirent->d_name, "_input", "_max");
+					g_snprintf(buf, PATH_MAX, "%s/%s/%s", root_node, dirent->d_name, tmp);
+					g_free(tmp);
+					(*list)[i].critical = read_int_from_file(buf);
+				}
+
+				i++;
+			}
+			closedir(subdir);
+		}
+		closedir(dir);
+		return TRUE;
+	}
+
+	// read phase - always return TRUE
+	for (i=0; (*list)[i].temp_path[0] != '\0'; i++)
+		(*list)[i].temp = read_int_from_file((*list)[i].temp_path);
+
+	return TRUE;
+}
+
+void
+multiload_graph_temp_get_data (int Maximum, int data[2], LoadGraph *g, TemperatureData *xd)
+{
+	static TemperatureSourceSupport support = TEMP_SOURCE_SUPPORT_UNINITIALIZED;
+	static TemperatureSourceData *list = NULL;
+	TemperatureSourceData *use = NULL;
+
+	guint i, m;
+
+	if (G_UNLIKELY(support == TEMP_SOURCE_NO_SUPPORT))
 		return;
 
-	// finds max temperature and its index (to use the respective maximum)
-	for (i=0,j=0; i<n_zones; i++) {
-		t = read_int_from_file(paths[i]);
-		if (t > temp) {
-			temp = t;
-			j = i;
-		}
+	// initialization phase: looks for support type and builds static data
+	if (G_UNLIKELY(support == TEMP_SOURCE_SUPPORT_UNINITIALIZED)) {
+		if (list_temp_hwmon(&list, TRUE))
+			support = TEMP_SOURCE_SUPPORT_HWMON;
+		else if (list_temp_acpitz(&list, TRUE))
+			support = TEMP_SOURCE_SUPPORT_ACPITZ;
+		else
+			support = TEMP_SOURCE_NO_SUPPORT;
 	}
 
-	int max = autoscaler_get_max(&xd->scaler, g, temp);
+	// read phase: fills in current temperature values
+	switch (support) {
+		case TEMP_SOURCE_SUPPORT_HWMON:
+			list_temp_hwmon(&list, FALSE);
+			break;
+		case TEMP_SOURCE_SUPPORT_ACPITZ:
+			list_temp_acpitz(&list, FALSE);
+			break;
+		default:
+			g_assert_not_reached();
+			return;
+	}
 
-	if (maxtemps[j] > 0 && maxtemps[j] < temp) {
-		data[0] = rint (Maximum * (float)(maxtemps[j]) / max);
-		data[1] = rint (Maximum * (float)(temp-maxtemps[j]) / max);
+	// select phase: choose which source to show
+	if (g->config->filter_enable) {
+		for (i=0; list[i].temp_path[0]!='\0'; i++) {
+			if (strcmp(list[i].name, g->config->filter) == 0) {
+				use = &list[i];
+				break;
+			}
+		}
+	}
+	if (use == NULL) { // filter disabled or filter value not found - auto selection
+		for (i=1, m=0; list[i].temp_path[0]!='\0'; i++) {
+			if (list[i].temp > list[m].temp)
+				m = i;
+		}
+	}
+	use = &list[m];
+
+	// output phase
+	int max = autoscaler_get_max(&xd->scaler, g, use->temp);
+
+	if (use->critical > 0 && use->critical < use->temp) {
+		data[0] = rint (Maximum * (float)(use->critical) / max);
+		data[1] = rint (Maximum * (float)(use->temp - use->critical) / max);
 	} else {
-		data[0] = rint (Maximum * (float)temp / max);
+		data[0] = rint (Maximum * (float)(use->temp) / max);
 		data[1] = 0;
 	}
 
-	xd->value = temp;
-	xd->max = maxtemps[j];
+	strcpy(xd->name, use->name);
+	xd->value = use->temp;
+	xd->max = use->critical;
 }
 
 
@@ -153,6 +347,8 @@ void
 multiload_graph_temp_tooltip_update (char **title, char **text, LoadGraph *g, TemperatureData *xd)
 {
 	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
+		*title = g_strdup(xd->name);
+
 		if (xd->max > 0)
 			*text = g_strdup_printf(_(	"Current: %.1f °C\n"
 										"Critical: %.1f °C"),
