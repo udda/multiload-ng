@@ -21,6 +21,7 @@
 
 #include <config.h>
 
+#include <ctype.h>
 #include <math.h>
 #include <net/if.h>
 
@@ -46,7 +47,7 @@ typedef struct {
 } if_data;
 
 
-gint
+static gint
 sort_if_data_by_ifindex (gconstpointer a, gconstpointer b)
 {
 	if (((if_data*)a)->ifindex > ((if_data*)b)->ifindex)
@@ -56,6 +57,51 @@ sort_if_data_by_ifindex (gconstpointer a, gconstpointer b)
 	else // equals
 		return 0;
 }
+
+
+gchar *
+multiload_graph_net_get_filter (LoadGraph *g, NetData *xd)
+{
+	gboolean present;
+	guint i;
+
+	char *buf = NULL;
+	char *start, *end;
+	size_t n = 0;
+
+	char iface[12];
+	char *ifaces = g_malloc0(64);
+
+	char **active_filter = g_strsplit(g->config->filter, ",", -1);
+
+	FILE *f = cached_fopen_r("/proc/net/dev", FALSE);
+	while (getline(&buf, &n, f) >= 0) {
+		end = strchr(buf, ':');
+		// skip header lines of /proc/net/dev
+		if (end == NULL)
+			continue;
+
+		for (start=buf; isspace(*start); start++) {}
+
+		g_snprintf(iface, end-start+1, "%s", start);
+
+		for (i=0, present=FALSE; active_filter[i] != NULL; i++) {
+			if (strcmp(active_filter[i], iface) == 0) {
+				present = TRUE;
+				break;
+			}
+		}
+
+		strcat(ifaces, present?"+":"-");
+		strcat(ifaces, iface);
+		strcat(ifaces, ",");
+	}
+	ifaces[strlen(ifaces)-1] = '\0';
+
+	g_strfreev(active_filter);
+	return ifaces;
+}
+
 
 void
 multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *xd)
@@ -164,17 +210,33 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 		if (d_ptr == NULL)
 			break;
 
+		gboolean can_add = TRUE;
+
 		// find devices with same HW address (e.g. ifaces put in monitor mode from airmon-ng)
-		gboolean match = FALSE;
 		for (j=0; j<i; j++) {
 			if_data *d_tmp = &g_array_index(valid_ifaces, if_data, j);
 			if (strcmp(d_tmp->address, d_ptr->address) == 0) {
-				g_debug("Ignored interface %s because has the same HW address of %s (%s)", d_tmp->name, d_ptr->name, d_ptr->address);
-				match = TRUE;
+				g_debug("[graph-net] Ignored interface %s because has the same HW address of %s (%s)", d_tmp->name, d_ptr->name, d_ptr->address);
+				can_add = FALSE;
 				break;
 			}
 		}
-		if (match)
+
+		if (can_add && g->config->filter_enable) {
+			can_add = FALSE;
+			gchar ** filter_array = g_strsplit(g->config->filter, ",", -1);
+			for (j=0; filter_array[j]!=NULL; j++) {
+				if (strcmp(filter_array[j], d_ptr->name) == 0) {
+					can_add = TRUE;
+					break;
+				}
+			}
+			if (!can_add)
+				g_debug("[graph-net] Ignored interface %s due to user filter", d_ptr->name);
+			g_strfreev(filter_array);
+		}
+
+		if (!can_add)
 			continue;
 
 		if (d_ptr->flags & IFF_LOOPBACK) {
@@ -192,7 +254,6 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 	xd->ifaces[strlen(xd->ifaces)-2] = 0;
 
 
-
 	if (G_UNLIKELY(ticks < 2)) { // avoid initial spike
 		ticks++;
 		memset(data, 0, NET_MAX * sizeof data[0]);
@@ -200,7 +261,7 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 		for (i = 0; i < NET_MAX; i++) {
 			delta[i] = present[i] - xd->last[i];
 			if (delta[i] < 0)
-				g_warning("[graph-net] Measured negative delta for traffic #%u. This is a bug.", i);
+				continue; // filter changes could cause negative delta. Just ignore it (happens once)
 			total += delta[i];
 		}
 

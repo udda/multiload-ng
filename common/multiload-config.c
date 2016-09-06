@@ -54,7 +54,8 @@ void multiload_config_init()
 		{	"net",	_("Network"),		6,
 			(GraphGetDataFunc)			multiload_graph_net_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_net_tooltip_update,
-			(GraphCmdlineOutputFunc)	multiload_graph_net_cmdline_output
+			(GraphCmdlineOutputFunc)	multiload_graph_net_cmdline_output,
+			(GraphGetFilterFunc)		multiload_graph_net_get_filter
 		},
 		{	"swap",	_("Swap"),			4,
 			(GraphGetDataFunc)			multiload_graph_swap_get_data,

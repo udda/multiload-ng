@@ -121,6 +121,8 @@ multiload_graph_mem_cmdline_output (LoadGraph *g, MemoryData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_mem_tooltip_update (char **title, char **text, LoadGraph *g, MemoryData *xd);
 
+G_GNUC_INTERNAL gchar *
+multiload_graph_net_get_filter (LoadGraph *g, NetData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_net_get_data (int Maximum, int data [4], LoadGraph *g, NetData *xd);
 G_GNUC_INTERNAL void

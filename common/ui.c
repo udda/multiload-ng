@@ -122,6 +122,16 @@ multiload_ui_read (MultiloadPlugin *ma)
 			multiload_set_max_value(ma, i, scaler_max);
 			g_free (key);
 
+			/* Filter enable */
+			key = g_strdup_printf("graph-%s-filter-enable", graph_types[i].name);
+			multiload_ps_settings_get_boolean (settings, key, &ma->graph_config[i].filter_enable);
+			g_free (key);
+
+			/* Filter */
+			key = g_strdup_printf("graph-%s-filter", graph_types[i].name);
+			multiload_ps_settings_get_string (settings, key, ma->graph_config[i].filter, sizeof(ma->graph_config[i].filter));
+			g_free (key);
+
 			/* Colors */
 			if (!color_scheme_valid) {
 				key = g_strdup_printf("graph-%s-colors", graph_types[i].name);
@@ -203,6 +213,16 @@ multiload_ui_save (MultiloadPlugin *ma)
 			int scaler_max = multiload_get_max_value(ma, i);
 			key = g_strdup_printf("graph-%s-max", graph_types[i].name);
 			multiload_ps_settings_set_int (settings, key, scaler_max);
+			g_free (key);
+
+			/* Filter enable */
+			key = g_strdup_printf("graph-%s-filter-enable", graph_types[i].name);
+			multiload_ps_settings_set_boolean (settings, key, ma->graph_config[i].filter_enable);
+			g_free (key);
+
+			/* Filter */
+			key = g_strdup_printf("graph-%s-filter", graph_types[i].name);
+			multiload_ps_settings_set_string (settings, key, ma->graph_config[i].filter);
 			g_free (key);
 
 			/* Colors */

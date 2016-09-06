@@ -59,6 +59,9 @@ typedef struct _GraphConfig {
 	gint tooltip_style;
 	gint dblclick_policy;
 	gchar dblclick_cmdline[1024];
+
+	gchar filter[64];
+	gboolean filter_enable;
 } GraphConfig;
 
 typedef struct _MultiloadPlugin {

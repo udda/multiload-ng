@@ -41,118 +41,21 @@
 static GtkBuilder *builder = NULL;
 
 #define OB(name) (gtk_builder_get_object(builder, name))
+#define EMBED_GRAPH_INDEX(ob,i) g_object_set_data(G_OBJECT(ob), "graph-index", GINT_TO_POINTER(i));
+#define EXTRACT_GRAPH_INDEX(ob) GPOINTER_TO_INT(g_object_get_data(G_OBJECT(ob), "graph-index"));
+#define DEFINE_OB_NAMES_FULL(p) static const gchar* (p##_names)[GRAPH_MAX] = { #p "_cpu", #p "_mem", #p "_net", #p "_swap", #p "_load", #p "_disk", #p "_temp", #p "_parm" };
 
 
-
-static const gchar* checkbox_visibility_names[GRAPH_MAX] = {
-	"cb_visible_cpu",
-	"cb_visible_mem",
-	"cb_visible_net",
-	"cb_visible_swap",
-	"cb_visible_load",
-	"cb_visible_disk",
-	"cb_visible_temp",
-	"cb_visible_parm"
-};
-
-static const gchar* button_advanced_names[GRAPH_MAX] = {
-	"button_advanced_cpu",
-	"button_advanced_mem",
-	"button_advanced_net",
-	"button_advanced_swap",
-	"button_advanced_load",
-	"button_advanced_disk",
-	"button_advanced_temp",
-	"button_advanced_parm"
-};
-
-static const gchar* spinbutton_size_names[GRAPH_MAX] = {
-	"sb_size_cpu",
-	"sb_size_mem",
-	"sb_size_net",
-	"sb_size_swap",
-	"sb_size_load",
-	"sb_size_disk",
-	"sb_size_temp",
-	"sb_size_parm"
-};
-
-static const gchar* spinbutton_interval_names[GRAPH_MAX] = {
-	"sb_interval_cpu",
-	"sb_interval_mem",
-	"sb_interval_net",
-	"sb_interval_swap",
-	"sb_interval_load",
-	"sb_interval_disk",
-	"sb_interval_temp",
-	"sb_interval_parm"
-};
-
-static const gchar* label_timespan_names[GRAPH_MAX] = {
-	"label_timespan_cpu",
-	"label_timespan_mem",
-	"label_timespan_net",
-	"label_timespan_swap",
-	"label_timespan_load",
-	"label_timespan_disk",
-	"label_timespan_temp",
-	"label_timespan_parm"
-};
-
-static const gchar* tooltip_style_names[GRAPH_MAX] = {
-	"combo_tooltip_cpu",
-	"combo_tooltip_mem",
-	"combo_tooltip_net",
-	"combo_tooltip_swap",
-	"combo_tooltip_load",
-	"combo_tooltip_disk",
-	"combo_tooltip_temp",
-	"combo_tooltip_parm"
-};
-
-static const gchar* dblclick_policy_names[GRAPH_MAX] = {
-	"combo_dblclick_cpu",
-	"combo_dblclick_mem",
-	"combo_dblclick_net",
-	"combo_dblclick_swap",
-	"combo_dblclick_load",
-	"combo_dblclick_disk",
-	"combo_dblclick_temp",
-	"combo_dblclick_parm"
-};
-
-static const gchar* dblclick_command_names[GRAPH_MAX] = {
-	"entry_dblclick_command_cpu",
-	"entry_dblclick_command_mem",
-	"entry_dblclick_command_net",
-	"entry_dblclick_command_swap",
-	"entry_dblclick_command_load",
-	"entry_dblclick_command_disk",
-	"entry_dblclick_command_temp",
-	"entry_dblclick_command_parm"
-};
-
-static const gchar* info_dblclick_command_names[GRAPH_MAX] = {
-	"image_info_dblclick_command_cpu",
-	"image_info_dblclick_command_mem",
-	"image_info_dblclick_command_net",
-	"image_info_dblclick_command_swap",
-	"image_info_dblclick_command_load",
-	"image_info_dblclick_command_disk",
-	"image_info_dblclick_command_temp",
-	"image_info_dblclick_command_parm"
-};
-
-static const gchar* spin_border_names[GRAPH_MAX] = {
-	"sb_border_cpu",
-	"sb_border_mem",
-	"sb_border_net",
-	"sb_border_swap",
-	"sb_border_load",
-	"sb_border_disk",
-	"sb_border_temp",
-	"sb_border_parm"
-};
+DEFINE_OB_NAMES_FULL(cb_visible);
+DEFINE_OB_NAMES_FULL(button_advanced);
+DEFINE_OB_NAMES_FULL(sb_size);
+DEFINE_OB_NAMES_FULL(sb_interval);
+DEFINE_OB_NAMES_FULL(label_timespan);
+DEFINE_OB_NAMES_FULL(combo_tooltip);
+DEFINE_OB_NAMES_FULL(combo_dblclick);
+DEFINE_OB_NAMES_FULL(entry_dblclick_command);
+DEFINE_OB_NAMES_FULL(image_info_dblclick_command);
+DEFINE_OB_NAMES_FULL(sb_border);
 
 static const gchar* spin_ceil_names[GRAPH_MAX] = {
 	"",
@@ -165,7 +68,7 @@ static const gchar* spin_ceil_names[GRAPH_MAX] = {
 	"sb_ceil_parm"
 };
 
-static const gchar* cb_autoscaler_enable_names[GRAPH_MAX] = {
+static const gchar* cb_autoscaler_names[GRAPH_MAX] = {
 	"",
 	"",
 	"cb_autoscaler_net",
@@ -174,6 +77,50 @@ static const gchar* cb_autoscaler_enable_names[GRAPH_MAX] = {
 	"cb_autoscaler_disk",
 	"cb_autoscaler_temp",
 	"cb_autoscaler_parm"
+};
+
+static const gchar* cb_source_auto_names[GRAPH_MAX] = {
+	"",
+	"",
+	"cb_source_auto_net",
+	"",
+	"",
+	"",
+	"",
+	""
+};
+
+static const gchar* treeview_source_names[GRAPH_MAX] = {
+	"",
+	"",
+	"treeview_source_net",
+	"",
+	"",
+	"",
+	"",
+	""
+};
+
+static const gchar* cellrenderertoggle_source_names[GRAPH_MAX] = {
+	"",
+	"",
+	"cellrenderertoggle_source_net",
+	"",
+	"",
+	"",
+	"",
+	""
+};
+
+static const gchar* liststore_source_names[GRAPH_MAX] = {
+	"",
+	"",
+	"liststore_source_net",
+	"",
+	"",
+	"",
+	"",
+	""
 };
 
 static const gchar* color_button_names[GRAPH_MAX][MAX_COLORS] = {
@@ -241,10 +188,10 @@ static const gchar* color_button_names[GRAPH_MAX][MAX_COLORS] = {
 
 
 static guint
-multiload_preferences_get_graph_index (GtkWidget *widget, const gchar **list)
+multiload_preferences_get_graph_index (GtkBuildable *ob, const gchar **list)
 {
 	guint i;
-	const gchar *name = gtk_buildable_get_name(GTK_BUILDABLE(widget));
+	const gchar *name = gtk_buildable_get_name(ob);
 
 	for (i=0; i<GRAPH_MAX; i++) {
 		if (strcmp(list[i], name) == 0)
@@ -277,25 +224,31 @@ static void
 multiload_preferences_update_dynamic_widgets(MultiloadPlugin *ma)
 {
 	guint i;
-	GraphConfig *gc;
+	GraphConfig *conf;
 
 	for (i=0; i<GRAPH_MAX; i++) {
-		gc = &ma->graph_config[i];
+		conf = &ma->graph_config[i];
 
 		// timespan
-		gchar *timespan = format_time_duration(gc->size * gc->interval / 1000);
+		gchar *timespan = format_time_duration(conf->size * conf->interval / 1000);
 		gtk_label_set_text (GTK_LABEL(OB(label_timespan_names[i])), timespan);
 		g_free(timespan);
 
 		// cmdline enable
-		gboolean cmdline_enabled = (gc->dblclick_policy == DBLCLICK_POLICY_CMDLINE);
-		gtk_widget_set_sensitive (GTK_WIDGET(OB(dblclick_command_names[i])), cmdline_enabled);
-		gtk_widget_set_visible (GTK_WIDGET(OB(info_dblclick_command_names[i])), cmdline_enabled);
+		gboolean cmdline_enabled = (conf->dblclick_policy == DBLCLICK_POLICY_CMDLINE);
+		gtk_widget_set_sensitive (GTK_WIDGET(OB(entry_dblclick_command_names[i])), cmdline_enabled);
+		gtk_widget_set_visible (GTK_WIDGET(OB(image_info_dblclick_command_names[i])), cmdline_enabled);
 
 		// autoscaler
-		if (strcmp(cb_autoscaler_enable_names[i], "") != 0) {
+		if (strcmp(cb_autoscaler_names[i], "") != 0) {
 			gtk_widget_set_sensitive(GTK_WIDGET(OB(spin_ceil_names[i])),
-					!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(OB(cb_autoscaler_enable_names[i]))));
+					!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(OB(cb_autoscaler_names[i]))));
+		}
+
+		// filter
+		if (strcmp(cb_source_auto_names[i], "") != 0) {
+			gtk_widget_set_sensitive(GTK_WIDGET(OB(treeview_source_names[i])),
+					!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(OB(cb_source_auto_names[i]))));
 		}
 	}
 
@@ -325,7 +278,7 @@ multiload_preferences_checkboxes_sensitive_cb (GtkToggleButton *checkbox, gpoint
 
 	if (!active) {
 		for (i = 0; i < GRAPH_MAX; i++) {
-			if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(OB(checkbox_visibility_names[i])))) {
+			if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(OB(cb_visible_names[i])))) {
 				last_graph = i;
 				visible_count ++;
 			}
@@ -336,10 +289,10 @@ multiload_preferences_checkboxes_sensitive_cb (GtkToggleButton *checkbox, gpoint
 		if (active) {
 			// Enable all checkboxes
 			for (i = 0; i < GRAPH_MAX; i++)
-				gtk_widget_set_sensitive(GTK_WIDGET(OB(checkbox_visibility_names[i])), TRUE);
+				gtk_widget_set_sensitive(GTK_WIDGET(OB(cb_visible_names[i])), TRUE);
 		} else {
 			// Disable last remaining checkbox
-			gtk_widget_set_sensitive(GTK_WIDGET(OB(checkbox_visibility_names[last_graph])), FALSE);
+			gtk_widget_set_sensitive(GTK_WIDGET(OB(cb_visible_names[last_graph])), FALSE);
 		}
 	}
 
@@ -349,7 +302,7 @@ multiload_preferences_checkboxes_sensitive_cb (GtkToggleButton *checkbox, gpoint
 static void
 multiload_preferences_graph_visibility_cb (GtkToggleButton *checkbox, MultiloadPlugin *ma)
 {
-	guint i = multiload_preferences_get_graph_index(GTK_WIDGET(checkbox), checkbox_visibility_names);
+	guint i = multiload_preferences_get_graph_index(GTK_BUILDABLE(checkbox), cb_visible_names);
 	gboolean active = gtk_toggle_button_get_active(checkbox);
 
 	ma->graph_config[i].visible = active;
@@ -365,7 +318,7 @@ multiload_preferences_graph_visibility_cb (GtkToggleButton *checkbox, MultiloadP
 static void
 multiload_preferences_button_advanced_clicked_cb (GtkWidget *button, MultiloadPlugin *ma)
 {
-	guint i = multiload_preferences_get_graph_index(GTK_WIDGET(button), button_advanced_names);
+	guint i = multiload_preferences_get_graph_index(GTK_BUILDABLE(button), button_advanced_names);
 
 	GtkWidget *dialog_config = GTK_WIDGET(OB("dialog_advanced"));
 	gtk_window_set_transient_for(GTK_WINDOW(dialog_config), GTK_WINDOW(gtk_widget_get_toplevel(button)));
@@ -393,7 +346,7 @@ multiload_preferences_size_output_cb (GtkSpinButton *spin, gpointer p)
 static void
 multiload_preferences_size_change_cb (GtkSpinButton *spin, MultiloadPlugin *ma)
 {
-	guint i = multiload_preferences_get_graph_index(GTK_WIDGET(spin), spinbutton_size_names);
+	guint i = multiload_preferences_get_graph_index(GTK_BUILDABLE(spin), sb_size_names);
 
 	ma->graph_config[i].size = gtk_spin_button_get_value_as_int(spin);
 
@@ -428,7 +381,7 @@ multiload_preferences_interval_output_cb (GtkSpinButton *spin, gpointer p)
 static void
 multiload_preferences_interval_change_cb (GtkSpinButton *spin, MultiloadPlugin *ma)
 {
-	guint i = multiload_preferences_get_graph_index(GTK_WIDGET(spin), spinbutton_interval_names);
+	guint i = multiload_preferences_get_graph_index(GTK_BUILDABLE(spin), sb_interval_names);
 
 	ma->graph_config[i].interval = gtk_spin_button_get_value_as_int(spin);
 
@@ -475,7 +428,7 @@ multiload_preferences_fill_between_toggled_cb (GtkToggleButton *toggle, Multiloa
 static void
 multiload_preferences_tooltip_style_changed_cb (GtkComboBox *combo, MultiloadPlugin *ma)
 {
-	guint i = multiload_preferences_get_graph_index(GTK_WIDGET(combo), tooltip_style_names);
+	guint i = multiload_preferences_get_graph_index(GTK_BUILDABLE(combo), combo_tooltip_names);
 
 	ma->graph_config[i].tooltip_style = gtk_combo_box_get_active(combo);
 }
@@ -483,7 +436,7 @@ multiload_preferences_tooltip_style_changed_cb (GtkComboBox *combo, MultiloadPlu
 static void
 multiload_preferences_dblclick_policy_changed_cb (GtkComboBox *combo, MultiloadPlugin *ma)
 {
-	guint i = multiload_preferences_get_graph_index(GTK_WIDGET(combo), dblclick_policy_names);
+	guint i = multiload_preferences_get_graph_index(GTK_BUILDABLE(combo), combo_dblclick_names);
 
 	ma->graph_config[i].dblclick_policy = gtk_combo_box_get_active(combo);
 	multiload_preferences_update_dynamic_widgets(ma);
@@ -492,7 +445,7 @@ multiload_preferences_dblclick_policy_changed_cb (GtkComboBox *combo, MultiloadP
 static void
 multiload_preferences_dblclick_command_changed_cb (GtkEntry *entry, MultiloadPlugin *ma)
 {
-	guint i = multiload_preferences_get_graph_index(GTK_WIDGET(entry), dblclick_command_names);
+	guint i = multiload_preferences_get_graph_index(GTK_BUILDABLE(entry), entry_dblclick_command_names);
 
 	strncpy(ma->graph_config[i].dblclick_cmdline, gtk_entry_get_text(entry), sizeof(ma->graph_config[i].dblclick_cmdline));
 }
@@ -500,7 +453,7 @@ multiload_preferences_dblclick_command_changed_cb (GtkEntry *entry, MultiloadPlu
 static void
 multiload_preferences_border_changed_cb (GtkSpinButton *spin, MultiloadPlugin *ma)
 {
-	guint i = multiload_preferences_get_graph_index(GTK_WIDGET(spin), spin_border_names);
+	guint i = multiload_preferences_get_graph_index(GTK_BUILDABLE(spin), sb_border_names);
 	guint value = gtk_spin_button_get_value_as_int(spin);
 
 	ma->graph_config[i].border_width = value;
@@ -663,7 +616,7 @@ multiload_preferences_parm_command_test_clicked_cb (GtkWidget *button, Multiload
 static void
 multiload_preferences_autoscaler_toggled_cb (GtkToggleButton *toggle, MultiloadPlugin *ma)
 {
-	guint i = multiload_preferences_get_graph_index(GTK_WIDGET(toggle), cb_autoscaler_enable_names);
+	guint i = multiload_preferences_get_graph_index(GTK_BUILDABLE(toggle), cb_autoscaler_names);
 	AutoScaler *scaler = multiload_get_scaler(ma, i);
 	if (scaler == NULL)
 		return;
@@ -683,13 +636,69 @@ multiload_preferences_autoscaler_toggled_cb (GtkToggleButton *toggle, MultiloadP
 static void
 multiload_preferences_ceil_changed_cb (GtkSpinButton *spin, MultiloadPlugin *ma)
 {
-	guint i = multiload_preferences_get_graph_index(GTK_WIDGET(spin), spin_ceil_names);
+	guint i = multiload_preferences_get_graph_index(GTK_BUILDABLE(spin), spin_ceil_names);
 	AutoScaler *scaler = multiload_get_scaler(ma, i);
 	if (scaler == NULL)
 		return;
 
 	int value = gtk_spin_button_get_value_as_int(spin);
 	autoscaler_set_max(scaler, value);
+}
+
+static void
+multiload_preferences_source_toggled_cb (GtkCellRendererToggle *cell, gchar *path_string, MultiloadPlugin *ma)
+{
+	GtkListStore *ls;
+	GtkTreePath *path;
+	GtkTreeIter iter;
+	gchar *filter;
+	gchar *s;
+	gboolean b;
+
+	guint graph_index = EXTRACT_GRAPH_INDEX(cell);
+	if (liststore_source_names[graph_index] == NULL)
+		return;
+
+	// update view
+	ls = GTK_LIST_STORE(OB(liststore_source_names[graph_index]));
+	b = gtk_cell_renderer_toggle_get_active(cell);
+
+	path = gtk_tree_path_new_from_string(path_string);
+	gtk_tree_model_get_iter (GTK_TREE_MODEL(ls), &iter, path);
+	gtk_list_store_set (ls, &iter, 0, !b, -1);
+
+	gtk_tree_path_free (path);
+
+	// update filter
+	ma->graph_config[graph_index].filter_enable = !b;
+	filter = ma->graph_config[graph_index].filter;
+	filter[0] = '\0';
+
+	b = gtk_tree_model_get_iter_first (GTK_TREE_MODEL(ls), &iter);
+	while (b) {
+		gtk_tree_model_get (GTK_TREE_MODEL(ls), &iter, 0, &b, 1, &s, -1);
+
+		if (b) {
+			strcat(filter, s);
+			strcat(filter, ",");
+		}
+
+		g_free(s);
+		b = gtk_tree_model_iter_next (GTK_TREE_MODEL(ls), &iter);
+	}
+	filter[strlen(filter)-1] = '\0';
+	g_debug ("[preferences] set interfaces filter for graph #%d: %s\n", graph_index, filter);
+}
+
+static void
+multiload_preferences_source_auto_toggled_cb (GtkToggleButton *toggle, MultiloadPlugin *ma)
+{
+	guint i = multiload_preferences_get_graph_index(GTK_BUILDABLE(toggle), cb_source_auto_names);
+	gboolean b = gtk_toggle_button_get_active(toggle);
+
+	ma->graph_config[i].filter_enable = !b;
+
+	multiload_preferences_update_dynamic_widgets(ma);
 }
 
 static void
@@ -722,23 +731,32 @@ multiload_preferences_connect_signals (MultiloadPlugin *ma)
 	guint i, j;
 
 	for (i=0; i<GRAPH_MAX; i++) {
-		g_signal_connect(G_OBJECT(OB(spinbutton_size_names[i])), "output", G_CALLBACK(multiload_preferences_size_output_cb), ma);
-		g_signal_connect(G_OBJECT(OB(spinbutton_size_names[i])), "value-changed", G_CALLBACK(multiload_preferences_size_change_cb), ma);
-		g_signal_connect(G_OBJECT(OB(spinbutton_interval_names[i])), "output", G_CALLBACK(multiload_preferences_interval_output_cb), ma);
-		g_signal_connect(G_OBJECT(OB(spinbutton_interval_names[i])), "value-changed", G_CALLBACK(multiload_preferences_interval_change_cb), ma);
-		g_signal_connect(G_OBJECT(OB(checkbox_visibility_names[i])), "toggled", G_CALLBACK(multiload_preferences_graph_visibility_cb), ma);
-		g_signal_connect(G_OBJECT(OB(checkbox_visibility_names[i])), "toggled", G_CALLBACK(multiload_preferences_checkboxes_sensitive_cb), ma);
+		g_signal_connect(G_OBJECT(OB(sb_size_names[i])), "output", G_CALLBACK(multiload_preferences_size_output_cb), ma);
+		g_signal_connect(G_OBJECT(OB(sb_size_names[i])), "value-changed", G_CALLBACK(multiload_preferences_size_change_cb), ma);
+		g_signal_connect(G_OBJECT(OB(sb_interval_names[i])), "output", G_CALLBACK(multiload_preferences_interval_output_cb), ma);
+		g_signal_connect(G_OBJECT(OB(sb_interval_names[i])), "value-changed", G_CALLBACK(multiload_preferences_interval_change_cb), ma);
+		g_signal_connect(G_OBJECT(OB(cb_visible_names[i])), "toggled", G_CALLBACK(multiload_preferences_graph_visibility_cb), ma);
+		g_signal_connect(G_OBJECT(OB(cb_visible_names[i])), "toggled", G_CALLBACK(multiload_preferences_checkboxes_sensitive_cb), ma);
 		g_signal_connect(G_OBJECT(OB(button_advanced_names[i])), "clicked", G_CALLBACK(multiload_preferences_button_advanced_clicked_cb), ma);
-		g_signal_connect(G_OBJECT(OB(tooltip_style_names[i])), "changed", G_CALLBACK(multiload_preferences_tooltip_style_changed_cb), ma);
-		g_signal_connect(G_OBJECT(OB(dblclick_policy_names[i])), "changed", G_CALLBACK(multiload_preferences_dblclick_policy_changed_cb), ma);
-		g_signal_connect(G_OBJECT(OB(dblclick_command_names[i])), "changed", G_CALLBACK(multiload_preferences_dblclick_command_changed_cb), ma);
-		g_signal_connect(G_OBJECT(OB(spin_border_names[i])), "value-changed", G_CALLBACK(multiload_preferences_border_changed_cb), ma);
+		g_signal_connect(G_OBJECT(OB(combo_tooltip_names[i])), "changed", G_CALLBACK(multiload_preferences_tooltip_style_changed_cb), ma);
+		g_signal_connect(G_OBJECT(OB(combo_dblclick_names[i])), "changed", G_CALLBACK(multiload_preferences_dblclick_policy_changed_cb), ma);
+		g_signal_connect(G_OBJECT(OB(entry_dblclick_command_names[i])), "changed", G_CALLBACK(multiload_preferences_dblclick_command_changed_cb), ma);
+		g_signal_connect(G_OBJECT(OB(sb_border_names[i])), "value-changed", G_CALLBACK(multiload_preferences_border_changed_cb), ma);
 
-		if (strcmp(cb_autoscaler_enable_names[i], "") != 0) {
-			g_signal_connect(G_OBJECT(OB(cb_autoscaler_enable_names[i])), "toggled", G_CALLBACK(multiload_preferences_autoscaler_toggled_cb), ma);
+		// autoscaler
+		if (strcmp(cb_autoscaler_names[i], "") != 0) {
+			g_signal_connect(G_OBJECT(OB(cb_autoscaler_names[i])), "toggled", G_CALLBACK(multiload_preferences_autoscaler_toggled_cb), ma);
 			g_signal_connect(G_OBJECT(OB(spin_ceil_names[i])), "value-changed", G_CALLBACK(multiload_preferences_ceil_changed_cb), ma);
 		}
 
+		// filter
+		if (strcmp(cellrenderertoggle_source_names[i], "") != 0) {
+			g_signal_connect(G_OBJECT(OB(cb_source_auto_names[i])), "toggled", G_CALLBACK(multiload_preferences_source_auto_toggled_cb), ma);
+			g_signal_connect(G_OBJECT(OB(cellrenderertoggle_source_names[i])), "toggled", G_CALLBACK(multiload_preferences_source_toggled_cb), ma);
+			EMBED_GRAPH_INDEX(OB(cellrenderertoggle_source_names[i]), i);
+		}
+
+		// color buttons
 		for (j=0; j < G_N_ELEMENTS(color_button_names[i]); j++) {
 			if (NULL == color_button_names[i][j])
 				break;
@@ -749,14 +767,18 @@ multiload_preferences_connect_signals (MultiloadPlugin *ma)
 	g_signal_connect(G_OBJECT(OB("hscale_spacing")), "value-changed", G_CALLBACK(multiload_preferences_spacing_or_padding_changed_cb), ma);
 	g_signal_connect(G_OBJECT(OB("hscale_padding")), "value-changed", G_CALLBACK(multiload_preferences_spacing_or_padding_changed_cb), ma);
 	g_signal_connect(G_OBJECT(OB("combo_orientation")), "changed", G_CALLBACK(multiload_preferences_orientation_changed_cb), ma);
-	g_signal_connect(G_OBJECT(OB("tb_colorscheme_import")), "clicked", G_CALLBACK(multiload_preferences_colorscheme_import_clicked_cb), ma);
-	g_signal_connect(G_OBJECT(OB("tb_colorscheme_export")), "clicked", G_CALLBACK(multiload_preferences_colorscheme_export_clicked_cb), ma);
+
+	// Parametric graph
 	g_signal_connect(G_OBJECT(OB("entry_parm_command")), "changed", G_CALLBACK(multiload_preferences_parm_command_changed_cb), ma);
 	g_signal_connect(G_OBJECT(OB("button_parm_command_test")), "clicked", G_CALLBACK(multiload_preferences_parm_command_test_clicked_cb), ma);
 
+	// Color schemes
+	g_signal_connect(G_OBJECT(OB("tb_colorscheme_import")), "clicked", G_CALLBACK(multiload_preferences_colorscheme_import_clicked_cb), ma);
+	g_signal_connect(G_OBJECT(OB("tb_colorscheme_export")), "clicked", G_CALLBACK(multiload_preferences_colorscheme_export_clicked_cb), ma);
 	GtkTreeSelection *sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(OB("treeview_colors")));
 	g_signal_connect(G_OBJECT(sel), "changed", G_CALLBACK(multiload_preferences_color_scheme_selected_cb), ma);
 
+	// Dialog
 	g_signal_connect(G_OBJECT(OB("dialog_advanced")), "delete-event", G_CALLBACK(gtk_widget_hide_on_delete), ma);
 	g_signal_connect_swapped(G_OBJECT(OB("button_dialog_advanced_close")), "clicked", G_CALLBACK(gtk_widget_hide), G_OBJECT(OB("dialog_advanced")));
 
@@ -776,9 +798,10 @@ multiload_preferences_update_color_buttons (MultiloadPlugin *ma)
 void
 multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 {
-	guint i;
+	guint i,j;
 	gint tmp;
 	gboolean color_scheme_is_set = FALSE;
+	GraphConfig *conf;
 
 	GdkPixbuf *pix;
 
@@ -786,32 +809,49 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 
 	// init values
 	for (i=0; i<GRAPH_MAX; i++) {
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON(OB(spinbutton_size_names[i])), ma->graph_config[i].size*1.00);
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON(OB(spinbutton_interval_names[i])), ma->graph_config[i].interval*1.00);
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(OB(checkbox_visibility_names[i])), ma->graph_config[i].visible);
-		gtk_entry_set_max_length(GTK_ENTRY(OB(dblclick_command_names[i])), sizeof(ma->graph_config[i].dblclick_cmdline));
-		gtk_combo_box_set_active (GTK_COMBO_BOX(OB(tooltip_style_names[i])), ma->graph_config[i].tooltip_style);
-		gtk_combo_box_set_active (GTK_COMBO_BOX(OB(dblclick_policy_names[i])), ma->graph_config[i].dblclick_policy);
-		gtk_entry_set_text (GTK_ENTRY(OB(dblclick_command_names[i])), ma->graph_config[i].dblclick_cmdline);
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON(OB(spin_border_names[i])), ma->graph_config[i].border_width*1.00);
+		conf = &ma->graph_config[i];
 
-		//autoscaler
-		if (strcmp(cb_autoscaler_enable_names[i], "") != 0) {
+		gtk_spin_button_set_value(GTK_SPIN_BUTTON(OB(sb_size_names[i])), conf->size*1.00);
+		gtk_spin_button_set_value(GTK_SPIN_BUTTON(OB(sb_interval_names[i])), conf->interval*1.00);
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(OB(cb_visible_names[i])), conf->visible);
+		gtk_entry_set_max_length(GTK_ENTRY(OB(entry_dblclick_command_names[i])), sizeof(conf->dblclick_cmdline));
+		gtk_combo_box_set_active (GTK_COMBO_BOX(OB(combo_tooltip_names[i])), conf->tooltip_style);
+		gtk_combo_box_set_active (GTK_COMBO_BOX(OB(combo_dblclick_names[i])), conf->dblclick_policy);
+		gtk_entry_set_text (GTK_ENTRY(OB(entry_dblclick_command_names[i])), conf->dblclick_cmdline);
+		gtk_spin_button_set_value(GTK_SPIN_BUTTON(OB(sb_border_names[i])), conf->border_width*1.00);
+
+		// autoscaler
+		if (strcmp(cb_autoscaler_names[i], "") != 0) {
 			tmp = multiload_get_max_value(ma, i);
 			gtk_spin_button_set_value(GTK_SPIN_BUTTON(OB(spin_ceil_names[i])), tmp*1.00);
-			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(OB(cb_autoscaler_enable_names[i])), (tmp<0));
+			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(OB(cb_autoscaler_names[i])), (tmp<0));
+		}
+
+		// filter
+		if (strcmp(cb_source_auto_names[i], "") != 0) {
+			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(OB(cb_source_auto_names[i])), !conf->filter_enable);
+
+			gchar *filter = graph_types[i].get_filter(ma->graphs[i], ma->extra_data[i]);
+			gchar ** filter_split = g_strsplit (filter, ",", -1);
+			for (j=0; filter_split[j]!=NULL; j++) {
+				gtk_list_store_insert_with_values (GTK_LIST_STORE(OB(liststore_source_names[i])), NULL, -1,
+					0, (filter_split[j][0]=='+')?TRUE:FALSE,
+					1, &filter_split[j][1],
+				-1);
+			}
+			g_strfreev(filter_split);
+			g_free(filter);
 		}
 	}
 	gtk_range_set_value(GTK_RANGE(OB("hscale_spacing")), (gdouble)ma->spacing);
 	gtk_range_set_value(GTK_RANGE(OB("hscale_padding")), (gdouble)ma->padding);
 	gtk_combo_box_set_active (GTK_COMBO_BOX(OB("combo_orientation")), ma->orientation_policy);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(OB("cb_fill_between")), ma->fill_between);
+
+	// Parametric
 	gtk_entry_set_text(GTK_ENTRY(OB("entry_parm_command")), ((ParametricData*)ma->extra_data[GRAPH_PARAMETRIC])->command);
 
-	multiload_preferences_update_color_buttons(ma);
-	multiload_preferences_checkboxes_sensitive_cb(NULL, NULL);
-
-	// color schemes list
+	// Color schemes
 	GtkListStore *ls_colors = GTK_LIST_STORE(OB("liststore_colors"));
 	for (i=0; multiload_builtin_color_schemes[i].name[0] != '\0'; i++) {
 		const gchar *name = multiload_builtin_color_schemes[i].name;
@@ -832,12 +872,16 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 	}
 	// insert (Custom) entry
 	gtk_list_store_insert_with_values(ls_colors, NULL, -1, 0, _("(Custom)"), 1, i, -1 );
-
 	// no current color scheme, select last entry (Custom)
 	if (!color_scheme_is_set)
 		multiload_preferences_color_scheme_select_custom();
 
+
+	// refresh widget status
+	multiload_preferences_update_color_buttons(ma);
+	multiload_preferences_checkboxes_sensitive_cb(NULL, NULL);
 	multiload_preferences_update_dynamic_widgets(ma);
+
 
 	// main window
 	GtkWidget *mainwnd_vbox = GTK_WIDGET(OB("mainwnd_vbox"));

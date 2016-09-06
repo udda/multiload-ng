@@ -43,6 +43,12 @@
     <key name="graph-cpu-max" type="i">
       <default>500</default>
     </key>
+    <key name="graph-cpu-filter-enable" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-cpu-filter" type="s">
+      <default>''</default>
+    </key>
 
 
     <key name="graph-mem-visible" type="b">
@@ -71,6 +77,12 @@
     </key>
     <key name="graph-mem-max" type="i">
       <default>500</default>
+    </key>
+    <key name="graph-mem-filter-enable" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-mem-filter" type="s">
+      <default>''</default>
     </key>
 
 
@@ -101,6 +113,12 @@
     <key name="graph-net-max" type="i">
       <default>500</default>
     </key>
+    <key name="graph-net-filter-enable" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-net-filter" type="s">
+      <default>''</default>
+    </key>
 
 
     <key name="graph-swap-visible" type="b">
@@ -129,6 +147,12 @@
     </key>
     <key name="graph-swap-max" type="i">
       <default>500</default>
+    </key>
+    <key name="graph-swap-filter-enable" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-swap-filter" type="s">
+      <default>''</default>
     </key>
 
 
@@ -159,6 +183,12 @@
     <key name="graph-load-max" type="i">
       <default>500</default>
     </key>
+    <key name="graph-load-filter-enable" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-load-filter" type="s">
+      <default>''</default>
+    </key>
 
 
     <key name="graph-disk-visible" type="b">
@@ -187,6 +217,12 @@
     </key>
     <key name="graph-disk-max" type="i">
       <default>500</default>
+    </key>
+    <key name="graph-disk-filter-enable" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-disk-filter" type="s">
+      <default>''</default>
     </key>
 
 
@@ -217,6 +253,12 @@
     <key name="graph-temp-max" type="i">
       <default>500</default>
     </key>
+    <key name="graph-temp-filter-enable" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-temp-filter" type="s">
+      <default>''</default>
+    </key>
 
 
     <key name="graph-parm-visible" type="b">
@@ -245,6 +287,12 @@
     </key>
     <key name="graph-parm-max" type="i">
       <default>500</default>
+    </key>
+    <key name="graph-parm-filter-enable" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-parm-filter" type="s">
+      <default>''</default>
     </key>
 
     <key name="graph-parm-command" type="s">

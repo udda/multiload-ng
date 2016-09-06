@@ -226,6 +226,7 @@ multiload_init()
 void multiload_defaults(MultiloadPlugin *ma)
 {
 	guint i;
+	GraphConfig *conf;
 
 	/* default settings */
 	ma->padding = DEFAULT_PADDING;
@@ -233,12 +234,15 @@ void multiload_defaults(MultiloadPlugin *ma)
 	ma->fill_between = DEFAULT_FILL_BETWEEN;
 	strncpy(ma->color_scheme, DEFAULT_COLOR_SCHEME, sizeof(ma->color_scheme));
 	for ( i = 0; i < GRAPH_MAX; i++ ) {
-		ma->graph_config[i].border_width = DEFAULT_BORDER_WIDTH;
-		ma->graph_config[i].visible = i == 0 ? TRUE : FALSE;
-		ma->graph_config[i].interval = DEFAULT_INTERVAL;
-		ma->graph_config[i].size = DEFAULT_SIZE;
-		ma->graph_config[i].tooltip_style = DEFAULT_TOOLTIP_STYLE;
-		ma->graph_config[i].dblclick_policy = DEFAULT_DBLCLICK_POLICY;
+		conf = &ma->graph_config[i];
+		conf->border_width = DEFAULT_BORDER_WIDTH;
+		conf->visible = i == 0 ? TRUE : FALSE;
+		conf->interval = DEFAULT_INTERVAL;
+		conf->size = DEFAULT_SIZE;
+		conf->tooltip_style = DEFAULT_TOOLTIP_STYLE;
+		conf->dblclick_policy = DEFAULT_DBLCLICK_POLICY;
+		conf->filter[0] = '\0';
+		conf->filter_enable = FALSE;
 		multiload_colors_default(ma, i);
 
 		if (i == GRAPH_LOADAVG)
