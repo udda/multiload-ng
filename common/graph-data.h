@@ -152,6 +152,8 @@ multiload_graph_disk_cmdline_output (LoadGraph *g, DiskData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_disk_tooltip_update (char **title, char **text, LoadGraph *g, DiskData *xd);
 
+G_GNUC_INTERNAL gchar *
+multiload_graph_temp_get_filter (LoadGraph *g, TemperatureData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_temp_get_data (int Maximum, int data [2], LoadGraph *g, TemperatureData *xd);
 G_GNUC_INTERNAL void

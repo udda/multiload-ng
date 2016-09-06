@@ -51,6 +51,31 @@ typedef enum {
 	TEMP_SOURCE_NO_SUPPORT
 } TemperatureSourceSupport;
 
+static TemperatureSourceSupport list_temp(TemperatureSourceData **list);
+
+gchar *
+multiload_graph_temp_get_filter (LoadGraph *g, TemperatureData *xd)
+{
+	TemperatureSourceData *list;
+	gchar *filter;
+	gboolean selected;
+	guint i;
+
+	if (list_temp(&list) != TEMP_SOURCE_NO_SUPPORT) {
+		for (i=0; list[i].temp_path[0]!='\0'; i++) {}
+		filter = g_new0(char, i*(3+sizeof(list[i].name)));
+		for (i=0; list[i].temp_path[0]!='\0'; i++) {
+			selected = (strcmp(list[i].name, g->config->filter) == 0);
+			strcat(filter, selected?"+":"-");
+			strcat(filter, list[i].name);
+			strcat(filter, ",");
+		}
+	}
+	filter[strlen(filter)-1] = '\0';
+
+	g_free(list);
+	return filter;
+}
 
 static gboolean
 list_temp_acpitz(TemperatureSourceData **list, gboolean init)
@@ -67,6 +92,7 @@ list_temp_acpitz(TemperatureSourceData **list, gboolean init)
 	guint i, j;
 	size_t s;
 
+	(void)s; // shuts off warning by '-Wunused-but-set-variable'
 
 	if (init) {
 		// check if /sys node exists, otherwise means no acpitz support
@@ -159,6 +185,8 @@ list_temp_hwmon(TemperatureSourceData **list, gboolean init)
 	size_t s;
 	guint i, n;
 
+
+	(void)s; // shuts off warning by '-Wunused-but-set-variable'
 
 	if (init) {
 		// check if /sys node exists, otherwise means no hwmon support
@@ -264,6 +292,17 @@ list_temp_hwmon(TemperatureSourceData **list, gboolean init)
 	return TRUE;
 }
 
+static TemperatureSourceSupport
+list_temp(TemperatureSourceData **list)
+{
+	if (list_temp_hwmon(list, TRUE))
+		return TEMP_SOURCE_SUPPORT_HWMON;
+	else if (list_temp_acpitz(list, TRUE))
+		return TEMP_SOURCE_SUPPORT_ACPITZ;
+	else
+		return TEMP_SOURCE_NO_SUPPORT;
+}
+
 void
 multiload_graph_temp_get_data (int Maximum, int data[2], LoadGraph *g, TemperatureData *xd)
 {
@@ -278,12 +317,7 @@ multiload_graph_temp_get_data (int Maximum, int data[2], LoadGraph *g, Temperatu
 
 	// initialization phase: looks for support type and builds static data
 	if (G_UNLIKELY(support == TEMP_SOURCE_SUPPORT_UNINITIALIZED)) {
-		if (list_temp_hwmon(&list, TRUE))
-			support = TEMP_SOURCE_SUPPORT_HWMON;
-		else if (list_temp_acpitz(&list, TRUE))
-			support = TEMP_SOURCE_SUPPORT_ACPITZ;
-		else
-			support = TEMP_SOURCE_NO_SUPPORT;
+		support = list_temp(&list);
 	}
 
 	// read phase: fills in current temperature values
