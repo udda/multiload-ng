@@ -93,6 +93,7 @@ file_check_contents(FILE *f, const gchar *string)
 	buf = (gchar*)malloc(n);
 
 	s = fread(buf, 1, n, f);
+	g_free(buf);
 
 	if (s != n)
 		return FALSE;
