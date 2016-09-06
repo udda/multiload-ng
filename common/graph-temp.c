@@ -253,7 +253,10 @@ list_temp_hwmon(TemperatureSourceData **list, gboolean init)
 				g_free(tmp);
 				f  = fopen(buf, "r");
 				if (f != NULL) {
-					s = fscanf(f, "%s", buf);
+					// build format string to accept spaces too
+					tmp = g_strdup_printf("%%%zu[0-9a-zA-Z ]", sizeof((*list)[i].name)-1);
+					s = fscanf(f, tmp, buf);
+					g_free(tmp);
 					fclose(f);
 					g_snprintf((*list)[i].name, sizeof((*list)[i].name), "%s (%s)", buf, name);
 				} else {
