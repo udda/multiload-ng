@@ -323,9 +323,15 @@ multiload_preferences_button_advanced_clicked_cb (GtkWidget *button, MultiloadPl
 	GtkWidget *dialog_config = GTK_WIDGET(OB("dialog_advanced"));
 	gtk_window_set_transient_for(GTK_WINDOW(dialog_config), GTK_WINDOW(gtk_widget_get_toplevel(button)));
 
-	GtkWidget *notebook = GTK_WIDGET(OB("advanced_notebook"));
-	gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook), i);
+	GtkNotebook *notebook = GTK_NOTEBOOK(OB("advanced_notebook"));
+
 	gtk_widget_show(dialog_config);
+
+	/* From GTK+ 2/3 Reference Manual:
+	Note that due to historical reasons, GtkNotebook refuses to switch to a
+	page unless the child widget is visible. Therefore, it is recommended
+	to show child widgets before adding them to a notebook. */
+	gtk_notebook_set_current_page(notebook, i);
 }
 
 static gint
