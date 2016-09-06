@@ -3895,8 +3895,10 @@
           <object class="GtkNotebook" id="advanced_notebook">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="scrollable">True</property>
+            <property name="enable_popup">True</property>
             <child>
-              <object class="GtkVBox" id="vbox1">
+              <object class="GtkVBox" id="advanced_box_cpu">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="border_width">6</property>
@@ -4064,7 +4066,7 @@
               </object>
             </child>
             <child type="tab">
-              <object class="GtkLabel" id="label10">
+              <object class="GtkLabel" id="advanced_label_cpu">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Processor</property>
@@ -4074,7 +4076,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkVBox" id="vbox3">
+              <object class="GtkVBox" id="advanced_box_mem">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="border_width">6</property>
@@ -4245,7 +4247,7 @@
               </packing>
             </child>
             <child type="tab">
-              <object class="GtkLabel" id="label11">
+              <object class="GtkLabel" id="advanced_label_mem">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Memory</property>
@@ -4256,7 +4258,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkVBox" id="vbox4">
+              <object class="GtkVBox" id="advanced_box_net">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="border_width">6</property>
@@ -4597,7 +4599,7 @@
               </packing>
             </child>
             <child type="tab">
-              <object class="GtkLabel" id="label12">
+              <object class="GtkLabel" id="advanced_label_net">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Network</property>
@@ -4608,7 +4610,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkVBox" id="vbox5">
+              <object class="GtkVBox" id="advanced_box_swap">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="border_width">6</property>
@@ -4779,7 +4781,7 @@
               </packing>
             </child>
             <child type="tab">
-              <object class="GtkLabel" id="label28">
+              <object class="GtkLabel" id="advanced_label_swap">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Swap</property>
@@ -4790,7 +4792,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkVBox" id="vbox6">
+              <object class="GtkVBox" id="advanced_box_load">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="border_width">6</property>
@@ -5032,7 +5034,7 @@
               </packing>
             </child>
             <child type="tab">
-              <object class="GtkLabel" id="label29">
+              <object class="GtkLabel" id="advanced_label_load">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Load average</property>
@@ -5043,7 +5045,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkVBox" id="vbox7">
+              <object class="GtkVBox" id="advanced_box_disk">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="border_width">6</property>
@@ -5285,7 +5287,7 @@
               </packing>
             </child>
             <child type="tab">
-              <object class="GtkLabel" id="label31">
+              <object class="GtkLabel" id="advanced_label_disk">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Disk</property>
@@ -5296,7 +5298,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkVBox" id="vbox8">
+              <object class="GtkVBox" id="advanced_box_temp">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="border_width">6</property>
@@ -5538,7 +5540,7 @@
               </packing>
             </child>
             <child type="tab">
-              <object class="GtkLabel" id="label32">
+              <object class="GtkLabel" id="advanced_label_temp">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Temperature</property>
@@ -5549,7 +5551,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkVBox" id="vbox9">
+              <object class="GtkVBox" id="advanced_box_parm">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="border_width">6</property>
@@ -5873,7 +5875,7 @@ Process CAN print some text to stderr.
               </packing>
             </child>
             <child type="tab">
-              <object class="GtkLabel" id="label34">
+              <object class="GtkLabel" id="advanced_label_parm">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Parametric</property>

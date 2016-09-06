@@ -56,6 +56,7 @@ DEFINE_OB_NAMES_FULL(combo_dblclick);
 DEFINE_OB_NAMES_FULL(entry_dblclick_command);
 DEFINE_OB_NAMES_FULL(image_info_dblclick_command);
 DEFINE_OB_NAMES_FULL(sb_border);
+DEFINE_OB_NAMES_FULL(advanced_box);
 
 static const gchar* spin_ceil_names[GRAPH_MAX] = {
 	"",
@@ -848,6 +849,9 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 			g_strfreev(filter_split);
 			g_free(filter);
 		}
+
+		// advanced preferences - tab menu names
+		gtk_notebook_set_menu_label_text(GTK_NOTEBOOK(OB("advanced_notebook")), GTK_WIDGET(OB(advanced_box_names[i])), graph_types[i].label);
 	}
 	gtk_range_set_value(GTK_RANGE(OB("hscale_spacing")), (gdouble)ma->spacing);
 	gtk_range_set_value(GTK_RANGE(OB("hscale_padding")), (gdouble)ma->padding);
