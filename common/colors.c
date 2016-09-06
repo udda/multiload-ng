@@ -212,9 +212,9 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(00,00,00, FF)		// Background (bottom)
 			}, { // PARM hue: (gray)
 				HEX_TO_RGBA(4C,4C,4C, FF),		// Result 1
-				HEX_TO_RGBA(84,84,84, FF),		// Result 2
-				HEX_TO_RGBA(B7,B7,B7, FF),		// Result 3
-				HEX_TO_RGBA(F1,F1,F1, FF),		// Result 4
+				HEX_TO_RGBA(90,90,90, FF),		// Result 2
+				HEX_TO_RGBA(CC,CC,CC, FF),		// Result 3
+				HEX_TO_RGBA(F3,F3,F3, FF),		// Result 4
 				HEX_TO_RGBA(80,80,80, FF),		// Border
 				HEX_TO_RGBA(00,00,00, FF),		// Background (top)
 				HEX_TO_RGBA(00,00,00, FF)		// Background (bottom)
