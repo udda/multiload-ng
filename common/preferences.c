@@ -87,7 +87,7 @@ static const gchar* cb_source_auto_names[GRAPH_MAX] = {
 	"",
 	"",
 	"",
-	"",
+	"cb_source_auto_temp",
 	""
 };
 
@@ -98,7 +98,7 @@ static const gchar* treeview_source_names[GRAPH_MAX] = {
 	"",
 	"",
 	"",
-	"",
+	"treeview_source_temp",
 	""
 };
 
@@ -109,7 +109,7 @@ static const gchar* cellrenderertoggle_source_names[GRAPH_MAX] = {
 	"",
 	"",
 	"",
-	"",
+	"cellrenderertoggle_source_temp",
 	""
 };
 
@@ -120,7 +120,7 @@ static const gchar* liststore_source_names[GRAPH_MAX] = {
 	"",
 	"",
 	"",
-	"",
+	"liststore_source_temp",
 	""
 };
 
@@ -660,24 +660,37 @@ multiload_preferences_source_toggled_cb (GtkCellRendererToggle *cell, gchar *pat
 	GtkTreeIter iter;
 	gchar *filter;
 	gchar *s;
+	gboolean active;
 	gboolean b;
 
 	guint graph_index = EXTRACT_GRAPH_INDEX(cell);
 	if (liststore_source_names[graph_index] == NULL)
-		return;
+		return; // filter not implemented for this graph
 
-	// update view
 	ls = GTK_LIST_STORE(OB(liststore_source_names[graph_index]));
-	b = gtk_cell_renderer_toggle_get_active(cell);
+	active = gtk_cell_renderer_toggle_get_active(cell);
 
+	// radio button behavior
+	if (gtk_cell_renderer_toggle_get_radio(cell)) {
+		if (active)
+			return; // selecting already selected radio buttons - do nothing
+
+		// deselect every radio button
+		b = gtk_tree_model_get_iter_first (GTK_TREE_MODEL(ls), &iter);
+		while (b) {
+			gtk_list_store_set (ls, &iter, 0, FALSE, -1);
+			b = gtk_tree_model_iter_next (GTK_TREE_MODEL(ls), &iter);
+		}
+	}
+
+	// select current entry
 	path = gtk_tree_path_new_from_string(path_string);
 	gtk_tree_model_get_iter (GTK_TREE_MODEL(ls), &iter, path);
-	gtk_list_store_set (ls, &iter, 0, !b, -1);
-
+	gtk_list_store_set (ls, &iter, 0, !active, -1);
 	gtk_tree_path_free (path);
 
 	// update filter
-	ma->graph_config[graph_index].filter_enable = !b;
+	ma->graph_config[graph_index].filter_enable = !active;
 	filter = ma->graph_config[graph_index].filter;
 	filter[0] = '\0';
 
