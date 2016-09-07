@@ -68,7 +68,7 @@ multiload_graph_temp_get_filter (LoadGraph *g, TemperatureData *xd)
 			selected = (strcmp(list[i].name, g->config->filter) == 0);
 			strcat(filter, selected?"+":"-");
 			strcat(filter, list[i].name);
-			strcat(filter, ",");
+			strcat(filter, MULTILOAD_FILTER_SEPARATOR);
 		}
 	}
 	filter[strlen(filter)-1] = '\0';

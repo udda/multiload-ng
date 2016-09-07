@@ -852,7 +852,7 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(OB(cb_source_auto_names[i])), !conf->filter_enable);
 
 			gchar *filter = graph_types[i].get_filter(ma->graphs[i], ma->extra_data[i]);
-			gchar ** filter_split = g_strsplit (filter, ",", -1);
+			gchar ** filter_split = g_strsplit (filter, MULTILOAD_FILTER_SEPARATOR, -1);
 			for (j=0; filter_split[j]!=NULL; j++) {
 				gtk_list_store_insert_with_values (GTK_LIST_STORE(OB(liststore_source_names[i])), NULL, -1,
 					0, (filter_split[j][0]=='+')?TRUE:FALSE,

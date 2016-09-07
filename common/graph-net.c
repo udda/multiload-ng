@@ -94,7 +94,7 @@ multiload_graph_net_get_filter (LoadGraph *g, NetData *xd)
 
 		strcat(ifaces, present?"+":"-");
 		strcat(ifaces, iface);
-		strcat(ifaces, ",");
+		strcat(ifaces, MULTILOAD_FILTER_SEPARATOR);
 	}
 	ifaces[strlen(ifaces)-1] = '\0';
 

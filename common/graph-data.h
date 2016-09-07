@@ -27,6 +27,8 @@
 
 G_BEGIN_DECLS
 
+#define MULTILOAD_FILTER_SEPARATOR "\n"
+
 
 typedef struct _CpuData {
 	guint64 last [5];
