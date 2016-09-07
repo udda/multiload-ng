@@ -4235,62 +4235,52 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkFrame" id="frame1">
+                      <object class="GtkScrolledWindow" id="scrolledwindow2">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="hexpand">True</property>
-                        <property name="vexpand">True</property>
-                        <property name="label_xalign">0</property>
+                        <property name="can_focus">True</property>
+                        <property name="hscrollbar_policy">never</property>
                         <property name="shadow_type">in</property>
+                        <property name="min_content_height">100</property>
                         <child>
-                          <object class="GtkAlignment" id="alignment1">
+                          <object class="GtkTreeView" id="treeview_source_net">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
+                            <property name="can_focus">True</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="model">liststore_source_net</property>
+                            <property name="headers_clickable">False</property>
+                            <property name="search_column">1</property>
+                            <property name="fixed_height_mode">True</property>
+                            <property name="show_expanders">False</property>
+                            <property name="tooltip_column">2</property>
+                            <child internal-child="selection">
+                              <object class="GtkTreeSelection" id="treeview-selection"/>
+                            </child>
                             <child>
-                              <object class="GtkTreeView" id="treeview_source_net">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="hexpand">True</property>
-                                <property name="vexpand">True</property>
-                                <property name="model">liststore_source_net</property>
-                                <property name="headers_clickable">False</property>
-                                <property name="search_column">1</property>
-                                <property name="fixed_height_mode">True</property>
-                                <property name="show_expanders">False</property>
-                                <property name="tooltip_column">2</property>
-                                <child internal-child="selection">
-                                  <object class="GtkTreeSelection" id="treeview-selection"/>
-                                </child>
+                              <object class="GtkTreeViewColumn" id="treeviewcolumn3">
+                                <property name="sizing">fixed</property>
+                                <property name="min_width">40</property>
                                 <child>
-                                  <object class="GtkTreeViewColumn" id="treeviewcolumn3">
-                                    <property name="sizing">fixed</property>
-                                    <property name="min_width">40</property>
-                                    <child>
-                                      <object class="GtkCellRendererToggle" id="cellrenderertoggle_source_net"/>
-                                      <attributes>
-                                        <attribute name="active">0</attribute>
-                                      </attributes>
-                                    </child>
-                                  </object>
+                                  <object class="GtkCellRendererToggle" id="cellrenderertoggle_source_net"/>
+                                  <attributes>
+                                    <attribute name="active">0</attribute>
+                                  </attributes>
                                 </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkTreeViewColumn" id="treeviewcolumn4">
+                                <property name="sizing">fixed</property>
+                                <property name="title" translatable="yes">Name</property>
                                 <child>
-                                  <object class="GtkTreeViewColumn" id="treeviewcolumn4">
-                                    <property name="sizing">fixed</property>
-                                    <property name="title" translatable="yes">Name</property>
-                                    <child>
-                                      <object class="GtkCellRendererText" id="cellrenderertext19"/>
-                                      <attributes>
-                                        <attribute name="text">1</attribute>
-                                      </attributes>
-                                    </child>
-                                  </object>
+                                  <object class="GtkCellRendererText" id="cellrenderertext19"/>
+                                  <attributes>
+                                    <attribute name="text">1</attribute>
+                                  </attributes>
                                 </child>
                               </object>
                             </child>
                           </object>
-                        </child>
-                        <child type="label_item">
-                          <placeholder/>
                         </child>
                       </object>
                       <packing>
@@ -5276,6 +5266,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="shadow_type">in</property>
+                        <property name="min_content_height">100</property>
                         <child>
                           <object class="GtkTreeView" id="treeview_source_temp">
                             <property name="visible">True</property>
