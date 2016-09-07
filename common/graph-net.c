@@ -72,7 +72,7 @@ multiload_graph_net_get_filter (LoadGraph *g, NetData *xd)
 	char iface[12];
 	char *ifaces = g_malloc0(64);
 
-	char **active_filter = g_strsplit(g->config->filter, ",", -1);
+	char **active_filter = g_strsplit(g->config->filter, MULTILOAD_FILTER_SEPARATOR_INLINE, -1);
 
 	FILE *f = cached_fopen_r("/proc/net/dev", FALSE);
 	while (getline(&buf, &n, f) >= 0) {
@@ -224,7 +224,7 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 
 		if (can_add && g->config->filter_enable) {
 			can_add = FALSE;
-			gchar ** filter_array = g_strsplit(g->config->filter, ",", -1);
+			gchar ** filter_array = g_strsplit(g->config->filter, MULTILOAD_FILTER_SEPARATOR_INLINE, -1);
 			for (j=0; filter_array[j]!=NULL; j++) {
 				if (strcmp(filter_array[j], d_ptr->name) == 0) {
 					can_add = TRUE;

@@ -700,7 +700,7 @@ multiload_preferences_source_toggled_cb (GtkCellRendererToggle *cell, gchar *pat
 
 		if (b) {
 			strcat(filter, s);
-			strcat(filter, ",");
+			strcat(filter, MULTILOAD_FILTER_SEPARATOR_INLINE);
 		}
 
 		g_free(s);

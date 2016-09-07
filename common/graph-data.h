@@ -28,6 +28,7 @@
 G_BEGIN_DECLS
 
 #define MULTILOAD_FILTER_SEPARATOR "\n"
+#define MULTILOAD_FILTER_SEPARATOR_INLINE ","
 
 
 typedef struct _CpuData {
