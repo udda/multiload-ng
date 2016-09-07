@@ -3859,6 +3859,16 @@
       <column type="gchararray"/>
     </columns>
   </object>
+  <object class="GtkListStore" id="liststore_source_temp">
+    <columns>
+      <!-- column-name selected -->
+      <column type="gboolean"/>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name description -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkListStore" id="liststore_tooltips">
     <columns>
       <!-- column-name Description -->
@@ -4579,7 +4589,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="xalign">0</property>
-                        <property name="label" translatable="yes">Interfaces:</property>
+                        <property name="label" translatable="yes">Source:</property>
                       </object>
                       <packing>
                         <property name="x_options">GTK_FILL</property>
@@ -5532,7 +5542,103 @@
                   </packing>
                 </child>
                 <child>
-                  <placeholder/>
+                  <object class="GtkTable" id="table15">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="n_rows">2</property>
+                    <property name="n_columns">2</property>
+                    <property name="column_spacing">6</property>
+                    <property name="row_spacing">6</property>
+                    <child>
+                      <object class="GtkCheckButton" id="cb_source_auto_temp">
+                        <property name="label" translatable="yes">Choose automatically</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="active">True</property>
+                        <property name="draw_indicator">True</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="y_options"/>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label10">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Source:</property>
+                      </object>
+                      <packing>
+                        <property name="x_options">GTK_FILL</property>
+                        <property name="y_options">GTK_FILL</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <object class="GtkScrolledWindow" id="scrolledwindow1">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="hscrollbar_policy">never</property>
+                        <property name="vscrollbar_policy">automatic</property>
+                        <property name="shadow_type">in</property>
+                        <child>
+                          <object class="GtkTreeView" id="treeview_source_temp">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="model">liststore_source_temp</property>
+                            <property name="headers_clickable">False</property>
+                            <property name="search_column">1</property>
+                            <property name="fixed_height_mode">True</property>
+                            <property name="show_expanders">False</property>
+                            <property name="tooltip_column">2</property>
+                            <child>
+                              <object class="GtkTreeViewColumn" id="treeviewcolumn4">
+                                <property name="sizing">fixed</property>
+                                <property name="min_width">40</property>
+                                <child>
+                                  <object class="GtkCellRendererToggle" id="cellrenderertoggle_source_temp">
+                                    <property name="radio">True</property>
+                                  </object>
+                                  <attributes>
+                                    <attribute name="active">0</attribute>
+                                  </attributes>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkTreeViewColumn" id="treeviewcolumn5">
+                                <property name="sizing">fixed</property>
+                                <property name="title" translatable="yes">Name</property>
+                                <property name="expand">True</property>
+                                <child>
+                                  <object class="GtkCellRendererText" id="cellrenderertext20"/>
+                                  <attributes>
+                                    <attribute name="text">1</attribute>
+                                  </attributes>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">4</property>
+                  </packing>
                 </child>
               </object>
               <packing>
@@ -5958,6 +6064,7 @@ Process CAN print some text to stderr.
       <widget name="label52"/>
       <widget name="label54"/>
       <widget name="label58"/>
+      <widget name="label10"/>
     </widgets>
   </object>
 </interface>
