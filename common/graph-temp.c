@@ -337,7 +337,7 @@ multiload_graph_temp_get_data (int Maximum, int data[2], LoadGraph *g, Temperatu
 	}
 
 	// select phase: choose which source to show
-	if (g->config->filter_enable) {
+	if (g->config->filter_enable && g->config->filter[0] != '\0') {
 		for (i=0; list[i].temp_path[0]!='\0'; i++) {
 			if (strcmp(list[i].name, g->config->filter) == 0) {
 				use = &list[i];
@@ -350,8 +350,8 @@ multiload_graph_temp_get_data (int Maximum, int data[2], LoadGraph *g, Temperatu
 			if (list[i].temp > list[m].temp)
 				m = i;
 		}
+		use = &list[m];
 	}
-	use = &list[m];
 
 	// output phase
 	int max = autoscaler_get_max(&xd->scaler, g, use->temp);
