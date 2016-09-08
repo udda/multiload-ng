@@ -690,7 +690,6 @@ multiload_preferences_source_toggled_cb (GtkCellRendererToggle *cell, gchar *pat
 	gtk_tree_path_free (path);
 
 	// update filter
-	ma->graph_config[graph_index].filter_enable = !active;
 	filter = ma->graph_config[graph_index].filter;
 	filter[0] = '\0';
 
