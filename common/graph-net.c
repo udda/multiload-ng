@@ -65,16 +65,26 @@ multiload_graph_net_get_filter (LoadGraph *g, NetData *xd)
 	gboolean present;
 	guint i;
 
+	FILE *f;
 	char *buf = NULL;
 	char *start, *end;
 	size_t n = 0;
 
 	char iface[12];
-	char *ifaces = g_malloc0(64);
+	char *filter;
 
 	char **active_filter = g_strsplit(g->config->filter, MULTILOAD_FILTER_SEPARATOR_INLINE, -1);
 
-	FILE *f = cached_fopen_r("/proc/net/dev", FALSE);
+	f = cached_fopen_r("/proc/net/dev", FALSE);
+	for (i=0; getline(&buf, &n, f) >= 0;) {
+		// skip header lines of /proc/net/dev
+		if (strchr(buf, ':') != NULL)
+			i++;
+	}
+	filter = g_malloc0(i+(2+sizeof(iface)));
+
+	buf=NULL, n=0;
+	f = cached_fopen_r("/proc/net/dev", FALSE);
 	while (getline(&buf, &n, f) >= 0) {
 		end = strchr(buf, ':');
 		// skip header lines of /proc/net/dev
@@ -92,14 +102,14 @@ multiload_graph_net_get_filter (LoadGraph *g, NetData *xd)
 			}
 		}
 
-		strcat(ifaces, present?"+":"-");
-		strcat(ifaces, iface);
-		strcat(ifaces, MULTILOAD_FILTER_SEPARATOR);
+		strcat(filter, present?"+":"-");
+		strcat(filter, iface);
+		strcat(filter, MULTILOAD_FILTER_SEPARATOR);
 	}
-	ifaces[strlen(ifaces)-1] = '\0';
+	filter[strlen(filter)-1] = '\0';
 
 	g_strfreev(active_filter);
-	return ifaces;
+	return filter;
 }
 
 
