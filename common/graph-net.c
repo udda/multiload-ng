@@ -216,7 +216,7 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 		for (j=0; j<i; j++) {
 			if_data *d_tmp = &g_array_index(valid_ifaces, if_data, j);
 			if (strcmp(d_tmp->address, d_ptr->address) == 0) {
-				g_debug("[graph-net] Ignored interface %s because has the same HW address of %s (%s)", d_tmp->name, d_ptr->name, d_ptr->address);
+				g_debug("[graph-net] Ignored interface '%s' because has the same HW address of '%s' (%s)", d_tmp->name, d_ptr->name, d_ptr->address);
 				can_add = FALSE;
 				break;
 			}
@@ -232,7 +232,7 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 				}
 			}
 			if (!can_add)
-				g_debug("[graph-net] Ignored interface %s due to user filter", d_ptr->name);
+				g_debug("[graph-net] Ignored interface '%s' due to user filter", d_ptr->name);
 			g_strfreev(filter_array);
 		}
 
