@@ -86,7 +86,7 @@ static const gchar* cb_source_auto_names[GRAPH_MAX] = {
 	"cb_source_auto_net",
 	"",
 	"",
-	"",
+	"cb_source_auto_disk",
 	"cb_source_auto_temp",
 	""
 };
@@ -97,7 +97,7 @@ static const gchar* treeview_source_names[GRAPH_MAX] = {
 	"treeview_source_net",
 	"",
 	"",
-	"",
+	"treeview_source_disk",
 	"treeview_source_temp",
 	""
 };
@@ -108,7 +108,7 @@ static const gchar* cellrenderertoggle_source_names[GRAPH_MAX] = {
 	"cellrenderertoggle_source_net",
 	"",
 	"",
-	"",
+	"cellrenderertoggle_source_disk",
 	"cellrenderertoggle_source_temp",
 	""
 };
@@ -119,7 +119,7 @@ static const gchar* liststore_source_names[GRAPH_MAX] = {
 	"liststore_source_net",
 	"",
 	"",
-	"",
+	"liststore_source_disk",
 	"liststore_source_temp",
 	""
 };

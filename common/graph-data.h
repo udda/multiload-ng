@@ -27,7 +27,10 @@
 
 G_BEGIN_DECLS
 
+// separator for filter returned by multiload_graph_*_get_filter() to use in program
 #define MULTILOAD_FILTER_SEPARATOR "\n"
+
+// separator for filter saved on settings. Must not contain newlines or invalid UTF-8 sequences.
 #define MULTILOAD_FILTER_SEPARATOR_INLINE ","
 
 
@@ -148,6 +151,8 @@ multiload_graph_load_cmdline_output (LoadGraph *g, LoadData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_load_tooltip_update (char **title, char **text, LoadGraph *g, LoadData *xd);
 
+G_GNUC_INTERNAL gchar *
+multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_disk_get_data (int Maximum, int data [3], LoadGraph *g, DiskData *xd);
 G_GNUC_INTERNAL void

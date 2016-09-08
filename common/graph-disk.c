@@ -32,11 +32,83 @@
 #include "util.h"
 
 
+const static char *fstype_ignore_list[] = { "rootfs", "smbfs", "nfs", "cifs", "fuse.", NULL };
+
+
+gchar *
+multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
+{
+	char *buf = NULL;
+	size_t n = 0;
+
+	size_t s;
+	char device[20];
+	gchar *prefix;
+	guint i;
+	gboolean present;
+
+	FILE *f;
+	gchar *filter;
+	char sysfs_path[PATH_MAX];
+
+	char **active_filter = g_strsplit(g->config->filter, MULTILOAD_FILTER_SEPARATOR_INLINE, -1);
+
+	// calculate filter string length
+	f = cached_fopen_r("/proc/partitions", TRUE);
+	for (i=0; getline(&buf, &n, f) >= 0; i++) {}
+	filter = g_new0(gchar, i*(2+sizeof(device)));
+
+
+	f = cached_fopen_r("/proc/partitions", TRUE);
+	while(getline(&buf, &n, f) >= 0) {
+		s = fscanf(f, "%*u %*u %*u %s", device);
+		if (s != 1)
+			continue;
+
+		// extract block device and partition names
+		gboolean is_partition = FALSE;
+		prefix = g_strdup(device);
+		for (i=0; prefix[i] != '\0'; i++) {
+			if (isdigit(prefix[i])) {
+				prefix[i] = '\0';
+				is_partition = TRUE;
+				break;
+			}
+		}
+
+		// generate sysfs path
+		if (is_partition)
+			g_snprintf(sysfs_path, PATH_MAX, "/sys/block/%s/%s/stat", prefix, device);
+		else
+			g_snprintf(sysfs_path, PATH_MAX, "/sys/block/%s/stat", device);
+		g_free(prefix);
+
+		if (access(sysfs_path, R_OK) != 0)
+			continue;
+
+		for (i=0, present=FALSE; active_filter[i] != NULL; i++) {
+			if (strcmp(active_filter[i], device) == 0) {
+				present = TRUE;
+				break;
+			}
+		}
+
+		strcat(filter, present?"+":"-");
+		strcat(filter, device);
+		strcat(filter, MULTILOAD_FILTER_SEPARATOR);
+	}
+	filter[strlen(filter)-1] = '\0';
+	free(buf);
+	g_strfreev(active_filter);
+
+	return filter;
+}
+
+
 void
 multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData *xd)
 {
 	static gboolean first_call = TRUE;
-	const static char *fstype_ignore_list[] = { "rootfs", "smbfs", "nfs", "cifs", "fuse.", NULL };
 
 	FILE *f_mntent;
 	FILE *f_stat;
@@ -70,7 +142,6 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 				ignore = TRUE;
 				break;
 			}
-
 		}
 		if (ignore)
 			continue;
@@ -86,6 +157,23 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 				break;
 			}
 		}
+
+		// filter
+		if (g->config->filter_enable) {
+			ignore = TRUE;
+			gchar ** filter_array = g_strsplit(g->config->filter, MULTILOAD_FILTER_SEPARATOR_INLINE, -1);
+			for (i=0; filter_array[i]!=NULL; i++) {
+				if (strcmp(filter_array[i], device) == 0) {
+					ignore = FALSE;
+					break;
+				}
+			}
+			if (ignore)
+				g_debug("[graph-disk] Ignored device '%s' due to user filter", device);
+			g_strfreev(filter_array);
+		}
+		if (ignore)
+			continue;
 
 		// generate sysfs path
 		if (is_partition)

@@ -70,7 +70,8 @@ void multiload_config_init()
 		{	"disk",	_("Disk"),			5,
 			(GraphGetDataFunc)			multiload_graph_disk_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_disk_tooltip_update,
-			(GraphCmdlineOutputFunc)	multiload_graph_disk_cmdline_output
+			(GraphCmdlineOutputFunc)	multiload_graph_disk_cmdline_output,
+			(GraphGetFilterFunc)		multiload_graph_disk_get_filter
 		},
 		{	"temp",	_("Temperature"),	5,
 			(GraphGetDataFunc)			multiload_graph_temp_get_data,
