@@ -42,8 +42,7 @@ multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
 	size_t n = 0;
 
 	size_t s;
-	char device[20];
-	gchar *prefix;
+	char device[20], prefix[20];
 	guint i;
 	gboolean present;
 
@@ -67,7 +66,7 @@ multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
 
 		// extract block device and partition names
 		gboolean is_partition = FALSE;
-		prefix = g_strdup(device);
+		g_strlcpy(prefix, device, sizeof(device));
 		for (i=0; prefix[i] != '\0'; i++) {
 			if (isdigit(prefix[i])) {
 				prefix[i] = '\0';
@@ -81,7 +80,6 @@ multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
 			g_snprintf(sysfs_path, PATH_MAX, "/sys/block/%s/%s/stat", prefix, device);
 		else
 			g_snprintf(sysfs_path, PATH_MAX, "/sys/block/%s/stat", device);
-		g_free(prefix);
 
 		if (access(sysfs_path, R_OK) != 0)
 			continue;
@@ -117,7 +115,9 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 	guint i;
 	int max;
 
-	char *sysfs_path, *device, *prefix;
+	char sysfs_path[PATH_MAX];
+	char *device;
+	char prefix[20];
 	guint64 read, write;
 	guint64 read_total = 0, write_total = 0;
 	guint64 readdiff, writediff;
@@ -149,7 +149,7 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 		// extract block device and partition names
 		gboolean is_partition = FALSE;
 		device = &mnt->mnt_fsname[5];
-		prefix = g_strdup(device);
+		g_strlcpy(prefix, device, sizeof(device));
 		for (i=0; prefix[i] != '\0'; i++) {
 			if (isdigit(prefix[i])) {
 				prefix[i] = '\0';
@@ -177,14 +177,12 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 
 		// generate sysfs path
 		if (is_partition)
-			sysfs_path = g_strdup_printf("/sys/block/%s/%s/stat", prefix, device);
+			g_snprintf(sysfs_path, PATH_MAX, "/sys/block/%s/%s/stat", prefix, device);
 		else
-			sysfs_path = g_strdup_printf("/sys/block/%s/stat", device);
-		g_free(prefix);
+			g_snprintf(sysfs_path, PATH_MAX, "/sys/block/%s/stat", device);
 
 		// read data from sysfs
 		f_stat = fopen(sysfs_path, "r");
-		g_free(sysfs_path);
 		if (f_stat == NULL)
 			continue;
 		int result = fscanf(f_stat, "%*u %*u %lu %*u %*u %*u %lu %*u", &read, &write);
