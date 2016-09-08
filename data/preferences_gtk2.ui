@@ -4516,7 +4516,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="n_rows">2</property>
-                    <property name="n_columns">2</property>
+                    <property name="n_columns">3</property>
                     <property name="column_spacing">6</property>
                     <property name="row_spacing">6</property>
                     <child>
@@ -4594,9 +4594,23 @@
                         </child>
                       </object>
                       <packing>
-                        <property name="right_attach">2</property>
+                        <property name="right_attach">3</property>
                         <property name="top_attach">1</property>
                         <property name="bottom_attach">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkImage" id="image_info_source_net">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">Please note that some selected sources might still not show up, because of other constraints that make them not suitable.</property>
+                        <property name="icon_name">dialog-information</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">2</property>
+                        <property name="right_attach">3</property>
+                        <property name="x_options"/>
+                        <property name="y_options"/>
                       </packing>
                     </child>
                   </object>
@@ -5296,7 +5310,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="n_rows">2</property>
-                    <property name="n_columns">2</property>
+                    <property name="n_columns">3</property>
                     <property name="column_spacing">6</property>
                     <property name="row_spacing">6</property>
                     <child>
@@ -5323,7 +5337,7 @@
                       </object>
                       <packing>
                         <property name="x_options">GTK_FILL</property>
-                        <property name="y_options">GTK_FILL</property>
+                        <property name="y_options"/>
                       </packing>
                     </child>
                     <child>
@@ -5374,9 +5388,23 @@
                         </child>
                       </object>
                       <packing>
-                        <property name="right_attach">2</property>
+                        <property name="right_attach">3</property>
                         <property name="top_attach">1</property>
                         <property name="bottom_attach">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkImage" id="image_info_source_disk">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">Please note that some selected sources might still not show up, because of other constraints that make them not suitable.</property>
+                        <property name="icon_name">dialog-information</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">2</property>
+                        <property name="right_attach">3</property>
+                        <property name="x_options"/>
+                        <property name="y_options"/>
                       </packing>
                     </child>
                   </object>
