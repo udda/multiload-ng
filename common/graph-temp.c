@@ -341,8 +341,10 @@ multiload_graph_temp_get_data (int Maximum, int data[2], LoadGraph *g, Temperatu
 		for (i=0; list[i].temp_path[0]!='\0'; i++) {
 			if (strcmp(list[i].name, g->config->filter) == 0) {
 				use = &list[i];
+				g_debug("[graph-temp] Using source '%s' (selected by filter)", list[i].name);
 				break;
 			}
+			g_debug("[graph-temp] No source found for filter '%s'", g->config->filter);
 		}
 	}
 	if (use == NULL) { // filter disabled or filter value not found - auto selection
