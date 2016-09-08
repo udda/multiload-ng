@@ -125,7 +125,7 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 	};
 
 	static GHashTable *table = NULL;
-	static int ticks = 0;
+	static gboolean first_call = TRUE;
 
 	char *buf = NULL;
 	char tmp[PATH_MAX];
@@ -140,6 +140,11 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 
 	if_data d;
 	if_data *d_ptr;
+
+	if (g->filter_changed) {
+		first_call = TRUE;
+		g->filter_changed = FALSE;
+	}
 
 	GArray *valid_ifaces = g_array_sized_new(TRUE, FALSE, sizeof(if_data), 10);
 
@@ -264,14 +269,22 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 	xd->ifaces[strlen(xd->ifaces)-2] = 0;
 
 
-	if (G_UNLIKELY(ticks < 2)) { // avoid initial spike
-		ticks++;
+	if (G_UNLIKELY(first_call)) { // avoid initial spike
+		first_call = FALSE;
+
+		xd->in_speed = 0;
+		xd->out_speed = 0;
+		xd->local_speed = 0;
+
 		memset(data, 0, NET_MAX * sizeof data[0]);
 	} else {
 		for (i = 0; i < NET_MAX; i++) {
 			delta[i] = present[i] - xd->last[i];
-			if (delta[i] < 0)
-				continue; // filter changes could cause negative delta. Just ignore it (happens once)
+			if (delta[i] < 0) {
+				// filter changes could cause negative delta - reset total byte counts
+				g->filter_changed = TRUE;
+				return;
+			}
 			total += delta[i];
 		}
 

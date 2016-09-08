@@ -707,6 +707,9 @@ multiload_preferences_source_toggled_cb (GtkCellRendererToggle *cell, gchar *pat
 	}
 	filter[strlen(filter)-1] = '\0';
 	g_debug ("[preferences] set interfaces filter for graph #%d: %s\n", graph_index, filter);
+
+	// trigger data refresh for graphs that require it
+	ma->graphs[graph_index]->filter_changed = TRUE;
 }
 
 static void
@@ -716,6 +719,9 @@ multiload_preferences_source_auto_toggled_cb (GtkToggleButton *toggle, Multiload
 	gboolean b = gtk_toggle_button_get_active(toggle);
 
 	ma->graph_config[i].filter_enable = !b;
+
+	// trigger data refresh for graphs that require it
+	ma->graphs[i]->filter_changed = TRUE;
 
 	multiload_preferences_update_dynamic_widgets(ma);
 }

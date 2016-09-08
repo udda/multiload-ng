@@ -103,6 +103,7 @@ struct _LoadGraph {
 
 	gboolean allocated;
 	gboolean tooltip_update;
+	gboolean filter_changed;
 
 	GraphConfig *config;
 };
