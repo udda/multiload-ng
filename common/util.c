@@ -166,7 +166,8 @@ format_percent(guint64 value, guint64 total, guint ndigits)
 gchar*
 format_time_duration(gdouble seconds) {
 	gint d, h, m, s;
-	gchar* format = g_new0(gchar, 24);
+	gchar *format = g_new0(gchar, 24);
+	gchar *unit = NULL;
 
 	int n;
 	gchar *pos = format;
@@ -184,22 +185,30 @@ format_time_duration(gdouble seconds) {
 	d = (t-h)/24;
 
 	if (d) {
-		n = sprintf(pos, "%dd ", d);
+		// xgettext: single-letter form for "days" - e.g. 3 days -> 3d
+		unit=_("d");
+		n = sprintf(pos, "%d%s ", d, unit);
 		pos += n;
 	}
 
 	if (h) {
-		n = sprintf(pos, "%dh ", h);
+		// xgettext: single-letter form for "hours" - e.g. 3 hours -> 3h
+		unit=_("h");
+		n = sprintf(pos, "%d%s ", h, unit);
 		pos += n;
 	}
 
 	if (m) {
-		n = sprintf(pos, "%dm ", m);
+		// xgettext: single-letter form for "minutes" - e.g. 3 minutes -> 3m
+		unit=_("m");
+		n = sprintf(pos, "%d%s ", m, unit);
 		pos += n;
 	}
 
 	if (s || pos==format) {
-		n = sprintf(pos, "%ds ", s);
+		// xgettext: single-letter form for "seconds" - e.g. 3 seconds -> 3s
+		unit=_("s");
+		n = sprintf(pos, "%d%s ", s, unit);
 		pos += n;
 	}
 
