@@ -264,6 +264,7 @@ multiload_ui_show_about (GtkWindow* parent)
 		"license-type",			GTK_LICENSE_GPL_2_0,
 	#endif
 		"authors",				about_data_authors,
+		// xgettext: Translator Full Name <translator_email@example.com>
 		"translator-credits",	_("translator-credits"),
 		NULL);
 }
