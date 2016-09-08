@@ -281,9 +281,8 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 		for (i = 0; i < NET_MAX; i++) {
 			delta[i] = present[i] - xd->last[i];
 			if (delta[i] < 0) {
-				// filter changes could cause negative delta - reset total byte counts
-				g->filter_changed = TRUE;
-				return;
+				g_warning("[graph-net] Measured negative delta for traffic #%d. This is a bug.", i);
+				continue
 			}
 			total += delta[i];
 		}
