@@ -283,7 +283,8 @@ cached_fopen_r(gchar* path, gboolean reopen)
 	}
 	if (f == NULL) {
 		f = fopen(path, "r");
-		g_assert(f != NULL);
+		if (f == NULL)
+			g_error("fopen failed for '%s'", path);
 		g_hash_table_insert(table, path, f);
 	}
 

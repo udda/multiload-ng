@@ -50,7 +50,8 @@ multiload_tooltip_update (LoadGraph *g)
 	g_assert_nonnull(g);
 	g_assert_nonnull(g->multiload);
 	g_assert_nonnull(g->multiload->extra_data);
-	g_assert(g->id >= 0 && g->id < GRAPH_MAX);
+	g_assert_cmpuint(g->id, >=, 0);
+	g_assert_cmpuint(g->id,  <, GRAPH_MAX);
 
 	graph_types[g->id].tooltip_update(&title, &text, g, g->multiload->extra_data[g->id]);
 

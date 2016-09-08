@@ -198,7 +198,7 @@ multiload_preferences_get_graph_index (GtkBuildable *ob, const gchar **list)
 		if (strcmp(list[i], name) == 0)
 			break;
 	}
-	g_assert(i < GRAPH_MAX);
+	g_assert_cmpuint(i, <, GRAPH_MAX);
 
 	return i;
 }
@@ -487,8 +487,8 @@ multiload_preferences_color_set_cb (GtkColorButton *col, MultiloadPlugin *ma)
 		if (found)
 			break;
 	}
-	g_assert(graph_index < GRAPH_MAX);
-	g_assert(found == TRUE);
+	g_assert_cmpuint(graph_index, <, GRAPH_MAX);
+	g_assert_true(found);
 
 	gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER(col), &ma->graph_config[graph_index].colors[i]);
 

@@ -102,7 +102,8 @@ multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *
 
 	// CPU stats
 	f = cached_fopen_r("/proc/stat", TRUE);
-	g_assert(7 == fscanf(f, "cpu %ld %ld %ld %ld %ld %ld %ld", time+CPU_USER, time+CPU_NICE, time+CPU_SYS, time+CPU_IDLE, time+CPU_IOWAIT, &irq, &softirq));
+	n = fscanf(f, "cpu %ld %ld %ld %ld %ld %ld %ld", time+CPU_USER, time+CPU_NICE, time+CPU_SYS, time+CPU_IDLE, time+CPU_IOWAIT, &irq, &softirq);
+	g_assert_cmpuint(n, ==, 7u);
 	time[CPU_IOWAIT] += irq+softirq;
 
 	if (!first_call) {

@@ -28,7 +28,7 @@
 
 guint multiload_config_get_num_colors(guint id)
 {
-	g_assert (graph_types[id].num_colors <= MAX_COLORS);
+	g_assert_cmpuint (graph_types[id].num_colors, <=, MAX_COLORS);
 	return graph_types[id].num_colors;
 }
 

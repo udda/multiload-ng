@@ -34,6 +34,7 @@ void
 multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData *xd)
 {
 	char *savelocale;
+	size_t n;
 
 	FILE *f = cached_fopen_r("/proc/loadavg", TRUE);
 
@@ -41,7 +42,8 @@ multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData
 	savelocale = strdup(setlocale(LC_NUMERIC, NULL));
 	setlocale(LC_NUMERIC, "C");
 
-	g_assert(5 == fscanf(f, "%f %f %f %d/%d", &xd->loadavg_1, &xd->loadavg_5, &xd->loadavg_15, &xd->proc_active, &xd->proc_count));
+	n = fscanf(f, "%f %f %f %d/%d", &xd->loadavg_1, &xd->loadavg_5, &xd->loadavg_15, &xd->proc_active, &xd->proc_count);
+	g_assert_cmpuint(n, ==, 5);
 
 	// restore default locale for numbers
 	setlocale(LC_NUMERIC, savelocale);

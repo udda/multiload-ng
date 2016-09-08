@@ -45,7 +45,7 @@ gdk_rgba_to_argb_string(GdkRGBA* color, gchar *out_str)
 					(guint8)(color->red * 255),
 					(guint8)(color->green * 255),
 					(guint8)(color->blue * 255));
-	g_assert(rc == 9);
+	g_assert_cmpint(rc, ==, 9);
 }
 
 static gboolean
@@ -86,7 +86,8 @@ argb_string_to_gdk_rgba(const gchar *gspec, GdkRGBA *color)
 
 guint multiload_colors_get_extra_index(guint i, MultiloadExtraColor col)
 {
-	g_assert(col >= 0 && col < EXTRA_COLORS);
+	g_assert_cmpuint(col, >=, 0);
+	g_assert_cmpuint(col,  <, EXTRA_COLORS);
 	return multiload_config_get_num_colors(i) - EXTRA_COLORS + col;
 }
 
@@ -113,7 +114,7 @@ multiload_colors_stringify(MultiloadPlugin *ma, guint i, char *list)
 			listpos[9] = ',';
 		listpos += 10;
 	}
-	g_assert (strlen(list) == 10*ncolors-1);
+	g_assert_cmpint ((strlen(list)), ==, (10*ncolors-1));
 }
 
 
