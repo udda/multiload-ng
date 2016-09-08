@@ -3520,6 +3520,16 @@
       <widget name="label45"/>
     </widgets>
   </object>
+  <object class="GtkListStore" id="liststore_source_disk">
+    <columns>
+      <!-- column-name selected -->
+      <column type="gboolean"/>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name description -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkListStore" id="liststore_source_net">
     <columns>
       <!-- column-name selected -->
@@ -4972,7 +4982,104 @@
                   </packing>
                 </child>
                 <child>
-                  <placeholder/>
+                  <object class="GtkGrid" id="grid8">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_top">6</property>
+                    <property name="margin_bottom">6</property>
+                    <property name="row_spacing">6</property>
+                    <property name="column_spacing">6</property>
+                    <child>
+                      <object class="GtkLabel" id="label11">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">start</property>
+                        <property name="hexpand">False</property>
+                        <property name="label" translatable="yes">Source:</property>
+                        <property name="xalign">0</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkCheckButton" id="cb_source_auto_disk">
+                        <property name="label" translatable="yes">Choose automatically</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="hexpand">True</property>
+                        <property name="xalign">0</property>
+                        <property name="active">True</property>
+                        <property name="draw_indicator">True</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkScrolledWindow" id="scrolledwindow3">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="hscrollbar_policy">never</property>
+                        <property name="shadow_type">in</property>
+                        <property name="min_content_height">100</property>
+                        <child>
+                          <object class="GtkTreeView" id="treeview_source_disk">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="model">liststore_source_disk</property>
+                            <property name="headers_clickable">False</property>
+                            <property name="search_column">1</property>
+                            <property name="fixed_height_mode">True</property>
+                            <property name="show_expanders">False</property>
+                            <property name="tooltip_column">2</property>
+                            <child internal-child="selection">
+                              <object class="GtkTreeSelection" id="treeview-selection7"/>
+                            </child>
+                            <child>
+                              <object class="GtkTreeViewColumn" id="treeviewcolumn7">
+                                <property name="sizing">fixed</property>
+                                <property name="min_width">40</property>
+                                <child>
+                                  <object class="GtkCellRendererToggle" id="cellrenderertoggle_source_disk"/>
+                                  <attributes>
+                                    <attribute name="active">0</attribute>
+                                  </attributes>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkTreeViewColumn" id="treeviewcolumn8">
+                                <property name="sizing">fixed</property>
+                                <property name="title" translatable="yes">Name</property>
+                                <child>
+                                  <object class="GtkCellRendererText" id="cellrenderertext21"/>
+                                  <attributes>
+                                    <attribute name="text">1</attribute>
+                                  </attributes>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">1</property>
+                        <property name="width">2</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">4</property>
+                  </packing>
                 </child>
               </object>
               <packing>
@@ -5721,6 +5828,7 @@ Process CAN print some text to stderr.
       <widget name="label62"/>
       <widget name="label66"/>
       <widget name="label10"/>
+      <widget name="label11"/>
     </widgets>
   </object>
 </interface>
