@@ -70,8 +70,9 @@ multiload_graph_temp_get_filter (LoadGraph *g, TemperatureData *xd)
 			strcat(filter, list[i].name);
 			strcat(filter, MULTILOAD_FILTER_SEPARATOR);
 		}
-	}
-	filter[strlen(filter)-1] = '\0';
+		filter[strlen(filter)-1] = '\0';
+	} else
+		filter = "";
 
 	g_free(list);
 	return filter;
