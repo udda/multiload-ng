@@ -6,8 +6,8 @@
 msgid   ""
 msgstr  "Project-Id-Version: multiload-ng\n"
         "Report-Msgid-Bugs-To: Michael Kogan <michael.kogan@gmx.net>\n"
-        "POT-Creation-Date: 2016-08-31 15:52+0200\n"
-        "PO-Revision-Date: 2016-08-31 15:52+0200\n"
+        "POT-Creation-Date: 2016-09-09 14:55+0200\n"
+        "PO-Revision-Date: 2016-09-09 14:55+0200\n"
         "Last-Translator: Michael Kogan <michael.kogan@gmx.net>\n"
         "Language-Team: Deutsche\n"
         "Language: de\n"
@@ -25,73 +25,6 @@ msgstr  "Copyright © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, und andere"
 #, c-format
 msgid   "Unable to execute the following command line: '%s'"
 msgstr  "Folgender Befehl konnte nicht ausgeführt werden: '%s'"
-
-#, c-format
-msgid   "%lu processors  -  %.2f GHz  -  Governor: %s\n"
-        "%.1f%% in use by programs\n"
-        "%.1f%% in wait for I/O\n"
-        "%.1f%% total CPU use\n"
-        "\n"
-        "Uptime: %s"
-msgstr  "%lu Kerne  -  %.2f GHz  -  Governor: %s\n"
-        "%.1f%% von Programmen benutzt\n"
-        "%.1f%% wartend auf I/O\n"
-        "%.1f%% gesamte CPU Nutzung\n"
-        "\n"
-        "Uptime: %s"
-
-#, c-format
-msgid   "%s of RAM"
-msgstr  "%s RAM"
-
-#, c-format
-msgid   "%s in use by programs\n"
-        "%s in use as cache"
-msgstr  "%s von Programmen benutzt\n"
-        "%s als Cache benutzt"
-
-#, c-format
-msgid   "Monitored interfaces: %s\n"
-        "\n"
-        "Receiving: %s\n"
-        "Sending: %s\n"
-        "Local: %s"
-msgstr  "Überwachte Schnittstellen: %s\n"
-        "\n"
-        "Eingehend: %s\n"
-        "Ausgehend: %s\n"
-        "Lokal: %s"
-
-msgid   "No swap"
-msgstr  "Kein Swap"
-
-#, c-format
-msgid   "%s of swap"
-msgstr  "%s swap"
-
-#, c-format
-msgid   "%s used"
-msgstr  "%s benutzt"
-
-#, c-format
-msgid   "Last minute: %0.02f\n"
-        "Last 5 minutes: %0.02f\n"
-        "Last 15 minutes: %0.02f"
-msgstr  "Letzte Minute: %0.02f\n"
-        "Letzte 5 Minuten: %0.02f\n"
-        "Letzte 15 Minuten: %0.02f"
-
-#, c-format
-msgid   "Read: %s\n"
-        "Write: %s"
-msgstr  "Lesen: %s\n"
-        "Schreiben: %s"
-
-#, c-format
-msgid   "Current: %.1f °C\n"
-        "Critical: %.1f °C"
-msgstr  "Aktuell: %.1f °C\n"
-        "Kritisch: %.1f °C"
 
 msgid   "Processor"
 msgstr  "Prozessor"
@@ -113,6 +46,9 @@ msgstr  "Festplatte"
 
 msgid   "Temperature"
 msgstr  "Temperatur"
+
+msgid   "Parametric"
+msgstr  "Parametrisch"
 
 #, c-format
 msgid   "%d pixel"
@@ -148,6 +84,10 @@ msgstr  "_Speichern"
 msgid   "Error exporting color scheme."
 msgstr  "Fehler beim Exportieren des Farbschemas."
 
+#, c-format
+msgid   "Command line is valid. Retrieved %d numbers."
+msgstr  ""
+
 msgid   "(Custom)"
 msgstr  "(Benutzerdefiniert)"
 
@@ -155,6 +95,22 @@ msgstr  "(Benutzerdefiniert)"
 #, c-format
 msgid   "%s/s"
 msgstr  "%s/s"
+
+#. xgettext: single-letter form for "days" - e.g. 3 days -> 3d
+msgid   "d"
+msgstr  ""
+
+#. xgettext: single-letter form for "hours" - e.g. 3 hours -> 3h
+msgid   "h"
+msgstr  ""
+
+#. xgettext: single-letter form for "minutes" - e.g. 3 minutes -> 3m
+msgid   "m"
+msgstr  ""
+
+#. xgettext: single-letter form for "seconds" - e.g. 3 seconds -> 3s
+msgid   "s"
+msgstr  ""
 
 #, c-format
 msgid   "Unable to open the following url: '%s'"
@@ -272,9 +228,6 @@ msgstr  "System"
 msgid   "Nice"
 msgstr  "Nice"
 
-msgid   "IOWait"
-msgstr  "Leerlauf"
-
 msgid   "Background"
 msgstr  "Hintergrund"
 
@@ -311,8 +264,23 @@ msgstr  "Lesen"
 msgid   "Write"
 msgstr  "Schreiben"
 
-msgid   "Value"
-msgstr  "Wert"
+msgid   "Current"
+msgstr  "Aktuell"
+
+msgid   "Result 1"
+msgstr  ""
+
+msgid   "Critical"
+msgstr  "Kritisch"
+
+msgid   "Result 2"
+msgstr  ""
+
+msgid   "Result 3"
+msgstr  ""
+
+msgid   "Result 4"
+msgstr  ""
 
 msgid   "Colors"
 msgstr  "Farben"
@@ -339,60 +307,65 @@ msgstr  "Die Aktion, die bei einem Doppelklick auf diesen Graphen ausgeführt "
 msgid   "Set custom action of this graph"
 msgstr  "Die benutzerdefinierte Aktion dieses Grafen setzen"
 
-#, c-format
 msgid   "The following tokens can be used within the command line:\n"
         "\n"
-        "%n - graph number, from 1 (CPU) to 7 (temperature)\n"
-        "%x - short name of the graph - three to four letters"
-msgstr  "Folgende wildcards können in der Kommandozeile benutzt werden:\n"
+        "%n - graph number - counting left to right, starting from 1\n"
+        "%x - graph short name - three to four lowercase characters\n"
         "\n"
-        "%n\tNummer des Grafen, von 1 (Prozessor) bis 7 (Temperatur)\n"
-        "%x\tKurzname des Grafen - drei bis vier Buchstaben"
-
-msgid   "Color"
-msgstr  "Farbe"
-
-#, c-format
-msgid   "Command: %s\n"
-        "ERROR: %s"
-msgstr  "Befehl: %s\n"
-        "FEHLER: %s"
-
-#, c-format
-msgid   "Command: %s\n"
-        "Result: %lu\n"
-        "Message: %s"
-msgstr  "Befehl: %s\n"
-        "Ergebnis: %lu\n"
-        "Nachricht: %s"
-
-msgid   "Parametric"
-msgstr  "Parametrisch"
-
-msgid   "Command line is empty."
-msgstr  "Kommandozeile ist leer."
-
-msgid   "Unable to execute command."
-msgstr  "Befehl konnte nicht ausgeführt werden."
-
-#, c-format
-msgid   "Command has exited with status code %d."
-msgstr  "Befehl wurde mit Statuscode %d beendet."
-
-msgid   "Command did not return a valid number."
-msgstr  "Befehl gab keine gültige Zahl aus."
-
-msgid   "Command line is valid."
-msgstr  "Befehlszeile ist gültig."
-
-msgid   "Result"
-msgstr  "Ergebnis"
+        "%1 - first value of graph data - depends on the graph\n"
+        "%2 - second value of graph data - depends on the graph\n"
+        "%3 - third value of graph data - depends on the graph\n"
+        "%4 - fourth value of graph data - depends on the graph\n"
+        "%u - measure unit in which graph data values are measured\n"
+        "\n"
+        "%% - inserts a literal percent sign"
+msgstr  ""
 
 msgid   "Double click command:"
 msgstr  "Doppelklick-Befehl:"
+
+msgid   "Maximum value:"
+msgstr  ""
+
+msgid   "Choose automatically"
+msgstr  ""
+
+msgid   "Source:"
+msgstr  ""
+
+msgid   "Name"
+msgstr  ""
+
+msgid   "Please note that some selected sources might still not show up, "
+        "because of other constraints that make them not suitable."
+msgstr  ""
 
 msgid   "Graph command:"
 msgstr  "Graf-Befehl:"
 
 msgid   "Test"
 msgstr  "Test"
+
+msgid   "Color"
+msgstr  "Farbe"
+
+msgid   "Type a valid command line. Process must obey these rules:\n"
+        "\n"
+        "<b>EXIT CODE</b>\n"
+        "Process MUST exit with status code '0'\n"
+        "\n"
+        "<b>STDOUT</b>\n"
+        "Process MUST print to stdout POSITIVE floating point numbers.\n"
+        "* Graph accepts at least one number to max 4 numbers.\n"
+        "* Separate numbers by spaces or newline.\n"
+        "* For decimal numbers, use point or comma depending on your locale "
+        "settings.\n"
+        "* Negative numbers will be set to 0.\n"
+        "* Numbers can be prefix with 0 (octal) or 0x (hex).\n"
+        "* Any additional content after the numbers is ignored.\n"
+        "\n"
+        "<b>STDERR</b>\n"
+        "Process CAN print some text to stderr.\n"
+        "* The first line of text will be displayed as \"Message\" text.\n"
+        "* Any additional content after the first line is ignored.\n"
+msgstr  ""
