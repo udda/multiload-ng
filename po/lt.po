@@ -7,7 +7,7 @@ msgid   ""
 msgstr  "Project-Id-Version: multiload-ng\n"
         "Report-Msgid-Bugs-To: Moo <hazap@hotmail.com>\n"
         "POT-Creation-Date: 2016-09-09 21:58+0200\n"
-        "PO-Revision-Date: 2016-09-09 21:58+0200\n"
+        "PO-Revision-Date: 2016-09-10 01:54+0300\n"
         "Last-Translator: Moo <hazap@hotmail.com>\n"
         "Language-Team: Lithuanian\n"
         "Language: lt\n"
@@ -24,7 +24,7 @@ msgstr  "Autorių teisės © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, ir kit
 
 #. xgettext: Not Available
 msgid   "N/A"
-msgstr  ""
+msgstr  "Nėra"
 
 #, c-format
 msgid   "%lu processors  -  %.2f GHz  -  Governor: %s\n"
@@ -35,7 +35,14 @@ msgid   "%lu processors  -  %.2f GHz  -  Governor: %s\n"
         "%.1f%% total CPU use\n"
         "\n"
         "Uptime: %s"
-msgstr  ""
+msgstr  "%lu procesoriai  -  %.2f GHz  -  Reguliatorius: %s\n"
+        "%.1f%% yra naudojama programų\n"
+        "%.1f%% yra naudojama žemo prioriteto programų\n"
+        "%.1f%% yra naudojama branduolio\n"
+        "%.1f%% laukiant I/O\n"
+        "%.1f%% bendras centrinio procesoriaus naudojimas\n"
+        "\n"
+        "Sistemos veikimo trukmė: %s"
 
 #, c-format
 msgid   "%s of RAM"
@@ -46,7 +53,10 @@ msgid   "%s (%s) used by programs\n"
         "%s (%s) used by shared memory\n"
         "%s (%s) used for buffers\n"
         "%s (%s) used as cache"
-msgstr  ""
+msgstr  "%s (%s) yra naudojama programų\n"
+        "%s (%s) yra naudojama bendrinamos atminties\n"
+        "%s (%s) yra naudojama buferiams\n"
+        "%s (%s) yra naudojama kaip podėlis"
 
 #, c-format
 msgid   "Monitored interfaces: %s\n"
@@ -76,14 +86,20 @@ msgid   "Last minute: %0.02f\n"
         "Last 5 minutes: %0.02f\n"
         "Last 15 minutes: %0.02f\n"
         "Processes/threads: %d active out of %d."
-msgstr  ""
+msgstr  "Paskutinės minutės: %0.02f\n"
+        "Paskutinių 5 minučių: %0.02f\n"
+        "Paskutinių 15 minučių: %0.02f\n"
+        "Procesų/gijų: %d aktyvių iš %d."
 
 #, c-format
 msgid   "Monitored partitions: %s\n"
         "\n"
         "Read: %s\n"
         "Write: %s"
-msgstr  ""
+msgstr  "Stebimi skaidiniai: %s\n"
+        "\n"
+        "Skaitymas: %s\n"
+        "Rašymas: %s"
 
 #, c-format
 msgid   "Current: %.1f °C\n"
@@ -109,7 +125,7 @@ msgstr  "Komanda išėjo su būsenos kodu %d."
 
 #, c-format
 msgid   "Command did not return valid numbers."
-msgstr  ""
+msgstr  "Komanda negrąžino taisyklingų skaičių."
 
 #, c-format
 msgid   "Command: %s\n"
@@ -120,7 +136,8 @@ msgstr  "Komanda: %s\n"
 #, c-format
 msgid   "Command: %s\n"
         "Results: (%.3lf, %.3lf, %.3lf, %.3lf)"
-msgstr  ""
+msgstr  "Komanda: %s\n"
+        "Rezultatai: (%.3lf, %.3lf, %.3lf, %.3lf)"
 
 #, c-format
 msgid   "ERROR: %s"
