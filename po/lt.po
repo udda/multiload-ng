@@ -39,7 +39,7 @@ msgstr  ""
 
 #, c-format
 msgid   "%s of RAM"
-msgstr  ""
+msgstr  "%s RAM atminties"
 
 #, c-format
 msgid   "%s (%s) used by programs\n"
@@ -54,18 +54,22 @@ msgid   "Monitored interfaces: %s\n"
         "Receiving: %s\n"
         "Sending: %s\n"
         "Local: %s"
-msgstr  ""
+msgstr  "Stebimos sąsajos: %s\n"
+        "\n"
+        "Gaunama: %s\n"
+        "Siunčiama: %s\n"
+        "Vietoje: %s"
 
 msgid   "No swap"
-msgstr  ""
+msgstr  "Nėra sukeitimų skaidinio"
 
 #, c-format
 msgid   "%s of swap"
-msgstr  ""
+msgstr  "%s sukeitimų skaidinio"
 
 #, c-format
 msgid   "%s used"
-msgstr  ""
+msgstr  "%s naudojama"
 
 #, c-format
 msgid   "Last minute: %0.02f\n"
@@ -84,23 +88,24 @@ msgstr  ""
 #, c-format
 msgid   "Current: %.1f °C\n"
         "Critical: %.1f °C"
-msgstr  ""
+msgstr  "Esama: %.1f °C\n"
+        "Kritinė: %.1f °C"
 
 #, c-format
 msgid   "Current: %.1f °C"
-msgstr  ""
+msgstr  "Esama: %.1f °C"
 
 #, c-format
 msgid   "Command line is empty."
-msgstr  ""
+msgstr  "Komandų eilutė tuščia."
 
 #, c-format
 msgid   "Unable to execute command."
-msgstr  ""
+msgstr  "Nepavyko vykdyti komandos."
 
 #, c-format
 msgid   "Command has exited with status code %d."
-msgstr  ""
+msgstr  "Komanda išėjo su būsenos kodu %d."
 
 #, c-format
 msgid   "Command did not return valid numbers."
@@ -109,7 +114,8 @@ msgstr  ""
 #, c-format
 msgid   "Command: %s\n"
         "ERROR: %s"
-msgstr  ""
+msgstr  "Komanda: %s\n"
+        "KLAIDA: %s"
 
 #, c-format
 msgid   "Command: %s\n"
@@ -118,7 +124,7 @@ msgstr  ""
 
 #, c-format
 msgid   "ERROR: %s"
-msgstr  ""
+msgstr  "KLAIDA: %s"
 
 #, c-format
 msgid   "Unable to execute the following command line: '%s'"
