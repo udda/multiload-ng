@@ -4700,7 +4700,6 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
-                        <property name="text" translatable="yes">500</property>
                         <property name="adjustment">adjustment_ceil_load</property>
                         <property name="numeric">True</property>
                         <property name="value">500</property>
