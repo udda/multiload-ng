@@ -44,9 +44,12 @@ enum {
 void
 multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *xd)
 {
+	static gboolean first_call = TRUE;
+	static gboolean have_cpufreq = TRUE;
+	static const gchar *cpufreq_sysfs_path = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor";
+
 	FILE *f;
 	guint64 irq, softirq, total;
-	gboolean first_call = FALSE;
 	guint i;
 
 	guint64 time[CPU_MAX];
@@ -55,7 +58,7 @@ multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *
 	char *buf;
 	size_t n;
 
-	if (xd->num_cpu == 0) {
+	if (first_call) {
 		// CPU name and number of CPUs
 		buf = NULL; n = 0;
 		f = cached_fopen_r("/proc/cpuinfo", TRUE);
@@ -68,7 +71,13 @@ multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *
 			}
 		}
 		free(buf);
-		first_call = TRUE;
+
+		have_cpufreq = (access(cpufreq_sysfs_path, R_OK)==0);
+		if (!have_cpufreq) {
+			//xgettext: Not Available
+			strcpy(xd->cpu0_governor, _("N/A"));
+			g_debug("[graph-cpu] cpufreq scaling support not found");
+		}
 	}
 
 	// MHz
@@ -78,35 +87,43 @@ multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *
 		if (strncmp(buf, "cpu MHz", 7) == 0) {
 			xd->cpu0_mhz = g_ascii_strtod(strchr(buf, ':')+2, NULL);
 			if (errno != 0)
-				g_warning("[graph-cpu] Parsing of cpu0_mhz failed");
+				g_warning("[graph-cpu] Could not retrieve CPU0 frequency (d)");
 			break;
 		}
 	}
 	free(buf);
 
 	// governor
-	f = cached_fopen_r("/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor", TRUE);
-	if(1 != fscanf(f, "%s", xd->cpu0_governor));
+	if (have_cpufreq) {
+		f = cached_fopen_r((gchar*)cpufreq_sysfs_path, TRUE);
+		n = fscanf(f, "%s", xd->cpu0_governor);
+		if (n != 1) {
+			g_warning("[graph-cpu] Could not retrieve CPU0 governor");
+			have_cpufreq = FALSE;
+		}
+	}
 
 	// uptime
 	f = cached_fopen_r("/proc/uptime", TRUE);
 	buf = (char*)malloc(12);
 	if (1 != fscanf(f, "%s", buf))
-		g_warning("[graph-cpu] Parsing of uptime failed (s)");
+		g_warning("[graph-cpu] Could not retrieve system uptime (s)");
 	else {
 		xd->uptime = g_ascii_strtod(buf, NULL);
 		if (errno != 0)
-			g_warning("[graph-cpu] Parsing of uptime failed (d)");
+			g_warning("[graph-cpu] Could not retrieve system uptime (d)");
 	}
 	free(buf);
 
 	// CPU stats
 	f = cached_fopen_r("/proc/stat", TRUE);
 	n = fscanf(f, "cpu %ld %ld %ld %ld %ld %ld %ld", time+CPU_USER, time+CPU_NICE, time+CPU_SYS, time+CPU_IDLE, time+CPU_IOWAIT, &irq, &softirq);
-	g_assert_cmpuint(n, ==, 7u);
+	g_assert_cmpuint(n, ==, 7);
 	time[CPU_IOWAIT] += irq+softirq;
 
-	if (!first_call) {
+	if (first_call) {
+		first_call = FALSE;
+	} else {
 		for (i=0, total=0; i<CPU_MAX; i++) {
 			diff[i] = time[i] - xd->last[i];
 			total += diff[i];
