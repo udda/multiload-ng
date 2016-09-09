@@ -775,13 +775,13 @@ multiload_preferences_connect_signals (MultiloadPlugin *ma)
 		g_signal_connect(G_OBJECT(OB(sb_border_names[i])), "value-changed", G_CALLBACK(multiload_preferences_border_changed_cb), ma);
 
 		// autoscaler
-		if (strcmp(cb_autoscaler_names[i], "") != 0) {
+		if (cb_autoscaler_names[i][0] != '\0') {
 			g_signal_connect(G_OBJECT(OB(cb_autoscaler_names[i])), "toggled", G_CALLBACK(multiload_preferences_autoscaler_toggled_cb), ma);
 			g_signal_connect(G_OBJECT(OB(spin_ceil_names[i])), "value-changed", G_CALLBACK(multiload_preferences_ceil_changed_cb), ma);
 		}
 
 		// filter
-		if (strcmp(cellrenderertoggle_source_names[i], "") != 0) {
+		if (cellrenderertoggle_source_names[i][0] != '\0') {
 			g_signal_connect(G_OBJECT(OB(cb_source_auto_names[i])), "toggled", G_CALLBACK(multiload_preferences_source_auto_toggled_cb), ma);
 			g_signal_connect(G_OBJECT(OB(cellrenderertoggle_source_names[i])), "toggled", G_CALLBACK(multiload_preferences_source_toggled_cb), ma);
 			EMBED_GRAPH_INDEX(OB(cellrenderertoggle_source_names[i]), i);
@@ -852,14 +852,14 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(OB(sb_border_names[i])), conf->border_width*1.00);
 
 		// autoscaler
-		if (strcmp(cb_autoscaler_names[i], "") != 0) {
+		if (cb_autoscaler_names[i][0] != '\0') {
 			tmp = multiload_get_max_value(ma, i);
 			gtk_spin_button_set_value(GTK_SPIN_BUTTON(OB(spin_ceil_names[i])), tmp*1.00);
 			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(OB(cb_autoscaler_names[i])), (tmp<0));
 		}
 
 		// filter
-		if (strcmp(cb_source_auto_names[i], "") != 0) {
+		if (cb_source_auto_names[i][0] != '\0') {
 			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(OB(cb_source_auto_names[i])), !conf->filter_enable);
 
 			gchar *filter = graph_types[i].get_filter(ma->graphs[i], ma->extra_data[i]);
