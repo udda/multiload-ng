@@ -6,8 +6,8 @@
 msgid   ""
 msgstr  "Project-Id-Version: multiload-ng\n"
         "Report-Msgid-Bugs-To: Alexander <sfslinux@gmail.com>\n"
-        "POT-Creation-Date: 2016-08-31 14:07+0200\n"
-        "PO-Revision-Date: 2016-08-31 14:07+0200\n"
+        "POT-Creation-Date: 2016-09-09 21:58+0200\n"
+        "PO-Revision-Date: 2016-09-09 21:58+0200\n"
         "Last-Translator: Alexander <sfslinux@gmail.com>\n"
         "Language-Team: puppyrus.org\n"
         "Language: ru\n"
@@ -22,9 +22,9 @@ msgid   "Copyright © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, and others"
 msgstr  "Авторские права © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, и "
         "другие"
 
-#, c-format
-msgid   "Unable to execute the following command line: '%s'"
-msgstr  "Команда не запускается: '%s'"
+#. xgettext: Not Available
+msgid   "N/A"
+msgstr  ""
 
 #, c-format
 msgid   "%lu processors  -  %.2f GHz  -  Governor: %s\n"
@@ -45,10 +45,11 @@ msgid   "%s of RAM"
 msgstr  "%s памяти"
 
 #, c-format
-msgid   "%s in use by programs\n"
-        "%s in use as cache"
-msgstr  "%s используется программами\n"
-        "%s используется как кэш"
+msgid   "%s (%s) used by programs\n"
+        "%s (%s) used by shared memory\n"
+        "%s (%s) used for buffers\n"
+        "%s (%s) used as cache"
+msgstr  ""
 
 #, c-format
 msgid   "Monitored interfaces: %s\n"
@@ -82,16 +83,53 @@ msgstr  "Последняя минута: %0.02f\n"
         "Последние 15 мин.: %0.02f"
 
 #, c-format
-msgid   "Read: %s\n"
+msgid   "Monitored partitions: %s\n"
+        "\n"
+        "Read: %s\n"
         "Write: %s"
-msgstr  "Чтение: %s\n"
-        "Запись: %s"
+msgstr  ""
 
 #, c-format
 msgid   "Current: %.1f °C\n"
         "Critical: %.1f °C"
 msgstr  "Текушая: %.1f °C\n"
         "Критическая: %.1f °C"
+
+#, c-format
+msgid   "Current: %.1f °C"
+msgstr  "Текушая: %.1f °C"
+
+msgid   "Command line is empty."
+msgstr  "Командная строка пуста."
+
+msgid   "Unable to execute command."
+msgstr  "Невозможно выполнить команду."
+
+#, c-format
+msgid   "Command has exited with status code %d."
+msgstr  "Команда выполнена с кодом завершения %d."
+
+msgid   "Command did not return a valid number."
+msgstr  "Команда не выдала годное числою"
+
+#, c-format
+msgid   "Command: %s\n"
+        "ERROR: %s"
+msgstr  "Команда: %s\n"
+        "ОШИБКА: %s"
+
+#, c-format
+msgid   "Command: %s\n"
+        "Results: (%.3lf, %.3lf, %.3lf, %.3lf)"
+msgstr  ""
+
+#, c-format
+msgid   "ERROR: %s"
+msgstr  "ERROR: %s"
+
+#, c-format
+msgid   "Unable to execute the following command line: '%s'"
+msgstr  "Команда не запускается: '%s'"
 
 msgid   "Processor"
 msgstr  "Процессор"
@@ -113,6 +151,9 @@ msgstr  "Диск"
 
 msgid   "Temperature"
 msgstr  "Температура"
+
+msgid   "Parametric"
+msgstr  "Параметр"
 
 #, c-format
 msgid   "%d pixel"
@@ -148,6 +189,10 @@ msgstr  "_Сохранить"
 msgid   "Error exporting color scheme."
 msgstr  "Ошибка при экспорте цветовой схемы"
 
+#, c-format
+msgid   "Command line is valid. Retrieved %d numbers."
+msgstr  ""
+
 msgid   "(Custom)"
 msgstr  "(Пользовательские)"
 
@@ -156,10 +201,27 @@ msgstr  "(Пользовательские)"
 msgid   "%s/s"
 msgstr  "%s/с"
 
+#. xgettext: single-letter form for "days" - e.g. 3 days -> 3d
+msgid   "d"
+msgstr  ""
+
+#. xgettext: single-letter form for "hours" - e.g. 3 hours -> 3h
+msgid   "h"
+msgstr  ""
+
+#. xgettext: single-letter form for "minutes" - e.g. 3 minutes -> 3m
+msgid   "m"
+msgstr  ""
+
+#. xgettext: single-letter form for "seconds" - e.g. 3 seconds -> 3s
+msgid   "s"
+msgstr  ""
+
 #, c-format
 msgid   "Unable to open the following url: '%s'"
 msgstr  "'%s' не открывается"
 
+#. xgettext: Translator Full Name <translator_email@example.com>
 msgid   "translator-credits"
 msgstr  "Alexander <sfslinux@gmail.com>"
 
@@ -269,7 +331,7 @@ msgstr  ""
 msgid   "Nice"
 msgstr  ""
 
-msgid   "IOWait"
+msgid   "I/O wait"
 msgstr  ""
 
 msgid   "Background"
@@ -308,8 +370,23 @@ msgstr  "Чтение"
 msgid   "Write"
 msgstr  "Запись"
 
-msgid   "Value"
-msgstr  "°C"
+msgid   "Current"
+msgstr  ""
+
+msgid   "Result 1"
+msgstr  ""
+
+msgid   "Critical"
+msgstr  ""
+
+msgid   "Result 2"
+msgstr  ""
+
+msgid   "Result 3"
+msgstr  ""
+
+msgid   "Result 4"
+msgstr  ""
 
 msgid   "Colors"
 msgstr  "Цвета"
@@ -335,60 +412,65 @@ msgstr  "Выберите действие при двойном клике на
 msgid   "Set custom action of this graph"
 msgstr  "Настройте действие"
 
-#, c-format
 msgid   "The following tokens can be used within the command line:\n"
         "\n"
-        "%n - graph number, from 1 (CPU) to 7 (temperature)\n"
-        "%x - short name of the graph - three to four letters"
-msgstr  "В команде можно использовать переменные:\n"
+        "%n - graph number - counting left to right, starting from 1\n"
+        "%x - graph short name - three to four lowercase characters\n"
         "\n"
-        "%n - номер графика, 1 (CPU) - 7 (температура)\n"
-        "%x - короткое имя графика - 3 или 4 буквы"
-
-msgid   "Color"
-msgstr  "Цвет"
-
-#, c-format
-msgid   "Command: %s\n"
-        "ERROR: %s"
-msgstr  "Команда: %s\n"
-        "ОШИБКА: %s"
-
-#, c-format
-msgid   "Command: %s\n"
-        "Result: %lu\n"
-        "Message: %s"
-msgstr  "Команда: %s\n"
-        "Результат: %lu\n"
-        "Сообщение: %s"
-
-msgid   "Parametric"
-msgstr  "Параметр"
-
-msgid   "Command line is empty."
-msgstr  "Командная строка пуста."
-
-msgid   "Unable to execute command."
-msgstr  "Невозможно выполнить команду."
-
-#, c-format
-msgid   "Command has exited with status code %d."
-msgstr  "Команда выполнена с кодом завершения %d."
-
-msgid   "Command did not return a valid number."
-msgstr  "Команда не выдала годное числою"
-
-msgid   "Command line is valid."
-msgstr  "Подходящая команда"
-
-msgid   "Result"
-msgstr  "Результат"
+        "%1 - first value of graph data - depends on the graph\n"
+        "%2 - second value of graph data - depends on the graph\n"
+        "%3 - third value of graph data - depends on the graph\n"
+        "%4 - fourth value of graph data - depends on the graph\n"
+        "%u - measure unit in which graph data values are measured\n"
+        "\n"
+        "%% - inserts a literal percent sign"
+msgstr  ""
 
 msgid   "Double click command:"
 msgstr  "Каманда при двойном нажатии"
+
+msgid   "Maximum value:"
+msgstr  ""
+
+msgid   "Choose automatically"
+msgstr  ""
+
+msgid   "Source:"
+msgstr  ""
+
+msgid   "Name"
+msgstr  ""
+
+msgid   "Please note that some selected sources might still not show up, "
+        "because of other constraints that make them not suitable."
+msgstr  ""
 
 msgid   "Graph command:"
 msgstr  "Команда графика"
 
 msgid   "Test"
 msgstr  "Тест"
+
+msgid   "Color"
+msgstr  "Цвет"
+
+msgid   "Type a valid command line. Process must obey these rules:\n"
+        "\n"
+        "<b>EXIT CODE</b>\n"
+        "Process MUST exit with status code '0'\n"
+        "\n"
+        "<b>STDOUT</b>\n"
+        "Process MUST print to stdout POSITIVE floating point numbers.\n"
+        "* Graph accepts at least one number to max 4 numbers.\n"
+        "* Separate numbers by spaces or newline.\n"
+        "* For decimal numbers, use point or comma depending on your locale "
+        "settings.\n"
+        "* Negative numbers will be set to 0.\n"
+        "* Numbers can be prefix with 0 (octal) or 0x (hex).\n"
+        "* Any additional content after the numbers is ignored.\n"
+        "\n"
+        "<b>STDERR</b>\n"
+        "Process CAN print some text to stderr.\n"
+        "* The first line of text will be displayed as \"Message\" text.\n"
+        "* Any additional content after the first line is ignored.\n"
+msgstr  ""
