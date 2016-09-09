@@ -734,19 +734,25 @@ multiload_preferences_destroy ()
 
 	// top level windows must be explicitly destroyed
 	gtk_widget_destroy(GTK_WIDGET(OB("dialog_advanced")));
-	g_object_unref (G_OBJECT (builder));
-	builder = NULL;
+	g_clear_object (&builder);
 }
 
 static void
 multiload_preferences_init ()
 {
+	GError *error = NULL;
+
 	if (builder != NULL)
 		multiload_preferences_destroy();
 
 	builder = gtk_builder_new();
 	gtk_builder_set_translation_domain (builder, GETTEXT_PACKAGE);
-	gtk_builder_add_from_string (builder, binary_data_preferences_ui, -1, NULL);
+	gtk_builder_add_from_string (builder, binary_data_preferences_ui, -1, &error);
+
+	if (error != NULL) {
+		g_error ("Unable load Preferences UI: %s", error->message);
+		g_error_free (error);
+	}
 }
 
 static void
