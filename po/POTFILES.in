@@ -1,4 +1,12 @@
 common/about-data.h
+common/graph-cpu.c
+common/graph-mem.c
+common/graph-net.c
+common/graph-swap.c
+common/graph-load.c
+common/graph-disk.c
+common/graph-temp.c
+common/graph-parm.c
 common/load-graph.c
 common/multiload.c
 common/multiload-config.c
