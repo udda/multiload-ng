@@ -6,8 +6,8 @@
 msgid   ""
 msgstr  "Project-Id-Version: multiload-ng\n"
         "Report-Msgid-Bugs-To: Michael Kogan <michael.kogan@gmx.net>\n"
-        "POT-Creation-Date: 2016-09-09 14:55+0200\n"
-        "PO-Revision-Date: 2016-09-09 14:55+0200\n"
+        "POT-Creation-Date: 2016-09-09 21:58+0200\n"
+        "PO-Revision-Date: 2016-09-09 21:58+0200\n"
         "Last-Translator: Michael Kogan <michael.kogan@gmx.net>\n"
         "Language-Team: Deutsche\n"
         "Language: de\n"
@@ -21,6 +21,104 @@ msgstr  "Moderne grafische Systemüberwachung"
 
 msgid   "Copyright © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, and others"
 msgstr  "Copyright © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, und andere"
+
+#. xgettext: Not Available
+msgid   "N/A"
+msgstr  ""
+
+#, c-format
+msgid   "%lu processors  -  %.2f GHz  -  Governor: %s\n"
+        "%.1f%% in use by programs\n"
+        "%.1f%% in use by low priority programs\n"
+        "%.1f%% in use by the kernel\n"
+        "%.1f%% in wait for I/O\n"
+        "%.1f%% total CPU use\n"
+        "\n"
+        "Uptime: %s"
+msgstr  ""
+
+#, c-format
+msgid   "%s of RAM"
+msgstr  ""
+
+#, c-format
+msgid   "%s (%s) used by programs\n"
+        "%s (%s) used by shared memory\n"
+        "%s (%s) used for buffers\n"
+        "%s (%s) used as cache"
+msgstr  ""
+
+#, c-format
+msgid   "Monitored interfaces: %s\n"
+        "\n"
+        "Receiving: %s\n"
+        "Sending: %s\n"
+        "Local: %s"
+msgstr  ""
+
+msgid   "No swap"
+msgstr  ""
+
+#, c-format
+msgid   "%s of swap"
+msgstr  ""
+
+#, c-format
+msgid   "%s used"
+msgstr  ""
+
+#, c-format
+msgid   "Last minute: %0.02f\n"
+        "Last 5 minutes: %0.02f\n"
+        "Last 15 minutes: %0.02f\n"
+        "Processes/threads: %d active out of %d."
+msgstr  ""
+
+#, c-format
+msgid   "Monitored partitions: %s\n"
+        "\n"
+        "Read: %s\n"
+        "Write: %s"
+msgstr  ""
+
+#, c-format
+msgid   "Current: %.1f °C\n"
+        "Critical: %.1f °C"
+msgstr  ""
+
+#, c-format
+msgid   "Current: %.1f °C"
+msgstr  ""
+
+#, c-format
+msgid   "Command line is empty."
+msgstr  ""
+
+#, c-format
+msgid   "Unable to execute command."
+msgstr  ""
+
+#, c-format
+msgid   "Command has exited with status code %d."
+msgstr  ""
+
+#, c-format
+msgid   "Command did not return valid numbers."
+msgstr  ""
+
+#, c-format
+msgid   "Command: %s\n"
+        "ERROR: %s"
+msgstr  ""
+
+#, c-format
+msgid   "Command: %s\n"
+        "Results: (%.3lf, %.3lf, %.3lf, %.3lf)"
+msgstr  ""
+
+#, c-format
+msgid   "ERROR: %s"
+msgstr  ""
 
 #, c-format
 msgid   "Unable to execute the following command line: '%s'"
@@ -116,6 +214,7 @@ msgstr  ""
 msgid   "Unable to open the following url: '%s'"
 msgstr  "Folgende URL konnte nicht geöffnet werden: '%s'"
 
+#. xgettext: Translator Full Name <translator_email@example.com>
 msgid   "translator-credits"
 msgstr  "Michael Kogan <michael.kogan@gmx.net>"
 
@@ -227,6 +326,9 @@ msgstr  "System"
 
 msgid   "Nice"
 msgstr  "Nice"
+
+msgid   "I/O wait"
+msgstr  ""
 
 msgid   "Background"
 msgstr  "Hintergrund"
