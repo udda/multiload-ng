@@ -349,7 +349,7 @@ There are some notable differences:
 * Multiload-ng can filter which source to show in suitable graphs
 * ...and so on
 
-Try it in your system and you won't come back!
+Not enough? Try it in your system and you won't come back!
 
 ### Q: Doesn't a system monitor use system resources by itself?
 A: Yes. This is true for every system monitor. That's why resources usage from Multiload-ng is kept to a negligible level.
