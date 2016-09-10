@@ -17,6 +17,7 @@ Multiload-ng can be built with GTK2 and GTK3, so can be embedded within GTK2/GTK
 - [Features](#features)
 - [Screenshots](#screenshots)
 - [The Graphs](#the-graphs)
+- [Color Schemes](#color-schemes)
 - [History](#history)
 - [System Requirements](#system-requirements)
 - [Build Instructions](#build-instructions)
@@ -28,9 +29,9 @@ Multiload-ng can be built with GTK2 and GTK3, so can be embedded within GTK2/GTK
 
 
 ## Features
-- Draw graphs of system resources
+- Draw graphs of system resources ([learn more](#the-graphs))
 - Customizable under every aspect
-- Builtin color schemes
+- Builtin color schemes ([learn more](#color-schemes))
 - Independent configuration for each graph
 - Automatically adapts to container changes (panel or window)
 - Written in pure C with few dependencies = little CPU/memory footprint
@@ -121,6 +122,25 @@ Tooltip shows contents of command's *stderr*.
 
 ### Stay tuned
 Other graphs are coming!
+
+
+
+## Color Schemes
+Multiload-ng has color scheme support, that is, every color of the graphs can be changed.
+This include borders and background (two-color gradient).
+
+Colors (except for border and background) have alpha values, so you can play with
+transparency too!
+
+There are also some builtin color schemes, which you can set with a single click.
+Some examples are present in [screenshots](#screenshots) above. Here is a partial list:
+- **Default color scheme** with its distinctive colors
+- **Tango** from [Tango Desktop Project](http://tango.freedesktop.org/)
+- **Solarized** by [Ethan Schoonover](http://ethanschoonover.com/solarized) in both Light and Dark variants
+- Color schemes inspired by famous Linux distribution: **[Ubuntu](http://www.ubuntu.com/)** (both Ambiance and Radiance), **[Linux Mint](https://www.linuxmint.com/)**
+- Color schemes inspired by famous GTK themes: **[Arc](https://github.com/horst3180/arc-theme)** **[Numix](https://numixproject.org/)** (both Light and Dark)
+- Color schemes inspired by outer space: **Moon**, **Venus**, **Earth**, **Mars**, **Jupiter**, **Uranus**, **Neptune**
+- More!
 
 
 
@@ -383,5 +403,4 @@ The best way to get a new port is to suggest it (or code it yourself, of course)
 - FSF and creators of original Multiload applet (see AUTHORS file), for giving me a starting point
 - Translators, for sending me always up-to-date translations. Read their names in *About* dialog, in git commits comments, or looking at the source, in the PO file headers
 - Beta testers, for reporting bugs that I would have never discovered, because they didn't happen in any of my systems. Now these bugs are all gone, thanks to them. Some translators also helped me with testing.
-- [Ethan Schoonover](http://ethanschoonover.com/), for its [Solarized color scheme](http://ethanschoonover.com/solarized)
-- [Gisela at All Free Designs](http://allfreedesigns.com/author/123ggizelle/), for [these tips](http://allfreedesigns.com/bright-color-palettes/) I picked to create Fruity color scheme
+
