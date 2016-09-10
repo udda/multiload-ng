@@ -42,32 +42,35 @@ Multiload-ng can be built with GTK2 and GTK3, so can be embedded within GTK2/GTK
 
 
 ## Screenshots
-![Default configuration, small panel. All graphs visible](../gh-pages/screenshots/0_default.png?raw=true)  
+![Default configuration, small panel. All graphs visible](../gh-pages/screenshots/all.panel-24px.png?raw=true)  
 <sup>*Small panel, default configuration. All graphs visible*</sup>
 
-![All graphs visible, larger panel. Thicker (2px) borders](../gh-pages/screenshots/1_borders.png?raw=true)  
-<sup>*All graphs visible, larger panel. Thicker (2px) borders*</sup>
+![All graphs visible, larger panel. Thicker (2px) borders, graphs have different widths](../gh-pages/screenshots/all.panel-40px.border-2px.widths.png?raw=true)  
+<sup>*All graphs visible, larger panel. Thicker (2px) borders, graphs have different widths*</sup>
 
-![Each graph has different border width. CPU graph has grey-blue gradient background](../gh-pages/screenshots/2_gradient+singleborders.png?raw=true)  
-<sup>*Each graph has different border width. CPU graph has grey-blue gradient background*</sup>
+![Each graph has different border width. Color scheme: Uranus](../gh-pages/screenshots/borders.uranus.png?raw=true)  
+<sup>*Each graph has different border width. Color scheme: __Uranus__*</sup>
 
-![Graphs have no borders. Extra spacing and padding](../gh-pages/screenshots/3_margins+padding+noborder.png?raw=true)  
-<sup>*Graphs have no borders. Extra spacing and padding*</sup>
+![Graphs have no borders. Extra spacing and padding. Color scheme: Solarized Light](../gh-pages/screenshots/margin.padding.noborder.solarized-light?raw=true)  
+<sup>*Graphs have no borders. Extra spacing and padding. Color scheme: __Solarized Light__*</sup>
 
-![Graph background matches panel background. Very stylish](../gh-pages/screenshots/4_background-match.png?raw=true)  
+![Graph background matches panel background. Very stylish](../gh-pages/screenshots/background-blend.png?raw=true)  
 <sup>*Graph background matches panel background. Very stylish*</sup>
 
-![Graphs have different sizes. Color scheme: Solarized Light](../gh-pages/screenshots/5_sizes_solarized.png?raw=true)  
-<sup>*Graphs have different sizes. Color scheme: __Solarized Light__*</sup>
+![Graphs have vertical orientation on horizontal panel. The opposite is also possible](../gh-pages/screenshots/vertical-on-horizontal.png?raw=true)  
+<sup>*Graphs have vertical orientation on horizontal panel. The opposite is also possible*</sup>
 
-![Color scheme: Ubuntu Ambiance](../gh-pages/screenshots/6_ambiance.png?raw=true)  
-<sup>*Color scheme: __Ubuntu Ambiance__*</sup>
+![Graphs are contiguous, with no border and no spacing, behaving like a single graph. Color scheme: Jupiter](../gh-pages/screenshots/contiguous.noborder.jupiter.png?raw=true)  
+<sup>*Graphs are contiguous, with no border and no spacing, behaving like a single graph. Color scheme: __Jupiter__*</sup>
 
-![Standalone window, horizontal layout. Color scheme: Earth](../gh-pages/screenshots/7_standalone_horiz_earth.png?raw=true)  
-<sup>*Standalone window, horizontal layout. Color scheme: __Earth__*</sup>
+![Just CPU graph. Color scheme: Ubuntu Ambiance](../gh-pages/screenshots/cpu.ambiance.png?raw=true)  
+<sup>*Just CPU graph. Color scheme: __Ubuntu Ambiance__*</sup>
 
-![Standalone window, vertical layout. Color scheme: Solarized Dark](../gh-pages/screenshots/8_standalone_vert_solarized.png?raw=true)  
-<sup>*Standalone window, vertical layout. Color scheme: __Solarized Dark__*</sup>
+![Standalone window, horizontal layout. Color scheme: Fruity](../gh-pages/screenshots/standalone.horizontal.fruity.png?raw=true)  
+<sup>*Standalone window, horizontal layout. Color scheme: __Fruity__*</sup>
+
+![Standalone window, vertical layout. Color scheme: Numix Light](../gh-pages/screenshots/standalone.vertical.numix-light.png?raw=true)  
+<sup>*Standalone window, vertical layout. Color scheme: __Numix Light__*</sup>
 
 
 
