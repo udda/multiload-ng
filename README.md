@@ -51,7 +51,7 @@ Multiload-ng can be built with GTK2 and GTK3, so can be embedded within GTK2/GTK
 ![Each graph has different border width. Color scheme: Uranus](../gh-pages/screenshots/borders.uranus.png?raw=true)  
 <sup>*Each graph has different border width. Color scheme: __Uranus__*</sup>
 
-![Graphs have no borders. Extra spacing and padding. Color scheme: Solarized Light](../gh-pages/screenshots/margin.padding.noborder.solarized-light?raw=true)  
+![Graphs have no borders. Extra spacing and padding. Color scheme: Solarized Light](../gh-pages/screenshots/margin.padding.noborder.solarized-light.png?raw=true)  
 <sup>*Graphs have no borders. Extra spacing and padding. Color scheme: __Solarized Light__*</sup>
 
 ![Graph background matches panel background. Very stylish](../gh-pages/screenshots/background-blend.png?raw=true)  
