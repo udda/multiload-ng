@@ -153,18 +153,18 @@ cairo                       | >= 1.0
 Multiload-ng requires a reasonably recent Linux kernel (>2.6.36) built with
 specific configuration options. These are not build-time requirement, rather
 run-time ones. Here are required options:  
-- ***CONFIG_SYSFS* (sysfs filesystem support)**
-- ***CONFIG_PROC_FS* (/proc filesystem support)**
+- **CONFIG_SYSFS** *(sysfs filesystem support)*
+- **CONFIG_PROC_FS** *(/proc filesystem support)*
 
 Multiload-ng measures system resources using nodes in /sys and /proc, so they must exist.
 
 In addition, enabling the following options allows Multiload-ng to gather all possible
 informations from the system. These are not strictly required, but some graphs might
 not work properly, or not work at all, without these other options:  
-- **CONFIG_CPU_FREQ *(CPU Frequency scaling)***
-- **CONFIG_HWMON *(Hardware Monitoring support)***
-- **CONFIG_THERMAL *(Generic Thermal sysfs driver)***
-- **CONFIG_SENSORS_\*** - enable sensors you need
+- **CONFIG_CPU_FREQ** *(CPU Frequency scaling)*
+- **CONFIG_HWMON** *(Hardware Monitoring support)*
+- **CONFIG_THERMAL** *(Generic Thermal sysfs driver)*
+- __CONFIG_SENSORS_*__ - enable sensors you need
 
 Any modern kernel (since 2010) sets all these options automatically, so generally
 speaking you don't have to worry about user kernels.
