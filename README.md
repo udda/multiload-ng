@@ -72,51 +72,51 @@ Multiload-ng can be built with GTK2 and GTK3, so can be embedded within GTK2/GTK
 
 
 ## The Graphs
-#### CPU
+### CPU
 Draws CPU usage, differentiating between cycles used by programs with normal and
 low priority, by the kernel and waiting for I/O to complete.
 
 Tooltip shows CPU information (model, cores, frequency/governor).
 
-#### MEMORY
+### MEMORY
 Draws RAM usage, differentiating between memory used by the applications (directly
 and through shared modules) and memory used as cache/buffers.
 
 Tooltip prints these values as percentage and absolute value.
 
-#### NETWORK
+### NETWORK
 Draws network I/O of every supported network interface, differentiating between
 input, output and local (loopback, ADB, etc) traffic.
 
 User can choose which interfaces will be used for graph calculations.
 
-#### SWAP
+### SWAP
 Draws swap usage, when swap is present.
 
-#### LOAD AVERAGE
+### LOAD AVERAGE
 Draws load average, as returned by `uptime`.
 
 Tooltip shows load average of 1,5,15 minutes and number of active processes/threads.
 
-#### DISK
+### DISK
 Draws Disk I/O, differentiating between read and write speeds.
 
 User can choose which partitions will be used for graph calculations.
 
-#### TEMPERATURE
+### TEMPERATURE
 Draws temperature of the system
 
 User can choose which sensor/driver to read for drawing the graph, or let Multiload-ng 
 automatically select the hottest temperature measured among all detected sensors.
 
-#### PARAMETRIC
+### PARAMETRIC
 Draws numeric output of user defined command line. Up to 4 values will be shown together.  
 Can be also used to monitor changes to a file using `cat <filename>` as command line.  
 Can be also used to execute arbitrary shell commands using `sh -c "<commands>"` as command line.
 
 Tooltip shows contents of command's *stderr*.
 
-#### Stay tuned
+### Stay tuned
 Other graphs are coming!
 
 
@@ -224,7 +224,7 @@ Note that XFCE 4.6 or greater is required.
 
 ## Build Instructions
 
-#### Get the source
+### Get the source
 Execute the following command line (you must have git installed):  
 `git clone https://github.com/udda/multiload-ng`
 
@@ -232,7 +232,7 @@ If you don't have git, download the lastest source ZIP [here](https://github.com
 
 Or, if you don't want any surprise, download a stable release [here](https://github.com/udda/multiload-ng/releases).
 
-#### Configure
+### Configure
 Move to the directory that contains source code just cloned and run:  
 `./autogen.sh`
 
@@ -244,13 +244,13 @@ Lubuntu users (and possibly others) have different libraries location. They may 
 `./configure --libdir=/usr/lib/x86_64-linux-gnu`  
 If plugin does not show up in the list of panel plugins, you could try to repeat build process with this configure setting.
 
-#### GTK version
+### GTK version
 Build system automatically selects highest GTK+ version available. If you need to build against a lower version, you have to
 set it manually (see next section, [Advanced configure](#advanced-configure))
 
 For example, XFCE and LXDE users need GTK2 version of the plugin. They need to add option `--with-gtk=2.0` to *./configure*.
 
-#### Advanced configure
+### Advanced configure
 If you are ok with default settings, you can skip this paragraph and head to [Build](#build) section. Otherwise, continue reading.
 
 Configure script automatically detects installed panels (and related development packages) and enables panel plugins accordingly. You can force enable/disable them using `--with-PLUGIN`, `--without-PLUGIN` or `--with-PLUGIN=yes|no` (replace `PLUGIN` accordingly)
@@ -270,11 +270,11 @@ To get a list of all available options, type:
 
 When you are satisfied with your flags, run `./configure` with selected options.
 
-#### Build
+### Build
 This is simple. Move to the directory that contains source code and execute:  
 `make`
 
-#### Install/uninstall
+### Install/uninstall
 To install (must run `make` before), execute:  
 `sudo make install`
 
@@ -305,13 +305,13 @@ Each pull request will be considered and will get a response.
 ## Help & Troubleshooting
 Look at the [FAQ](#faq) for some common pitfalls. All additional documentation is located in the [Wiki](../../wiki).
 
-#### Plugin shows only a vertical blank line
+### Plugin shows only a vertical blank line
 Probably you compiled against the wrong GTK version. E.g: XFCE and LXDE panels are still GTK2-based, and
 Multiload-ng build system automatically selects GTK3 if available.
 
 Try running Configure with the right options (see [Configure](#configure) section above)
 
-#### High CPU usage
+### High CPU usage
 This has basically two causes:  
 * low update interval
 * parametric command
@@ -326,7 +326,7 @@ plugins hangs waiting for the command line to terminate and return numbers. You 
 
 ## FAQ
 
-#### Q: Which are the differences with original Multiload applet?
+### Q: Which are the differences with original Multiload applet?
 A: First of all, this project is *forked* from original Multiload. Nearly 100% of the code has been
 rewritten by now, but Multiload-ng is designed to keep ALL the features of the original multiload,
 and extend them.
@@ -351,19 +351,19 @@ There are some notable differences:
 
 Try it in your system and you won't come back!
 
-#### Q: Doesn't a system monitor use system resources by itself?
+### Q: Doesn't a system monitor use system resources by itself?
 A: Yes. This is true for every system monitor. That's why resources usage from Multiload-ng is kept to a negligible level.
 
-#### Q: I found a bug/I have a suggestion! How can I report?
+### Q: I found a bug/I have a suggestion! How can I report?
 A: The preferred way to report a bug or suggest new features is by [creating a new issue](../../issues/new).
 
 First, check wether the bug/suggestion is already present in [issues list](../../issues) or in the project [Wishlist](../../wiki/Wishlist).
 If it's not, you should [create a new issue](../../issues/new).
 
-#### Q: Will you continue the development of Multiload-ng?
+### Q: Will you continue the development of Multiload-ng?
 A: Of course! To get an idea of future directions, take a look at the [Wishlist](../../wiki/Wishlist).
 
-#### Q: Why don't you port to panel *\[insertyourpanelhere\]*?
+### Q: Why don't you port to panel *\[insertyourpanelhere\]*?
 A: Because of a number of reasons:
 
 1. I don't have the time -> Will be done when I find some time
