@@ -107,7 +107,7 @@ User can choose which partitions will be used for graph calculations.
 Draws temperature of the system
 
 User can choose which sensor/driver to read for drawing the graph, or let Multiload-ng 
-utomatically select the hottest temperature detected among all detected sensors.
+automatically select the hottest temperature measured among all detected sensors.
 
 #### PARAMETRIC
 Draws numeric output of user defined command line. Up to 4 values will be shown together.  
@@ -133,7 +133,7 @@ would allow to choose future directions with more ease.
 For the above reasons, I made Multiload-ng a separate project.
 The name changes too (so the filenames), in order to allow them to be installed together.
 
-Multiload-ng gained popularity starting from version 1.1.0, that introduced GTK3 support. Some Linux blogs
+Multiload-ng gained popularity starting from version 1.1.0, that introduced GTK3 support. Some Linux bloggers
 started writing about the plugin, and some contributors started to send translation in their languages.
 
 All this keeps the author motivated, and the project alive and kicking!
@@ -141,7 +141,7 @@ All this keeps the author motivated, and the project alive and kicking!
 
 
 ## System Requirements
-#### Common requirements
+### Common requirements
 These are the packages required to build any version of the plugin.
 See per-panel section below for full list.
 
@@ -161,18 +161,18 @@ Multiload-ng measures system resources using nodes in /sys and /proc, so they mu
 In addition, enabling the following options allows Multiload-ng to gather all possible
 informations from the system. These are not strictly required, but some graphs might
 not work properly, or not work at all, without these other options:  
-- ***CONFIG_CPU_FREQ* (CPU Frequency scaling)**
-- ***CONFIG_HWMON* (Hardware Monitoring support)**
-- ***CONFIG_THERMAL* (Generic Thermal sysfs driver)**
-- ***CONFIG_SENSORS_\** ** - enable sensors you need
+- **CONFIG_CPU_FREQ *(CPU Frequency scaling)***
+- **CONFIG_HWMON *(Hardware Monitoring support)***
+- **CONFIG_THERMAL *(Generic Thermal sysfs driver)***
+- **CONFIG_SENSORS_\*** - enable sensors you need
 
 Any modern kernel (since 2010) sets all these options automatically, so generally
 speaking you don't have to worry about user kernels.
 
-#### Requirements for standalone window
+### Requirements for standalone window
 Standalone target has no additional requirements.
 
-#### Requirements for LXDE panel
+### Requirements for LXDE panel
 In addition to common requirements (see above)
 these packages are required to build LXDE panel plugin:
 
@@ -189,7 +189,7 @@ You will have to force GTK+2 build (see [here](#gtk-version) for instructions).
 
 Note that LXDE 0.7 or greater is required.
 
-#### Requirements for MATE panel
+### Requirements for MATE panel
 In addition to common requirements (see above)
 these packages are required to build MATE panel plugin:
 
@@ -203,7 +203,7 @@ newer versions of mate-panel are GTK+3. You may have to set correct GTK+ version
 
 Note that MATE 1.7 or greater is required.
 
-#### Requirements for XFCE panel
+### Requirements for XFCE panel
 In addition to common requirements (see above)
 these packages are required to build XFCE panel plugin:
 
