@@ -25,7 +25,7 @@ msgstr  "Copyright © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, et autres"
 
 #. xgettext: Not Available
 msgid   "N/A"
-msgstr  ""
+msgstr  "N/D"
 
 #, c-format
 msgid   "%lu processors  -  %.2f GHz  -  Governor: %s\n"
@@ -36,7 +36,14 @@ msgid   "%lu processors  -  %.2f GHz  -  Governor: %s\n"
         "%.1f%% total CPU use\n"
         "\n"
         "Uptime: %s"
-msgstr  ""
+msgstr  "%ld processeur  -  %.2f GHz  -  Regulateur: %s\n"
+        "%.1f%% usé par les programmes\n"
+        "%.1f%% usé par les programmes avec faible priorité\n"
+        "%.1f%% usé par le kernel\n"
+        "%.1f%% en attendant I/O"
+        "%.1f%% usage total de UC"
+        "\n"
+        "Uptime: %s"
 
 #, c-format
 msgid   "%s of RAM"
@@ -47,7 +54,10 @@ msgid   "%s (%s) used by programs\n"
         "%s (%s) used by shared memory\n"
         "%s (%s) used for buffers\n"
         "%s (%s) used as cache"
-msgstr  ""
+msgstr  "%s (%s) usé par les programmes\n"
+        "%s (%s) usé par la mémoire partagée\n"
+        "%s (%s) usé par les buffers\n"
+        "%s (%s) usé comme cache"
 
 #, c-format
 msgid   "Monitored interfaces: %s\n"
@@ -75,17 +85,22 @@ msgstr  "%s usé"
 #, c-format
 msgid   "Last minute: %0.02f\n"
         "Last 5 minutes: %0.02f\n"
-        "Last 15 minutes: %0.02f"
+        "Last 15 minutes: %0.02f\n"
+        "Processes/threads: %d active out of %d."
 msgstr  "Dernier minute: %0.02f\n"
         "Dernier 5 minutes: %0.02f\n"
-        "Dernier 15 minutes: %0.02f"
+        "Dernier 15 minutes: %0.02f\n"
+        "Processus/threads: %d activent en %d."
 
 #, c-format
 msgid   "Monitored partitions: %s\n"
         "\n"
         "Read: %s\n"
         "Write: %s"
-msgstr  ""
+msgstr  "Partitions surveillées: %s\n"
+        "\n"
+        "Lecture: %s\n"
+        "Écriture: %s"
 
 #, c-format
 msgid   "Current: %.1f °C\n"
@@ -99,33 +114,35 @@ msgstr  "Actuel: %.1f °C"
 
 #, c-format
 msgid   "Command line is empty."
-msgstr  ""
+msgstr  "La ligne de commande est vide."
 
 #, c-format
 msgid   "Unable to execute command."
-msgstr  ""
+msgstr  "Impossible d'exécuter la commande."
 
 #, c-format
 msgid   "Command has exited with status code %d."
-msgstr  ""
+msgstr  "La commande a quitté avec le code d'état %d."
 
 #, c-format
 msgid   "Command did not return valid numbers."
-msgstr  ""
+msgstr  "La commande n'a retourné aucun numéro valide."
 
 #, c-format
 msgid   "Command: %s\n"
         "ERROR: %s"
-msgstr  ""
+msgstr  "Commande: %s\n"
+        "ERREUR: %s"
 
 #, c-format
 msgid   "Command: %s\n"
         "Results: (%.3lf, %.3lf, %.3lf, %.3lf)"
-msgstr  ""
+msgstr  "Commande: %s\n"
+        "Résultats: (%.3lf, %.3lf, %.3lf, %.3lf)"
 
 #, c-format
 msgid   "ERROR: %s"
-msgstr  ""
+msgstr  "ERREUR: %s"
 
 #, c-format
 msgid   "Unable to execute the following command line: '%s'"
@@ -153,7 +170,7 @@ msgid   "Temperature"
 msgstr  "Température"
 
 msgid   "Parametric"
-msgstr  ""
+msgstr  "Paramétrique"
 
 #, c-format
 msgid   "%d pixel"
@@ -200,19 +217,19 @@ msgstr  "%s/s"
 
 #. xgettext: single-letter form for "days" - e.g. 3 days -> 3d
 msgid   "d"
-msgstr  ""
+msgstr  "j"
 
 #. xgettext: single-letter form for "hours" - e.g. 3 hours -> 3h
 msgid   "h"
-msgstr  ""
+msgstr  "h"
 
 #. xgettext: single-letter form for "minutes" - e.g. 3 minutes -> 3m
 msgid   "m"
-msgstr  ""
+msgstr  "m"
 
 #. xgettext: single-letter form for "seconds" - e.g. 3 seconds -> 3s
 msgid   "s"
-msgstr  ""
+msgstr  "s"
 
 #, c-format
 msgid   "Unable to open the following url: '%s'"
@@ -370,22 +387,22 @@ msgid   "Write"
 msgstr  "Écriture"
 
 msgid   "Current"
-msgstr  ""
+msgstr  "Actuel"
 
 msgid   "Result 1"
-msgstr  ""
+msgstr  "Résultat 1"
 
 msgid   "Critical"
-msgstr  ""
+msgstr  "Critique"
 
 msgid   "Result 2"
-msgstr  ""
+msgstr  "Résultat 2"
 
 msgid   "Result 3"
-msgstr  ""
+msgstr  "Résultat 3"
 
 msgid   "Result 4"
-msgstr  ""
+msgstr  "Résultat 4"
 
 msgid   "Colors"
 msgstr  "Couleurs"
@@ -423,35 +440,50 @@ msgid   "The following tokens can be used within the command line:\n"
         "%u - measure unit in which graph data values are measured\n"
         "\n"
         "%% - inserts a literal percent sign"
-msgstr  ""
+msgstr  "Les symboles suivants peuvent être utilisés dans la ligne de "
+        "commande:\n"
+        "\n"
+        "%n - numéro de graphique - comptage gauche à droite, à partir de 1\n"
+        "%x - nom court de graphique - trois à quatre caractères minuscules\n"
+        "\n"
+        "%1 - première valeur des données de graphique - dépend du graphique\n"
+        "%2 - deuxième valeur des données de graphique - dépend du graphique\n"
+        "%3 - troisième valeur des données de graphique - dépend du graphique\n"
+        "%4 - quatrième valeur des données de graphique - dépend du graphique\n"
+        "%u - unité de mesure dans lequel les valeurs des données du "
+        "graphique sont mesurées\n"
+        "\n"
+        "%% - insère un signe pour cent"
 
 msgid   "Double click command:"
-msgstr  ""
+msgstr  "Commande sur un double clic:"
 
 msgid   "Maximum value:"
-msgstr  ""
+msgstr  "Valeur maximum"
 
 msgid   "Choose automatically"
-msgstr  ""
+msgstr  "Sélectionner automatiquement"
 
 msgid   "Source:"
-msgstr  ""
+msgstr  "Source:"
 
 msgid   "Name"
-msgstr  ""
+msgstr  "Prénom"
 
 msgid   "Please note that some selected sources might still not show up, "
         "because of other constraints that make them not suitable."
-msgstr  ""
+msgstr  "Note: certaines sources sélectionnées peuvent encore ne pas "
+        "apparaître, en raison d'autres contraintes qui les rendent pas "
+        "approprié."
 
 msgid   "Graph command:"
-msgstr  ""
+msgstr  "Commande du graphique"
 
 msgid   "Test"
-msgstr  ""
+msgstr  "Tester"
 
 msgid   "Color"
-msgstr  ""
+msgstr  "Couleur"
 
 msgid   "Type a valid command line. Process must obey these rules:\n"
         "\n"
@@ -472,4 +504,24 @@ msgid   "Type a valid command line. Process must obey these rules:\n"
         "Process CAN print some text to stderr.\n"
         "* The first line of text will be displayed as \"Message\" text.\n"
         "* Any additional content after the first line is ignored.\n"
-msgstr  ""
+msgstr  "Tapez une ligne de commande valide. Le processus doit obéir à "
+        "ces règles:\n"
+        "\n"
+        "<b>CODE DE SORTIE</b>\n"
+        "Processus DOIT sortir avec le code d'état '0'\n"
+        "\n"
+        "<b>STDOUT</b>\n"
+        "Processus DOIT imprimer sur stdout nombres décimaux POSITIFS.\n"
+        "* Graphique accepte au moins un numéro à 4 chiffres max.\n"
+        "* Séparez les numéros de l'espace ou fin de ligne.\n"
+        "* Pour les nombres décimaux, utiliser le point ou la virgule en "
+        "fonction de vos paramètres régionaux.\n"
+        "* Les nombres négatifs seront mis à 0.\n"
+        "* Les nombres peuvent être préfixées avec 0 (octal) ou 0x "
+        "(hexadécimal).\n"
+        "* Tout contenu supplémentaire après les chiffres est ignoré.\n"
+        "\n"
+        "<b>STDERR</b>\n"
+        "Le processus peut imprimer du texte sur stderr.\n"
+        "* La première ligne de texte sera affiché comme \"Message\".\n"
+        "* Tout contenu supplémentaire après la première ligne est ignorée.\n"
