@@ -13,14 +13,31 @@ Multiload-ng can be built with GTK2 and GTK3, so can be embedded within GTK2/GTK
 
 
 
+## Contents
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [The Graphs](#the-graphs)
+- [History](#history)
+- [System Requirements](#system-requirements)
+- [Build Instructions](#build-instructions)
+- [How to Contribute](#how-to-contribute)
+- [Help & Troubleshooting](#help--troubleshooting)
+- [FAQ](#faq)
+- [Credits](#credits)
+
+
+
 ## Features
 - Draw graphs of system resources
-- Very customizable
-- Color schemes support
+- Customizable under every aspect
+- Builtin color schemes
+- Independent configuration for each graph
 - Automatically adapts to container changes (panel or window)
-- Written in pure C with few dependencies - little CPU/memory footprint
-- Customizable tooltips
-- Custom mouse actions
+- Written in pure C with few dependencies = little CPU/memory footprint
+- Customizable tooltips with lots of information
+- Customizable mouse actions, with user-defined command lines
+- Customizable graph scale
+- Customizable data sources (filters)
 
 
 
@@ -54,20 +71,53 @@ Multiload-ng can be built with GTK2 and GTK3, so can be embedded within GTK2/GTK
 
 
 
-## Graphs
-- **CPU GRAPH**: draws CPU usage, differentiating between User/System/Nice/IOWait.
-- **MEMORY GRAPH**: draws RAM usage, differentiating between memory used by the applications (directly and through shared modules) and memory used as cache/buffers.
-- **NETWORK GRAPH**: draws network I/O of every supported network interface, differentiating between input, output and local (loopback, adb, etc) traffic.
-- **SWAP GRAPH** draws swap usage, when swap is present.
-- **LOAD AVERAGE GRAPH**: draws load average, as returned by `uptime`.
-- **DISK GRAPH**: draws Disk I/O, differentiating between read and write.
-- **TEMPERATURE GRAPH**: draws temperature of the system, based on the hottest temperature detected among the supported sensors in the system.
-- ...others coming soon
+## The Graphs
+#### CPU
+Draws CPU usage, differentiating between cycles used by programs with normal and
+low priority, by the kernel and waiting for I/O to complete.
 
+Tooltip shows CPU information (model, cores, frequency/governor).
 
+#### MEMORY
+Draws RAM usage, differentiating between memory used by the applications (directly
+and through shared modules) and memory used as cache/buffers.
 
-## Help & Troubleshooting
-Look at the [FAQ](#faq) for some common pitfalls. All additional documentation is located in the [Wiki](../../wiki).
+Tooltip prints these values as percentage and absolute value.
+
+#### NETWORK
+Draws network I/O of every supported network interface, differentiating between
+input, output and local (loopback, ADB, etc) traffic.
+
+User can choose which interfaces will be used for graph calculations.
+
+#### SWAP
+Draws swap usage, when swap is present.
+
+#### LOAD AVERAGE
+Draws load average, as returned by `uptime`.
+
+Tooltip shows load average of 1,5,15 minutes and number of active processes/threads.
+
+#### DISK
+Draws Disk I/O, differentiating between read and write speeds.
+
+User can choose which partitions will be used for graph calculations.
+
+#### TEMPERATURE
+Draws temperature of the system
+
+User can choose which sensor/driver to read for drawing the graph, or let Multiload-ng 
+utomatically select the hottest temperature detected among all detected sensors.
+
+#### PARAMETRIC
+Draws numeric output of user defined command line. Up to 4 values will be shown together.  
+Can be also used to monitor changes to a file using `cat <filename>` as command line.  
+Can be also used to execute arbitrary shell commands using `sh -c "<commands>"` as command line.
+
+Tooltip shows contents of command's *stderr*.
+
+#### Stay tuned
+Other graphs are coming!
 
 
 
@@ -83,6 +133,11 @@ would allow to choose future directions with more ease.
 For the above reasons, I made Multiload-ng a separate project.
 The name changes too (so the filenames), in order to allow them to be installed together.
 
+Multiload-ng gained popularity starting from version 1.1.0, that introduced GTK3 support. Some Linux blogs
+started writing about the plugin, and some contributors started to send translation in their languages.
+
+All this keeps the author motivated, and the project alive and kicking!
+
 
 
 ## System Requirements
@@ -94,6 +149,25 @@ Package                     | Min version
 :-------------------------- | -------------:
 gtk+                        | >= 2.18.0
 cairo                       | >= 1.0
+
+Multiload-ng requires a reasonably recent Linux kernel (>2.6.36) built with
+specific configuration options. These are not build-time requirement, rather
+run-time ones. Here are required options:  
+- ***CONFIG_SYSFS* (sysfs filesystem support)**
+- ***CONFIG_PROC_FS* (/proc filesystem support)**
+
+Multiload-ng measures system resources using nodes in /sys and /proc, so they must exist.
+
+In addition, enabling the following options allows Multiload-ng to gather all possible
+informations from the system. These are not strictly required, but some graphs might
+not work properly, or not work at all, without these other options:  
+- ***CONFIG_CPU_FREQ* (CPU Frequency scaling)**
+- ***CONFIG_HWMON* (Hardware Monitoring support)**
+- ***CONFIG_THERMAL* (Generic Thermal sysfs driver)**
+- ***CONFIG_SENSORS_\** ** - enable sensors you need
+
+Any modern kernel (since 2010) sets all these options automatically, so generally
+speaking you don't have to worry about user kernels.
 
 #### Requirements for standalone window
 Standalone target has no additional requirements.
@@ -145,17 +219,10 @@ correct GTK+ version (see [here](#gtk-version) for instructions).
 
 Note that XFCE 4.6 or greater is required.
 
-#### Requirements for temperature graph
-This is not a build-time requirement, rather a run-time one. The plugin search
-sysfs nodes corresponding to thermal zones, chooses the hottest one and draws it
-in the graph. The only requirement here is a Linux kernel compiled with
-`CONFIG_THERMAL (Generic Thermal sysfs driver)`. Any modern kernel (since 2010)
-sets it automatically, so it should be just fine.
 
 
 
-
-## Build instructions
+## Build Instructions
 
 #### Get the source
 Execute the following command line (you must have git installed):  
@@ -216,7 +283,7 @@ To later uninstall you need source directory. If you deleted it, just download a
 
 
 
-## How to contribute
+## How to Contribute
 You can contribute in several ways:
 
 * Suggest new features
@@ -234,46 +301,63 @@ Each pull request will be considered and will get a response.
 
 
 
+
+## Help & Troubleshooting
+Look at the [FAQ](#faq) for some common pitfalls. All additional documentation is located in the [Wiki](../../wiki).
+
+#### Plugin shows only a vertical blank line
+Probably you compiled against the wrong GTK version. E.g: XFCE and LXDE panels are still GTK2-based, and
+Multiload-ng build system automatically selects GTK3 if available.
+
+Try running Configure with the right options (see [Configure](#configure) section above)
+
+#### High CPU usage
+This has basically two causes:  
+* low update interval
+* parametric command
+
+Lowering update interval means more redraws per second. CPU usage might become noticeable on older systems.
+
+Command line of parametric graph is called synchronously every time the graph is redrawn. This means that
+plugins hangs waiting for the command line to terminate and return numbers. You should try to
+
+
+
+
 ## FAQ
 
 #### Q: Which are the differences with original Multiload applet?
-A: First of all, this project is *forked* from original Multiload. Multiload-ng has ALL the features of the original multiload, since they share the same codebase.
+A: First of all, this project is *forked* from original Multiload. Nearly 100% of the code has been
+rewritten by now, but Multiload-ng is designed to keep ALL the features of the original multiload,
+and extend them.
 
 There are some notable differences:
 
 * Original multiload contains old and unmantained code, Multiload-ng is actively mantained
 * Multiload-ng has a [Wiki](../../wiki)!
 * Multiload-ng runs on a variety of panels, including those of the original multiload
+* Multiload-ng recently dropped glibtop dependency, meaning less bugs and less overhead
+* Multiload-ng detects automatically which task manager is installed
 * Multiload-ng has additional graphs, and more will be added in the future
 * Multiload-ng has more graphical customizations, like individual size/interval/border
 * Multiload-ng has color schemes support
 * Multiload-ng responds to mouse events with per-graph customizable actions
 * Multiload-ng can choose its orientation regardless of panel orientation
+* Multiload-ng can set graphs scale manually
 * Multiload-ng has higher limits for graph size and update interval
 * Multiload-ng can also be run without any panel
+* Multiload-ng can filter which source to show in suitable graphs
 * ...and so on
 
 Try it in your system and you won't come back!
 
-#### Q: I tried to compile plugin for *\[insertyourpanelhere\]*, but it shows just a vertical blank line. Why?
-A: Probably you compiled against the wrong GTK version. E.g: XFCE and LXDE panels are still GTK2-based, and
-Multiload-ng build system automatically selects GTK3 if available.
-
-Try running Configure with the right options (see [Configure](#configure) section above)
-
 #### Q: Doesn't a system monitor use system resources by itself?
 A: Yes. This is true for every system monitor. That's why resources usage from Multiload-ng is kept to a negligible level.
 
-#### Q: I found a bug! How can I report?
-A: The preferred way to report a bug is by [creating a new issue](../../issues/new).
+#### Q: I found a bug/I have a suggestion! How can I report?
+A: The preferred way to report a bug or suggest new features is by [creating a new issue](../../issues/new).
 
-First, check wether the bug is already present in [issues list](../../issues) or in the appropriate [wiki page](../../wiki/Known-issues-and-TODO).
-If it's not, you should [create a new issue](../../issues/new).
-
-#### Q: I have a suggestion that could be useful. How can I report?
-A: The preferred way to suggest a new features is by [creating a new issue](../../issues/new).
-
-First, check wether your suggestion is already present in [issues list](../../issues) or in the project [Wishlist](../../wiki/Wishlist).
+First, check wether the bug/suggestion is already present in [issues list](../../issues) or in the project [Wishlist](../../wiki/Wishlist).
 If it's not, you should [create a new issue](../../issues/new).
 
 #### Q: Will you continue the development of Multiload-ng?
@@ -289,3 +373,12 @@ A: Because of a number of reasons:
 5. Requires plugins to be written in languages other than C -> Sorry, this would break ALL existing plugins. Unless special cases (like supersets of C or simple wrappers), it's very likely it can't be done.
 
 The best way to get a new port is to suggest it (or code it yourself, of course). Feel free to submit an issue about your request, it will be considered carefully.
+
+
+
+## Credits
+- FSF and creators of original Multiload applet (see AUTHORS file), for giving me a starting point
+- Translators, for sending me always up-to-date translations. Read their names in *About* dialog, in git commits comments, or looking at the source, in the PO file headers
+- Beta testers, for reporting bugs that I would have never discovered, because they didn't happen in any of my systems. Now these bugs are all gone, thanks to them. Some translators also helped me with testing.
+- [Ethan Schoonover](http://ethanschoonover.com/), for its [Solarized color scheme](http://ethanschoonover.com/solarized)
+- [Gisela at All Free Designs](http://allfreedesigns.com/author/123ggizelle/), for [these tips](http://allfreedesigns.com/bright-color-palettes/) I picked to create Fruity color scheme
