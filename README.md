@@ -138,7 +138,7 @@ Some examples are present in [screenshots](#screenshots) above. Here is a partia
 - **Tango** from [Tango Desktop Project](http://tango.freedesktop.org/)
 - **Solarized** by [Ethan Schoonover](http://ethanschoonover.com/solarized) in both Light and Dark variants
 - Color schemes inspired by famous Linux distribution: **[Ubuntu](http://www.ubuntu.com/)** (both Ambiance and Radiance), **[Linux Mint](https://www.linuxmint.com/)**
-- Color schemes inspired by famous GTK themes: **[Arc](https://github.com/horst3180/arc-theme)** **[Numix](https://numixproject.org/)** (both Light and Dark)
+- Color schemes inspired by famous GTK themes: **[Numix](https://numixproject.org/)** (both Light and Dark), **[Arc](https://github.com/horst3180/arc-theme)**
 - Color schemes inspired by outer space: **Moon**, **Venus**, **Earth**, **Mars**, **Jupiter**, **Uranus**, **Neptune**
 - More!
 
