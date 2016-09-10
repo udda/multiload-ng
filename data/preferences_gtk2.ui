@@ -6091,7 +6091,7 @@ Process CAN print some text to stderr.
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">True</property>
+                    <property name="expand">False</property>
                     <property name="fill">True</property>
                     <property name="position">4</property>
                   </packing>
