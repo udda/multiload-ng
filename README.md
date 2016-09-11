@@ -247,10 +247,11 @@ Note that XFCE 4.6 or greater is required.
 
 ## Install instructions
 
-- For Debian and its derivatives (Ubuntu, Mint...) stable packages for all supported panels are available in [WebUpd8 PPA](https://launchpad.net/~nilarimogard/+archive/ubuntu/webupd8). Read how to install [here](http://www.webupd8.org/2016/08/multiload-ng-120-released-with-color.html).
+- For Debian and its derivatives (Ubuntu, Mint...) **stable** packages for all supported panels are available in [WebUpd8 PPA](https://launchpad.net/~nilarimogard/+archive/ubuntu/webupd8). Read how to install [here](http://www.webupd8.org/2016/08/multiload-ng-120-released-with-color.html).
 - Arch users can install XFCE version from AUR ([stable](https://aur.archlinux.org/packages/xfce4-multiload-ng-plugin/), [unstable](https://aur.archlinux.org/packages/xfce4-multiload-ng-plugin/))
+- Other distro users will have to [build from source](#build-instructions).
 
-To install in other distribution, or if you want to have some control over build process, or try lastest code, you can [build it yourself](#build-instructions).
+If you want to try lastest features, or have some control over build (e.g. enable/disable some panels), you can [build it yourself](#build-instructions).
 
 
 
