@@ -20,6 +20,7 @@ Multiload-ng can be built with GTK2 and GTK3, so can be embedded within GTK2/GTK
 - [Color Schemes](#color-schemes)
 - [History](#history)
 - [System Requirements](#system-requirements)
+- [Install Instructions](#install-instructions)
 - [Build Instructions](#build-instructions)
 - [How to Contribute](#how-to-contribute)
 - [Help & Troubleshooting](#help--troubleshooting)
@@ -242,6 +243,14 @@ correct GTK+ version (see [here](#gtk-version) for instructions).
 
 Note that XFCE 4.6 or greater is required.
 
+
+
+## Install instructions
+
+- For Debian and its derivatives (Ubuntu, Mint...) stable packages for all supported panels are available in [WebUpd8 PPA](https://launchpad.net/~nilarimogard/+archive/ubuntu/webupd8). Read how to install [here](http://www.webupd8.org/2016/08/multiload-ng-120-released-with-color.html).
+- Arch users can install XFCE version from AUR ([stable](https://aur.archlinux.org/packages/xfce4-multiload-ng-plugin/), [unstable](https://aur.archlinux.org/packages/xfce4-multiload-ng-plugin/))
+
+To install in other distribution, or if you want to have some control over build process, or try lastest code, you can [build it yourself](#build-instructions).
 
 
 
