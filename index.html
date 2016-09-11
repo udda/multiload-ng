@@ -39,73 +39,168 @@
 <p>Multiload-ng can be built with GTK2 and GTK3, so can be embedded within GTK2/GTK3 builds of all the panels above.</p>
 
 <h2>
+<a id="contents" class="anchor" href="#contents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contents</h2>
+
+<ul>
+<li><a href="#features">Features</a></li>
+<li><a href="#screenshots">Screenshots</a></li>
+<li><a href="#the-graphs">The Graphs</a></li>
+<li><a href="#color-schemes">Color Schemes</a></li>
+<li><a href="#history">History</a></li>
+<li><a href="#system-requirements">System Requirements</a></li>
+<li><a href="#install-instructions">Install Instructions</a></li>
+<li><a href="#build-instructions">Build Instructions</a></li>
+<li><a href="#how-to-contribute">How to Contribute</a></li>
+<li><a href="#help--troubleshooting">Help &amp; Troubleshooting</a></li>
+<li><a href="#faq">FAQ</a></li>
+<li><a href="#credits">Credits</a></li>
+</ul>
+
+<h2>
 <a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h2>
 
 <ul>
-<li>Draw graphs of system resources</li>
-<li>Very customizable</li>
-<li>Color schemes support</li>
+<li>Draw graphs of system resources (<a href="#the-graphs">learn more</a>)</li>
+<li>Customizable under every aspect</li>
+<li>Builtin color schemes (<a href="#color-schemes">learn more</a>)</li>
+<li>Independent configuration for each graph</li>
 <li>Automatically adapts to container changes (panel or window)</li>
-<li>Written in pure C with few dependencies - little CPU/memory footprint</li>
-<li>Customizable tooltips</li>
-<li>Custom mouse actions</li>
+<li>Written in pure C with few dependencies = little CPU/memory footprint</li>
+<li>Customizable tooltips with lots of information</li>
+<li>Customizable mouse actions, with user-defined command lines</li>
+<li>Customizable graph scale</li>
+<li>Customizable data sources (filters)</li>
 </ul>
 
 <h2>
 <a id="screenshots" class="anchor" href="#screenshots" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Screenshots</h2>
 
-<p><img src="screenshots/0_default.png?raw=true" alt="Default configuration, small panel. All graphs visible"><br>
+<p><img src="screenshots/all.panel-24px.png?raw=true" alt="Default configuration, small panel. All graphs visible"><br>
 <sup><em>Small panel, default configuration. All graphs visible</em></sup></p>
 
-<p><img src="screenshots/1_borders.png?raw=true" alt="All graphs visible, larger panel. Thicker (2px) borders"><br>
-<sup><em>All graphs visible, larger panel. Thicker (2px) borders</em></sup></p>
+<p><img src="screenshots/all.panel-40px.border-2px.widths.png?raw=true" alt="All graphs visible, larger panel. Thicker (2px) borders, graphs have different widths"><br>
+<sup><em>All graphs visible, larger panel. Thicker (2px) borders, graphs have different widths</em></sup></p>
 
-<p><img src="screenshots/2_gradient+singleborders.png?raw=true" alt="Each graph has different border width. CPU graph has grey-blue gradient background"><br>
-<sup><em>Each graph has different border width. CPU graph has grey-blue gradient background</em></sup></p>
+<p><img src="screenshots/borders.uranus.png?raw=true" alt="Each graph has different border width. Color scheme: Uranus"><br>
+<sup><em>Each graph has different border width. Color scheme: <strong>Uranus</strong></em></sup></p>
 
-<p><img src="screenshots/3_margins+padding+noborder.png?raw=true" alt="Graphs have no borders. Extra spacing and padding"><br>
-<sup><em>Graphs have no borders. Extra spacing and padding</em></sup></p>
+<p><img src="screenshots/margin.padding.noborder.solarized-light.png?raw=true" alt="Graphs have no borders. Extra spacing and padding. Color scheme: Solarized Light"><br>
+<sup><em>Graphs have no borders. Extra spacing and padding. Color scheme: <strong>Solarized Light</strong></em></sup></p>
 
-<p><img src="screenshots/4_background-match.png?raw=true" alt="Graph background matches panel background. Very stylish"><br>
+<p><img src="screenshots/background-blend.png?raw=true" alt="Graph background matches panel background. Very stylish"><br>
 <sup><em>Graph background matches panel background. Very stylish</em></sup></p>
 
-<p><img src="screenshots/5_sizes_solarized.png?raw=true" alt="Graphs have different sizes. Color scheme: Solarized Light"><br>
-<sup><em>Graphs have different sizes. Color scheme: <strong>Solarized Light</strong></em></sup></p>
+<p><img src="screenshots/vertical-on-horizontal.png?raw=true" alt="Graphs have vertical orientation on horizontal panel. The opposite is also possible"><br>
+<sup><em>Graphs have vertical orientation on horizontal panel. The opposite is also possible</em></sup></p>
 
-<p><img src="screenshots/6_ambiance.png?raw=true" alt="Color scheme: Ubuntu Ambiance"><br>
-<sup><em>Color scheme: <strong>Ubuntu Ambiance</strong></em></sup></p>
+<p><img src="screenshots/contiguous.noborder.jupiter.png?raw=true" alt="Graphs are contiguous, with no border and no spacing, behaving like a single graph. Color scheme: Jupiter"><br>
+<sup><em>Graphs are contiguous, with no border and no spacing, behaving like a single graph. Color scheme: <strong>Jupiter</strong></em></sup></p>
 
-<p><img src="screenshots/7_standalone_horiz_earth.png?raw=true" alt="Standalone window, horizontal layout. Color scheme: Earth"><br>
-<sup><em>Standalone window, horizontal layout. Color scheme: <strong>Earth</strong></em></sup></p>
+<p><img src="screenshots/cpu.ambiance.png?raw=true" alt="Just CPU graph. Color scheme: Ubuntu Ambiance"><br>
+<sup><em>Just CPU graph. Color scheme: <strong>Ubuntu Ambiance</strong></em></sup></p>
 
-<p><img src="screenshots/8_standalone_vert_solarized.png?raw=true" alt="Standalone window, vertical layout. Color scheme: Solarized Dark"><br>
-<sup><em>Standalone window, vertical layout. Color scheme: <strong>Solarized Dark</strong></em></sup></p>
+<p><img src="screenshots/standalone.horizontal.fruity.png?raw=true" alt="Standalone window, horizontal layout. Color scheme: Fruity"><br>
+<sup><em>Standalone window, horizontal layout. Color scheme: <strong>Fruity</strong></em></sup></p>
+
+<p><img src="screenshots/standalone.vertical.numix-light.png?raw=true" alt="Standalone window, vertical layout. Color scheme: Numix Light"><br>
+<sup><em>Standalone window, vertical layout. Color scheme: <strong>Numix Light</strong></em></sup></p>
 
 <h2>
-<a id="graphs" class="anchor" href="#graphs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Graphs</h2>
+<a id="the-graphs" class="anchor" href="#the-graphs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The Graphs</h2>
+
+<h3>
+<a id="cpu" class="anchor" href="#cpu" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>CPU</h3>
+
+<p>Draws CPU usage, differentiating between cycles used by programs with normal and
+low priority, by the kernel and waiting for I/O to complete.</p>
+
+<p>Tooltip shows CPU information (model, cores, frequency/governor).</p>
+
+<h3>
+<a id="memory" class="anchor" href="#memory" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>MEMORY</h3>
+
+<p>Draws RAM usage, differentiating between memory used by the applications (directly
+and through shared modules) and memory used as cache/buffers.</p>
+
+<p>Tooltip prints these values as percentage and absolute value.</p>
+
+<h3>
+<a id="network" class="anchor" href="#network" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>NETWORK</h3>
+
+<p>Draws network I/O of every supported network interface, differentiating between
+input, output and local (loopback, ADB, etc) traffic.</p>
+
+<p>User can choose which interfaces will be used for graph calculations.</p>
+
+<h3>
+<a id="swap" class="anchor" href="#swap" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SWAP</h3>
+
+<p>Draws swap usage, when swap is present.</p>
+
+<h3>
+<a id="load-average" class="anchor" href="#load-average" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>LOAD AVERAGE</h3>
+
+<p>Draws load average, as returned by <code>uptime</code>.</p>
+
+<p>Tooltip shows load average of 1,5,15 minutes and number of active processes/threads.</p>
+
+<h3>
+<a id="disk" class="anchor" href="#disk" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>DISK</h3>
+
+<p>Draws Disk I/O, differentiating between read and write speeds.</p>
+
+<p>User can choose which partitions will be used for graph calculations.</p>
+
+<h3>
+<a id="temperature" class="anchor" href="#temperature" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TEMPERATURE</h3>
+
+<p>Draws temperature of the system</p>
+
+<p>User can choose which sensor/driver to read for drawing the graph, or let Multiload-ng 
+automatically select the hottest temperature measured among all detected sensors.</p>
+
+<h3>
+<a id="parametric" class="anchor" href="#parametric" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>PARAMETRIC</h3>
+
+<p>Draws numeric output of user defined command line. Up to 4 values will be shown together.<br>
+Can be also used to monitor changes to a file using <code>cat &lt;filename&gt;</code> as command line.<br>
+Can be also used to execute arbitrary shell commands using <code>sh -c "&lt;commands&gt;"</code> as command line.</p>
+
+<p>Tooltip shows contents of command's <em>stderr</em>.</p>
+
+<h3>
+<a id="stay-tuned" class="anchor" href="#stay-tuned" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Stay tuned</h3>
+
+<p>Other graphs are coming!</p>
+
+<h2>
+<a id="color-schemes" class="anchor" href="#color-schemes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Color Schemes</h2>
+
+<p>Multiload-ng has color scheme support, that is, every color of the graphs can be changed.
+This include borders and background (two-color gradient).</p>
+
+<p>Colors (except for border and background) have alpha values, so you can play with
+transparency too!</p>
+
+<p>There are also some builtin color schemes, which you can set with a single click.
+Some examples are present in <a href="#screenshots">screenshots</a> above. Here is a partial list:</p>
 
 <ul>
 <li>
-<strong>CPU GRAPH</strong>: draws CPU usage, differentiating between User/System/Nice/IOWait.</li>
+<strong>Default color scheme</strong> with its distinctive colors</li>
 <li>
-<strong>MEMORY GRAPH</strong>: draws RAM usage, differentiating between memory used by the applications (directly and through shared modules) and memory used as cache/buffers.</li>
+<strong>Tango</strong> from <a href="http://tango.freedesktop.org/">Tango Desktop Project</a>
+</li>
 <li>
-<strong>NETWORK GRAPH</strong>: draws network I/O of every supported network interface, differentiating between input, output and local (loopback, adb, etc) traffic.</li>
-<li>
-<strong>SWAP GRAPH</strong> draws swap usage, when swap is present.</li>
-<li>
-<strong>LOAD AVERAGE GRAPH</strong>: draws load average, as returned by <code>uptime</code>.</li>
-<li>
-<strong>DISK GRAPH</strong>: draws Disk I/O, differentiating between read and write.</li>
-<li>
-<strong>TEMPERATURE GRAPH</strong>: draws temperature of the system, based on the hottest temperature detected among the supported sensors in the system.</li>
-<li>...others coming soon</li>
+<strong>Solarized</strong> by <a href="http://ethanschoonover.com/solarized">Ethan Schoonover</a> in both Light and Dark variants</li>
+<li>Color schemes inspired by famous Linux distribution: <strong><a href="http://www.ubuntu.com/">Ubuntu</a></strong> (both Ambiance and Radiance), <strong><a href="https://www.linuxmint.com/">Linux Mint</a></strong>
+</li>
+<li>Color schemes inspired by famous GTK themes: <strong><a href="https://numixproject.org/">Numix</a></strong> (both Light and Dark), <strong><a href="https://github.com/horst3180/arc-theme">Arc</a></strong>
+</li>
+<li>Color schemes inspired by outer space: <strong>Moon</strong>, <strong>Venus</strong>, <strong>Earth</strong>, <strong>Mars</strong>, <strong>Jupiter</strong>, <strong>Uranus</strong>, <strong>Neptune</strong>
+</li>
+<li>More!</li>
 </ul>
-
-<h2>
-<a id="help--troubleshooting" class="anchor" href="#help--troubleshooting" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Help &amp; Troubleshooting</h2>
-
-<p>Look at the <a href="#faq">FAQ</a> for some common pitfalls. All additional documentation is located in the <a href="../../wiki">Wiki</a>.</p>
 
 <h2>
 <a id="history" class="anchor" href="#history" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>History</h2>
@@ -121,11 +216,16 @@ would allow to choose future directions with more ease.</p>
 <p>For the above reasons, I made Multiload-ng a separate project.
 The name changes too (so the filenames), in order to allow them to be installed together.</p>
 
+<p>Multiload-ng gained popularity starting from version 1.1.0, that introduced GTK3 support. Some Linux bloggers
+started writing about the plugin, and some contributors started to send translation in their languages.</p>
+
+<p>All this keeps the author motivated, and the project alive and kicking!</p>
+
 <h2>
 <a id="system-requirements" class="anchor" href="#system-requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>System Requirements</h2>
 
-<h4>
-<a id="common-requirements" class="anchor" href="#common-requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Common requirements</h4>
+<h3>
+<a id="common-requirements" class="anchor" href="#common-requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Common requirements</h3>
 
 <p>These are the packages required to build any version of the plugin.
 See per-panel section below for full list.</p>
@@ -146,20 +246,52 @@ See per-panel section below for full list.</p>
 <td align="left">cairo</td>
 <td align="right">&gt;= 1.0</td>
 </tr>
-<tr>
-<td align="left">libgtop</td>
-<td align="right">&gt;= 2.11.92</td>
-</tr>
 </tbody>
 </table>
 
-<h4>
-<a id="requirements-for-standalone-window" class="anchor" href="#requirements-for-standalone-window" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements for standalone window</h4>
+<p>Multiload-ng requires a reasonably recent Linux kernel (&gt;2.6.36) built with
+specific configuration options. These are not build-time requirement, rather
+run-time ones. Here are required options:  </p>
+
+<ul>
+<li>
+<strong>CONFIG_SYSFS</strong> <em>(sysfs filesystem support)</em>
+</li>
+<li>
+<strong>CONFIG_PROC_FS</strong> <em>(/proc filesystem support)</em>
+</li>
+</ul>
+
+<p>Multiload-ng measures system resources using nodes in /sys and /proc, so they must exist.</p>
+
+<p>In addition, enabling the following options allows Multiload-ng to gather all possible
+informations from the system. These are not strictly required, but some graphs might
+not work properly, or not work at all, without these other options:  </p>
+
+<ul>
+<li>
+<strong>CONFIG_CPU_FREQ</strong> <em>(CPU Frequency scaling)</em>
+</li>
+<li>
+<strong>CONFIG_HWMON</strong> <em>(Hardware Monitoring support)</em>
+</li>
+<li>
+<strong>CONFIG_THERMAL</strong> <em>(Generic Thermal sysfs driver)</em>
+</li>
+<li>
+<strong>CONFIG_SENSORS_*</strong> - enable sensors you need</li>
+</ul>
+
+<p>Any modern kernel (since 2010) sets all these options automatically, so generally
+speaking you don't have to worry about user kernels.</p>
+
+<h3>
+<a id="requirements-for-standalone-window" class="anchor" href="#requirements-for-standalone-window" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements for standalone window</h3>
 
 <p>Standalone target has no additional requirements.</p>
 
-<h4>
-<a id="requirements-for-lxde-panel" class="anchor" href="#requirements-for-lxde-panel" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements for LXDE panel</h4>
+<h3>
+<a id="requirements-for-lxde-panel" class="anchor" href="#requirements-for-lxde-panel" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements for LXDE panel</h3>
 
 <p>In addition to common requirements (see above)
 these packages are required to build LXDE panel plugin:</p>
@@ -191,8 +323,8 @@ need also libmenu-cache. This was fixed in version 0.7.1. Read about this
 
 <p>Note that LXDE 0.7 or greater is required.</p>
 
-<h4>
-<a id="requirements-for-mate-panel" class="anchor" href="#requirements-for-mate-panel" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements for MATE panel</h4>
+<h3>
+<a id="requirements-for-mate-panel" class="anchor" href="#requirements-for-mate-panel" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements for MATE panel</h3>
 
 <p>In addition to common requirements (see above)
 these packages are required to build MATE panel plugin:</p>
@@ -218,8 +350,8 @@ newer versions of mate-panel are GTK+3. You may have to set correct GTK+ version
 
 <p>Note that MATE 1.7 or greater is required.</p>
 
-<h4>
-<a id="requirements-for-xfce-panel" class="anchor" href="#requirements-for-xfce-panel" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements for XFCE panel</h4>
+<h3>
+<a id="requirements-for-xfce-panel" class="anchor" href="#requirements-for-xfce-panel" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements for XFCE panel</h3>
 
 <p>In addition to common requirements (see above)
 these packages are required to build XFCE panel plugin:</p>
@@ -253,20 +385,22 @@ correct GTK+ version (see <a href="#gtk-version">here</a> for instructions).</p>
 
 <p>Note that XFCE 4.6 or greater is required.</p>
 
-<h4>
-<a id="requirements-for-temperature-graph" class="anchor" href="#requirements-for-temperature-graph" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements for temperature graph</h4>
+<h2>
+<a id="install-instructions" class="anchor" href="#install-instructions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install instructions</h2>
 
-<p>This is not a build-time requirement, rather a run-time one. The plugin search
-sysfs nodes corresponding to thermal zones, chooses the hottest one and draws it
-in the graph. The only requirement here is a Linux kernel compiled with
-<code>CONFIG_THERMAL (Generic Thermal sysfs driver)</code>. Any modern kernel (since 2010)
-sets it automatically, so it should be just fine.</p>
+<ul>
+<li>For Debian and its derivatives (Ubuntu, Mint...) <strong>stable</strong> packages for all supported panels are available in <a href="https://launchpad.net/%7Enilarimogard/+archive/ubuntu/webupd8">WebUpd8 PPA</a>. Read how to install <a href="http://www.webupd8.org/2016/08/multiload-ng-120-released-with-color.html">here</a>.</li>
+<li>Arch users can install XFCE version from AUR (<a href="https://aur.archlinux.org/packages/xfce4-multiload-ng-plugin/">stable</a>, <a href="https://aur.archlinux.org/packages/xfce4-multiload-ng-plugin/">unstable</a>)</li>
+<li>Other distro users will have to <a href="#build-instructions">build from source</a>.</li>
+</ul>
+
+<p>If you want to try lastest features, or have some control over build (e.g. enable/disable some panels), you can <a href="#build-instructions">build it yourself</a>.</p>
 
 <h2>
-<a id="build-instructions" class="anchor" href="#build-instructions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Build instructions</h2>
+<a id="build-instructions" class="anchor" href="#build-instructions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Build Instructions</h2>
 
-<h4>
-<a id="get-the-source" class="anchor" href="#get-the-source" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Get the source</h4>
+<h3>
+<a id="get-the-source" class="anchor" href="#get-the-source" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Get the source</h3>
 
 <p>Execute the following command line (you must have git installed):<br>
 <code>git clone https://github.com/udda/multiload-ng</code></p>
@@ -275,8 +409,8 @@ sets it automatically, so it should be just fine.</p>
 
 <p>Or, if you don't want any surprise, download a stable release <a href="https://github.com/udda/multiload-ng/releases">here</a>.</p>
 
-<h4>
-<a id="configure" class="anchor" href="#configure" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configure</h4>
+<h3>
+<a id="configure" class="anchor" href="#configure" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configure</h3>
 
 <p>Move to the directory that contains source code just cloned and run:<br>
 <code>./autogen.sh</code></p>
@@ -289,16 +423,16 @@ Change prefix as needed (/usr is the default of most distros and it's just OK; i
 <code>./configure --libdir=/usr/lib/x86_64-linux-gnu</code><br>
 If plugin does not show up in the list of panel plugins, you could try to repeat build process with this configure setting.</p>
 
-<h4>
-<a id="gtk-version" class="anchor" href="#gtk-version" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GTK version</h4>
+<h3>
+<a id="gtk-version" class="anchor" href="#gtk-version" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GTK version</h3>
 
 <p>Build system automatically selects highest GTK+ version available. If you need to build against a lower version, you have to
 set it manually (see next section, <a href="#advanced-configure">Advanced configure</a>)</p>
 
 <p>For example, XFCE and LXDE users need GTK2 version of the plugin. They need to add option <code>--with-gtk=2.0</code> to <em>./configure</em>.</p>
 
-<h4>
-<a id="advanced-configure" class="anchor" href="#advanced-configure" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Advanced configure</h4>
+<h3>
+<a id="advanced-configure" class="anchor" href="#advanced-configure" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Advanced configure</h3>
 
 <p>If you are ok with default settings, you can skip this paragraph and head to <a href="#build">Build</a> section. Otherwise, continue reading.</p>
 
@@ -348,14 +482,14 @@ set it manually (see next section, <a href="#advanced-configure">Advanced config
 
 <p>When you are satisfied with your flags, run <code>./configure</code> with selected options.</p>
 
-<h4>
-<a id="build" class="anchor" href="#build" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Build</h4>
+<h3>
+<a id="build" class="anchor" href="#build" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Build</h3>
 
 <p>This is simple. Move to the directory that contains source code and execute:<br>
 <code>make</code></p>
 
-<h4>
-<a id="installuninstall" class="anchor" href="#installuninstall" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install/uninstall</h4>
+<h3>
+<a id="installuninstall" class="anchor" href="#installuninstall" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install/uninstall</h3>
 
 <p>To install (must run <code>make</code> before), execute:<br>
 <code>sudo make install</code></p>
@@ -364,7 +498,7 @@ set it manually (see next section, <a href="#advanced-configure">Advanced config
 <code>sudo make uninstall</code></p>
 
 <h2>
-<a id="how-to-contribute" class="anchor" href="#how-to-contribute" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to contribute</h2>
+<a id="how-to-contribute" class="anchor" href="#how-to-contribute" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to Contribute</h2>
 
 <p>You can contribute in several ways:</p>
 
@@ -373,6 +507,7 @@ set it manually (see next section, <a href="#advanced-configure">Advanced config
 <li>Report bugs</li>
 <li>Translate to new languages</li>
 <li>Port the plugin to other panels</li>
+<li>Submit your personal color scheme</li>
 <li>Implement something present in the <a href="../../wiki/Wishlist">Wishlist</a>
 </li>
 <li>Fix something present in <a href="../../wiki/Known-issues-and-TODO">Known issues and TODO</a>
@@ -385,12 +520,42 @@ set it manually (see next section, <a href="#advanced-configure">Advanced config
 <p>Each pull request will be considered and will get a response.</p>
 
 <h2>
+<a id="help--troubleshooting" class="anchor" href="#help--troubleshooting" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Help &amp; Troubleshooting</h2>
+
+<p>Look at the <a href="#faq">FAQ</a> for some common pitfalls. All additional documentation is located in the <a href="../../wiki">Wiki</a>.</p>
+
+<h3>
+<a id="plugin-shows-only-a-vertical-blank-line" class="anchor" href="#plugin-shows-only-a-vertical-blank-line" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Plugin shows only a vertical blank line</h3>
+
+<p>Probably you compiled against the wrong GTK version. E.g: XFCE and LXDE panels are still GTK2-based, and
+Multiload-ng build system automatically selects GTK3 if available.</p>
+
+<p>Try running Configure with the right options (see <a href="#configure">Configure</a> section above)</p>
+
+<h3>
+<a id="high-cpu-usage" class="anchor" href="#high-cpu-usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>High CPU usage</h3>
+
+<p>This has basically two causes:  </p>
+
+<ul>
+<li>low update interval</li>
+<li>parametric command</li>
+</ul>
+
+<p>Lowering update interval means more redraws per second. CPU usage might become noticeable on older systems.</p>
+
+<p>Command line of parametric graph is called synchronously every time the graph is redrawn. This means that
+plugins hangs waiting for the command line to terminate and return numbers. You should try to</p>
+
+<h2>
 <a id="faq" class="anchor" href="#faq" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>FAQ</h2>
 
-<h4>
-<a id="q-which-are-the-differences-with-original-multiload-applet" class="anchor" href="#q-which-are-the-differences-with-original-multiload-applet" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q: Which are the differences with original Multiload applet?</h4>
+<h3>
+<a id="q-which-are-the-differences-with-original-multiload-applet" class="anchor" href="#q-which-are-the-differences-with-original-multiload-applet" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q: Which are the differences with original Multiload applet?</h3>
 
-<p>A: First of all, this project is <em>forked</em> from original Multiload. Multiload-ng has ALL the features of the original multiload, since they share the same codebase.</p>
+<p>A: First of all, this project is <em>forked</em> from original Multiload. Nearly 100% of the code has been
+rewritten by now, but Multiload-ng is designed to keep ALL the features of the original multiload,
+and extend them.</p>
 
 <p>There are some notable differences:</p>
 
@@ -398,54 +563,42 @@ set it manually (see next section, <a href="#advanced-configure">Advanced config
 <li>Original multiload contains old and unmantained code, Multiload-ng is actively mantained</li>
 <li>Multiload-ng has a <a href="../../wiki">Wiki</a>!</li>
 <li>Multiload-ng runs on a variety of panels, including those of the original multiload</li>
+<li>Multiload-ng recently dropped glibtop dependency, meaning less bugs and less overhead</li>
+<li>Multiload-ng detects automatically which task manager is installed</li>
 <li>Multiload-ng has additional graphs, and more will be added in the future</li>
 <li>Multiload-ng has more graphical customizations, like individual size/interval/border</li>
 <li>Multiload-ng has color schemes support</li>
 <li>Multiload-ng responds to mouse events with per-graph customizable actions</li>
 <li>Multiload-ng can choose its orientation regardless of panel orientation</li>
+<li>Multiload-ng can set graphs scale manually</li>
 <li>Multiload-ng has higher limits for graph size and update interval</li>
 <li>Multiload-ng can also be run without any panel</li>
+<li>Multiload-ng can filter which source to show in suitable graphs</li>
 <li>...and so on</li>
 </ul>
 
-<p>Try it in your system and you won't come back!</p>
+<p>Not enough? Try it in your system and you won't come back!</p>
 
-<h4>
-<a id="q-i-tried-to-compile-plugin-for-insertyourpanelhere-but-it-shows-just-a-vertical-blank-line-why" class="anchor" href="#q-i-tried-to-compile-plugin-for-insertyourpanelhere-but-it-shows-just-a-vertical-blank-line-why" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q: I tried to compile plugin for <em>[insertyourpanelhere]</em>, but it shows just a vertical blank line. Why?</h4>
-
-<p>A: Probably you compiled against the wrong GTK version. E.g: XFCE and LXDE panels are still GTK2-based, and
-Multiload-ng build system automatically selects GTK3 if available.</p>
-
-<p>Try running Configure with the right options (see <a href="#configure">Configure</a> section above)</p>
-
-<h4>
-<a id="q-doesnt-a-system-monitor-use-system-resources-by-itself" class="anchor" href="#q-doesnt-a-system-monitor-use-system-resources-by-itself" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q: Doesn't a system monitor use system resources by itself?</h4>
+<h3>
+<a id="q-doesnt-a-system-monitor-use-system-resources-by-itself" class="anchor" href="#q-doesnt-a-system-monitor-use-system-resources-by-itself" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q: Doesn't a system monitor use system resources by itself?</h3>
 
 <p>A: Yes. This is true for every system monitor. That's why resources usage from Multiload-ng is kept to a negligible level.</p>
 
-<h4>
-<a id="q-i-found-a-bug-how-can-i-report" class="anchor" href="#q-i-found-a-bug-how-can-i-report" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q: I found a bug! How can I report?</h4>
+<h3>
+<a id="q-i-found-a-bugi-have-a-suggestion-how-can-i-report" class="anchor" href="#q-i-found-a-bugi-have-a-suggestion-how-can-i-report" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q: I found a bug/I have a suggestion! How can I report?</h3>
 
-<p>A: The preferred way to report a bug is by <a href="../../issues/new">creating a new issue</a>.</p>
+<p>A: The preferred way to report a bug or suggest new features is by <a href="../../issues/new">creating a new issue</a>.</p>
 
-<p>First, check wether the bug is already present in <a href="../../issues">issues list</a> or in the appropriate <a href="../../wiki/Known-issues-and-TODO">wiki page</a>.
+<p>First, check wether the bug/suggestion is already present in <a href="../../issues">issues list</a> or in the project <a href="../../wiki/Wishlist">Wishlist</a>.
 If it's not, you should <a href="../../issues/new">create a new issue</a>.</p>
 
-<h4>
-<a id="q-i-have-a-suggestion-that-could-be-useful-how-can-i-report" class="anchor" href="#q-i-have-a-suggestion-that-could-be-useful-how-can-i-report" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q: I have a suggestion that could be useful. How can I report?</h4>
-
-<p>A: The preferred way to suggest a new features is by <a href="../../issues/new">creating a new issue</a>.</p>
-
-<p>First, check wether your suggestion is already present in <a href="../../issues">issues list</a> or in the project <a href="../../wiki/Wishlist">Wishlist</a>.
-If it's not, you should <a href="../../issues/new">create a new issue</a>.</p>
-
-<h4>
-<a id="q-will-you-continue-the-development-of-multiload-ng" class="anchor" href="#q-will-you-continue-the-development-of-multiload-ng" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q: Will you continue the development of Multiload-ng?</h4>
+<h3>
+<a id="q-will-you-continue-the-development-of-multiload-ng" class="anchor" href="#q-will-you-continue-the-development-of-multiload-ng" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q: Will you continue the development of Multiload-ng?</h3>
 
 <p>A: Of course! To get an idea of future directions, take a look at the <a href="../../wiki/Wishlist">Wishlist</a>.</p>
 
-<h4>
-<a id="q-why-dont-you-port-to-panel-insertyourpanelhere" class="anchor" href="#q-why-dont-you-port-to-panel-insertyourpanelhere" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q: Why don't you port to panel <em>[insertyourpanelhere]</em>?</h4>
+<h3>
+<a id="q-why-dont-you-port-to-panel-insertyourpanelhere" class="anchor" href="#q-why-dont-you-port-to-panel-insertyourpanelhere" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q: Why don't you port to panel <em>[insertyourpanelhere]</em>?</h3>
 
 <p>A: Because of a number of reasons:</p>
 
@@ -458,6 +611,15 @@ If it's not, you should <a href="../../issues/new">create a new issue</a>.</p>
 </ol>
 
 <p>The best way to get a new port is to suggest it (or code it yourself, of course). Feel free to submit an issue about your request, it will be considered carefully.</p>
+
+<h2>
+<a id="credits" class="anchor" href="#credits" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Credits</h2>
+
+<ul>
+<li>FSF and creators of original Multiload applet (see AUTHORS file), for giving me a starting point</li>
+<li>Translators, for sending me always up-to-date translations. Read their names in <em>About</em> dialog, in git commits comments, or looking at the source, in the PO file headers</li>
+<li>Beta testers, for reporting bugs that I would have never discovered, because they didn't happen in any of my systems. Now these bugs are all gone, thanks to them. Some translators also helped me with testing.</li>
+</ul>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/udda/multiload-ng">Multiload-ng</a> is maintained by <a href="https://github.com/udda">udda</a>.</span>
