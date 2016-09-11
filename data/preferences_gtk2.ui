@@ -6047,7 +6047,7 @@
                       <object class="GtkImage" id="image_info_parm_command">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="tooltip_markup">Type a valid command line. Process must obey these rules:
+                        <property name="tooltip_markup" translatable="yes">Type a valid command line. Process must obey these rules:
 
 &lt;b&gt;EXIT CODE&lt;/b&gt;
 Process MUST exit with status code '0'
