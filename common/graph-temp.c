@@ -72,7 +72,7 @@ multiload_graph_temp_get_filter (LoadGraph *g, TemperatureData *xd)
 		}
 		filter[strlen(filter)-1] = '\0';
 	} else
-		filter = "";
+		filter = g_new0(char, 1);
 
 	g_free(list);
 	return filter;
