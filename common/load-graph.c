@@ -64,8 +64,7 @@ load_graph_draw (LoadGraph *g)
 	guint i, j;
 	guint c_top, c_bottom, c_border;
 	cairo_t *cr;
-	GraphConfig *config = &(g->multiload->graph_config[g->id]);
-	GdkRGBA *colors = config->colors;
+	GdkRGBA *colors = g->config->colors;
 
 	guint x = 0;
 	guint y = 0;
@@ -91,23 +90,23 @@ load_graph_draw (LoadGraph *g)
 
 
 	// border
-	if (config->border_width > 0) {
-		cairo_set_source_rgba_from_config(cr, config, c_border);
+	if (g->config->border_width > 0) {
+		cairo_set_source_rgba_from_config(cr, g->config, c_border);
 		cairo_rectangle(cr, 0, 0, W, H);
 		cairo_fill(cr);
 
-		if (2*config->border_width < W)
-			W -= 2*config->border_width;
+		if (2*g->config->border_width < W)
+			W -= 2*g->config->border_width;
 		else
 			W=0;
 
-		if (2*config->border_width < H)
-			H -= 2*config->border_width;
+		if (2*g->config->border_width < H)
+			H -= 2*g->config->border_width;
 		else
 			H=0;
 
-		x = config->border_width;
-		y = config->border_width;
+		x = g->config->border_width;
+		y = g->config->border_width;
 	}
 
 	if (W > 0 && H > 0) {
@@ -121,7 +120,7 @@ load_graph_draw (LoadGraph *g)
 			g->pos[i] = H;
 
 		for (j = 0; j < multiload_config_get_num_data(g->id); j++) {
-			cairo_set_source_rgba_from_config(cr, config, j);
+			cairo_set_source_rgba_from_config(cr, g->config, j);
 			for (i = 0; i < W; i++) {
 				if (g->data[i][j] == 0)
 					continue;
