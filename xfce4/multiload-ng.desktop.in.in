@@ -8,3 +8,4 @@ X-XFCE-Module=multiload-ng
 X-XFCE-Internal=false
 X-XFCE-Unique=false
 X-XFCE-Module-Path=@LIBDIR@/xfce4/panel/plugins
+X-XFCE-API=@XFCE_API@

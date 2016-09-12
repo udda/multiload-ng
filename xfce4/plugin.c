@@ -23,13 +23,6 @@
 #include <config.h>
 #include <string.h>
 
-#ifdef HAVE_XFCE4UI
-#include <libxfce4ui/libxfce4ui.h>
-#elif HAVE_XFCEGUI4
-#include <libxfcegui4/libxfcegui4.h>
-#else
-#error Must have one of libxfce4ui or xfcegui4
-#endif
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 
@@ -185,7 +178,6 @@ xfce_constructor (XfcePanelPlugin *plugin)
 
 	multiload->panel_data = plugin;
 	multiload->panel_orientation = xfce_panel_plugin_get_orientation (plugin);
-
 	gtk_container_add (GTK_CONTAINER (plugin), GTK_WIDGET(multiload->container));
 
 	multiload_ui_read (multiload);
