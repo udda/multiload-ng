@@ -20,6 +20,7 @@
 
 
 #include <config.h>
+#include <math.h>
 #include <string.h>
 #include <gtk/gtk.h>
 #include <glib/gi18n-lib.h>
@@ -57,6 +58,7 @@ DEFINE_OB_NAMES_FULL(entry_dblclick_command);
 DEFINE_OB_NAMES_FULL(image_info_dblclick_command);
 DEFINE_OB_NAMES_FULL(sb_border);
 DEFINE_OB_NAMES_FULL(advanced_box);
+DEFINE_OB_NAMES_FULL(draw_color_bgpreview);
 
 static const gchar* spin_ceil_names[GRAPH_MAX] = {
 	"",
@@ -464,6 +466,7 @@ multiload_preferences_border_changed_cb (GtkSpinButton *spin, MultiloadPlugin *m
 	guint value = gtk_spin_button_get_value_as_int(spin);
 
 	ma->graph_config[i].border_width = value;
+	gtk_widget_queue_draw(GTK_WIDGET(OB(draw_color_bgpreview_names[i])));
 }
 
 static void
@@ -727,6 +730,84 @@ multiload_preferences_source_auto_toggled_cb (GtkToggleButton *toggle, Multiload
 }
 
 static void
+multiload_preferences_bgpreview_draw_cb(GtkWidget *widget, cairo_t *cr, LoadGraph *g)
+{
+	guint i, total;
+	gdouble step, remainder;
+	GdkRGBA *c_top, *c_bottom, *c_border;
+	GdkRGBA *colors = g->config->colors;
+	GtkAllocation alloc;
+
+	gtk_widget_get_allocation(widget, &alloc);
+
+	guint x = 0;
+	guint y = 0;
+	guint W = alloc.width;
+	guint H = alloc.height;
+
+	c_top = &colors[multiload_colors_get_extra_index(g->id, EXTRA_COLOR_BACKGROUND_TOP)];
+	c_bottom = &colors[multiload_colors_get_extra_index(g->id, EXTRA_COLOR_BACKGROUND_BOTTOM)];
+	c_border = &colors[multiload_colors_get_extra_index(g->id, EXTRA_COLOR_BORDER)];
+
+	// border
+	if (g->config->border_width > 0) {
+		cairo_set_source_rgba(cr, c_border->red, c_border->green, c_border->blue, c_border->alpha);
+		cairo_rectangle(cr, 0, 0, W, H);
+		cairo_fill(cr);
+
+		if (2*g->config->border_width < W)
+			W -= 2*g->config->border_width;
+		else
+			W=0;
+
+		if (2*g->config->border_width < H)
+			H -= 2*g->config->border_width;
+		else
+			H=0;
+
+		x = g->config->border_width;
+		y = g->config->border_width;
+	}
+
+	if (W > 0 && H > 0) {
+		// background
+		cairo_pattern_t *pat = cairo_pattern_create_linear (0.0, 0.0, 0.0, H);
+		cairo_pattern_add_color_stop_rgb (pat, 0, c_top->red, c_top->green, c_top->blue);
+		cairo_pattern_add_color_stop_rgb (pat, 1, c_bottom->red, c_bottom->green, c_bottom->blue);
+		cairo_set_source(cr, pat);
+
+		cairo_rectangle(cr, x, y, W, H);
+		cairo_fill(cr);
+
+		// data example
+		total = multiload_config_get_num_data(g->id);
+		step = floor(H/total);
+		remainder = H - step*total;
+		for (i = 0; i < total; i++) {
+			cairo_set_source_rgba(cr, colors[i].red, colors[i].green, colors[i].blue, colors[i].alpha);
+			cairo_rectangle(cr,
+				x + ((W%2)? 1+(W-1)/2:W/2),
+				y + ((i==total-1) ? 0 : H - (i+1)*step),
+				W/2,
+				step + ((i==total-1) ? remainder : 0)
+			);
+			cairo_fill(cr);
+		}
+	}
+}
+
+#if GTK_API == 2
+static void
+multiload_preferences_bgpreview_expose(GtkWidget *widget, GdkEventExpose *event, LoadGraph *g)
+{
+	cairo_t *cr = gdk_cairo_create (event->window);
+	load_graph_draw_cb(widget, cr, g);
+	cairo_destroy (cr);
+	return FALSE;
+}
+#endif
+
+static void
 multiload_preferences_destroy ()
 {
 	if (builder == NULL)
@@ -793,7 +874,15 @@ multiload_preferences_connect_signals (MultiloadPlugin *ma)
 				break;
 			g_signal_connect(G_OBJECT(OB(color_button_names[i][j])), "color-set", G_CALLBACK(multiload_preferences_color_set_cb), ma);
 		}
+
+		// background preview
+		#if GTK_API == 2
+			g_signal_connect (OB(draw_color_bgpreview_names[i]), "expose_event", G_CALLBACK (multiload_preferences_bgpreview_expose), ma->graphs[i]);
+		#elif GTK_API == 3
+			g_signal_connect (OB(draw_color_bgpreview_names[i]), "draw", G_CALLBACK (multiload_preferences_bgpreview_draw_cb), ma->graphs[i]);
+		#endif
 	}
+
 	g_signal_connect(G_OBJECT(OB("cb_fill_between")), "toggled", G_CALLBACK(multiload_preferences_fill_between_toggled_cb), ma);
 	g_signal_connect(G_OBJECT(OB("hscale_spacing")), "value-changed", G_CALLBACK(multiload_preferences_spacing_or_padding_changed_cb), ma);
 	g_signal_connect(G_OBJECT(OB("hscale_padding")), "value-changed", G_CALLBACK(multiload_preferences_spacing_or_padding_changed_cb), ma);
@@ -820,9 +909,11 @@ void
 multiload_preferences_update_color_buttons (MultiloadPlugin *ma)
 {
 	guint i, c;
-	for (i=0; i<GRAPH_MAX; i++)
+	for (i=0; i<GRAPH_MAX; i++) {
 		for (c=0; c<multiload_config_get_num_colors(i); c++)
 			gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(OB(color_button_names[i][c])), &ma->graph_config[i].colors[c]);
+		gtk_widget_queue_draw(GTK_WIDGET(OB(draw_color_bgpreview_names[i])));
+	}
 }
 
 

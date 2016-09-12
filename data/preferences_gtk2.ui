@@ -3310,7 +3310,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkDrawingArea" id="draw_color_gradientbg_cpu">
+                      <object class="GtkDrawingArea" id="draw_color_bgpreview_cpu">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                       </object>
@@ -3323,7 +3323,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkDrawingArea" id="draw_color_gradientbg_mem">
+                      <object class="GtkDrawingArea" id="draw_color_bgpreview_mem">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                       </object>
@@ -3336,7 +3336,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkDrawingArea" id="draw_color_gradientbg_net">
+                      <object class="GtkDrawingArea" id="draw_color_bgpreview_net">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                       </object>
@@ -3349,7 +3349,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkDrawingArea" id="draw_color_gradientbg_swap">
+                      <object class="GtkDrawingArea" id="draw_color_bgpreview_swap">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                       </object>
@@ -3362,7 +3362,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkDrawingArea" id="draw_color_gradientbg_load">
+                      <object class="GtkDrawingArea" id="draw_color_bgpreview_load">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                       </object>
@@ -3375,7 +3375,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkDrawingArea" id="draw_color_gradientbg_disk">
+                      <object class="GtkDrawingArea" id="draw_color_bgpreview_disk">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                       </object>
@@ -3388,7 +3388,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkDrawingArea" id="draw_color_gradientbg_temp">
+                      <object class="GtkDrawingArea" id="draw_color_bgpreview_temp">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                       </object>
@@ -3490,7 +3490,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkDrawingArea" id="draw_color_gradientbg_parm">
+                      <object class="GtkDrawingArea" id="draw_color_bgpreview_parm">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                       </object>
