@@ -71,7 +71,7 @@ multiload_graph_net_get_filter (LoadGraph *g, NetData *xd)
 	size_t n = 0;
 
 	char iface[12];
-	char *filter;
+	gchar *filter;
 
 	char **active_filter = g_strsplit(g->config->filter, MULTILOAD_FILTER_SEPARATOR_INLINE, -1);
 
@@ -81,7 +81,7 @@ multiload_graph_net_get_filter (LoadGraph *g, NetData *xd)
 		if (strchr(buf, ':') != NULL)
 			i++;
 	}
-	filter = g_malloc0(i+(2+sizeof(iface)));
+	filter = g_new0(gchar, i*(2+sizeof(iface)));
 
 	buf=NULL, n=0;
 	f = cached_fopen_r("/proc/net/dev", FALSE);
