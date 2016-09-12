@@ -129,6 +129,10 @@ load_graph_draw (LoadGraph *g)
 				line_y = y + g->pos[i] - 0.5;
 				line_y_dest = line_y - g->data[i][j] + 1;
 
+				// Ensure 1px lines are drawn
+				if (g->data[i][j] == 1)
+					line_y_dest -= 1;
+
 				if (line_y > y) { // don't even begin to draw out of scale values
 					if (line_y_dest < y) // makes sure that line ends to graph border
 						line_y_dest = y + 0.5;
