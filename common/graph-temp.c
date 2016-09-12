@@ -56,7 +56,7 @@ static TemperatureSourceSupport list_temp(TemperatureSourceData **list);
 gchar *
 multiload_graph_temp_get_filter (LoadGraph *g, TemperatureData *xd)
 {
-	TemperatureSourceData *list;
+	TemperatureSourceData *list = NULL;
 	gchar *filter;
 	gboolean selected;
 	guint i;
