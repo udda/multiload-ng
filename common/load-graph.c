@@ -111,7 +111,7 @@ load_graph_draw (LoadGraph *g)
 
 	if (W > 0 && H > 0) {
 		// background
-		cairo_set_vertical_gradient(cr, W, &(colors[c_top]), &(colors[c_bottom]));
+		cairo_set_vertical_gradient(cr, H, &(colors[c_top]), &(colors[c_bottom]));
 		cairo_rectangle(cr, x, y, W, H);
 		cairo_fill(cr);
 
