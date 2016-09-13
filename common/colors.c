@@ -200,7 +200,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(00,00,00, FF)		// Background (bottom)
 			}, { // DISK - hue: 31
 				HEX_TO_RGBA(ED,7A,00, FF),		// Read
-				HEX_TO_RGBA(FF,85,33, FF),		// Write
+				HEX_TO_RGBA(FF,AB,73, FF),		// Write
 				HEX_TO_RGBA(80,42,00, FF),		// Border
 				HEX_TO_RGBA(26,1D,13, FF),		// Background (top)
 				HEX_TO_RGBA(00,00,00, FF)		// Background (bottom)
