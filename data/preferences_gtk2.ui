@@ -6065,7 +6065,10 @@ Process MUST print to stdout POSITIVE floating point numbers.
 Process CAN print some text to stderr.
 * The first line of text will be displayed as "Message" text.
 * Any additional content after the first line is ignored.
-</property>
+
+&lt;b&gt;EXAMPLES OF COMMON COMMAND LINES&lt;/b&gt;
+* To monitor changes to a file: cat [filename]
+* To execute arbitrary shell commands: sh -c "[commands]"</property>
                         <property name="icon_name">dialog-information</property>
                       </object>
                       <packing>
