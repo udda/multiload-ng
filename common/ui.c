@@ -146,7 +146,7 @@ multiload_ui_read (MultiloadPlugin *ma)
 
 		multiload_sanitize(ma);
 	} else {
-		g_warning("multiload_ui_read: settings = NULL");
+		g_warning("multiload_ui_read: settings = NULL (if this is the first start of the plugin, that's normal)");
 	}
 }
 
