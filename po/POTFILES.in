@@ -19,6 +19,7 @@ data/preferences_gtk3.ui
 indicator/plugin.c
 lxpanel/plugin.c
 mate/plugin.c
+mate/org.mate.multiload-ng.Applet.mate-panel-applet.in.in.in
 standalone/multiload-ng.desktop.in.in
 standalone/plugin.c
 xfce4/multiload-ng.desktop.in.in
