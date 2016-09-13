@@ -731,7 +731,7 @@ multiload_preferences_source_auto_toggled_cb (GtkToggleButton *toggle, Multiload
 	multiload_preferences_update_dynamic_widgets(ma);
 }
 
-static void
+static gboolean
 multiload_preferences_bgpreview_draw_cb(GtkWidget *widget, cairo_t *cr, LoadGraph *g)
 {
 	guint i, total;
@@ -796,14 +796,15 @@ multiload_preferences_bgpreview_draw_cb(GtkWidget *widget, cairo_t *cr, LoadGrap
 			cairo_fill(cr);
 		}
 	}
+	return FALSE;
 }
 
 #if GTK_API == 2
-static void
+static gboolean
 multiload_preferences_bgpreview_expose(GtkWidget *widget, GdkEventExpose *event, LoadGraph *g)
 {
 	cairo_t *cr = gdk_cairo_create (event->window);
-	load_graph_draw_cb(widget, cr, g);
+	multiload_preferences_bgpreview_draw_cb(widget, cr, g);
 	cairo_destroy (cr);
 	return FALSE;
 }
