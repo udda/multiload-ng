@@ -497,6 +497,8 @@ multiload_preferences_color_set_cb (GtkColorButton *col, MultiloadPlugin *ma)
 
 	// every color-set event changes the color scheme to (Custom)
 	multiload_preferences_color_scheme_select_custom();
+
+	gtk_widget_queue_draw(GTK_WIDGET(OB(draw_color_bgpreview_names[graph_index])));
 }
 
 static void
