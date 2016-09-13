@@ -1,10 +1,10 @@
 [Applet Factory]
 Id=MultiloadNgFactory
 Location=@LOCATION@
-_Name=Multiload-ng Factory
-_Description=Factory for Multiload-ng
+Name=Multiload-ng Factory
+Description=Multiload-ng Factory
 
 [MultiloadNgApplet]
-_Name=Multiload-ng
+Name=Multiload-ng
 _Description=Modern graphical system monitor
 Icon=@APPICON@

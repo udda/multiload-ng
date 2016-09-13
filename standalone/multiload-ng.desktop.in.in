@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=X-XFCE-PanelPlugin
 Encoding=UTF-8
-_Name=Multiload-ng
+Name=Multiload-ng
 _Comment=Modern graphical system monitor
 TryExec=multiload-ng
 Exec=multiload-ng

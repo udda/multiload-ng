@@ -1,7 +1,7 @@
 [Xfce Panel]
 Type=X-XFCE-PanelPlugin
 Encoding=UTF-8
-_Name=Multiload-ng
+Name=Multiload-ng
 _Comment=Modern graphical system monitor
 Icon=@APPICON@
 X-XFCE-Module=multiload-ng
