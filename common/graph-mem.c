@@ -65,14 +65,16 @@ multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryDat
 	char *buf = NULL;
 	char *tmp;
 	size_t n = 0;
+	size_t len;
 	guint i;
 
 	FILE *f = cached_fopen_r("/proc/meminfo", FALSE);
 	while(getline(&buf, &n, f) >= 0) {
 		for (i=0; table[i].address != NULL; i++) {
-			if (strncmp(buf, table[i].key, strlen(table[i].key)) == 0) {
+			len = strlen(table[i].key);
+			if (strncmp(buf, table[i].key, len) == 0) {
 				// tmp will start with numeric value
-				for (tmp = buf+strlen(table[i].key)+1; isspace(tmp[0]); tmp++);
+				for (tmp = buf+len+1; isspace(tmp[0]); tmp++);
 
 				errno = 0;
 				*(table[i].address) = g_ascii_strtoull(tmp, NULL, 0);
