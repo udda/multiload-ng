@@ -134,6 +134,7 @@ m4_include([standalone/configure.m4])
 m4_include([indicator/configure.m4])
 m4_include([lxpanel/configure.m4])
 m4_include([mate/configure.m4])
+m4_include([systray/configure.m4])
 m4_include([xfce4/configure.m4])
 
 
@@ -143,6 +144,7 @@ if \
 	test x$with_indicator != xyes && \
 	test x$with_lxpanel != xyes && \
 	test x$with_mate != xyes && \
+	test x$with_systray != xyes && \
 	test x$with_xfce4 != xyes
 then
 	AC_MSG_FAILURE([No supported panels are installed and available.])
@@ -210,6 +212,7 @@ echo "*   - standalone  : $with_standalone"
 echo "*   - indicator   : $with_indicator"
 echo "*   - lxpanel     : $with_lxpanel"
 echo "*   - mate-panel  : $with_mate"
+echo "*   - system tray : $with_systray"
 echo "*   - xfce4-panel : $with_xfce4"
 echo "*"
 echo "* ----------------------"
