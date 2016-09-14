@@ -76,8 +76,8 @@
     <property name="lower">10</property>
     <property name="upper">2000000</property>
     <property name="value">500</property>
-    <property name="step_increment">50</property>
-    <property name="page_increment">1000</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment_interval_cpu">
     <property name="lower">50</property>
