@@ -174,7 +174,16 @@ multiload_get_max_value(MultiloadPlugin *ma, guint graph_id)
 void
 multiload_refresh_orientation (MultiloadPlugin *ma)
 {
+	guint i;
+	LoadGraph *g;
+
 	gtk_orientable_set_orientation(GTK_ORIENTABLE(ma->box), multiload_get_orientation(ma));
+
+	for (i=0; i<GRAPH_MAX; i++) {
+		g = ma->graphs[i];
+		if (g != NULL)
+			load_graph_resize(g);
+	}
 }
 
 
