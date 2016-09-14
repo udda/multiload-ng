@@ -185,7 +185,7 @@ int main(int argc, char *argv[]) {
 	MultiloadPlugin *multiload = multiload_new();
 
 	multiload_ui_read (multiload);
-	multiload_refresh(multiload);
+	multiload_start(multiload);
 
 	GtkWindow *w = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
 	gtk_window_set_title (w, about_data_progname);

@@ -150,8 +150,7 @@ xfce_free_cb (XfcePanelPlugin *plugin, MultiloadPlugin *multiload)
 static gboolean
 xfce_size_changed_cb (XfcePanelPlugin *plugin, int size, MultiloadPlugin *ma)
 {
-	multiload_refresh(ma);
-	return TRUE;
+	return TRUE; // this is necessary
 }
 static void
 xfce_orientation_changed_cb (XfcePanelPlugin *plugin, GtkOrientation orientation, MultiloadPlugin *ma)
@@ -181,7 +180,7 @@ xfce_constructor (XfcePanelPlugin *plugin)
 	gtk_container_add (GTK_CONTAINER (plugin), GTK_WIDGET(multiload->container));
 
 	multiload_ui_read (multiload);
-	multiload_refresh(multiload);
+	multiload_start(multiload);
 
 
 	/* show the panel's right-click menu on this ebox */
@@ -189,14 +188,10 @@ xfce_constructor (XfcePanelPlugin *plugin)
 
 
 	/* plugin signals */
-	g_signal_connect (G_OBJECT (plugin), "free-data",
-						G_CALLBACK (xfce_free_cb), multiload);
-	g_signal_connect (G_OBJECT (plugin), "save",
-						G_CALLBACK (xfce_save_cb), multiload);
-	g_signal_connect (G_OBJECT (plugin), "size-changed",
-						G_CALLBACK (xfce_size_changed_cb), multiload);
-	g_signal_connect (G_OBJECT (plugin), "orientation-changed",
-						G_CALLBACK (xfce_orientation_changed_cb), multiload);
+	g_signal_connect(G_OBJECT(plugin), "free-data",           G_CALLBACK (xfce_free_cb),                multiload);
+	g_signal_connect(G_OBJECT(plugin), "save",                G_CALLBACK (xfce_save_cb),                multiload);
+	g_signal_connect(G_OBJECT(plugin), "size-changed",        G_CALLBACK (xfce_size_changed_cb),        multiload);
+	g_signal_connect(G_OBJECT(plugin), "orientation-changed", G_CALLBACK (xfce_orientation_changed_cb), multiload);
 
 	/* menu items */
 	GtkMenuItem *mi_separator = GTK_MENU_ITEM(gtk_separator_menu_item_new ());

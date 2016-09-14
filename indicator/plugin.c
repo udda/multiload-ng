@@ -185,7 +185,7 @@ int main (int argc, char **argv)
 	gtk_widget_set_size_request(GTK_WIDGET(multiload->container), -1, 30);
 
 	multiload_ui_read (multiload);
-	multiload_refresh(multiload);
+	multiload_start(multiload);
 
 
 	GtkWidget *menuitem_container = gtk_menu_item_new();

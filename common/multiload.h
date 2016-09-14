@@ -112,7 +112,7 @@ struct _LoadGraph {
 G_BEGIN_DECLS
 
 G_GNUC_INTERNAL void
-multiload_refresh(MultiloadPlugin *ma);
+multiload_start(MultiloadPlugin *ma);
 G_GNUC_INTERNAL GtkOrientation
 multiload_get_orientation(MultiloadPlugin *ma);
 G_GNUC_INTERNAL void

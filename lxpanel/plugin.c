@@ -124,7 +124,7 @@ lxpanel_reconfigure_cb(LXPanel *panel, GtkWidget *ebox)
 	else // lxpanel panel orientation can have values other than vert/horiz
 		multiload->panel_orientation = GTK_ORIENTATION_HORIZONTAL;
 
-	multiload_refresh(multiload);
+	multiload_refresh_orientation(multiload);
 }
 
 void
@@ -149,6 +149,7 @@ lxpanel_constructor(LXPanel *panel, config_setting_t *settings)
 
 	multiload_ui_read (multiload);
 	lxpanel_reconfigure_cb(panel, GTK_WIDGET(multiload->container));
+	multiload_start(multiload);
 
 	return GTK_WIDGET(multiload->container);
 }

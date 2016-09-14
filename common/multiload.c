@@ -90,30 +90,11 @@ multiload_get_orientation(MultiloadPlugin *ma) {
 		return ma->panel_orientation;
 }
 
-/* remove the old graphs and rebuild them */
 void
-multiload_refresh(MultiloadPlugin *ma)
+multiload_start(MultiloadPlugin *ma)
 {
-	gint i;
-	guint n;
-
-	// stop and free the old graphs
-	for (n=0, i=0; i < GRAPH_MAX; i++) {
-		if (!ma->graphs[i])
-			continue;
-
-		load_graph_stop(ma->graphs[i]);
-		gtk_widget_destroy(ma->graphs[i]->main_widget);
-
-		load_graph_unalloc(ma->graphs[i]);
-		g_free(ma->graphs[i]);
-
-		n++;
-	}
-
-
-	if (ma->box)
-		gtk_widget_destroy(ma->box);
+	guint i, n;
+	gboolean vis;
 
 	ma->box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 
@@ -132,20 +113,17 @@ multiload_refresh(MultiloadPlugin *ma)
 	// Only start and display the graphs the user has turned on
 	for (n=0, i=0; i < GRAPH_MAX; i++) {
 		ma->graphs[i] = load_graph_new (ma, i);
+		gtk_box_pack_start(GTK_BOX(ma->box), ma->graphs[i]->main_widget, TRUE, TRUE, 0);
 
-		gtk_box_pack_start(GTK_BOX(ma->box),
-						   ma->graphs[i]->main_widget,
-						   TRUE, TRUE, 0);
-
-		if (ma->graph_config[i].visible) {
-			gtk_widget_show_all (ma->graphs[i]->main_widget);
+		vis = ma->graph_config[i].visible;
+		gtk_widget_set_visible (ma->graphs[i]->main_widget, vis);
+		if (vis) {
 			load_graph_start(ma->graphs[i]);
 			n++;
 		}
 	}
 
 	g_debug("[multiload] Started %d of %d graphs", n, GRAPH_MAX);
-
 	return;
 }
 
