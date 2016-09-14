@@ -101,7 +101,8 @@ Draws swap usage, when swap is present.
 ### LOAD AVERAGE
 Draws load average, as returned by `uptime`.
 
-Tooltip shows load average of 1,5,15 minutes and number of active processes/threads.
+Tooltip shows load average of 1,5,15 minutes, number of active processes/threads
+and informations about currently running kernel.
 
 ### DISK
 Draws Disk I/O, differentiating between read and write speeds.
