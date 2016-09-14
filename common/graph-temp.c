@@ -37,8 +37,8 @@ typedef struct {
 	char node_path[PATH_MAX];
 	char temp_path[PATH_MAX];
 
-	gint64 temp;
-	gint64 critical;
+	double temp;
+	double critical;
 } TemperatureSourceData;
 
 typedef enum {
@@ -149,7 +149,7 @@ list_temp_acpitz(TemperatureSourceData **list, gboolean init)
 
 				if (file_check_contents(f, "critical")) { // found critical temp
 					g_snprintf(buf, PATH_MAX, "%s/trip_point_%d_temp", (*list)[i].node_path, j);
-					(*list)[i].critical = read_int_from_file(buf);
+					(*list)[i].critical = read_int_from_file(buf) / 1000.0f;
 				}
 
 				fclose(f);
@@ -162,7 +162,7 @@ list_temp_acpitz(TemperatureSourceData **list, gboolean init)
 
 	// read phase - always return TRUE
 	for (i=0; (*list)[i].temp_path[0] != '\0'; i++)
-		(*list)[i].temp = read_int_from_file((*list)[i].temp_path);
+		(*list)[i].temp = read_int_from_file((*list)[i].temp_path) / 1000.0f;
 
 	return TRUE;
 }
@@ -280,6 +280,7 @@ list_temp_hwmon(TemperatureSourceData **list, gboolean init)
 					g_free(tmp);
 					(*list)[i].critical = read_int_from_file(buf);
 				}
+				(*list)[i].critical /= 1000.0f;
 
 				i++;
 			}
@@ -291,7 +292,7 @@ list_temp_hwmon(TemperatureSourceData **list, gboolean init)
 
 	// read phase - always return TRUE
 	for (i=0; (*list)[i].temp_path[0] != '\0'; i++)
-		(*list)[i].temp = read_int_from_file((*list)[i].temp_path);
+		(*list)[i].temp = read_int_from_file((*list)[i].temp_path) / 1000.0f;
 
 	return TRUE;
 }
@@ -360,10 +361,10 @@ multiload_graph_temp_get_data (int Maximum, int data[2], LoadGraph *g, Temperatu
 	int max = autoscaler_get_max(&xd->scaler, g, use->temp);
 
 	if (use->critical > 0 && use->critical < use->temp) {
-		data[0] = rint (Maximum * (float)(use->critical) / max);
-		data[1] = rint (Maximum * (float)(use->temp - use->critical) / max);
+		data[0] = rint (Maximum * (use->critical) / max);
+		data[1] = rint (Maximum * (use->temp - use->critical) / max);
 	} else {
-		data[0] = rint (Maximum * (float)(use->temp) / max);
+		data[0] = rint (Maximum * (use->temp) / max);
 		data[1] = 0;
 	}
 
@@ -376,8 +377,8 @@ multiload_graph_temp_get_data (int Maximum, int data[2], LoadGraph *g, Temperatu
 void
 multiload_graph_temp_cmdline_output (LoadGraph *g, TemperatureData *xd)
 {
-	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%d", xd->value);
-	g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "%d", xd->max);
+	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%.03f", xd->value);
+	g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "%.03f", xd->max);
 }
 
 
@@ -390,11 +391,11 @@ multiload_graph_temp_tooltip_update (char **title, char **text, LoadGraph *g, Te
 		if (xd->max > 0)
 			*text = g_strdup_printf(_(	"Current: %.1f °C\n"
 										"Critical: %.1f °C"),
-										(xd->value/1000.0), (xd->max/1000.0));
+										xd->value, xd->max);
 		else
 			*text = g_strdup_printf(_(	"Current: %.1f °C"),
-										(xd->value/1000.0));
+										xd->value);
 	} else {
-		*text = g_strdup_printf("%.1f °C", xd->value/1000.0);
+		*text = g_strdup_printf("%.1f °C", xd->value);
 	}
 }
