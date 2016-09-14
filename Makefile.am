@@ -7,6 +7,9 @@ endif
 if HAVE_LXPANEL
 LXPANEL_DIRS = lxpanel
 endif
+if HAVE_SYSTRAY
+SYSTRAY_DIRS = systray
+endif
 if HAVE_MATE
 MATE_DIRS = mate
 endif
@@ -22,6 +25,7 @@ SUBDIRS =	\
 	$(APPINDICATOR_DIRS) \
 	$(LXPANEL_DIRS) \
 	$(MATE_DIRS) \
+	$(SYSTRAY_DIRS) \
 	$(XFCE4_DIRS) \
 	po
 
