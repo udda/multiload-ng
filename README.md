@@ -281,7 +281,8 @@ If plugin does not show up in the list of panel plugins, you could try to repeat
 Build system automatically selects highest GTK+ version available. If you need to build against a lower version, you have to
 set it manually (see next section, [Advanced configure](#advanced-configure))
 
-For example, XFCE and LXDE users need GTK2 version of the plugin. They need to add option `--with-gtk=2.0` to *./configure*.
+For example, LXDE panel and older versions of XFCE panel (< 4.12.0) need GTK2 version of the plugin.
+They need to add option `--with-gtk=2.0` to *./configure*.
 
 ### Advanced configure
 If you are ok with default settings, you can skip this paragraph and head to [Build](#build) section. Otherwise, continue reading.
@@ -339,8 +340,8 @@ Each pull request will be considered and will get a response.
 Look at the [FAQ](#faq) for some common pitfalls. All additional documentation is located in the [Wiki](../../wiki).
 
 ### Plugin shows only a vertical blank line
-Probably you compiled against the wrong GTK version. E.g: XFCE and LXDE panels are still GTK2-based, and
-Multiload-ng build system automatically selects GTK3 if available.
+Probably you compiled against the wrong GTK+ version. E.g: LXDE panel and older version of XFCE panel (< 4.12.0)
+are still GTK2-based, and Multiload-ng build system automatically selects GTK+3 if available.
 
 Try running Configure with the right options (see [Configure](#configure) section above)
 
