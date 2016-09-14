@@ -78,9 +78,7 @@ typedef struct _SwapData {
 } SwapData;
 
 typedef struct _LoadData {
-	float loadavg_1;
-	float loadavg_5;
-	float loadavg_15;
+	double loadavg[3];
 
 	AutoScaler scaler;
 
