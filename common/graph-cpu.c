@@ -174,6 +174,6 @@ multiload_graph_cpu_tooltip_update (char **title, char **text, LoadGraph *g, Cpu
 									uptime);
 		g_free(uptime);
 	} else {
-		*text = g_strdup_printf("%.1f%%", xd->total_use*100);
+		*text = g_strdup_printf("%.1f%%", xd->total_use);
 	}
 }
