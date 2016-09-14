@@ -27,9 +27,11 @@
 
 G_BEGIN_DECLS
 
+/* Requirements for filter separators: must characters/sequences that never appear in
+ * filter elements. As filter elements by now are all files in /sys or /dev, comma
+ * colon, newline, etc are good separators. To play safe, longer sequences can be used. */
 // separator for filter returned by multiload_graph_*_get_filter() to use in program
 #define MULTILOAD_FILTER_SEPARATOR "\n"
-
 // separator for filter saved on settings. Must not contain newlines or invalid UTF-8 sequences.
 #define MULTILOAD_FILTER_SEPARATOR_INLINE ","
 
