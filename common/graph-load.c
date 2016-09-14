@@ -24,6 +24,7 @@
 #include <locale.h>
 #include <math.h>
 #include <stdlib.h>
+#include <sys/utsname.h>
 
 #include "graph-data.h"
 #include "preferences.h"
@@ -33,6 +34,7 @@
 void
 multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData *xd)
 {
+	static gboolean first_call = TRUE;
 	char *savelocale;
 	size_t n;
 
@@ -48,6 +50,16 @@ multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData
 	// restore default locale for numbers
 	setlocale(LC_NUMERIC, savelocale);
 	free(savelocale);
+
+	if (G_UNLIKELY(first_call)) {
+		struct utsname un;
+		first_call = FALSE;
+		if (0 == uname(&un)) {
+			g_snprintf(xd->uname, sizeof(xd->uname), "%s %s (%s)", un.sysname, un.release, un.machine);
+		} else {
+			g_warning("uname() failed: could not get kernel name and version.");
+		}
+	}
 
 	int max = autoscaler_get_max(&xd->scaler, g, rint(xd->loadavg_1));
 	data [0] = rint ((float) Maximum * xd->loadavg_1 / max);
@@ -66,6 +78,8 @@ void
 multiload_graph_load_tooltip_update (char **title, char **text, LoadGraph *g, LoadData *xd)
 {
 	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
+		if (xd->uname[0] != 0)
+			*title = g_strdup(xd->uname);
 		*text = g_strdup_printf(_(	"Last minute: %0.02f\n"
 									"Last 5 minutes: %0.02f\n"
 									"Last 15 minutes: %0.02f\n"

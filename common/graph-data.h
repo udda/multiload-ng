@@ -86,6 +86,8 @@ typedef struct _LoadData {
 
 	guint proc_active;
 	guint proc_count;
+	// use oversized buffers (just to be sure)
+	gchar uname[512];
 } LoadData;
 
 typedef struct _DiskData {
