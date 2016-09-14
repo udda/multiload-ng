@@ -121,7 +121,7 @@ multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *
 	g_assert_cmpuint(n, ==, 7);
 	time[CPU_IOWAIT] += irq+softirq;
 
-	if (first_call) {
+	if (G_UNLIKELY(first_call)) {
 		first_call = FALSE;
 	} else {
 		for (i=0, total=0; i<CPU_MAX; i++) {
