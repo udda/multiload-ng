@@ -91,7 +91,7 @@ enum MultiloadDefaults {
 	DEFAULT_TOOLTIP_STYLE				= TOOLTIP_STYLE_SIMPLE,
 
 	DEFAULT_MAX_VALUE					= -1,
-	DEFAULT_MAX_VALUE_LOAD				= 10,		// should cover well single to quad cores
+	DEFAULT_MAX_VALUE_LOAD				= 8,		// should cover well single to quad cores
 	DEFAULT_MAX_VALUE_TEMP				= 120000	// measured in millidegrees
 };
 #define DEFAULT_COLOR_SCHEME "Multiload-ng"
