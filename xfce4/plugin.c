@@ -120,7 +120,7 @@ xfce_configure_cb (XfcePanelPlugin *plugin, MultiloadPlugin *ma)
 	xfce_panel_plugin_block_menu (plugin);
 	GtkWidget *dialog = multiload_ui_configure_dialog_new(ma,
 		GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))));
-	gtk_widget_show (dialog);
+	gtk_window_present(GTK_WINDOW(dialog));
 }
 
 void

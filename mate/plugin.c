@@ -108,7 +108,7 @@ mate_properties_cb (GtkAction *action, MultiloadPlugin *ma)
 {
 	GtkWidget *dialog = multiload_ui_configure_dialog_new(ma,
 		GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (ma->container))));
-	gtk_widget_show (dialog);
+	gtk_window_present(GTK_WINDOW(dialog));
 }
 
 static void

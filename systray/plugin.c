@@ -168,7 +168,7 @@ systray_preferences_cb(GtkWidget *widget, MultiloadPlugin *ma)
 	GtkWidget *dialog = multiload_ui_configure_dialog_new(ma, GTK_WINDOW(window));
 	gtk_window_set_transient_for(GTK_WINDOW(window), GTK_WINDOW(dialog));
 	gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
-	gtk_widget_show(dialog);
+	gtk_window_present(GTK_WINDOW(dialog));
 }
 
 

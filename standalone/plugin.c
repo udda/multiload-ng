@@ -175,7 +175,7 @@ standalone_preferences_cb(GtkWidget *widget, MultiloadPlugin *multiload)
 	GtkWidget *dialog = multiload_ui_configure_dialog_new(multiload, window);
 	gtk_window_set_transient_for(window, GTK_WINDOW(dialog));
 	gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
-	gtk_widget_show(dialog);
+	gtk_window_present(GTK_WINDOW(dialog));
 }
 
 
