@@ -4472,7 +4472,6 @@
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">adjustment_ceil_net</property>
-                        <property name="numeric">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -5013,7 +5012,6 @@
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">adjustment_ceil_load</property>
-                        <property name="numeric">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -5266,7 +5264,6 @@
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">adjustment_ceil_disk</property>
-                        <property name="numeric">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -5625,7 +5622,6 @@
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">adjustment_ceil_temp</property>
-                        <property name="numeric">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -5972,7 +5968,6 @@
                         <property name="primary_icon_sensitive">True</property>
                         <property name="secondary_icon_sensitive">True</property>
                         <property name="adjustment">adjustment_ceil_parm</property>
-                        <property name="numeric">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>

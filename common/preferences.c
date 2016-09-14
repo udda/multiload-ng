@@ -657,6 +657,18 @@ multiload_preferences_ceil_changed_cb (GtkSpinButton *spin, MultiloadPlugin *ma)
 	autoscaler_set_max(scaler, value);
 }
 
+static gint
+multiload_preferences_ceil_output_cb (GtkSpinButton *spin, LoadGraph *g)
+{
+	gint n = gtk_spin_button_get_value_as_int(spin);
+	gchar *s = g_strdup_printf("%d %s", n, graph_types[g->id].output_unit);
+	gtk_entry_set_text(GTK_ENTRY(spin), s);
+	g_free(s);
+
+	// block the default output
+	return TRUE;
+}
+
 static void
 multiload_preferences_source_toggled_cb (GtkCellRendererToggle *cell, gchar *path_string, MultiloadPlugin *ma)
 {
@@ -861,6 +873,7 @@ multiload_preferences_connect_signals (MultiloadPlugin *ma)
 		// autoscaler
 		if (cb_autoscaler_names[i][0] != '\0') {
 			g_signal_connect(G_OBJECT(OB(cb_autoscaler_names[i])), "toggled", G_CALLBACK(multiload_preferences_autoscaler_toggled_cb), ma);
+			g_signal_connect(G_OBJECT(OB(spin_ceil_names[i])), "output", G_CALLBACK(multiload_preferences_ceil_output_cb), ma->graphs[i]);
 			g_signal_connect(G_OBJECT(OB(spin_ceil_names[i])), "value-changed", G_CALLBACK(multiload_preferences_ceil_changed_cb), ma);
 		}
 

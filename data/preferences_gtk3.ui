@@ -4163,7 +4163,6 @@
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
                         <property name="adjustment">adjustment_ceil_net</property>
-                        <property name="numeric">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -4701,8 +4700,6 @@
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
                         <property name="adjustment">adjustment_ceil_load</property>
-                        <property name="numeric">True</property>
-                        <property name="value">500</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -4951,7 +4948,6 @@
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
                         <property name="adjustment">adjustment_ceil_disk</property>
-                        <property name="numeric">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -5312,7 +5308,6 @@
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
                         <property name="adjustment">adjustment_ceil_temp</property>
-                        <property name="numeric">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -5662,7 +5657,6 @@
                         <property name="can_focus">True</property>
                         <property name="hexpand">True</property>
                         <property name="adjustment">adjustment_ceil_parm</property>
-                        <property name="numeric">True</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>

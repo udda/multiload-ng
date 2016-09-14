@@ -94,7 +94,6 @@ struct _LoadGraph {
 	guint *pos;
 
 	char output_str[4][20];
-	char output_unit[8];
 
 	GtkWidget *main_widget;
 	GtkWidget *box, *disp;

@@ -146,8 +146,6 @@ multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *
 void
 multiload_graph_cpu_cmdline_output (LoadGraph *g, CpuData *xd)
 {
-	if (g->output_unit[0] == '\0')
-		g_strlcpy(g->output_unit, "%", sizeof(g->output_unit));
 	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%.03f", xd->user);
 	g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "%.03f", xd->nice);
 	g_snprintf(g->output_str[2], sizeof(g->output_str[2]), "%.03f", xd->system);

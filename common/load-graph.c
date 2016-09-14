@@ -313,7 +313,7 @@ static gchar* parse_cmdline(const gchar* cmdline, LoadGraph *g) {
 		{ "%2",				g->output_str[1] },
 		{ "%3",				g->output_str[2] },
 		{ "%4",				g->output_str[3] },
-		{ "%u",				g->output_unit }, // leave that for last, as it can contain '%'s
+		{ "%u",				graph_types[g->id].output_unit }, // leave that for last, as it can contain '%'s
 		{ percent_escape,	"%" }
 	};
 

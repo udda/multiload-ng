@@ -84,8 +84,6 @@ multiload_graph_swap_get_data (int Maximum, int data [1], LoadGraph *g, SwapData
 void
 multiload_graph_swap_cmdline_output (LoadGraph *g, SwapData *xd)
 {
-	if (g->output_unit[0] == '\0')
-		g_strlcpy(g->output_unit, "byte", sizeof(g->output_unit));
 	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%ld", xd->used);
 }
 

@@ -42,6 +42,7 @@ typedef struct _GraphType {
 	const char *name;
 	const char *label;
 	const guint num_colors;
+	const gchar output_unit[10];
 	const GraphGetDataFunc get_data;
 	const GraphTooltipUpdateFunc tooltip_update;
 	const GraphCmdlineOutputFunc cmdline_output;

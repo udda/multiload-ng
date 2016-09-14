@@ -109,8 +109,6 @@ multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryDat
 void
 multiload_graph_mem_cmdline_output (LoadGraph *g, MemoryData *xd)
 {
-	if (g->output_unit[0] == '\0')
-		g_strlcpy(g->output_unit, "byte", sizeof(g->output_unit));
 	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%ld", xd->user);
 	g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "%ld", xd->shared);
 	g_snprintf(g->output_str[2], sizeof(g->output_str[2]), "%ld", xd->buffers);

@@ -41,45 +41,45 @@ guint multiload_config_get_num_data(guint id)
 void multiload_config_init()
 {
 	GraphType temp[] = {
-		{	"cpu",	_("Processor"),		7,
+		{	"cpu",	_("Processor"),		7,		"%",
 			(GraphGetDataFunc)			multiload_graph_cpu_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_cpu_tooltip_update,
 			(GraphCmdlineOutputFunc)	multiload_graph_cpu_cmdline_output
 		},
-		{	"mem",	_("Memory"),		7,
+		{	"mem",	_("Memory"),		7,		"byte",
 			(GraphGetDataFunc)			multiload_graph_mem_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_mem_tooltip_update,
 			(GraphCmdlineOutputFunc)	multiload_graph_mem_cmdline_output
 		},
-		{	"net",	_("Network"),		6,
+		{	"net",	_("Network"),		6,		"Bps",
 			(GraphGetDataFunc)			multiload_graph_net_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_net_tooltip_update,
 			(GraphCmdlineOutputFunc)	multiload_graph_net_cmdline_output,
 			(GraphGetFilterFunc)		multiload_graph_net_get_filter
 		},
-		{	"swap",	_("Swap"),			4,
+		{	"swap",	_("Swap"),			4,		"byte",
 			(GraphGetDataFunc)			multiload_graph_swap_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_swap_tooltip_update,
 			(GraphCmdlineOutputFunc)	multiload_graph_swap_cmdline_output
 		},
-		{	"load",	_("Load average"),	4,
+		{	"load",	_("Load average"),	4,		"",
 			(GraphGetDataFunc)			multiload_graph_load_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_load_tooltip_update,
 			(GraphCmdlineOutputFunc)	multiload_graph_load_cmdline_output
 		},
-		{	"disk",	_("Disk"),			5,
+		{	"disk",	_("Disk"),			5,		"Bps",
 			(GraphGetDataFunc)			multiload_graph_disk_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_disk_tooltip_update,
 			(GraphCmdlineOutputFunc)	multiload_graph_disk_cmdline_output,
 			(GraphGetFilterFunc)		multiload_graph_disk_get_filter
 		},
-		{	"temp",	_("Temperature"),	5,
+		{	"temp",	_("Temperature"),	5,		"m°C",
 			(GraphGetDataFunc)			multiload_graph_temp_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_temp_tooltip_update,
 			(GraphCmdlineOutputFunc)	multiload_graph_temp_cmdline_output,
 			(GraphGetFilterFunc)		multiload_graph_temp_get_filter
 		},
-		{	"parm",	_("Parametric"),	7,
+		{	"parm",	_("Parametric"),	7,		"",
 			(GraphGetDataFunc)			multiload_graph_parm_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_parm_tooltip_update,
 			(GraphCmdlineOutputFunc)	multiload_graph_parm_cmdline_output

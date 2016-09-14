@@ -224,8 +224,6 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 void
 multiload_graph_disk_cmdline_output (LoadGraph *g, DiskData *xd)
 {
-	if (g->output_unit[0] == '\0')
-		g_strlcpy(g->output_unit, "Bps", sizeof(g->output_unit));
 	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%ld", xd->read_speed);
 	g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "%ld", xd->write_speed);
 }

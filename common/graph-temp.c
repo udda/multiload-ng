@@ -376,8 +376,6 @@ multiload_graph_temp_get_data (int Maximum, int data[2], LoadGraph *g, Temperatu
 void
 multiload_graph_temp_cmdline_output (LoadGraph *g, TemperatureData *xd)
 {
-	if (g->output_unit[0] == '\0')
-		g_strlcpy(g->output_unit, "m°C", sizeof(g->output_unit));
 	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%d", xd->value);
 	g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "%d", xd->max);
 }
