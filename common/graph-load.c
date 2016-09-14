@@ -35,13 +35,14 @@ void
 multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData *xd)
 {
 	static gboolean first_call = TRUE;
+	FILE *f = cached_fopen_r("/proc/loadavg", TRUE);
 	int n;
 
-	FILE *f = cached_fopen_r("/proc/loadavg", TRUE);
-
+	// load average
 	n = getloadavg(xd->loadavg, 3);
 	g_assert_cmpint(n, >=, 0);
 
+	// threads stats
 	n = fscanf(f, "%*s %*s %*s %d/%d", &xd->proc_active, &xd->proc_count);
 	g_assert_cmpint(n, ==, 2);
 
