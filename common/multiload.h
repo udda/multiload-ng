@@ -67,6 +67,9 @@ typedef struct _GraphConfig {
 typedef struct _MultiloadPlugin {
 	gpointer panel_data;
 	GtkWidget *pref_dialog;
+	gboolean pref_dialog_maximized;
+	gint pref_dialog_width;
+	gint pref_dialog_height;
 
 	GtkContainer *container;
 	GtkWidget *box;

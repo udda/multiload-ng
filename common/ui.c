@@ -61,10 +61,13 @@ multiload_ui_read (MultiloadPlugin *ma)
 	settings = multiload_ps_settings_open_for_read(ma);
 	g_debug("[ui] Reading settings from object %p", settings);
 	if (G_LIKELY (settings != NULL)) {
-		multiload_ps_settings_get_int		(settings, "padding",			&ma->padding);
-		multiload_ps_settings_get_int		(settings, "spacing",			&ma->spacing);
-		multiload_ps_settings_get_int		(settings, "orientation",		&ma->orientation_policy);
-		multiload_ps_settings_get_boolean	(settings, "fill-between",		&ma->fill_between);
+		multiload_ps_settings_get_int		(settings, "padding",				&ma->padding);
+		multiload_ps_settings_get_int		(settings, "spacing",				&ma->spacing);
+		multiload_ps_settings_get_int		(settings, "orientation",			&ma->orientation_policy);
+		multiload_ps_settings_get_boolean	(settings, "fill-between",			&ma->fill_between);
+		multiload_ps_settings_get_boolean	(settings, "pref-dialog-maximized",	&ma->pref_dialog_maximized);
+		multiload_ps_settings_get_int		(settings, "pref-dialog-width",		&ma->pref_dialog_width);
+		multiload_ps_settings_get_int		(settings, "pref-dialog-height",	&ma->pref_dialog_height);
 
 		/* Color scheme */
 		multiload_ps_settings_get_string	(settings, "color-scheme",		ma->color_scheme, sizeof(ma->color_scheme));
@@ -161,11 +164,14 @@ multiload_ui_save (MultiloadPlugin *ma)
 	settings = multiload_ps_settings_open_for_save(ma);
 	g_debug("[ui] Writing settings to object %p", settings);
 	if (G_LIKELY (settings != NULL)) {
-		multiload_ps_settings_set_int		(settings, "padding",			ma->padding);
-		multiload_ps_settings_set_int		(settings, "spacing",			ma->spacing);
-		multiload_ps_settings_set_int		(settings, "orientation",		ma->orientation_policy);
-		multiload_ps_settings_set_boolean	(settings, "fill-between",		ma->fill_between);
-		multiload_ps_settings_set_string	(settings, "color-scheme",		ma->color_scheme);
+		multiload_ps_settings_set_int		(settings, "padding",				ma->padding);
+		multiload_ps_settings_set_int		(settings, "spacing",				ma->spacing);
+		multiload_ps_settings_set_int		(settings, "orientation",			ma->orientation_policy);
+		multiload_ps_settings_set_boolean	(settings, "fill-between",			ma->fill_between);
+		multiload_ps_settings_set_boolean	(settings, "pref-dialog-maximized",	ma->pref_dialog_maximized);
+		multiload_ps_settings_set_int		(settings, "pref-dialog-width",		ma->pref_dialog_width);
+		multiload_ps_settings_set_int		(settings, "pref-dialog-height",	ma->pref_dialog_height);
+		multiload_ps_settings_set_string	(settings, "color-scheme",			ma->color_scheme);
 
 		/* Parametric graph */
 		ParametricData* xd = (ParametricData*)ma->extra_data[GRAPH_PARAMETRIC];
@@ -269,7 +275,7 @@ multiload_ui_show_about (GtkWindow* parent)
 		NULL);
 }
 
-void
+static void
 multiload_ui_configure_response_cb (GtkWidget *dialog, gint response, MultiloadPlugin *ma)
 {
 	if (response == GTK_RESPONSE_HELP) {
@@ -281,6 +287,20 @@ multiload_ui_configure_response_cb (GtkWidget *dialog, gint response, MultiloadP
 		multiload_ps_preferences_closed_cb(ma);
 		gtk_widget_destroy (dialog);
 	}
+}
+
+static gboolean
+multiload_ui_configure_resize_cb (GtkWidget *dialog, GdkEvent *event, MultiloadPlugin *ma)
+{
+	if (event->type == GDK_WINDOW_STATE) {
+		ma->pref_dialog_maximized = (((GdkEventWindowState*)event)->new_window_state) & GDK_WINDOW_STATE_MAXIMIZED;
+	}
+	if (event->type == GDK_CONFIGURE) {
+		ma->pref_dialog_width = ((GdkEventConfigure*)event)->width;
+		ma->pref_dialog_height = ((GdkEventConfigure*)event)->height;
+	}
+
+	return FALSE;
 }
 
 GtkWidget*
@@ -303,11 +323,19 @@ multiload_ui_configure_dialog_new(MultiloadPlugin *ma, GtkWindow* parent)
 	gtk_window_set_icon_name (GTK_WINDOW (dialog), about_data_icon);
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
-	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+
+	g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK(multiload_ui_configure_response_cb), ma);
+	g_signal_connect (G_OBJECT (dialog), "configure-event", G_CALLBACK(multiload_ui_configure_resize_cb), ma);
+	g_signal_connect (G_OBJECT (dialog), "window-state-event", G_CALLBACK(multiload_ui_configure_resize_cb), ma);
+
 	multiload_preferences_fill_dialog(dialog, ma);
 
-	g_signal_connect (G_OBJECT (dialog), "response",
-					G_CALLBACK(multiload_ui_configure_response_cb), ma);
+	// set size
+	if (ma->pref_dialog_width > 0 && ma->pref_dialog_height > 0)
+		gtk_window_resize (GTK_WINDOW(dialog), ma->pref_dialog_width, ma->pref_dialog_height);
+	if (ma->pref_dialog_maximized)
+		gtk_window_maximize (GTK_WINDOW(dialog));
+	gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
 
 	ma->pref_dialog = dialog;
 	return dialog;
