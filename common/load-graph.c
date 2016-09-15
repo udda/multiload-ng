@@ -418,7 +418,7 @@ load_graph_resize (LoadGraph *g)
 	guint size = CLAMP(g->config->size, MIN_SIZE, MAX_SIZE);
 	gint w, h;
 
-	if ( g->multiload->panel_orientation == GTK_ORIENTATION_VERTICAL ) {
+	if ( multiload_get_orientation(g->multiload) == GTK_ORIENTATION_VERTICAL ) {
 		w = -1;
 		h = size;
 	}
