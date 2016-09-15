@@ -833,6 +833,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="tooltip_text" translatable="yes">Advanced configuration</property>
+                <property name="valign">center</property>
                 <property name="image">image_advanced_mem</property>
                 <signal name="clicked" handler="button_advanced_clicked_cb" swapped="no"/>
               </object>
@@ -847,6 +848,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="tooltip_text" translatable="yes">Advanced configuration</property>
+                <property name="valign">center</property>
                 <property name="image">image_advanced_net</property>
                 <signal name="clicked" handler="button_advanced_clicked_cb" swapped="no"/>
               </object>
@@ -861,6 +863,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="tooltip_text" translatable="yes">Advanced configuration</property>
+                <property name="valign">center</property>
                 <property name="image">image_advanced_swap</property>
                 <signal name="clicked" handler="button_advanced_clicked_cb" swapped="no"/>
               </object>
@@ -875,6 +878,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="tooltip_text" translatable="yes">Advanced configuration</property>
+                <property name="valign">center</property>
                 <property name="image">image_advanced_load</property>
                 <signal name="clicked" handler="button_advanced_clicked_cb" swapped="no"/>
               </object>
@@ -889,6 +893,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="tooltip_text" translatable="yes">Advanced configuration</property>
+                <property name="valign">center</property>
                 <property name="image">image_advanced_disk</property>
                 <signal name="clicked" handler="button_advanced_clicked_cb" swapped="no"/>
               </object>
@@ -903,6 +908,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="tooltip_text" translatable="yes">Advanced configuration</property>
+                <property name="valign">center</property>
                 <property name="image">image_advanced_temp</property>
                 <signal name="clicked" handler="button_advanced_clicked_cb" swapped="no"/>
               </object>
@@ -1001,6 +1007,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="tooltip_text" translatable="yes">Advanced configuration</property>
+                <property name="valign">center</property>
                 <property name="image">image_advanced_cpu</property>
                 <signal name="clicked" handler="button_advanced_clicked_cb" swapped="no"/>
               </object>
@@ -1252,6 +1259,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="tooltip_text" translatable="yes">Advanced configuration</property>
+                <property name="valign">center</property>
                 <property name="image">image_advanced_parm</property>
                 <signal name="clicked" handler="button_advanced_clicked_cb" swapped="no"/>
               </object>
