@@ -21,7 +21,6 @@ multiload_ng_core_la_SOURCES = \
 	graph-data.h \
 	load-graph.c load-graph.h \
 	multiload.c multiload.h \
-	multiload-colors.c multiload-colors.h \
 	multiload-config.c multiload-config.h \
 	preferences.c preferences.h \
 	util.c util.h \

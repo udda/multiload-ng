@@ -61,23 +61,41 @@ typedef enum {
 
 extern const MultiloadColorScheme multiload_builtin_color_schemes[];
 
+typedef enum {
+	EXTRA_COLOR_BORDER = 0,
+	EXTRA_COLOR_BACKGROUND_TOP,
+	EXTRA_COLOR_BACKGROUND_BOTTOM,
+
+	EXTRA_COLORS
+} MultiloadExtraColor;
+
+G_GNUC_INTERNAL guint
+multiload_colors_get_extra_index(guint i, MultiloadExtraColor col);
+
+
 G_GNUC_INTERNAL void
 multiload_color_scheme_fill (MultiloadColorScheme *scheme, MultiloadPlugin *ma);
 
 G_GNUC_INTERNAL void
 multiload_color_scheme_apply (const MultiloadColorScheme *scheme, MultiloadPlugin *ma);
-
 G_GNUC_INTERNAL void
 multiload_color_scheme_apply_single (const MultiloadColorScheme *scheme, MultiloadPlugin *ma, guint i);
 
 G_GNUC_INTERNAL gboolean
 multiload_color_scheme_to_file(const gchar *filename, MultiloadPlugin *ma);
-
 G_GNUC_INTERNAL MultiloadColorSchemeStatus
 multiload_color_scheme_from_file(const gchar *filename, MultiloadPlugin *ma);
 
 G_GNUC_INTERNAL const MultiloadColorScheme*
 multiload_color_scheme_find_by_name (const gchar *name);
+
+G_GNUC_INTERNAL gchar *
+multiload_colors_to_string(MultiloadPlugin *ma, guint graph_index);
+G_GNUC_INTERNAL gboolean
+multiload_colors_from_string(MultiloadPlugin *ma, guint graph_index, const char *list);
+
+G_GNUC_INTERNAL void
+multiload_colors_default(MultiloadPlugin *ma, guint graph_index);
 
 G_END_DECLS
 

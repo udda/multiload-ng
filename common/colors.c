@@ -22,9 +22,13 @@
 
 #include <config.h>
 
+#include <errno.h>
+#include <stdlib.h>
 #include <glib/gi18n-lib.h>
 
 #include "colors.h"
+#include "gtk-compat.h"
+#include "multiload-config.h"
 #include "preferences.h"
 
 
@@ -32,6 +36,13 @@
 
 static const gchar magic_header[MULTILOAD_COLOR_SCHEME_HEADER_SIZE] = "MULTILOAD-NG";
 
+guint
+multiload_colors_get_extra_index(guint i, MultiloadExtraColor col)
+{
+	g_assert_cmpuint(col, >=, 0);
+	g_assert_cmpuint(col,  <, EXTRA_COLORS);
+	return multiload_config_get_num_colors(i) - EXTRA_COLORS + col;
+}
 
 static void
 multiload_color_scheme_init (MultiloadColorSchemeFileHeader *header)
@@ -162,6 +173,119 @@ multiload_color_scheme_find_by_name (const gchar *name)
 	}
 	return NULL;
 }
+
+
+// Converts graph colors into a string of the form "#aarrggbb,#aarrggbb,..."
+gchar *
+multiload_colors_to_string(MultiloadPlugin *ma, guint graph_index)
+{
+	guint ncolors;
+	GdkRGBA *c;
+	guint j;
+	int rc;
+	char *list, *lp;
+
+	ncolors = multiload_config_get_num_colors(graph_index);
+	list = g_new0(char, 10*ncolors);
+
+	for ( j=0, lp=list; j<ncolors; j++, lp+=10 ) {
+		c = &ma->graph_config[graph_index].colors[j];
+
+		rc = snprintf(lp, 10, "#%02X%02X%02X%02X", (guint8)(c->alpha * 255), (guint8)(c->red * 255), (guint8)(c->green * 255), (guint8)(c->blue * 255));
+		g_assert_cmpint(rc, ==, 9);
+
+		lp[9] = ',';
+	}
+	list[(10*ncolors)-1] = '\0';
+
+	return list;
+}
+
+// Set graph colors from a string, as produced by multiload_colors_to_string
+gboolean
+multiload_colors_from_string(MultiloadPlugin *ma, guint graph_index, const char *list)
+{
+	guint ncolors;
+	GdkRGBA *colors;
+	gboolean success;
+	double alpha;
+	guint j;
+	size_t pos;
+	char gspec[10];
+	char *lp, *tmp;
+
+	if (G_LIKELY(list != NULL)) {
+		ncolors = multiload_config_get_num_colors(graph_index);
+		colors = ma->graph_config[graph_index].colors;
+
+		for ( j=0, lp=(char*)list; j<ncolors; j++, lp+=10 ) {
+
+			// Check the length of the list item
+			if ((tmp = strchr(lp, ',')) != NULL) {
+				pos = tmp - lp;
+			} else if (j==ncolors-1) {
+				pos = strlen(lp);
+			} else {
+				success = FALSE;
+				break;
+			}
+
+			if (G_UNLIKELY(pos!=9 && pos!=7)) {
+				success = FALSE;
+				break;
+			}
+
+			strncpy(gspec, lp, pos);
+			if (pos == 7) { // may be a standard RGB hex string, fallback to standard parse
+				if (FALSE == gdk_rgba_parse(&colors[j], gspec)) {
+					success = FALSE;
+					break;
+				}
+				colors[j].alpha = 1.0;
+			} else {
+				// alpha part
+				gspec[0] = gspec[1];
+				gspec[1] = gspec[2];
+				gspec[2] = 0;
+				errno = 0;
+				alpha = (double)strtol(gspec, NULL, 16) / 255.0;
+				if (errno) { // error in strtol, set alpha=max
+					alpha = 1.0;
+				}
+
+				// color part
+				gspec[2] = '#';
+				if (FALSE == gdk_rgba_parse(&colors[j], gspec+2)) {
+					success = FALSE;
+					break;
+				} else {
+					colors[j].alpha = alpha;
+				}
+			}
+		}
+		success = TRUE;
+	} else {
+		success = FALSE;
+	}
+
+	if (success) {
+		//ignore alpha value of last three colors (background top, background bottom, border)
+		colors[ncolors-1].alpha = 1.0;
+		colors[ncolors-2].alpha = 1.0;
+		colors[ncolors-3].alpha = 1.0;
+	} else {
+		multiload_colors_default(ma, graph_index);
+	}
+
+	return success;
+}
+
+void
+multiload_colors_default(MultiloadPlugin *ma, guint graph_index)
+{
+	multiload_color_scheme_apply_single(&multiload_builtin_color_schemes[0], ma, graph_index);
+}
+
 
 const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 	{ DEFAULT_COLOR_SCHEME, color_scheme_default_xpm,

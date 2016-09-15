@@ -10,7 +10,6 @@ common/graph-parm.c
 common/load-graph.c
 common/multiload.c
 common/multiload-config.c
-common/multiload-colors.c
 common/preferences.c
 common/util.c
 common/ui.c

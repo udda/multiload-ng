@@ -27,12 +27,12 @@
 
 #include <glib/gi18n-lib.h>
 
+#include "colors.h"
 #include "gtk-compat.h"
 #include "graph-data.h"
 #include "load-graph.h"
 #include "multiload.h"
 #include "multiload-config.h"
-#include "multiload-colors.h"
 #include "preferences.h"
 #include "util.h"
 

@@ -27,7 +27,6 @@
 #include "common/graph-data.h"
 #include "common/multiload.h"
 #include "common/multiload-config.h"
-#include "common/multiload-colors.h"
 #include "common/preferences.h"
 #include "common/util.h"
 
@@ -140,7 +139,7 @@ multiload_ui_read (MultiloadPlugin *ma)
 				key = g_strdup_printf("graph-%s-colors", graph_types[i].name);
 				colors_list[0] = 0;
 				multiload_ps_settings_get_string (settings, key, colors_list, sizeof(colors_list)/sizeof(gchar));
-				multiload_colors_unstringify(ma, i, colors_list);
+				multiload_colors_from_string(ma, i, colors_list);
 				g_free (key);
 			}
 		}
@@ -158,7 +157,7 @@ multiload_ui_save (MultiloadPlugin *ma)
 {
 	gpointer *settings;
 	char *key;
-	gchar colors_list[10*MAX_COLORS];
+	gchar *buf;
 	int i;
 
 	settings = multiload_ps_settings_open_for_save(ma);
@@ -233,8 +232,9 @@ multiload_ui_save (MultiloadPlugin *ma)
 
 			/* Colors */
 			key = g_strdup_printf("graph-%s-colors", graph_types[i].name);
-			multiload_colors_stringify (ma, i, colors_list);
-			multiload_ps_settings_set_string (settings, key, colors_list);
+			buf = multiload_colors_to_string(ma, i);
+			multiload_ps_settings_set_string (settings, key, buf);
+			g_free (buf);
 			g_free (key);
 		}
 

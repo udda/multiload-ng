@@ -30,7 +30,6 @@
 #include "gtk-compat.h"
 #include "load-graph.h"
 #include "multiload.h"
-#include "multiload-colors.h"
 #include "multiload-config.h"
 #include "preferences.h"
 #include "util.h"

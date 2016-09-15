@@ -22,8 +22,8 @@
 
 #include <config.h>
 
+#include "colors.h"
 #include "graph-data.h"
-#include "multiload-colors.h"
 #include "multiload-config.h"
 
 guint multiload_config_get_num_colors(guint id)
