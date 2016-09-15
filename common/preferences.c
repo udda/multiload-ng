@@ -20,6 +20,7 @@
 
 
 #include <config.h>
+#include <errno.h>
 #include <math.h>
 #include <string.h>
 #include <gtk/gtk.h>
@@ -28,6 +29,7 @@
 #include "binary-data.h"
 #include "colors.h"
 #include "gtk-compat.h"
+#include "graph-data.h"
 #include "load-graph.h"
 #include "multiload.h"
 #include "multiload-config.h"
@@ -35,8 +37,6 @@
 #include "util.h"
 #include "ui.h"
 
-#include <errno.h>
-#include "graph-data.h"
 
 static GtkBuilder *builder = NULL;
 
