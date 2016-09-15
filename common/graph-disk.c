@@ -58,7 +58,7 @@ multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
 	filter = g_new0(gchar, i*(2+sizeof(device)));
 
 
-	f = cached_fopen_r("/proc/partitions", TRUE);
+	rewind(f);
 	while(getline(&buf, &n, f) >= 0) {
 		s = fscanf(f, "%*u %*u %*u %s", device);
 		if (s != 1)
@@ -109,7 +109,7 @@ multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
 
 
 	filter[strlen(filter)-1] = '\0';
-	free(buf);
+	g_free(buf);
 	g_strfreev(active_filter);
 
 	return filter;

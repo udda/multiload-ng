@@ -83,8 +83,7 @@ multiload_graph_net_get_filter (LoadGraph *g, NetData *xd)
 	}
 	filter = g_new0(gchar, i*(2+sizeof(iface)));
 
-	buf=NULL, n=0;
-	f = cached_fopen_r("/proc/net/dev", FALSE);
+	rewind(f);
 	while (getline(&buf, &n, f) >= 0) {
 		end = strchr(buf, ':');
 		// skip header lines of /proc/net/dev
@@ -120,8 +119,9 @@ multiload_graph_net_get_filter (LoadGraph *g, NetData *xd)
 
 
 	filter[strlen(filter)-1] = '\0';
-
+	g_free(buf);
 	g_strfreev(active_filter);
+
 	return filter;
 }
 
