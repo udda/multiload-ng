@@ -940,6 +940,7 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 	gint tmp;
 	gboolean color_scheme_is_set = FALSE;
 	GraphConfig *conf;
+	gboolean active, absent;
 
 	GdkPixbuf *pix;
 
@@ -972,9 +973,12 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 			gchar *filter = graph_types[i].get_filter(ma->graphs[i], ma->extra_data[i]);
 			gchar ** filter_split = g_strsplit (filter, MULTILOAD_FILTER_SEPARATOR, -1);
 			for (j=0; filter_split[j]!=NULL; j++) {
+				absent = (filter_split[j][0]=='#');
+				active = (absent || filter_split[j][0]=='+');
 				gtk_list_store_insert_with_values (GTK_LIST_STORE(OB(liststore_source_names[i])), NULL, -1,
-					0, (filter_split[j][0]=='+')?TRUE:FALSE,
+					0, active,
 					1, &filter_split[j][1],
+					2, absent,
 				-1);
 			}
 			g_strfreev(filter_split);

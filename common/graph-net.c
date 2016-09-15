@@ -98,6 +98,7 @@ multiload_graph_net_get_filter (LoadGraph *g, NetData *xd)
 		for (i=0, present=FALSE; active_filter[i] != NULL; i++) {
 			if (strcmp(active_filter[i], iface) == 0) {
 				present = TRUE;
+				active_filter[i][0] = '#';
 				break;
 			}
 		}
@@ -106,6 +107,18 @@ multiload_graph_net_get_filter (LoadGraph *g, NetData *xd)
 		strcat(filter, iface);
 		strcat(filter, MULTILOAD_FILTER_SEPARATOR);
 	}
+
+	// add remaining elements from existing filter (already selected)
+	for (i=0; active_filter[i] != NULL; i++) {
+		if (active_filter[i][0] == '#')
+			continue;
+
+		strcat(filter, "#");
+		strcat(filter, active_filter[i]);
+		strcat(filter, MULTILOAD_FILTER_SEPARATOR);
+	}
+
+
 	filter[strlen(filter)-1] = '\0';
 
 	g_strfreev(active_filter);

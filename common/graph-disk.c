@@ -87,6 +87,7 @@ multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
 		for (i=0, present=FALSE; active_filter[i] != NULL; i++) {
 			if (strcmp(active_filter[i], device) == 0) {
 				present = TRUE;
+				active_filter[i][0] = '#';
 				break;
 			}
 		}
@@ -95,6 +96,18 @@ multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
 		strcat(filter, device);
 		strcat(filter, MULTILOAD_FILTER_SEPARATOR);
 	}
+
+	// add remaining elements from existing filter (already selected)
+	for (i=0; active_filter[i] != NULL; i++) {
+		if (active_filter[i][0] == '#')
+			continue;
+
+		strcat(filter, "#");
+		strcat(filter, active_filter[i]);
+		strcat(filter, MULTILOAD_FILTER_SEPARATOR);
+	}
+
+
 	filter[strlen(filter)-1] = '\0';
 	free(buf);
 	g_strfreev(active_filter);

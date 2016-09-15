@@ -59,6 +59,7 @@ multiload_graph_temp_get_filter (LoadGraph *g, TemperatureData *xd)
 	TemperatureSourceData *list = NULL;
 	gchar *filter;
 	gboolean selected;
+	gboolean found = FALSE;
 	guint i;
 
 	if (list_temp(&list) != TEMP_SOURCE_NO_SUPPORT) {
@@ -66,10 +67,21 @@ multiload_graph_temp_get_filter (LoadGraph *g, TemperatureData *xd)
 		filter = g_new0(char, i*(3+sizeof(list[i].name)));
 		for (i=0; list[i].temp_path[0]!='\0'; i++) {
 			selected = (strcmp(list[i].name, g->config->filter) == 0);
+			if (selected)
+				found = TRUE;
+
 			strcat(filter, selected?"+":"-");
 			strcat(filter, list[i].name);
 			strcat(filter, MULTILOAD_FILTER_SEPARATOR);
 		}
+
+		// add remaining elements from existing filter (already selected)
+		if (!found) {
+			strcat(filter, "#");
+			strcat(filter, g->config->filter);
+			strcat(filter, MULTILOAD_FILTER_SEPARATOR);
+		}
+
 		filter[strlen(filter)-1] = '\0';
 	} else
 		filter = g_new0(char, 1);

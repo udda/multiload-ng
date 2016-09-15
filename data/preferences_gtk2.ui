@@ -3860,8 +3860,8 @@
       <column type="gboolean"/>
       <!-- column-name name -->
       <column type="gchararray"/>
-      <!-- column-name description -->
-      <column type="gchararray"/>
+      <!-- column-name absent -->
+      <column type="gboolean"/>
     </columns>
   </object>
   <object class="GtkListStore" id="liststore_source_net">
@@ -3870,8 +3870,8 @@
       <column type="gboolean"/>
       <!-- column-name name -->
       <column type="gchararray"/>
-      <!-- column-name description -->
-      <column type="gchararray"/>
+      <!-- column-name absent -->
+      <column type="gboolean"/>
     </columns>
   </object>
   <object class="GtkListStore" id="liststore_source_temp">
@@ -3880,8 +3880,8 @@
       <column type="gboolean"/>
       <!-- column-name name -->
       <column type="gchararray"/>
-      <!-- column-name description -->
-      <column type="gchararray"/>
+      <!-- column-name absent -->
+      <column type="gboolean"/>
     </columns>
   </object>
   <object class="GtkListStore" id="liststore_tooltips">
@@ -4560,6 +4560,7 @@
                         <property name="shadow_type">in</property>
                         <child>
                           <object class="GtkTreeView" id="treeview_source_net">
+                            <property name="height_request">100</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="has_tooltip">True</property>
@@ -4589,6 +4590,7 @@
                                 <child>
                                   <object class="GtkCellRendererText" id="cellrenderertext19"/>
                                   <attributes>
+                                    <attribute name="strikethrough">2</attribute>
                                     <attribute name="text">1</attribute>
                                   </attributes>
                                 </child>
@@ -5352,6 +5354,7 @@
                         <property name="shadow_type">in</property>
                         <child>
                           <object class="GtkTreeView" id="treeview_source_disk">
+                            <property name="height_request">100</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="has_tooltip">True</property>
@@ -5381,6 +5384,7 @@
                                 <child>
                                   <object class="GtkCellRendererText" id="cellrenderertext21"/>
                                   <attributes>
+                                    <attribute name="strikethrough">2</attribute>
                                     <attribute name="text">1</attribute>
                                   </attributes>
                                 </child>
@@ -5710,6 +5714,7 @@
                         <property name="shadow_type">in</property>
                         <child>
                           <object class="GtkTreeView" id="treeview_source_temp">
+                            <property name="height_request">100</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="has_tooltip">True</property>
@@ -5741,6 +5746,7 @@
                                 <child>
                                   <object class="GtkCellRendererText" id="cellrenderertext20"/>
                                   <attributes>
+                                    <attribute name="strikethrough">2</attribute>
                                     <attribute name="text">1</attribute>
                                   </attributes>
                                 </child>

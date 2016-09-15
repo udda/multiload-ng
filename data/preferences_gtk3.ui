@@ -3539,8 +3539,8 @@
       <column type="gboolean"/>
       <!-- column-name name -->
       <column type="gchararray"/>
-      <!-- column-name description -->
-      <column type="gchararray"/>
+      <!-- column-name absent -->
+      <column type="gboolean"/>
     </columns>
   </object>
   <object class="GtkListStore" id="liststore_source_net">
@@ -3549,8 +3549,8 @@
       <column type="gboolean"/>
       <!-- column-name name -->
       <column type="gchararray"/>
-      <!-- column-name description -->
-      <column type="gchararray"/>
+      <!-- column-name absent -->
+      <column type="gboolean"/>
     </columns>
   </object>
   <object class="GtkListStore" id="liststore_source_temp">
@@ -3559,8 +3559,8 @@
       <column type="gboolean"/>
       <!-- column-name name -->
       <column type="gchararray"/>
-      <!-- column-name description -->
-      <column type="gchararray"/>
+      <!-- column-name absent -->
+      <column type="gboolean"/>
     </columns>
   </object>
   <object class="GtkListStore" id="liststore_tooltips">
@@ -4297,6 +4297,7 @@
                                 <child>
                                   <object class="GtkCellRendererText" id="cellrenderertext19"/>
                                   <attributes>
+                                    <attribute name="strikethrough">2</attribute>
                                     <attribute name="text">1</attribute>
                                   </attributes>
                                 </child>
@@ -5080,6 +5081,7 @@
                                 <child>
                                   <object class="GtkCellRendererText" id="cellrenderertext21"/>
                                   <attributes>
+                                    <attribute name="strikethrough">2</attribute>
                                     <attribute name="text">1</attribute>
                                   </attributes>
                                 </child>
@@ -5441,6 +5443,7 @@
                                 <child>
                                   <object class="GtkCellRendererText" id="cellrenderertext20"/>
                                   <attributes>
+                                    <attribute name="strikethrough">2</attribute>
                                     <attribute name="text">1</attribute>
                                   </attributes>
                                 </child>
