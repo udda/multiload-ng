@@ -1412,7 +1412,6 @@
                                 <property name="sizing">fixed</property>
                                 <property name="title" translatable="yes">Color scheme</property>
                                 <property name="expand">True</property>
-                                <property name="sort_column_id">0</property>
                                 <child>
                                   <object class="GtkCellRendererText" id="cellrenderertext15"/>
                                   <attributes>
