@@ -290,1102 +290,1102 @@ multiload_colors_default(MultiloadPlugin *ma, guint graph_index)
 const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 	{ DEFAULT_COLOR_SCHEME, color_scheme_default_xpm,
 			{  { // CPU  - hue: 196
-				HEX_TO_RGBA(03,6F,96, FF),		// User
-				HEX_TO_RGBA(48,BD,E6, FF),		// System
-				HEX_TO_RGBA(BE,EE,FF, FF),		// Nice
-				HEX_TO_RGBA(00,30,40, FF),		// IOWait
-				HEX_TO_RGBA(00,5D,80, FF),		// Border
-				HEX_TO_RGBA(13,21,26, FF),		// Background (top)
-				HEX_TO_RGBA(00,00,00, FF)		// Background (bottom)
+				HEX_TO_RGBA(036F96, FF),		// User
+				HEX_TO_RGBA(48BDE6, FF),		// System
+				HEX_TO_RGBA(BEEEFF, FF),		// Nice
+				HEX_TO_RGBA(003040, FF),		// IOWait
+				HEX_TO_RGBA(005D80, FF),		// Border
+				HEX_TO_RGBA(132126, FF),		// Background (top)
+				HEX_TO_RGBA(000000, FF)			// Background (bottom)
 			}, { // MEM  - hue: 151
-				HEX_TO_RGBA(03,96,4F, FF),		// User
-				HEX_TO_RGBA(43,D1,8D, FF),		// Shared
-				HEX_TO_RGBA(BF,FF,E0, FF),		// Buffers
-				HEX_TO_RGBA(00,40,21, FF),		// Cached
-				HEX_TO_RGBA(00,80,42, FF),		// Border
-				HEX_TO_RGBA(13,26,1D, FF),		// Background (top)
-				HEX_TO_RGBA(00,00,00, FF)		// Background (bottom)
+				HEX_TO_RGBA(03964F, FF),		// User
+				HEX_TO_RGBA(43D18D, FF),		// Shared
+				HEX_TO_RGBA(BFFFE0, FF),		// Buffers
+				HEX_TO_RGBA(004021, FF),		// Cached
+				HEX_TO_RGBA(008042, FF),		// Border
+				HEX_TO_RGBA(13261D, FF),		// Background (top)
+				HEX_TO_RGBA(000000, FF)			// Background (bottom)
 			}, { // NET  - hue: 53
-				HEX_TO_RGBA(E2,CC,05, FF),		// In
-				HEX_TO_RGBA(69,60,18, FF),		// Out
-				HEX_TO_RGBA(FF,F7,B1, FF),		// Local
-				HEX_TO_RGBA(80,71,00, FF),		// Border
-				HEX_TO_RGBA(26,24,13, FF),		// Background (top)
-				HEX_TO_RGBA(00,00,00, FF)		// Background (bottom)
+				HEX_TO_RGBA(E2CC05, FF),		// In
+				HEX_TO_RGBA(696018, FF),		// Out
+				HEX_TO_RGBA(FFF7B1, FF),		// Local
+				HEX_TO_RGBA(807100, FF),		// Border
+				HEX_TO_RGBA(262413, FF),		// Background (top)
+				HEX_TO_RGBA(000000, FF)			// Background (bottom)
 			}, { // SWAP - hue: 278
-				HEX_TO_RGBA(9C,43,D1, FF),		// Used
-				HEX_TO_RGBA(51,00,80, FF),		// Border
-				HEX_TO_RGBA(1F,13,26, FF),		// Background (top)
-				HEX_TO_RGBA(00,00,00, FF)		// Background (bottom)
+				HEX_TO_RGBA(9C43D1, FF),		// Used
+				HEX_TO_RGBA(510080, FF),		// Border
+				HEX_TO_RGBA(1F1326, FF),		// Background (top)
+				HEX_TO_RGBA(000000, FF)			// Background (bottom)
 			}, { // LOAD - hue: 0
-				HEX_TO_RGBA(D1,43,43, FF),		// Average
-				HEX_TO_RGBA(80,00,00, FF),		// Border
-				HEX_TO_RGBA(26,13,13, FF),		// Background (top)
-				HEX_TO_RGBA(00,00,00, FF)		// Background (bottom)
+				HEX_TO_RGBA(D14343, FF),		// Average
+				HEX_TO_RGBA(800000, FF),		// Border
+				HEX_TO_RGBA(261313, FF),		// Background (top)
+				HEX_TO_RGBA(000000, FF)			// Background (bottom)
 			}, { // DISK - hue: 31
-				HEX_TO_RGBA(ED,7A,00, FF),		// Read
-				HEX_TO_RGBA(FF,AB,73, FF),		// Write
-				HEX_TO_RGBA(80,42,00, FF),		// Border
-				HEX_TO_RGBA(26,1D,13, FF),		// Background (top)
-				HEX_TO_RGBA(00,00,00, FF)		// Background (bottom)
+				HEX_TO_RGBA(ED7A00, FF),		// Read
+				HEX_TO_RGBA(FFAB73, FF),		// Write
+				HEX_TO_RGBA(804200, FF),		// Border
+				HEX_TO_RGBA(261D13, FF),		// Background (top)
+				HEX_TO_RGBA(000000, FF)			// Background (bottom)
 			}, { // TEMP hue: 310
-				HEX_TO_RGBA(F0,49,D5, FF),		// Value
-				HEX_TO_RGBA(FF,BE,F2, FF),		// Critical
-				HEX_TO_RGBA(80,00,6B, FF),		// Border
-				HEX_TO_RGBA(26,13,23, FF),		// Background (top)
-				HEX_TO_RGBA(00,00,00, FF)		// Background (bottom)
+				HEX_TO_RGBA(F049D5, FF),		// Value
+				HEX_TO_RGBA(FFBEF2, FF),		// Critical
+				HEX_TO_RGBA(80006B, FF),		// Border
+				HEX_TO_RGBA(261323, FF),		// Background (top)
+				HEX_TO_RGBA(000000, FF)			// Background (bottom)
 			}, { // PARM hue: (gray)
-				HEX_TO_RGBA(4C,4C,4C, FF),		// Result 1
-				HEX_TO_RGBA(90,90,90, FF),		// Result 2
-				HEX_TO_RGBA(CC,CC,CC, FF),		// Result 3
-				HEX_TO_RGBA(F3,F3,F3, FF),		// Result 4
-				HEX_TO_RGBA(80,80,80, FF),		// Border
-				HEX_TO_RGBA(00,00,00, FF),		// Background (top)
-				HEX_TO_RGBA(00,00,00, FF)		// Background (bottom)
+				HEX_TO_RGBA(4C4C4C, FF),		// Result 1
+				HEX_TO_RGBA(909090, FF),		// Result 2
+				HEX_TO_RGBA(CCCCCC, FF),		// Result 3
+				HEX_TO_RGBA(F3F3F3, FF),		// Result 4
+				HEX_TO_RGBA(808080, FF),		// Border
+				HEX_TO_RGBA(000000, FF),		// Background (top)
+				HEX_TO_RGBA(000000, FF)			// Background (bottom)
 			}
 		}
 	},
 
 	{ "Tango", color_scheme_tango_xpm,
 			{  { // CPU  - Tango Sky Blue
-				HEX_TO_RGBA(20,4A,87, FF),		// User
-				HEX_TO_RGBA(34,65,A4, FF),		// System
-				HEX_TO_RGBA(72,9F,CF, FF),		// Nice
-				HEX_TO_RGBA(27,41,66, FF),		// IOWait
-				HEX_TO_RGBA(2E,34,36, FF),		// Border
-				HEX_TO_RGBA(88,8A,85, FF),		// Background (top)
-				HEX_TO_RGBA(55,57,53, FF)		// Background (bottom)
+				HEX_TO_RGBA(204A87, FF),		// User
+				HEX_TO_RGBA(3465A4, FF),		// System
+				HEX_TO_RGBA(729FCF, FF),		// Nice
+				HEX_TO_RGBA(274166, FF),		// IOWait
+				HEX_TO_RGBA(2E3436, FF),		// Border
+				HEX_TO_RGBA(888A85, FF),		// Background (top)
+				HEX_TO_RGBA(555753, FF)			// Background (bottom)
 			}, { // MEM  - Tango Chameleon
-				HEX_TO_RGBA(4E,9A,06, FF),		// User
-				HEX_TO_RGBA(73,D2,16, FF),		// Shared
-				HEX_TO_RGBA(8A,E2,34, FF),		// Buffers
-				HEX_TO_RGBA(3E,66,18, FF),		// Cached
-				HEX_TO_RGBA(2E,34,36, FF),		// Border
-				HEX_TO_RGBA(88,8A,85, FF),		// Background (top)
-				HEX_TO_RGBA(55,57,53, FF)		// Background (bottom)
+				HEX_TO_RGBA(4E9A06, FF),		// User
+				HEX_TO_RGBA(73D216, FF),		// Shared
+				HEX_TO_RGBA(8AE234, FF),		// Buffers
+				HEX_TO_RGBA(3E6618, FF),		// Cached
+				HEX_TO_RGBA(2E3436, FF),		// Border
+				HEX_TO_RGBA(888A85, FF),		// Background (top)
+				HEX_TO_RGBA(555753, FF)			// Background (bottom)
 			}, { // NET  - Tango Butter
-				HEX_TO_RGBA(ED,D4,00, FF),		// In
-				HEX_TO_RGBA(C4,A0,00, FF),		// Out
-				HEX_TO_RGBA(FC,E9,4F, FF),		// Local
-				HEX_TO_RGBA(2E,34,36, FF),		// Border
-				HEX_TO_RGBA(88,8A,85, FF),		// Background (top)
-				HEX_TO_RGBA(55,57,53, FF)		// Background (bottom)
+				HEX_TO_RGBA(EDD400, FF),		// In
+				HEX_TO_RGBA(C4A000, FF),		// Out
+				HEX_TO_RGBA(FCE94F, FF),		// Local
+				HEX_TO_RGBA(2E3436, FF),		// Border
+				HEX_TO_RGBA(888A85, FF),		// Background (top)
+				HEX_TO_RGBA(555753, FF)			// Background (bottom)
 			}, { // SWAP - Tango Plum (dark)
-				HEX_TO_RGBA(5C,35,66, FF),		// Used
-				HEX_TO_RGBA(2E,34,36, FF),		// Border
-				HEX_TO_RGBA(88,8A,85, FF),		// Background (top)
-				HEX_TO_RGBA(55,57,53, FF)		// Background (bottom)
+				HEX_TO_RGBA(5C3566, FF),		// Used
+				HEX_TO_RGBA(2E3436, FF),		// Border
+				HEX_TO_RGBA(888A85, FF),		// Background (top)
+				HEX_TO_RGBA(555753, FF)			// Background (bottom)
 			}, { // LOAD - Tango Scarlet Red
-				HEX_TO_RGBA(A4,00,00, FF),		// Average
-				HEX_TO_RGBA(2E,34,36, FF),		// Border
-				HEX_TO_RGBA(88,8A,85, FF),		// Background (top)
-				HEX_TO_RGBA(55,57,53, FF)		// Background (bottom)
+				HEX_TO_RGBA(A40000, FF),		// Average
+				HEX_TO_RGBA(2E3436, FF),		// Border
+				HEX_TO_RGBA(888A85, FF),		// Background (top)
+				HEX_TO_RGBA(555753, FF)			// Background (bottom)
 			}, { // DISK - Tango Orange
-				HEX_TO_RGBA(F5,79,00, FF),		// Read
-				HEX_TO_RGBA(CE,5C,00, FF),		// Write
-				HEX_TO_RGBA(2E,34,36, FF),		// Border
-				HEX_TO_RGBA(88,8A,85, FF),		// Background (top)
-				HEX_TO_RGBA(55,57,53, FF)		// Background (bottom)
+				HEX_TO_RGBA(F57900, FF),		// Read
+				HEX_TO_RGBA(CE5C00, FF),		// Write
+				HEX_TO_RGBA(2E3436, FF),		// Border
+				HEX_TO_RGBA(888A85, FF),		// Background (top)
+				HEX_TO_RGBA(555753, FF)			// Background (bottom)
 			}, { // TEMP - Tango Plum (light)
-				HEX_TO_RGBA(AD,7F,A8, FF),		// Value
-				HEX_TO_RGBA(75,50,7B, FF),		// Critical
-				HEX_TO_RGBA(2E,34,36, FF),		// Border
-				HEX_TO_RGBA(88,8A,85, FF),		// Background (top)
-				HEX_TO_RGBA(55,57,53, FF)		// Background (bottom)
+				HEX_TO_RGBA(AD7FA8, FF),		// Value
+				HEX_TO_RGBA(75507B, FF),		// Critical
+				HEX_TO_RGBA(2E3436, FF),		// Border
+				HEX_TO_RGBA(888A85, FF),		// Background (top)
+				HEX_TO_RGBA(555753, FF)			// Background (bottom)
 			}, { // PARM - Tango Aluminium (with some addition)
-				HEX_TO_RGBA(2E,34,36, FF),		// Result 1
-				HEX_TO_RGBA(70,7A,7D, FF),		// Result 2
-				HEX_TO_RGBA(93,B1,BA, FF),		// Result 3
-				HEX_TO_RGBA(E6,F3,F7, FF),		// Result 4
-				HEX_TO_RGBA(2E,34,36, FF),		// Border
-				HEX_TO_RGBA(88,8A,85, FF),		// Background (top)
-				HEX_TO_RGBA(55,57,53, FF)		// Background (bottom)
+				HEX_TO_RGBA(2E3436, FF),		// Result 1
+				HEX_TO_RGBA(707A7D, FF),		// Result 2
+				HEX_TO_RGBA(93B1BA, FF),		// Result 3
+				HEX_TO_RGBA(E6F3F7, FF),		// Result 4
+				HEX_TO_RGBA(2E3436, FF),		// Border
+				HEX_TO_RGBA(888A85, FF),		// Background (top)
+				HEX_TO_RGBA(555753, FF)			// Background (bottom)
 			}
 		}
 	},
 
 	{ "Solarized Dark", color_scheme_solarized_dark_xpm,
 			{  { // CPU  - Solarized Blue
-				HEX_TO_RGBA(26,8B,D2, FF),		// User
-				HEX_TO_RGBA(65,7B,83, FF),		// System
-				HEX_TO_RGBA(83,94,96, FF),		// Nice
-				HEX_TO_RGBA(93,A1,A1, FF),		// IOWait
-				HEX_TO_RGBA(58,6E,75, FF),		// Border
-				HEX_TO_RGBA(07,36,42, FF),		// Background (top)
-				HEX_TO_RGBA(00,2B,36, FF)		// Background (bottom)
+				HEX_TO_RGBA(268BD2, FF),		// User
+				HEX_TO_RGBA(657B83, FF),		// System
+				HEX_TO_RGBA(839496, FF),		// Nice
+				HEX_TO_RGBA(93A1A1, FF),		// IOWait
+				HEX_TO_RGBA(586E75, FF),		// Border
+				HEX_TO_RGBA(073642, FF),		// Background (top)
+				HEX_TO_RGBA(002B36, FF)			// Background (bottom)
 			}, { // MEM  - Solarized Green
-				HEX_TO_RGBA(85,99,00, FF),		// User
-				HEX_TO_RGBA(65,7B,83, FF),		// Shared
-				HEX_TO_RGBA(83,94,96, FF),		// Buffers
-				HEX_TO_RGBA(93,A1,A1, FF),		// Cached
-				HEX_TO_RGBA(58,6E,75, FF),		// Border
-				HEX_TO_RGBA(07,36,42, FF),		// Background (top)
-				HEX_TO_RGBA(00,2B,36, FF)		// Background (bottom)
+				HEX_TO_RGBA(859900, FF),		// User
+				HEX_TO_RGBA(657B83, FF),		// Shared
+				HEX_TO_RGBA(839496, FF),		// Buffers
+				HEX_TO_RGBA(93A1A1, FF),		// Cached
+				HEX_TO_RGBA(586E75, FF),		// Border
+				HEX_TO_RGBA(073642, FF),		// Background (top)
+				HEX_TO_RGBA(002B36, FF)			// Background (bottom)
 			}, { // NET  - Solarized Yellow
-				HEX_TO_RGBA(B5,89,00, FF),		// In
-				HEX_TO_RGBA(65,7B,83, FF),		// Out
-				HEX_TO_RGBA(83,94,96, FF),		// Local
-				HEX_TO_RGBA(58,6E,75, FF),		// Border
-				HEX_TO_RGBA(07,36,42, FF),		// Background (top)
-				HEX_TO_RGBA(00,2B,36, FF)		// Background (bottom)
+				HEX_TO_RGBA(B58900, FF),		// In
+				HEX_TO_RGBA(657B83, FF),		// Out
+				HEX_TO_RGBA(839496, FF),		// Local
+				HEX_TO_RGBA(586E75, FF),		// Border
+				HEX_TO_RGBA(073642, FF),		// Background (top)
+				HEX_TO_RGBA(002B36, FF)			// Background (bottom)
 			}, { // SWAP - Solarized Violet
-				HEX_TO_RGBA(6C,71,C4, FF),		// Used
-				HEX_TO_RGBA(58,6E,75, FF),		// Border
-				HEX_TO_RGBA(07,36,42, FF),		// Background (top)
-				HEX_TO_RGBA(00,2B,36, FF)		// Background (bottom)
+				HEX_TO_RGBA(6C71C4, FF),		// Used
+				HEX_TO_RGBA(586E75, FF),		// Border
+				HEX_TO_RGBA(073642, FF),		// Background (top)
+				HEX_TO_RGBA(002B36, FF)			// Background (bottom)
 			}, { // LOAD - Solarized Red
-				HEX_TO_RGBA(DC,32,2F, FF),		// Average
-				HEX_TO_RGBA(58,6E,75, FF),		// Border
-				HEX_TO_RGBA(07,36,42, FF),		// Background (top)
-				HEX_TO_RGBA(00,2B,36, FF)		// Background (bottom)
+				HEX_TO_RGBA(DC322F, FF),		// Average
+				HEX_TO_RGBA(586E75, FF),		// Border
+				HEX_TO_RGBA(073642, FF),		// Background (top)
+				HEX_TO_RGBA(002B36, FF)			// Background (bottom)
 			}, { // DISK - Solarized Orange
-				HEX_TO_RGBA(CB,4B,16, FF),		// Read
-				HEX_TO_RGBA(65,7B,83, FF),		// Write
-				HEX_TO_RGBA(58,6E,75, FF),		// Border
-				HEX_TO_RGBA(07,36,42, FF),		// Background (top)
-				HEX_TO_RGBA(00,2B,36, FF)		// Background (bottom)
+				HEX_TO_RGBA(CB4B16, FF),		// Read
+				HEX_TO_RGBA(657B83, FF),		// Write
+				HEX_TO_RGBA(586E75, FF),		// Border
+				HEX_TO_RGBA(073642, FF),		// Background (top)
+				HEX_TO_RGBA(002B36, FF)			// Background (bottom)
 			}, { // TEMP - Solarized Magenta
-				HEX_TO_RGBA(D3,36,82, FF),		// Value
-				HEX_TO_RGBA(65,7B,83, FF),		// Critical
-				HEX_TO_RGBA(58,6E,75, FF),		// Border
-				HEX_TO_RGBA(07,36,42, FF),		// Background (top)
-				HEX_TO_RGBA(00,2B,36, FF)		// Background (bottom)
+				HEX_TO_RGBA(D33682, FF),		// Value
+				HEX_TO_RGBA(657B83, FF),		// Critical
+				HEX_TO_RGBA(586E75, FF),		// Border
+				HEX_TO_RGBA(073642, FF),		// Background (top)
+				HEX_TO_RGBA(002B36, FF)			// Background (bottom)
 			}, { // PARM - Solarized Base01
-				HEX_TO_RGBA(58,6E,75, FF),		// Result 1
-				HEX_TO_RGBA(65,7B,83, FF),		// Result 2
-				HEX_TO_RGBA(83,94,96, FF),		// Result 3
-				HEX_TO_RGBA(93,A1,A1, FF),		// Result 4
-				HEX_TO_RGBA(58,6E,75, FF),		// Border
-				HEX_TO_RGBA(07,36,42, FF),		// Background (top)
-				HEX_TO_RGBA(00,2B,36, FF)		// Background (bottom)
+				HEX_TO_RGBA(586E75, FF),		// Result 1
+				HEX_TO_RGBA(657B83, FF),		// Result 2
+				HEX_TO_RGBA(839496, FF),		// Result 3
+				HEX_TO_RGBA(93A1A1, FF),		// Result 4
+				HEX_TO_RGBA(586E75, FF),		// Border
+				HEX_TO_RGBA(073642, FF),		// Background (top)
+				HEX_TO_RGBA(002B36, FF)			// Background (bottom)
 			}
 		}
 	},
 
 	{ "Solarized Light", color_scheme_solarized_light_xpm,
 			{  { // CPU  - Solarized Blue
-				HEX_TO_RGBA(26,8B,D2, FF),		// User
-				HEX_TO_RGBA(65,7B,83, FF),		// System
-				HEX_TO_RGBA(83,94,96, FF),		// Nice
-				HEX_TO_RGBA(93,A1,A1, FF),		// IOWait
-				HEX_TO_RGBA(58,6E,75, FF),		// Border
-				HEX_TO_RGBA(FD,F6,E3, FF),		// Background (top)
-				HEX_TO_RGBA(EE,E8,D5, FF)		// Background (bottom)
+				HEX_TO_RGBA(268BD2, FF),		// User
+				HEX_TO_RGBA(657B83, FF),		// System
+				HEX_TO_RGBA(839496, FF),		// Nice
+				HEX_TO_RGBA(93A1A1, FF),		// IOWait
+				HEX_TO_RGBA(586E75, FF),		// Border
+				HEX_TO_RGBA(FDF6E3, FF),		// Background (top)
+				HEX_TO_RGBA(EEE8D5, FF)			// Background (bottom)
 			}, { // MEM  - Solarized Green
-				HEX_TO_RGBA(85,99,00, FF),		// User
-				HEX_TO_RGBA(65,7B,83, FF),		// Shared
-				HEX_TO_RGBA(83,94,96, FF),		// Buffers
-				HEX_TO_RGBA(93,A1,A1, FF),		// Cached
-				HEX_TO_RGBA(58,6E,75, FF),		// Border
-				HEX_TO_RGBA(FD,F6,E3, FF),		// Background (top)
-				HEX_TO_RGBA(EE,E8,D5, FF)		// Background (bottom)
+				HEX_TO_RGBA(859900, FF),		// User
+				HEX_TO_RGBA(657B83, FF),		// Shared
+				HEX_TO_RGBA(839496, FF),		// Buffers
+				HEX_TO_RGBA(93A1A1, FF),		// Cached
+				HEX_TO_RGBA(586E75, FF),		// Border
+				HEX_TO_RGBA(FDF6E3, FF),		// Background (top)
+				HEX_TO_RGBA(EEE8D5, FF)			// Background (bottom)
 			}, { // NET  - Solarized Yellow
-				HEX_TO_RGBA(B5,89,00, FF),		// In
-				HEX_TO_RGBA(65,7B,83, FF),		// Out
-				HEX_TO_RGBA(83,94,96, FF),		// Local
-				HEX_TO_RGBA(58,6E,75, FF),		// Border
-				HEX_TO_RGBA(FD,F6,E3, FF),		// Background (top)
-				HEX_TO_RGBA(EE,E8,D5, FF)		// Background (bottom)
+				HEX_TO_RGBA(B58900, FF),		// In
+				HEX_TO_RGBA(657B83, FF),		// Out
+				HEX_TO_RGBA(839496, FF),		// Local
+				HEX_TO_RGBA(586E75, FF),		// Border
+				HEX_TO_RGBA(FDF6E3, FF),		// Background (top)
+				HEX_TO_RGBA(EEE8D5, FF)			// Background (bottom)
 			}, { // SWAP - Solarized Violet
-				HEX_TO_RGBA(6C,71,C4, FF),		// Used
-				HEX_TO_RGBA(58,6E,75, FF),		// Border
-				HEX_TO_RGBA(FD,F6,E3, FF),		// Background (top)
-				HEX_TO_RGBA(EE,E8,D5, FF)		// Background (bottom)
+				HEX_TO_RGBA(6C71C4, FF),		// Used
+				HEX_TO_RGBA(586E75, FF),		// Border
+				HEX_TO_RGBA(FDF6E3, FF),		// Background (top)
+				HEX_TO_RGBA(EEE8D5, FF)			// Background (bottom)
 			}, { // LOAD - Solarized Red
-				HEX_TO_RGBA(DC,32,2F, FF),		// Average
-				HEX_TO_RGBA(58,6E,75, FF),		// Border
-				HEX_TO_RGBA(FD,F6,E3, FF),		// Background (top)
-				HEX_TO_RGBA(EE,E8,D5, FF)		// Background (bottom)
+				HEX_TO_RGBA(DC322F, FF),		// Average
+				HEX_TO_RGBA(586E75, FF),		// Border
+				HEX_TO_RGBA(FDF6E3, FF),		// Background (top)
+				HEX_TO_RGBA(EEE8D5, FF)			// Background (bottom)
 			}, { // DISK - Solarized Orange
-				HEX_TO_RGBA(CB,4B,16, FF),		// Read
-				HEX_TO_RGBA(65,7B,83, FF),		// Write
-				HEX_TO_RGBA(58,6E,75, FF),		// Border
-				HEX_TO_RGBA(FD,F6,E3, FF),		// Background (top)
-				HEX_TO_RGBA(EE,E8,D5, FF)		// Background (bottom)
+				HEX_TO_RGBA(CB4B16, FF),		// Read
+				HEX_TO_RGBA(657B83, FF),		// Write
+				HEX_TO_RGBA(586E75, FF),		// Border
+				HEX_TO_RGBA(FDF6E3, FF),		// Background (top)
+				HEX_TO_RGBA(EEE8D5, FF)			// Background (bottom)
 			}, { // TEMP - Solarized Magenta
-				HEX_TO_RGBA(D3,36,82, FF),		// Value
-				HEX_TO_RGBA(65,7B,83, FF),		// Critical
-				HEX_TO_RGBA(58,6E,75, FF),		// Border
-				HEX_TO_RGBA(FD,F6,E3, FF),		// Background (top)
-				HEX_TO_RGBA(EE,E8,D5, FF)		// Background (bottom)
+				HEX_TO_RGBA(D33682, FF),		// Value
+				HEX_TO_RGBA(657B83, FF),		// Critical
+				HEX_TO_RGBA(586E75, FF),		// Border
+				HEX_TO_RGBA(FDF6E3, FF),		// Background (top)
+				HEX_TO_RGBA(EEE8D5, FF)			// Background (bottom)
 			}, { // PARM - Solarized Base01
-				HEX_TO_RGBA(58,6E,75, FF),		// Result 1
-				HEX_TO_RGBA(65,7B,83, FF),		// Result 2
-				HEX_TO_RGBA(83,94,96, FF),		// Result 3
-				HEX_TO_RGBA(93,A1,A1, FF),		// Result 4
-				HEX_TO_RGBA(58,6E,75, FF),		// Border
-				HEX_TO_RGBA(FD,F6,E3, FF),		// Background (top)
-				HEX_TO_RGBA(EE,E8,D5, FF)		// Background (bottom)
+				HEX_TO_RGBA(586E75, FF),		// Result 1
+				HEX_TO_RGBA(657B83, FF),		// Result 2
+				HEX_TO_RGBA(839496, FF),		// Result 3
+				HEX_TO_RGBA(93A1A1, FF),		// Result 4
+				HEX_TO_RGBA(586E75, FF),		// Border
+				HEX_TO_RGBA(FDF6E3, FF),		// Background (top)
+				HEX_TO_RGBA(EEE8D5, FF)			// Background (bottom)
 			}
 		}
 	},
 
 	{ "Fruity", color_scheme_fruity_xpm, // http://allfreedesigns.com/bright-color-palettes/
 			{  { // CPU  - Blueberries
-				HEX_TO_RGBA(06,44,90, FF),		// User
-				HEX_TO_RGBA(26,86,E0, FF),		// System
-				HEX_TO_RGBA(68,CA,FB, FF),		// Nice
-				HEX_TO_RGBA(04,23,5A, FF),		// IOWait
-				HEX_TO_RGBA(40,40,40, FF),		// Border
-				HEX_TO_RGBA(B0,B0,E8, FF),		// Background (top)
-				HEX_TO_RGBA(B4,B4,C2, FF)		// Background (bottom)
+				HEX_TO_RGBA(064490, FF),		// User
+				HEX_TO_RGBA(2686E0, FF),		// System
+				HEX_TO_RGBA(68CAFB, FF),		// Nice
+				HEX_TO_RGBA(04235A, FF),		// IOWait
+				HEX_TO_RGBA(404040, FF),		// Border
+				HEX_TO_RGBA(B0B0E8, FF),		// Background (top)
+				HEX_TO_RGBA(B4B4C2, FF)			// Background (bottom)
 			}, { // MEM  - Kiwi
-				HEX_TO_RGBA(55,64,1F, FF),		// User
-				HEX_TO_RGBA(78,92,36, FF),		// Shared
-				HEX_TO_RGBA(9A,B4,52, FF),		// Buffers
-				HEX_TO_RGBA(27,2C,1E, FF),		// Cached
-				HEX_TO_RGBA(40,40,40, FF),		// Border
-				HEX_TO_RGBA(72,51,1E, FF),		// Background (top)
-				HEX_TO_RGBA(80,97,58, FF)		// Background (bottom)
+				HEX_TO_RGBA(55641F, FF),		// User
+				HEX_TO_RGBA(789236, FF),		// Shared
+				HEX_TO_RGBA(9AB452, FF),		// Buffers
+				HEX_TO_RGBA(272C1E, FF),		// Cached
+				HEX_TO_RGBA(404040, FF),		// Border
+				HEX_TO_RGBA(72511E, FF),		// Background (top)
+				HEX_TO_RGBA(809758, FF)			// Background (bottom)
 			}, { // NET  - Lemons
-				HEX_TO_RGBA(EE,CB,13, FF),		// In
-				HEX_TO_RGBA(B0,83,09, FF),		// Out
-				HEX_TO_RGBA(FD,F0,63, FF),		// Local
-				HEX_TO_RGBA(40,40,40, FF),		// Border
-				HEX_TO_RGBA(EB,DA,82, FF),		// Background (top)
-				HEX_TO_RGBA(A7,93,64, FF)		// Background (bottom)
+				HEX_TO_RGBA(EECB13, FF),		// In
+				HEX_TO_RGBA(B08309, FF),		// Out
+				HEX_TO_RGBA(FDF063, FF),		// Local
+				HEX_TO_RGBA(404040, FF),		// Border
+				HEX_TO_RGBA(EBDA82, FF),		// Background (top)
+				HEX_TO_RGBA(A79364, FF)			// Background (bottom)
 			}, { // SWAP - Grapes
-				HEX_TO_RGBA(82,15,32, FF),		// Used
-				HEX_TO_RGBA(40,40,40, FF),		// Border
-				HEX_TO_RGBA(7A,3C,3F, FF),		// Background (top)
-				HEX_TO_RGBA(3B,17,19, FF)		// Background (bottom)
+				HEX_TO_RGBA(821532, FF),		// Used
+				HEX_TO_RGBA(404040, FF),		// Border
+				HEX_TO_RGBA(7A3C3F, FF),		// Background (top)
+				HEX_TO_RGBA(3B1719, FF)			// Background (bottom)
 			}, { // LOAD - Cherries
-				HEX_TO_RGBA(8A,0C,0D, FF),		// Average
-				HEX_TO_RGBA(40,40,40, FF),		// Border
-				HEX_TO_RGBA(E0,BE,BC, FF),		// Background (top)
-				HEX_TO_RGBA(CE,63,70, FF)		// Background (bottom)
+				HEX_TO_RGBA(8A0C0D, FF),		// Average
+				HEX_TO_RGBA(404040, FF),		// Border
+				HEX_TO_RGBA(E0BEBC, FF),		// Background (top)
+				HEX_TO_RGBA(CE6370, FF)			// Background (bottom)
 			}, { // DISK - Peaches
-				HEX_TO_RGBA(FB,99,24, FF),		// Read
-				HEX_TO_RGBA(F3,63,21, FF),		// Write
-				HEX_TO_RGBA(40,40,40, FF),		// Border
-				HEX_TO_RGBA(F3,D5,AF, FF),		// Background (top)
-				HEX_TO_RGBA(F6,BE,84, FF)		// Background (bottom)
+				HEX_TO_RGBA(FB9924, FF),		// Read
+				HEX_TO_RGBA(F36321, FF),		// Write
+				HEX_TO_RGBA(404040, FF),		// Border
+				HEX_TO_RGBA(F3D5AF, FF),		// Background (top)
+				HEX_TO_RGBA(F6BE84, FF)			// Background (bottom)
 			}, { // TEMP - Strawberries
-				HEX_TO_RGBA(86,15,14, FF),		// Value
-				HEX_TO_RGBA(EA,D6,B3, FF),		// Critical
-				HEX_TO_RGBA(40,40,40, FF),		// Border
-				HEX_TO_RGBA(E3,8B,5E, FF),		// Background (top)
-				HEX_TO_RGBA(D5,29,0C, FF)		// Background (bottom)
+				HEX_TO_RGBA(861514, FF),		// Value
+				HEX_TO_RGBA(EAD6B3, FF),		// Critical
+				HEX_TO_RGBA(404040, FF),		// Border
+				HEX_TO_RGBA(E38B5E, FF),		// Background (top)
+				HEX_TO_RGBA(D5290C, FF)			// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(46,4D,47, FF),		// Result 1
-				HEX_TO_RGBA(6B,75,6C, FF),		// Result 2
-				HEX_TO_RGBA(90,9E,92, FF),		// Result 3
-				HEX_TO_RGBA(B3,C4,B5, FF),		// Result 4
-				HEX_TO_RGBA(40,40,40, FF),		// Border
-				HEX_TO_RGBA(E2,EB,E3, FF),		// Background (top)
-				HEX_TO_RGBA(A0,A7,A1, FF)		// Background (bottom)
+				HEX_TO_RGBA(464D47, FF),		// Result 1
+				HEX_TO_RGBA(6B756C, FF),		// Result 2
+				HEX_TO_RGBA(909E92, FF),		// Result 3
+				HEX_TO_RGBA(B3C4B5, FF),		// Result 4
+				HEX_TO_RGBA(404040, FF),		// Border
+				HEX_TO_RGBA(E2EBE3, FF),		// Background (top)
+				HEX_TO_RGBA(A0A7A1, FF)			// Background (bottom)
 			}
 		}
 	},
 
 	{ "Ubuntu Ambiance", color_scheme_ubuntu_ambiance_xpm,
 			{  { // CPU
-				HEX_TO_RGBA(E9,6F,20, FF),		// User
-				HEX_TO_RGBA(E9,6F,20, FF),		// System
-				HEX_TO_RGBA(E9,6F,20, FF),		// Nice
-				HEX_TO_RGBA(E9,6F,20, FF),		// IOWait
-				HEX_TO_RGBA(37,37,37, FF),		// Border
-				HEX_TO_RGBA(30,0A,24, FF),		// Background (top)
-				HEX_TO_RGBA(30,0A,24, FF)		// Background (bottom)
+				HEX_TO_RGBA(E96F20, FF),		// User
+				HEX_TO_RGBA(E96F20, FF),		// System
+				HEX_TO_RGBA(E96F20, FF),		// Nice
+				HEX_TO_RGBA(E96F20, FF),		// IOWait
+				HEX_TO_RGBA(373737, FF),		// Border
+				HEX_TO_RGBA(300A24, FF),		// Background (top)
+				HEX_TO_RGBA(300A24, FF)			// Background (bottom)
 			}, { // MEM
-				HEX_TO_RGBA(E9,6F,20, FF),		// User
-				HEX_TO_RGBA(E9,6F,20, FF),		// Shared
-				HEX_TO_RGBA(E9,6F,20, FF),		// Buffers
-				HEX_TO_RGBA(E9,6F,20, FF),		// Cached
-				HEX_TO_RGBA(37,37,37, FF),		// Border
-				HEX_TO_RGBA(30,0A,24, FF),		// Background (top)
-				HEX_TO_RGBA(30,0A,24, FF)		// Background (bottom)
+				HEX_TO_RGBA(E96F20, FF),		// User
+				HEX_TO_RGBA(E96F20, FF),		// Shared
+				HEX_TO_RGBA(E96F20, FF),		// Buffers
+				HEX_TO_RGBA(E96F20, FF),		// Cached
+				HEX_TO_RGBA(373737, FF),		// Border
+				HEX_TO_RGBA(300A24, FF),		// Background (top)
+				HEX_TO_RGBA(300A24, FF)			// Background (bottom)
 			}, { // NET
-				HEX_TO_RGBA(E9,6F,20, FF),		// In
-				HEX_TO_RGBA(E9,6F,20, FF),		// Out
-				HEX_TO_RGBA(E9,6F,20, FF),		// Local
-				HEX_TO_RGBA(37,37,37, FF),		// Border
-				HEX_TO_RGBA(30,0A,24, FF),		// Background (top)
-				HEX_TO_RGBA(30,0A,24, FF)		// Background (bottom)
+				HEX_TO_RGBA(E96F20, FF),		// In
+				HEX_TO_RGBA(E96F20, FF),		// Out
+				HEX_TO_RGBA(E96F20, FF),		// Local
+				HEX_TO_RGBA(373737, FF),		// Border
+				HEX_TO_RGBA(300A24, FF),		// Background (top)
+				HEX_TO_RGBA(300A24, FF)			// Background (bottom)
 			}, { // SWAP
-				HEX_TO_RGBA(E9,6F,20, FF),		// Used
-				HEX_TO_RGBA(37,37,37, FF),		// Border
-				HEX_TO_RGBA(30,0A,24, FF),		// Background (top)
-				HEX_TO_RGBA(30,0A,24, FF)		// Background (bottom)
+				HEX_TO_RGBA(E96F20, FF),		// Used
+				HEX_TO_RGBA(373737, FF),		// Border
+				HEX_TO_RGBA(300A24, FF),		// Background (top)
+				HEX_TO_RGBA(300A24, FF)			// Background (bottom)
 			}, { // LOAD
-				HEX_TO_RGBA(E9,6F,20, FF),		// Average
-				HEX_TO_RGBA(37,37,37, FF),		// Border
-				HEX_TO_RGBA(30,0A,24, FF),		// Background (top)
-				HEX_TO_RGBA(30,0A,24, FF)		// Background (bottom)
+				HEX_TO_RGBA(E96F20, FF),		// Average
+				HEX_TO_RGBA(373737, FF),		// Border
+				HEX_TO_RGBA(300A24, FF),		// Background (top)
+				HEX_TO_RGBA(300A24, FF)			// Background (bottom)
 			}, { // DISK
-				HEX_TO_RGBA(E9,6F,20, FF),		// Read
-				HEX_TO_RGBA(E9,6F,20, FF),		// Write
-				HEX_TO_RGBA(37,37,37, FF),		// Border
-				HEX_TO_RGBA(30,0A,24, FF),		// Background (top)
-				HEX_TO_RGBA(30,0A,24, FF)		// Background (bottom)
+				HEX_TO_RGBA(E96F20, FF),		// Read
+				HEX_TO_RGBA(E96F20, FF),		// Write
+				HEX_TO_RGBA(373737, FF),		// Border
+				HEX_TO_RGBA(300A24, FF),		// Background (top)
+				HEX_TO_RGBA(300A24, FF)			// Background (bottom)
 			}, { // TEMP
-				HEX_TO_RGBA(E9,6F,20, FF),		// Value
-				HEX_TO_RGBA(E9,6F,20, FF),		// Critical
-				HEX_TO_RGBA(37,37,37, FF),		// Border
-				HEX_TO_RGBA(30,0A,24, FF),		// Background (top)
-				HEX_TO_RGBA(30,0A,24, FF)		// Background (bottom)
+				HEX_TO_RGBA(E96F20, FF),		// Value
+				HEX_TO_RGBA(E96F20, FF),		// Critical
+				HEX_TO_RGBA(373737, FF),		// Border
+				HEX_TO_RGBA(300A24, FF),		// Background (top)
+				HEX_TO_RGBA(300A24, FF)			// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(E9,6F,20, FF),		// Result 1
-				HEX_TO_RGBA(E9,6F,20, FF),		// Result 2
-				HEX_TO_RGBA(E9,6F,20, FF),		// Result 3
-				HEX_TO_RGBA(E9,6F,20, FF),		// Result 4
-				HEX_TO_RGBA(37,37,37, FF),		// Border
-				HEX_TO_RGBA(30,0A,24, FF),		// Background (top)
-				HEX_TO_RGBA(30,0A,24, FF)		// Background (bottom)
+				HEX_TO_RGBA(E96F20, FF),		// Result 1
+				HEX_TO_RGBA(E96F20, FF),		// Result 2
+				HEX_TO_RGBA(E96F20, FF),		// Result 3
+				HEX_TO_RGBA(E96F20, FF),		// Result 4
+				HEX_TO_RGBA(373737, FF),		// Border
+				HEX_TO_RGBA(300A24, FF),		// Background (top)
+				HEX_TO_RGBA(300A24, FF)			// Background (bottom)
 			}
 		}
 	},
 
 	{ "Ubuntu Radiance", color_scheme_ubuntu_radiance_xpm,
 			{  { // CPU
-				HEX_TO_RGBA(E9,6F,20, FF),		// User
-				HEX_TO_RGBA(E9,6F,20, FF),		// System
-				HEX_TO_RGBA(E9,6F,20, FF),		// Nice
-				HEX_TO_RGBA(E9,6F,20, FF),		// IOWait
-				HEX_TO_RGBA(D6,D6,D6, FF),		// Border
-				HEX_TO_RGBA(E8,E8,E8, FF),		// Background (top)
-				HEX_TO_RGBA(E8,E8,E8, FF)		// Background (bottom)
+				HEX_TO_RGBA(E96F20, FF),		// User
+				HEX_TO_RGBA(E96F20, FF),		// System
+				HEX_TO_RGBA(E96F20, FF),		// Nice
+				HEX_TO_RGBA(E96F20, FF),		// IOWait
+				HEX_TO_RGBA(D6D6D6, FF),		// Border
+				HEX_TO_RGBA(E8E8E8, FF),		// Background (top)
+				HEX_TO_RGBA(E8E8E8, FF)			// Background (bottom)
 			}, { // MEM
-				HEX_TO_RGBA(E9,6F,20, FF),		// User
-				HEX_TO_RGBA(E9,6F,20, FF),		// Shared
-				HEX_TO_RGBA(E9,6F,20, FF),		// Buffers
-				HEX_TO_RGBA(E9,6F,20, FF),		// Cached
-				HEX_TO_RGBA(D6,D6,D6, FF),		// Border
-				HEX_TO_RGBA(E8,E8,E8, FF),		// Background (top)
-				HEX_TO_RGBA(E8,E8,E8, FF)		// Background (bottom)
+				HEX_TO_RGBA(E96F20, FF),		// User
+				HEX_TO_RGBA(E96F20, FF),		// Shared
+				HEX_TO_RGBA(E96F20, FF),		// Buffers
+				HEX_TO_RGBA(E96F20, FF),		// Cached
+				HEX_TO_RGBA(D6D6D6, FF),		// Border
+				HEX_TO_RGBA(E8E8E8, FF),		// Background (top)
+				HEX_TO_RGBA(E8E8E8, FF)			// Background (bottom)
 			}, { // NET
-				HEX_TO_RGBA(E9,6F,20, FF),		// In
-				HEX_TO_RGBA(E9,6F,20, FF),		// Out
-				HEX_TO_RGBA(E9,6F,20, FF),		// Local
-				HEX_TO_RGBA(D6,D6,D6, FF),		// Border
-				HEX_TO_RGBA(E8,E8,E8, FF),		// Background (top)
-				HEX_TO_RGBA(E8,E8,E8, FF)		// Background (bottom)
+				HEX_TO_RGBA(E96F20, FF),		// In
+				HEX_TO_RGBA(E96F20, FF),		// Out
+				HEX_TO_RGBA(E96F20, FF),		// Local
+				HEX_TO_RGBA(D6D6D6, FF),		// Border
+				HEX_TO_RGBA(E8E8E8, FF),		// Background (top)
+				HEX_TO_RGBA(E8E8E8, FF)			// Background (bottom)
 			}, { // SWAP
-				HEX_TO_RGBA(E9,6F,20, FF),		// Used
-				HEX_TO_RGBA(D6,D6,D6, FF),		// Border
-				HEX_TO_RGBA(E8,E8,E8, FF),		// Background (top)
-				HEX_TO_RGBA(E8,E8,E8, FF)		// Background (bottom)
+				HEX_TO_RGBA(E96F20, FF),		// Used
+				HEX_TO_RGBA(D6D6D6, FF),		// Border
+				HEX_TO_RGBA(E8E8E8, FF),		// Background (top)
+				HEX_TO_RGBA(E8E8E8, FF)			// Background (bottom)
 			}, { // LOAD
-				HEX_TO_RGBA(E9,6F,20, FF),		// Average
-				HEX_TO_RGBA(D6,D6,D6, FF),		// Border
-				HEX_TO_RGBA(E8,E8,E8, FF),		// Background (top)
-				HEX_TO_RGBA(E8,E8,E8, FF)		// Background (bottom)
+				HEX_TO_RGBA(E96F20, FF),		// Average
+				HEX_TO_RGBA(D6D6D6, FF),		// Border
+				HEX_TO_RGBA(E8E8E8, FF),		// Background (top)
+				HEX_TO_RGBA(E8E8E8, FF)			// Background (bottom)
 			}, { // DISK
-				HEX_TO_RGBA(E9,6F,20, FF),		// Read
-				HEX_TO_RGBA(E9,6F,20, FF),		// Write
-				HEX_TO_RGBA(D6,D6,D6, FF),		// Border
-				HEX_TO_RGBA(E8,E8,E8, FF),		// Background (top)
-				HEX_TO_RGBA(E8,E8,E8, FF)		// Background (bottom)
+				HEX_TO_RGBA(E96F20, FF),		// Read
+				HEX_TO_RGBA(E96F20, FF),		// Write
+				HEX_TO_RGBA(D6D6D6, FF),		// Border
+				HEX_TO_RGBA(E8E8E8, FF),		// Background (top)
+				HEX_TO_RGBA(E8E8E8, FF)			// Background (bottom)
 			}, { // TEMP
-				HEX_TO_RGBA(E9,6F,20, FF),		// Value
-				HEX_TO_RGBA(E9,6F,20, FF),		// Critical
-				HEX_TO_RGBA(D6,D6,D6, FF),		// Border
-				HEX_TO_RGBA(E8,E8,E8, FF),		// Background (top)
-				HEX_TO_RGBA(E8,E8,E8, FF)		// Background (bottom)
+				HEX_TO_RGBA(E96F20, FF),		// Value
+				HEX_TO_RGBA(E96F20, FF),		// Critical
+				HEX_TO_RGBA(D6D6D6, FF),		// Border
+				HEX_TO_RGBA(E8E8E8, FF),		// Background (top)
+				HEX_TO_RGBA(E8E8E8, FF)			// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(E9,6F,20, FF),		// Result 1
-				HEX_TO_RGBA(E9,6F,20, FF),		// Result 2
-				HEX_TO_RGBA(E9,6F,20, FF),		// Result 3
-				HEX_TO_RGBA(E9,6F,20, FF),		// Result 4
-				HEX_TO_RGBA(D6,D6,D6, FF),		// Border
-				HEX_TO_RGBA(E8,E8,E8, FF),		// Background (top)
-				HEX_TO_RGBA(E8,E8,E8, FF)		// Background (bottom)
+				HEX_TO_RGBA(E96F20, FF),		// Result 1
+				HEX_TO_RGBA(E96F20, FF),		// Result 2
+				HEX_TO_RGBA(E96F20, FF),		// Result 3
+				HEX_TO_RGBA(E96F20, FF),		// Result 4
+				HEX_TO_RGBA(D6D6D6, FF),		// Border
+				HEX_TO_RGBA(E8E8E8, FF),		// Background (top)
+				HEX_TO_RGBA(E8E8E8, FF)			// Background (bottom)
 			}
 		}
 	},
 
 	{ "Linux Mint", color_scheme_linux_mint_xpm,
 			{  { // CPU
-				HEX_TO_RGBA(97,BF,60, FF),		// User
-				HEX_TO_RGBA(97,BF,60, FF),		// System
-				HEX_TO_RGBA(97,BF,60, FF),		// Nice
-				HEX_TO_RGBA(97,BF,60, FF),		// IOWait
-				HEX_TO_RGBA(3C,3C,3C, FF),		// Border
-				HEX_TO_RGBA(48,48,48, FF),		// Background (top)
-				HEX_TO_RGBA(39,39,39, FF)		// Background (bottom)
+				HEX_TO_RGBA(97BF60, FF),		// User
+				HEX_TO_RGBA(97BF60, FF),		// System
+				HEX_TO_RGBA(97BF60, FF),		// Nice
+				HEX_TO_RGBA(97BF60, FF),		// IOWait
+				HEX_TO_RGBA(3C3C3C, FF),		// Border
+				HEX_TO_RGBA(484848, FF),		// Background (top)
+				HEX_TO_RGBA(393939, FF)			// Background (bottom)
 			}, { // MEM
-				HEX_TO_RGBA(97,BF,60, FF),		// User
-				HEX_TO_RGBA(97,BF,60, FF),		// Shared
-				HEX_TO_RGBA(97,BF,60, FF),		// Buffers
-				HEX_TO_RGBA(97,BF,60, FF),		// Cached
-				HEX_TO_RGBA(3C,3C,3C, FF),		// Border
-				HEX_TO_RGBA(48,48,48, FF),		// Background (top)
-				HEX_TO_RGBA(39,39,39, FF)		// Background (bottom)
+				HEX_TO_RGBA(97BF60, FF),		// User
+				HEX_TO_RGBA(97BF60, FF),		// Shared
+				HEX_TO_RGBA(97BF60, FF),		// Buffers
+				HEX_TO_RGBA(97BF60, FF),		// Cached
+				HEX_TO_RGBA(3C3C3C, FF),		// Border
+				HEX_TO_RGBA(484848, FF),		// Background (top)
+				HEX_TO_RGBA(393939, FF)			// Background (bottom)
 			}, { // NET
-				HEX_TO_RGBA(97,BF,60, FF),		// In
-				HEX_TO_RGBA(97,BF,60, FF),		// Out
-				HEX_TO_RGBA(97,BF,60, FF),		// Local
-				HEX_TO_RGBA(3C,3C,3C, FF),		// Border
-				HEX_TO_RGBA(48,48,48, FF),		// Background (top)
-				HEX_TO_RGBA(39,39,39, FF)		// Background (bottom)
+				HEX_TO_RGBA(97BF60, FF),		// In
+				HEX_TO_RGBA(97BF60, FF),		// Out
+				HEX_TO_RGBA(97BF60, FF),		// Local
+				HEX_TO_RGBA(3C3C3C, FF),		// Border
+				HEX_TO_RGBA(484848, FF),		// Background (top)
+				HEX_TO_RGBA(393939, FF)			// Background (bottom)
 			}, { // SWAP
-				HEX_TO_RGBA(97,BF,60, FF),		// Used
-				HEX_TO_RGBA(3C,3C,3C, FF),		// Border
-				HEX_TO_RGBA(48,48,48, FF),		// Background (top)
-				HEX_TO_RGBA(39,39,39, FF)		// Background (bottom)
+				HEX_TO_RGBA(97BF60, FF),		// Used
+				HEX_TO_RGBA(3C3C3C, FF),		// Border
+				HEX_TO_RGBA(484848, FF),		// Background (top)
+				HEX_TO_RGBA(393939, FF)			// Background (bottom)
 			}, { // LOAD
-				HEX_TO_RGBA(97,BF,60, FF),		// Average
-				HEX_TO_RGBA(3C,3C,3C, FF),		// Border
-				HEX_TO_RGBA(48,48,48, FF),		// Background (top)
-				HEX_TO_RGBA(39,39,39, FF)		// Background (bottom)
+				HEX_TO_RGBA(97BF60, FF),		// Average
+				HEX_TO_RGBA(3C3C3C, FF),		// Border
+				HEX_TO_RGBA(484848, FF),		// Background (top)
+				HEX_TO_RGBA(393939, FF)			// Background (bottom)
 			}, { // DISK
-				HEX_TO_RGBA(97,BF,60, FF),		// Read
-				HEX_TO_RGBA(97,BF,60, FF),		// Write
-				HEX_TO_RGBA(3C,3C,3C, FF),		// Border
-				HEX_TO_RGBA(48,48,48, FF),		// Background (top)
-				HEX_TO_RGBA(39,39,39, FF)		// Background (bottom)
+				HEX_TO_RGBA(97BF60, FF),		// Read
+				HEX_TO_RGBA(97BF60, FF),		// Write
+				HEX_TO_RGBA(3C3C3C, FF),		// Border
+				HEX_TO_RGBA(484848, FF),		// Background (top)
+				HEX_TO_RGBA(393939, FF)			// Background (bottom)
 			}, { // TEMP
-				HEX_TO_RGBA(97,BF,60, FF),		// Value
-				HEX_TO_RGBA(97,BF,60, FF),		// Critical
-				HEX_TO_RGBA(3C,3C,3C, FF),		// Border
-				HEX_TO_RGBA(48,48,48, FF),		// Background (top)
-				HEX_TO_RGBA(39,39,39, FF)		// Background (bottom)
+				HEX_TO_RGBA(97BF60, FF),		// Value
+				HEX_TO_RGBA(97BF60, FF),		// Critical
+				HEX_TO_RGBA(3C3C3C, FF),		// Border
+				HEX_TO_RGBA(484848, FF),		// Background (top)
+				HEX_TO_RGBA(393939, FF)			// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(97,BF,60, FF),		// Result 1
-				HEX_TO_RGBA(97,BF,60, FF),		// Result 2
-				HEX_TO_RGBA(97,BF,60, FF),		// Result 3
-				HEX_TO_RGBA(97,BF,60, FF),		// Result 4
-				HEX_TO_RGBA(3C,3C,3C, FF),		// Border
-				HEX_TO_RGBA(48,48,48, FF),		// Background (top)
-				HEX_TO_RGBA(39,39,39, FF)		// Background (bottom)
+				HEX_TO_RGBA(97BF60, FF),		// Result 1
+				HEX_TO_RGBA(97BF60, FF),		// Result 2
+				HEX_TO_RGBA(97BF60, FF),		// Result 3
+				HEX_TO_RGBA(97BF60, FF),		// Result 4
+				HEX_TO_RGBA(3C3C3C, FF),		// Border
+				HEX_TO_RGBA(484848, FF),		// Background (top)
+				HEX_TO_RGBA(393939, FF)			// Background (bottom)
 			}
 		}
 	},
 
 	{ "Windows Metro", color_scheme_windows_metro_xpm, // http://www.creepyed.com/2012/09/windows-8-colors-hex-code/
 			{  { // CPU
-				HEX_TO_RGBA_1(2C4566, FF),		// User
-				HEX_TO_RGBA_1(006AC1, FF),		// System
-				HEX_TO_RGBA_1(006AC1, FF),		// Nice
-				HEX_TO_RGBA_1(006AC1, FF),		// IOWait
-				HEX_TO_RGBA_1(001E4E, FF),		// Border
-				HEX_TO_RGBA_1(001940, FF),		// Background (top)
-				HEX_TO_RGBA_1(001940, FF)		// Background (bottom)
+				HEX_TO_RGBA(2C4566, FF),		// User
+				HEX_TO_RGBA(006AC1, FF),		// System
+				HEX_TO_RGBA(006AC1, FF),		// Nice
+				HEX_TO_RGBA(006AC1, FF),		// IOWait
+				HEX_TO_RGBA(001E4E, FF),		// Border
+				HEX_TO_RGBA(001940, FF),		// Background (top)
+				HEX_TO_RGBA(001940, FF)			// Background (bottom)
 			}, { // MEM
-				HEX_TO_RGBA_1(199900, FF),		// User
-				HEX_TO_RGBA_1(2D652B, FF),		// Shared
-				HEX_TO_RGBA_1(2D652B, FF),		// Buffers
-				HEX_TO_RGBA_1(2D652B, FF),		// Cached
-				HEX_TO_RGBA_1(004A00, FF),		// Border
-				HEX_TO_RGBA_1(003E00, FF),		// Background (top)
-				HEX_TO_RGBA_1(003E00, FF)		// Background (bottom)
+				HEX_TO_RGBA(199900, FF),		// User
+				HEX_TO_RGBA(2D652B, FF),		// Shared
+				HEX_TO_RGBA(2D652B, FF),		// Buffers
+				HEX_TO_RGBA(2D652B, FF),		// Cached
+				HEX_TO_RGBA(004A00, FF),		// Border
+				HEX_TO_RGBA(003E00, FF),		// Background (top)
+				HEX_TO_RGBA(003E00, FF)			// Background (bottom)
 			}, { // NET
-				HEX_TO_RGBA_1(E1B700, FF),		// In
-				HEX_TO_RGBA_1(CEA539, FF),		// Out
-				HEX_TO_RGBA_1(CEA539, FF),		// Local
-				HEX_TO_RGBA_1(D39D09, FF),		// Border
-				HEX_TO_RGBA_1(C69408, FF),		// Background (top)
-				HEX_TO_RGBA_1(C69408, FF)		// Background (bottom)
+				HEX_TO_RGBA(E1B700, FF),		// In
+				HEX_TO_RGBA(CEA539, FF),		// Out
+				HEX_TO_RGBA(CEA539, FF),		// Local
+				HEX_TO_RGBA(D39D09, FF),		// Border
+				HEX_TO_RGBA(C69408, FF),		// Background (top)
+				HEX_TO_RGBA(C69408, FF)			// Background (bottom)
 			}, { // SWAP
-				HEX_TO_RGBA_1(AA40FF, FF),		// Used
-				HEX_TO_RGBA_1(691BB8, FF),		// Border
-				HEX_TO_RGBA_1(57169A, FF),		// Background (top)
-				HEX_TO_RGBA_1(57169A, FF)		// Background (bottom)
+				HEX_TO_RGBA(AA40FF, FF),		// Used
+				HEX_TO_RGBA(691BB8, FF),		// Border
+				HEX_TO_RGBA(57169A, FF),		// Background (top)
+				HEX_TO_RGBA(57169A, FF)			// Background (bottom)
 			}, { // LOAD
-				HEX_TO_RGBA_1(FF2E12, FF),		// Average
-				HEX_TO_RGBA_1(B81B1B, FF),		// Border
-				HEX_TO_RGBA_1(9E1716, FF),		// Background (top)
-				HEX_TO_RGBA_1(9E1716, FF)		// Background (bottom)
+				HEX_TO_RGBA(FF2E12, FF),		// Average
+				HEX_TO_RGBA(B81B1B, FF),		// Border
+				HEX_TO_RGBA(9E1716, FF),		// Background (top)
+				HEX_TO_RGBA(9E1716, FF)			// Background (bottom)
 			}, { // DISK
-				HEX_TO_RGBA_1(FF981D, FF),		// Read
-				HEX_TO_RGBA_1(C27D4F, FF),		// Write
-				HEX_TO_RGBA_1(E56C19, FF),		// Border
-				HEX_TO_RGBA_1(C35D15, FF),		// Background (top)
-				HEX_TO_RGBA_1(C35D15, FF)		// Background (bottom)
+				HEX_TO_RGBA(FF981D, FF),		// Read
+				HEX_TO_RGBA(C27D4F, FF),		// Write
+				HEX_TO_RGBA(E56C19, FF),		// Border
+				HEX_TO_RGBA(C35D15, FF),		// Background (top)
+				HEX_TO_RGBA(C35D15, FF)			// Background (bottom)
 			}, { // TEMP
-				HEX_TO_RGBA_1(FF76BC, FF),		// Value
-				HEX_TO_RGBA_1(E773BD, FF),		// Critical
-				HEX_TO_RGBA_1(E064B7, FF),		// Border
-				HEX_TO_RGBA_1(DE4AAD, FF),		// Background (top)
-				HEX_TO_RGBA_1(DE4AAD, FF)		// Background (bottom)
+				HEX_TO_RGBA(FF76BC, FF),		// Value
+				HEX_TO_RGBA(E773BD, FF),		// Critical
+				HEX_TO_RGBA(E064B7, FF),		// Border
+				HEX_TO_RGBA(DE4AAD, FF),		// Background (top)
+				HEX_TO_RGBA(DE4AAD, FF)			// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA_1(878787, FF),		// Result 1
-				HEX_TO_RGBA_1(727272, FF),		// Result 2
-				HEX_TO_RGBA_1(727272, FF),		// Result 3
-				HEX_TO_RGBA_1(727272, FF),		// Result 4
-				HEX_TO_RGBA_1(606060, FF),		// Border
-				HEX_TO_RGBA_1(505050, FF),		// Background (top)
-				HEX_TO_RGBA_1(505050, FF)		// Background (bottom)
+				HEX_TO_RGBA(878787, FF),		// Result 1
+				HEX_TO_RGBA(727272, FF),		// Result 2
+				HEX_TO_RGBA(727272, FF),		// Result 3
+				HEX_TO_RGBA(727272, FF),		// Result 4
+				HEX_TO_RGBA(606060, FF),		// Border
+				HEX_TO_RGBA(505050, FF),		// Background (top)
+				HEX_TO_RGBA(505050, FF)			// Background (bottom)
 			}
 		}
 	},
 
 	{ "Arc", color_scheme_arc_xpm,
 			{  { // CPU
-				HEX_TO_RGBA(59,24,E2, FF),		// User
-				HEX_TO_RGBA(59,24,E2, FF),		// System
-				HEX_TO_RGBA(59,24,E2, FF),		// Nice
-				HEX_TO_RGBA(59,24,E2, FF),		// IOWait
-				HEX_TO_RGBA(1B,1E,24, FF),		// Border
-				HEX_TO_RGBA(38,3C,4A, FF),		// Background (top)
-				HEX_TO_RGBA(38,3C,4A, FF)		// Background (bottom)
+				HEX_TO_RGBA(5924E2, FF),		// User
+				HEX_TO_RGBA(5924E2, FF),		// System
+				HEX_TO_RGBA(5924E2, FF),		// Nice
+				HEX_TO_RGBA(5924E2, FF),		// IOWait
+				HEX_TO_RGBA(1B1E24, FF),		// Border
+				HEX_TO_RGBA(383C4A, FF),		// Background (top)
+				HEX_TO_RGBA(383C4A, FF)			// Background (bottom)
 			}, { // MEM
-				HEX_TO_RGBA(59,24,E2, FF),		// User
-				HEX_TO_RGBA(59,24,E2, FF),		// Shared
-				HEX_TO_RGBA(59,24,E2, FF),		// Buffers
-				HEX_TO_RGBA(59,24,E2, FF),		// Cached
-				HEX_TO_RGBA(1B,1E,24, FF),		// Border
-				HEX_TO_RGBA(38,3C,4A, FF),		// Background (top)
-				HEX_TO_RGBA(38,3C,4A, FF)		// Background (bottom)
+				HEX_TO_RGBA(5924E2, FF),		// User
+				HEX_TO_RGBA(5924E2, FF),		// Shared
+				HEX_TO_RGBA(5924E2, FF),		// Buffers
+				HEX_TO_RGBA(5924E2, FF),		// Cached
+				HEX_TO_RGBA(1B1E24, FF),		// Border
+				HEX_TO_RGBA(383C4A, FF),		// Background (top)
+				HEX_TO_RGBA(383C4A, FF)			// Background (bottom)
 			}, { // NET
-				HEX_TO_RGBA(59,24,E2, FF),		// In
-				HEX_TO_RGBA(59,24,E2, FF),		// Out
-				HEX_TO_RGBA(59,24,E2, FF),		// Local
-				HEX_TO_RGBA(1B,1E,24, FF),		// Border
-				HEX_TO_RGBA(38,3C,4A, FF),		// Background (top)
-				HEX_TO_RGBA(38,3C,4A, FF)		// Background (bottom)
+				HEX_TO_RGBA(5924E2, FF),		// In
+				HEX_TO_RGBA(5924E2, FF),		// Out
+				HEX_TO_RGBA(5924E2, FF),		// Local
+				HEX_TO_RGBA(1B1E24, FF),		// Border
+				HEX_TO_RGBA(383C4A, FF),		// Background (top)
+				HEX_TO_RGBA(383C4A, FF)			// Background (bottom)
 			}, { // SWAP
-				HEX_TO_RGBA(59,24,E2, FF),		// Used
-				HEX_TO_RGBA(1B,1E,24, FF),		// Border
-				HEX_TO_RGBA(38,3C,4A, FF),		// Background (top)
-				HEX_TO_RGBA(38,3C,4A, FF)		// Background (bottom)
+				HEX_TO_RGBA(5924E2, FF),		// Used
+				HEX_TO_RGBA(1B1E24, FF),		// Border
+				HEX_TO_RGBA(383C4A, FF),		// Background (top)
+				HEX_TO_RGBA(383C4A, FF)			// Background (bottom)
 			}, { // LOAD
-				HEX_TO_RGBA(59,24,E2, FF),		// Average
-				HEX_TO_RGBA(1B,1E,24, FF),		// Border
-				HEX_TO_RGBA(38,3C,4A, FF),		// Background (top)
-				HEX_TO_RGBA(38,3C,4A, FF)		// Background (bottom)
+				HEX_TO_RGBA(5924E2, FF),		// Average
+				HEX_TO_RGBA(1B1E24, FF),		// Border
+				HEX_TO_RGBA(383C4A, FF),		// Background (top)
+				HEX_TO_RGBA(383C4A, FF)			// Background (bottom)
 			}, { // DISK
-				HEX_TO_RGBA(59,24,E2, FF),		// Read
-				HEX_TO_RGBA(59,24,E2, FF),		// Write
-				HEX_TO_RGBA(1B,1E,24, FF),		// Border
-				HEX_TO_RGBA(38,3C,4A, FF),		// Background (top)
-				HEX_TO_RGBA(38,3C,4A, FF)		// Background (bottom)
+				HEX_TO_RGBA(5924E2, FF),		// Read
+				HEX_TO_RGBA(5924E2, FF),		// Write
+				HEX_TO_RGBA(1B1E24, FF),		// Border
+				HEX_TO_RGBA(383C4A, FF),		// Background (top)
+				HEX_TO_RGBA(383C4A, FF)			// Background (bottom)
 			}, { // TEMP
-				HEX_TO_RGBA(59,24,E2, FF),		// Value
-				HEX_TO_RGBA(59,24,E2, FF),		// Critical
-				HEX_TO_RGBA(1B,1E,24, FF),		// Border
-				HEX_TO_RGBA(38,3C,4A, FF),		// Background (top)
-				HEX_TO_RGBA(38,3C,4A, FF)		// Background (bottom)
+				HEX_TO_RGBA(5924E2, FF),		// Value
+				HEX_TO_RGBA(5924E2, FF),		// Critical
+				HEX_TO_RGBA(1B1E24, FF),		// Border
+				HEX_TO_RGBA(383C4A, FF),		// Background (top)
+				HEX_TO_RGBA(383C4A, FF)			// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(59,24,E2, FF),		// Result 1
-				HEX_TO_RGBA(59,24,E2, FF),		// Result 2
-				HEX_TO_RGBA(59,24,E2, FF),		// Result 3
-				HEX_TO_RGBA(59,24,E2, FF),		// Result 4
-				HEX_TO_RGBA(1B,1E,24, FF),		// Border
-				HEX_TO_RGBA(38,3C,4A, FF),		// Background (top)
-				HEX_TO_RGBA(38,3C,4A, FF)		// Background (bottom)
+				HEX_TO_RGBA(5924E2, FF),		// Result 1
+				HEX_TO_RGBA(5924E2, FF),		// Result 2
+				HEX_TO_RGBA(5924E2, FF),		// Result 3
+				HEX_TO_RGBA(5924E2, FF),		// Result 4
+				HEX_TO_RGBA(1B1E24, FF),		// Border
+				HEX_TO_RGBA(383C4A, FF),		// Background (top)
+				HEX_TO_RGBA(383C4A, FF)			// Background (bottom)
 			}
 		}
 	},
 
 	{ "Numix Dark", color_scheme_numix_dark_xpm,
 			{  { // CPU
-				HEX_TO_RGBA(D6,49,37, FF),		// User
-				HEX_TO_RGBA(D6,49,37, FF),		// System
-				HEX_TO_RGBA(D6,49,37, FF),		// Nice
-				HEX_TO_RGBA(D6,49,37, FF),		// IOWait
-				HEX_TO_RGBA(DE,DE,DE, FF),		// Border
-				HEX_TO_RGBA(33,33,33, FF),		// Background (top)
-				HEX_TO_RGBA(33,33,33, FF)		// Background (bottom)
+				HEX_TO_RGBA(D64937, FF),		// User
+				HEX_TO_RGBA(D64937, FF),		// System
+				HEX_TO_RGBA(D64937, FF),		// Nice
+				HEX_TO_RGBA(D64937, FF),		// IOWait
+				HEX_TO_RGBA(DEDEDE, FF),		// Border
+				HEX_TO_RGBA(333333, FF),		// Background (top)
+				HEX_TO_RGBA(333333, FF)			// Background (bottom)
 			}, { // MEM
-				HEX_TO_RGBA(D6,49,37, FF),		// User
-				HEX_TO_RGBA(D6,49,37, FF),		// Shared
-				HEX_TO_RGBA(D6,49,37, FF),		// Buffers
-				HEX_TO_RGBA(D6,49,37, FF),		// Cached
-				HEX_TO_RGBA(DE,DE,DE, FF),		// Border
-				HEX_TO_RGBA(33,33,33, FF),		// Background (top)
-				HEX_TO_RGBA(33,33,33, FF)		// Background (bottom)
+				HEX_TO_RGBA(D64937, FF),		// User
+				HEX_TO_RGBA(D64937, FF),		// Shared
+				HEX_TO_RGBA(D64937, FF),		// Buffers
+				HEX_TO_RGBA(D64937, FF),		// Cached
+				HEX_TO_RGBA(DEDEDE, FF),		// Border
+				HEX_TO_RGBA(333333, FF),		// Background (top)
+				HEX_TO_RGBA(333333, FF)			// Background (bottom)
 			}, { // NET
-				HEX_TO_RGBA(D6,49,37, FF),		// In
-				HEX_TO_RGBA(D6,49,37, FF),		// Out
-				HEX_TO_RGBA(D6,49,37, FF),		// Local
-				HEX_TO_RGBA(DE,DE,DE, FF),		// Border
-				HEX_TO_RGBA(33,33,33, FF),		// Background (top)
-				HEX_TO_RGBA(33,33,33, FF)		// Background (bottom)
+				HEX_TO_RGBA(D64937, FF),		// In
+				HEX_TO_RGBA(D64937, FF),		// Out
+				HEX_TO_RGBA(D64937, FF),		// Local
+				HEX_TO_RGBA(DEDEDE, FF),		// Border
+				HEX_TO_RGBA(333333, FF),		// Background (top)
+				HEX_TO_RGBA(333333, FF)			// Background (bottom)
 			}, { // SWAP
-				HEX_TO_RGBA(D6,49,37, FF),		// Used
-				HEX_TO_RGBA(DE,DE,DE, FF),		// Border
-				HEX_TO_RGBA(33,33,33, FF),		// Background (top)
-				HEX_TO_RGBA(33,33,33, FF)		// Background (bottom)
+				HEX_TO_RGBA(D64937, FF),		// Used
+				HEX_TO_RGBA(DEDEDE, FF),		// Border
+				HEX_TO_RGBA(333333, FF),		// Background (top)
+				HEX_TO_RGBA(333333, FF)			// Background (bottom)
 			}, { // LOAD
-				HEX_TO_RGBA(D6,49,37, FF),		// Average
-				HEX_TO_RGBA(DE,DE,DE, FF),		// Border
-				HEX_TO_RGBA(33,33,33, FF),		// Background (top)
-				HEX_TO_RGBA(33,33,33, FF)		// Background (bottom)
+				HEX_TO_RGBA(D64937, FF),		// Average
+				HEX_TO_RGBA(DEDEDE, FF),		// Border
+				HEX_TO_RGBA(333333, FF),		// Background (top)
+				HEX_TO_RGBA(333333, FF)			// Background (bottom)
 			}, { // DISK
-				HEX_TO_RGBA(D6,49,37, FF),		// Read
-				HEX_TO_RGBA(D6,49,37, FF),		// Write
-				HEX_TO_RGBA(DE,DE,DE, FF),		// Border
-				HEX_TO_RGBA(33,33,33, FF),		// Background (top)
-				HEX_TO_RGBA(33,33,33, FF)		// Background (bottom)
+				HEX_TO_RGBA(D64937, FF),		// Read
+				HEX_TO_RGBA(D64937, FF),		// Write
+				HEX_TO_RGBA(DEDEDE, FF),		// Border
+				HEX_TO_RGBA(333333, FF),		// Background (top)
+				HEX_TO_RGBA(333333, FF)			// Background (bottom)
 			}, { // TEMP
-				HEX_TO_RGBA(D6,49,37, FF),		// Value
-				HEX_TO_RGBA(D6,49,37, FF),		// Critical
-				HEX_TO_RGBA(DE,DE,DE, FF),		// Border
-				HEX_TO_RGBA(33,33,33, FF),		// Background (top)
-				HEX_TO_RGBA(33,33,33, FF)		// Background (bottom)
+				HEX_TO_RGBA(D64937, FF),		// Value
+				HEX_TO_RGBA(D64937, FF),		// Critical
+				HEX_TO_RGBA(DEDEDE, FF),		// Border
+				HEX_TO_RGBA(333333, FF),		// Background (top)
+				HEX_TO_RGBA(333333, FF)			// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(D6,49,37, FF),		// Result 1
-				HEX_TO_RGBA(D6,49,37, FF),		// Result 2
-				HEX_TO_RGBA(D6,49,37, FF),		// Result 3
-				HEX_TO_RGBA(D6,49,37, FF),		// Result 4
-				HEX_TO_RGBA(DE,DE,DE, FF),		// Border
-				HEX_TO_RGBA(33,33,33, FF),		// Background (top)
-				HEX_TO_RGBA(33,33,33, FF)		// Background (bottom)
+				HEX_TO_RGBA(D64937, FF),		// Result 1
+				HEX_TO_RGBA(D64937, FF),		// Result 2
+				HEX_TO_RGBA(D64937, FF),		// Result 3
+				HEX_TO_RGBA(D64937, FF),		// Result 4
+				HEX_TO_RGBA(DEDEDE, FF),		// Border
+				HEX_TO_RGBA(333333, FF),		// Background (top)
+				HEX_TO_RGBA(333333, FF)			// Background (bottom)
 			}
 		}
 	},
 
 	{ "Numix Light", color_scheme_numix_light_xpm,
 			{  { // CPU
-				HEX_TO_RGBA(D6,49,37, FF),		// User
-				HEX_TO_RGBA(D6,49,37, FF),		// System
-				HEX_TO_RGBA(D6,49,37, FF),		// Nice
-				HEX_TO_RGBA(D6,49,37, FF),		// IOWait
-				HEX_TO_RGBA(33,33,33, FF),		// Border
-				HEX_TO_RGBA(DE,DE,DE, FF),		// Background (top)
-				HEX_TO_RGBA(DE,DE,DE, FF)		// Background (bottom)
+				HEX_TO_RGBA(D64937, FF),		// User
+				HEX_TO_RGBA(D64937, FF),		// System
+				HEX_TO_RGBA(D64937, FF),		// Nice
+				HEX_TO_RGBA(D64937, FF),		// IOWait
+				HEX_TO_RGBA(333333, FF),		// Border
+				HEX_TO_RGBA(DEDEDE, FF),		// Background (top)
+				HEX_TO_RGBA(DEDEDE, FF)			// Background (bottom)
 			}, { // MEM
-				HEX_TO_RGBA(D6,49,37, FF),		// User
-				HEX_TO_RGBA(D6,49,37, FF),		// Shared
-				HEX_TO_RGBA(D6,49,37, FF),		// Buffers
-				HEX_TO_RGBA(D6,49,37, FF),		// Cached
-				HEX_TO_RGBA(33,33,33, FF),		// Border
-				HEX_TO_RGBA(DE,DE,DE, FF),		// Background (top)
-				HEX_TO_RGBA(DE,DE,DE, FF)		// Background (bottom)
+				HEX_TO_RGBA(D64937, FF),		// User
+				HEX_TO_RGBA(D64937, FF),		// Shared
+				HEX_TO_RGBA(D64937, FF),		// Buffers
+				HEX_TO_RGBA(D64937, FF),		// Cached
+				HEX_TO_RGBA(333333, FF),		// Border
+				HEX_TO_RGBA(DEDEDE, FF),		// Background (top)
+				HEX_TO_RGBA(DEDEDE, FF)			// Background (bottom)
 			}, { // NET
-				HEX_TO_RGBA(D6,49,37, FF),		// In
-				HEX_TO_RGBA(D6,49,37, FF),		// Out
-				HEX_TO_RGBA(D6,49,37, FF),		// Local
-				HEX_TO_RGBA(33,33,33, FF),		// Border
-				HEX_TO_RGBA(DE,DE,DE, FF),		// Background (top)
-				HEX_TO_RGBA(DE,DE,DE, FF)		// Background (bottom)
+				HEX_TO_RGBA(D64937, FF),		// In
+				HEX_TO_RGBA(D64937, FF),		// Out
+				HEX_TO_RGBA(D64937, FF),		// Local
+				HEX_TO_RGBA(333333, FF),		// Border
+				HEX_TO_RGBA(DEDEDE, FF),		// Background (top)
+				HEX_TO_RGBA(DEDEDE, FF)			// Background (bottom)
 			}, { // SWAP
-				HEX_TO_RGBA(D6,49,37, FF),		// Used
-				HEX_TO_RGBA(33,33,33, FF),		// Border
-				HEX_TO_RGBA(DE,DE,DE, FF),		// Background (top)
-				HEX_TO_RGBA(DE,DE,DE, FF)		// Background (bottom)
+				HEX_TO_RGBA(D64937, FF),		// Used
+				HEX_TO_RGBA(333333, FF),		// Border
+				HEX_TO_RGBA(DEDEDE, FF),		// Background (top)
+				HEX_TO_RGBA(DEDEDE, FF)			// Background (bottom)
 			}, { // LOAD
-				HEX_TO_RGBA(D6,49,37, FF),		// Average
-				HEX_TO_RGBA(33,33,33, FF),		// Border
-				HEX_TO_RGBA(DE,DE,DE, FF),		// Background (top)
-				HEX_TO_RGBA(DE,DE,DE, FF)		// Background (bottom)
+				HEX_TO_RGBA(D64937, FF),		// Average
+				HEX_TO_RGBA(333333, FF),		// Border
+				HEX_TO_RGBA(DEDEDE, FF),		// Background (top)
+				HEX_TO_RGBA(DEDEDE, FF)			// Background (bottom)
 			}, { // DISK
-				HEX_TO_RGBA(D6,49,37, FF),		// Read
-				HEX_TO_RGBA(D6,49,37, FF),		// Write
-				HEX_TO_RGBA(33,33,33, FF),		// Border
-				HEX_TO_RGBA(DE,DE,DE, FF),		// Background (top)
-				HEX_TO_RGBA(DE,DE,DE, FF)		// Background (bottom)
+				HEX_TO_RGBA(D64937, FF),		// Read
+				HEX_TO_RGBA(D64937, FF),		// Write
+				HEX_TO_RGBA(333333, FF),		// Border
+				HEX_TO_RGBA(DEDEDE, FF),		// Background (top)
+				HEX_TO_RGBA(DEDEDE, FF)			// Background (bottom)
 			}, { // TEMP
-				HEX_TO_RGBA(D6,49,37, FF),		// Value
-				HEX_TO_RGBA(D6,49,37, FF),		// Critical
-				HEX_TO_RGBA(33,33,33, FF),		// Border
-				HEX_TO_RGBA(DE,DE,DE, FF),		// Background (top)
-				HEX_TO_RGBA(DE,DE,DE, FF)		// Background (bottom)
+				HEX_TO_RGBA(D64937, FF),		// Value
+				HEX_TO_RGBA(D64937, FF),		// Critical
+				HEX_TO_RGBA(333333, FF),		// Border
+				HEX_TO_RGBA(DEDEDE, FF),		// Background (top)
+				HEX_TO_RGBA(DEDEDE, FF)			// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(D6,49,37, FF),		// Result 1
-				HEX_TO_RGBA(D6,49,37, FF),		// Result 2
-				HEX_TO_RGBA(D6,49,37, FF),		// Result 3
-				HEX_TO_RGBA(D6,49,37, FF),		// Result 4
-				HEX_TO_RGBA(33,33,33, FF),		// Border
-				HEX_TO_RGBA(DE,DE,DE, FF),		// Background (top)
-				HEX_TO_RGBA(DE,DE,DE, FF)		// Background (bottom)
+				HEX_TO_RGBA(D64937, FF),		// Result 1
+				HEX_TO_RGBA(D64937, FF),		// Result 2
+				HEX_TO_RGBA(D64937, FF),		// Result 3
+				HEX_TO_RGBA(D64937, FF),		// Result 4
+				HEX_TO_RGBA(333333, FF),		// Border
+				HEX_TO_RGBA(DEDEDE, FF),		// Background (top)
+				HEX_TO_RGBA(DEDEDE, FF)			// Background (bottom)
 			}
 		}
 	},
 
 	{ "Moon", color_scheme_moon_xpm,
 			{  { // CPU
-				HEX_TO_RGBA(50,50,50, FF),		// User
-				HEX_TO_RGBA(50,50,50, FF),		// System
-				HEX_TO_RGBA(50,50,50, FF),		// Nice
-				HEX_TO_RGBA(50,50,50, FF),		// IOWait
-				HEX_TO_RGBA(14,23,39, FF),		// Border
-				HEX_TO_RGBA(CB,CB,CB, FF),		// Background (top)
-				HEX_TO_RGBA(B5,B5,B5, FF)		// Background (bottom)
+				HEX_TO_RGBA(505050, FF),		// User
+				HEX_TO_RGBA(505050, FF),		// System
+				HEX_TO_RGBA(505050, FF),		// Nice
+				HEX_TO_RGBA(505050, FF),		// IOWait
+				HEX_TO_RGBA(142339, FF),		// Border
+				HEX_TO_RGBA(CBCBCB, FF),		// Background (top)
+				HEX_TO_RGBA(B5B5B5, FF)			// Background (bottom)
 			}, { // MEM
-				HEX_TO_RGBA(77,77,77, FF),		// User
-				HEX_TO_RGBA(77,77,77, FF),		// Shared
-				HEX_TO_RGBA(77,77,77, FF),		// Buffers
-				HEX_TO_RGBA(77,77,77, FF),		// Cached
-				HEX_TO_RGBA(14,23,39, FF),		// Border
-				HEX_TO_RGBA(CB,CB,CB, FF),		// Background (top)
-				HEX_TO_RGBA(B5,B5,B5, FF)		// Background (bottom)
+				HEX_TO_RGBA(777777, FF),		// User
+				HEX_TO_RGBA(777777, FF),		// Shared
+				HEX_TO_RGBA(777777, FF),		// Buffers
+				HEX_TO_RGBA(777777, FF),		// Cached
+				HEX_TO_RGBA(142339, FF),		// Border
+				HEX_TO_RGBA(CBCBCB, FF),		// Background (top)
+				HEX_TO_RGBA(B5B5B5, FF)			// Background (bottom)
 			}, { // NET
-				HEX_TO_RGBA(F7,F7,F7, FF),		// In
-				HEX_TO_RGBA(F7,F7,F7, FF),		// Out
-				HEX_TO_RGBA(F7,F7,F7, FF),		// Local
-				HEX_TO_RGBA(14,23,39, FF),		// Border
-				HEX_TO_RGBA(CB,CB,CB, FF),		// Background (top)
-				HEX_TO_RGBA(B5,B5,B5, FF)		// Background (bottom)
+				HEX_TO_RGBA(F7F7F7, FF),		// In
+				HEX_TO_RGBA(F7F7F7, FF),		// Out
+				HEX_TO_RGBA(F7F7F7, FF),		// Local
+				HEX_TO_RGBA(142339, FF),		// Border
+				HEX_TO_RGBA(CBCBCB, FF),		// Background (top)
+				HEX_TO_RGBA(B5B5B5, FF)			// Background (bottom)
 			}, { // SWAP
-				HEX_TO_RGBA(90,90,90, FF),		// Used
-				HEX_TO_RGBA(14,23,29, FF),		// Border
-				HEX_TO_RGBA(CB,CB,CB, FF),		// Background (top)
-				HEX_TO_RGBA(B5,B5,B5, FF)		// Background (bottom)
+				HEX_TO_RGBA(909090, FF),		// Used
+				HEX_TO_RGBA(142329, FF),		// Border
+				HEX_TO_RGBA(CBCBCB, FF),		// Background (top)
+				HEX_TO_RGBA(B5B5B5, FF)			// Background (bottom)
 			}, { // LOAD
-				HEX_TO_RGBA(2D,2D,2D, FF),		// Average
-				HEX_TO_RGBA(14,23,39, FF),		// Border
-				HEX_TO_RGBA(CB,CB,CB, FF),		// Background (top)
-				HEX_TO_RGBA(B5,B5,B5, FF)		// Background (bottom)
+				HEX_TO_RGBA(2D2D2D, FF),		// Average
+				HEX_TO_RGBA(142339, FF),		// Border
+				HEX_TO_RGBA(CBCBCB, FF),		// Background (top)
+				HEX_TO_RGBA(B5B5B5, FF)			// Background (bottom)
 			}, { // DISK
-				HEX_TO_RGBA(61,61,61, FF),		// Read
-				HEX_TO_RGBA(61,61,61, FF),		// Write
-				HEX_TO_RGBA(14,23,39, FF),		// Border
-				HEX_TO_RGBA(CB,CB,CB, FF),		// Background (top)
-				HEX_TO_RGBA(B5,B5,B5, FF)		// Background (bottom)
+				HEX_TO_RGBA(616161, FF),		// Read
+				HEX_TO_RGBA(616161, FF),		// Write
+				HEX_TO_RGBA(142339, FF),		// Border
+				HEX_TO_RGBA(CBCBCB, FF),		// Background (top)
+				HEX_TO_RGBA(B5B5B5, FF)			// Background (bottom)
 			}, { // TEMP
-				HEX_TO_RGBA(E2,E2,E2, FF),		// Value
-				HEX_TO_RGBA(E2,E2,E2, FF),		// Critical
-				HEX_TO_RGBA(14,23,39, FF),		// Border
-				HEX_TO_RGBA(CB,CB,CB, FF),		// Background (top)
-				HEX_TO_RGBA(B5,B5,B5, FF)		// Background (bottom)
+				HEX_TO_RGBA(E2E2E2, FF),		// Value
+				HEX_TO_RGBA(E2E2E2, FF),		// Critical
+				HEX_TO_RGBA(142339, FF),		// Border
+				HEX_TO_RGBA(CBCBCB, FF),		// Background (top)
+				HEX_TO_RGBA(B5B5B5, FF)			// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(95,95,95, FF),		// Result 1
-				HEX_TO_RGBA(95,95,95, FF),		// Result 2
-				HEX_TO_RGBA(95,95,95, FF),		// Result 3
-				HEX_TO_RGBA(95,95,95, FF),		// Result 4
-				HEX_TO_RGBA(14,23,39, FF),		// Border
-				HEX_TO_RGBA(CB,CB,CB, FF),		// Background (top)
-				HEX_TO_RGBA(B5,B5,B5, FF)		// Background (bottom)
+				HEX_TO_RGBA(959595, FF),		// Result 1
+				HEX_TO_RGBA(959595, FF),		// Result 2
+				HEX_TO_RGBA(959595, FF),		// Result 3
+				HEX_TO_RGBA(959595, FF),		// Result 4
+				HEX_TO_RGBA(142339, FF),		// Border
+				HEX_TO_RGBA(CBCBCB, FF),		// Background (top)
+				HEX_TO_RGBA(B5B5B5, FF)			// Background (bottom)
 			}
 		}
 	},
 
 	{ "Venus", color_scheme_venus_xpm,
 			{  { // CPU
-				HEX_TO_RGBA(F9,C2,1A, FF),		// User
-				HEX_TO_RGBA(F9,C2,1A, FF),		// System
-				HEX_TO_RGBA(F9,C2,1A, FF),		// Nice
-				HEX_TO_RGBA(F9,C2,1A, FF),		// IOWait
-				HEX_TO_RGBA(E3,9E,1C, FF),		// Border
-				HEX_TO_RGBA(C1,8F,17, FF),		// Background (top)
-				HEX_TO_RGBA(A5,7C,1B, FF)		// Background (bottom)
+				HEX_TO_RGBA(F9C21A, FF),		// User
+				HEX_TO_RGBA(F9C21A, FF),		// System
+				HEX_TO_RGBA(F9C21A, FF),		// Nice
+				HEX_TO_RGBA(F9C21A, FF),		// IOWait
+				HEX_TO_RGBA(E39E1C, FF),		// Border
+				HEX_TO_RGBA(C18F17, FF),		// Background (top)
+				HEX_TO_RGBA(A57C1B, FF)			// Background (bottom)
 			}, { // MEM
-				HEX_TO_RGBA(E7,D5,20, FF),		// User
-				HEX_TO_RGBA(E7,D5,20, FF),		// Shared
-				HEX_TO_RGBA(E7,D5,20, FF),		// Buffers
-				HEX_TO_RGBA(E7,D5,20, FF),		// Cached
-				HEX_TO_RGBA(E3,9E,1C, FF),		// Border
-				HEX_TO_RGBA(C1,8F,17, FF),		// Background (top)
-				HEX_TO_RGBA(A5,7C,1B, FF)		// Background (bottom)
+				HEX_TO_RGBA(E7D520, FF),		// User
+				HEX_TO_RGBA(E7D520, FF),		// Shared
+				HEX_TO_RGBA(E7D520, FF),		// Buffers
+				HEX_TO_RGBA(E7D520, FF),		// Cached
+				HEX_TO_RGBA(E39E1C, FF),		// Border
+				HEX_TO_RGBA(C18F17, FF),		// Background (top)
+				HEX_TO_RGBA(A57C1B, FF)			// Background (bottom)
 			}, { // NET
-				HEX_TO_RGBA(F4,B5,55, FF),		// In
-				HEX_TO_RGBA(F4,B5,55, FF),		// Out
-				HEX_TO_RGBA(F4,B5,55, FF),		// Local
-				HEX_TO_RGBA(E3,9E,1C, FF),		// Border
-				HEX_TO_RGBA(C1,8F,17, FF),		// Background (top)
-				HEX_TO_RGBA(A5,7C,1B, FF)		// Background (bottom)
+				HEX_TO_RGBA(F4B555, FF),		// In
+				HEX_TO_RGBA(F4B555, FF),		// Out
+				HEX_TO_RGBA(F4B555, FF),		// Local
+				HEX_TO_RGBA(E39E1C, FF),		// Border
+				HEX_TO_RGBA(C18F17, FF),		// Background (top)
+				HEX_TO_RGBA(A57C1B, FF)			// Background (bottom)
 			}, { // SWAP
-				HEX_TO_RGBA(F4,C4,4F, FF),		// Used
-				HEX_TO_RGBA(E3,9E,1C, FF),		// Border
-				HEX_TO_RGBA(C1,8F,17, FF),		// Background (top)
-				HEX_TO_RGBA(A5,7C,1B, FF)		// Background (bottom)
+				HEX_TO_RGBA(F4C44F, FF),		// Used
+				HEX_TO_RGBA(E39E1C, FF),		// Border
+				HEX_TO_RGBA(C18F17, FF),		// Background (top)
+				HEX_TO_RGBA(A57C1B, FF)			// Background (bottom)
 			}, { // LOAD
-				HEX_TO_RGBA(F5,C4,7A, FF),		// Average
-				HEX_TO_RGBA(E3,9E,1C, FF),		// Border
-				HEX_TO_RGBA(C1,8F,17, FF),		// Background (top)
-				HEX_TO_RGBA(A5,7C,1B, FF)		// Background (bottom)
+				HEX_TO_RGBA(F5C47A, FF),		// Average
+				HEX_TO_RGBA(E39E1C, FF),		// Border
+				HEX_TO_RGBA(C18F17, FF),		// Background (top)
+				HEX_TO_RGBA(A57C1B, FF)			// Background (bottom)
 			}, { // DISK
-				HEX_TO_RGBA(FF,DA,00, FF),		// Read
-				HEX_TO_RGBA(FF,DA,00, FF),		// Write
-				HEX_TO_RGBA(E3,9E,1C, FF),		// Border
-				HEX_TO_RGBA(C1,8F,17, FF),		// Background (top)
-				HEX_TO_RGBA(A5,7C,1B, FF)		// Background (bottom)
+				HEX_TO_RGBA(FFDA00, FF),		// Read
+				HEX_TO_RGBA(FFDA00, FF),		// Write
+				HEX_TO_RGBA(E39E1C, FF),		// Border
+				HEX_TO_RGBA(C18F17, FF),		// Background (top)
+				HEX_TO_RGBA(A57C1B, FF)			// Background (bottom)
 			}, { // TEMP
-				HEX_TO_RGBA(D0,BA,05, FF),		// Value
-				HEX_TO_RGBA(D0,BA,05, FF),		// Critical
-				HEX_TO_RGBA(E3,9E,1C, FF),		// Border
-				HEX_TO_RGBA(C1,8F,17, FF),		// Background (top)
-				HEX_TO_RGBA(A5,7C,1B, FF)		// Background (bottom)
+				HEX_TO_RGBA(D0BA05, FF),		// Value
+				HEX_TO_RGBA(D0BA05, FF),		// Critical
+				HEX_TO_RGBA(E39E1C, FF),		// Border
+				HEX_TO_RGBA(C18F17, FF),		// Background (top)
+				HEX_TO_RGBA(A57C1B, FF)			// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(E6,D8,7E, FF),		// Result 1
-				HEX_TO_RGBA(E6,D8,7E, FF),		// Result 2
-				HEX_TO_RGBA(E6,D8,7E, FF),		// Result 3
-				HEX_TO_RGBA(E6,D8,7E, FF),		// Result 4
-				HEX_TO_RGBA(E3,9E,1C, FF),		// Border
-				HEX_TO_RGBA(C1,8F,17, FF),		// Background (top)
-				HEX_TO_RGBA(A5,7C,1B, FF)		// Background (bottom)
+				HEX_TO_RGBA(E6D87E, FF),		// Result 1
+				HEX_TO_RGBA(E6D87E, FF),		// Result 2
+				HEX_TO_RGBA(E6D87E, FF),		// Result 3
+				HEX_TO_RGBA(E6D87E, FF),		// Result 4
+				HEX_TO_RGBA(E39E1C, FF),		// Border
+				HEX_TO_RGBA(C18F17, FF),		// Background (top)
+				HEX_TO_RGBA(A57C1B, FF)			// Background (bottom)
 			}
 		}
 	},
 
 	{ "Earth", color_scheme_earth_xpm,
 			{  { // CPU
-				HEX_TO_RGBA(33,8C,2E, FF),		// User
-				HEX_TO_RGBA(81,D0,9B, FF),		// System
-				HEX_TO_RGBA(6C,BA,67, FF),		// Nice
-				HEX_TO_RGBA(E5,EA,ED, FF),		// IOWait
-				HEX_TO_RGBA(24,31,3A, FF),		// Border
-				HEX_TO_RGBA(79,BD,D8, FF),		// Background (top)
-				HEX_TO_RGBA(00,62,87, FF)		// Background (bottom)
+				HEX_TO_RGBA(338C2E, FF),		// User
+				HEX_TO_RGBA(81D09B, FF),		// System
+				HEX_TO_RGBA(6CBA67, FF),		// Nice
+				HEX_TO_RGBA(E5EAED, FF),		// IOWait
+				HEX_TO_RGBA(24313A, FF),		// Border
+				HEX_TO_RGBA(79BDD8, FF),		// Background (top)
+				HEX_TO_RGBA(006287, FF)			// Background (bottom)
 			}, { // MEM
-				HEX_TO_RGBA(73,59,1C, FF),		// User
-				HEX_TO_RGBA(8C,6A,1B, FF),		// Shared
-				HEX_TO_RGBA(DE,BC,6B, FF),		// Buffers
-				HEX_TO_RGBA(C8,AA,66, FF),		// Cached
-				HEX_TO_RGBA(24,31,3A, FF),		// Border
-				HEX_TO_RGBA(79,BD,D8, FF),		// Background (top)
-				HEX_TO_RGBA(00,62,87, FF)		// Background (bottom)
+				HEX_TO_RGBA(73591C, FF),		// User
+				HEX_TO_RGBA(8C6A1B, FF),		// Shared
+				HEX_TO_RGBA(DEBC6B, FF),		// Buffers
+				HEX_TO_RGBA(C8AA66, FF),		// Cached
+				HEX_TO_RGBA(24313A, FF),		// Border
+				HEX_TO_RGBA(79BDD8, FF),		// Background (top)
+				HEX_TO_RGBA(006287, FF)			// Background (bottom)
 			}, { // NET
-				HEX_TO_RGBA(1D,6F,61, FF),		// In
-				HEX_TO_RGBA(6D,C0,B2, FF),		// Out
-				HEX_TO_RGBA(8D,CB,FF, FF),		// Local
-				HEX_TO_RGBA(24,31,3A, FF),		// Border
-				HEX_TO_RGBA(79,BD,D8, FF),		// Background (top)
-				HEX_TO_RGBA(00,62,87, FF)		// Background (bottom)
+				HEX_TO_RGBA(1D6F61, FF),		// In
+				HEX_TO_RGBA(6DC0B2, FF),		// Out
+				HEX_TO_RGBA(8DCBFF, FF),		// Local
+				HEX_TO_RGBA(24313A, FF),		// Border
+				HEX_TO_RGBA(79BDD8, FF),		// Background (top)
+				HEX_TO_RGBA(006287, FF)			// Background (bottom)
 			}, { // SWAP
-				HEX_TO_RGBA(B6,DE,ED, FF),		// Used
-				HEX_TO_RGBA(24,31,3A, FF),		// Border
-				HEX_TO_RGBA(79,BD,D8, FF),		// Background (top)
-				HEX_TO_RGBA(00,62,87, FF)		// Background (bottom)
+				HEX_TO_RGBA(B6DEED, FF),		// Used
+				HEX_TO_RGBA(24313A, FF),		// Border
+				HEX_TO_RGBA(79BDD8, FF),		// Background (top)
+				HEX_TO_RGBA(006287, FF)			// Background (bottom)
 			}, { // LOAD
-				HEX_TO_RGBA(EF,DA,71, FF),		// Average
-				HEX_TO_RGBA(24,31,3A, FF),		// Border
-				HEX_TO_RGBA(79,BD,D8, FF),		// Background (top)
-				HEX_TO_RGBA(00,62,87, FF)		// Background (bottom)
+				HEX_TO_RGBA(EFDA71, FF),		// Average
+				HEX_TO_RGBA(24313A, FF),		// Border
+				HEX_TO_RGBA(79BDD8, FF),		// Background (top)
+				HEX_TO_RGBA(006287, FF)			// Background (bottom)
 			}, { // DISK
-				HEX_TO_RGBA(23,15,0F, FF),		// Read
-				HEX_TO_RGBA(64,3C,34, FF),		// Write
-				HEX_TO_RGBA(24,31,3A, FF),		// Border
-				HEX_TO_RGBA(79,BD,D8, FF),		// Background (top)
-				HEX_TO_RGBA(00,62,87, FF)		// Background (bottom)
+				HEX_TO_RGBA(23150F, FF),		// Read
+				HEX_TO_RGBA(643C34, FF),		// Write
+				HEX_TO_RGBA(24313A, FF),		// Border
+				HEX_TO_RGBA(79BDD8, FF),		// Background (top)
+				HEX_TO_RGBA(006287, FF)			// Background (bottom)
 			}, { // TEMP
-				HEX_TO_RGBA(EC,EE,EF, FF),		// Value
-				HEX_TO_RGBA(55,61,67, FF),		// Critical
-				HEX_TO_RGBA(24,31,3A, FF),		// Border
-				HEX_TO_RGBA(79,BD,D8, FF),		// Background (top)
-				HEX_TO_RGBA(00,62,87, FF)		// Background (bottom)
+				HEX_TO_RGBA(ECEEEF, FF),		// Value
+				HEX_TO_RGBA(556167, FF),		// Critical
+				HEX_TO_RGBA(24313A, FF),		// Border
+				HEX_TO_RGBA(79BDD8, FF),		// Background (top)
+				HEX_TO_RGBA(006287, FF)			// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(20,1E,36, FF),		// Result 1
-				HEX_TO_RGBA(5D,57,9C, FF),		// Result 2
-				HEX_TO_RGBA(9C,99,BA, FF),		// Result 3
-				HEX_TO_RGBA(F1,F0,FF, FF),		// Result 4
-				HEX_TO_RGBA(24,31,3A, FF),		// Border
-				HEX_TO_RGBA(79,BD,D8, FF),		// Background (top)
-				HEX_TO_RGBA(00,62,87, FF)		// Background (bottom)
+				HEX_TO_RGBA(201E36, FF),		// Result 1
+				HEX_TO_RGBA(5D579C, FF),		// Result 2
+				HEX_TO_RGBA(9C99BA, FF),		// Result 3
+				HEX_TO_RGBA(F1F0FF, FF),		// Result 4
+				HEX_TO_RGBA(24313A, FF),		// Border
+				HEX_TO_RGBA(79BDD8, FF),		// Background (top)
+				HEX_TO_RGBA(006287, FF)			// Background (bottom)
 			}
 		}
 	},
 
 	{ "Mars", color_scheme_mars_xpm,
 			{  { // CPU
-				HEX_TO_RGBA(DC,AC,9E, FF),		// User
-				HEX_TO_RGBA(DC,AC,9E, FF),		// System
-				HEX_TO_RGBA(DC,AC,9E, FF),		// Nice
-				HEX_TO_RGBA(DC,AC,9E, FF),		// IOWait
-				HEX_TO_RGBA(73,3E,34, FF),		// Border
-				HEX_TO_RGBA(A2,76,43, FF),		// Background (top)
-				HEX_TO_RGBA(45,41,3F, FF)		// Background (bottom)
+				HEX_TO_RGBA(DCAC9E, FF),		// User
+				HEX_TO_RGBA(DCAC9E, FF),		// System
+				HEX_TO_RGBA(DCAC9E, FF),		// Nice
+				HEX_TO_RGBA(DCAC9E, FF),		// IOWait
+				HEX_TO_RGBA(733E34, FF),		// Border
+				HEX_TO_RGBA(A27643, FF),		// Background (top)
+				HEX_TO_RGBA(45413F, FF)			// Background (bottom)
 			}, { // MEM
-				HEX_TO_RGBA(D6,64,56, FF),		// User
-				HEX_TO_RGBA(D6,64,56, FF),		// Shared
-				HEX_TO_RGBA(D6,64,56, FF),		// Buffers
-				HEX_TO_RGBA(D6,64,56, FF),		// Cached
-				HEX_TO_RGBA(73,3E,34, FF),		// Border
-				HEX_TO_RGBA(A2,76,43, FF),		// Background (top)
-				HEX_TO_RGBA(45,41,3F, FF)		// Background (bottom)
+				HEX_TO_RGBA(D66456, FF),		// User
+				HEX_TO_RGBA(D66456, FF),		// Shared
+				HEX_TO_RGBA(D66456, FF),		// Buffers
+				HEX_TO_RGBA(D66456, FF),		// Cached
+				HEX_TO_RGBA(733E34, FF),		// Border
+				HEX_TO_RGBA(A27643, FF),		// Background (top)
+				HEX_TO_RGBA(45413F, FF)			// Background (bottom)
 			}, { // NET
-				HEX_TO_RGBA(F9,64,12, FF),		// In
-				HEX_TO_RGBA(F9,64,12, FF),		// Out
-				HEX_TO_RGBA(F9,64,12, FF),		// Local
-				HEX_TO_RGBA(73,3E,34, FF),		// Border
-				HEX_TO_RGBA(A2,76,43, FF),		// Background (top)
-				HEX_TO_RGBA(45,41,3F, FF)		// Background (bottom)
+				HEX_TO_RGBA(F96412, FF),		// In
+				HEX_TO_RGBA(F96412, FF),		// Out
+				HEX_TO_RGBA(F96412, FF),		// Local
+				HEX_TO_RGBA(733E34, FF),		// Border
+				HEX_TO_RGBA(A27643, FF),		// Background (top)
+				HEX_TO_RGBA(45413F, FF)			// Background (bottom)
 			}, { // SWAP
-				HEX_TO_RGBA(F4,1D,03, FF),		// Used
-				HEX_TO_RGBA(73,3E,34, FF),		// Border
-				HEX_TO_RGBA(A2,76,43, FF),		// Background (top)
-				HEX_TO_RGBA(45,41,3F, FF)		// Background (bottom)
+				HEX_TO_RGBA(F41D03, FF),		// Used
+				HEX_TO_RGBA(733E34, FF),		// Border
+				HEX_TO_RGBA(A27643, FF),		// Background (top)
+				HEX_TO_RGBA(45413F, FF)			// Background (bottom)
 			}, { // LOAD
-				HEX_TO_RGBA(C0,1C,04, FF),		// Average
-				HEX_TO_RGBA(73,3E,34, FF),		// Border
-				HEX_TO_RGBA(A2,76,43, FF),		// Background (top)
-				HEX_TO_RGBA(45,41,3F, FF)		// Background (bottom)
+				HEX_TO_RGBA(C01C04, FF),		// Average
+				HEX_TO_RGBA(733E34, FF),		// Border
+				HEX_TO_RGBA(A27643, FF),		// Background (top)
+				HEX_TO_RGBA(45413F, FF)			// Background (bottom)
 			}, { // DISK
-				HEX_TO_RGBA(DB,60,4E, FF),		// Read
-				HEX_TO_RGBA(DB,60,4E, FF),		// Write
-				HEX_TO_RGBA(73,3E,34, FF),		// Border
-				HEX_TO_RGBA(A2,76,43, FF),		// Background (top)
-				HEX_TO_RGBA(45,41,3F, FF)		// Background (bottom)
+				HEX_TO_RGBA(DB604E, FF),		// Read
+				HEX_TO_RGBA(DB604E, FF),		// Write
+				HEX_TO_RGBA(733E34, FF),		// Border
+				HEX_TO_RGBA(A27643, FF),		// Background (top)
+				HEX_TO_RGBA(45413F, FF)			// Background (bottom)
 			}, { // TEMP
-				HEX_TO_RGBA(FB,0E,08, FF),		// Value
-				HEX_TO_RGBA(FB,0E,08, FF),		// Critical
-				HEX_TO_RGBA(73,3E,34, FF),		// Border
-				HEX_TO_RGBA(A2,76,43, FF),		// Background (top)
-				HEX_TO_RGBA(45,41,3F, FF)		// Background (bottom)
+				HEX_TO_RGBA(FB0E08, FF),		// Value
+				HEX_TO_RGBA(FB0E08, FF),		// Critical
+				HEX_TO_RGBA(733E34, FF),		// Border
+				HEX_TO_RGBA(A27643, FF),		// Background (top)
+				HEX_TO_RGBA(45413F, FF)			// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(72,05,03, FF),		// Result 1
-				HEX_TO_RGBA(72,05,03, FF),		// Result 2
-				HEX_TO_RGBA(72,05,03, FF),		// Result 3
-				HEX_TO_RGBA(72,05,03, FF),		// Result 4
-				HEX_TO_RGBA(73,3E,34, FF),		// Border
-				HEX_TO_RGBA(A2,76,43, FF),		// Background (top)
-				HEX_TO_RGBA(45,41,3F, FF)		// Background (bottom)
+				HEX_TO_RGBA(720503, FF),		// Result 1
+				HEX_TO_RGBA(720503, FF),		// Result 2
+				HEX_TO_RGBA(720503, FF),		// Result 3
+				HEX_TO_RGBA(720503, FF),		// Result 4
+				HEX_TO_RGBA(733E34, FF),		// Border
+				HEX_TO_RGBA(A27643, FF),		// Background (top)
+				HEX_TO_RGBA(45413F, FF)			// Background (bottom)
 			}
 		}
 	},
 
 	{ "Jupiter", color_scheme_jupiter_xpm,
 			{  { // CPU
-				HEX_TO_RGBA(86,CF,80, FF),		// User
-				HEX_TO_RGBA(86,CF,80, FF),		// System
-				HEX_TO_RGBA(86,CF,80, FF),		// Nice
-				HEX_TO_RGBA(86,CF,80, FF),		// IOWait
-				HEX_TO_RGBA(3B,76,3B, FF),		// Border
-				HEX_TO_RGBA(C5,C0,AA, FF),		// Background (top)
-				HEX_TO_RGBA(06,3D,06, FF)		// Background (bottom)
+				HEX_TO_RGBA(86CF80, FF),		// User
+				HEX_TO_RGBA(86CF80, FF),		// System
+				HEX_TO_RGBA(86CF80, FF),		// Nice
+				HEX_TO_RGBA(86CF80, FF),		// IOWait
+				HEX_TO_RGBA(3B763B, FF),		// Border
+				HEX_TO_RGBA(C5C0AA, FF),		// Background (top)
+				HEX_TO_RGBA(063D06, FF)			// Background (bottom)
 			}, { // MEM
-				HEX_TO_RGBA(1A,8A,14, FF),		// User
-				HEX_TO_RGBA(1A,8A,14, FF),		// Shared
-				HEX_TO_RGBA(1A,8A,14, FF),		// Buffers
-				HEX_TO_RGBA(1A,8A,14, FF),		// Cached
-				HEX_TO_RGBA(3B,76,3B, FF),		// Border
-				HEX_TO_RGBA(C5,C0,AA, FF),		// Background (top)
-				HEX_TO_RGBA(06,3D,06, FF)		// Background (bottom)
+				HEX_TO_RGBA(1A8A14, FF),		// User
+				HEX_TO_RGBA(1A8A14, FF),		// Shared
+				HEX_TO_RGBA(1A8A14, FF),		// Buffers
+				HEX_TO_RGBA(1A8A14, FF),		// Cached
+				HEX_TO_RGBA(3B763B, FF),		// Border
+				HEX_TO_RGBA(C5C0AA, FF),		// Background (top)
+				HEX_TO_RGBA(063D06, FF)			// Background (bottom)
 			}, { // NET
-				HEX_TO_RGBA(04,FF,9E, FF),		// In
-				HEX_TO_RGBA(04,FF,9E, FF),		// Out
-				HEX_TO_RGBA(04,FF,9E, FF),		// Local
-				HEX_TO_RGBA(3B,76,3B, FF),		// Border
-				HEX_TO_RGBA(C5,C0,AA, FF),		// Background (top)
-				HEX_TO_RGBA(06,3D,06, FF)		// Background (bottom)
+				HEX_TO_RGBA(04FF9E, FF),		// In
+				HEX_TO_RGBA(04FF9E, FF),		// Out
+				HEX_TO_RGBA(04FF9E, FF),		// Local
+				HEX_TO_RGBA(3B763B, FF),		// Border
+				HEX_TO_RGBA(C5C0AA, FF),		// Background (top)
+				HEX_TO_RGBA(063D06, FF)			// Background (bottom)
 			}, { // SWAP
-				HEX_TO_RGBA(7A,FB,49, FF),		// Used
-				HEX_TO_RGBA(3B,76,3B, FF),		// Border
-				HEX_TO_RGBA(C5,C0,AA, FF),		// Background (top)
-				HEX_TO_RGBA(06,3D,06, FF)		// Background (bottom)
+				HEX_TO_RGBA(7AFB49, FF),		// Used
+				HEX_TO_RGBA(3B763B, FF),		// Border
+				HEX_TO_RGBA(C5C0AA, FF),		// Background (top)
+				HEX_TO_RGBA(063D06, FF)			// Background (bottom)
 			}, { // LOAD
-				HEX_TO_RGBA(02,FD,21, FF),		// Average
-				HEX_TO_RGBA(3B,76,3B, FF),		// Border
-				HEX_TO_RGBA(C5,C0,AA, FF),		// Background (top)
-				HEX_TO_RGBA(06,3D,06, FF)		// Background (bottom)
+				HEX_TO_RGBA(02FD21, FF),		// Average
+				HEX_TO_RGBA(3B763B, FF),		// Border
+				HEX_TO_RGBA(C5C0AA, FF),		// Background (top)
+				HEX_TO_RGBA(063D06, FF)			// Background (bottom)
 			}, { // DISK
-				HEX_TO_RGBA(AD,D4,9D, FF),		// Read
-				HEX_TO_RGBA(AD,D4,9D, FF),		// Write
-				HEX_TO_RGBA(3B,76,3B, FF),		// Border
-				HEX_TO_RGBA(C5,C0,AA, FF),		// Background (top)
-				HEX_TO_RGBA(06,3D,06, FF)		// Background (bottom)
+				HEX_TO_RGBA(ADD49D, FF),		// Read
+				HEX_TO_RGBA(ADD49D, FF),		// Write
+				HEX_TO_RGBA(3B763B, FF),		// Border
+				HEX_TO_RGBA(C5C0AA, FF),		// Background (top)
+				HEX_TO_RGBA(063D06, FF)			// Background (bottom)
 			}, { // TEMP
-				HEX_TO_RGBA(7D,B7,87, FF),		// Value
-				HEX_TO_RGBA(7D,B7,87, FF),		// Critical
-				HEX_TO_RGBA(3B,76,3B, FF),		// Border
-				HEX_TO_RGBA(C5,C0,AA, FF),		// Background (top)
-				HEX_TO_RGBA(06,3D,06, FF)		// Background (bottom)
+				HEX_TO_RGBA(7DB787, FF),		// Value
+				HEX_TO_RGBA(7DB787, FF),		// Critical
+				HEX_TO_RGBA(3B763B, FF),		// Border
+				HEX_TO_RGBA(C5C0AA, FF),		// Background (top)
+				HEX_TO_RGBA(063D06, FF)			// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(4D,7A,55, FF),		// Result 1
-				HEX_TO_RGBA(4D,7A,55, FF),		// Result 2
-				HEX_TO_RGBA(4D,7A,55, FF),		// Result 3
-				HEX_TO_RGBA(4D,7A,55, FF),		// Result 4
-				HEX_TO_RGBA(3B,76,3B, FF),		// Border
-				HEX_TO_RGBA(C5,C0,AA, FF),		// Background (top)
-				HEX_TO_RGBA(06,3D,06, FF)		// Background (bottom)
+				HEX_TO_RGBA(4D7A55, FF),		// Result 1
+				HEX_TO_RGBA(4D7A55, FF),		// Result 2
+				HEX_TO_RGBA(4D7A55, FF),		// Result 3
+				HEX_TO_RGBA(4D7A55, FF),		// Result 4
+				HEX_TO_RGBA(3B763B, FF),		// Border
+				HEX_TO_RGBA(C5C0AA, FF),		// Background (top)
+				HEX_TO_RGBA(063D06, FF)			// Background (bottom)
 			}
 		}
 	},
 
 	{ "Uranus", color_scheme_uranus_xpm,
 			{  { // CPU
-				HEX_TO_RGBA(5E,85,87, FF),		// User
-				HEX_TO_RGBA(5E,85,87, FF),		// System
-				HEX_TO_RGBA(5E,85,87, FF),		// Nice
-				HEX_TO_RGBA(5E,85,87, FF),		// IOWait
-				HEX_TO_RGBA(10,10,10, FF),		// Border
-				HEX_TO_RGBA(22,84,99, FF),		// Background (top)
-				HEX_TO_RGBA(03,44,4A, FF)		// Background (bottom)
+				HEX_TO_RGBA(5E8587, FF),		// User
+				HEX_TO_RGBA(5E8587, FF),		// System
+				HEX_TO_RGBA(5E8587, FF),		// Nice
+				HEX_TO_RGBA(5E8587, FF),		// IOWait
+				HEX_TO_RGBA(101010, FF),		// Border
+				HEX_TO_RGBA(228499, FF),		// Background (top)
+				HEX_TO_RGBA(03444A, FF)			// Background (bottom)
 			}, { // MEM
-				HEX_TO_RGBA(30,AB,C0, FF),		// User
-				HEX_TO_RGBA(30,AB,C0, FF),		// Shared
-				HEX_TO_RGBA(30,AB,C0, FF),		// Buffers
-				HEX_TO_RGBA(30,AB,C0, FF),		// Cached
-				HEX_TO_RGBA(10,10,10, FF),		// Border
-				HEX_TO_RGBA(22,84,99, FF),		// Background (top)
-				HEX_TO_RGBA(03,44,4A, FF)		// Background (bottom)
+				HEX_TO_RGBA(30ABC0, FF),		// User
+				HEX_TO_RGBA(30ABC0, FF),		// Shared
+				HEX_TO_RGBA(30ABC0, FF),		// Buffers
+				HEX_TO_RGBA(30ABC0, FF),		// Cached
+				HEX_TO_RGBA(101010, FF),		// Border
+				HEX_TO_RGBA(228499, FF),		// Background (top)
+				HEX_TO_RGBA(03444A, FF)			// Background (bottom)
 			}, { // NET
-				HEX_TO_RGBA(54,BF,C4, FF),		// In
-				HEX_TO_RGBA(54,BF,C4, FF),		// Out
-				HEX_TO_RGBA(54,BF,C4, FF),		// Local
-				HEX_TO_RGBA(10,10,10, FF),		// Border
-				HEX_TO_RGBA(22,84,99, FF),		// Background (top)
-				HEX_TO_RGBA(03,44,4A, FF)		// Background (bottom)
+				HEX_TO_RGBA(54BFC4, FF),		// In
+				HEX_TO_RGBA(54BFC4, FF),		// Out
+				HEX_TO_RGBA(54BFC4, FF),		// Local
+				HEX_TO_RGBA(101010, FF),		// Border
+				HEX_TO_RGBA(228499, FF),		// Background (top)
+				HEX_TO_RGBA(03444A, FF)			// Background (bottom)
 			}, { // SWAP
-				HEX_TO_RGBA(BC,DB,E3, FF),		// Used
-				HEX_TO_RGBA(10,10,10, FF),		// Border
-				HEX_TO_RGBA(22,84,99, FF),		// Background (top)
-				HEX_TO_RGBA(03,44,4A, FF)		// Background (bottom)
+				HEX_TO_RGBA(BCDBE3, FF),		// Used
+				HEX_TO_RGBA(101010, FF),		// Border
+				HEX_TO_RGBA(228499, FF),		// Background (top)
+				HEX_TO_RGBA(03444A, FF)			// Background (bottom)
 			}, { // LOAD
-				HEX_TO_RGBA(72,DE,E0, FF),		// Average
-				HEX_TO_RGBA(10,10,10, FF),		// Border
-				HEX_TO_RGBA(22,84,99, FF),		// Background (top)
-				HEX_TO_RGBA(03,44,4A, FF)		// Background (bottom)
+				HEX_TO_RGBA(72DEE0, FF),		// Average
+				HEX_TO_RGBA(101010, FF),		// Border
+				HEX_TO_RGBA(228499, FF),		// Background (top)
+				HEX_TO_RGBA(03444A, FF)			// Background (bottom)
 			}, { // DISK
-				HEX_TO_RGBA(5A,9E,BA, FF),		// Read
-				HEX_TO_RGBA(5A,9E,BA, FF),		// Write
-				HEX_TO_RGBA(10,10,10, FF),		// Border
-				HEX_TO_RGBA(22,84,99, FF),		// Background (top)
-				HEX_TO_RGBA(03,44,4A, FF)		// Background (bottom)
+				HEX_TO_RGBA(5A9EBA, FF),		// Read
+				HEX_TO_RGBA(5A9EBA, FF),		// Write
+				HEX_TO_RGBA(101010, FF),		// Border
+				HEX_TO_RGBA(228499, FF),		// Background (top)
+				HEX_TO_RGBA(03444A, FF)			// Background (bottom)
 			}, { // TEMP
-				HEX_TO_RGBA(9D,AD,BA, FF),		// Value
-				HEX_TO_RGBA(9D,AD,BA, FF),		// Critical
-				HEX_TO_RGBA(10,10,10, FF),		// Border
-				HEX_TO_RGBA(22,84,99, FF),		// Background (top)
-				HEX_TO_RGBA(03,44,4A, FF)		// Background (bottom)
+				HEX_TO_RGBA(9DADBA, FF),		// Value
+				HEX_TO_RGBA(9DADBA, FF),		// Critical
+				HEX_TO_RGBA(101010, FF),		// Border
+				HEX_TO_RGBA(228499, FF),		// Background (top)
+				HEX_TO_RGBA(03444A, FF)			// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(4B,9C,DE, FF),		// Result 1
-				HEX_TO_RGBA(4B,9C,DE, FF),		// Result 2
-				HEX_TO_RGBA(4B,9C,DE, FF),		// Result 3
-				HEX_TO_RGBA(4B,9C,DE, FF),		// Result 4
-				HEX_TO_RGBA(10,10,10, FF),		// Border
-				HEX_TO_RGBA(22,84,99, FF),		// Background (top)
-				HEX_TO_RGBA(03,44,4A, FF)		// Background (bottom)
+				HEX_TO_RGBA(4B9CDE, FF),		// Result 1
+				HEX_TO_RGBA(4B9CDE, FF),		// Result 2
+				HEX_TO_RGBA(4B9CDE, FF),		// Result 3
+				HEX_TO_RGBA(4B9CDE, FF),		// Result 4
+				HEX_TO_RGBA(101010, FF),		// Border
+				HEX_TO_RGBA(228499, FF),		// Background (top)
+				HEX_TO_RGBA(03444A, FF)			// Background (bottom)
 			}
 		}
 	},
 
 	{ "Neptune", color_scheme_neptune_xpm,
 			{  { // CPU
-				HEX_TO_RGBA(6D,AF,CF, FF),		// User
-				HEX_TO_RGBA(6D,AF,CF, FF),		// System
-				HEX_TO_RGBA(6D,AF,CF, FF),		// Nice
-				HEX_TO_RGBA(6D,AF,CF, FF),		// IOWait
-				HEX_TO_RGBA(14,23,39, FF),		// Border
-				HEX_TO_RGBA(64,59,CA, FF),		// Background (top)
-				HEX_TO_RGBA(3D,2B,67, FF)		// Background (bottom)
+				HEX_TO_RGBA(6DAFCF, FF),		// User
+				HEX_TO_RGBA(6DAFCF, FF),		// System
+				HEX_TO_RGBA(6DAFCF, FF),		// Nice
+				HEX_TO_RGBA(6DAFCF, FF),		// IOWait
+				HEX_TO_RGBA(142339, FF),		// Border
+				HEX_TO_RGBA(6459CA, FF),		// Background (top)
+				HEX_TO_RGBA(3D2B67, FF)			// Background (bottom)
 			}, { // MEM
-				HEX_TO_RGBA(5A,7B,E4, FF),		// User
-				HEX_TO_RGBA(5A,7B,E4, FF),		// Shared
-				HEX_TO_RGBA(5A,7B,E4, FF),		// Buffers
-				HEX_TO_RGBA(5A,7B,E4, FF),		// Cached
-				HEX_TO_RGBA(14,23,39, FF),		// Border
-				HEX_TO_RGBA(64,59,CA, FF),		// Background (top)
-				HEX_TO_RGBA(3D,2B,67, FF)		// Background (bottom)
+				HEX_TO_RGBA(5A7BE4, FF),		// User
+				HEX_TO_RGBA(5A7BE4, FF),		// Shared
+				HEX_TO_RGBA(5A7BE4, FF),		// Buffers
+				HEX_TO_RGBA(5A7BE4, FF),		// Cached
+				HEX_TO_RGBA(142339, FF),		// Border
+				HEX_TO_RGBA(6459CA, FF),		// Background (top)
+				HEX_TO_RGBA(3D2B67, FF)			// Background (bottom)
 			}, { // NET
-				HEX_TO_RGBA(9D,EA,E0, FF),		// In
-				HEX_TO_RGBA(9D,EA,E0, FF),		// Out
-				HEX_TO_RGBA(9D,EA,E0, FF),		// Local
-				HEX_TO_RGBA(14,23,39, FF),		// Border
-				HEX_TO_RGBA(64,59,CA, FF),		// Background (top)
-				HEX_TO_RGBA(3D,2B,67, FF)		// Background (bottom)
+				HEX_TO_RGBA(9DEAE0, FF),		// In
+				HEX_TO_RGBA(9DEAE0, FF),		// Out
+				HEX_TO_RGBA(9DEAE0, FF),		// Local
+				HEX_TO_RGBA(142339, FF),		// Border
+				HEX_TO_RGBA(6459CA, FF),		// Background (top)
+				HEX_TO_RGBA(3D2B67, FF)			// Background (bottom)
 			}, { // SWAP
-				HEX_TO_RGBA(83,97,D6, FF),		// Used
-				HEX_TO_RGBA(14,23,39, FF),		// Border
-				HEX_TO_RGBA(64,59,CA, FF),		// Background (top)
-				HEX_TO_RGBA(3D,2B,67, FF)		// Background (bottom)
+				HEX_TO_RGBA(8397D6, FF),		// Used
+				HEX_TO_RGBA(142339, FF),		// Border
+				HEX_TO_RGBA(6459CA, FF),		// Background (top)
+				HEX_TO_RGBA(3D2B67, FF)			// Background (bottom)
 			}, { // LOAD
-				HEX_TO_RGBA(B0,CA,D9, FF),		// Average
-				HEX_TO_RGBA(14,23,39, FF),		// Border
-				HEX_TO_RGBA(64,59,CA, FF),		// Background (top)
-				HEX_TO_RGBA(3D,2B,67, FF)		// Background (bottom)
+				HEX_TO_RGBA(B0CAD9, FF),		// Average
+				HEX_TO_RGBA(142339, FF),		// Border
+				HEX_TO_RGBA(6459CA, FF),		// Background (top)
+				HEX_TO_RGBA(3D2B67, FF)			// Background (bottom)
 			}, { // DISK
-				HEX_TO_RGBA(05,9F,E5, FF),		// Read
-				HEX_TO_RGBA(05,9F,E5, FF),		// Write
-				HEX_TO_RGBA(14,23,39, FF),		// Border
-				HEX_TO_RGBA(64,59,CA, FF),		// Background (top)
-				HEX_TO_RGBA(3D,2B,67, FF)		// Background (bottom)
+				HEX_TO_RGBA(059FE5, FF),		// Read
+				HEX_TO_RGBA(059FE5, FF),		// Write
+				HEX_TO_RGBA(142339, FF),		// Border
+				HEX_TO_RGBA(6459CA, FF),		// Background (top)
+				HEX_TO_RGBA(3D2B67, FF)			// Background (bottom)
 			}, { // TEMP
-				HEX_TO_RGBA(A0,BA,D5, FF),		// Value
-				HEX_TO_RGBA(A0,BA,D5, FF),		// Critical
-				HEX_TO_RGBA(14,23,39, FF),		// Border
-				HEX_TO_RGBA(64,59,CA, FF),		// Background (top)
-				HEX_TO_RGBA(3D,2B,67, FF)		// Background (bottom)
+				HEX_TO_RGBA(A0BAD5, FF),		// Value
+				HEX_TO_RGBA(A0BAD5, FF),		// Critical
+				HEX_TO_RGBA(142339, FF),		// Border
+				HEX_TO_RGBA(6459CA, FF),		// Background (top)
+				HEX_TO_RGBA(3D2B67, FF)			// Background (bottom)
 			}, { // PARM
-				HEX_TO_RGBA(71,80,91, FF),		// Result 1
-				HEX_TO_RGBA(71,80,91, FF),		// Result 2
-				HEX_TO_RGBA(71,80,91, FF),		// Result 3
-				HEX_TO_RGBA(71,80,91, FF),		// Result 4
-				HEX_TO_RGBA(14,23,39, FF),		// Border
-				HEX_TO_RGBA(64,59,CA, FF),		// Background (top)
-				HEX_TO_RGBA(3D,2B,67, FF)		// Background (bottom)
+				HEX_TO_RGBA(718091, FF),		// Result 1
+				HEX_TO_RGBA(718091, FF),		// Result 2
+				HEX_TO_RGBA(718091, FF),		// Result 3
+				HEX_TO_RGBA(718091, FF),		// Result 4
+				HEX_TO_RGBA(142339, FF),		// Border
+				HEX_TO_RGBA(6459CA, FF),		// Background (top)
+				HEX_TO_RGBA(3D2B67, FF)			// Background (bottom)
 			}
 		}
 	},
