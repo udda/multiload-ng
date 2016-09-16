@@ -752,6 +752,64 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
+	{ "Windows Metro", color_scheme_windows_metro_xpm, // http://www.creepyed.com/2012/09/windows-8-colors-hex-code/
+			{  { // CPU
+				HEX_TO_RGBA_1(2C4566, FF),		// User
+				HEX_TO_RGBA_1(006AC1, FF),		// System
+				HEX_TO_RGBA_1(006AC1, FF),		// Nice
+				HEX_TO_RGBA_1(006AC1, FF),		// IOWait
+				HEX_TO_RGBA_1(001E4E, FF),		// Border
+				HEX_TO_RGBA_1(001940, FF),		// Background (top)
+				HEX_TO_RGBA_1(001940, FF)		// Background (bottom)
+			}, { // MEM
+				HEX_TO_RGBA_1(199900, FF),		// User
+				HEX_TO_RGBA_1(2D652B, FF),		// Shared
+				HEX_TO_RGBA_1(2D652B, FF),		// Buffers
+				HEX_TO_RGBA_1(2D652B, FF),		// Cached
+				HEX_TO_RGBA_1(004A00, FF),		// Border
+				HEX_TO_RGBA_1(003E00, FF),		// Background (top)
+				HEX_TO_RGBA_1(003E00, FF)		// Background (bottom)
+			}, { // NET
+				HEX_TO_RGBA_1(E1B700, FF),		// In
+				HEX_TO_RGBA_1(CEA539, FF),		// Out
+				HEX_TO_RGBA_1(CEA539, FF),		// Local
+				HEX_TO_RGBA_1(D39D09, FF),		// Border
+				HEX_TO_RGBA_1(C69408, FF),		// Background (top)
+				HEX_TO_RGBA_1(C69408, FF)		// Background (bottom)
+			}, { // SWAP
+				HEX_TO_RGBA_1(AA40FF, FF),		// Used
+				HEX_TO_RGBA_1(691BB8, FF),		// Border
+				HEX_TO_RGBA_1(57169A, FF),		// Background (top)
+				HEX_TO_RGBA_1(57169A, FF)		// Background (bottom)
+			}, { // LOAD
+				HEX_TO_RGBA_1(FF2E12, FF),		// Average
+				HEX_TO_RGBA_1(B81B1B, FF),		// Border
+				HEX_TO_RGBA_1(9E1716, FF),		// Background (top)
+				HEX_TO_RGBA_1(9E1716, FF)		// Background (bottom)
+			}, { // DISK
+				HEX_TO_RGBA_1(FF981D, FF),		// Read
+				HEX_TO_RGBA_1(C27D4F, FF),		// Write
+				HEX_TO_RGBA_1(E56C19, FF),		// Border
+				HEX_TO_RGBA_1(C35D15, FF),		// Background (top)
+				HEX_TO_RGBA_1(C35D15, FF)		// Background (bottom)
+			}, { // TEMP
+				HEX_TO_RGBA_1(FF76BC, FF),		// Value
+				HEX_TO_RGBA_1(E773BD, FF),		// Critical
+				HEX_TO_RGBA_1(E064B7, FF),		// Border
+				HEX_TO_RGBA_1(DE4AAD, FF),		// Background (top)
+				HEX_TO_RGBA_1(DE4AAD, FF)		// Background (bottom)
+			}, { // PARM
+				HEX_TO_RGBA_1(878787, FF),		// Result 1
+				HEX_TO_RGBA_1(727272, FF),		// Result 2
+				HEX_TO_RGBA_1(727272, FF),		// Result 3
+				HEX_TO_RGBA_1(727272, FF),		// Result 4
+				HEX_TO_RGBA_1(606060, FF),		// Border
+				HEX_TO_RGBA_1(505050, FF),		// Background (top)
+				HEX_TO_RGBA_1(505050, FF)		// Background (bottom)
+			}
+		}
+	},
+
 	{ "Arc", color_scheme_arc_xpm,
 			{  { // CPU
 				HEX_TO_RGBA(59,24,E2, FF),		// User

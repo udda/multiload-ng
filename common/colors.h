@@ -34,6 +34,7 @@
 G_BEGIN_DECLS
 
 #define HEX_TO_RGBA(r, g, b, a) {(gdouble)(0x##r)/255.0, (gdouble)(0x##g)/255.0, (gdouble)(0x##b)/255.0, (gdouble)(0x##a)/255.0}
+#define HEX_TO_RGBA_1(rgb, a) {(gdouble)((0x##rgb >> 16) & 0xFF)/255.0, (gdouble)((0x##rgb >> 8) & 0xFF)/255.0, (gdouble)(0x##rgb & 0xFF)/255.0, (gdouble)(0x##a)/255.0}
 
 // Format version. Increment this every time color scheme format changes.
 #define MULTILOAD_COLOR_SCHEME_VERSION 4
