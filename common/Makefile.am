@@ -15,6 +15,7 @@ multiload_ng_core_la_SOURCES = \
 	autoscaler.c autoscaler.h \
 	binary-data.c binary-data.h \
 	colors.c colors.h \
+	color-scheme-icons.inc \
 	filter.c filter.h \
 	gtk-compat.c gtk-compat.h \
 	graph-cpu.c graph-mem.c graph-net.c graph-swap.c \
@@ -24,6 +25,7 @@ multiload_ng_core_la_SOURCES = \
 	multiload.c multiload.h \
 	multiload-config.c multiload-config.h \
 	preferences.c preferences.h \
+	ps-settings-impl-gkeyfile.inc \
 	util.c util.h \
 	ui.c ui.h
 
