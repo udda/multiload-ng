@@ -346,7 +346,7 @@ load_graph_clicked (GtkWidget *widget, GdkEventButton *event, LoadGraph *g)
 			case DBLCLICK_POLICY_DONOTHING:
 				g_debug("[load-graph] Detected double click on graph '%s' - action: none", graph_types[g->id].name);
 			default:
-				return FALSE;
+				return GDK_EVENT_PROPAGATE;
 		}
 
 		result = g_spawn_command_line_async (cmdline, NULL);
@@ -356,14 +356,15 @@ load_graph_clicked (GtkWidget *widget, GdkEventButton *event, LoadGraph *g)
 
 		g_free(cmdline);
 	}
-	return FALSE;
+	return GDK_EVENT_PROPAGATE;
 }
 
 static gboolean
-load_graph_mouse_move_cb(GtkWidget *widget, GdkEventCrossing *event, LoadGraph *graph)
+load_graph_mouse_move_cb(GtkWidget *widget, GdkEventCrossing *event, LoadGraph *g)
 {
-	graph->tooltip_update = (event->type == GDK_ENTER_NOTIFY);
-	return TRUE;
+	g->tooltip_update = (event->type == GDK_ENTER_NOTIFY);
+	g_debug("[load-graph] Mouse %s event on graph %d", (event->type == GDK_ENTER_NOTIFY)?"enter":"leave", g->id);
+	return GDK_EVENT_PROPAGATE;
 }
 
 LoadGraph *
@@ -406,7 +407,7 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 	g_signal_connect (G_OBJECT(g->disp), "enter-notify-event", G_CALLBACK(load_graph_mouse_move_cb), g);
 	g_signal_connect (G_OBJECT(g->disp), "leave-notify-event", G_CALLBACK(load_graph_mouse_move_cb), g);
 
-	gtk_box_pack_start (GTK_BOX (g->box), g->disp, TRUE, TRUE, 0);    
+	gtk_box_pack_start (GTK_BOX (g->box), g->disp, TRUE, TRUE, 0);
 	gtk_widget_show_all(g->box);
 
 	return g;

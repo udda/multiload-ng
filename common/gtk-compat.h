@@ -72,6 +72,16 @@ gtk_button_new_from_icon_name (const gchar *icon_name, GtkIconSize size);
 #endif /* GTK_API == 2 */
 
 
+//gtk+>3.4
+#ifndef GDK_EVENT_PROPAGATE
+#define GDK_EVENT_PROPAGATE (FALSE)
+#endif
+
+#ifndef GDK_EVENT_STOP
+#define GDK_EVENT_STOP (TRUE)
+#endif
+
+
 void
 gdk_color_to_rgba(const GdkColor *color, guint16 alpha, GdkRGBA *rgba);
 
