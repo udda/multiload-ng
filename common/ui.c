@@ -32,13 +32,14 @@
 
 
 // ps = Panel Specific - implement these for every panel
+// multiload_ps_settings_get_* must change the value of *destination ONLY when get is successful
 extern gpointer multiload_ps_settings_open_for_read(MultiloadPlugin *ma);
 extern gpointer multiload_ps_settings_open_for_save(MultiloadPlugin *ma);
 extern gboolean multiload_ps_settings_save(gpointer settings);
 extern void multiload_ps_settings_close(gpointer settings);
-extern void multiload_ps_settings_get_int(gpointer settings, const gchar *key, int *destination);
-extern void multiload_ps_settings_get_boolean(gpointer settings, const gchar *key, gboolean *destination);
-extern void multiload_ps_settings_get_string(gpointer settings, const gchar *key, gchar *destination, size_t maxlen);
+extern gboolean multiload_ps_settings_get_int(gpointer settings, const gchar *key, int *destination);
+extern gboolean multiload_ps_settings_get_boolean(gpointer settings, const gchar *key, gboolean *destination);
+extern gboolean multiload_ps_settings_get_string(gpointer settings, const gchar *key, gchar *destination, size_t maxlen);
 extern void multiload_ps_settings_set_int(gpointer settings, const gchar *key, int value);
 extern void multiload_ps_settings_set_boolean(gpointer settings, const gchar *key, gboolean value);
 extern void multiload_ps_settings_set_string(gpointer settings, const gchar *key, const gchar *value);
@@ -120,8 +121,8 @@ multiload_ui_read (MultiloadPlugin *ma)
 			/* Scaler max (-1 = autoscaler) */
 			int scaler_max;
 			key = g_strdup_printf("graph-%s-max", graph_types[i].name);
-			multiload_ps_settings_get_int (settings, key, &scaler_max);
-			multiload_set_max_value(ma, i, scaler_max);
+			if (multiload_ps_settings_get_int (settings, key, &scaler_max))
+				multiload_set_max_value(ma, i, scaler_max);
 			g_free (key);
 
 			/* Filter enable */

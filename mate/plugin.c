@@ -56,22 +56,25 @@ multiload_ps_settings_close(gpointer settings)
 {
 }
 
-void
+gboolean
 multiload_ps_settings_get_int(gpointer settings, const gchar *key, int *destination)
 {
 	*destination = g_settings_get_int((GSettings*)settings, key);
+	return TRUE;
 }
-void
+gboolean
 multiload_ps_settings_get_boolean(gpointer settings, const gchar *key, gboolean *destination)
 {
 	*destination = g_settings_get_boolean((GSettings*)settings, key);
+	return TRUE;
 }
-void
+gboolean
 multiload_ps_settings_get_string(gpointer settings, const gchar *key, gchar *destination, size_t maxlen)
 {
 	const gchar* temp = g_settings_get_string((GSettings*)settings, key);
 	if (G_LIKELY(temp != NULL))
 		strncpy(destination, temp, maxlen);
+	return TRUE;
 }
 
 void

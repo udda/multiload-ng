@@ -82,46 +82,60 @@ multiload_ps_settings_close(gpointer settings)
 	g_key_file_free((GKeyFile*)settings);
 }
 
-void
+gboolean
 multiload_ps_settings_get_int(gpointer settings, const gchar *key, int *destination)
 {
 	GError *err = NULL;
+	gboolean ret;
 	int temp;
 
 	temp = g_key_file_get_integer ((GKeyFile*)settings, G_KEY_GROUP_NAME, key, &err);
-	if (G_LIKELY(err == NULL || err->code == 0))
+	if (G_LIKELY(err == NULL || err->code == 0)) {
 		*destination = temp;
+		ret = TRUE;
+	} else {
+		ret = FALSE;
+	}
 
 	g_clear_error(&err);
+	return ret;
 }
-void
+gboolean
 multiload_ps_settings_get_boolean(gpointer settings, const gchar *key, gboolean *destination)
 {
 	GError *err = NULL;
+	gboolean ret;
 	gboolean temp;
 
 	temp = g_key_file_get_boolean ((GKeyFile*)settings, G_KEY_GROUP_NAME, key, &err);
-	if (G_LIKELY(err == NULL || err->code == 0))
+	if (G_LIKELY(err == NULL || err->code == 0)) {
 		*destination = temp;
+		ret = TRUE;
+	} else {
+		ret = FALSE;
+	}
 
 	g_clear_error(&err);
+	return ret;
 }
-void
+gboolean
 multiload_ps_settings_get_string(gpointer settings, const gchar *key, gchar *destination, size_t maxlen)
 {
 	GError *err = NULL;
+	gboolean ret;
 	gchar *temp;
 
 	temp = g_key_file_get_string ((GKeyFile*)settings, G_KEY_GROUP_NAME, key, &err);
-	if (G_LIKELY(err == NULL || err->code == 0)) {
-		if (temp == NULL)
-			destination[0] = 0;
-		else
-			strncpy(destination, temp, maxlen);
+	if (G_LIKELY((err == NULL || err->code == 0) && temp != NULL)) {
+		strncpy(destination, temp, maxlen);
+		ret = TRUE;
+	} else {
+		ret = FALSE;
 	}
 
 	g_clear_error(&err);
 	g_free(temp);
+	return ret;
 }
 
 void
