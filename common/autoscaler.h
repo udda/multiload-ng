@@ -30,12 +30,12 @@
 
 G_BEGIN_DECLS
 
-/* Min value of the the maximum */
-#define AUTOSCALER_FLOOR 10
+#define AUTOSCALER_MIN_DEFAULT 20
 
 typedef struct {
 	gboolean enable;
 	int max;
+	int min;
 	guint count;
 	time_t last_update;
 	gdouble sum;
@@ -47,6 +47,9 @@ G_GNUC_INTERNAL int
 autoscaler_get_max(AutoScaler *s, LoadGraph *g, int current);
 G_GNUC_INTERNAL void
 autoscaler_set_max(AutoScaler *s, int max);
+
+G_GNUC_INTERNAL void
+autoscaler_set_min(AutoScaler *s, int min);
 
 G_GNUC_INTERNAL void
 autoscaler_set_enabled(AutoScaler *s, gboolean enable);

@@ -80,10 +80,6 @@ enum MultiloadDefaults {
 	DEFAULT_DBLCLICK_POLICY				= DBLCLICK_POLICY_DONOTHING,
 	DEFAULT_FILL_BETWEEN				= FALSE,
 	DEFAULT_TOOLTIP_STYLE				= MULTILOAD_TOOLTIP_STYLE_SIMPLE,
-
-	DEFAULT_MAX_VALUE					= -1,
-	DEFAULT_MAX_VALUE_LOAD				= 8,	// should cover well single to quad cores
-	DEFAULT_MAX_VALUE_TEMP				= 120	// measured in °C
 };
 #define DEFAULT_COLOR_SCHEME "Multiload-ng"
 

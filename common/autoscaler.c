@@ -36,6 +36,9 @@ autoscaler_get_max(AutoScaler *s, LoadGraph *g, int current)
 	if (current < 0)
 		current = 0;
 
+	if (s->min < 0)
+		s->min = AUTOSCALER_MIN_DEFAULT;
+
 	if (s->enable) {
 		s->sum += current;
 		s->count++;
@@ -59,7 +62,7 @@ autoscaler_get_max(AutoScaler *s, LoadGraph *g, int current)
 		}
 
 		s->max = MAX(s->max, current);
-		s->max = MAX(s->max, AUTOSCALER_FLOOR);
+		s->max = MAX(s->max, s->min);
 	}
 
 	return s->max;
@@ -70,6 +73,12 @@ autoscaler_set_max(AutoScaler *s, int max)
 {
 	if (s->enable == FALSE)
 		s->max = max;
+}
+
+void
+autoscaler_set_min(AutoScaler *s, int min)
+{
+	s->min = min;
 }
 
 void

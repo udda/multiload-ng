@@ -158,6 +158,16 @@ multiload_set_max_value (MultiloadPlugin *ma, guint graph_id, int val)
 	autoscaler_set_max(scaler, val);
 }
 
+void
+multiload_set_max_floor (MultiloadPlugin *ma, guint graph_id, int val)
+{
+	AutoScaler *scaler = multiload_get_scaler(ma, graph_id);
+	if (scaler == NULL)
+		return;
+
+	autoscaler_set_min(scaler, val);
+}
+
 int
 multiload_get_max_value(MultiloadPlugin *ma, guint graph_id)
 {
@@ -233,12 +243,8 @@ void multiload_defaults(MultiloadPlugin *ma)
 		conf->filter_enable = FALSE;
 		multiload_colors_default(ma, i);
 
-		if (i == GRAPH_LOADAVG)
-			multiload_set_max_value(ma, i, DEFAULT_MAX_VALUE_LOAD);
-		else if (i == GRAPH_TEMPERATURE)
-			multiload_set_max_value(ma, i, DEFAULT_MAX_VALUE_TEMP);
-		else
-			multiload_set_max_value(ma, i, DEFAULT_MAX_VALUE);
+		multiload_set_max_value(ma, i, graph_types[i].scaler_max);
+		multiload_set_max_floor(ma, i, graph_types[i].scaler_max_floor);
 	}
 }
 

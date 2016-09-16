@@ -43,6 +43,8 @@ typedef struct _GraphType {
 	const char *name;
 	const char *label;
 	const guint num_colors;
+	const gint scaler_max;			// fixed max value, or -1 for autoscaler
+	const gint scaler_max_floor;	// fixed minimum value of scaler max, or -1 for default
 	const gchar output_unit[10];
 	const GraphGetDataFunc get_data;
 	const GraphTooltipUpdateFunc tooltip_update;
