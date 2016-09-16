@@ -55,6 +55,7 @@ COLOR_SCHEME_ICONS = \
 	$(top_srcdir)/data/color-scheme-ubuntu-ambiance.xpm \
 	$(top_srcdir)/data/color-scheme-ubuntu-radiance.xpm \
 	$(top_srcdir)/data/color-scheme-linux-mint.xpm \
+	$(top_srcdir)/data/color-scheme-windows-metro.xpm \
 	$(top_srcdir)/data/color-scheme-arc.xpm \
 	$(top_srcdir)/data/color-scheme-numix-dark.xpm \
 	$(top_srcdir)/data/color-scheme-numix-light.xpm \
