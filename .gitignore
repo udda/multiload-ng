@@ -36,6 +36,7 @@ mate/org.mate.panel.applet.*.gschema.xml.in
 standalone/multiload-ng
 standalone/*.desktop
 standalone/*.desktop.in
+systray/multiload-ng-systray
 xfce4/*.desktop
 xfce4/*.desktop.in
 po/.intltool-merge-cache
