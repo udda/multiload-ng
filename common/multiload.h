@@ -60,7 +60,7 @@ typedef struct _GraphConfig {
 	gint dblclick_policy;
 	gchar dblclick_cmdline[1024];
 
-	gchar filter[64];
+	gchar filter[150];
 	gboolean filter_enable;
 } GraphConfig;
 
