@@ -23,17 +23,10 @@
 #define __GRAPH_DATA_H__
 
 #include "autoscaler.h"
+#include "filter.h"
 
 
 G_BEGIN_DECLS
-
-/* Requirements for filter separators: must characters/sequences that never appear in
- * filter elements. As filter elements by now are all files in /sys or /dev, comma
- * colon, newline, etc are good separators. To play safe, longer sequences can be used. */
-// separator for filter returned by multiload_graph_*_get_filter() to use in program
-#define MULTILOAD_FILTER_SEPARATOR "\n"
-// separator for filter saved on settings. Must not contain newlines or invalid UTF-8 sequences.
-#define MULTILOAD_FILTER_SEPARATOR_INLINE ","
 
 
 typedef struct _CpuData {
@@ -130,7 +123,7 @@ multiload_graph_mem_cmdline_output (LoadGraph *g, MemoryData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_mem_tooltip_update (char **title, char **text, LoadGraph *g, MemoryData *xd);
 
-G_GNUC_INTERNAL gchar *
+G_GNUC_INTERNAL MultiloadFilter *
 multiload_graph_net_get_filter (LoadGraph *g, NetData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_net_get_data (int Maximum, int data [4], LoadGraph *g, NetData *xd);
@@ -153,7 +146,7 @@ multiload_graph_load_cmdline_output (LoadGraph *g, LoadData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_load_tooltip_update (char **title, char **text, LoadGraph *g, LoadData *xd);
 
-G_GNUC_INTERNAL gchar *
+G_GNUC_INTERNAL MultiloadFilter *
 multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_disk_get_data (int Maximum, int data [3], LoadGraph *g, DiskData *xd);
@@ -162,7 +155,7 @@ multiload_graph_disk_cmdline_output (LoadGraph *g, DiskData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_disk_tooltip_update (char **title, char **text, LoadGraph *g, DiskData *xd);
 
-G_GNUC_INTERNAL gchar *
+G_GNUC_INTERNAL MultiloadFilter *
 multiload_graph_temp_get_filter (LoadGraph *g, TemperatureData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_temp_get_data (int Maximum, int data [2], LoadGraph *g, TemperatureData *xd);

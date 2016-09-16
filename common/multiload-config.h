@@ -27,16 +27,17 @@
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 
+#include "filter.h"
 #include "gtk-compat.h"
 #include "multiload.h"
 
 
 G_BEGIN_DECLS
 
-typedef void (*GraphGetDataFunc) (int id, int data[], LoadGraph *g, gpointer xd);
-typedef void (*GraphTooltipUpdateFunc) (char **title, char **text, LoadGraph *g, gpointer xd);
-typedef void (*GraphCmdlineOutputFunc) (LoadGraph *g, gpointer xd);
-typedef char* (*GraphGetFilterFunc) (LoadGraph *g, gpointer xd);
+typedef void 				(*GraphGetDataFunc)			(int id, int data[], LoadGraph *g, gpointer xd);
+typedef void				(*GraphTooltipUpdateFunc)	(char **title, char **text, LoadGraph *g, gpointer xd);
+typedef void				(*GraphCmdlineOutputFunc)	(LoadGraph *g, gpointer xd);
+typedef MultiloadFilter*	(*GraphGetFilterFunc)		(LoadGraph *g, gpointer xd);
 
 typedef struct _GraphType {
 	const char *name;

@@ -59,68 +59,32 @@ sort_if_data_by_ifindex (gconstpointer a, gconstpointer b)
 }
 
 
-gchar *
+MultiloadFilter *
 multiload_graph_net_get_filter (LoadGraph *g, NetData *xd)
 {
-	gboolean present;
-	guint i;
-
-	FILE *f;
 	char *buf = NULL;
-	char *start, *end;
 	size_t n = 0;
 
-	char iface[12];
-	gchar *filter;
+	char *start, *end;
+	char iface[20];
 
-	char **active_filter = g_strsplit(g->config->filter, MULTILOAD_FILTER_SEPARATOR_INLINE, -1);
+	MultiloadFilter *filter = multiload_filter_new();
 
-	f = cached_fopen_r("/proc/net/dev", FALSE);
-	for (i=0; getline(&buf, &n, f) >= 0;) {
-		// skip header lines of /proc/net/dev
-		if (strchr(buf, ':') != NULL)
-			i++;
-	}
-	filter = g_new0(gchar, i*(2+sizeof(iface)));
-
-	rewind(f);
+	FILE *f = cached_fopen_r("/proc/net/dev", FALSE);
 	while (getline(&buf, &n, f) >= 0) {
-		end = strchr(buf, ':');
 		// skip header lines of /proc/net/dev
-		if (end == NULL)
+		if ((end = strchr(buf, ':')) == NULL)
 			continue;
 
 		for (start=buf; isspace(*start); start++) {}
 
 		g_snprintf(iface, end-start+1, "%s", start);
 
-		for (i=0, present=FALSE; active_filter[i] != NULL; i++) {
-			if (strcmp(active_filter[i], iface) == 0) {
-				present = TRUE;
-				active_filter[i][0] = '#';
-				break;
-			}
-		}
-
-		strcat(filter, present?"+":"-");
-		strcat(filter, iface);
-		strcat(filter, MULTILOAD_FILTER_SEPARATOR);
+		multiload_filter_append(filter, iface);
 	}
-
-	// add remaining elements from existing filter (already selected)
-	for (i=0; active_filter[i] != NULL; i++) {
-		if (active_filter[i][0] == '#')
-			continue;
-
-		strcat(filter, "#");
-		strcat(filter, active_filter[i]);
-		strcat(filter, MULTILOAD_FILTER_SEPARATOR);
-	}
-
-
-	filter[strlen(filter)-1] = '\0';
 	g_free(buf);
-	g_strfreev(active_filter);
+
+	multiload_filter_import_existing(filter, g->config->filter);
 
 	return filter;
 }
@@ -238,33 +202,34 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 		if (d_ptr == NULL)
 			break;
 
-		gboolean can_add = TRUE;
+		gboolean ignore = FALSE;
 
 		// find devices with same HW address (e.g. ifaces put in monitor mode from airmon-ng)
 		for (j=0; j<i; j++) {
 			if_data *d_tmp = &g_array_index(valid_ifaces, if_data, j);
 			if (strcmp(d_tmp->address, d_ptr->address) == 0) {
 				g_debug("[graph-net] Ignored interface '%s' because has the same HW address of '%s' (%s)", d_tmp->name, d_ptr->name, d_ptr->address);
-				can_add = FALSE;
+				ignore = TRUE;
 				break;
 			}
 		}
 
-		if (can_add && g->config->filter_enable) {
-			can_add = FALSE;
-			gchar ** filter_array = g_strsplit(g->config->filter, MULTILOAD_FILTER_SEPARATOR_INLINE, -1);
-			for (j=0; filter_array[j]!=NULL; j++) {
-				if (strcmp(filter_array[j], d_ptr->name) == 0) {
-					can_add = TRUE;
+		if (ignore == FALSE && g->config->filter_enable) {
+			MultiloadFilter *filter = multiload_filter_new_from_existing(g->config->filter);
+			for (j=0, ignore=TRUE; j<multiload_filter_get_length(filter); j++) {
+				if (strcmp(multiload_filter_get_element_data(filter,j), d_ptr->name) == 0) {
+					ignore = FALSE;
 					break;
 				}
 			}
-			if (!can_add)
+
+			if (ignore)
 				g_debug("[graph-net] Ignored interface '%s' due to user filter", d_ptr->name);
-			g_strfreev(filter_array);
+
+			multiload_filter_free(filter);
 		}
 
-		if (!can_add)
+		if (ignore)
 			continue;
 
 		if (d_ptr->flags & IFF_LOOPBACK) {

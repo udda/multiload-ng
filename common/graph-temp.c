@@ -53,40 +53,22 @@ typedef enum {
 
 static TemperatureSourceSupport list_temp(TemperatureSourceData **list);
 
-gchar *
+MultiloadFilter *
 multiload_graph_temp_get_filter (LoadGraph *g, TemperatureData *xd)
 {
 	TemperatureSourceData *list = NULL;
-	gchar *filter;
-	gboolean selected;
-	gboolean found = FALSE;
 	guint i;
 
+	MultiloadFilter *filter = multiload_filter_new();
+
 	if (list_temp(&list) != TEMP_SOURCE_NO_SUPPORT) {
-		for (i=0; list[i].temp_path[0]!='\0'; i++) {}
-		filter = g_new0(char, i*(3+sizeof(list[i].name)));
-		for (i=0; list[i].temp_path[0]!='\0'; i++) {
-			selected = (strcmp(list[i].name, g->config->filter) == 0);
-			if (selected)
-				found = TRUE;
+		for (i=0; list[i].temp_path[0]!='\0'; i++)
+			multiload_filter_append(filter, list[i].name);
 
-			strcat(filter, selected?"+":"-");
-			strcat(filter, list[i].name);
-			strcat(filter, MULTILOAD_FILTER_SEPARATOR);
-		}
-
-		// add remaining elements from existing filter (already selected)
-		if (!found) {
-			strcat(filter, "#");
-			strcat(filter, g->config->filter);
-			strcat(filter, MULTILOAD_FILTER_SEPARATOR);
-		}
-
-		filter[strlen(filter)-1] = '\0';
-	} else
-		filter = g_new0(char, 1);
-
+		multiload_filter_import_existing(filter, g->config->filter);
+	}
 	g_free(list);
+
 	return filter;
 }
 

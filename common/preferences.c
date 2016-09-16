@@ -187,7 +187,12 @@ static const gchar* color_button_names[GRAPH_MAX][MAX_COLORS] = {
 	}
 };
 
-
+enum {
+	LS_SOURCE_COLUMN_SELECTED	= 0,
+	LS_SOURCE_COLUMN_LABEL		= 1,
+	LS_SOURCE_COLUMN_ABSENT		= 2,
+	LS_SOURCE_COLUMN_DATA		= 3
+};
 
 static guint
 multiload_preferences_get_graph_index (GtkBuildable *ob, const gchar **list)
@@ -674,10 +679,10 @@ multiload_preferences_source_toggled_cb (GtkCellRendererToggle *cell, gchar *pat
 	GtkListStore *ls;
 	GtkTreePath *path;
 	GtkTreeIter iter;
-	gchar *filter;
-	gchar *s;
 	gboolean active;
 	gboolean b;
+	gchar *s;
+	MultiloadFilter *filter;
 
 	guint graph_index = EXTRACT_GRAPH_INDEX(cell);
 	if (liststore_source_names[graph_index] == NULL)
@@ -706,23 +711,23 @@ multiload_preferences_source_toggled_cb (GtkCellRendererToggle *cell, gchar *pat
 	gtk_tree_path_free (path);
 
 	// update filter
-	filter = ma->graph_config[graph_index].filter;
-	filter[0] = '\0';
+	filter = multiload_filter_new();
 
 	b = gtk_tree_model_get_iter_first (GTK_TREE_MODEL(ls), &iter);
 	while (b) {
-		gtk_tree_model_get (GTK_TREE_MODEL(ls), &iter, 0, &b, 1, &s, -1);
+		gtk_tree_model_get (GTK_TREE_MODEL(ls), &iter,
+			LS_SOURCE_COLUMN_SELECTED,	&b,
+			LS_SOURCE_COLUMN_DATA,		&s,
+		-1);
 
-		if (b) {
-			strcat(filter, s);
-			strcat(filter, MULTILOAD_FILTER_SEPARATOR_INLINE);
-		}
+		if (b)
+			multiload_filter_append(filter, s);
 
 		g_free(s);
 		b = gtk_tree_model_iter_next (GTK_TREE_MODEL(ls), &iter);
 	}
-	filter[strlen(filter)-1] = '\0';
-	g_debug ("[preferences] set interfaces filter for graph #%d: %s\n", graph_index, filter);
+	multiload_filter_export(filter, ma->graph_config[graph_index].filter, sizeof(ma->graph_config[graph_index].filter));
+	g_debug ("[preferences] set filter for graph #%d: %s\n", graph_index, ma->graph_config[graph_index].filter);
 
 	// trigger data refresh for graphs that require it
 	ma->graphs[graph_index]->filter_changed = TRUE;
@@ -939,7 +944,6 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 	gint tmp;
 	gboolean color_scheme_is_set = FALSE;
 	GraphConfig *conf;
-	gboolean active, absent;
 
 	GdkPixbuf *pix;
 
@@ -969,19 +973,16 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 		if (cb_source_auto_names[i][0] != '\0') {
 			gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(OB(cb_source_auto_names[i])), !conf->filter_enable);
 
-			gchar *filter = graph_types[i].get_filter(ma->graphs[i], ma->extra_data[i]);
-			gchar ** filter_split = g_strsplit (filter, MULTILOAD_FILTER_SEPARATOR, -1);
-			for (j=0; filter_split[j]!=NULL; j++) {
-				absent = (filter_split[j][0]=='#');
-				active = (absent || filter_split[j][0]=='+');
+			MultiloadFilter *filter = graph_types[i].get_filter(ma->graphs[i], ma->extra_data[i]);
+			for (j=0; j<multiload_filter_get_length(filter); j++) {
 				gtk_list_store_insert_with_values (GTK_LIST_STORE(OB(liststore_source_names[i])), NULL, -1,
-					0, active,
-					1, &filter_split[j][1],
-					2, absent,
+					LS_SOURCE_COLUMN_SELECTED,	multiload_filter_get_element_selected	(filter, j),
+					LS_SOURCE_COLUMN_LABEL,		multiload_filter_get_element_label		(filter, j),
+					LS_SOURCE_COLUMN_ABSENT,	multiload_filter_get_element_absent		(filter, j),
+					LS_SOURCE_COLUMN_DATA,		multiload_filter_get_element_data		(filter, j),
 				-1);
 			}
-			g_strfreev(filter_split);
-			g_free(filter);
+			multiload_filter_free(filter);
 		}
 
 		// advanced preferences - tab menu names
