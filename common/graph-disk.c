@@ -215,7 +215,7 @@ multiload_graph_disk_tooltip_update (char **title, char **text, LoadGraph *g, Di
 	gchar *disk_read = format_rate_for_display(xd->read_speed);
 	gchar *disk_write = format_rate_for_display(xd->write_speed);
 
-	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
+	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
 		*text = g_strdup_printf(_(	"Monitored partitions: %s\n"
 									"\n"
 									"Read: %s\n"

@@ -66,7 +66,7 @@ multiload_tooltip_update (LoadGraph *g)
 		g_free(text);
 	}
 
-	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
+	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
 		tooltip_markup = g_strdup_printf("<span weight='bold' size='larger'>%s</span>\n%s", title, text_sanitized);
 	} else {
 		tooltip_markup = g_strdup_printf("%s: %s", title, text_sanitized);
@@ -258,7 +258,7 @@ multiload_sanitize(MultiloadPlugin *ma)
 
 		ma->graph_config[i].interval = CLAMP(ma->graph_config[i].interval, MIN_INTERVAL, MAX_INTERVAL);
 		ma->graph_config[i].size = CLAMP(ma->graph_config[i].size, MIN_SIZE, MAX_SIZE);
-		ma->graph_config[i].tooltip_style = CLAMP(ma->graph_config[i].tooltip_style, 0, TOOLTIP_STYLE_N_VALUES);
+		ma->graph_config[i].tooltip_style = CLAMP(ma->graph_config[i].tooltip_style, 0, MULTILOAD_TOOLTIP_STYLE_N_VALUES);
 		ma->graph_config[i].dblclick_policy = CLAMP(ma->graph_config[i].dblclick_policy, 0, DBLCLICK_POLICY_N_VALUES);
 
 		if (ma->graph_config[i].visible) {

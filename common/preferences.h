@@ -47,12 +47,11 @@ enum MultiloadDblClickPolicy {
 };
 
 enum MultiloadTooltipStyle {
-	TOOLTIP_STYLE_SIMPLE				= 0,
-	TOOLTIP_STYLE_DETAILS				= 1,
+	MULTILOAD_TOOLTIP_STYLE_SIMPLE				= 0,
+	MULTILOAD_TOOLTIP_STYLE_DETAILED				= 1,
 
-	TOOLTIP_STYLE_N_VALUES				= 1
+	MULTILOAD_TOOLTIP_STYLE_N_VALUES				= 1
 };
-
 
 enum MultiloadLimits {
 	MIN_SIZE							= 10,
@@ -71,14 +70,6 @@ enum MultiloadLimits {
 	MAX_BORDER_WIDTH					= 16
 };
 
-enum MultiloadStep {
-	STEP_SIZE							= 5,
-	STEP_INTERVAL						= 50,
-	STEP_PADDING						= 1,
-	STEP_SPACING						= 1,
-	STEP_BORDER_WIDTH					= 1
-};
-
 enum MultiloadDefaults {
 	DEFAULT_SIZE						= 40,
 	DEFAULT_INTERVAL					= 500,
@@ -88,7 +79,7 @@ enum MultiloadDefaults {
 	DEFAULT_ORIENTATION					= MULTILOAD_ORIENTATION_AUTO,
 	DEFAULT_DBLCLICK_POLICY				= DBLCLICK_POLICY_DONOTHING,
 	DEFAULT_FILL_BETWEEN				= FALSE,
-	DEFAULT_TOOLTIP_STYLE				= TOOLTIP_STYLE_SIMPLE,
+	DEFAULT_TOOLTIP_STYLE				= MULTILOAD_TOOLTIP_STYLE_SIMPLE,
 
 	DEFAULT_MAX_VALUE					= -1,
 	DEFAULT_MAX_VALUE_LOAD				= 8,	// should cover well single to quad cores

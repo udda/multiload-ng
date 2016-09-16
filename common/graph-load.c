@@ -30,6 +30,12 @@
 #include "preferences.h"
 #include "util.h"
 
+enum {
+	LOADAVG_1,
+	LOADAVG_5,
+	LOADAVG_15,
+	LOADAVG_PROC
+};
 
 void
 multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData *xd)
@@ -56,32 +62,32 @@ multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData
 		}
 	}
 
-	int max = autoscaler_get_max(&xd->scaler, g, rint(xd->loadavg[0]));
-	data [0] = rint ((float) Maximum * xd->loadavg[0] / max);
+	int max = autoscaler_get_max(&xd->scaler, g, rint(xd->loadavg[LOADAVG_1]));
+	data [0] = rint ((float) Maximum * xd->loadavg[LOADAVG_1] / max);
 }
 
 void
 multiload_graph_load_cmdline_output (LoadGraph *g, LoadData *xd)
 {
-	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%.02f", xd->loadavg[0]);
-	g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "%.02f", xd->loadavg[1]);
-	g_snprintf(g->output_str[2], sizeof(g->output_str[2]), "%.02f", xd->loadavg[2]);
-	g_snprintf(g->output_str[3], sizeof(g->output_str[3]), "%u/%u", xd->proc_active, xd->proc_count);
+	g_snprintf(g->output_str[LOADAVG_1], sizeof(g->output_str[LOADAVG_1]), "%.02f", xd->loadavg[LOADAVG_1]);
+	g_snprintf(g->output_str[LOADAVG_5], sizeof(g->output_str[LOADAVG_5]), "%.02f", xd->loadavg[LOADAVG_5]);
+	g_snprintf(g->output_str[LOADAVG_15], sizeof(g->output_str[LOADAVG_15]), "%.02f", xd->loadavg[LOADAVG_15]);
+	g_snprintf(g->output_str[LOADAVG_PROC], sizeof(g->output_str[LOADAVG_PROC]), "%u/%u", xd->proc_active, xd->proc_count);
 }
 
 void
 multiload_graph_load_tooltip_update (char **title, char **text, LoadGraph *g, LoadData *xd)
 {
-	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
+	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
 		if (xd->uname[0] != 0)
 			*title = g_strdup(xd->uname);
 		*text = g_strdup_printf(_(	"Last minute: %0.02f\n"
 									"Last 5 minutes: %0.02f\n"
 									"Last 15 minutes: %0.02f\n"
 									"Processes/threads: %d active out of %d."),
-									xd->loadavg[0], xd->loadavg[1], xd->loadavg[2],
+									xd->loadavg[LOADAVG_1], xd->loadavg[LOADAVG_5], xd->loadavg[LOADAVG_15],
 									xd->proc_active, xd->proc_count);
 	} else {
-		*text = g_strdup_printf("%0.02f", xd->loadavg[0]);
+		*text = g_strdup_printf("%0.02f", xd->loadavg[LOADAVG_1]);
 	}
 }

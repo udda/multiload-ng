@@ -118,7 +118,7 @@ multiload_graph_mem_cmdline_output (LoadGraph *g, MemoryData *xd)
 void
 multiload_graph_mem_tooltip_update (char **title, char **text, LoadGraph *g, MemoryData *xd)
 {
-	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
+	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
 		gchar *total = g_format_size_full(xd->total, G_FORMAT_SIZE_IEC_UNITS);
 
 		gchar *user = g_format_size_full(xd->user, G_FORMAT_SIZE_IEC_UNITS);

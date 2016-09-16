@@ -156,7 +156,7 @@ multiload_graph_cpu_cmdline_output (LoadGraph *g, CpuData *xd)
 void
 multiload_graph_cpu_tooltip_update (char **title, char **text, LoadGraph *g, CpuData *xd)
 {
-	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
+	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
 		gchar *uptime = format_time_duration(xd->uptime);
 		*title = g_strdup(xd->cpu0_name);
 		*text = g_strdup_printf(_(	"%lu processors  -  %.2f GHz  -  Governor: %s\n"

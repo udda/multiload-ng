@@ -121,7 +121,7 @@ multiload_graph_parm_cmdline_output (LoadGraph *g, ParametricData *xd)
 void
 multiload_graph_parm_tooltip_update (char **title, char **text, LoadGraph *g, ParametricData *xd)
 {
-	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
+	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
 		if (xd->error)
 			*text = g_strdup_printf(_(	"Command: %s\n"
 										"ERROR: %s"),

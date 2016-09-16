@@ -295,7 +295,7 @@ multiload_graph_net_tooltip_update (char **title, char **text, LoadGraph *g, Net
 	gchar *tx_out = format_rate_for_display(xd->out_speed);
 	gchar *tx_local = format_rate_for_display(xd->local_speed);
 
-	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
+	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
 		*text = g_strdup_printf(_(	"Monitored interfaces: %s\n"
 									"\n"
 									"Receiving: %s\n"

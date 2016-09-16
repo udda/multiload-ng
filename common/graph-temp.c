@@ -379,7 +379,7 @@ multiload_graph_temp_cmdline_output (LoadGraph *g, TemperatureData *xd)
 void
 multiload_graph_temp_tooltip_update (char **title, char **text, LoadGraph *g, TemperatureData *xd)
 {
-	if (g->config->tooltip_style == TOOLTIP_STYLE_DETAILS) {
+	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
 		*title = g_strdup(xd->name);
 
 		if (xd->max > 0)
