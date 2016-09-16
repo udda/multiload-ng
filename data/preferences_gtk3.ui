@@ -3537,30 +3537,36 @@
     <columns>
       <!-- column-name selected -->
       <column type="gboolean"/>
-      <!-- column-name name -->
+      <!-- column-name label -->
       <column type="gchararray"/>
       <!-- column-name absent -->
       <column type="gboolean"/>
+      <!-- column-name data -->
+      <column type="gchararray"/>
     </columns>
   </object>
   <object class="GtkListStore" id="liststore_source_net">
     <columns>
       <!-- column-name selected -->
       <column type="gboolean"/>
-      <!-- column-name name -->
+      <!-- column-name label -->
       <column type="gchararray"/>
       <!-- column-name absent -->
       <column type="gboolean"/>
+      <!-- column-name data -->
+      <column type="gchararray"/>
     </columns>
   </object>
   <object class="GtkListStore" id="liststore_source_temp">
     <columns>
       <!-- column-name selected -->
       <column type="gboolean"/>
-      <!-- column-name name -->
+      <!-- column-name label -->
       <column type="gchararray"/>
       <!-- column-name absent -->
       <column type="gboolean"/>
+      <!-- column-name data -->
+      <column type="gchararray"/>
     </columns>
   </object>
   <object class="GtkListStore" id="liststore_tooltips">
@@ -4274,7 +4280,7 @@
                             <property name="search_column">1</property>
                             <property name="fixed_height_mode">True</property>
                             <property name="show_expanders">False</property>
-                            <property name="tooltip_column">2</property>
+                            <property name="tooltip_column">3</property>
                             <child internal-child="selection">
                               <object class="GtkTreeSelection" id="treeview-selection"/>
                             </child>
@@ -5058,7 +5064,7 @@
                             <property name="search_column">1</property>
                             <property name="fixed_height_mode">True</property>
                             <property name="show_expanders">False</property>
-                            <property name="tooltip_column">2</property>
+                            <property name="tooltip_column">3</property>
                             <child internal-child="selection">
                               <object class="GtkTreeSelection" id="treeview-selection7"/>
                             </child>
@@ -5418,7 +5424,7 @@
                             <property name="search_column">1</property>
                             <property name="fixed_height_mode">True</property>
                             <property name="show_expanders">False</property>
-                            <property name="tooltip_column">2</property>
+                            <property name="tooltip_column">3</property>
                             <child internal-child="selection">
                               <object class="GtkTreeSelection" id="treeview-selection5"/>
                             </child>
