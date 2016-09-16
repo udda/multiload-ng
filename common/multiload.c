@@ -73,6 +73,7 @@ multiload_tooltip_update (LoadGraph *g)
 	}
 
 	gtk_widget_set_tooltip_markup(g->disp, tooltip_markup);
+	gtk_widget_trigger_tooltip_query (g->disp);
 	g_free(title);
 	g_free(text_sanitized);
 	g_free(tooltip_markup);
