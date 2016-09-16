@@ -152,11 +152,12 @@ multiload_set_max_value (MultiloadPlugin *ma, guint graph_id, int val)
 	AutoScaler *scaler = multiload_get_scaler(ma, graph_id);
 	if (scaler == NULL)
 		return;
-
-	gboolean enable_autoscaler = (val<0);
-
-	autoscaler_set_enabled(scaler, enable_autoscaler);
-	autoscaler_set_max(scaler, val);
+	if (val < 0) {
+		autoscaler_set_enabled(scaler, TRUE);
+	} else {
+		autoscaler_set_enabled(scaler, FALSE);
+		autoscaler_set_max(scaler, val);
+	}
 }
 
 void
@@ -165,6 +166,9 @@ multiload_set_max_floor (MultiloadPlugin *ma, guint graph_id, int val)
 	AutoScaler *scaler = multiload_get_scaler(ma, graph_id);
 	if (scaler == NULL)
 		return;
+
+	if (val < 0)
+		val = AUTOSCALER_MIN_DEFAULT;
 
 	autoscaler_set_min(scaler, val);
 }
