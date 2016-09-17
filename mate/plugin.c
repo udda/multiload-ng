@@ -33,71 +33,9 @@
 #include "common/ui.h"
 
 
-
-gpointer
-multiload_ps_settings_open_for_read(MultiloadPlugin *ma)
-{
-	return ma->panel_data;
-}
-gpointer
-multiload_ps_settings_open_for_save(MultiloadPlugin *ma)
-{
-	return ma->panel_data;
-}
-
-gboolean
-multiload_ps_settings_save(gpointer settings)
-{
-	return TRUE;
-}
-
-void
-multiload_ps_settings_close(gpointer settings)
-{
-}
-
-gboolean
-multiload_ps_settings_get_int(gpointer settings, const gchar *key, int *destination)
-{
-	*destination = g_settings_get_int((GSettings*)settings, key);
-	return TRUE;
-}
-gboolean
-multiload_ps_settings_get_boolean(gpointer settings, const gchar *key, gboolean *destination)
-{
-	*destination = g_settings_get_boolean((GSettings*)settings, key);
-	return TRUE;
-}
-gboolean
-multiload_ps_settings_get_string(gpointer settings, const gchar *key, gchar *destination, size_t maxlen)
-{
-	const gchar* temp = g_settings_get_string((GSettings*)settings, key);
-	if (G_LIKELY(temp != NULL))
-		strncpy(destination, temp, maxlen);
-	return TRUE;
-}
-
-void
-multiload_ps_settings_set_int(gpointer settings, const gchar *key, int value)
-{
-	g_settings_set_int((GSettings*)settings, key, value);
-}
-void
-multiload_ps_settings_set_boolean(gpointer settings, const gchar *key, gboolean value)
-{
-	g_settings_set_boolean((GSettings*)settings, key, value);
-}
-void
-multiload_ps_settings_set_string(gpointer settings, const gchar *key, const gchar *value)
-{
-	g_settings_set_string((GSettings*)settings, key, value);
-}
-
-void
-multiload_ps_preferences_closed_cb(MultiloadPlugin *ma)
-{
-}
-
+// Panel Specific Settings Implementation
+#define MULTILOAD_CONFIG_BASENAME "indicator.conf"
+#include "common/ps-settings-impl-gsettings.inc"
 
 
 static void
@@ -178,11 +116,10 @@ mate_constructor (MatePanelApplet* applet, const char* iid, gpointer data)
 	mate_panel_applet_set_flags (applet, MATE_PANEL_APPLET_EXPAND_MINOR | MATE_PANEL_APPLET_HAS_HANDLE);
 	mate_panel_applet_set_background_widget(applet, GTK_WIDGET(applet));
 
-	multiload->panel_data = mate_panel_applet_settings_new (applet, "org.mate.panel.applet.multiload-ng");
-
 	gtk_container_add (GTK_CONTAINER(applet), GTK_WIDGET(multiload->container));
 	gtk_widget_show (GTK_WIDGET(applet));
 
+	_settings = mate_panel_applet_settings_new (applet, "org.mate.panel.applet.multiload-ng");
 	multiload_ui_read (multiload);
 	// trigger orientation setup
 	mate_orientation_cb(applet, -1, multiload);
