@@ -257,7 +257,7 @@ msgstr "无法打开以下网址：‘%s’"
 
 #. xgettext: Translator Full Name <translator_email@example.com>
 msgid "translator-credits"
-msgstr "translator-credits"
+msgstr "Dee.H.Y <dongfengweixiao@hotmail.com>"
 
 msgid "_Help"
 msgstr "帮助（&H）"
