@@ -19,6 +19,16 @@
  */
 
 
+/*
+ * Include this file in any plugin.c to make it use GKeyFile (standard INI-like files).
+ *
+ * PREREQUISITES
+ * -------------
+ * Before including, #define MULTILOAD_CONFIG_BASENAME as the name (without path) of config file.
+*/
+
+#include <glib.h>
+
 #define G_KEY_GROUP_NAME "Multiload"
 
 #ifndef MULTILOAD_CONFIG_BASENAME
