@@ -48,6 +48,7 @@ enum GraphType {
 
 
 typedef struct _LoadGraph LoadGraph;
+typedef void (*GraphUpdateFunc)	(LoadGraph *g, gpointer user_data);
 
 typedef struct _GraphConfig {
 	gboolean visible;
@@ -107,6 +108,9 @@ struct _LoadGraph {
 	gboolean tooltip_update;
 	gboolean filter_changed;
 
+	GraphUpdateFunc update_cb;
+	gpointer update_cb_user_data;
+
 	GraphConfig *config;
 };
 
@@ -135,6 +139,8 @@ G_GNUC_INTERNAL void
 multiload_init();
 G_GNUC_INTERNAL void
 multiload_sanitize(MultiloadPlugin *ma);
+G_GNUC_INTERNAL void
+multiload_set_update_cb (MultiloadPlugin *ma, guint graph_id, GraphUpdateFunc callback, gpointer user_data);
 G_GNUC_INTERNAL void
 multiload_defaults(MultiloadPlugin *ma);
 G_GNUC_INTERNAL MultiloadPlugin*

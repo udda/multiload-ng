@@ -188,6 +188,9 @@ load_graph_update (LoadGraph *g)
 		multiload_tooltip_update(g);
 
 	load_graph_draw(g);
+
+	if (g->update_cb)
+		g->update_cb(g, g->update_cb_user_data);
 	return TRUE;
 }
 

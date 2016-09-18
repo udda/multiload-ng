@@ -283,6 +283,13 @@ multiload_sanitize(MultiloadPlugin *ma)
 		ma->graph_config[0].visible = TRUE;
 }
 
+void
+multiload_set_update_cb (MultiloadPlugin *ma, guint graph_id, GraphUpdateFunc callback, gpointer user_data) {
+	g_assert_nonnull(ma);
+	ma->graphs[graph_id]->update_cb = callback;
+	ma->graphs[graph_id]->update_cb_user_data = user_data;
+}
+
 MultiloadPlugin*
 multiload_new()
 {
