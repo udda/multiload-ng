@@ -142,7 +142,8 @@ input, output and local (loopback, ADB, etc) traffic.</p>
 
 <p>Draws load average, as returned by <code>uptime</code>.</p>
 
-<p>Tooltip shows load average of 1,5,15 minutes and number of active processes/threads.</p>
+<p>Tooltip shows load average of 1,5,15 minutes, number of active processes/threads
+and informations about currently running kernel.</p>
 
 <h3>
 <a id="disk" class="anchor" href="#disk" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>DISK</h3>
@@ -429,7 +430,8 @@ If plugin does not show up in the list of panel plugins, you could try to repeat
 <p>Build system automatically selects highest GTK+ version available. If you need to build against a lower version, you have to
 set it manually (see next section, <a href="#advanced-configure">Advanced configure</a>)</p>
 
-<p>For example, XFCE and LXDE users need GTK2 version of the plugin. They need to add option <code>--with-gtk=2.0</code> to <em>./configure</em>.</p>
+<p>For example, LXDE panel and older versions of XFCE panel (&lt; 4.12.0) need GTK2 version of the plugin.
+They need to add option <code>--with-gtk=2.0</code> to <em>./configure</em>.</p>
 
 <h3>
 <a id="advanced-configure" class="anchor" href="#advanced-configure" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Advanced configure</h3>
@@ -527,8 +529,8 @@ set it manually (see next section, <a href="#advanced-configure">Advanced config
 <h3>
 <a id="plugin-shows-only-a-vertical-blank-line" class="anchor" href="#plugin-shows-only-a-vertical-blank-line" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Plugin shows only a vertical blank line</h3>
 
-<p>Probably you compiled against the wrong GTK version. E.g: XFCE and LXDE panels are still GTK2-based, and
-Multiload-ng build system automatically selects GTK3 if available.</p>
+<p>Probably you compiled against the wrong GTK+ version. E.g: LXDE panel and older version of XFCE panel (&lt; 4.12.0)
+are still GTK2-based, and Multiload-ng build system automatically selects GTK+3 if available.</p>
 
 <p>Try running Configure with the right options (see <a href="#configure">Configure</a> section above)</p>
 
