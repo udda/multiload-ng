@@ -99,8 +99,13 @@ systray_graph_update_cb(LoadGraph *g, gpointer user_data)
 	g->config->size = icon_size;
 
 	// update icon pixbuf
-	cairo_surface_t *surface = g->surface;
-	GdkPixbuf *pixbuf = gdk_pixbuf_get_from_surface (surface, 0, 0, g->draw_width, g->draw_height);
+#if GTK_API == 3
+	GdkPixbuf *pixbuf = gdk_pixbuf_get_from_surface (g->surface, 0, 0, g->draw_width, g->draw_height);
+#elif GTK_API == 2
+	GdkPixbuf *pixbuf = gdk_pixbuf_get_from_drawable (NULL, GDK_DRAWABLE(gtk_widget_get_window(g->disp)), NULL, 0, 0, 0, 0, g->draw_width, g->draw_height);
+#else
+#error "Wrong GTK+ version."
+#endif
 
 	if (gdk_pixbuf_get_width(pixbuf) != icon_size || gdk_pixbuf_get_height(pixbuf) != icon_size)
 		return; // incorrect pixbuf size - could be first drawing
