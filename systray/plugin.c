@@ -38,7 +38,7 @@
 #include "common/ps-settings-impl-gkeyfile.inc"
 
 
-static GtkWindow *dummy_window;
+static GtkWidget *offscr;
 static GtkStatusIcon *status_icons[GRAPH_MAX];
 static GtkWidget *menu;
 
@@ -75,10 +75,9 @@ systray_graph_update_cb(LoadGraph *g, gpointer user_data)
 
 	if (!g->config->visible)
 		return;
-	if (g->surface == NULL)
-		return;
-	if (status_icons[g->id] == NULL)
-		return;
+
+	g_return_if_fail (g->surface != NULL);
+	g_return_if_fail (status_icons[g->id] != NULL);
 
 	for (i=0, v=0; i<GRAPH_MAX; i++) {
 		visible = g->multiload->graph_config[i].visible;
@@ -87,20 +86,25 @@ systray_graph_update_cb(LoadGraph *g, gpointer user_data)
 			v++;
 	}
 
-	if (!gtk_status_icon_is_embedded(status_icons[g->id]))
-		return;
-	guint size = gtk_status_icon_get_size(status_icons[g->id]);
-	gtk_widget_set_size_request(GTK_WIDGET(g->multiload->container), v*GRAPH_MAX, size);
-	gtk_window_resize(dummy_window, v*GRAPH_MAX, size);
+	g_return_if_fail (gtk_status_icon_is_embedded(status_icons[g->id]));
+
+	guint icon_size = gtk_status_icon_get_size(status_icons[g->id]);
+
+	gtk_window_resize(GTK_WINDOW(offscr), v*icon_size, icon_size);
+	gtk_widget_set_size_request(GTK_WIDGET(g->multiload->container), v*icon_size, icon_size);
 
 	gtk_status_icon_set_tooltip_text(status_icons[g->id], gtk_widget_get_tooltip_text(g->disp));
 
 	// set graph size from icon size
-	g->config->size = size;
+	g->config->size = icon_size;
 
 	// update icon pixbuf
 	cairo_surface_t *surface = g->surface;
 	GdkPixbuf *pixbuf = gdk_pixbuf_get_from_surface (surface, 0, 0, g->draw_width, g->draw_height);
+
+	if (gdk_pixbuf_get_width(pixbuf) != icon_size || gdk_pixbuf_get_height(pixbuf) != icon_size)
+		return; // incorrect pixbuf size - could be first drawing
+
 	gtk_status_icon_set_from_pixbuf(status_icons[g->id], pixbuf);
 }
 
@@ -180,18 +184,11 @@ int main (int argc, char **argv)
 
 	memset(status_icons, 0, sizeof(status_icons));
 
-	// UGLY HACK: create dummy window just to realize plugin
-	dummy_window = GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
-	gtk_container_add(GTK_CONTAINER(dummy_window), GTK_WIDGET(multiload->container));
-	gtk_window_set_decorated(dummy_window, FALSE);
-	gtk_window_set_skip_taskbar_hint(dummy_window, TRUE);
-	gtk_window_set_skip_pager_hint(dummy_window, TRUE);
-	gtk_window_set_keep_below(dummy_window, TRUE);
-	gtk_window_set_accept_focus(dummy_window, FALSE);
-	gtk_widget_set_can_focus (GTK_WIDGET(dummy_window), FALSE);
-	gtk_widget_set_can_focus (GTK_WIDGET(multiload->container), FALSE);
-
-	gtk_widget_show(GTK_WIDGET(dummy_window));
+	// create offscreen window to keep widget drawing
+	offscr = gtk_offscreen_window_new ();
+	gtk_widget_set_size_request(GTK_WIDGET(multiload->container), -1, -1);
+	gtk_container_add(GTK_CONTAINER(offscr), GTK_WIDGET(multiload->container));
+	gtk_widget_show(offscr);
 
 	build_menu(multiload);
 	build_icons(multiload);
