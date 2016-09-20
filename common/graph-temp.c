@@ -327,6 +327,8 @@ multiload_graph_temp_get_data (int Maximum, int data[2], LoadGraph *g, Temperatu
 		case TEMP_SOURCE_SUPPORT_ACPITZ:
 			list_temp_acpitz(&list, FALSE);
 			break;
+		case TEMP_SOURCE_NO_SUPPORT:
+			return;
 		default:
 			g_assert_not_reached();
 			return;
