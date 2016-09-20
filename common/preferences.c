@@ -747,6 +747,157 @@ multiload_preferences_source_auto_toggled_cb (GtkToggleButton *toggle, Multiload
 	multiload_preferences_update_dynamic_widgets(ma);
 }
 
+
+#ifdef MULTILOAD_DEVELOPER_MODE
+
+#define _CPRINT(c, buf) sprintf(buf, "HEX_TO_RGBA(%02X%02X%02X, %02X)", (guint8)(255*c.red), (guint8)(255*c.green), (guint8)(255*c.blue), (guint8)(255*c.alpha));
+
+static void
+multiload_preferences_dev_colorscheme_generate_clicked_cb (GtkToolButton *btn, MultiloadPlugin *ma)
+{
+	char buf[30];
+	printf("\t{ \"COLORSCHEME_NAME\", NULL /*color_scheme_icon_xpm*/,\n");
+
+	printf("\t\t\t{  { // CPU\n");
+	_CPRINT(ma->graph_config[GRAPH_CPULOAD].colors[0], buf);
+	printf("\t\t\t\t%s,\t\t// User\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_CPULOAD].colors[1], buf);
+	printf("\t\t\t\t%s,\t\t// System\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_CPULOAD].colors[2], buf);
+	printf("\t\t\t\t%s,\t\t// Nice\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_CPULOAD].colors[3], buf);
+	printf("\t\t\t\t%s,\t\t// IOWait\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_CPULOAD].colors[4], buf);
+	printf("\t\t\t\t%s,\t\t// Border\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_CPULOAD].colors[5], buf);
+	printf("\t\t\t\t%s,\t\t// Background (top)\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_CPULOAD].colors[6], buf);
+	printf("\t\t\t\t%s\t\t\t// Background (bottom)\n", buf);
+
+	printf("\t\t\t}, { // MEM\n");
+	_CPRINT(ma->graph_config[GRAPH_MEMLOAD].colors[0], buf);
+	printf("\t\t\t\t%s,\t\t// User\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_MEMLOAD].colors[1], buf);
+	printf("\t\t\t\t%s,\t\t// Shared\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_MEMLOAD].colors[2], buf);
+	printf("\t\t\t\t%s,\t\t// Buffers\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_MEMLOAD].colors[3], buf);
+	printf("\t\t\t\t%s,\t\t// Cached\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_MEMLOAD].colors[4], buf);
+	printf("\t\t\t\t%s,\t\t// Border\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_MEMLOAD].colors[5], buf);
+	printf("\t\t\t\t%s,\t\t// Background (top)\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_MEMLOAD].colors[6], buf);
+	printf("\t\t\t\t%s\t\t\t// Background (bottom)\n", buf);
+
+	printf("\t\t\t}, { // NET\n");
+	_CPRINT(ma->graph_config[GRAPH_NETLOAD].colors[0], buf);
+	printf("\t\t\t\t%s,\t\t// In\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_NETLOAD].colors[1], buf);
+	printf("\t\t\t\t%s,\t\t// Out\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_NETLOAD].colors[2], buf);
+	printf("\t\t\t\t%s,\t\t// Local\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_NETLOAD].colors[3], buf);
+	printf("\t\t\t\t%s,\t\t// Border\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_NETLOAD].colors[4], buf);
+	printf("\t\t\t\t%s,\t\t// Background (top)\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_NETLOAD].colors[5], buf);
+	printf("\t\t\t\t%s\t\t\t// Background (bottom)\n", buf);
+
+	printf("\t\t\t}, { // SWAP\n");
+	_CPRINT(ma->graph_config[GRAPH_SWAPLOAD].colors[0], buf);
+	printf("\t\t\t\t%s,\t\t// Used\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_SWAPLOAD].colors[1], buf);
+	printf("\t\t\t\t%s,\t\t// Border\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_SWAPLOAD].colors[2], buf);
+	printf("\t\t\t\t%s,\t\t// Background (top)\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_SWAPLOAD].colors[3], buf);
+	printf("\t\t\t\t%s\t\t\t// Background (bottom)\n", buf);
+
+	printf("\t\t\t}, { // LOAD\n");
+	_CPRINT(ma->graph_config[GRAPH_LOADAVG].colors[0], buf);
+	printf("\t\t\t\t%s,\t\t// Average\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_LOADAVG].colors[1], buf);
+	printf("\t\t\t\t%s,\t\t// Border\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_LOADAVG].colors[2], buf);
+	printf("\t\t\t\t%s,\t\t// Background (top)\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_LOADAVG].colors[3], buf);
+	printf("\t\t\t\t%s\t\t\t// Background (bottom)\n", buf);
+
+	printf("\t\t\t}, { // DISK\n");
+	_CPRINT(ma->graph_config[GRAPH_DISKLOAD].colors[0], buf);
+	printf("\t\t\t\t%s,\t\t// Read\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_DISKLOAD].colors[1], buf);
+	printf("\t\t\t\t%s,\t\t// Write\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_DISKLOAD].colors[2], buf);
+	printf("\t\t\t\t%s,\t\t// Border\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_DISKLOAD].colors[3], buf);
+	printf("\t\t\t\t%s,\t\t// Background (top)\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_DISKLOAD].colors[4], buf);
+	printf("\t\t\t\t%s\t\t\t// Background (bottom)\n", buf);
+
+	printf("\t\t\t}, { // TEMP\n");
+	_CPRINT(ma->graph_config[GRAPH_TEMPERATURE].colors[0], buf);
+	printf("\t\t\t\t%s,\t\t// Value\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_TEMPERATURE].colors[1], buf);
+	printf("\t\t\t\t%s,\t\t// Critical\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_TEMPERATURE].colors[2], buf);
+	printf("\t\t\t\t%s,\t\t// Border\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_TEMPERATURE].colors[3], buf);
+	printf("\t\t\t\t%s,\t\t// Background (top)\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_TEMPERATURE].colors[4], buf);
+	printf("\t\t\t\t%s\t\t\t// Background (bottom)\n", buf);
+
+	printf("\t\t\t}, { // PARM\n");
+	_CPRINT(ma->graph_config[GRAPH_PARAMETRIC].colors[0], buf);
+	printf("\t\t\t\t%s,\t\t// Result 1\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_PARAMETRIC].colors[1], buf);
+	printf("\t\t\t\t%s,\t\t// Result 2\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_PARAMETRIC].colors[2], buf);
+	printf("\t\t\t\t%s,\t\t// Result 3\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_PARAMETRIC].colors[3], buf);
+	printf("\t\t\t\t%s,\t\t// Result 4\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_PARAMETRIC].colors[4], buf);
+	printf("\t\t\t\t%s,\t\t// Border\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_PARAMETRIC].colors[5], buf);
+	printf("\t\t\t\t%s,\t\t// Background (top)\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_PARAMETRIC].colors[6], buf);
+	printf("\t\t\t\t%s\t\t\t// Background (bottom)\n", buf);
+
+	printf("\t\t\t}\n");
+	printf("\t\t}\n");
+	printf("\t},\n");
+}
+
+
+static void
+multiload_developer_buttons(MultiloadPlugin *ma)
+{
+	GtkToolbar *toolbar = GTK_TOOLBAR(OB("toolbar_colors"));
+	GtkToolItem *button;
+
+	// separator
+	button = gtk_separator_tool_item_new();
+	gtk_separator_tool_item_set_draw (GTK_SEPARATOR_TOOL_ITEM(button), FALSE);
+	gtk_tool_item_set_expand (button, TRUE);
+	gtk_widget_show(GTK_WIDGET(button));
+	gtk_toolbar_insert(toolbar, button, -1);
+
+	// Generate C code for current color scheme
+	button = gtk_tool_button_new(NULL, NULL);
+	gtk_tool_button_set_icon_name(GTK_TOOL_BUTTON(button), "insert-object");
+	gtk_tool_item_set_tooltip_text (button, "MULTILOAD_DEVELOPER_MODE: generate C code for current color scheme");
+	gtk_widget_show(GTK_WIDGET(button));
+	g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(multiload_preferences_dev_colorscheme_generate_clicked_cb), ma);
+	gtk_toolbar_insert(toolbar, button, -1);
+
+}
+#else
+
+static void multiload_developer_buttons() {}
+
+#endif
+
 static gboolean
 multiload_preferences_bgpreview_draw_cb(GtkWidget *widget, cairo_t *cr, LoadGraph *g)
 {
@@ -1027,6 +1178,8 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 	multiload_preferences_checkboxes_sensitive_cb(NULL, NULL);
 	multiload_preferences_update_dynamic_widgets(ma);
 
+	// other stuff
+	multiload_developer_buttons(ma);
 
 	// main window
 	GtkWidget *mainwnd_vbox = GTK_WIDGET(OB("mainwnd_vbox"));
