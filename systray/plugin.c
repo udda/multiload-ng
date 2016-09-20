@@ -41,6 +41,7 @@
 static GtkWidget *offscr;
 static GtkStatusIcon *status_icons[GRAPH_MAX];
 static GtkWidget *menu;
+static guint timer_indexes[GRAPH_MAX];
 
 static void
 systray_destroy_cb(GtkWidget *widget, MultiloadPlugin *ma)
@@ -93,8 +94,6 @@ systray_graph_update_cb(LoadGraph *g, gpointer user_data)
 	gtk_window_resize(GTK_WINDOW(offscr), v*icon_size, icon_size);
 	gtk_widget_set_size_request(GTK_WIDGET(g->multiload->container), v*icon_size, icon_size);
 
-	gtk_status_icon_set_tooltip_text(status_icons[g->id], gtk_widget_get_tooltip_text(g->disp));
-
 	// set graph size from icon size
 	g->config->size = icon_size;
 
@@ -113,6 +112,32 @@ systray_graph_update_cb(LoadGraph *g, gpointer user_data)
 	gtk_status_icon_set_from_pixbuf(status_icons[g->id], pixbuf);
 }
 
+gboolean
+systray_tooltip_disable (GtkStatusIcon *status_icon)
+{
+	LoadGraph *g = g_object_get_data(G_OBJECT(status_icon), "graph");
+
+	timer_indexes[g->id] = 0;
+
+	g->tooltip_update = FALSE;
+	gtk_status_icon_set_tooltip_markup(status_icon, gtk_status_icon_get_title(status_icon));
+
+	return FALSE; // single shot timer
+}
+
+gboolean
+systray_query_tooltip_cb (GtkStatusIcon *status_icon, gint x, gint y, gboolean keyboard_mode, GtkTooltip *tooltip, LoadGraph *g)
+{
+	g->tooltip_update = TRUE;
+
+	if (timer_indexes[g->id] > 0)
+		g_source_remove(timer_indexes[g->id]);
+	timer_indexes[g->id] = g_timeout_add (g->config->interval+100, (GSourceFunc) systray_tooltip_disable, status_icon);
+
+	gtk_tooltip_set_markup(tooltip, gtk_widget_get_tooltip_markup(g->disp));
+
+	return TRUE;
+}
 
 static void
 build_icons (MultiloadPlugin *ma)
@@ -129,11 +154,16 @@ build_icons (MultiloadPlugin *ma)
 		// create status icon
 		status_icons[i] = gtk_status_icon_new_from_icon_name (about_data_icon);
 		g_signal_connect (G_OBJECT(status_icons[i]), "popup-menu", G_CALLBACK(systray_popup_menu), ma);
+		g_signal_connect (G_OBJECT(status_icons[i]), "query-tooltip", G_CALLBACK(systray_query_tooltip_cb), ma->graphs[i]);
+		g_object_set_data(G_OBJECT(status_icons[i]), "graph", ma->graphs[i]);
 
 		// set title
 		title = g_strdup_printf("Multiload-ng: %s", graph_types[i].label);
 		gtk_status_icon_set_title(status_icons[i], title);
 		g_free(title);
+
+		// enable "query-tooltip" signal
+		gtk_status_icon_set_has_tooltip (status_icons[i], TRUE);
 
 		multiload_set_update_cb(ma, i, systray_graph_update_cb, status_icons[i]);
 	}
@@ -188,6 +218,7 @@ int main (int argc, char **argv)
 	multiload_start(multiload);
 
 	memset(status_icons, 0, sizeof(status_icons));
+	memset(timer_indexes, 0, sizeof(timer_indexes));
 
 	// create offscreen window to keep widget drawing
 	offscr = gtk_offscreen_window_new ();
