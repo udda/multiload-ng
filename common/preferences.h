@@ -72,7 +72,7 @@ enum MultiloadLimits {
 
 enum MultiloadDefaults {
 	DEFAULT_SIZE						= 40,
-	DEFAULT_INTERVAL					= 500,
+	DEFAULT_INTERVAL					= 1000,
 	DEFAULT_PADDING						= 2,
 	DEFAULT_SPACING						= 1,
 	DEFAULT_BORDER_WIDTH				= 1,
