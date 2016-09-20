@@ -97,9 +97,9 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 	char sysfs_path[PATH_MAX];
 	char *device;
 	char prefix[20];
-	guint64 read, write;
-	guint64 read_total = 0, write_total = 0;
-	guint64 readdiff, writediff;
+	long long unsigned read, write;
+	long long unsigned read_total = 0, write_total = 0;
+	long long unsigned readdiff, writediff;
 
 
 	if ((f_mntent = setmntent(MOUNTED, "r")) == NULL)
@@ -165,7 +165,7 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 		f_stat = fopen(sysfs_path, "r");
 		if (f_stat == NULL)
 			continue;
-		int result = fscanf(f_stat, "%*u %*u %lu %*u %*u %*u %lu %*u", &read, &write);
+		int result = fscanf(f_stat, "%*u %*u %llu %*u %*u %*u %llu %*u", &read, &write);
 		fclose(f_stat);
 		if (result != 2)
 			continue;
@@ -204,8 +204,8 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 void
 multiload_graph_disk_cmdline_output (LoadGraph *g, DiskData *xd)
 {
-	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%ld", xd->read_speed);
-	g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "%ld", xd->write_speed);
+	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%lld", xd->read_speed);
+	g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "%lld", xd->write_speed);
 }
 
 

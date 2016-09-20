@@ -32,15 +32,15 @@
 
 typedef struct {
 	char key[20];
-	guint64 *address;
+	long long unsigned *address;
 } meminfo_mapping_table;
 
 void
 multiload_graph_swap_get_data (int Maximum, int data [1], LoadGraph *g, SwapData *xd)
 {
 	// displayed keys
-	static guint64 kb_swap_total = 0;
-	static guint64 kb_swap_free = 0;
+	static long long unsigned kb_swap_total = 0;
+	static long long unsigned kb_swap_free = 0;
 
 	const static meminfo_mapping_table table[] = {
 		{ "SwapTotal",		&kb_swap_total },
@@ -84,7 +84,7 @@ multiload_graph_swap_get_data (int Maximum, int data [1], LoadGraph *g, SwapData
 void
 multiload_graph_swap_cmdline_output (LoadGraph *g, SwapData *xd)
 {
-	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%ld", xd->used);
+	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%llu", xd->used);
 }
 
 

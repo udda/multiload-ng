@@ -32,24 +32,24 @@
 
 typedef struct {
 	char key[20];
-	guint64 *address;
+	long long unsigned *address;
 } meminfo_mapping_table;
 
 void
 multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryData *xd)
 {
 	// displayed keys
-	static guint64 kb_main_total = 0;
-	static guint64 kb_main_buffers = 0;
-	static guint64 kb_main_shared = 0;
-	static guint64 kb_main_cached = 0;
-	static guint64 kb_main_used = 0;
+	static long long unsigned kb_main_total = 0;
+	static long long unsigned kb_main_buffers = 0;
+	static long long unsigned kb_main_shared = 0;
+	static long long unsigned kb_main_cached = 0;
+	static long long unsigned kb_main_used = 0;
 
 	// auxiliary keys
-	static guint64 kb_main_available = 0;
-	static guint64 kb_main_free = 0;
-	static guint64 kb_page_cache = 0;
-	static guint64 kb_slab = 0;
+	static long long unsigned kb_main_available = 0;
+	static long long unsigned kb_main_free = 0;
+	static long long unsigned kb_page_cache = 0;
+	static long long unsigned kb_slab = 0;
 
 	const static meminfo_mapping_table table[] = {
 		{ "MemTotal",		&kb_main_total },
@@ -109,10 +109,10 @@ multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryDat
 void
 multiload_graph_mem_cmdline_output (LoadGraph *g, MemoryData *xd)
 {
-	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%ld", xd->user);
-	g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "%ld", xd->shared);
-	g_snprintf(g->output_str[2], sizeof(g->output_str[2]), "%ld", xd->buffers);
-	g_snprintf(g->output_str[3], sizeof(g->output_str[3]), "%ld", xd->cache);
+	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%llu", xd->user);
+	g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "%llu", xd->shared);
+	g_snprintf(g->output_str[2], sizeof(g->output_str[2]), "%llu", xd->buffers);
+	g_snprintf(g->output_str[3], sizeof(g->output_str[3]), "%llu", xd->cache);
 }
 
 void
