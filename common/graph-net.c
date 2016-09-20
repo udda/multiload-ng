@@ -33,8 +33,8 @@
 
 typedef struct {
 	char name[32];
-	guint64 rx_bytes;
-	guint64 tx_bytes;
+	long long unsigned rx_bytes;
+	long long unsigned tx_bytes;
 
 	FILE *f_address;
 	char address[40]; // IPv6
@@ -137,7 +137,7 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 		if (strchr(buf, ':') == NULL)
 			continue;
 
-		if (3 != sscanf(buf, "%s %lu %*u %*u %*u %*u %*u %*u %*u %lu", d.name, &d.rx_bytes, &d.tx_bytes))
+		if (3 != sscanf(buf, "%s %llu %*u %*u %*u %*u %*u %*u %*u %llu", d.name, &d.rx_bytes, &d.tx_bytes))
 			continue; // bad data
 		d.name[strlen(d.name)-1] = '\0'; // remove trailing colon
 
