@@ -49,7 +49,7 @@ multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData
 	g_assert_cmpint(n, >=, 0);
 
 	// threads stats
-	n = fscanf(f, "%*s %*s %*s %d/%d", &xd->proc_active, &xd->proc_count);
+	n = fscanf(f, "%*s %*s %*s %u/%u", &xd->proc_active, &xd->proc_count);
 	g_assert_cmpint(n, ==, 2);
 
 	if (G_UNLIKELY(first_call)) {
@@ -84,7 +84,7 @@ multiload_graph_load_tooltip_update (char **title, char **text, LoadGraph *g, Lo
 		*text = g_strdup_printf(_(	"Last minute: %0.02f\n"
 									"Last 5 minutes: %0.02f\n"
 									"Last 15 minutes: %0.02f\n"
-									"Processes/threads: %d active out of %d."),
+									"Processes/threads: %u active out of %u."),
 									xd->loadavg[LOADAVG_1], xd->loadavg[LOADAVG_5], xd->loadavg[LOADAVG_15],
 									xd->proc_active, xd->proc_count);
 	} else {

@@ -33,8 +33,8 @@
 
 typedef struct {
 	char name[32];
-	long long unsigned rx_bytes;
-	long long unsigned tx_bytes;
+	guint64 rx_bytes;
+	guint64 tx_bytes;
 
 	FILE *f_address;
 	char address[40]; // IPv6
@@ -137,7 +137,7 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 		if (strchr(buf, ':') == NULL)
 			continue;
 
-		if (3 != sscanf(buf, "%s %llu %*u %*u %*u %*u %*u %*u %*u %llu", d.name, &d.rx_bytes, &d.tx_bytes))
+		if (3 != sscanf(buf, "%s %"G_GUINT64_FORMAT" %*u %*u %*u %*u %*u %*u %*u %"G_GUINT64_FORMAT, d.name, &d.rx_bytes, &d.tx_bytes))
 			continue; // bad data
 		d.name[strlen(d.name)-1] = '\0'; // remove trailing colon
 
@@ -283,9 +283,9 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 void
 multiload_graph_net_cmdline_output (LoadGraph *g, NetData *xd)
 {
-	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%llu", xd->in_speed);
-	g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "%llu", xd->out_speed);
-	g_snprintf(g->output_str[2], sizeof(g->output_str[2]), "%llu", xd->local_speed);
+	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%"G_GUINT64_FORMAT, xd->in_speed);
+	g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "%"G_GUINT64_FORMAT, xd->out_speed);
+	g_snprintf(g->output_str[2], sizeof(g->output_str[2]), "%"G_GUINT64_FORMAT, xd->local_speed);
 }
 
 

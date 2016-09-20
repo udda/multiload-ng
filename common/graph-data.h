@@ -30,7 +30,7 @@ G_BEGIN_DECLS
 
 
 typedef struct _CpuData {
-	long long unsigned last [5];
+	guint64 last [5];
 
 	gfloat user;
 	gfloat nice;
@@ -47,27 +47,27 @@ typedef struct _CpuData {
 } CpuData;
 
 typedef struct _MemoryData {
-	long long unsigned user;
-	long long unsigned shared;
-	long long unsigned buffers;
-	long long unsigned cache;
-	long long unsigned total;
+	guint64 user;
+	guint64 shared;
+	guint64 buffers;
+	guint64 cache;
+	guint64 total;
 } MemoryData;
 
 typedef struct _NetData {
-	long long unsigned last [3];
+	guint64 last [3];
 	AutoScaler scaler;
 
-	long long unsigned in_speed;
-	long long unsigned out_speed;
-	long long unsigned local_speed;
+	guint64 in_speed;
+	guint64 out_speed;
+	guint64 local_speed;
 
 	gchar ifaces[64];
 } NetData;
 
 typedef struct _SwapData {
-	long long unsigned used;
-	long long unsigned total;
+	guint64 used;
+	guint64 total;
 } SwapData;
 
 typedef struct _LoadData {
@@ -82,12 +82,12 @@ typedef struct _LoadData {
 } LoadData;
 
 typedef struct _DiskData {
-	long long unsigned last_read;
-	long long unsigned last_write;
+	guint64 last_read;
+	guint64 last_write;
 	AutoScaler scaler;
 
-	long long unsigned read_speed;
-	long long unsigned write_speed;
+	guint64 read_speed;
+	guint64 write_speed;
 
 	gchar partitions[128];
 } DiskData;

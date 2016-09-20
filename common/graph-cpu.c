@@ -49,11 +49,11 @@ multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *
 	static const gchar *cpufreq_sysfs_path = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor";
 
 	FILE *f;
-	long long unsigned irq, softirq, total;
+	guint64 irq, softirq, total;
 	guint i;
 
-	long long unsigned time[CPU_MAX];
-	long long unsigned diff[CPU_MAX];
+	guint64 time[CPU_MAX];
+	guint64 diff[CPU_MAX];
 
 	char *buf;
 	size_t n;
@@ -117,7 +117,8 @@ multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *
 
 	// CPU stats
 	f = cached_fopen_r("/proc/stat", TRUE);
-	n = fscanf(f, "cpu %llu %llu %llu %llu %llu %llu %llu",	time+CPU_USER, time+CPU_NICE, time+CPU_SYS, time+CPU_IDLE, time+CPU_IOWAIT, &irq, &softirq);
+	n = fscanf(f, "cpu %"G_GUINT64_FORMAT" %"G_GUINT64_FORMAT" %"G_GUINT64_FORMAT" %"G_GUINT64_FORMAT" %"G_GUINT64_FORMAT" %"G_GUINT64_FORMAT" %"G_GUINT64_FORMAT,
+				time+CPU_USER, time+CPU_NICE, time+CPU_SYS, time+CPU_IDLE, time+CPU_IOWAIT, &irq, &softirq);
 	g_assert_cmpuint(n, ==, 7);
 	time[CPU_IOWAIT] += irq+softirq;
 
