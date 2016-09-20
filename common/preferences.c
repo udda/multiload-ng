@@ -382,7 +382,7 @@ multiload_preferences_interval_output_cb (GtkSpinButton *spin, gpointer p)
 	gtk_entry_set_text(GTK_ENTRY(spin), s);
 	g_free(s);
 
-	if (n < tooltip_timeout)
+	if (n <= tooltip_timeout)
 		gtk_entry_set_icon_from_icon_name (GTK_ENTRY(spin), GTK_ENTRY_ICON_SECONDARY, "dialog-warning");
 	else
 		gtk_entry_set_icon_from_icon_name (GTK_ENTRY(spin), GTK_ENTRY_ICON_SECONDARY, NULL);
