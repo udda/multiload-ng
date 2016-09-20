@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: multiload-ng\n"
 "Report-Msgid-Bugs-To: Moo <hazap@hotmail.com>\n"
 "POT-Creation-Date: 2016-09-09 21:58+0200\n"
-"PO-Revision-Date: 2016-09-10 01:54+0300\n"
+"PO-Revision-Date: 2016-09-20 14:19+0300\n"
 "Last-Translator: Moo <hazap@hotmail.com>\n"
 "Language-Team: Lithuanian\n"
 "Language: lt\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Poedit 1.8.8\n"
 
 msgid "Modern graphical system monitor"
-msgstr "Šiuolaikinis grafinis sistemos monitorius"
+msgstr "Šiuolaikinė grafinė sistemos prižiūryklė"
 
 msgid "Copyright © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, and others"
 msgstr "Autorių teisės © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, ir kiti"
@@ -238,19 +238,19 @@ msgstr "%s/s"
 
 #. xgettext: single-letter form for "days" - e.g. 3 days -> 3d
 msgid "d"
-msgstr "d"
+msgstr "d."
 
 #. xgettext: single-letter form for "hours" - e.g. 3 hours -> 3h
 msgid "h"
-msgstr "v"
+msgstr "val."
 
 #. xgettext: single-letter form for "minutes" - e.g. 3 minutes -> 3m
 msgid "m"
-msgstr "m"
+msgstr "min."
 
 #. xgettext: single-letter form for "seconds" - e.g. 3 seconds -> 3s
 msgid "s"
-msgstr "s"
+msgstr "sek."
 
 #, c-format
 msgid "Unable to open the following url: '%s'"
@@ -557,6 +557,6 @@ msgstr ""
 "tekstas.\n"
 "* Bet kokio po pirmos eilutės esančio papildomo turinio bus nepaisoma.\n"
 "\n"
-"<b>ĮPRASTŲ KOMANDŲ EILUČIŲ PAVYZDŽIAI</b>* Norint stebėti failo pakeitimus: "
-"cat [failo pavadinimas]* Norint vykdyti pasirinktinas apvalkalo komandas: sh "
-"-c \"[komandos]\""
+"<b>ĮPRASTŲ KOMANDŲ EILUČIŲ PAVYZDŽIAI</b>\n"
+"* Norint stebėti failo pakeitimus: cat [failo pavadinimas]\n"
+"* Norint vykdyti pasirinktinas apvalkalo komandas: sh -c \"[komandos]\""
