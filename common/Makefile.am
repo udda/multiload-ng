@@ -52,6 +52,7 @@ COLOR_SCHEME_ICONS = \
 	$(top_srcdir)/data/color-scheme-solarized-dark.xpm \
 	$(top_srcdir)/data/color-scheme-solarized-light.xpm \
 	$(top_srcdir)/data/color-scheme-fruity.xpm \
+	$(top_srcdir)/data/color-scheme-colored-glass.xpm \
 	$(top_srcdir)/data/color-scheme-ubuntu-ambiance.xpm \
 	$(top_srcdir)/data/color-scheme-ubuntu-radiance.xpm \
 	$(top_srcdir)/data/color-scheme-linux-mint.xpm \

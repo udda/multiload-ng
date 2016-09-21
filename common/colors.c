@@ -578,6 +578,64 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
+	{ "Colored Glass", color_scheme_colored_glass_xpm,
+			{  { // CPU
+				HEX_TO_RGBA(FFFFFF, D8),		// User
+				HEX_TO_RGBA(FFFFFF, A5),		// System
+				HEX_TO_RGBA(FFFFFF, 72),		// Nice
+				HEX_TO_RGBA(FFFFFF, 3F),		// IOWait
+				HEX_TO_RGBA(FFFFFF, FF),		// Border
+				HEX_TO_RGBA(BEEEFF, FF),		// Background (top)
+				HEX_TO_RGBA(48BDE6, FF)			// Background (bottom)
+			}, { // MEM
+				HEX_TO_RGBA(FFFFFF, D8),		// User
+				HEX_TO_RGBA(FFFFFF, A5),		// Shared
+				HEX_TO_RGBA(FFFFFF, 72),		// Buffers
+				HEX_TO_RGBA(FFFFFF, 3F),		// Cached
+				HEX_TO_RGBA(FFFFFF, FF),		// Border
+				HEX_TO_RGBA(BFFFE0, FF),		// Background (top)
+				HEX_TO_RGBA(43D18D, FF)			// Background (bottom)
+			}, { // NET
+				HEX_TO_RGBA(FFFFFF, D8),		// In
+				HEX_TO_RGBA(FFFFFF, A5),		// Out
+				HEX_TO_RGBA(FFFFFF, 72),		// Local
+				HEX_TO_RGBA(FFFFFF, FF),		// Border
+				HEX_TO_RGBA(F1F6D1, FF),		// Background (top)
+				HEX_TO_RGBA(D7CD46, FF)			// Background (bottom)
+			}, { // SWAP
+				HEX_TO_RGBA(FFFFFF, D8),		// Used
+				HEX_TO_RGBA(FFFFFF, FF),		// Border
+				HEX_TO_RGBA(E6D6F0, FF),		// Background (top)
+				HEX_TO_RGBA(D0A1E1, FF)			// Background (bottom)
+			}, { // LOAD
+				HEX_TO_RGBA(FFFFFF, D8),		// Average
+				HEX_TO_RGBA(FFFFFF, FF),		// Border
+				HEX_TO_RGBA(EACECE, FF),		// Background (top)
+				HEX_TO_RGBA(DF8181, FF)			// Background (bottom)
+			}, { // DISK
+				HEX_TO_RGBA(FFFFFF, D8),		// Read
+				HEX_TO_RGBA(FFFFFF, A5),		// Write
+				HEX_TO_RGBA(FFFFFF, FF),		// Border
+				HEX_TO_RGBA(F3E8DD, FF),		// Background (top)
+				HEX_TO_RGBA(E2AB70, FF)			// Background (bottom)
+			}, { // TEMP
+				HEX_TO_RGBA(FFFFFF, D8),		// Value
+				HEX_TO_RGBA(FFFFFF, A5),		// Critical
+				HEX_TO_RGBA(FFFFFF, FF),		// Border
+				HEX_TO_RGBA(FAD8F3, FF),		// Background (top)
+				HEX_TO_RGBA(F28AE1, FF)			// Background (bottom)
+			}, { // PARM
+				HEX_TO_RGBA(FFFFFF, D8),		// Result 1
+				HEX_TO_RGBA(FFFFFF, A5),		// Result 2
+				HEX_TO_RGBA(FFFFFF, 72),		// Result 3
+				HEX_TO_RGBA(FFFFFF, 3F),		// Result 4
+				HEX_TO_RGBA(FFFFFF, FF),		// Border
+				HEX_TO_RGBA(DDDDDD, FF),		// Background (top)
+				HEX_TO_RGBA(BBBBBB, FF)			// Background (bottom)
+			}
+		}
+	},
+
 	{ "Ubuntu Ambiance", color_scheme_ubuntu_ambiance_xpm,
 			{  { // CPU
 				HEX_TO_RGBA(E96F20, FF),		// User
