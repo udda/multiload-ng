@@ -178,42 +178,35 @@ AC_CONFIG_FILES([
 AC_OUTPUT
 
 
-echo
-echo
-echo "* ----------------------"
-echo "*  Build Configuration"
-echo "* ----------------------"
-echo "*"
-echo "*  CFLAGS: $CFLAGS"
+AS_ECHO([ ])
+AS_ECHO([ ])
+AS_ECHO([ "* -----------------------------" ])
+AS_ECHO([ "*  Build configuration: ])
+AS_ECHO([ "* -----------------------------" ])
+AS_ECHO([ "*" ])
+AS_ECHO([ "*  CFLAGS: $CFLAGS" ])
+AS_ECHO([ "*  Building against GTK+$GTK_API" ])
+AS_ECHO([ "*" ])
 if test "x$enable_debug" = "xyes"; then
-echo "*  Enabled debugging CFLAGS"
+	AS_ECHO([ "*  Enabled debugging CFLAGS" ])
 fi
 if test "x$enable_profiling" = "xyes"; then
-echo "*  Enabled profiling CFLAGS"
+	AS_ECHO([ "*  Enabled profiling CFLAGS" ])
 fi
 if test "x$enable_deprecations" = "xno"; then
-echo "*"
-echo "*  Disabled GDK/GTK deprecation warnings"
+	AS_ECHO([ "*  Disabled GDK/GTK deprecation warnings" ])
 fi
 if test "x$enable_experimental" = "xyes"; then
-echo "*"
-echo "*  Enabled experimental code (WARNING: this is unstable)"
+	AS_ECHO([ "*  Enabled experimental code (WARNING: this is unstable)" ])
 fi
-echo "*"
-if test "x$with_gtk" = "xauto"; then
-echo "*  Building against GTK+$GTK_API (detected automatically)"
-echo "*  Please make sure that your panel supports GTK+$GTK_API plugins."
-else
-echo "*  Building against GTK+$GTK_API (set by command line option)"
-fi
-echo "*"
-echo "*  Enabled plugins:"
-echo "*   - standalone  : $with_standalone"
-echo "*   - indicator   : $with_indicator"
-echo "*   - lxpanel     : $with_lxpanel"
-echo "*   - mate-panel  : $with_mate"
-echo "*   - system tray : $with_systray"
-echo "*   - xfce4-panel : $with_xfce4"
-echo "*"
-echo "* ----------------------"
-echo
+AS_ECHO([ "*" ])
+AS_ECHO([ "*  Enabled plugins:" ])
+AS_ECHO([ "*   - standalone       : $with_standalone" ])
+AS_ECHO([ "*   - indicator        : $with_indicator" ])
+AS_ECHO([ "*   - lxpanel          : $with_lxpanel" ])
+AS_ECHO([ "*   - mate-panel       : $with_mate" ])
+AS_ECHO([ "*   - system tray      : $with_systray" ])
+AS_ECHO([ "*   - xfce4-panel      : $with_xfce4" ])
+AS_ECHO([ "*" ])
+AS_ECHO([ "* -----------------------------" ])
+AS_ECHO([ ])
