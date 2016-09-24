@@ -18,7 +18,7 @@ libmultiload_ng_la_SOURCES = \
 
 libmultiload_ng_la_CFLAGS = \
 	$(GTK_CFLAGS) \
-	$(XFCE4_CFLAGS) $(XFCE4UI_CFLAGS) $(XFCEGUI4_CFLAGS)
+	$(XFCE4_CFLAGS)
 
 
 libmultiload_ng_la_LDFLAGS = \
@@ -31,7 +31,7 @@ libmultiload_ng_la_LDFLAGS = \
 libmultiload_ng_la_LIBADD = \
 	../common/multiload-ng-core.la \
 	$(GTK_LIBS) \
-	$(XFCE4_LIBS) $(XFCE4UI_LIBS) $(XFCEGUI4_LIBS)
+	$(XFCE4_LIBS)
 
 
 # Desktop file
