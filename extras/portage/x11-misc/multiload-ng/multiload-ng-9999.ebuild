@@ -1,0 +1,74 @@
+# Copyright 1999-2016 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Id$
+
+EAPI=6
+inherit autotools eutils git-r3
+
+DESCRIPTION="Modern graphical system monitor for XFCE/MATE/LXDE and others"
+HOMEPAGE="https://github.com/udda/multiload-ng"
+
+EGIT_REPO_URI="git://github.com/udda/multiload-ng.git"
+KEYWORDS="~amd64 ~x86"
+
+LICENSE="GPL-2"
+SLOT="0"
+IUSE="-debug -experimental gtk2 +gtk3 +lxde +mate +standalone -systray +xfce4"
+
+RDEPEND="
+	gtk2? ( >=x11-libs/gtk+-2.18:2 )
+	gtk3? ( x11-libs/gtk+:3 )
+	x11-libs/cairo:=
+	lxde? (
+		>=lxde-base/lxpanel-0.7.0
+		>=x11-misc/libfm-1.2.0
+	)
+	mate? (
+		gtk2? ( >=mate-base/mate-panel-1.7.0 )
+		gtk3? ( >=mate-base/mate-panel-1.7.0[gtk3(-)] )
+	)
+	xfce4? (
+		gtk2? (
+			>=xfce-base/libxfce4util-4.6.0
+			>=xfce-base/xfce4-panel-4.6.0
+		)
+		gtk3? (
+			>=xfce-base/libxfce4util-4.12.0
+			>=xfce-base/xfce4-panel-4.12.0
+		)
+	)"
+
+DEPEND="${RDEPEND}
+	dev-util/intltool
+	sys-devel/gettext
+	virtual/pkgconfig"
+
+DOCS="AUTHORS README.md"
+
+REQUIRED_USE="
+	^^ ( gtk2 gtk3 )
+	|| ( lxde mate standalone systray xfce4 )
+	systray? ( experimental )
+	lxde? ( gtk2 )"
+
+src_prepare() {
+	eautoreconf
+	eapply_user
+}
+
+src_configure() {
+	if use gtk2; then
+		GTK_CONF="--with-gtk=2.0"
+	else
+		GTK_CONF="--with-gtk=3.0 --disable-deprecations"
+	fi
+	econf \
+		$(use_enable experimental) \
+		$(use_enable debug) \
+		$GTK_CONF \
+		$(use_with standalone) \
+		$(use_with lxde lxpanel) \
+		$(use_with mate) \
+		$(use_with systray) \
+		$(use_with xfce4)
+}
