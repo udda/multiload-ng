@@ -26,23 +26,14 @@ multiload_ng_LDADD = \
 	$(GTK_LIBS)
 
 
-#
 # Desktop file
-#
 desktopdir = $(datadir)/applications
-
-desktop_DATA = \
-	multiload-ng.desktop
+desktop_DATA = multiload-ng-standalone.desktop
 
 @INTLTOOL_DESKTOP_RULE@
 
-EXTRA_DIST = \
-	multiload-ng.desktop.in.in
-
-CLEANFILES = \
-	$(desktop_DATA)
-
-DISTCLEANFILES = \
-	multiload-ng.desktop.in
+EXTRA_DIST = multiload-ng-standalone.desktop.in.in
+CLEANFILES = $(desktop_DATA)
+DISTCLEANFILES = multiload-ng-standalone.desktop.in
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

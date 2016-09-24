@@ -22,6 +22,7 @@ AC_SUBST(APPINDICATOR_LIBS)
 
 AC_CONFIG_FILES([
 	indicator/Makefile
+	indicator/multiload-ng-indicator.desktop.in
 ])
 
 

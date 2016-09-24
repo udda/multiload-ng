@@ -23,19 +23,14 @@ multiload_ng_systray_LDADD = \
 	$(GTK_LIBS)
 
 
-#
 # Desktop file
-#
-#desktopdir = $(datadir)/applications
+desktopdir = $(datadir)/applications
+desktop_DATA = multiload-ng-systray.desktop
 
-#desktop_DATA = indicator-multiload-ng.desktop
+@INTLTOOL_DESKTOP_RULE@
 
-#@INTLTOOL_DESKTOP_RULE@
-
-#EXTRA_DIST = indicator-multiload-ng.desktop.in.in
-
-#CLEANFILES = $(desktop_DATA)
-
-#DISTCLEANFILES = indicator-multiload-ng.desktop.in
+EXTRA_DIST = multiload-ng-systray.desktop.in.in
+CLEANFILES = $(desktop_DATA)
+DISTCLEANFILES = multiload-ng-systray.desktop.in
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

@@ -7,39 +7,34 @@ AM_CPPFLAGS = \
 #
 # multiload plugin
 #
-bin_PROGRAMS = indicator-multiload-ng
+bin_PROGRAMS = multiload-ng-indicator
 
-indicator_multiload_ng_SOURCES = plugin.c
+multiload_ng_indicator_SOURCES = plugin.c
 
-indicator_multiload_ng_CFLAGS = \
+multiload_ng_indicator_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(APPINDICATOR_CFLAGS)
 
 
-indicator_multiload_ng_LDFLAGS = \
+multiload_ng_indicator_LDFLAGS = \
        -avoid-version \
        -no-undefined \
        $(PLATFORM_LDFLAGS)
 
-indicator_multiload_ng_LDADD = \
+multiload_ng_indicator_LDADD = \
 	../common/multiload-ng-core.la \
 	$(GTK_LIBS) \
 	$(APPINDICATOR_LIBS)
 
 
-#
 # Desktop file
-#
-#desktopdir = $(datadir)/applications
+desktopdir = $(datadir)/applications
+desktop_DATA = multiload-ng-indicator.desktop
 
-#desktop_DATA = indicator-multiload-ng.desktop
+@INTLTOOL_DESKTOP_RULE@
 
-#@INTLTOOL_DESKTOP_RULE@
-
-#EXTRA_DIST = indicator-multiload-ng.desktop.in.in
-
-#CLEANFILES = $(desktop_DATA)
-
-#DISTCLEANFILES = indicator-multiload-ng.desktop.in
+EXTRA_DIST = multiload-ng-indicator.desktop.in.in
+CLEANFILES = $(desktop_DATA)
+DISTCLEANFILES = multiload-ng-indicator.desktop.in
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

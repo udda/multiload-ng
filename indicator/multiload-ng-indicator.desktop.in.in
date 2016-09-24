@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=X-XFCE-PanelPlugin
+Encoding=UTF-8
+_Name=Multiload-ng (indicator)
+_Comment=Modern graphical system monitor
+TryExec=multiload-ng-indicator
+Exec=multiload-ng-indicator
+Icon=@APPICON@
+Type=Application
+Categories=Utility;System;

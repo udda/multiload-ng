@@ -6,6 +6,7 @@ AM_CONDITIONAL(HAVE_SYSTRAY, test "x$with_systray" != "xno")
 
 AC_CONFIG_FILES([
 	systray/Makefile
+	systray/multiload-ng-systray.desktop.in
 ])
 
 

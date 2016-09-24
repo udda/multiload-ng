@@ -41,5 +41,5 @@ AC_SUBST(XFCE_API)
 
 AC_CONFIG_FILES([
 	xfce4/Makefile
-	xfce4/multiload-ng.desktop.in
+	xfce4/multiload-ng-xfce4.desktop.in
 ])

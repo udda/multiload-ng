@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=X-XFCE-PanelPlugin
+Encoding=UTF-8
+_Name=Multiload-ng (system tray)
+_Comment=Modern graphical system monitor
+TryExec=multiload-ng-systray
+Exec=multiload-ng-systray
+Icon=@APPICON@
+Type=Application
+Categories=Utility;System;

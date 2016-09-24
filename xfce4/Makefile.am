@@ -34,27 +34,18 @@ libmultiload_ng_la_LIBADD = \
 	$(XFCE4_LIBS) $(XFCE4UI_LIBS) $(XFCEGUI4_LIBS)
 
 
-#
 # Desktop file
-#
 if XFCE_IS_4_6
 desktopdir = $(datadir)/xfce4/panel-plugins
 else
 desktopdir = $(datadir)/xfce4/panel/plugins
 endif
-
-desktop_DATA = \
-	multiload-ng.desktop
+desktop_DATA = multiload-ng-xfce4.desktop
 
 @INTLTOOL_DESKTOP_RULE@
 
-EXTRA_DIST = \
-	multiload-ng.desktop.in.in
-
-CLEANFILES = \
-	$(desktop_DATA)
-
-DISTCLEANFILES = \
-	multiload-ng.desktop.in
+EXTRA_DIST = multiload-ng-xfce4.desktop.in.in
+CLEANFILES = $(desktop_DATA)
+DISTCLEANFILES = multiload-ng-xfce4.desktop.in
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

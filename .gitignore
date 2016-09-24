@@ -24,7 +24,9 @@ common/about-data.c
 common/binary-data.c
 common/color-scheme-icons.inc
 data/generate-about-data.sh
-indicator/indicator-multiload-ng
+indicator/multiload-ng-indicator
+indicator/*.desktop
+indicator/*.desktop.in
 mate/mate-multiload-ng-applet
 mate/org.mate.*.mate-panel-applet
 mate/org.mate.*.mate-panel-applet.in
@@ -37,6 +39,8 @@ standalone/multiload-ng
 standalone/*.desktop
 standalone/*.desktop.in
 systray/multiload-ng-systray
+systray/*.desktop
+systray/*.desktop.in
 xfce4/*.desktop
 xfce4/*.desktop.in
 po/.intltool-merge-cache

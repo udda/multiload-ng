@@ -5,5 +5,5 @@ AM_CONDITIONAL(HAVE_STANDALONE, test x$with_standalone != xno)
 
 AC_CONFIG_FILES([
 	standalone/Makefile
-	standalone/multiload-ng.desktop.in
+	standalone/multiload-ng-standalone.desktop.in
 ])
