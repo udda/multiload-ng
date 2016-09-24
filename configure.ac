@@ -181,7 +181,7 @@ AC_OUTPUT
 AS_ECHO([ ])
 AS_ECHO([ ])
 AS_ECHO([ "* -----------------------------" ])
-AS_ECHO([ "*  Build configuration: ])
+AS_ECHO([ "*  Configured $PACKAGE_NAME version $PACKAGE_VERSION" ])
 AS_ECHO([ "* -----------------------------" ])
 AS_ECHO([ "*" ])
 AS_ECHO([ "*  CFLAGS: $CFLAGS" ])
