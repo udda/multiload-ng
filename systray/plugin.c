@@ -73,6 +73,7 @@ systray_graph_update_cb(LoadGraph *g, gpointer user_data)
 {
 	guint i, v;
 	gboolean visible;
+	GdkPixbuf *pixbuf;
 
 	if (!g->config->visible)
 		return;
@@ -99,9 +100,9 @@ systray_graph_update_cb(LoadGraph *g, gpointer user_data)
 
 	// update icon pixbuf
 #if GTK_API == 3
-	GdkPixbuf *pixbuf = gdk_pixbuf_get_from_surface (g->surface, 0, 0, g->draw_width, g->draw_height);
+	pixbuf = gdk_pixbuf_get_from_surface (g->surface, 0, 0, g->draw_width, g->draw_height);
 #elif GTK_API == 2
-	GdkPixbuf *pixbuf = gdk_pixbuf_get_from_drawable (NULL, GDK_DRAWABLE(gtk_widget_get_window(g->disp)), NULL, 0, 0, 0, 0, g->draw_width, g->draw_height);
+	pixbuf = gdk_pixbuf_get_from_drawable (NULL, GDK_DRAWABLE(gtk_widget_get_window(g->disp)), NULL, 0, 0, 0, 0, g->draw_width, g->draw_height);
 #else
 #error "Wrong GTK+ version."
 #endif
