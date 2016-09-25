@@ -71,4 +71,8 @@ src_configure() {
 		$(use_with mate) \
 		$(use_with systray) \
 		$(use_with xfce4)
+
+	if use experimental; then
+		elog "You are enabling experimental code. Please note that this can be really unstable."
+	fi
 }
