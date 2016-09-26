@@ -356,7 +356,14 @@ Lowering update interval means more redraws per second. CPU usage might become n
 Command line of parametric graph is called synchronously every time the graph is redrawn. This means that
 plugins hangs waiting for the command line to terminate and return numbers. You should try to
 
+### Memory usage is not the same reported by task manager
+There is some disagreement on how to count some components of kernel memory. Some task managers
+count them as *used* memory, while standard programs like `free` report them as *shared*.
 
+Multiload-ng follows the latter approach, doing its best to align reported values to those of
+standard tools. Task managers could (and sometimes do) count memory usage in a different way.
+
+You can read more of this on issue #21.
 
 
 ## FAQ
