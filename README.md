@@ -172,7 +172,7 @@ See per-panel section below for full list.
 
 Package                     | Min version
 :-------------------------- | -------------:
-gtk+                        | >= 2.18.0
+gtk+                        | >= 2.20.0
 cairo                       | >= 1.0
 
 Multiload-ng requires a reasonably recent Linux kernel (>2.6.36) built with

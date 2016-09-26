@@ -16,7 +16,7 @@ SLOT="0"
 IUSE="-debug -experimental gtk2 +gtk3 +lxde +mate +standalone -systray +xfce4"
 
 RDEPEND="
-	gtk2? ( >=x11-libs/gtk+-2.18:2 )
+	gtk2? ( >=x11-libs/gtk+-2.20:2 )
 	gtk3? ( x11-libs/gtk+:3 )
 	x11-libs/cairo:=
 	lxde? (

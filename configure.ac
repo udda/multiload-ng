@@ -70,7 +70,7 @@ AC_MSG_RESULT([$with_gtk])
 case "$with_gtk" in
 	2.0)
 		GTK_API=2
-		GTK_REQUIRED=2.18.0
+		GTK_REQUIRED=2.20.0
 		;;
 	3.0)
 		GTK_API=3
