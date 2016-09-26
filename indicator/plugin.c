@@ -42,7 +42,8 @@
 
 
 static GtkWidget *offscr;
-static gchar *icon_filename;
+static gchar icon_filename[2][PATH_MAX];
+static int icon_current_index=0;
 
 static void
 indicator_destroy_cb(GtkWidget *widget, MultiloadPlugin *ma)
@@ -67,7 +68,6 @@ indicator_graph_update_cb(LoadGraph *g, gpointer user_data)
 	static guint64 last_msec = 0;
 	guint64 now_msec;
 	struct timeval tv;
-	gboolean too_early;
 
 	GtkAllocation allocation;
 	GdkPixbuf *pixbuf;
@@ -88,25 +88,35 @@ indicator_graph_update_cb(LoadGraph *g, gpointer user_data)
 
 	// update icon pixbuf
 	pixbuf = gtk_offscreen_window_get_pixbuf (GTK_OFFSCREEN_WINDOW(offscr));
-	gdk_pixbuf_save (pixbuf, icon_filename, "png", &error, "compression", "0", NULL);
+	gdk_pixbuf_save (pixbuf, icon_filename[icon_current_index], "png", &error, "compression", "0", NULL);
 	if (error != NULL)
 		printf("ERR: %s\n",error->message); // TODO better error handling
 	else if (gdk_pixbuf_get_width(pixbuf) == allocation.width && gdk_pixbuf_get_height(pixbuf) == allocation.height)
-		app_indicator_set_icon(APP_INDICATOR(user_data), icon_filename);
+		app_indicator_set_icon(APP_INDICATOR(user_data), icon_filename[icon_current_index]);
 
+	icon_current_index = 1-icon_current_index;
 	g_clear_error(&error);
 	g_object_unref(pixbuf);
 }
 
 static void
-create_buffer_file()
+create_buffer_files()
 {
 	gchar *template = g_build_filename(g_get_tmp_dir(), "multiload-ng.XXXXXX", NULL);
 	char *dirname = mkdtemp(template);
+	gchar *tmp;
 
 	if (dirname != NULL) {
-		icon_filename = g_build_filename(dirname, "mapped_icon.png", NULL);
+		tmp = g_build_filename(dirname, "mapped_icon0.png", NULL);
 		// TODO error message (check errno) and exit
+		strncpy(icon_filename[0], tmp, PATH_MAX);
+		g_free(tmp);
+
+		tmp = g_build_filename(dirname, "mapped_icon1.png", NULL);
+		strncpy(icon_filename[1], tmp, PATH_MAX);
+		g_free(tmp);
+		// TODO error message (check errno) and exit
+
 		// TODO memory mapped file? (or other means to avoid repetitive read/write to disk)
 	}
 
@@ -179,7 +189,7 @@ int main (int argc, char **argv)
 	indicator = app_indicator_new ("indicator-multiload-ng", about_data_icon, APP_INDICATOR_CATEGORY_HARDWARE);
 	app_indicator_set_status (indicator, APP_INDICATOR_STATUS_ACTIVE);
 
-	create_buffer_file();
+	create_buffer_files();
 	build_menu(indicator, multiload);
 	set_graph_update_cb(indicator, multiload);
 
