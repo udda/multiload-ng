@@ -15,11 +15,14 @@ common/util.c
 common/ui.c
 data/preferences_gtk2.ui
 data/preferences_gtk3.ui
+indicator/multiload-ng-indicator.desktop.in.in
 indicator/plugin.c
 lxpanel/plugin.c
 mate/plugin.c
 mate/org.mate.multiload-ng.Applet.mate-panel-applet.in.in.in
-standalone/multiload-ng.desktop.in.in
+standalone/multiload-ng-standalone.desktop.in.in
 standalone/plugin.c
-xfce4/multiload-ng.desktop.in.in
+systray/multiload-ng-systray.desktop.in.in
+systray/plugin.c
+xfce4/multiload-ng-xfce4.desktop.in.in
 xfce4/plugin.c
