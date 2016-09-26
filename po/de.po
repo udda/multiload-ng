@@ -16,6 +16,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.9\n"
 
+msgid "Multiload-ng (indicator)"
+msgstr ""
+
+msgid "Multiload-ng (system tray)"
+msgstr ""
+
 msgid "Modern graphical system monitor"
 msgstr "Moderne grafische Systemüberwachung"
 

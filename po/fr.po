@@ -18,6 +18,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Vé 0.1.4\n"
 
+msgid "Multiload-ng (indicator)"
+msgstr ""
+
+msgid "Multiload-ng (system tray)"
+msgstr ""
+
 msgid "Modern graphical system monitor"
 msgstr "Monitor de charge du système moderne"
 

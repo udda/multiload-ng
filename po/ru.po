@@ -16,6 +16,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+msgid "Multiload-ng (indicator)"
+msgstr ""
+
+msgid "Multiload-ng (system tray)"
+msgstr ""
+
 msgid "Modern graphical system monitor"
 msgstr "Графическая система мониторинга"
 

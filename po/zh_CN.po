@@ -17,6 +17,12 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Language: zh_CN\n"
 
+msgid "Multiload-ng (indicator)"
+msgstr ""
+
+msgid "Multiload-ng (system tray)"
+msgstr ""
+
 msgid "Modern graphical system monitor"
 msgstr "现代化的图形系统监视器"
 
