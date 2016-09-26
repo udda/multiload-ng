@@ -363,7 +363,7 @@ count them as *used* memory, while standard programs like `free` report them as 
 Multiload-ng follows the latter approach, doing its best to align reported values to those of
 standard tools. Task managers could (and sometimes do) count memory usage in a different way.
 
-You can read more of this on issue #21.
+You can read more of this on [issue #21](https://github.com/udda/multiload-ng/issues/21).
 
 
 ## FAQ
