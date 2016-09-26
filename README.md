@@ -353,8 +353,10 @@ This has basically two causes:
 
 Lowering update interval means more redraws per second. CPU usage might become noticeable on older systems.
 
-Command line of parametric graph is called synchronously every time the graph is redrawn. This means that
-plugins hangs waiting for the command line to terminate and return numbers. You should try to
+Command line of parametric graph is called **synchronously** every time the graph is redrawn. This means that
+plugins hangs waiting for the command line to terminate and return numbers.
+
+You should try to raise update interval, and try to use lightweight programs for parametric command line.
 
 ### Memory usage is not the same reported by task manager
 There is some disagreement on how to count some components of kernel memory. Some task managers
