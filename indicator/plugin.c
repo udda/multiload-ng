@@ -120,7 +120,7 @@ create_buffer_files()
 		// TODO memory mapped file? (or other means to avoid repetitive read/write to disk)
 	}
 
-	g_free(template);
+	g_free(template); // apparently mkdtemp uses template buffer, so free it after its use
 }
 
 static void
