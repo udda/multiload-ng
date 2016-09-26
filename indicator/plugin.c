@@ -26,6 +26,7 @@
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
+#include <sys/time.h>
 #include <gtk/gtk.h>
 #include <glib/gi18n-lib.h>
 #include <libappindicator/app-indicator.h>
@@ -63,13 +64,24 @@ indicator_preferences_cb(GtkWidget *widget, MultiloadPlugin *ma)
 static void
 indicator_graph_update_cb(LoadGraph *g, gpointer user_data)
 {
+	static guint64 last_msec = 0;
+	guint64 now_msec;
+	struct timeval tv;
+	gboolean too_early;
+
 	GtkAllocation allocation;
 	GdkPixbuf *pixbuf;
 	GError *error = NULL;
 	guint height = 24; //TODO retrieve actual panel height
 
-	//TODO if two updates are too close, ignore the second
+	// ignore updates if too close each other
+	gettimeofday(&tv, NULL);
+	now_msec = tv.tv_sec*1000 + tv.tv_usec/1000;
+	if ( (now_msec-last_msec) < 200 )
+		return;
+	last_msec = now_msec;
 
+	// resize widget and offscreen window to fit into panel
 	gtk_widget_set_size_request(GTK_WIDGET(g->multiload->container), -1, height);
 	gtk_widget_get_allocation (GTK_WIDGET(g->multiload->container), &allocation);
 	gtk_window_resize(GTK_WINDOW(offscr), allocation.width, allocation.height);
