@@ -25,6 +25,7 @@
 
 #include <errno.h>
 #include <string.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
 #include <gtk/gtk.h>
@@ -42,6 +43,7 @@
 
 
 static GtkWidget *offscr;
+static gchar icon_directory[PATH_MAX];
 static gchar icon_filename[2][PATH_MAX];
 static int icon_current_index=0;
 
@@ -50,6 +52,11 @@ indicator_destroy_cb(GtkWidget *widget, MultiloadPlugin *ma)
 {
     gtk_main_quit ();
     g_free(ma);
+
+    // cleanup buffer files
+    remove(icon_filename[0]);
+    remove(icon_filename[1]);
+    remove(icon_directory);
 }
 
 static void
@@ -102,17 +109,21 @@ indicator_graph_update_cb(LoadGraph *g, gpointer user_data)
 static void
 create_buffer_files()
 {
-	gchar *template = g_build_filename(g_get_tmp_dir(), "multiload-ng.XXXXXX", NULL);
-	char *dirname = mkdtemp(template);
 	gchar *tmp;
 
+	gchar *template = g_build_filename(g_get_tmp_dir(), "multiload-ng.XXXXXX", NULL);
+	char *dirname = mkdtemp(template);
+
 	if (dirname != NULL) {
-		tmp = g_build_filename(dirname, "mapped_icon0.png", NULL);
+		strncpy(icon_directory, dirname, PATH_MAX);
+		g_debug("Using this directory for buffers: %s", icon_directory);
+
+		tmp = g_build_filename(icon_directory, "mapped_icon0.png", NULL);
 		// TODO error message (check errno) and exit
 		strncpy(icon_filename[0], tmp, PATH_MAX);
 		g_free(tmp);
 
-		tmp = g_build_filename(dirname, "mapped_icon1.png", NULL);
+		tmp = g_build_filename(icon_directory, "mapped_icon1.png", NULL);
 		strncpy(icon_filename[1], tmp, PATH_MAX);
 		g_free(tmp);
 		// TODO error message (check errno) and exit
