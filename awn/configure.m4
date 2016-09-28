@@ -2,7 +2,7 @@ AS_IF([test "x$enable_experimental" = "xyes"], [
 
 AC_ARG_WITH([awn], AS_HELP_STRING([--with-awn], [Build plugin for Avant Window Navigator]), [], [with_awn=check])
 AS_IF([test "x$with_awn" != "xno"], [
-	PKG_CHECK_MODULES(AWN, [awn >= 0.3.9], [
+	PKG_CHECK_MODULES(AWN, [awn >= 0.3.9 glibmm-2.4 >= 2.16.0 gtkmm-2.4], [
 		AC_DEFINE([HAVE_AWN], [1], [Support for Avant Window Navigator])
 		with_awn=yes
 	],[
