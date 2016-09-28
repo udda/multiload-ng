@@ -35,7 +35,7 @@ multiload_ng_la_LIBADD = \
 
 
 # Desktop file
-desktopdir = $(libdir)/awn/applets
+desktopdir = $(datadir)/avant-window-navigator/applets
 desktop_DATA = multiload-ng-awn.desktop
 
 @INTLTOOL_DESKTOP_RULE@
