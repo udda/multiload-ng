@@ -20,6 +20,8 @@ build-aux
 intltool*
 libtool
 gmon.out
+awn/*.desktop
+awn/*.desktop.in
 common/about-data.c
 common/binary-data.c
 common/color-scheme-icons.inc
