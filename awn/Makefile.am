@@ -18,7 +18,8 @@ multiload_ng_la_SOURCES = \
 
 multiload_ng_la_CFLAGS = \
 	$(GTK_CFLAGS) \
-	$(AWN_CFLAGS)
+	$(AWN_CFLAGS) \
+	-std=gnu90
 
 
 multiload_ng_la_LDFLAGS = \
@@ -39,9 +40,6 @@ desktopdir = $(datadir)/avant-window-navigator/applets
 desktop_DATA = multiload-ng-awn.desktop
 
 @INTLTOOL_DESKTOP_RULE@
-
-#$(desktop_DATA).in: $(desktop_DATA).in.in
-#	sed -e "s|\@LIBDIR\@|$(libdir)|g" $< > $@
 
 EXTRA_DIST = $(desktop_DATA).in.in
 CLEANFILES = $(desktop_DATA)
