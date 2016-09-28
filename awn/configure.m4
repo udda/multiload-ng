@@ -1,3 +1,5 @@
+AS_IF([test "x$enable_experimental" = "xyes"], [
+
 AC_ARG_WITH([awn], AS_HELP_STRING([--with-awn], [Build plugin for Avant Window Navigator]), [], [with_awn=check])
 AS_IF([test "x$with_awn" != "xno"], [
 	PKG_CHECK_MODULES(AWN, [awn >= 0.3.9], [
@@ -19,4 +21,10 @@ AC_SUBST(AWN_LIBS)
 AC_CONFIG_FILES([
 	awn/Makefile
 	awn/multiload-ng-awn.desktop.in
+])
+
+
+], [
+	with_awn="disabled (experimental)"
+	AM_CONDITIONAL(HAVE_AWN, test "x$with_awn" = "xyes")
 ])
