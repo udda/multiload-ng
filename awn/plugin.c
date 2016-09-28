@@ -90,15 +90,64 @@ multiload_ps_preferences_closed_cb(MultiloadPlugin *ma)
 }
 */
 
-/*
-GtkWidget*
-lxpanel_configure_cb(LXPanel *panel, GtkWidget *ebox)
+
+static void
+awn_preferences_cb(AwnApplet *applet, MultiloadPlugin *multiload)
 {
-	MultiloadPlugin *multiload = lxpanel_plugin_get_data(ebox);
-	return multiload_ui_configure_dialog_new(multiload,
-		GTK_WINDOW(gtk_widget_get_toplevel (GTK_WIDGET(ebox))));
+	GtkWidget *dialog = multiload_ui_configure_dialog_new(multiload,
+		GTK_WINDOW(gtk_widget_get_toplevel (GTK_WIDGET(applet))));
+
+	gtk_window_present(GTK_WINDOW(dialog));
 }
-*/
+
+static void
+awn_applet_deleted_cb (AwnApplet *app, MultiloadPlugin *multiload)
+{
+	gtk_widget_destroy (GTK_WIDGET(multiload->container));
+	g_free(multiload);
+}
+
+static gboolean
+awn_button_press_event_cb(AwnApplet *applet, GdkEventButton *event, MultiloadPlugin *multiload)
+{
+	static GtkWidget *menu = NULL;
+	GtkWidget *menuitem;
+
+	if (event->button == 1) {
+	} else if (event->button == 3) {
+		if (menu == NULL) {
+			menu = awn_applet_create_default_menu(applet);
+
+			menuitem = gtk_image_menu_item_new_with_label (_("Start task manager"));
+			gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM(menuitem), gtk_image_new_from_icon_name("utilities-system-monitor", GTK_ICON_SIZE_MENU));
+			g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(multiload_ui_start_system_monitor), multiload);
+			gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
+
+			gtk_menu_shell_append (GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
+
+			menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_PREFERENCES, NULL);
+			g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(awn_preferences_cb), multiload);
+			gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
+
+			menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_HELP, NULL);
+			g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(multiload_ui_show_help), NULL);
+			gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
+
+			gtk_menu_shell_append (GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
+
+			menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_ABOUT, NULL);
+			g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(multiload_ui_show_about), NULL);
+			gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
+
+			gtk_widget_show_all(menu);
+		}
+
+		if (menu != NULL) {
+			awn_applet_popup_gtk_menu (AWN_APPLET(applet), menu, event->button, event->time);
+		}
+	}
+	return FALSE;
+}
 
 static void
 awn_position_changed_cb (AwnApplet *app, GtkPositionType orient, MultiloadPlugin *multiload)
@@ -123,34 +172,22 @@ awn_applet_factory_initp (const gchar *name, const gchar *uid, gint panel_id)
 
 	int size = awn_applet_get_size (applet);
 
-	gtk_widget_set_size_request (GTK_WIDGET (applet),  size*2, size );
+	gtk_widget_set_size_request (GTK_WIDGET (applet), size, size );
 	gtk_container_add(GTK_CONTAINER(applet), GTK_WIDGET(multiload->container));
 
-	// connect to height and orientation changes
-	g_signal_connect (G_OBJECT (applet), "position-changed", G_CALLBACK (awn_position_changed_cb), multiload);
+	g_signal_connect (G_OBJECT (applet), "position-changed",   G_CALLBACK (awn_position_changed_cb), multiload);
+	g_signal_connect (G_OBJECT (applet), "applet-deleted",     G_CALLBACK (awn_applet_deleted_cb), multiload);
+	g_signal_connect (G_OBJECT (applet), "button-press-event", G_CALLBACK (awn_button_press_event_cb), multiload);
+
+	//TODO set correct size, taking in account orientation, size and offset - do that on startup and on change of any of these properties
 
 	// Signals:
 	//"offset-changed"
 	//"size-changed"
 	//"panel-configure-event"
 	//"origin-changed"
-	//"applet-deleted"
 	//"menu-creation"
 	//"flags-changed"
-
-	// Properties:
-	//"canonical-name"
-	//"display-name"
-	//"panel-id"
-	//"panel-xid"
-	//"position"
-	//"offset"
-	//"offset-modifier"
-	//"size"
-	//"max-size"
-	//"path-type"
-	//"show-all-on-embed"
-	//"quit-on-delete"
 
 	return applet;
 }
