@@ -1,6 +1,9 @@
 if HAVE_STANDALONE
 STANDALONE_DIRS = standalone
 endif
+if HAVE_AWN
+AWN_DIRS = awn
+endif
 if HAVE_APPINDICATOR
 APPINDICATOR_DIRS = indicator
 endif
@@ -22,6 +25,7 @@ SUBDIRS =	\
 	common \
 	data \
 	$(STANDALONE_DIRS) \
+	$(AWN_DIRS) \
 	$(APPINDICATOR_DIRS) \
 	$(LXPANEL_DIRS) \
 	$(MATE_DIRS) \

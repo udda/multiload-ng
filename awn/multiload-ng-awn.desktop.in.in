@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=C
+Encoding=UTF-8
+_Comment=Modern graphical system monitor
+Exec=awn-applet -p %k
+X-AWN-AppletExec=@LIBDIR@/awn/applets/multiload-ng/multiload-ng.so
+Icon=@APPICON@

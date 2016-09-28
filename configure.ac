@@ -131,6 +131,7 @@ AC_ARG_ENABLE([profiling], AS_HELP_STRING([--enable-profiling], [Enable CFLAGS f
 # Per-panel configure
 m4_include([data/configure.m4])
 m4_include([standalone/configure.m4])
+m4_include([awn/configure.m4])
 m4_include([indicator/configure.m4])
 m4_include([lxpanel/configure.m4])
 m4_include([mate/configure.m4])
@@ -141,6 +142,7 @@ m4_include([xfce4/configure.m4])
 # Checks if at least one build is available
 if \
 	test x$with_standalone != xyes && \
+	test x$with_awn != xyes && \
 	test x$with_indicator != xyes && \
 	test x$with_lxpanel != xyes && \
 	test x$with_mate != xyes && \
@@ -202,6 +204,7 @@ fi
 AS_ECHO([ "*" ])
 AS_ECHO([ "*  Enabled plugins:" ])
 AS_ECHO([ "*   - standalone       : $with_standalone" ])
+AS_ECHO([ "*   - awn              : $with_awn" ])
 AS_ECHO([ "*   - indicator        : $with_indicator" ])
 AS_ECHO([ "*   - lxpanel          : $with_lxpanel" ])
 AS_ECHO([ "*   - mate-panel       : $with_mate" ])
