@@ -1,7 +1,11 @@
 [Desktop Entry]
-Type=C
+Type=Application
+X-AWN-Type=Applet
+X-AWN-AppletType=C
 Encoding=UTF-8
+Name=Multiload-ng
 _Comment=Modern graphical system monitor
 Exec=awn-applet -p %k
 X-AWN-AppletExec=@LIBDIR@/awn/applets/multiload-ng/multiload-ng.so
+X-AWN-AppletCategory=Utility
 Icon=@APPICON@
