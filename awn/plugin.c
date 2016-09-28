@@ -124,14 +124,30 @@ awn_applet_factory_initp (const gchar *name, const gchar *uid, gint panel_id)
 
 	// connect to height and orientation changes
 	g_signal_connect (G_OBJECT (applet), "position-changed", G_CALLBACK (awn_position_changed_cb), multiload);
-//"offset-changed"
-//"size-changed"
-//"panel-configure-event"
-//"origin-changed"
-//"applet-deleted"
-//"menu-creation"
-//"flags-changed"
-	
+
+	// Signals:
+	//"offset-changed"
+	//"size-changed"
+	//"panel-configure-event"
+	//"origin-changed"
+	//"applet-deleted"
+	//"menu-creation"
+	//"flags-changed"
+
+	// Properties:
+	//"canonical-name"
+	//"display-name"
+	//"panel-id"
+	//"panel-xid"
+	//"position"
+	//"offset"
+	//"offset-modifier"
+	//"size"
+	//"max-size"
+	//"path-type"
+	//"show-all-on-embed"
+	//"quit-on-delete"
+
 	return applet;
 }
 
