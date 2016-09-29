@@ -181,16 +181,37 @@ awn_button_press_event_cb(AwnApplet *applet, GdkEventButton *event, MultiloadPlu
 }
 
 static void
-awn_position_changed_cb (AwnApplet *app, GtkPositionType orient, MultiloadPlugin *multiload)
+awn_position_changed_cb (AwnApplet *applet, GtkPositionType pos_type, MultiloadPlugin *multiload)
 {
-	if ( orient == GTK_POS_LEFT || orient == GTK_POS_RIGHT )
+	printf("POSITION CHANGED -> %d\n", pos_type);
+
+	if ( pos_type == GTK_POS_LEFT || pos_type == GTK_POS_RIGHT )
 		multiload->panel_orientation = GTK_ORIENTATION_VERTICAL;
-	else // if ( orient == GTK_POS_TOP || orient == GTK_POS_BOTTOM )
+	else // if ( pos_type == GTK_POS_TOP || pos_type == GTK_POS_BOTTOM )
 		multiload->panel_orientation = GTK_ORIENTATION_HORIZONTAL;
 
 	multiload_refresh_orientation(multiload);
 }
 
+static void
+awn_offset_changed_cb (AwnApplet *applet, gint offset, MultiloadPlugin *multiload)
+{
+	printf("OFFSET CHANGED -> %d\n", offset);
+}
+
+static void
+awn_size_changed_cb (AwnApplet *applet, gint size, MultiloadPlugin *multiload)
+{
+	printf("SIZE CHANGED -> %d\n", size);
+}
+
+/*
+static void
+awn_origin_changed_cb (AwnApplet *applet, GdkRectangle* rect, MultiloadPlugin *multiload)
+{
+	printf("ORIGIN CHANGED -> (%d,%d) [%d,%d]\n", rect->x, rect->y, rect->width, rect->height);
+}
+*/
 
 AwnApplet*
 awn_applet_factory_initp (const gchar *name, const gchar *uid, gint panel_id)
@@ -207,22 +228,19 @@ awn_applet_factory_initp (const gchar *name, const gchar *uid, gint panel_id)
 	multiload_ui_read (multiload);
 	multiload_start(multiload);
 
-	int size = awn_applet_get_size (applet);
-
-//	gtk_widget_set_size_request (GTK_WIDGET (multiload->container), size, size );
 	gtk_container_add(GTK_CONTAINER(applet), GTK_WIDGET(multiload->container));
-
-	g_signal_connect (G_OBJECT (applet), "position-changed",   G_CALLBACK (awn_position_changed_cb), multiload);
-	g_signal_connect (G_OBJECT (applet), "applet-deleted",     G_CALLBACK (awn_applet_deleted_cb), multiload);
-	g_signal_connect (G_OBJECT (applet), "button-press-event", G_CALLBACK (awn_button_press_event_cb), multiload);
 
 	//TODO set correct size, taking in account orientation, size and offset - do that on startup and on change of any of these properties
 
-	// Signals:
-	//"offset-changed"
-	//"size-changed"
+	g_signal_connect (G_OBJECT (applet), "position-changed",       G_CALLBACK (awn_position_changed_cb), multiload);
+	g_signal_connect (G_OBJECT (applet), "offset-changed",         G_CALLBACK (awn_offset_changed_cb), multiload);
+	g_signal_connect (G_OBJECT (applet), "size-changed",           G_CALLBACK (awn_size_changed_cb), multiload);
+//	g_signal_connect (G_OBJECT (applet), "origin-changed",         G_CALLBACK (awn_origin_changed_cb), multiload);
+	g_signal_connect (G_OBJECT (applet), "applet-deleted",         G_CALLBACK (awn_applet_deleted_cb), multiload);
+	g_signal_connect (G_OBJECT (applet), "button-press-event",     G_CALLBACK (awn_button_press_event_cb), multiload);
+
+	// Other signals:
 	//"panel-configure-event"
-	//"origin-changed"
 	//"menu-creation"
 	//"flags-changed"
 
