@@ -63,9 +63,10 @@ multiload_ps_settings_get_int(gpointer settings, const gchar *key, int *destinat
 {
 	GError *error = NULL;
 	gint value = desktop_agnostic_config_client_get_int ((DesktopAgnosticConfigClient*)settings, DESKTOP_AGNOSTIC_CONFIG_GROUP_DEFAULT, key, &error);
-	//TODO check for errors
-	if (error != NULL) printf("ERR: %s\n",error->message);
-	*destination = value;
+
+	if (G_LIKELY(error != NULL))
+		*destination = value;
+
 	g_clear_error(&error);
 }
 void
@@ -73,9 +74,10 @@ multiload_ps_settings_get_boolean(gpointer settings, const gchar *key, gboolean 
 {
 	GError *error = NULL;
 	gboolean value = desktop_agnostic_config_client_get_bool ((DesktopAgnosticConfigClient*)settings, DESKTOP_AGNOSTIC_CONFIG_GROUP_DEFAULT, key, &error);
-	//TODO check for errors
-	if (error != NULL) printf("ERR: %s\n",error->message);
-	*destination = value;
+
+	if (G_LIKELY(error != NULL))
+		*destination = value;
+
 	g_clear_error(&error);
 }
 void
@@ -83,11 +85,10 @@ multiload_ps_settings_get_string(gpointer settings, const gchar *key, gchar *des
 {
 	GError *error = NULL;
 	gchar *value = desktop_agnostic_config_client_get_string ((DesktopAgnosticConfigClient*)settings, DESKTOP_AGNOSTIC_CONFIG_GROUP_DEFAULT, key, &error);
-	//TODO check for errors
-	if (error != NULL) printf("ERR: %s\n",error->message);
 
-	if (G_LIKELY(value != NULL))
+	if (G_LIKELY(error != NULL && value != NULL))
 		strncpy(destination, value, maxlen);
+
 	g_free(value);
 	g_clear_error(&error);
 }
@@ -97,8 +98,6 @@ multiload_ps_settings_set_int(gpointer settings, const gchar *key, int value)
 {
 	GError *error = NULL;
 	desktop_agnostic_config_client_set_int ((DesktopAgnosticConfigClient*)settings, DESKTOP_AGNOSTIC_CONFIG_GROUP_DEFAULT, key, value, &error);
-	//TODO check for errors
-	if (error != NULL) printf("ERR: %s\n",error->message);
 	g_clear_error(&error);
 }
 void
@@ -106,8 +105,6 @@ multiload_ps_settings_set_boolean(gpointer settings, const gchar *key, gboolean 
 {
 	GError *error = NULL;
 	desktop_agnostic_config_client_set_bool ((DesktopAgnosticConfigClient*)settings, DESKTOP_AGNOSTIC_CONFIG_GROUP_DEFAULT, key, value, &error);
-	//TODO check for errors
-	if (error != NULL) printf("ERR: %s\n",error->message);
 	g_clear_error(&error);
 }
 void
@@ -115,8 +112,6 @@ multiload_ps_settings_set_string(gpointer settings, const gchar *key, const gcha
 {
 	GError *error = NULL;
 	desktop_agnostic_config_client_set_string ((DesktopAgnosticConfigClient*)settings, DESKTOP_AGNOSTIC_CONFIG_GROUP_DEFAULT, key, value, &error);
-	//TODO check for errors
-	if (error != NULL) printf("ERR: %s\n",error->message);
 	g_clear_error(&error);
 }
 
