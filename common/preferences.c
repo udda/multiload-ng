@@ -1181,6 +1181,11 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 	// other stuff
 	multiload_developer_buttons(ma);
 
+	#if GTK_API == 3 && GTK_CHECK_VERSION(3,16,0)
+	if (gtk_check_version(3,16,0) == NULL)
+		gtk_scrolled_window_set_overlay_scrolling(GTK_SCROLLED_WINDOW(OB("scrolledwindow_color_scheme")), FALSE);
+	#endif
+
 	// main window
 	GtkWidget *mainwnd_vbox = GTK_WIDGET(OB("mainwnd_vbox"));
 	gtk_container_add(GTK_CONTAINER(gtk_dialog_get_content_area(GTK_DIALOG(dialog))), mainwnd_vbox);
