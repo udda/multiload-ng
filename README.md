@@ -9,6 +9,11 @@ It supports the following panels:
 - MATE (mate-panel)
 - Standalone (has its own window, not embedded in any panel)
 
+In addition, there is **experimental** support for the following panels:
+- Ubuntu Unity (and other panels that support indicators)
+- System tray (virtually *any* panel with a systray, in particular those without external plugins support)
+- Avant Window Navigator
+
 Multiload-ng can be built with GTK2 and GTK3, so can be embedded within GTK2/GTK3 builds of all the panels above.
 
 
