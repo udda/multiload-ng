@@ -1,0 +1,501 @@
+[DEFAULT/padding]
+type = integer
+default = 2
+description = 
+
+[DEFAULT/spacing]
+type = integer
+default = 1
+description = 
+
+[DEFAULT/orientation]
+type = integer
+default = 0
+description = 
+
+[DEFAULT/fill-between]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/pref-dialog-maximized]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/pref-dialog-width]
+type = integer
+default = 0
+description = 
+
+[DEFAULT/pref-dialog-height]
+type = integer
+default = 0
+description = 
+
+[DEFAULT/color-scheme]
+type = string
+default = Multiload-ng
+description = 
+
+
+[DEFAULT/graph-cpu-visible]
+type = boolean
+default = true
+description = 
+
+[DEFAULT/graph-cpu-border-width]
+type = integer
+default = 1
+description = 
+
+[DEFAULT/graph-cpu-colors]
+type = string
+default = 
+description = 
+
+[DEFAULT/graph-cpu-size]
+type = integer
+default = 40
+description = 
+
+[DEFAULT/graph-cpu-interval]
+type = integer
+default = 1000
+description = 
+
+[DEFAULT/graph-cpu-tooltip-style]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-cpu-dblclick-policy]
+type = integer
+default = 0
+description = 
+
+[DEFAULT/graph-cpu-dblclick-cmdline]
+type = string
+default = 
+description = 
+
+[DEFAULT/graph-cpu-max]
+type = integer
+default = 500
+description = 
+
+[DEFAULT/graph-cpu-filter-enable]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-cpu-filter]
+type = string
+default = 
+description = 
+
+
+
+[DEFAULT/graph-mem-visible]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-mem-border-width]
+type = integer
+default = 1
+description = 
+
+[DEFAULT/graph-mem-colors]
+type = string
+default = 
+description = 
+
+[DEFAULT/graph-mem-size]
+type = integer
+default = 40
+description = 
+
+[DEFAULT/graph-mem-interval]
+type = integer
+default = 1000
+description = 
+
+[DEFAULT/graph-mem-tooltip-style]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-mem-dblclick-policy]
+type = integer
+default = 0
+description = 
+
+[DEFAULT/graph-mem-dblclick-cmdline]
+type = string
+default = 
+description = 
+
+[DEFAULT/graph-mem-max]
+type = integer
+default = 500
+description = 
+
+[DEFAULT/graph-mem-filter-enable]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-mem-filter]
+type = string
+default = 
+description = 
+
+
+
+[DEFAULT/graph-net-visible]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-net-border-width]
+type = integer
+default = 1
+description = 
+
+[DEFAULT/graph-net-colors]
+type = string
+default = 
+description = 
+
+[DEFAULT/graph-net-size]
+type = integer
+default = 40
+description = 
+
+[DEFAULT/graph-net-interval]
+type = integer
+default = 1000
+description = 
+
+[DEFAULT/graph-net-tooltip-style]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-net-dblclick-policy]
+type = integer
+default = 0
+description = 
+
+[DEFAULT/graph-net-dblclick-cmdline]
+type = string
+default = 
+description = 
+
+[DEFAULT/graph-net-max]
+type = integer
+default = 500
+description = 
+
+[DEFAULT/graph-net-filter-enable]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-net-filter]
+type = string
+default = 
+description = 
+
+
+
+[DEFAULT/graph-swap-visible]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-swap-border-width]
+type = integer
+default = 1
+description = 
+
+[DEFAULT/graph-swap-colors]
+type = string
+default = 
+description = 
+
+[DEFAULT/graph-swap-size]
+type = integer
+default = 40
+description = 
+
+[DEFAULT/graph-swap-interval]
+type = integer
+default = 1000
+description = 
+
+[DEFAULT/graph-swap-tooltip-style]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-swap-dblclick-policy]
+type = integer
+default = 0
+description = 
+
+[DEFAULT/graph-swap-dblclick-cmdline]
+type = string
+default = 
+description = 
+
+[DEFAULT/graph-swap-max]
+type = integer
+default = 500
+description = 
+
+[DEFAULT/graph-swap-filter-enable]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-swap-filter]
+type = string
+default = 
+description = 
+
+
+
+[DEFAULT/graph-load-visible]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-load-border-width]
+type = integer
+default = 1
+description = 
+
+[DEFAULT/graph-load-colors]
+type = string
+default = 
+description = 
+
+[DEFAULT/graph-load-size]
+type = integer
+default = 40
+description = 
+
+[DEFAULT/graph-load-interval]
+type = integer
+default = 1000
+description = 
+
+[DEFAULT/graph-load-tooltip-style]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-load-dblclick-policy]
+type = integer
+default = 0
+description = 
+
+[DEFAULT/graph-load-dblclick-cmdline]
+type = string
+default = 
+description = 
+
+[DEFAULT/graph-load-max]
+type = integer
+default = 500
+description = 
+
+[DEFAULT/graph-load-filter-enable]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-load-filter]
+type = string
+default = 
+description = 
+
+
+
+[DEFAULT/graph-disk-visible]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-disk-border-width]
+type = integer
+default = 1
+description = 
+
+[DEFAULT/graph-disk-colors]
+type = string
+default = 
+description = 
+
+[DEFAULT/graph-disk-size]
+type = integer
+default = 40
+description = 
+
+[DEFAULT/graph-disk-interval]
+type = integer
+default = 1000
+description = 
+
+[DEFAULT/graph-disk-tooltip-style]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-disk-dblclick-policy]
+type = integer
+default = 0
+description = 
+
+[DEFAULT/graph-disk-dblclick-cmdline]
+type = string
+default = 
+description = 
+
+[DEFAULT/graph-disk-max]
+type = integer
+default = 500
+description = 
+
+[DEFAULT/graph-disk-filter-enable]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-disk-filter]
+type = string
+default = 
+description = 
+
+
+
+[DEFAULT/graph-temp-visible]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-temp-border-width]
+type = integer
+default = 1
+description = 
+
+[DEFAULT/graph-temp-colors]
+type = string
+default = 
+description = 
+
+[DEFAULT/graph-temp-size]
+type = integer
+default = 40
+description = 
+
+[DEFAULT/graph-temp-interval]
+type = integer
+default = 1000
+description = 
+
+[DEFAULT/graph-temp-tooltip-style]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-temp-dblclick-policy]
+type = integer
+default = 0
+description = 
+
+[DEFAULT/graph-temp-dblclick-cmdline]
+type = string
+default = 
+description = 
+
+[DEFAULT/graph-temp-max]
+type = integer
+default = 500
+description = 
+
+[DEFAULT/graph-temp-filter-enable]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-temp-filter]
+type = string
+default = 
+description = 
+
+
+
+[DEFAULT/graph-parm-visible]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-parm-border-width]
+type = integer
+default = 1
+description = 
+
+[DEFAULT/graph-parm-colors]
+type = string
+default = 
+description = 
+
+[DEFAULT/graph-parm-size]
+type = integer
+default = 40
+description = 
+
+[DEFAULT/graph-parm-interval]
+type = integer
+default = 1000
+description = 
+
+[DEFAULT/graph-parm-tooltip-style]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-parm-dblclick-policy]
+type = integer
+default = 0
+description = 
+
+[DEFAULT/graph-parm-dblclick-cmdline]
+type = string
+default = 
+description = 
+
+[DEFAULT/graph-parm-max]
+type = integer
+default = 500
+description = 
+
+[DEFAULT/graph-parm-filter-enable]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-parm-filter]
+type = string
+default = 
+description = 
+
+
+[DEFAULT/graph-parm-command]
+type = string
+default = 
+description = 
+

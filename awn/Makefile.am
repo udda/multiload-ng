@@ -35,6 +35,10 @@ multiload_ng_la_LIBADD = \
 
 
 
+# Schema
+schemadir = $(datadir)/avant-window-navigator/schemas
+schema_DATA = awn-applet-multiload-ng.schema-ini
+
 # Desktop file
 desktopdir = $(datadir)/avant-window-navigator/applets
 desktop_DATA = multiload-ng-awn.desktop

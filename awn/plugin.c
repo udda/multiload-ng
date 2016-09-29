@@ -34,23 +34,23 @@
 #include "common/ui.h"
 
 
-// Panel Specific Settings Implementation
-#define MULTILOAD_CONFIG_BASENAME "awn.conf"
-#include "common/ps-settings-impl-gkeyfile.inc"
+static DesktopAgnosticConfigClient *_settings = NULL;
 
-/*
 gpointer
 multiload_ps_settings_open_for_read(MultiloadPlugin *ma)
 {
+	return _settings;
 }
 gpointer
 multiload_ps_settings_open_for_save(MultiloadPlugin *ma)
 {
+	return _settings;
 }
 
 gboolean
 multiload_ps_settings_save(gpointer settings)
 {
+	return TRUE;
 }
 
 void
@@ -61,34 +61,70 @@ multiload_ps_settings_close(gpointer settings)
 void
 multiload_ps_settings_get_int(gpointer settings, const gchar *key, int *destination)
 {
+	GError *error = NULL;
+	gint value = desktop_agnostic_config_client_get_int ((DesktopAgnosticConfigClient*)settings, DESKTOP_AGNOSTIC_CONFIG_GROUP_DEFAULT, key, &error);
+	//TODO check for errors
+	if (error != NULL) printf("ERR: %s\n",error->message);
+	*destination = value;
+	g_clear_error(&error);
 }
 void
 multiload_ps_settings_get_boolean(gpointer settings, const gchar *key, gboolean *destination)
 {
+	GError *error = NULL;
+	gboolean value = desktop_agnostic_config_client_get_bool ((DesktopAgnosticConfigClient*)settings, DESKTOP_AGNOSTIC_CONFIG_GROUP_DEFAULT, key, &error);
+	//TODO check for errors
+	if (error != NULL) printf("ERR: %s\n",error->message);
+	*destination = value;
+	g_clear_error(&error);
 }
 void
 multiload_ps_settings_get_string(gpointer settings, const gchar *key, gchar *destination, size_t maxlen)
 {
+	GError *error = NULL;
+	gchar *value = desktop_agnostic_config_client_get_string ((DesktopAgnosticConfigClient*)settings, DESKTOP_AGNOSTIC_CONFIG_GROUP_DEFAULT, key, &error);
+	//TODO check for errors
+	if (error != NULL) printf("ERR: %s\n",error->message);
+
+	if (G_LIKELY(value != NULL))
+		strncpy(destination, value, maxlen);
+	g_free(value);
+	g_clear_error(&error);
 }
 
 void
 multiload_ps_settings_set_int(gpointer settings, const gchar *key, int value)
 {
+	GError *error = NULL;
+	desktop_agnostic_config_client_set_int ((DesktopAgnosticConfigClient*)settings, DESKTOP_AGNOSTIC_CONFIG_GROUP_DEFAULT, key, value, &error);
+	//TODO check for errors
+	if (error != NULL) printf("ERR: %s\n",error->message);
+	g_clear_error(&error);
 }
 void
 multiload_ps_settings_set_boolean(gpointer settings, const gchar *key, gboolean value)
 {
+	GError *error = NULL;
+	desktop_agnostic_config_client_set_bool ((DesktopAgnosticConfigClient*)settings, DESKTOP_AGNOSTIC_CONFIG_GROUP_DEFAULT, key, value, &error);
+	//TODO check for errors
+	if (error != NULL) printf("ERR: %s\n",error->message);
+	g_clear_error(&error);
 }
 void
 multiload_ps_settings_set_string(gpointer settings, const gchar *key, const gchar *value)
 {
+	GError *error = NULL;
+	desktop_agnostic_config_client_set_string ((DesktopAgnosticConfigClient*)settings, DESKTOP_AGNOSTIC_CONFIG_GROUP_DEFAULT, key, value, &error);
+	//TODO check for errors
+	if (error != NULL) printf("ERR: %s\n",error->message);
+	g_clear_error(&error);
 }
 
 void
 multiload_ps_preferences_closed_cb(MultiloadPlugin *ma)
 {
 }
-*/
+
 
 
 static void
@@ -164,15 +200,21 @@ awn_position_changed_cb (AwnApplet *app, GtkPositionType orient, MultiloadPlugin
 AwnApplet*
 awn_applet_factory_initp (const gchar *name, const gchar *uid, gint panel_id)
 {
+	GError *error = NULL;
 	AwnApplet *applet = awn_applet_new( name, uid, panel_id );
 	MultiloadPlugin *multiload = multiload_new();
+
+	_settings = awn_config_get_default_for_applet(applet, &error);
+	if (error != NULL) printf("ERR: %s\n",error->message);
+	//TODO check for errors
+	g_clear_error(&error);
 
 	multiload_ui_read (multiload);
 	multiload_start(multiload);
 
 	int size = awn_applet_get_size (applet);
 
-	gtk_widget_set_size_request (GTK_WIDGET (applet), size, size );
+//	gtk_widget_set_size_request (GTK_WIDGET (multiload->container), size, size );
 	gtk_container_add(GTK_CONTAINER(applet), GTK_WIDGET(multiload->container));
 
 	g_signal_connect (G_OBJECT (applet), "position-changed",   G_CALLBACK (awn_position_changed_cb), multiload);
