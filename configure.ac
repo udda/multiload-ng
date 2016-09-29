@@ -166,10 +166,6 @@ fi
 eval LIBDIR="$libdir"
 AC_SUBST([LIBDIR])
 
-# UI directory (Glade, colors...)
-eval UIDIR=$datadir/multiload-ng
-AC_SUBST([UIDIR])
-
 # Output files
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
