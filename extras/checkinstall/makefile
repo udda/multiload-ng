@@ -33,14 +33,19 @@ all:
 
 .PHONY: notice
 notice:
-	@echo "Note: configure and build package according to desired options before calling this."
-	@echo "Note: run as sudo."
+	@echo "Note: checkinstall requires su privileges."
 
-deb-package: notice
+.PHONY: checkbuild
+checkbuild:
+	@cd ../.. ; if test ! -f common/multiload-ng-core.la ; then \
+		echo "*** ERROR: configure and build package according to desired options before calling this."; \
+		exit 1 ; fi
+
+deb-package: checkbuild notice
 	@cd ../.. ; checkinstall $(COMMON_OPTS) --type=debian
 
-slack-package: notice
+slack-package: checkbuild notice
 	@cd ../.. ; checkinstall $(COMMON_OPTS) --type=slackware
 
-rpm-package: notice
+rpm-package: checkbuild notice
 	@cd ../.. ; checkinstall $(COMMON_OPTS) --type=rpm
