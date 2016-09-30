@@ -30,6 +30,7 @@
 #include "common/about-data.h"
 #include "common/multiload.h"
 #include "common/multiload-config.h"
+#include "common/preferences.h"
 #include "common/ui.h"
 
 
@@ -58,6 +59,14 @@ systray_preferences_cb(GtkWidget *widget, MultiloadPlugin *ma)
 	gtk_window_set_transient_for(GTK_WINDOW(window), GTK_WINDOW(dialog));
 	gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
 	gtk_window_present(GTK_WINDOW(dialog));
+
+	multiload_preferences_disable_settings(
+		MULTILOAD_SETTINGS_SIZE |
+		MULTILOAD_SETTINGS_PADDING |
+		MULTILOAD_SETTINGS_SPACING |
+		MULTILOAD_SETTINGS_ORIENTATION |
+		MULTILOAD_SETTINGS_FILL_BETWEEN
+	);
 }
 
 

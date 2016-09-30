@@ -1087,6 +1087,36 @@ multiload_preferences_update_color_buttons (MultiloadPlugin *ma)
 	}
 }
 
+void
+multiload_preferences_disable_settings(guint mask)
+{
+	guint i;
+
+	if (builder == NULL)
+		multiload_preferences_init();
+
+	if (mask & MULTILOAD_SETTINGS_SIZE) {
+		for (i=0; i<GRAPH_MAX; i++)
+			gtk_widget_set_sensitive(GTK_WIDGET(OB(sb_size_names[i])), FALSE);
+	}
+
+	if (mask & MULTILOAD_SETTINGS_PADDING)
+		gtk_widget_set_sensitive(GTK_WIDGET(OB("hscale_padding")), FALSE);
+
+	if (mask & MULTILOAD_SETTINGS_SPACING)
+		gtk_widget_set_sensitive(GTK_WIDGET(OB("hscale_spacing")), FALSE);
+
+	if (mask & MULTILOAD_SETTINGS_ORIENTATION)
+		gtk_widget_set_sensitive(GTK_WIDGET(OB("combo_orientation")), FALSE);
+
+	if (mask & MULTILOAD_SETTINGS_FILL_BETWEEN)
+		gtk_widget_set_sensitive(GTK_WIDGET(OB("cb_fill_between")), FALSE);
+
+	if (mask & MULTILOAD_SETTINGS_TOOLTIPS)
+		for (i=0; i<GRAPH_MAX; i++)
+			gtk_widget_set_sensitive(GTK_WIDGET(OB(combo_tooltip_names[i])), FALSE);
+}
+
 
 void
 multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)

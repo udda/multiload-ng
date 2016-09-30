@@ -34,6 +34,7 @@
 
 #include "common/about-data.h"
 #include "common/multiload.h"
+#include "common/preferences.h"
 #include "common/ui.h"
 
 
@@ -67,6 +68,10 @@ indicator_preferences_cb(GtkWidget *widget, MultiloadPlugin *ma)
 	gtk_window_set_transient_for(GTK_WINDOW(window), GTK_WINDOW(dialog));
 	gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
 	gtk_window_present(GTK_WINDOW(dialog));
+
+	multiload_preferences_disable_settings(
+		MULTILOAD_SETTINGS_TOOLTIPS
+	);
 }
 
 static void

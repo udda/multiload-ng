@@ -47,10 +47,10 @@ enum MultiloadDblClickPolicy {
 };
 
 enum MultiloadTooltipStyle {
-	MULTILOAD_TOOLTIP_STYLE_SIMPLE				= 0,
-	MULTILOAD_TOOLTIP_STYLE_DETAILED				= 1,
+	MULTILOAD_TOOLTIP_STYLE_SIMPLE		= 0,
+	MULTILOAD_TOOLTIP_STYLE_DETAILED	= 1,
 
-	MULTILOAD_TOOLTIP_STYLE_N_VALUES				= 1
+	MULTILOAD_TOOLTIP_STYLE_N_VALUES	= 1
 };
 
 enum MultiloadLimits {
@@ -81,6 +81,16 @@ enum MultiloadDefaults {
 	DEFAULT_FILL_BETWEEN				= FALSE,
 	DEFAULT_TOOLTIP_STYLE				= MULTILOAD_TOOLTIP_STYLE_SIMPLE,
 };
+
+enum MultiloadSettingsType {
+	MULTILOAD_SETTINGS_SIZE				= 1 << 0,
+	MULTILOAD_SETTINGS_PADDING			= 1 << 1,
+	MULTILOAD_SETTINGS_SPACING			= 1 << 2,
+	MULTILOAD_SETTINGS_ORIENTATION		= 1 << 3,
+	MULTILOAD_SETTINGS_FILL_BETWEEN		= 1 << 4,
+	MULTILOAD_SETTINGS_TOOLTIPS			= 1 << 5
+};
+
 #define DEFAULT_COLOR_SCHEME "Multiload-ng"
 
 
@@ -89,6 +99,9 @@ multiload_preferences_update_color_buttons(MultiloadPlugin *ma);
 
 G_GNUC_INTERNAL void
 multiload_preferences_fill_dialog(GtkWidget *dialog, MultiloadPlugin *ma);
+
+G_GNUC_INTERNAL void
+multiload_preferences_disable_settings(guint mask);
 
 G_END_DECLS
 
