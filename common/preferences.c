@@ -39,6 +39,7 @@
 
 
 static GtkBuilder *builder = NULL;
+static gboolean _orientation_warning_disable = FALSE;
 
 #define OB(name) (gtk_builder_get_object(builder, name))
 #define EMBED_GRAPH_INDEX(ob,i) g_object_set_data(G_OBJECT(ob), "graph-index", GINT_TO_POINTER(i));
@@ -264,8 +265,9 @@ multiload_preferences_update_dynamic_widgets(MultiloadPlugin *ma)
 
 	// orientation warning
 	gtk_widget_set_visible (GTK_WIDGET(OB("image_warning_orientation")),
-		( ma->panel_orientation == GTK_ORIENTATION_HORIZONTAL && ma->orientation_policy == MULTILOAD_ORIENTATION_VERTICAL) ||
-		( ma->panel_orientation == GTK_ORIENTATION_VERTICAL &&   ma->orientation_policy == MULTILOAD_ORIENTATION_HORIZONTAL)
+		!_orientation_warning_disable &&
+		(( ma->panel_orientation == GTK_ORIENTATION_HORIZONTAL && ma->orientation_policy == MULTILOAD_ORIENTATION_VERTICAL) ||
+		( ma->panel_orientation == GTK_ORIENTATION_VERTICAL &&   ma->orientation_policy == MULTILOAD_ORIENTATION_HORIZONTAL))
 	);
 }
 
@@ -1112,9 +1114,19 @@ multiload_preferences_disable_settings(guint mask)
 	if (mask & MULTILOAD_SETTINGS_FILL_BETWEEN)
 		gtk_widget_set_sensitive(GTK_WIDGET(OB("cb_fill_between")), FALSE);
 
-	if (mask & MULTILOAD_SETTINGS_TOOLTIPS)
+	if (mask & MULTILOAD_SETTINGS_TOOLTIPS) {
 		for (i=0; i<GRAPH_MAX; i++)
 			gtk_widget_set_sensitive(GTK_WIDGET(OB(combo_tooltip_names[i])), FALSE);
+	}
+
+	if (mask & MULTILOAD_SETTINGS_TIMESPAN) {
+		gtk_widget_set_visible(GTK_WIDGET(OB("label_col_timespan")), FALSE);
+		for (i=0; i<GRAPH_MAX; i++)
+			gtk_widget_set_visible(GTK_WIDGET(OB(label_timespan_names[i])), FALSE);
+	}
+
+	if (mask & MULTILOAD_SETTINGS_ORIENT_WARNING)
+		_orientation_warning_disable = TRUE;
 }
 
 
