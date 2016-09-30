@@ -23,7 +23,6 @@
 
 #ifdef MULTILOAD_EXPERIMENTAL
 
-#include <errno.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -99,13 +98,14 @@ indicator_graph_update_cb(LoadGraph *g, gpointer user_data)
 	// update icon pixbuf
 	pixbuf = gtk_offscreen_window_get_pixbuf (GTK_OFFSCREEN_WINDOW(offscr));
 	gdk_pixbuf_save (pixbuf, icon_filename[icon_current_index], "png", &error, "compression", "0", NULL);
-	if (error != NULL)
-		printf("ERR: %s\n",error->message); // TODO better error handling
-	else if (gdk_pixbuf_get_width(pixbuf) == allocation.width && gdk_pixbuf_get_height(pixbuf) == allocation.height)
+	if (error != NULL) {
+		g_error("Cannot save Multiload-ng window to temporary buffer: %s\n",error->message);
+		g_clear_error(&error);
+	} else if (gdk_pixbuf_get_width(pixbuf) == allocation.width && gdk_pixbuf_get_height(pixbuf) == allocation.height) {
 		app_indicator_set_icon(APP_INDICATOR(user_data), icon_filename[icon_current_index]);
+	}
 
 	icon_current_index = 1-icon_current_index;
-	g_clear_error(&error);
 	g_object_unref(pixbuf);
 }
 
@@ -117,21 +117,19 @@ create_buffer_files()
 	gchar *template = g_build_filename(g_get_tmp_dir(), "multiload-ng.XXXXXX", NULL);
 	char *dirname = mkdtemp(template);
 
-	if (dirname != NULL) {
+	if (dirname == NULL) {
+		g_error("Unable to create buffer directory.");
+	} else {
 		strncpy(icon_directory, dirname, PATH_MAX);
 		g_debug("Using this directory for buffers: %s", icon_directory);
 
 		tmp = g_build_filename(icon_directory, "mapped_icon0.png", NULL);
-		// TODO error message (check errno) and exit
 		strncpy(icon_filename[0], tmp, PATH_MAX);
 		g_free(tmp);
 
 		tmp = g_build_filename(icon_directory, "mapped_icon1.png", NULL);
 		strncpy(icon_filename[1], tmp, PATH_MAX);
 		g_free(tmp);
-		// TODO error message (check errno) and exit
-
-		// TODO memory mapped file? (or other means to avoid repetitive read/write to disk)
 	}
 
 	g_free(template); // apparently mkdtemp uses template buffer, so free it after its use
