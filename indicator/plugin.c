@@ -41,7 +41,7 @@
 #define MULTILOAD_CONFIG_BASENAME "indicator.conf"
 #include "common/ps-settings-impl-gkeyfile.inc"
 
-
+static AppIndicator *indicator;
 static GtkWidget *offscr;
 static gchar icon_directory[PATH_MAX];
 static gchar icon_filename[2][PATH_MAX];
@@ -74,40 +74,40 @@ indicator_preferences_cb(GtkWidget *widget, MultiloadPlugin *ma)
 static void
 indicator_graph_update_cb(LoadGraph *g, gpointer user_data)
 {
-	static guint64 last_msec = 0;
-	guint64 now_msec;
-	struct timeval tv;
-
 	GtkAllocation allocation;
-	GdkPixbuf *pixbuf;
-	GError *error = NULL;
 	guint height = 24; //TODO retrieve actual panel height
-
-	// ignore updates if too close each other
-	gettimeofday(&tv, NULL);
-	now_msec = tv.tv_sec*1000 + tv.tv_usec/1000;
-	if ( (now_msec-last_msec) < 200 )
-		return;
-	last_msec = now_msec;
 
 	// resize widget and offscreen window to fit into panel
 	gtk_widget_set_size_request(GTK_WIDGET(g->multiload->container), -1, height);
 	gtk_widget_get_allocation (GTK_WIDGET(g->multiload->container), &allocation);
 	gtk_window_resize(GTK_WINDOW(offscr), allocation.width, allocation.height);
 
+	gtk_widget_queue_draw(offscr);
+}
+
+static void
+indicator_update_pixbuf(GtkOffscreenWindow *window, gpointer unused, MultiloadPlugin *ma)
+{
+	GtkAllocation allocation;
+	GdkPixbuf *pixbuf;
+	GError *error = NULL;
+
+	gtk_widget_get_allocation (GTK_WIDGET(ma->container), &allocation);
+
 	// update icon pixbuf
 	pixbuf = gtk_offscreen_window_get_pixbuf (GTK_OFFSCREEN_WINDOW(offscr));
 	gdk_pixbuf_save (pixbuf, icon_filename[icon_current_index], "png", &error, "compression", "0", NULL);
 	if (error != NULL) {
-		g_error("Cannot save Multiload-ng window to temporary buffer: %s\n",error->message);
+		g_error("Cannot save Multiload-ng window to temporary buffer: %s\n", error->message);
 		g_clear_error(&error);
 	} else if (gdk_pixbuf_get_width(pixbuf) == allocation.width && gdk_pixbuf_get_height(pixbuf) == allocation.height) {
-		app_indicator_set_icon(APP_INDICATOR(user_data), icon_filename[icon_current_index]);
+		app_indicator_set_icon(indicator, icon_filename[icon_current_index]);
 	}
 
 	icon_current_index = 1-icon_current_index;
 	g_object_unref(pixbuf);
 }
+
 
 static void
 create_buffer_files()
@@ -135,17 +135,9 @@ create_buffer_files()
 	g_free(template); // apparently mkdtemp uses template buffer, so free it after its use
 }
 
-static void
-set_graph_update_cb (AppIndicator *indicator, MultiloadPlugin *ma)
-{
-	int i;
-
-	for (i=GRAPH_MAX-1; i>=0; i--)
-		multiload_set_update_cb(ma, i, indicator_graph_update_cb, indicator);
-}
 
 static void
-build_menu(AppIndicator *indicator, MultiloadPlugin *ma)
+build_menu(MultiloadPlugin *ma)
 {
 	GtkWidget *menuitem;
 	GtkWidget *menu = gtk_menu_new();
@@ -182,7 +174,7 @@ build_menu(AppIndicator *indicator, MultiloadPlugin *ma)
 
 int main (int argc, char **argv)
 {
-	AppIndicator *indicator;
+	guint i;
 
 	gtk_init (&argc, &argv);
 
@@ -196,14 +188,22 @@ int main (int argc, char **argv)
 	gtk_widget_set_size_request(GTK_WIDGET(multiload->container), -1, -1);
 	gtk_container_add(GTK_CONTAINER(offscr), GTK_WIDGET(multiload->container));
 	gtk_widget_show(offscr);
+#if GTK_API == 2
+	g_signal_connect(G_OBJECT(offscr), "expose-event", G_CALLBACK(indicator_update_pixbuf), multiload);
+#else
+	g_signal_connect(G_OBJECT(offscr), "draw", G_CALLBACK(indicator_update_pixbuf), multiload);
+#endif
 
 	// create indicator
 	indicator = app_indicator_new ("indicator-multiload-ng", about_data_icon, APP_INDICATOR_CATEGORY_HARDWARE);
 	app_indicator_set_status (indicator, APP_INDICATOR_STATUS_ACTIVE);
 
+	// set update callback
+	for (i=0; i<GRAPH_MAX; i++)
+		multiload_set_update_cb(multiload, i, indicator_graph_update_cb, indicator);
+
 	create_buffer_files();
-	build_menu(indicator, multiload);
-	set_graph_update_cb(indicator, multiload);
+	build_menu(multiload);
 
 	gtk_main ();
 
