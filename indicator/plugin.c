@@ -89,13 +89,14 @@ indicator_update_pixbuf(MultiloadPlugin *ma)
 	cairo_t *cr;
 
 	int i;
-	int x=ma->padding, y=ma->padding;
+	double x=ma->padding-0.5, y=ma->padding-0.5;
 
 	gtk_widget_get_allocation (GTK_WIDGET(ma->container), &allocation);
 
 	surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, allocation.width, allocation.height);
 	g_assert (surface != NULL);
 	cr = cairo_create (surface);
+	cairo_set_antialias(cr, CAIRO_ANTIALIAS_NONE);
 
 	for (i=0; i<GRAPH_MAX; i++) {
 		if (ma->graph_config[i].visible) {
