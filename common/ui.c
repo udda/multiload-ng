@@ -20,6 +20,7 @@
 
 
 #include <config.h>
+#include <stdlib.h>
 #include "common/ui.h"
 
 #include "common/about-data.h"
@@ -359,4 +360,32 @@ multiload_ui_start_system_monitor(MultiloadPlugin *ma)
 	}
 
 	g_free(cmdline);
+}
+
+MultiloadOptions *
+multiload_ui_parse_cmdline(int *argc, char ***argv, GOptionEntry *extra_entries)
+{
+	MultiloadOptions *options = g_new0(MultiloadOptions, 1);
+	GError *error = NULL;
+
+	GOptionEntry entries[] = {
+		{ "preferences",	'p', 0, G_OPTION_ARG_NONE, &options->show_preferences,		"Open preferences editor on startup", NULL },
+		{ "reset",			'r', 0, G_OPTION_ARG_NONE, &options->reset_settings,		"Reset to default settings", NULL },
+		{ NULL }
+	};
+	GOptionContext *context = g_option_context_new (NULL);
+	g_option_context_set_summary (context, ("Modern graphical system monitor"));
+	g_option_context_set_translation_domain(context, GETTEXT_PACKAGE);
+	g_option_context_add_group (context, gtk_get_option_group (TRUE));
+
+	g_option_context_add_main_entries (context, entries, GETTEXT_PACKAGE);
+	if (extra_entries != NULL)
+		g_option_context_add_main_entries (context, extra_entries, GETTEXT_PACKAGE);
+
+	if (!g_option_context_parse (context, argc, argv, &error)) {
+		g_print ("%s\n", error->message);
+		exit (1);
+	}
+
+	return options;
 }

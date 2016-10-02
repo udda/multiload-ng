@@ -64,12 +64,51 @@ standalone_preferences_cb(GtkWidget *widget, MultiloadPlugin *multiload)
 }
 
 
-int main(int argc, char *argv[]) {
-	gtk_init (&argc, &argv);
+static void
+build_menu(MultiloadPlugin *ma, GtkWidget *button_config)
+{
+	GtkMenu *menu = GTK_MENU(gtk_menu_new());
+	GtkWidget *menuitem;
 
+	menuitem = gtk_image_menu_item_new_with_label (_("Start task manager"));
+	gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM(menuitem), gtk_image_new_from_icon_name("utilities-system-monitor", GTK_ICON_SIZE_MENU));
+	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(multiload_ui_start_system_monitor), ma);
+	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
+
+	gtk_menu_shell_append (GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
+
+	menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_PREFERENCES, NULL);
+	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(standalone_preferences_cb), ma);
+	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
+
+	menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_HELP, NULL);
+	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(multiload_ui_show_help), NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
+
+	gtk_menu_shell_append (GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
+
+	menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_ABOUT, NULL);
+	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(multiload_ui_show_about), ma->panel_data);
+	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
+
+	menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, NULL);
+	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(standalone_destroy_cb), ma);
+	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
+
+	gtk_widget_show_all(GTK_WIDGET(menu));
+
+	g_signal_connect (G_OBJECT(button_config), "clicked", G_CALLBACK(standalone_settingsmenu_cb), menu);
+}
+
+int main(int argc, char *argv[]) {
+	MultiloadOptions *options = multiload_ui_parse_cmdline (&argc, &argv, NULL);
 	MultiloadPlugin *multiload = multiload_new();
 
-	multiload_ui_read (multiload);
+	if (options->reset_settings)
+		multiload_defaults (multiload);
+	else
+		multiload_ui_read (multiload);
+
 	multiload_start(multiload);
 
 	GtkWindow *w = GTK_WINDOW(gtk_window_new (GTK_WINDOW_TOPLEVEL));
@@ -89,44 +128,15 @@ int main(int argc, char *argv[]) {
 
 	gtk_container_add(GTK_CONTAINER(w), hbox);
 
-
-	GtkMenu *menu = GTK_MENU(gtk_menu_new());
-	GtkWidget *menuitem;
-
-	menuitem = gtk_image_menu_item_new_with_label (_("Start task manager"));
-	gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM(menuitem), gtk_image_new_from_icon_name("utilities-system-monitor", GTK_ICON_SIZE_MENU));
-	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(multiload_ui_start_system_monitor), multiload);
-	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
-
-	gtk_menu_shell_append (GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
-
-	menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_PREFERENCES, NULL);
-	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(standalone_preferences_cb), multiload);
-	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
-
-	menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_HELP, NULL);
-	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(multiload_ui_show_help), NULL);
-	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
-
-	gtk_menu_shell_append (GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
-
-	menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_ABOUT, NULL);
-	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(multiload_ui_show_about), w);
-	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
-
-	menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, NULL);
-	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(standalone_destroy_cb), multiload);
-	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
-
-	gtk_widget_show_all(GTK_WIDGET(menu));
-
-
 	g_signal_connect (G_OBJECT(w), "destroy", G_CALLBACK(standalone_destroy_cb), multiload);
-	g_signal_connect (G_OBJECT(btnConfig), "clicked", G_CALLBACK(standalone_settingsmenu_cb), menu);
 	gtk_container_set_border_width (GTK_CONTAINER (w), 0);
 
+	build_menu(multiload, btnConfig);
 
 	gtk_window_present (w);
+
+	if (options->show_preferences)
+		standalone_preferences_cb(GTK_WIDGET(w), multiload);
 
 	gtk_main();
 

@@ -114,6 +114,11 @@ struct _LoadGraph {
 	GraphConfig *config;
 };
 
+typedef struct {
+	gboolean show_preferences;
+	gboolean reset_settings;
+} MultiloadOptions;
+
 
 G_BEGIN_DECLS
 

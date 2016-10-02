@@ -9,3 +9,9 @@ Icon=@APPICON@
 Categories=Utility;System;Monitor;GTK;
 Terminal=false
 StartupNotify=true
+Actions=Preferences;
+
+[Desktop Action Preferences]
+_Name=Preferences
+Exec=multiload-ng-indicator --preferences
+Icon=preferences-system

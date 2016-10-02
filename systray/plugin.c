@@ -54,10 +54,7 @@ systray_destroy_cb(GtkWidget *widget, MultiloadPlugin *ma)
 static void
 systray_preferences_cb(GtkWidget *widget, MultiloadPlugin *ma)
 {
-	GtkWidget *window = gtk_widget_get_toplevel (widget);
-	GtkWidget *dialog = multiload_ui_configure_dialog_new(ma, GTK_WINDOW(window));
-	gtk_window_set_transient_for(GTK_WINDOW(window), GTK_WINDOW(dialog));
-	gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
+	GtkWidget *dialog = multiload_ui_configure_dialog_new(ma, NULL);
 	gtk_window_present(GTK_WINDOW(dialog));
 
 	multiload_preferences_disable_settings(
@@ -219,12 +216,14 @@ build_menu(MultiloadPlugin *ma)
 
 int main (int argc, char **argv)
 {
-
-	gtk_init (&argc, &argv);
-
+	MultiloadOptions *options = multiload_ui_parse_cmdline (&argc, &argv, NULL);
 	MultiloadPlugin *multiload = multiload_new();
 
-	multiload_ui_read (multiload);
+	if (options->reset_settings)
+		multiload_defaults (multiload);
+	else
+		multiload_ui_read (multiload);
+
 	multiload_start(multiload);
 
 	memset(status_icons, 0, sizeof(status_icons));
@@ -238,6 +237,9 @@ int main (int argc, char **argv)
 
 	build_menu(multiload);
 	build_icons(multiload);
+
+	if (options->show_preferences)
+		systray_preferences_cb(NULL, multiload);
 
 	gtk_main ();
 

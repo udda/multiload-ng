@@ -223,11 +223,14 @@ int main (int argc, char **argv)
 {
 	guint i;
 
-	gtk_init (&argc, &argv);
-
+	MultiloadOptions *options = multiload_ui_parse_cmdline (&argc, &argv, NULL); //TODO put this in Porting Wiki page
 	MultiloadPlugin *multiload = multiload_new();
 
-	multiload_ui_read (multiload);
+	if (options->reset_settings)
+		multiload_defaults (multiload);
+	else
+		multiload_ui_read (multiload);
+
 	multiload_start(multiload);
 
 	// create offscreen window to keep widget drawing
@@ -250,6 +253,9 @@ int main (int argc, char **argv)
 
 	create_buffer_files();
 	build_menu(multiload);
+
+	if (options->show_preferences)
+		indicator_preferences_cb(GTK_WIDGET(indicator), multiload);
 
 	gtk_main ();
 
