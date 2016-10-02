@@ -46,6 +46,7 @@ static GtkWidget *offscr;
 static gchar icon_directory[PATH_MAX];
 static gchar icon_filename[2][PATH_MAX];
 static int icon_current_index=0;
+static gboolean indicator_connected;
 
 static void
 indicator_destroy_cb(GtkWidget *widget, MultiloadPlugin *ma)
@@ -132,10 +133,12 @@ indicator_graph_update_cb(LoadGraph *g, gpointer user_data)
 
 	g_return_if_fail (g->surface != NULL);
 
-	height = indicator_get_icon_height();
+	if (indicator_connected == FALSE) {
+		g_warning ("Indicator is not connected to panel, thus it cannot be displayed.");
+		return;
+	}
 
-//	g_return_if_fail (gtk_status_icon_is_embedded(status_icons[g->id]));
-//TODO equivalent for appindicator
+	height = indicator_get_icon_height();
 
 	// resize widget and offscreen window to fit into panel
 	gtk_widget_set_size_request(GTK_WIDGET(g->multiload->container), -1, height);
@@ -143,6 +146,12 @@ indicator_graph_update_cb(LoadGraph *g, gpointer user_data)
 	gtk_window_resize(GTK_WINDOW(offscr), allocation.width, allocation.height);
 
 	indicator_update_pixbuf(g->multiload);
+}
+
+static void
+indicator_connection_changed_cb (AppIndicator *indicator, gboolean connected, MultiloadPlugin *ma)
+{
+	indicator_connected = connected;
 }
 
 
@@ -229,6 +238,10 @@ int main (int argc, char **argv)
 	// create indicator
 	indicator = app_indicator_new ("indicator-multiload-ng", about_data_icon, APP_INDICATOR_CATEGORY_HARDWARE);
 	app_indicator_set_status (indicator, APP_INDICATOR_STATUS_ACTIVE);
+
+	// "connected" property means a visible indicator, otherwise could be hidden. or fall back to GtkStatusIcon
+	g_signal_connect (G_OBJECT(indicator), "connection-changed", G_CALLBACK(indicator_connection_changed_cb), multiload);
+	g_object_get(G_OBJECT(indicator), "connected", &indicator_connected, NULL);
 
 	// set update callback
 	for (i=0; i<GRAPH_MAX; i++)
