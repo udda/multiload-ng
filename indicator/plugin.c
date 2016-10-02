@@ -72,9 +72,9 @@ indicator_preferences_cb(GtkWidget *widget, MultiloadPlugin *ma)
 }
 
 static int
-indicator_get_panel_height()
+indicator_get_icon_height()
 {
-	return 24; // TODO retrieve actual panel height!
+	return 22; // seems to be a fixed size (it's hardcoded in libappindicator source)
 }
 
 static void
@@ -125,20 +125,20 @@ static void
 indicator_graph_update_cb(LoadGraph *g, gpointer user_data)
 {
 	GtkAllocation allocation;
-	guint panel_height;
+	guint height;
 
 	if (!g->config->visible)
 		return;
 
 	g_return_if_fail (g->surface != NULL);
 
-	panel_height = indicator_get_panel_height();
+	height = indicator_get_icon_height();
 
 //	g_return_if_fail (gtk_status_icon_is_embedded(status_icons[g->id]));
 //TODO equivalent for appindicator
 
 	// resize widget and offscreen window to fit into panel
-	gtk_widget_set_size_request(GTK_WIDGET(g->multiload->container), -1, panel_height);
+	gtk_widget_set_size_request(GTK_WIDGET(g->multiload->container), -1, height);
 	gtk_widget_get_allocation (GTK_WIDGET(g->multiload->container), &allocation);
 	gtk_window_resize(GTK_WINDOW(offscr), allocation.width, allocation.height);
 
