@@ -6,4 +6,6 @@ _Comment=Modern graphical system monitor
 TryExec=multiload-ng
 Exec=multiload-ng
 Icon=@APPICON@
-Categories=Utility;System;
+Categories=Utility;System;Monitor;GTK;
+Terminal=false
+StartupNotify=true

@@ -6,4 +6,6 @@ _Comment=Modern graphical system monitor
 TryExec=multiload-ng-systray
 Exec=multiload-ng-systray
 Icon=@APPICON@
-Categories=Utility;System;
+Categories=Utility;System;Monitor;GTK;
+Terminal=false
+StartupNotify=false
