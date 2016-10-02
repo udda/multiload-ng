@@ -71,41 +71,78 @@ indicator_preferences_cb(GtkWidget *widget, MultiloadPlugin *ma)
 	multiload_preferences_disable_settings(MULTILOAD_SETTINGS_TOOLTIPS);
 }
 
+static int
+indicator_get_panel_height()
+{
+	return 24; // TODO retrieve actual panel height!
+}
+
+static void
+indicator_update_pixbuf(MultiloadPlugin *ma)
+{
+	GtkAllocation allocation;
+	GError *error = NULL;
+
+	cairo_status_t status;
+	cairo_surface_t *surface;
+	cairo_t *cr;
+
+	int i;
+	int x=ma->padding, y=ma->padding;
+
+	gtk_widget_get_allocation (GTK_WIDGET(ma->container), &allocation);
+
+	surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, allocation.width, allocation.height);
+	g_assert (surface != NULL);
+	cr = cairo_create (surface);
+
+	for (i=0; i<GRAPH_MAX; i++) {
+		if (ma->graph_config[i].visible) {
+			cairo_set_source_surface (cr, ma->graphs[i]->surface, x, y);
+			cairo_paint (cr);
+
+			if (multiload_get_orientation(ma) == GTK_ORIENTATION_HORIZONTAL)
+				x += ma->graphs[i]->draw_width + ma->spacing;
+			else
+				y += ma->graphs[i]->draw_height + ma->spacing;
+		}
+	}
+
+	status = cairo_surface_write_to_png (surface, icon_filename[icon_current_index]);
+	g_assert(status == CAIRO_STATUS_SUCCESS);
+	if (error != NULL) {
+		g_error("Cannot save Multiload-ng window to temporary buffer: %s\n", error->message);
+		g_clear_error(&error);
+	} else
+		app_indicator_set_icon(indicator, icon_filename[icon_current_index]);
+
+	icon_current_index = 1-icon_current_index;
+	cairo_surface_destroy (surface);
+	cairo_destroy (cr);
+}
+
 static void
 indicator_graph_update_cb(LoadGraph *g, gpointer user_data)
 {
 	GtkAllocation allocation;
-	guint height = 24; //TODO retrieve actual panel height
+	guint panel_height;
+
+	if (!g->config->visible)
+		return;
+
+	g_return_if_fail (g->surface != NULL);
+
+	panel_height = indicator_get_panel_height();
+
+//	g_return_if_fail (gtk_status_icon_is_embedded(status_icons[g->id]));
+//TODO equivalent for appindicator
 
 	// resize widget and offscreen window to fit into panel
-	gtk_widget_set_size_request(GTK_WIDGET(g->multiload->container), -1, height);
+	gtk_widget_set_size_request(GTK_WIDGET(g->multiload->container), -1, panel_height);
 	gtk_widget_get_allocation (GTK_WIDGET(g->multiload->container), &allocation);
 	gtk_window_resize(GTK_WINDOW(offscr), allocation.width, allocation.height);
 
-	gtk_widget_queue_draw(offscr);
-}
-
-static void
-indicator_update_pixbuf(GtkOffscreenWindow *window, gpointer unused, MultiloadPlugin *ma)
-{
-	GtkAllocation allocation;
-	GdkPixbuf *pixbuf;
-	GError *error = NULL;
-
-	gtk_widget_get_allocation (GTK_WIDGET(ma->container), &allocation);
-
-	// update icon pixbuf
-	pixbuf = gtk_offscreen_window_get_pixbuf (GTK_OFFSCREEN_WINDOW(offscr));
-	gdk_pixbuf_save (pixbuf, icon_filename[icon_current_index], "png", &error, "compression", "0", NULL);
-	if (error != NULL) {
-		g_error("Cannot save Multiload-ng window to temporary buffer: %s\n", error->message);
-		g_clear_error(&error);
-	} else if (gdk_pixbuf_get_width(pixbuf) == allocation.width && gdk_pixbuf_get_height(pixbuf) == allocation.height) {
-		app_indicator_set_icon(indicator, icon_filename[icon_current_index]);
-	}
-
-	icon_current_index = 1-icon_current_index;
-	g_object_unref(pixbuf);
+	indicator_update_pixbuf(g->multiload);
 }
 
 
@@ -188,11 +225,6 @@ int main (int argc, char **argv)
 	gtk_widget_set_size_request(GTK_WIDGET(multiload->container), -1, -1);
 	gtk_container_add(GTK_CONTAINER(offscr), GTK_WIDGET(multiload->container));
 	gtk_widget_show(offscr);
-#if GTK_API == 2
-	g_signal_connect(G_OBJECT(offscr), "expose-event", G_CALLBACK(indicator_update_pixbuf), multiload);
-#else
-	g_signal_connect(G_OBJECT(offscr), "draw", G_CALLBACK(indicator_update_pixbuf), multiload);
-#endif
 
 	// create indicator
 	indicator = app_indicator_new ("indicator-multiload-ng", about_data_icon, APP_INDICATOR_CATEGORY_HARDWARE);
