@@ -67,7 +67,7 @@ indicator_preferences_cb(GtkWidget *widget, MultiloadPlugin *ma)
 	gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
 	gtk_window_present(GTK_WINDOW(dialog));
 
-	multiload_preferences_disable_settings(MULTILOAD_SETTINGS_TOOLTIPS);
+	multiload_preferences_disable_settings(MULTILOAD_SETTINGS_FILL_BETWEEN | MULTILOAD_SETTINGS_TOOLTIPS);
 }
 
 static int
