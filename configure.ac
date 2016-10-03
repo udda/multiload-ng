@@ -52,6 +52,8 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package.])
 AM_GLIB_GNU_GETTEXT
 
+# Default paths
+AC_PREFIX_PROGRAM([ xdg-open ])
 
 # Check highest available GTK version
 PKG_CHECK_EXISTS([gtk+-3.0], [auto_gtk=3.0], [auto_gtk=2.0])
@@ -181,6 +183,8 @@ AS_ECHO([ ])
 AS_ECHO([ "* -----------------------------" ])
 AS_ECHO([ "*  Configured $PACKAGE_NAME version $PACKAGE_VERSION" ])
 AS_ECHO([ "* -----------------------------" ])
+AS_ECHO([ "*" ])
+AS_ECHO([ "*  Using prefix: $prefix" ])
 AS_ECHO([ "*" ])
 AS_ECHO([ "*  CFLAGS: $CFLAGS" ])
 AS_ECHO([ "*  Building against GTK+$GTK_API" ])
