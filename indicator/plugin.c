@@ -89,7 +89,7 @@ indicator_update_pixbuf(MultiloadPlugin *ma)
 	cairo_t *cr;
 
 	int i;
-	double x=ma->padding-0.5, y=ma->padding-0.5;
+	double x=ma->padding, y=ma->padding;
 
 	gtk_widget_get_allocation (GTK_WIDGET(ma->container), &allocation);
 
