@@ -4,13 +4,14 @@
 Multiload-ng is a modern graphical system monitor. It's a near-complete rewrite of the good old GNOME multiload applet.
 
 It supports the following panels:
-- XFCE (xfce4-panel)
-- LXDE (lxpanel)
-- MATE (mate-panel)
+- XFCE (*xfce4-panel*)
+- LXDE (*lxpanel*)
+- MATE (*mate-panel*)
+- Ubuntu Unity (through *libappindicator*)
+- Every panel with support for [Application Indicators](https://unity.ubuntu.com/projects/appindicators/)
 - Standalone (has its own window, not embedded in any panel)
 
 In addition, there is **experimental** support for the following panels:
-- Ubuntu Unity (and other panels that support indicators)
 - System tray (virtually *any* panel with a systray, in particular those without external plugins support)
 - Avant Window Navigator
 
@@ -201,6 +202,18 @@ speaking you don't have to worry about user kernels.
 
 ### Requirements for standalone window
 Standalone target has no additional requirements.
+
+### Requirements for Application Indicator (Ubuntu Unity and others)
+In addition to common requirements (see above)
+these packages are required to build Application Indicator:
+
+Package                     | Min version
+:-------------------------- | -------------:
+libappindicator             | >= 0.4.92
+
+Check which GTK+ version is supported by your target panel,
+Ubuntu Unity needs AppIndicators to be built against GTK+3.
+You may have to set correct GTK+ version (see [here](#gtk-version) for instructions).
 
 ### Requirements for LXDE panel
 In addition to common requirements (see above)

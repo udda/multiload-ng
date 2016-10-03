@@ -21,8 +21,6 @@
 
 #include <config.h>
 
-#ifdef MULTILOAD_EXPERIMENTAL
-
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -261,5 +259,3 @@ int main (int argc, char **argv)
 
 	return 0;
 }
-
-#endif /* def MULTILOAD_EXPERIMENTAL */
