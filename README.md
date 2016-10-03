@@ -254,14 +254,13 @@ Package                     | Min version
 :-------------------------- | -------------:
 libxfce4panel               | >= 4.6.0
 libxfce4util                | >= 4.6.0
-libxfce4ui-1 OR libxfcegui4 | >= 4.8.0
 
 Check which GTK+ version is supported by your panel: xfce4-panel used to be GTK+2
 only, newer versions of xfce4-panel supports GTK+3 too. You may have to set
 correct GTK+ version (see [here](#gtk-version) for instructions).
 
-Note that XFCE 4.6 or greater is required.
-
+Note that XFCE 4.6 or greater is required for GTK+2 plugin.
+Note that XFCE 4.12 or greater is required for GTK+3 plugin.
 
 
 ## Install instructions
