@@ -1117,6 +1117,11 @@ multiload_preferences_disable_settings(guint mask)
 	if (mask & MULTILOAD_SETTINGS_FILL_BETWEEN)
 		gtk_widget_set_sensitive(GTK_WIDGET(OB("cb_fill_between")), FALSE);
 
+	if (mask & MULTILOAD_SETTINGS_DBLCLICK_POLICY) {
+		for (i=0; i<GRAPH_MAX; i++)
+			gtk_widget_set_sensitive(GTK_WIDGET(OB(combo_dblclick_names[i])), FALSE);
+	}
+
 	if (mask & MULTILOAD_SETTINGS_TOOLTIPS) {
 		for (i=0; i<GRAPH_MAX; i++)
 			gtk_widget_set_sensitive(GTK_WIDGET(OB(combo_tooltip_names[i])), FALSE);
