@@ -104,8 +104,12 @@ multiload_graph_parm_get_data (int Maximum, int data[1], LoadGraph *g, Parametri
 		return; // allow this function to be used just to test command lines
 
 	max = autoscaler_get_max(&xd->scaler, g, rint(total));
-	for (i=0; i<4; i++)
-		data[i] = rint (Maximum * (float)xd->result[i] / max);
+	if (max == 0) {
+		memset(data, 0, 4*sizeof(data[0]));
+	} else {
+		for (i=0; i<4; i++)
+			data[i] = rint (Maximum * (float)xd->result[i] / max);
+	}
 }
 
 

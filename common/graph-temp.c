@@ -355,13 +355,16 @@ multiload_graph_temp_get_data (int Maximum, int data[2], LoadGraph *g, Temperatu
 
 	// output phase
 	int max = autoscaler_get_max(&xd->scaler, g, use->temp);
-
-	if (use->critical > 0 && use->critical < use->temp) {
-		data[0] = rint (Maximum * (use->critical) / max);
-		data[1] = rint (Maximum * (use->temp - use->critical) / max);
+	if (max == 0) {
+		memset(data, 0, 2*sizeof(data[0]));
 	} else {
-		data[0] = rint (Maximum * (use->temp) / max);
-		data[1] = 0;
+		if (use->critical > 0 && use->critical < use->temp) {
+			data[0] = rint (Maximum * (use->critical) / max);
+			data[1] = rint (Maximum * (use->temp - use->critical) / max);
+		} else {
+			data[0] = rint (Maximum * (use->temp) / max);
+			data[1] = 0;
+		}
 	}
 
 	strcpy(xd->name, use->name);

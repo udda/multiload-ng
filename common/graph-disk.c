@@ -191,8 +191,12 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 	} else {
 		max = autoscaler_get_max(&xd->scaler, g, readdiff + writediff);
 
-		data[0] = (float)Maximum *  readdiff / (float)max;
-		data[1] = (float)Maximum * writediff / (float)max;
+		if (max == 0) {
+			memset(data, 0, 4*sizeof(data[0]));
+		} else {
+			data[0] = (float)Maximum *  readdiff / (float)max;
+			data[1] = (float)Maximum * writediff / (float)max;
+		}
 
 		// read/write are relative to standard linux sectors (512 bytes, fixed)
 		xd->read_speed  = calculate_speed(readdiff  * 512, g->config->interval);

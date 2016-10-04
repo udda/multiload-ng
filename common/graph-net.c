@@ -272,8 +272,12 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 		xd->out_speed	= calculate_speed(delta[NET_OUT],	g->config->interval);
 		xd->local_speed	= calculate_speed(delta[NET_LOCAL],	g->config->interval);
 
-		for (i=0; i<NET_MAX; i++)
-			data[i] = rint (Maximum * (float)delta[i] / max);
+		if (max == 0) {
+			memset(data, 0, 4*sizeof(data[0]));
+		} else {
+			for (i=0; i<NET_MAX; i++)
+				data[i] = rint (Maximum * (float)delta[i] / max);
+		}
 	}
 
 	memcpy(xd->last, present, sizeof xd->last);

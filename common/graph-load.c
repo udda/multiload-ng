@@ -63,7 +63,11 @@ multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData
 	}
 
 	int max = autoscaler_get_max(&xd->scaler, g, rint(xd->loadavg[LOADAVG_1]));
-	data [0] = rint ((float) Maximum * xd->loadavg[LOADAVG_1] / max);
+	if (max == 0) {
+		memset(data, 0, 4*sizeof(data[0]));
+	} else {
+		data [0] = rint ((float) Maximum * xd->loadavg[LOADAVG_1] / max);
+	}
 }
 
 void
