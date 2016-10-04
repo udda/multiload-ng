@@ -291,9 +291,16 @@ Now run configure script:
 `./configure --prefix=/usr`  
 Change prefix as needed (/usr is the default of most distros and it's just OK; if not specified it defaults to /usr/local).
 
-Lubuntu users (and possibly others) have different libraries location. They may have to set directly *libdir*:  
-`./configure --libdir=/usr/lib/x86_64-linux-gnu`  
-If plugin does not show up in the list of panel plugins, you could try to repeat build process with this configure setting.
+### LxPanel in systems with Multiarch support
+Some Linux distributions (like Debian and its derivatives) have [Multiarch](https://wiki.debian.org/Multiarch) support, means that
+they can install 32 bit and 64 bit libraries alongside each other.
+
+This affects libraries location for LxPanel plugin, and it must be set manually.
+
+Users of Multiarch-enabled systems running LxPanel (e.g. Lubuntu) have to set `libdir` directly, by adding to *./configure* the
+option `--libdir=/usr/lib/x86_64-linux-gnu` in 64 bit systems, and `--libdir=/usr/lib/i386-linux-gnu` in 32 bit systems.
+
+If plugin does not show up in the list of LxPanel plugins, you could try to repeat build process with this configure setting.
 
 ### GTK version
 Build system automatically selects highest GTK+ version available. If you need to build against a lower version, you have to
