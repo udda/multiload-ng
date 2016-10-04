@@ -60,6 +60,9 @@ xdg_open_url();
 G_GNUC_INTERNAL FILE*
 cached_fopen_r(gchar* path, gboolean reopen);
 
+G_GNUC_INTERNAL GdkPixbuf*
+cairo_surface_to_gdk_pixbuf(cairo_surface_t *surface, guint width, guint height);
+
 G_END_DECLS
 
 #endif /* __UTIL_H__ */

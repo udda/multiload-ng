@@ -307,3 +307,27 @@ cached_fopen_r(gchar* path, gboolean reopen)
 	rewind(f);
 	return f;
 }
+
+static void
+gdk_pixbuf_image_data_free (guchar *pixels, gpointer data)
+{
+	g_free(pixels);
+}
+
+GdkPixbuf*
+cairo_surface_to_gdk_pixbuf(cairo_surface_t *surface, guint width, guint height)
+{
+	guint i, j;
+	guchar *img_data, *img_data_converted;
+
+	img_data = cairo_image_surface_get_data (surface);
+	img_data_converted = g_new(guchar, width * height * 3);
+	for (i=0,j=0; i<width*height; i++) {
+		img_data_converted[j++] = img_data[i*4+2];
+		img_data_converted[j++] = img_data[i*4+1];
+		img_data_converted[j++] = img_data[i*4];
+	}
+
+	// create pixbuf from converted data
+	return gdk_pixbuf_new_from_data(img_data_converted, GDK_COLORSPACE_RGB, FALSE, 8, width, height, width*3, gdk_pixbuf_image_data_free, NULL);
+}

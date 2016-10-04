@@ -32,6 +32,7 @@
 #include "common/multiload-config.h"
 #include "common/preferences.h"
 #include "common/ui.h"
+#include "common/util.h"
 
 
 // Panel Specific Settings Implementation
@@ -104,19 +105,12 @@ systray_graph_update_cb(LoadGraph *g, gpointer user_data)
 	// set graph size from icon size
 	g->config->size = icon_size;
 
-	// update icon pixbuf
-#if GTK_API == 3
-	pixbuf = gdk_pixbuf_get_from_surface (g->surface, 0, 0, g->draw_width, g->draw_height);
-#elif GTK_API == 2
-	pixbuf = gdk_pixbuf_get_from_drawable (NULL, GDK_DRAWABLE(gtk_widget_get_window(g->disp)), NULL, 0, 0, 0, 0, g->draw_width, g->draw_height);
-#else
-#error "Wrong GTK+ version."
-#endif
-
-	if (gdk_pixbuf_get_width(pixbuf) != icon_size || gdk_pixbuf_get_height(pixbuf) != icon_size)
+	if (g->draw_width != icon_size || g->draw_height != icon_size)
 		return; // incorrect pixbuf size - could be first drawing
 
+	pixbuf = cairo_surface_to_gdk_pixbuf(g->surface, icon_size, icon_size);
 	gtk_status_icon_set_from_pixbuf(status_icons[g->id], pixbuf);
+	g_object_unref(pixbuf);
 }
 
 gboolean
