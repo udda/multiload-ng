@@ -26,6 +26,7 @@
 #include <dirent.h>
 #include <string.h>
 #include <time.h>
+#include <math.h>
 #include <glib.h>
 #include <gdk/gdkx.h>
 #include <gtk/gtk.h>
@@ -48,10 +49,47 @@ cairo_set_source_rgba_from_config(cairo_t *cr, GraphConfig *config, guint color_
 	cairo_set_source_rgba(cr, c->red, c->green, c->blue, c->alpha);
 }
 
-static void
-cairo_set_vertical_gradient(cairo_t *cr, double height, GdkRGBA *a, GdkRGBA *b)
+void
+load_graph_cairo_set_gradient(cairo_t *cr, double width, double height, int direction, GdkRGBA *a, GdkRGBA *b)
 {
-	cairo_pattern_t *pat = cairo_pattern_create_linear (0.0, 0.0, 0.0, height);
+	cairo_pattern_t *pat;
+
+	// sanity check
+	if (direction < 0 || direction >= MULTILOAD_GRADIENT_MAX)
+		direction = MULTILOAD_GRADIENT_LINEAR_N_TO_S;
+
+	switch (direction) {
+		case MULTILOAD_GRADIENT_LINEAR_N_TO_S:
+			pat = cairo_pattern_create_linear (0.0, 0.0, 0.0, height);
+			break;
+		case MULTILOAD_GRADIENT_LINEAR_NE_TO_SW:
+			pat = cairo_pattern_create_linear (width, 0.0, 0.0, height);
+			break;
+		case MULTILOAD_GRADIENT_LINEAR_E_TO_W:
+			pat = cairo_pattern_create_linear (width, 0.0, 0.0, 0.0);
+			break;
+		case MULTILOAD_GRADIENT_LINEAR_SE_TO_NW:
+			pat = cairo_pattern_create_linear (width, height, 0.0, 0.0);
+			break;
+		case MULTILOAD_GRADIENT_LINEAR_S_TO_N:
+			pat = cairo_pattern_create_linear (0.0, height, 0.0, 0.0);
+			break;
+		case MULTILOAD_GRADIENT_LINEAR_SW_TO_NE:
+			pat = cairo_pattern_create_linear (0.0, height, width, 0.0);
+			break;
+		case MULTILOAD_GRADIENT_LINEAR_W_TO_E:
+			pat = cairo_pattern_create_linear (0.0, 0.0, width, 0.0);
+			break;
+		case MULTILOAD_GRADIENT_LINEAR_NW_TO_SE:
+			pat = cairo_pattern_create_linear (0.0, 0.0, width, height);
+			break;
+		case MULTILOAD_GRADIENT_RADIAL:
+			pat = cairo_pattern_create_radial (width/2, height/2, 0.0, width/2, height/2, sqrt(pow(width/2,2) + pow(height/2,2)) );
+			break;
+
+		default:
+			g_assert_not_reached();
+	}
 	cairo_pattern_add_color_stop_rgb (pat, 0, a->red, a->green, a->blue);
 	cairo_pattern_add_color_stop_rgb (pat, 1, b->red, b->green, b->blue);
 	cairo_set_source(cr, pat);
@@ -111,7 +149,7 @@ load_graph_draw (LoadGraph *g)
 
 	if (W > 0 && H > 0) {
 		// background
-		cairo_set_vertical_gradient(cr, H, &(colors[c_top]), &(colors[c_bottom]));
+		load_graph_cairo_set_gradient(cr, W, H, g->config->bg_direction, &(colors[c_top]), &(colors[c_bottom]));
 		cairo_rectangle(cr, x, y, W, H);
 		cairo_fill(cr);
 

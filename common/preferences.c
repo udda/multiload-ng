@@ -942,11 +942,7 @@ multiload_preferences_bgpreview_draw_cb(GtkWidget *widget, cairo_t *cr, LoadGrap
 
 	if (W > 0 && H > 0) {
 		// background
-		cairo_pattern_t *pat = cairo_pattern_create_linear (0.0, 0.0, 0.0, H);
-		cairo_pattern_add_color_stop_rgb (pat, 0, c_top->red, c_top->green, c_top->blue);
-		cairo_pattern_add_color_stop_rgb (pat, 1, c_bottom->red, c_bottom->green, c_bottom->blue);
-		cairo_set_source(cr, pat);
-
+		load_graph_cairo_set_gradient(cr, W, H, g->config->bg_direction, c_top, c_bottom);
 		cairo_rectangle(cr, x, y, W, H);
 		cairo_fill(cr);
 

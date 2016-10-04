@@ -38,6 +38,8 @@ G_GNUC_INTERNAL void
 load_graph_stop (LoadGraph *g);
 G_GNUC_INTERNAL void
 load_graph_unalloc (LoadGraph *g);
+G_GNUC_INTERNAL void
+load_graph_cairo_set_gradient(cairo_t *cr, double width, double height, int direction, GdkRGBA *a, GdkRGBA *b);
 
 G_END_DECLS
 

@@ -54,6 +54,7 @@ typedef struct _GraphConfig {
 	gboolean visible;
 	gint border_width;
 	GdkRGBA colors[MAX_COLORS];
+	gint bg_direction;
 
 	gint interval;
 	gint size;
@@ -118,6 +119,20 @@ typedef struct {
 	gboolean show_preferences;
 	gboolean reset_settings;
 } MultiloadOptions;
+
+typedef enum {
+	MULTILOAD_GRADIENT_LINEAR_N_TO_S,
+	MULTILOAD_GRADIENT_LINEAR_NE_TO_SW,
+	MULTILOAD_GRADIENT_LINEAR_E_TO_W,
+	MULTILOAD_GRADIENT_LINEAR_SE_TO_NW,
+	MULTILOAD_GRADIENT_LINEAR_S_TO_N,
+	MULTILOAD_GRADIENT_LINEAR_SW_TO_NE,
+	MULTILOAD_GRADIENT_LINEAR_W_TO_E,
+	MULTILOAD_GRADIENT_LINEAR_NW_TO_SE,
+	MULTILOAD_GRADIENT_RADIAL,
+
+	MULTILOAD_GRADIENT_MAX
+} MultiloadGradientDirection;
 
 
 G_BEGIN_DECLS

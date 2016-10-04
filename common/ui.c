@@ -144,6 +144,11 @@ multiload_ui_read (MultiloadPlugin *ma)
 				multiload_colors_from_string(ma, i, colors_list);
 				g_free (key);
 			}
+
+			/* Background gradient */
+			key = g_strdup_printf("graph-%s-background-direction", graph_types[i].name);
+			multiload_ps_settings_get_int (settings, key, &ma->graph_config[i].bg_direction);
+			g_free (key);
 		}
 		g_debug("[ui] Done reading settings. Closing object %p", settings);
 		multiload_ps_settings_close(settings);
@@ -237,6 +242,11 @@ multiload_ui_save (MultiloadPlugin *ma)
 			buf = multiload_colors_to_string(ma, i);
 			multiload_ps_settings_set_string (settings, key, buf);
 			g_free (buf);
+			g_free (key);
+
+			/* Background gradient */
+			key = g_strdup_printf("graph-%s-background-direction", graph_types[i].name);
+			multiload_ps_settings_set_int (settings, key, ma->graph_config[i].bg_direction);
 			g_free (key);
 		}
 

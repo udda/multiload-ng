@@ -246,6 +246,7 @@ void multiload_defaults(MultiloadPlugin *ma)
 		conf->dblclick_policy = DEFAULT_DBLCLICK_POLICY;
 		conf->filter[0] = '\0';
 		conf->filter_enable = FALSE;
+		conf->bg_direction = DEFAULT_BACKGROUND_DIRECTION;
 		multiload_colors_default(ma, i);
 
 		multiload_set_max_value(ma, i, graph_types[i].scaler_max);
