@@ -27,6 +27,7 @@ md5sums='f3e746784df07850a4f36d055bd141ba'
 get_pkgname()
 {
 	case "$1" in
+		awn)		echo 'awn-applet-multiload-ng' ;;
 		indicator)	echo 'multiload-ng-indicator' ;;
 		lxpanel)	echo 'lxpanel-multiload-ng-applet' ;;
 		mate)		echo 'mate-multiload-ng-applet' ;;
@@ -39,12 +40,13 @@ get_pkgname()
 get_pkgdesc()
 {
 	case "$1" in
-		indicator)	echo 'Modern graphical system monitor, libappindicator version' ;;
-		lxpanel)	echo 'Modern graphical system monitor, LxPanel version' ;;
-		mate)		echo 'Modern graphical system monitor, MATE panel version' ;;
+		awn)		echo 'Modern graphical system monitor, Avant Window Navigator applet' ;;
+		indicator)	echo 'Modern graphical system monitor, AppIndicator plugin' ;;
+		lxpanel)	echo 'Modern graphical system monitor, LxPanel plugin' ;;
+		mate)		echo 'Modern graphical system monitor, MATE panel applet' ;;
 		standalone)	echo 'Modern graphical system monitor, standalone version' ;;
 		systray)	echo 'Modern graphical system monitor, system tray version' ;;
-		xfce4)		echo 'Modern graphical system monitor, XFCE4 panel version' ;;
+		xfce4)		echo 'Modern graphical system monitor, XFCE4 panel plugin' ;;
 	esac
 }
 
@@ -53,6 +55,7 @@ get_depends()
 	if [ "$2" = "gtk2" ]; then
 		printf -- "'gtk2>=2.20.0' 'cairo'"
 		case "$1" in
+			awn)		printf -- " 'awn>=0.3.9' 'glibmm-2.4>=2.16.0' 'gtkmm-2.4>=-2.20'" ;;
 			indicator)	printf -- " 'appindicator-0.1>=0.4.92'" ;;
 			lxpanel)	printf -- " 'lxpanel>=0.7.0' 'libfm>=1.2.0'" ;;
 			mate)		printf -- " 'libmatepanelapplet-4.0>=1.7.0'" ;;
@@ -63,6 +66,7 @@ get_depends()
 	else
 		printf -- "'gtk3' 'cairo'"
 		case "$1" in
+			awn)		return 1 ;;
 			indicator)	printf -- " 'appindicator3-0.1>=0.4.92'" ;;
 			lxpanel)	return 1 ;;
 			mate)		printf -- " 'libmatepanelapplet-4.0>=1.7.0'" ;;
@@ -82,6 +86,10 @@ get_configure_string()
 		else printf -- ' --with-gtk=3.0 --disable-deprecations'
 	fi
 
+	if [ "$1" = "awn" ]
+		then printf -- ' --with-awn'
+		else printf -- ' --without-awn'
+	fi
 	if [ "$1" = "indicator" ]
 		then printf -- ' --with-indicator'
 		else printf -- ' --without-indicator'
@@ -120,7 +128,7 @@ generate_pkgbuild()
 				is_git=1 ;;
 			gtk2 | gtk3)
 				gtk_str="$arg" ;;
-			indicator | lxpanel | mate | standalone | systray | xfce4)
+			awn | indicator | lxpanel | mate | standalone | systray | xfce4)
 				target="$arg" ;;
 		esac
 	done
@@ -132,6 +140,8 @@ generate_pkgbuild()
 		return 1
 	fi
 
+	# there is no GTK3 support in AWN
+	[ "$target" = "awn" -a "$gtk_str" = "gtk3" ] && return 2
 	# there is no GTK3 support in LXDE
 	[ "$target" = "lxpanel" -a "$gtk_str" = "gtk3" ] && return 2
 
@@ -202,7 +212,7 @@ generate_pkgbuild()
 
 
 
-for target in indicator lxpanel mate standalone systray xfce4; do
+for target in awn indicator lxpanel mate standalone systray xfce4; do
 	for gtk in gtk2 gtk3; do
 		generate_pkgbuild ${gtk} ${target}
 		generate_pkgbuild ${gtk} ${target} git
