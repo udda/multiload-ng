@@ -129,6 +129,7 @@ static void
 indicator_graph_update_cb(LoadGraph *g, gpointer user_data)
 {
 	GtkAllocation allocation;
+	int width;
 	guint height;
 
 	if (!g->config->visible)
@@ -141,10 +142,14 @@ indicator_graph_update_cb(LoadGraph *g, gpointer user_data)
 		return;
 	}
 
+	if (multiload_get_orientation(g->multiload) == GTK_ORIENTATION_HORIZONTAL)
+		width = -1;
+	else
+		width = 100;
 	height = indicator_get_icon_height();
 
 	// resize widget and offscreen window to fit into panel
-	gtk_widget_set_size_request(GTK_WIDGET(g->multiload->container), -1, height);
+	gtk_widget_set_size_request(GTK_WIDGET(g->multiload->container), width, height);
 	gtk_widget_get_allocation (GTK_WIDGET(g->multiload->container), &allocation);
 	gtk_window_resize(GTK_WINDOW(offscr), allocation.width, allocation.height);
 
