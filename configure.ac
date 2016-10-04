@@ -54,6 +54,7 @@ AM_GLIB_GNU_GETTEXT
 
 # Default paths
 AC_PREFIX_PROGRAM([ xdg-open ])
+if test "${sysconfdir}" = '${prefix}/etc' ; then sysconfdir=/etc ; fi
 
 # Check highest available GTK version
 PKG_CHECK_EXISTS([gtk+-3.0], [auto_gtk=3.0], [auto_gtk=2.0])
@@ -132,7 +133,6 @@ AC_ARG_ENABLE([profiling], AS_HELP_STRING([--enable-profiling], [Enable CFLAGS f
 # Enable autostart for suitable targets
 AC_ARG_ENABLE([autostart], AS_HELP_STRING([--enable-autostart], [Enable autostart for suitable targets.]))
 AM_CONDITIONAL(ENABLE_AUTOSTART, test "x$enable_autostart" = "xyes")
-if test "${sysconfdir}" = '${prefix}/etc' ; then sysconfdir=/etc ; fi
 
 # Per-panel configure
 m4_include([data/configure.m4])
