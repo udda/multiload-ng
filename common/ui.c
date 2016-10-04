@@ -69,6 +69,7 @@ multiload_ui_read (MultiloadPlugin *ma)
 		multiload_ps_settings_get_boolean	(settings, "pref-dialog-maximized",	&ma->pref_dialog_maximized);
 		multiload_ps_settings_get_int		(settings, "pref-dialog-width",		&ma->pref_dialog_width);
 		multiload_ps_settings_get_int		(settings, "pref-dialog-height",	&ma->pref_dialog_height);
+		multiload_ps_settings_get_boolean	(settings, "size-format-iec",		&ma->size_format_iec);
 
 		/* Color scheme */
 		multiload_ps_settings_get_string	(settings, "color-scheme",		ma->color_scheme, sizeof(ma->color_scheme));
@@ -177,6 +178,7 @@ multiload_ui_save (MultiloadPlugin *ma)
 		multiload_ps_settings_set_boolean	(settings, "pref-dialog-maximized",	ma->pref_dialog_maximized);
 		multiload_ps_settings_set_int		(settings, "pref-dialog-width",		ma->pref_dialog_width);
 		multiload_ps_settings_set_int		(settings, "pref-dialog-height",	ma->pref_dialog_height);
+		multiload_ps_settings_set_boolean	(settings, "size-format-iec",		ma->size_format_iec);
 		multiload_ps_settings_set_string	(settings, "color-scheme",			ma->color_scheme);
 
 		/* Parametric graph */

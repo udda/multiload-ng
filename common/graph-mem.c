@@ -119,18 +119,18 @@ void
 multiload_graph_mem_tooltip_update (char **title, char **text, LoadGraph *g, MemoryData *xd)
 {
 	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
-		gchar *total = g_format_size_full(xd->total, G_FORMAT_SIZE_IEC_UNITS);
+		gchar *total = format_size_for_display(xd->total, g->multiload->size_format_iec);
 
-		gchar *user = g_format_size_full(xd->user, G_FORMAT_SIZE_IEC_UNITS);
+		gchar *user = format_size_for_display(xd->user, g->multiload->size_format_iec);
 		gchar *user_percent = format_percent(xd->user, xd->total, 1);
 
-		gchar *shared = g_format_size_full(xd->shared, G_FORMAT_SIZE_IEC_UNITS);
+		gchar *shared = format_size_for_display(xd->shared, g->multiload->size_format_iec);
 		gchar *shared_percent = format_percent(xd->shared, xd->total, 1);
 
-		gchar *buffers = g_format_size_full(xd->buffers, G_FORMAT_SIZE_IEC_UNITS);
+		gchar *buffers = format_size_for_display(xd->buffers, g->multiload->size_format_iec);
 		gchar *buffers_percent = format_percent(xd->buffers, xd->total, 1);
 
-		gchar *cache = g_format_size_full(xd->cache, G_FORMAT_SIZE_IEC_UNITS);
+		gchar *cache = format_size_for_display(xd->cache, g->multiload->size_format_iec);
 		gchar *cache_percent = format_percent(xd->cache, xd->total, 1);
 
 		*title = g_strdup_printf(_("%s of RAM"), total);

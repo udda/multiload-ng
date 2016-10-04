@@ -130,9 +130,16 @@ read_int_from_file(const gchar *path)
 
 
 gchar*
-format_rate_for_display(guint rate)
+format_size_for_display(guint size, gboolean iec_units)
 {
-	gchar *bytes = g_format_size_full(rate, G_FORMAT_SIZE_IEC_UNITS);
+	GFormatSizeFlags flags = iec_units ? G_FORMAT_SIZE_IEC_UNITS : G_FORMAT_SIZE_DEFAULT;
+	return g_format_size_full(size, flags);
+}
+
+gchar*
+format_rate_for_display(guint rate, gboolean iec_units)
+{
+	gchar *bytes = format_size_for_display(rate, iec_units);
 	// xgettext: this is a rate format (eg. 2 MiB/s)
 	gchar *ret = g_strdup_printf(_("%s/s"), bytes);
 

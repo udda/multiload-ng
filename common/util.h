@@ -41,7 +41,9 @@ G_GNUC_INTERNAL gint64
 read_int_from_file(const gchar *path);
 
 G_GNUC_INTERNAL gchar*
-format_rate_for_display (guint rate);
+format_size_for_display (guint size, gboolean iec_units);
+G_GNUC_INTERNAL gchar*
+format_rate_for_display (guint rate, gboolean iec_units);
 G_GNUC_INTERNAL gchar*
 format_percent(guint64 value, guint64 total, guint ndigits);
 G_GNUC_INTERNAL gchar*

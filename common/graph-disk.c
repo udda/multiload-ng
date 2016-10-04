@@ -212,8 +212,8 @@ multiload_graph_disk_cmdline_output (LoadGraph *g, DiskData *xd)
 void
 multiload_graph_disk_tooltip_update (char **title, char **text, LoadGraph *g, DiskData *xd)
 {
-	gchar *disk_read = format_rate_for_display(xd->read_speed);
-	gchar *disk_write = format_rate_for_display(xd->write_speed);
+	gchar *disk_read = format_rate_for_display(xd->read_speed, g->multiload->size_format_iec);
+	gchar *disk_write = format_rate_for_display(xd->write_speed, g->multiload->size_format_iec);
 
 	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
 		*text = g_strdup_printf(_(	"Monitored partitions: %s\n"

@@ -292,9 +292,9 @@ multiload_graph_net_cmdline_output (LoadGraph *g, NetData *xd)
 void
 multiload_graph_net_tooltip_update (char **title, char **text, LoadGraph *g, NetData *xd)
 {
-	gchar *tx_in = format_rate_for_display(xd->in_speed);
-	gchar *tx_out = format_rate_for_display(xd->out_speed);
-	gchar *tx_local = format_rate_for_display(xd->local_speed);
+	gchar *tx_in = format_rate_for_display(xd->in_speed, g->multiload->size_format_iec);
+	gchar *tx_out = format_rate_for_display(xd->out_speed, g->multiload->size_format_iec);
+	gchar *tx_local = format_rate_for_display(xd->local_speed, g->multiload->size_format_iec);
 
 	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
 		*text = g_strdup_printf(_(	"Monitored interfaces: %s\n"
