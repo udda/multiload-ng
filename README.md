@@ -9,7 +9,7 @@ It supports the following panels:
 - MATE (*mate-panel*)
 - Ubuntu Unity (through *libappindicator*)
 - Every panel with support for [Application Indicators](https://unity.ubuntu.com/projects/appindicators/)
-- System tray (virtually *any* panel with a systray, in particular those without external plugins support, like *tint2*)
+- System tray (virtually *any* panel with a systray, in particular those without external plugins support, like [tint2](https://gitlab.com/o9000/tint2/wikis/home))
 - Standalone (has its own window, not embedded in any panel)
 
 In addition, there is **experimental** support for the following panels:
