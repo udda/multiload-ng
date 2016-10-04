@@ -26,6 +26,7 @@ common/about-data.c
 common/binary-data.c
 common/color-scheme-icons.inc
 data/generate-about-data.sh
+extras/pacman/*.PKGBUILD
 indicator/multiload-ng-indicator
 indicator/*.desktop
 indicator/*.desktop.in
