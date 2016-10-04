@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Doesn't work with intltoolize
 # autoreconf --force --install || exit 1
