@@ -24,6 +24,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <signal.h>
 #include <sys/time.h>
 #include <gtk/gtk.h>
 #include <glib/gi18n-lib.h>
@@ -47,15 +48,30 @@ static int icon_current_index=0;
 static gboolean indicator_connected;
 
 static void
+indicator_cleanup(int sig)
+{
+	char signame[12];
+	if (sig == SIGTERM)
+		strcpy(signame, "SIGTERM");
+	else if (sig == SIGINT)
+		strcpy(signame, "SIGINT");
+	else
+		sprintf(signame, "Signal %d", sig);
+
+	printf("Received %s, cleaning up...\n", signame);
+    remove(icon_filename[0]);
+    remove(icon_filename[1]);
+    remove(icon_directory);
+
+    exit(0);
+}
+
+static void
 indicator_destroy_cb(GtkWidget *widget, MultiloadPlugin *ma)
 {
     gtk_main_quit ();
     g_free(ma);
-
-    // cleanup buffer files
-    remove(icon_filename[0]);
-    remove(icon_filename[1]);
-    remove(icon_directory);
+    indicator_cleanup(0);
 }
 
 static void
@@ -276,6 +292,10 @@ int main (int argc, char **argv)
 	set_defaults(multiload);
 	create_buffer_files();
 	build_menu(multiload);
+
+	// cleanup on SIGTERM
+	signal(SIGINT, indicator_cleanup);
+	signal(SIGTERM, indicator_cleanup);
 
 	if (options->show_preferences)
 		indicator_preferences_cb(GTK_WIDGET(indicator), multiload);
