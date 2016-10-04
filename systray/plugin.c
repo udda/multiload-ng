@@ -61,7 +61,8 @@ systray_preferences_cb(GtkWidget *widget, MultiloadPlugin *ma)
 		MULTILOAD_SETTINGS_PADDING |
 		MULTILOAD_SETTINGS_SPACING |
 		MULTILOAD_SETTINGS_ORIENTATION |
-		MULTILOAD_SETTINGS_FILL_BETWEEN
+		MULTILOAD_SETTINGS_FILL_BETWEEN |
+		MULTILOAD_SETTINGS_DBLCLICK_POLICY
 	);
 }
 
@@ -139,14 +140,30 @@ systray_query_tooltip_cb (GtkStatusIcon *status_icon, gint x, gint y, gboolean k
 }
 
 static void
+set_defaults (MultiloadPlugin *ma)
+{
+	guint i;
+
+	ma->padding = 0;
+	ma->spacing = 0;
+	ma->fill_between = FALSE;
+	ma->orientation_policy = MULTILOAD_ORIENTATION_HORIZONTAL;
+	for (i=0; i<GRAPH_MAX; i++)
+		ma->graph_config[i].dblclick_policy = DBLCLICK_POLICY_DONOTHING;
+
+	multiload_set_padding (ma, ma->padding);
+	multiload_set_spacing (ma, ma->spacing);
+	multiload_set_fill_between (ma, ma->fill_between);
+	multiload_refresh_orientation (ma);
+
+	multiload_ui_save(ma);
+}
+
+static void
 build_icons (MultiloadPlugin *ma)
 {
 	int i;
 	gchar *title;
-
-	// set proper settings
-	multiload_set_padding(ma, 0);
-	multiload_set_spacing(ma, 0);
 
 	// create new icons
 	for (i=GRAPH_MAX-1; i>=0; i--) {
@@ -166,8 +183,6 @@ build_icons (MultiloadPlugin *ma)
 
 		multiload_set_update_cb(ma, i, systray_graph_update_cb, status_icons[i]);
 	}
-
-	multiload_ui_save(ma);
 }
 
 
@@ -227,6 +242,7 @@ int main (int argc, char **argv)
 	gtk_container_add(GTK_CONTAINER(offscr), GTK_WIDGET(multiload->container));
 	gtk_widget_show(offscr);
 
+	set_defaults(multiload);
 	build_menu(multiload);
 	build_icons(multiload);
 

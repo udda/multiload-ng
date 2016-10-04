@@ -67,7 +67,11 @@ indicator_preferences_cb(GtkWidget *widget, MultiloadPlugin *ma)
 	gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
 	gtk_window_present(GTK_WINDOW(dialog));
 
-	multiload_preferences_disable_settings(MULTILOAD_SETTINGS_FILL_BETWEEN | MULTILOAD_SETTINGS_TOOLTIPS);
+	multiload_preferences_disable_settings(
+		MULTILOAD_SETTINGS_FILL_BETWEEN |
+		MULTILOAD_SETTINGS_TOOLTIPS |
+		MULTILOAD_SETTINGS_DBLCLICK_POLICY
+	);
 }
 
 static int
@@ -153,6 +157,21 @@ indicator_connection_changed_cb (AppIndicator *indicator, gboolean connected, Mu
 	indicator_connected = connected;
 }
 
+static void
+set_defaults(MultiloadPlugin *ma)
+{
+	guint i;
+
+	ma->fill_between = FALSE;
+	for (i=0; i<GRAPH_MAX; i++) {
+		ma->graph_config[i].tooltip_style = MULTILOAD_TOOLTIP_STYLE_SIMPLE;
+		ma->graph_config[i].dblclick_policy = DBLCLICK_POLICY_DONOTHING;
+	}
+
+	multiload_set_fill_between (ma, ma->fill_between);
+
+	multiload_ui_save(ma);
+}
 
 static void
 create_buffer_files()
@@ -249,6 +268,7 @@ int main (int argc, char **argv)
 	for (i=0; i<GRAPH_MAX; i++)
 		multiload_set_update_cb(multiload, i, indicator_graph_update_cb, indicator);
 
+	set_defaults(multiload);
 	create_buffer_files();
 	build_menu(multiload);
 
