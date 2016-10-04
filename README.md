@@ -53,6 +53,9 @@ Multiload-ng can be built with GTK2 and GTK3, so can be embedded within GTK2/GTK
 ![Default configuration, small panel. All graphs visible](../gh-pages/screenshots/all.panel-24px.png?raw=true)  
 <sup>*Small panel, default configuration. All graphs visible*</sup>
 
+![Multiload-ng running on Ubuntu](../gh-pages/screenshots/ubuntu.png?raw=true)  
+<sup>*Multiload-ng running on Ubuntu*</sup>
+
 ![All graphs visible, larger panel. Thicker (2px) borders, graphs have different widths](../gh-pages/screenshots/all.panel-40px.border-2px.widths.png?raw=true)  
 <sup>*All graphs visible, larger panel. Thicker (2px) borders, graphs have different widths*</sup>
 
