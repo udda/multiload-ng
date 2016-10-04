@@ -46,10 +46,7 @@ multiload_graph_parm_get_data (int Maximum, int data[1], LoadGraph *g, Parametri
 	if (xd->command[0] == '\0') {
 		xd->error = TRUE;
 		snprintf(xd->message, sizeof(xd->message), _("Command line is empty."));
-	}
-
-	spawn_success= g_spawn_command_line_sync (xd->command, &stdout, &stderr, &exit_status, NULL);
-	if (!spawn_success) {
+	} else if ((spawn_success= g_spawn_command_line_sync (xd->command, &stdout, &stderr, &exit_status, NULL)) == FALSE) {
 		xd->error = TRUE;
 		snprintf(xd->message, sizeof(xd->message), _("Unable to execute command."));
 	} else if (exit_status != 0) {
