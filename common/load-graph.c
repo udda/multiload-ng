@@ -119,6 +119,7 @@ load_graph_draw (LoadGraph *g)
 		g->surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, W, H);
 
 	cr = cairo_create (g->surface);
+	cairo_set_antialias(cr, CAIRO_ANTIALIAS_NONE);
 	cairo_set_line_width (cr, 1.0);
 	cairo_set_line_cap (cr, CAIRO_LINE_CAP_SQUARE);
 
