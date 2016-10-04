@@ -29,6 +29,12 @@ desktop_DATA = multiload-ng-systray.desktop
 
 @INTLTOOL_DESKTOP_RULE@
 
+# Autostart
+if ENABLE_AUTOSTART
+autostartdir = $(sysconfdir)/xdg/autostart
+autostart_DATA = $(desktop_DATA)
+endif
+
 EXTRA_DIST = multiload-ng-systray.desktop.in.in
 CLEANFILES = $(desktop_DATA)
 DISTCLEANFILES = multiload-ng-systray.desktop.in

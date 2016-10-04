@@ -33,6 +33,12 @@ desktop_DATA = multiload-ng-indicator.desktop
 
 @INTLTOOL_DESKTOP_RULE@
 
+# Autostart
+if ENABLE_AUTOSTART
+autostartdir = $(sysconfdir)/xdg/autostart
+autostart_DATA = $(desktop_DATA)
+endif
+
 EXTRA_DIST = multiload-ng-indicator.desktop.in.in
 CLEANFILES = $(desktop_DATA)
 DISTCLEANFILES = multiload-ng-indicator.desktop.in

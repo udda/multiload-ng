@@ -309,13 +309,14 @@ Configure script automatically detects installed panels (and related development
 
 Multiload-ng's ./configure has some extra options:  
 
-Option                      | Description                          | Note
---------------------------- | ------------------------------------ | ---------
-`--with-gtk=2.0|3.0|auto`   | GTK+ version to compile against      | Remember to set same GTK+ version of the target panel! Otherwise you could get linking or runtime errors.
-`--disable-deprecations`    | Disable GDK/GTK deprecation warnings | Useful when build system enforces *-Werror*. Some deprecated symbols does not have adequate replacement yet.
-`--enable-experimental`     | Compile in experimental code         | May be unstable/malfunctioning. Only for testing/developing purposes.
-`--enable-debug`            | Allows debugging with GDB            | This enables required CFLAGS.
-`--enable-profiling`        | Allows profiling with gprof          | This enables required CFLAGS
+Option                      | Description                           | Note
+--------------------------- | ------------------------------------  | ---------
+`--with-gtk=2.0|3.0|auto`   | GTK+ version to compile against       | Remember to set same GTK+ version of the target panel! Otherwise you could get linking or runtime errors.
+`--disable-deprecations`    | Disable GDK/GTK deprecation warnings  | Useful when build system enforces *-Werror*. Some deprecated symbols does not have adequate replacement yet.
+`--enable-experimental`     | Compile in experimental code          | May be unstable/malfunctioning. Only for testing/developing purposes.
+`--enable-debug`            | Allows debugging with GDB             | This enables required CFLAGS.
+`--enable-profiling`        | Allows profiling with gprof           | This enables required CFLAGS
+`--enable-autostart`        | Enable autostart for suitable targets | This installs .desktop files to `/etc/xdg/autostart` for some plugins (indicator, systray...)
 
 To get a list of all available options, type:  
 `./configure --help`

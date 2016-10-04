@@ -129,6 +129,10 @@ AC_ARG_ENABLE([profiling], AS_HELP_STRING([--enable-profiling], [Enable CFLAGS f
 	fi]
 )
 
+# Enable autostart for suitable targets
+AC_ARG_ENABLE([autostart], AS_HELP_STRING([--enable-autostart], [Enable autostart for suitable targets.]))
+AM_CONDITIONAL(ENABLE_AUTOSTART, test "x$enable_autostart" = "xyes")
+if test "${sysconfdir}" = '${prefix}/etc' ; then sysconfdir=/etc ; fi
 
 # Per-panel configure
 m4_include([data/configure.m4])
@@ -200,6 +204,9 @@ if test "x$enable_deprecations" = "xno"; then
 fi
 if test "x$enable_experimental" = "xyes"; then
 	AS_ECHO([ "*  Enabled experimental code (WARNING: this is unstable)" ])
+fi
+if test "x$enable_autostart" = "xyes"; then
+	AS_ECHO([ "*  Enabled autostart for suitable plugins" ])
 fi
 AS_ECHO([ "*" ])
 AS_ECHO([ "*  Enabled plugins:" ])
