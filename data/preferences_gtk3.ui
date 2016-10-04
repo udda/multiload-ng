@@ -1067,65 +1067,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               </object>
               <packing>
                 <property name="left_attach">6</property>
-                <property name="top_attach">8</property>
-                <property name="width">3</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label9">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">False</property>
-                <property name="label" translatable="yes">Orientation:</property>
-                <property name="xalign">1</property>
-              </object>
-              <packing>
-                <property name="left_attach">6</property>
                 <property name="top_attach">7</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label8">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">False</property>
-                <property name="label" translatable="yes">Padding:</property>
-                <property name="xalign">1</property>
-              </object>
-              <packing>
-                <property name="left_attach">6</property>
-                <property name="top_attach">6</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label7">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">False</property>
-                <property name="label" translatable="yes">Spacing:</property>
-                <property name="xalign">1</property>
-              </object>
-              <packing>
-                <property name="left_attach">6</property>
-                <property name="top_attach">5</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkScale" id="hscale_spacing">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="tooltip_text" translatable="yes">Set space between graphs</property>
-                <property name="hexpand">True</property>
-                <property name="adjustment">adjustment_spacing</property>
-                <property name="round_digits">0</property>
-                <property name="digits">0</property>
-                <property name="value_pos">right</property>
-                <signal name="value-changed" handler="spacing_or_padding_changed_cb" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">7</property>
-                <property name="top_attach">5</property>
-                <property name="width">2</property>
+                <property name="width">3</property>
               </packing>
             </child>
             <child>
@@ -1142,41 +1085,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               </object>
               <packing>
                 <property name="left_attach">7</property>
-                <property name="top_attach">6</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBox" id="combo_orientation">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="model">liststore_orientation</property>
-                <property name="active">0</property>
-                <signal name="changed" handler="combo_orientation_changed_cb" swapped="no"/>
-                <child>
-                  <object class="GtkCellRendererText" id="cellrenderertext14"/>
-                  <attributes>
-                    <attribute name="text">0</attribute>
-                  </attributes>
-                </child>
-              </object>
-              <packing>
-                <property name="left_attach">7</property>
-                <property name="top_attach">7</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkImage" id="image_warning_padding">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="tooltip_text" translatable="yes">If padding is set too large, the graph won't show.</property>
-                <property name="icon_name">dialog-warning</property>
-                <property name="icon_size">1</property>
-              </object>
-              <packing>
-                <property name="left_attach">8</property>
-                <property name="top_attach">6</property>
+                <property name="top_attach">5</property>
               </packing>
             </child>
             <child>
@@ -1191,19 +1100,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="left_attach">5</property>
                 <property name="top_attach">1</property>
                 <property name="height">8</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkImage" id="image_warning_orientation">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="tooltip_text" translatable="yes">Selected orientation is not the same of the panel. Graphs may be very small.</property>
-                <property name="icon_name">dialog-warning</property>
-                <property name="icon_size">1</property>
-              </object>
-              <packing>
-                <property name="left_attach">8</property>
-                <property name="top_attach">7</property>
               </packing>
             </child>
             <child>
@@ -1295,13 +1191,123 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkLabel" id="label_spacing">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">False</property>
+                <property name="label" translatable="yes">Spacing:</property>
+                <property name="xalign">1</property>
+              </object>
+              <packing>
+                <property name="left_attach">6</property>
+                <property name="top_attach">4</property>
+              </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkLabel" id="label_padding">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">False</property>
+                <property name="label" translatable="yes">Padding:</property>
+                <property name="xalign">1</property>
+              </object>
+              <packing>
+                <property name="left_attach">6</property>
+                <property name="top_attach">5</property>
+              </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkLabel" id="label_orientation">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">False</property>
+                <property name="label" translatable="yes">Orientation:</property>
+                <property name="xalign">1</property>
+              </object>
+              <packing>
+                <property name="left_attach">6</property>
+                <property name="top_attach">6</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkScale" id="hscale_spacing">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="tooltip_text" translatable="yes">Set space between graphs</property>
+                <property name="hexpand">True</property>
+                <property name="adjustment">adjustment_spacing</property>
+                <property name="round_digits">0</property>
+                <property name="digits">0</property>
+                <property name="value_pos">right</property>
+                <signal name="value-changed" handler="spacing_or_padding_changed_cb" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">7</property>
+                <property name="top_attach">4</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBox" id="combo_orientation">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="valign">center</property>
+                <property name="hexpand">True</property>
+                <property name="model">liststore_orientation</property>
+                <property name="active">0</property>
+                <signal name="changed" handler="combo_orientation_changed_cb" swapped="no"/>
+                <child>
+                  <object class="GtkCellRendererText" id="cellrenderertext14"/>
+                  <attributes>
+                    <attribute name="text">0</attribute>
+                  </attributes>
+                </child>
+              </object>
+              <packing>
+                <property name="left_attach">7</property>
+                <property name="top_attach">6</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkImage" id="image_warning_padding">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="tooltip_text" translatable="yes">If padding is set too large, the graph won't show.</property>
+                <property name="icon_name">dialog-warning</property>
+                <property name="icon_size">1</property>
+              </object>
+              <packing>
+                <property name="left_attach">8</property>
+                <property name="top_attach">5</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkImage" id="image_warning_orientation">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="tooltip_text" translatable="yes">Selected orientation is not the same of the panel. Graphs may be very small.</property>
+                <property name="icon_name">dialog-warning</property>
+                <property name="icon_size">1</property>
+              </object>
+              <packing>
+                <property name="left_attach">8</property>
+                <property name="top_attach">6</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="cb_iec_units">
+                <property name="label" translatable="yes">Use IEC units (binary prefixes)</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="xalign">0</property>
+                <property name="draw_indicator">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">6</property>
+                <property name="top_attach">8</property>
+                <property name="width">3</property>
+              </packing>
             </child>
             <child>
               <placeholder/>

@@ -441,6 +441,12 @@ multiload_preferences_fill_between_toggled_cb (GtkToggleButton *toggle, Multiloa
 }
 
 static void
+multiload_preferences_iec_units_toggled_cb (GtkToggleButton *toggle, MultiloadPlugin *ma)
+{
+	ma->size_format_iec = gtk_toggle_button_get_active(toggle);
+}
+
+static void
 multiload_preferences_tooltip_style_changed_cb (GtkComboBox *combo, MultiloadPlugin *ma)
 {
 	guint i = multiload_preferences_get_graph_index(GTK_BUILDABLE(combo), combo_tooltip_names);
@@ -1053,6 +1059,7 @@ multiload_preferences_connect_signals (MultiloadPlugin *ma)
 	}
 
 	g_signal_connect(G_OBJECT(OB("cb_fill_between")), "toggled", G_CALLBACK(multiload_preferences_fill_between_toggled_cb), ma);
+	g_signal_connect(G_OBJECT(OB("cb_iec_units")), "toggled", G_CALLBACK(multiload_preferences_iec_units_toggled_cb), ma);
 	g_signal_connect(G_OBJECT(OB("hscale_spacing")), "value-changed", G_CALLBACK(multiload_preferences_spacing_or_padding_changed_cb), ma);
 	g_signal_connect(G_OBJECT(OB("hscale_padding")), "value-changed", G_CALLBACK(multiload_preferences_spacing_or_padding_changed_cb), ma);
 	g_signal_connect(G_OBJECT(OB("combo_orientation")), "changed", G_CALLBACK(multiload_preferences_orientation_changed_cb), ma);
@@ -1181,6 +1188,7 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_range_set_value(GTK_RANGE(OB("hscale_padding")), (gdouble)ma->padding);
 	gtk_combo_box_set_active (GTK_COMBO_BOX(OB("combo_orientation")), ma->orientation_policy);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(OB("cb_fill_between")), ma->fill_between);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(OB("cb_iec_units")), ma->size_format_iec);
 
 	// Parametric
 	gtk_entry_set_text(GTK_ENTRY(OB("entry_parm_command")), ((ParametricData*)ma->extra_data[GRAPH_PARAMETRIC])->command);
