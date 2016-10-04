@@ -87,7 +87,7 @@ get_configure_string()
 	fi
 
 	if [ "$1" = "awn" ]
-		then printf -- ' --with-awn'
+		then printf -- ' --with-awn --enable-experimental'
 		else printf -- ' --without-awn'
 	fi
 	if [ "$1" = "indicator" ]
