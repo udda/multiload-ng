@@ -83,7 +83,7 @@ get_configure_string()
 	fi
 
 	if [ "$1" = "indicator" ]
-		then printf -- ' --with-indicator --enable-experimental'
+		then printf -- ' --with-indicator'
 		else printf -- ' --without-indicator'
 	fi
 	if [ "$1" = "lxpanel" ]
