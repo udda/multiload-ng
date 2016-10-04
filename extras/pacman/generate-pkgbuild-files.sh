@@ -107,7 +107,7 @@ get_configure_string()
 		else printf -- ' --without-standalone'
 	fi
 	if [ "$1" = "systray" ]
-		then printf -- ' --with-systray --enable-experimental'
+		then printf -- ' --with-systray'
 		else printf -- ' --without-systray'
 	fi
 	if [ "$1" = "xfce4" ]
