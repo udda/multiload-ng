@@ -60,12 +60,10 @@ msgstr "%s памяти"
 #, c-format
 msgid ""
 "%s (%s) used by programs\n"
-"%s (%s) used by shared memory\n"
 "%s (%s) used for buffers\n"
 "%s (%s) used as cache"
 msgstr ""
 "%s (%s) используется программами\n"
-"%s (%s) - разделяемая память\n"
 "%s (%s) - буферы\n"
 "%s (%s) - кэш"
 

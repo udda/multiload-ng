@@ -46,7 +46,7 @@ void multiload_config_init()
 			(GraphTooltipUpdateFunc)	multiload_graph_cpu_tooltip_update,
 			(GraphCmdlineOutputFunc)	multiload_graph_cpu_cmdline_output
 		},
-		{	"mem",	_("Memory"),		7,	-1,		-1,		"byte",
+		{	"mem",	_("Memory"),		6,	-1,		-1,		"byte",
 			(GraphGetDataFunc)			multiload_graph_mem_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_mem_tooltip_update,
 			(GraphCmdlineOutputFunc)	multiload_graph_mem_cmdline_output

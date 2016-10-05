@@ -59,12 +59,10 @@ msgstr "%s di RAM"
 #, c-format
 msgid ""
 "%s (%s) used by programs\n"
-"%s (%s) used by shared memory\n"
 "%s (%s) used for buffers\n"
 "%s (%s) used as cache"
 msgstr ""
 "%s (%s) usato dai programmi\n"
-"%s (%s) usato dalla memoria condivisa\n"
 "%s (%s) usato per i buffer\n"
 "%s (%s) usato come cache"
 

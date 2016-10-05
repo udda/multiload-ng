@@ -60,12 +60,10 @@ msgstr "%s RAM atminties"
 #, c-format
 msgid ""
 "%s (%s) used by programs\n"
-"%s (%s) used by shared memory\n"
 "%s (%s) used for buffers\n"
 "%s (%s) used as cache"
 msgstr ""
 "%s (%s) yra naudojama programų\n"
-"%s (%s) yra naudojama bendrinamos atminties\n"
 "%s (%s) yra naudojama buferiams\n"
 "%s (%s) yra naudojama kaip podėlis"
 

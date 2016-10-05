@@ -299,9 +299,8 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(000000, FF)			// Background (bottom)
 			}, { // MEM  - hue: 151
 				HEX_TO_RGBA(03964F, FF),		// User
-				HEX_TO_RGBA(43D18D, FF),		// Shared
-				HEX_TO_RGBA(BFFFE0, FF),		// Buffers
-				HEX_TO_RGBA(004021, FF),		// Cached
+				HEX_TO_RGBA(43D18D, FF),		// Buffers
+				HEX_TO_RGBA(BFFFE0, FF),		// Cached
 				HEX_TO_RGBA(008042, FF),		// Border
 				HEX_TO_RGBA(13261D, FF),		// Background (top)
 				HEX_TO_RGBA(000000, FF)			// Background (bottom)
@@ -356,10 +355,9 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(888A85, FF),		// Background (top)
 				HEX_TO_RGBA(555753, FF)			// Background (bottom)
 			}, { // MEM  - Tango Chameleon
-				HEX_TO_RGBA(4E9A06, FF),		// User
-				HEX_TO_RGBA(73D216, FF),		// Shared
-				HEX_TO_RGBA(8AE234, FF),		// Buffers
-				HEX_TO_RGBA(3E6618, FF),		// Cached
+				HEX_TO_RGBA(3E6618, FF),		// User
+				HEX_TO_RGBA(73D216, FF),		// Buffers
+				HEX_TO_RGBA(ACFF5C, FF),		// Cached
 				HEX_TO_RGBA(2E3436, FF),		// Border
 				HEX_TO_RGBA(888A85, FF),		// Background (top)
 				HEX_TO_RGBA(555753, FF)			// Background (bottom)
@@ -415,9 +413,8 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(002B36, FF)			// Background (bottom)
 			}, { // MEM  - Solarized Green
 				HEX_TO_RGBA(859900, FF),		// User
-				HEX_TO_RGBA(657B83, FF),		// Shared
-				HEX_TO_RGBA(839496, FF),		// Buffers
-				HEX_TO_RGBA(93A1A1, FF),		// Cached
+				HEX_TO_RGBA(657B83, FF),		// Buffers
+				HEX_TO_RGBA(839496, FF),		// Cached
 				HEX_TO_RGBA(586E75, FF),		// Border
 				HEX_TO_RGBA(073642, FF),		// Background (top)
 				HEX_TO_RGBA(002B36, FF)			// Background (bottom)
@@ -473,9 +470,8 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(EEE8D5, FF)			// Background (bottom)
 			}, { // MEM  - Solarized Green
 				HEX_TO_RGBA(859900, FF),		// User
-				HEX_TO_RGBA(657B83, FF),		// Shared
-				HEX_TO_RGBA(839496, FF),		// Buffers
-				HEX_TO_RGBA(93A1A1, FF),		// Cached
+				HEX_TO_RGBA(657B83, FF),		// Buffers
+				HEX_TO_RGBA(839496, FF),		// Cached
 				HEX_TO_RGBA(586E75, FF),		// Border
 				HEX_TO_RGBA(FDF6E3, FF),		// Background (top)
 				HEX_TO_RGBA(EEE8D5, FF)			// Background (bottom)
@@ -531,9 +527,8 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(B4B4C2, FF)			// Background (bottom)
 			}, { // MEM  - Kiwi
 				HEX_TO_RGBA(55641F, FF),		// User
-				HEX_TO_RGBA(789236, FF),		// Shared
-				HEX_TO_RGBA(9AB452, FF),		// Buffers
-				HEX_TO_RGBA(272C1E, FF),		// Cached
+				HEX_TO_RGBA(789236, FF),		// Buffers
+				HEX_TO_RGBA(9AB452, FF),		// Cached
 				HEX_TO_RGBA(404040, FF),		// Border
 				HEX_TO_RGBA(72511E, FF),		// Background (top)
 				HEX_TO_RGBA(809758, FF)			// Background (bottom)
@@ -589,9 +584,8 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(48BDE6, FF)			// Background (bottom)
 			}, { // MEM
 				HEX_TO_RGBA(FFFFFF, D8),		// User
-				HEX_TO_RGBA(FFFFFF, A5),		// Shared
-				HEX_TO_RGBA(FFFFFF, 72),		// Buffers
-				HEX_TO_RGBA(FFFFFF, 3F),		// Cached
+				HEX_TO_RGBA(FFFFFF, A5),		// Buffers
+				HEX_TO_RGBA(FFFFFF, 72),		// Cached
 				HEX_TO_RGBA(FFFFFF, FF),		// Border
 				HEX_TO_RGBA(BFFFE0, FF),		// Background (top)
 				HEX_TO_RGBA(43D18D, FF)			// Background (bottom)
@@ -647,7 +641,6 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(300A24, FF)			// Background (bottom)
 			}, { // MEM
 				HEX_TO_RGBA(E96F20, FF),		// User
-				HEX_TO_RGBA(E96F20, FF),		// Shared
 				HEX_TO_RGBA(E96F20, FF),		// Buffers
 				HEX_TO_RGBA(E96F20, FF),		// Cached
 				HEX_TO_RGBA(373737, FF),		// Border
@@ -705,7 +698,6 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(E8E8E8, FF)			// Background (bottom)
 			}, { // MEM
 				HEX_TO_RGBA(E96F20, FF),		// User
-				HEX_TO_RGBA(E96F20, FF),		// Shared
 				HEX_TO_RGBA(E96F20, FF),		// Buffers
 				HEX_TO_RGBA(E96F20, FF),		// Cached
 				HEX_TO_RGBA(D6D6D6, FF),		// Border
@@ -763,7 +755,6 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(393939, FF)			// Background (bottom)
 			}, { // MEM
 				HEX_TO_RGBA(97BF60, FF),		// User
-				HEX_TO_RGBA(97BF60, FF),		// Shared
 				HEX_TO_RGBA(97BF60, FF),		// Buffers
 				HEX_TO_RGBA(97BF60, FF),		// Cached
 				HEX_TO_RGBA(3C3C3C, FF),		// Border
@@ -821,7 +812,6 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(001940, FF)			// Background (bottom)
 			}, { // MEM
 				HEX_TO_RGBA(199900, FF),		// User
-				HEX_TO_RGBA(2D652B, FF),		// Shared
 				HEX_TO_RGBA(2D652B, FF),		// Buffers
 				HEX_TO_RGBA(2D652B, FF),		// Cached
 				HEX_TO_RGBA(004A00, FF),		// Border
@@ -879,7 +869,6 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(383C4A, FF)			// Background (bottom)
 			}, { // MEM
 				HEX_TO_RGBA(5924E2, FF),		// User
-				HEX_TO_RGBA(5924E2, FF),		// Shared
 				HEX_TO_RGBA(5924E2, FF),		// Buffers
 				HEX_TO_RGBA(5924E2, FF),		// Cached
 				HEX_TO_RGBA(1B1E24, FF),		// Border
@@ -937,7 +926,6 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(333333, FF)			// Background (bottom)
 			}, { // MEM
 				HEX_TO_RGBA(D64937, FF),		// User
-				HEX_TO_RGBA(D64937, FF),		// Shared
 				HEX_TO_RGBA(D64937, FF),		// Buffers
 				HEX_TO_RGBA(D64937, FF),		// Cached
 				HEX_TO_RGBA(DEDEDE, FF),		// Border
@@ -995,7 +983,6 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(DEDEDE, FF)			// Background (bottom)
 			}, { // MEM
 				HEX_TO_RGBA(D64937, FF),		// User
-				HEX_TO_RGBA(D64937, FF),		// Shared
 				HEX_TO_RGBA(D64937, FF),		// Buffers
 				HEX_TO_RGBA(D64937, FF),		// Cached
 				HEX_TO_RGBA(333333, FF),		// Border
@@ -1053,7 +1040,6 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(B5B5B5, FF)			// Background (bottom)
 			}, { // MEM
 				HEX_TO_RGBA(777777, FF),		// User
-				HEX_TO_RGBA(777777, FF),		// Shared
 				HEX_TO_RGBA(777777, FF),		// Buffers
 				HEX_TO_RGBA(777777, FF),		// Cached
 				HEX_TO_RGBA(142339, FF),		// Border
@@ -1111,7 +1097,6 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(A57C1B, FF)			// Background (bottom)
 			}, { // MEM
 				HEX_TO_RGBA(E7D520, FF),		// User
-				HEX_TO_RGBA(E7D520, FF),		// Shared
 				HEX_TO_RGBA(E7D520, FF),		// Buffers
 				HEX_TO_RGBA(E7D520, FF),		// Cached
 				HEX_TO_RGBA(E39E1C, FF),		// Border
@@ -1169,9 +1154,8 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(006287, FF)			// Background (bottom)
 			}, { // MEM
 				HEX_TO_RGBA(73591C, FF),		// User
-				HEX_TO_RGBA(8C6A1B, FF),		// Shared
-				HEX_TO_RGBA(DEBC6B, FF),		// Buffers
-				HEX_TO_RGBA(C8AA66, FF),		// Cached
+				HEX_TO_RGBA(B6974F, FF),		// Buffers
+				HEX_TO_RGBA(E1C584, FF),		// Cached
 				HEX_TO_RGBA(24313A, FF),		// Border
 				HEX_TO_RGBA(79BDD8, FF),		// Background (top)
 				HEX_TO_RGBA(006287, FF)			// Background (bottom)
@@ -1227,7 +1211,6 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(45413F, FF)			// Background (bottom)
 			}, { // MEM
 				HEX_TO_RGBA(D66456, FF),		// User
-				HEX_TO_RGBA(D66456, FF),		// Shared
 				HEX_TO_RGBA(D66456, FF),		// Buffers
 				HEX_TO_RGBA(D66456, FF),		// Cached
 				HEX_TO_RGBA(733E34, FF),		// Border
@@ -1285,7 +1268,6 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(063D06, FF)			// Background (bottom)
 			}, { // MEM
 				HEX_TO_RGBA(1A8A14, FF),		// User
-				HEX_TO_RGBA(1A8A14, FF),		// Shared
 				HEX_TO_RGBA(1A8A14, FF),		// Buffers
 				HEX_TO_RGBA(1A8A14, FF),		// Cached
 				HEX_TO_RGBA(3B763B, FF),		// Border
@@ -1343,7 +1325,6 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(03444A, FF)			// Background (bottom)
 			}, { // MEM
 				HEX_TO_RGBA(30ABC0, FF),		// User
-				HEX_TO_RGBA(30ABC0, FF),		// Shared
 				HEX_TO_RGBA(30ABC0, FF),		// Buffers
 				HEX_TO_RGBA(30ABC0, FF),		// Cached
 				HEX_TO_RGBA(101010, FF),		// Border
@@ -1401,7 +1382,6 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(3D2B67, FF)			// Background (bottom)
 			}, { // MEM
 				HEX_TO_RGBA(5A7BE4, FF),		// User
-				HEX_TO_RGBA(5A7BE4, FF),		// Shared
 				HEX_TO_RGBA(5A7BE4, FF),		// Buffers
 				HEX_TO_RGBA(5A7BE4, FF),		// Cached
 				HEX_TO_RGBA(142339, FF),		// Border

@@ -48,7 +48,6 @@ typedef struct _CpuData {
 
 typedef struct _MemoryData {
 	guint64 user;
-	guint64 shared;
 	guint64 buffers;
 	guint64 cache;
 	guint64 total;

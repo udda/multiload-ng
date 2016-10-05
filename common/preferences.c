@@ -139,7 +139,6 @@ static const gchar* color_button_names[GRAPH_MAX][MAX_COLORS] = {
 		"cb_color_mem1",
 		"cb_color_mem2",
 		"cb_color_mem3",
-		"cb_color_mem4",
 		"cb_color_mem_border",
 		"cb_color_mem_bg1",
 		"cb_color_mem_bg2"
