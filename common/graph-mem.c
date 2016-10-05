@@ -142,7 +142,7 @@ multiload_graph_mem_tooltip_update (char **title, char **text, LoadGraph *g, Mem
 		g_free(cache);
 		g_free(cache_percent);
 	} else {
-		gchar *use = format_percent(xd->user+xd->cache, xd->total, 0);
+		gchar *use = format_percent(xd->user, xd->total, 0);
 		*text = g_strdup_printf("%s", use);
 		g_free(use);
 	}
