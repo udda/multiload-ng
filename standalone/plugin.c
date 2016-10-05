@@ -63,6 +63,21 @@ standalone_preferences_cb(GtkWidget *widget, MultiloadPlugin *multiload)
 	multiload_preferences_disable_settings(MULTILOAD_SETTINGS_TIMESPAN | MULTILOAD_SETTINGS_ORIENT_WARNING);
 }
 
+static gboolean
+standalone_resize_cb (GtkWidget *dialog, GdkEvent *event, MultiloadPlugin *ma)
+{
+	if (event->type == GDK_CONFIGURE) {
+		if (((GdkEventConfigure*)event)->width >= ((GdkEventConfigure*)event)->height)
+			ma->panel_orientation = GTK_ORIENTATION_HORIZONTAL;
+		else
+			ma->panel_orientation = GTK_ORIENTATION_VERTICAL;
+
+		multiload_refresh_orientation(ma);
+	}
+
+	return FALSE;
+}
+
 
 static void
 build_menu(MultiloadPlugin *ma, GtkWidget *button_config)
@@ -129,6 +144,7 @@ int main(int argc, char *argv[]) {
 	gtk_container_add(GTK_CONTAINER(w), hbox);
 
 	g_signal_connect (G_OBJECT(w), "destroy", G_CALLBACK(standalone_destroy_cb), multiload);
+	g_signal_connect (G_OBJECT(w), "configure-event", G_CALLBACK(standalone_resize_cb), multiload);
 	gtk_container_set_border_width (GTK_CONTAINER (w), 0);
 
 	build_menu(multiload, btnConfig);
