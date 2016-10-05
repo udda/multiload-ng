@@ -15,6 +15,7 @@ multiload_ng_core_la_SOURCES = \
 	autoscaler.c autoscaler.h \
 	binary-data.c binary-data.h \
 	colors.c colors.h \
+	colors-compat.c \
 	color-scheme-icons.inc \
 	filter.c filter.h \
 	gtk-compat.c gtk-compat.h \

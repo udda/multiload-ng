@@ -37,7 +37,7 @@ G_BEGIN_DECLS
 #define HEX_TO_RGBA_SPLIT(r, g, b, a) {(gdouble)(0x##r)/255.0, (gdouble)(0x##g)/255.0, (gdouble)(0x##b)/255.0, (gdouble)(0x##a)/255.0}
 
 // Format version. Increment this every time color scheme format changes.
-#define MULTILOAD_COLOR_SCHEME_VERSION 4
+#define MULTILOAD_COLOR_SCHEME_VERSION 5
 
 // Header of the color scheme file. This must never change.
 #define MULTILOAD_COLOR_SCHEME_HEADER_SIZE 12
@@ -86,6 +86,9 @@ G_GNUC_INTERNAL gboolean
 multiload_color_scheme_to_file(const gchar *filename, MultiloadPlugin *ma);
 G_GNUC_INTERNAL MultiloadColorSchemeStatus
 multiload_color_scheme_from_file(const gchar *filename, MultiloadPlugin *ma);
+
+G_GNUC_INTERNAL MultiloadColorSchemeStatus
+multiload_color_scheme_parse (gpointer data, size_t length, guint32 version, MultiloadColorScheme *scheme);
 
 G_GNUC_INTERNAL const MultiloadColorScheme*
 multiload_color_scheme_find_by_name (const gchar *name);

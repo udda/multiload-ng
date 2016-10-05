@@ -58,9 +58,6 @@ multiload_color_scheme_validate (MultiloadColorSchemeFileHeader *header)
 	if (memcmp(header->magic, magic_header, MULTILOAD_COLOR_SCHEME_HEADER_SIZE) != 0)
 		return MULTILOAD_COLOR_SCHEME_STATUS_WRONG_FORMAT;
 
-	if (header->version != MULTILOAD_COLOR_SCHEME_VERSION)
-		return MULTILOAD_COLOR_SCHEME_STATUS_WRONG_VERSION;
-
 	return MULTILOAD_COLOR_SCHEME_STATUS_VALID;
 }
 
@@ -132,6 +129,7 @@ multiload_color_scheme_from_file(const gchar *filename, MultiloadPlugin *ma)
 
 	MultiloadColorSchemeStatus ret;
 	size_t rd;
+	guchar buffer[20480]; // 20 KiB oversized buffer - just in case
 
 	FILE *f = fopen(filename, "rb");
 	if (f == NULL)
@@ -144,16 +142,21 @@ multiload_color_scheme_from_file(const gchar *filename, MultiloadPlugin *ma)
 	}
 
 	ret = multiload_color_scheme_validate(&header);
-	if (ret != MULTILOAD_COLOR_SCHEME_STATUS_VALID)
-		return ret;
-
-	rd = fread(&scheme, sizeof(scheme), 1, f);
-	if (rd != 1) {
+	if (ret != MULTILOAD_COLOR_SCHEME_STATUS_VALID) {
 		fclose(f);
-		return MULTILOAD_COLOR_SCHEME_STATUS_WRONG_FORMAT;
+		return ret;
 	}
 
+	rd = fread(buffer, 1, sizeof(buffer), f);
 	fclose(f);
+	if (rd < 1)
+		return MULTILOAD_COLOR_SCHEME_STATUS_WRONG_FORMAT;
+
+	g_debug("[colors] Loading color scheme from '%s', version: %d", filename, header.version);
+
+	ret = multiload_color_scheme_parse(buffer, rd, header.version, &scheme);
+	if (ret != MULTILOAD_COLOR_SCHEME_STATUS_VALID)
+		return ret;
 
 	multiload_color_scheme_apply(&scheme, ma);
 	return MULTILOAD_COLOR_SCHEME_STATUS_VALID;
