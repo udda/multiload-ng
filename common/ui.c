@@ -78,10 +78,16 @@ multiload_ui_read (MultiloadPlugin *ma)
 		if (color_scheme_valid)
 			multiload_color_scheme_apply(scheme, ma);
 
+		/* Memory graph */
+		MemoryData* xd_mem = (MemoryData*)ma->extra_data[GRAPH_MEMLOAD];
+		key = g_strdup_printf("graph-%s-procps-compliant", graph_types[GRAPH_MEMLOAD].name);
+		multiload_ps_settings_get_boolean (settings, key, &xd_mem->procps_compliant);
+		g_free (key);
+
 		/* Parametric graph */
-		ParametricData* xd = (ParametricData*)ma->extra_data[GRAPH_PARAMETRIC];
+		ParametricData* xd_parm = (ParametricData*)ma->extra_data[GRAPH_PARAMETRIC];
 		key = g_strdup_printf("graph-%s-command", graph_types[GRAPH_PARAMETRIC].name);
-		multiload_ps_settings_get_string (settings, key, xd->command, sizeof(xd->command));
+		multiload_ps_settings_get_string (settings, key, xd_parm->command, sizeof(xd_parm->command));
 		g_free (key);
 
 		for ( i = 0; i < GRAPH_MAX; i++ ) {
@@ -181,10 +187,16 @@ multiload_ui_save (MultiloadPlugin *ma)
 		multiload_ps_settings_set_boolean	(settings, "size-format-iec",		ma->size_format_iec);
 		multiload_ps_settings_set_string	(settings, "color-scheme",			ma->color_scheme);
 
+		/* Memory graph */
+		MemoryData* xd_mem = (MemoryData*)ma->extra_data[GRAPH_MEMLOAD];
+		key = g_strdup_printf("graph-%s-procps-compliant", graph_types[GRAPH_MEMLOAD].name);
+		multiload_ps_settings_set_boolean (settings, key, xd_mem->procps_compliant);
+		g_free (key);
+
 		/* Parametric graph */
-		ParametricData* xd = (ParametricData*)ma->extra_data[GRAPH_PARAMETRIC];
+		ParametricData* xd_parm = (ParametricData*)ma->extra_data[GRAPH_PARAMETRIC];
 		key = g_strdup_printf("graph-%s-command", graph_types[GRAPH_PARAMETRIC].name);
-		multiload_ps_settings_set_string (settings, key, xd->command);
+		multiload_ps_settings_set_string (settings, key, xd_parm->command);
 		g_free (key);
 
 		for ( i = 0; i < GRAPH_MAX; i++ ) {

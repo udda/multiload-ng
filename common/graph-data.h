@@ -51,6 +51,8 @@ typedef struct _MemoryData {
 	guint64 buffers;
 	guint64 cache;
 	guint64 total;
+
+	gboolean procps_compliant;
 } MemoryData;
 
 typedef struct _NetData {

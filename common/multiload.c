@@ -253,6 +253,8 @@ void multiload_defaults(MultiloadPlugin *ma)
 		multiload_set_max_value(ma, i, graph_types[i].scaler_max);
 		multiload_set_max_floor(ma, i, graph_types[i].scaler_max_floor);
 	}
+
+	((MemoryData*)ma->extra_data[GRAPH_MEMLOAD])->procps_compliant = TRUE;
 }
 
 void

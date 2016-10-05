@@ -85,7 +85,9 @@ multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryDat
 	}
 	free(buf);
 
-	kb_main_cached = kb_page_cache + kb_slab;
+	kb_main_cached = kb_page_cache;
+	if (xd->procps_compliant)
+		kb_main_cached += kb_slab;
 
 	kb_main_used = kb_main_total - kb_main_free - kb_main_cached - kb_main_buffers;
 	if (kb_main_used < 0)
