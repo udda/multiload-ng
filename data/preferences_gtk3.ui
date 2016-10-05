@@ -1098,8 +1098,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               </object>
               <packing>
                 <property name="left_attach">5</property>
-                <property name="top_attach">1</property>
-                <property name="height">8</property>
+                <property name="top_attach">0</property>
+                <property name="height">9</property>
               </packing>
             </child>
             <child>
@@ -1308,9 +1308,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="top_attach">8</property>
                 <property name="width">3</property>
               </packing>
-            </child>
-            <child>
-              <placeholder/>
             </child>
             <child>
               <placeholder/>
