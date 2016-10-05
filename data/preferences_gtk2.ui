@@ -403,10 +403,22 @@ Author: Mario cianciolo <mr.udda@gmail.com>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="border_width">6</property>
-            <property name="n_rows">9</property>
+            <property name="n_rows">10</property>
             <property name="n_columns">9</property>
             <property name="column_spacing">10</property>
             <property name="row_spacing">8</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
             <child>
               <placeholder/>
             </child>
@@ -453,8 +465,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
-                <property name="top_attach">1</property>
-                <property name="bottom_attach">2</property>
+                <property name="top_attach">2</property>
+                <property name="bottom_attach">3</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -479,8 +491,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="right_attach">4</property>
-                <property name="top_attach">1</property>
-                <property name="bottom_attach">2</property>
+                <property name="top_attach">2</property>
+                <property name="bottom_attach">3</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -503,8 +515,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
-                <property name="top_attach">2</property>
-                <property name="bottom_attach">3</property>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -529,8 +541,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="right_attach">4</property>
-                <property name="top_attach">2</property>
-                <property name="bottom_attach">3</property>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -555,8 +567,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="right_attach">4</property>
-                <property name="top_attach">3</property>
-                <property name="bottom_attach">4</property>
+                <property name="top_attach">4</property>
+                <property name="bottom_attach">5</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -579,8 +591,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
-                <property name="top_attach">3</property>
-                <property name="bottom_attach">4</property>
+                <property name="top_attach">4</property>
+                <property name="bottom_attach">5</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -603,8 +615,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
-                <property name="top_attach">7</property>
-                <property name="bottom_attach">8</property>
+                <property name="top_attach">8</property>
+                <property name="bottom_attach">9</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -629,8 +641,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="right_attach">4</property>
-                <property name="top_attach">6</property>
-                <property name="bottom_attach">7</property>
+                <property name="top_attach">7</property>
+                <property name="bottom_attach">8</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -653,8 +665,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
-                <property name="top_attach">5</property>
-                <property name="bottom_attach">6</property>
+                <property name="top_attach">6</property>
+                <property name="bottom_attach">7</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -679,8 +691,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="right_attach">4</property>
-                <property name="top_attach">4</property>
-                <property name="bottom_attach">5</property>
+                <property name="top_attach">5</property>
+                <property name="bottom_attach">6</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -703,8 +715,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
-                <property name="top_attach">4</property>
-                <property name="bottom_attach">5</property>
+                <property name="top_attach">5</property>
+                <property name="bottom_attach">6</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -729,8 +741,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="right_attach">4</property>
-                <property name="top_attach">5</property>
-                <property name="bottom_attach">6</property>
+                <property name="top_attach">6</property>
+                <property name="bottom_attach">7</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -753,8 +765,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
-                <property name="top_attach">6</property>
-                <property name="bottom_attach">7</property>
+                <property name="top_attach">7</property>
+                <property name="bottom_attach">8</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -779,8 +791,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="right_attach">4</property>
-                <property name="top_attach">7</property>
-                <property name="bottom_attach">8</property>
+                <property name="top_attach">8</property>
+                <property name="bottom_attach">9</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -798,8 +810,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
               </object>
               <packing>
-                <property name="top_attach">1</property>
-                <property name="bottom_attach">2</property>
+                <property name="top_attach">2</property>
+                <property name="bottom_attach">3</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -815,8 +827,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
               </object>
               <packing>
-                <property name="top_attach">2</property>
-                <property name="bottom_attach">3</property>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -832,8 +844,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
               </object>
               <packing>
-                <property name="top_attach">3</property>
-                <property name="bottom_attach">4</property>
+                <property name="top_attach">4</property>
+                <property name="bottom_attach">5</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -849,8 +861,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
               </object>
               <packing>
-                <property name="top_attach">4</property>
-                <property name="bottom_attach">5</property>
+                <property name="top_attach">5</property>
+                <property name="bottom_attach">6</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -866,8 +878,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
               </object>
               <packing>
-                <property name="top_attach">5</property>
-                <property name="bottom_attach">6</property>
+                <property name="top_attach">6</property>
+                <property name="bottom_attach">7</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -883,8 +895,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
               </object>
               <packing>
-                <property name="top_attach">6</property>
-                <property name="bottom_attach">7</property>
+                <property name="top_attach">7</property>
+                <property name="bottom_attach">8</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -900,8 +912,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
               </object>
               <packing>
-                <property name="top_attach">7</property>
-                <property name="bottom_attach">8</property>
+                <property name="top_attach">8</property>
+                <property name="bottom_attach">9</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -913,6 +925,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="xalign">0</property>
                 <property name="label" translatable="yes">Graph</property>
               </object>
+              <packing>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
+              </packing>
             </child>
             <child>
               <object class="GtkLabel" id="label_col_size">
@@ -925,6 +941,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
               </packing>
             </child>
             <child>
@@ -938,6 +956,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="right_attach">4</property>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
               </packing>
             </child>
             <child>
@@ -952,8 +972,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-                <property name="top_attach">2</property>
-                <property name="bottom_attach">3</property>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
                 <property name="x_options"/>
                 <property name="y_options"/>
               </packing>
@@ -970,8 +990,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-                <property name="top_attach">3</property>
-                <property name="bottom_attach">4</property>
+                <property name="top_attach">4</property>
+                <property name="bottom_attach">5</property>
                 <property name="x_options"/>
                 <property name="y_options"/>
               </packing>
@@ -988,8 +1008,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-                <property name="top_attach">4</property>
-                <property name="bottom_attach">5</property>
+                <property name="top_attach">5</property>
+                <property name="bottom_attach">6</property>
                 <property name="x_options"/>
                 <property name="y_options"/>
               </packing>
@@ -1006,8 +1026,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-                <property name="top_attach">5</property>
-                <property name="bottom_attach">6</property>
+                <property name="top_attach">6</property>
+                <property name="bottom_attach">7</property>
                 <property name="x_options"/>
                 <property name="y_options"/>
               </packing>
@@ -1024,8 +1044,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-                <property name="top_attach">6</property>
-                <property name="bottom_attach">7</property>
+                <property name="top_attach">7</property>
+                <property name="bottom_attach">8</property>
                 <property name="x_options"/>
                 <property name="y_options"/>
               </packing>
@@ -1042,8 +1062,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-                <property name="top_attach">7</property>
-                <property name="bottom_attach">8</property>
+                <property name="top_attach">8</property>
+                <property name="bottom_attach">9</property>
                 <property name="x_options"/>
                 <property name="y_options"/>
               </packing>
@@ -1058,8 +1078,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">4</property>
                 <property name="right_attach">5</property>
-                <property name="top_attach">1</property>
-                <property name="bottom_attach">2</property>
+                <property name="top_attach">2</property>
+                <property name="bottom_attach">3</property>
               </packing>
             </child>
             <child>
@@ -1072,12 +1092,26 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">4</property>
                 <property name="right_attach">5</property>
-                <property name="top_attach">2</property>
-                <property name="bottom_attach">3</property>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel" id="label_timespan_temp">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">0</property>
+                <property name="label">-</property>
+              </object>
+              <packing>
+                <property name="left_attach">4</property>
+                <property name="right_attach">5</property>
+                <property name="top_attach">8</property>
+                <property name="bottom_attach">9</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label_timespan_disk">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
@@ -1091,7 +1125,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label_timespan_disk">
+              <object class="GtkLabel" id="label_timespan_load">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
@@ -1105,7 +1139,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label_timespan_load">
+              <object class="GtkLabel" id="label_timespan_swap">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
@@ -1119,7 +1153,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label_timespan_swap">
+              <object class="GtkLabel" id="label_timespan_net">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
@@ -1130,20 +1164,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="right_attach">5</property>
                 <property name="top_attach">4</property>
                 <property name="bottom_attach">5</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label_timespan_net">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="xalign">0</property>
-                <property name="label">-</property>
-              </object>
-              <packing>
-                <property name="left_attach">4</property>
-                <property name="right_attach">5</property>
-                <property name="top_attach">3</property>
-                <property name="bottom_attach">4</property>
               </packing>
             </child>
             <child>
@@ -1158,8 +1178,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-                <property name="top_attach">1</property>
-                <property name="bottom_attach">2</property>
+                <property name="top_attach">2</property>
+                <property name="bottom_attach">3</property>
                 <property name="x_options"/>
                 <property name="y_options"/>
               </packing>
@@ -1175,6 +1195,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">4</property>
                 <property name="right_attach">5</property>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
               </packing>
             </child>
             <child>
@@ -1189,8 +1211,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">6</property>
                 <property name="right_attach">9</property>
-                <property name="top_attach">7</property>
-                <property name="bottom_attach">8</property>
+                <property name="top_attach">8</property>
+                <property name="bottom_attach">9</property>
               </packing>
             </child>
             <child>
@@ -1203,8 +1225,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">6</property>
                 <property name="right_attach">7</property>
-                <property name="top_attach">6</property>
-                <property name="bottom_attach">7</property>
+                <property name="top_attach">7</property>
+                <property name="bottom_attach">8</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -1218,8 +1240,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">6</property>
                 <property name="right_attach">7</property>
-                <property name="top_attach">5</property>
-                <property name="bottom_attach">6</property>
+                <property name="top_attach">6</property>
+                <property name="bottom_attach">7</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -1233,13 +1255,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">6</property>
                 <property name="right_attach">7</property>
-                <property name="top_attach">4</property>
-                <property name="bottom_attach">5</property>
+                <property name="top_attach">5</property>
+                <property name="bottom_attach">6</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
-            </child>
-            <child>
-              <placeholder/>
             </child>
             <child>
               <object class="GtkHScale" id="hscale_spacing">
@@ -1256,8 +1275,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">7</property>
                 <property name="right_attach">9</property>
-                <property name="top_attach">4</property>
-                <property name="bottom_attach">5</property>
+                <property name="top_attach">5</property>
+                <property name="bottom_attach">6</property>
               </packing>
             </child>
             <child>
@@ -1275,8 +1294,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">7</property>
                 <property name="right_attach">8</property>
-                <property name="top_attach">5</property>
-                <property name="bottom_attach">6</property>
+                <property name="top_attach">6</property>
+                <property name="bottom_attach">7</property>
               </packing>
             </child>
             <child>
@@ -1296,13 +1315,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">7</property>
                 <property name="right_attach">8</property>
-                <property name="top_attach">6</property>
-                <property name="bottom_attach">7</property>
+                <property name="top_attach">7</property>
+                <property name="bottom_attach">8</property>
                 <property name="y_options"/>
               </packing>
-            </child>
-            <child>
-              <placeholder/>
             </child>
             <child>
               <object class="GtkImage" id="image_warning_padding">
@@ -1315,8 +1331,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">8</property>
                 <property name="right_attach">9</property>
-                <property name="top_attach">5</property>
-                <property name="bottom_attach">6</property>
+                <property name="top_attach">6</property>
+                <property name="bottom_attach">7</property>
                 <property name="x_options"/>
                 <property name="y_options"/>
               </packing>
@@ -1330,7 +1346,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">5</property>
                 <property name="right_attach">6</property>
-                <property name="bottom_attach">9</property>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">10</property>
               </packing>
             </child>
             <child>
@@ -1344,14 +1361,11 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">8</property>
                 <property name="right_attach">9</property>
-                <property name="top_attach">6</property>
-                <property name="bottom_attach">7</property>
+                <property name="top_attach">7</property>
+                <property name="bottom_attach">8</property>
                 <property name="x_options"/>
                 <property name="y_options"/>
               </packing>
-            </child>
-            <child>
-              <placeholder/>
             </child>
             <child>
               <object class="GtkCheckButton" id="cb_visible_parm">
@@ -1365,8 +1379,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
               </object>
               <packing>
-                <property name="top_attach">8</property>
-                <property name="bottom_attach">9</property>
+                <property name="top_attach">9</property>
+                <property name="bottom_attach">10</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -1389,8 +1403,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="right_attach">3</property>
-                <property name="top_attach">8</property>
-                <property name="bottom_attach">9</property>
+                <property name="top_attach">9</property>
+                <property name="bottom_attach">10</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -1415,8 +1429,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="right_attach">4</property>
-                <property name="top_attach">8</property>
-                <property name="bottom_attach">9</property>
+                <property name="top_attach">9</property>
+                <property name="bottom_attach">10</property>
                 <property name="x_options">GTK_FILL</property>
               </packing>
             </child>
@@ -1430,8 +1444,8 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">4</property>
                 <property name="right_attach">5</property>
-                <property name="top_attach">8</property>
-                <property name="bottom_attach">9</property>
+                <property name="top_attach">9</property>
+                <property name="bottom_attach">10</property>
               </packing>
             </child>
             <child>
@@ -1446,14 +1460,11 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-                <property name="top_attach">8</property>
-                <property name="bottom_attach">9</property>
+                <property name="top_attach">9</property>
+                <property name="bottom_attach">10</property>
                 <property name="x_options"/>
                 <property name="y_options"/>
               </packing>
-            </child>
-            <child>
-              <placeholder/>
             </child>
             <child>
               <object class="GtkCheckButton" id="cb_iec_units">
@@ -1466,8 +1477,29 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">6</property>
                 <property name="right_attach">9</property>
-                <property name="top_attach">8</property>
-                <property name="bottom_attach">9</property>
+                <property name="top_attach">9</property>
+                <property name="bottom_attach">10</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <object class="GtkHBox" id="infobar_graphs_container">
+                <property name="visible">False</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="right_attach">9</property>
               </packing>
             </child>
           </object>

@@ -106,6 +106,9 @@ G_GNUC_INTERNAL void
 multiload_preferences_fill_dialog(GtkWidget *dialog, MultiloadPlugin *ma);
 
 G_GNUC_INTERNAL void
+multiload_preferences_add_infobar (GtkMessageType message_type, const gchar *text);
+
+G_GNUC_INTERNAL void
 multiload_preferences_disable_settings(guint mask);
 
 G_END_DECLS

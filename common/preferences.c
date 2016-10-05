@@ -1093,6 +1093,26 @@ multiload_preferences_update_color_buttons (MultiloadPlugin *ma)
 }
 
 void
+multiload_preferences_add_infobar (GtkMessageType message_type, const gchar *text)
+{
+	GtkWidget *info_bar = gtk_info_bar_new();
+	gtk_info_bar_set_message_type (GTK_INFO_BAR(info_bar), message_type);
+
+	GtkWidget *content_area = gtk_info_bar_get_content_area (GTK_INFO_BAR(info_bar));
+
+	GtkWidget *label = gtk_label_new(text);
+	gtk_misc_set_alignment (GTK_MISC(label), 0, 0.5);
+	gtk_container_add(GTK_CONTAINER(content_area), label);
+
+	gtk_info_bar_add_button (GTK_INFO_BAR(info_bar), _("OK"), GTK_RESPONSE_OK);
+
+	g_signal_connect(G_OBJECT(info_bar), "response", G_CALLBACK (gtk_widget_hide), NULL);
+
+	gtk_container_add(GTK_CONTAINER(OB("infobar_graphs_container")), info_bar);
+	gtk_widget_show_all(GTK_WIDGET(OB("infobar_graphs_container")));
+}
+
+void
 multiload_preferences_disable_settings(guint mask)
 {
 	guint i;

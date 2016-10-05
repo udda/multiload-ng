@@ -61,6 +61,7 @@ standalone_preferences_cb(GtkWidget *widget, MultiloadPlugin *multiload)
 	gtk_window_present(GTK_WINDOW(dialog));
 
 	multiload_preferences_disable_settings(MULTILOAD_SETTINGS_TIMESPAN | MULTILOAD_SETTINGS_ORIENT_WARNING);
+	multiload_preferences_add_infobar (GTK_MESSAGE_INFO, _("If the window is larger than its minimum size, graphs will be scaled in proportion to the dimensions set below."));
 }
 
 static gboolean
