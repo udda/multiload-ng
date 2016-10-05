@@ -32,6 +32,7 @@
 
 #include "common/about-data.h"
 #include "common/multiload.h"
+#include "common/multiload-config.h"
 #include "common/preferences.h"
 #include "common/ui.h"
 
@@ -46,6 +47,7 @@ static gchar icon_directory[PATH_MAX];
 static gchar icon_filename[2][PATH_MAX];
 static int icon_current_index=0;
 static gboolean indicator_connected;
+static GtkWidget *graphs_menu_items[GRAPH_MAX];
 
 static void
 indicator_cleanup(int sig)
@@ -94,6 +96,28 @@ static int
 indicator_get_icon_height()
 {
 	return 22; // seems to be a fixed size (it's hardcoded in libappindicator source)
+}
+
+static void
+indicator_update_menu(MultiloadPlugin *ma)
+{
+	guint i;
+	gchar *title=NULL, *text=NULL, *label=NULL;
+
+	for (i=0; i<GRAPH_MAX; i++) {
+		ma->graphs[i]->tooltip_update = ma->graph_config[i].visible;
+		gtk_widget_set_visible(graphs_menu_items[i], ma->graph_config[i].visible);
+
+		if (ma->graph_config[i].visible) {
+			graph_types[i].tooltip_update(&title, &text, ma->graphs[i], ma->extra_data[i]);
+			label = g_strdup_printf("%s: %s", graph_types[i].label, text);
+			gtk_menu_item_set_label(GTK_MENU_ITEM(graphs_menu_items[i]), label);
+			g_free(title);
+			g_free(text);
+			g_free(label);
+		}
+
+	}
 }
 
 static void
@@ -147,6 +171,8 @@ indicator_graph_update_cb(LoadGraph *g, gpointer user_data)
 	GtkAllocation allocation;
 	int width;
 	guint height;
+
+	indicator_update_menu(g->multiload);
 
 	if (!g->config->visible)
 		return;
@@ -224,8 +250,17 @@ create_buffer_files()
 static void
 build_menu(MultiloadPlugin *ma)
 {
+	guint i;
 	GtkWidget *menuitem;
 	GtkWidget *menu = gtk_menu_new();
+
+	for (i=0; i<GRAPH_MAX; i++) {
+		graphs_menu_items[i] = gtk_image_menu_item_new_with_label (graph_types[i].label);
+		gtk_widget_set_sensitive(graphs_menu_items[i], FALSE);
+		gtk_menu_shell_append (GTK_MENU_SHELL(menu), graphs_menu_items[i]);
+	}
+
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
 
 	menuitem = gtk_image_menu_item_new_with_label (_("Start task manager"));
 	gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM(menuitem), gtk_image_new_from_icon_name("utilities-system-monitor", GTK_ICON_SIZE_MENU));
