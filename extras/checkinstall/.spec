@@ -1,3 +1,3 @@
 Summary:   Modern graphical system monitor
 Name:      multiload-ng
-Version:   1.3.1
+Version:   1.4.0

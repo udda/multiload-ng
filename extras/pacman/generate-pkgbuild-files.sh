@@ -19,7 +19,7 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 #
 
-pkgver=1.3.1
+pkgver=1.4.0
 pkgrel=1
 
 gen_md5sum()
