@@ -613,6 +613,13 @@ multiload_preferences_color_scheme_selected_cb (GtkTreeSelection *sel, Multiload
 }
 
 static void
+multiload_preferences_mem_slab_changed_cb (GtkComboBox *combo, MultiloadPlugin *ma)
+{
+	MemoryData *xd = (MemoryData*)ma->extra_data[GRAPH_MEMLOAD];
+	xd->procps_compliant = (gtk_combo_box_get_active (combo) == 1);
+}
+
+static void
 multiload_preferences_parm_command_changed_cb (GtkEntry *entry, MultiloadPlugin *ma)
 {
 	ParametricData *xd = (ParametricData*)ma->extra_data[GRAPH_PARAMETRIC];
@@ -1063,6 +1070,9 @@ multiload_preferences_connect_signals (MultiloadPlugin *ma)
 	g_signal_connect(G_OBJECT(OB("hscale_padding")), "value-changed", G_CALLBACK(multiload_preferences_spacing_or_padding_changed_cb), ma);
 	g_signal_connect(G_OBJECT(OB("combo_orientation")), "changed", G_CALLBACK(multiload_preferences_orientation_changed_cb), ma);
 
+	// Memory graph
+	g_signal_connect(G_OBJECT(OB("combo_mem_slab")), "changed", G_CALLBACK(multiload_preferences_mem_slab_changed_cb), ma);
+
 	// Parametric graph
 	g_signal_connect(G_OBJECT(OB("entry_parm_command")), "changed", G_CALLBACK(multiload_preferences_parm_command_changed_cb), ma);
 	g_signal_connect(G_OBJECT(OB("button_parm_command_test")), "clicked", G_CALLBACK(multiload_preferences_parm_command_test_clicked_cb), ma);
@@ -1213,6 +1223,9 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_combo_box_set_active (GTK_COMBO_BOX(OB("combo_orientation")), ma->orientation_policy);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(OB("cb_fill_between")), ma->fill_between);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(OB("cb_iec_units")), ma->size_format_iec);
+
+	// Memory
+	gtk_combo_box_set_active (GTK_COMBO_BOX(OB("combo_mem_slab")), ((MemoryData*)ma->extra_data[GRAPH_MEMLOAD])->procps_compliant?1:0);
 
 	// Parametric
 	gtk_entry_set_text(GTK_ENTRY(OB("entry_parm_command")), ((ParametricData*)ma->extra_data[GRAPH_PARAMETRIC])->command);

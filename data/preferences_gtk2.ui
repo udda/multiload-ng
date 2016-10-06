@@ -300,6 +300,20 @@ Author: Mario cianciolo <mr.udda@gmail.com>
       </row>
     </data>
   </object>
+  <object class="GtkListStore" id="liststore_mem_slab">
+    <columns>
+      <!-- column-name Description -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Under 'used' (like &lt;i&gt;htop&lt;/i&gt; and some graphical task managers)</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Under 'cache' (like &lt;i&gt;free&lt;/i&gt; and &lt;i&gt;top&lt;/i&gt;)</col>
+      </row>
+    </data>
+  </object>
   <object class="GtkListStore" id="liststore_orientation">
     <columns>
       <!-- column-name Description -->
@@ -1485,9 +1499,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <placeholder/>
             </child>
             <child>
-              <placeholder/>
-            </child>
-            <child>
               <object class="GtkHBox" id="infobar_graphs_container">
                 <property name="visible">False</property>
                 <property name="can_focus">False</property>
@@ -1680,6 +1691,12 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="border_width">4</property>
                         <property name="n_rows">13</property>
                         <property name="n_columns">23</property>
+                        <child>
+                          <placeholder/>
+                        </child>
+                        <child>
+                          <placeholder/>
+                        </child>
                         <child>
                           <placeholder/>
                         </child>
@@ -3762,12 +3779,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="y_options">GTK_SHRINK</property>
                           </packing>
                         </child>
-                        <child>
-                          <placeholder/>
-                        </child>
-                        <child>
-                          <placeholder/>
-                        </child>
                       </object>
                     </child>
                   </object>
@@ -4292,6 +4303,63 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
                     <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkTable" id="table17">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="n_columns">2</property>
+                    <property name="column_spacing">6</property>
+                    <child>
+                      <object class="GtkLabel" id="label7">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Count Slab cache:</property>
+                      </object>
+                      <packing>
+                        <property name="x_options">GTK_FILL</property>
+                        <property name="y_options">GTK_FILL</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkComboBox" id="combo_mem_slab">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">Choose how to count Slab cache</property>
+                        <property name="model">liststore_mem_slab</property>
+                        <property name="active">0</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext22"/>
+                          <attributes>
+                            <attribute name="markup">0</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="y_options">GTK_EXPAND</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkHSeparator" id="hseparator30">
+                    <property name="height_request">10</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">3</property>
                   </packing>
                 </child>
                 <child>
@@ -6227,6 +6295,7 @@ Process CAN print some text to stderr.
       <widget name="label58"/>
       <widget name="label10"/>
       <widget name="label11"/>
+      <widget name="label7"/>
     </widgets>
   </object>
 </interface>
