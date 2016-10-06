@@ -273,6 +273,54 @@ Author: Mario cianciolo <mr.udda@gmail.com>
     <property name="stock">gtk-preferences</property>
     <property name="icon-size">1</property>
   </object>
+  <object class="GtkImage" id="image_gradient_cpu">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">document-properties</property>
+    <property name="icon-size">1</property>
+  </object>
+  <object class="GtkImage" id="image_gradient_disk">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">document-properties</property>
+    <property name="icon-size">1</property>
+  </object>
+  <object class="GtkImage" id="image_gradient_load">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">document-properties</property>
+    <property name="icon-size">1</property>
+  </object>
+  <object class="GtkImage" id="image_gradient_mem">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">document-properties</property>
+    <property name="icon-size">1</property>
+  </object>
+  <object class="GtkImage" id="image_gradient_net">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">document-properties</property>
+    <property name="icon-size">1</property>
+  </object>
+  <object class="GtkImage" id="image_gradient_parm">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">document-properties</property>
+    <property name="icon-size">1</property>
+  </object>
+  <object class="GtkImage" id="image_gradient_swap">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">document-properties</property>
+    <property name="icon-size">1</property>
+  </object>
+  <object class="GtkImage" id="image_gradient_temp">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">document-properties</property>
+    <property name="icon-size">1</property>
+  </object>
   <object class="GtkListStore" id="liststore_colors">
     <columns>
       <!-- column-name Description -->
@@ -1496,9 +1544,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               </packing>
             </child>
             <child>
-              <placeholder/>
-            </child>
-            <child>
               <object class="GtkHBox" id="infobar_graphs_container">
                 <property name="visible">False</property>
                 <property name="can_focus">False</property>
@@ -1689,7 +1734,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="border_width">4</property>
-                        <property name="n_rows">13</property>
+                        <property name="n_rows">14</property>
                         <property name="n_columns">23</property>
                         <child>
                           <placeholder/>
@@ -1949,20 +1994,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkColorButton" id="cb_color_cpu_bg2">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
-                          </object>
-                          <packing>
-                            <property name="top_attach">12</property>
-                            <property name="bottom_attach">13</property>
-                            <property name="y_options">GTK_SHRINK</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="GtkColorButton" id="cb_color_cpu_bg1">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
@@ -2074,7 +2105,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           <packing>
                             <property name="left_attach">2</property>
                             <property name="right_attach">3</property>
-                            <property name="bottom_attach">13</property>
+                            <property name="bottom_attach">14</property>
                           </packing>
                         </child>
                         <child>
@@ -2101,7 +2132,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           <packing>
                             <property name="left_attach">5</property>
                             <property name="right_attach">6</property>
-                            <property name="bottom_attach">13</property>
+                            <property name="bottom_attach">14</property>
                           </packing>
                         </child>
                         <child>
@@ -2326,7 +2357,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           <packing>
                             <property name="left_attach">8</property>
                             <property name="right_attach">9</property>
-                            <property name="bottom_attach">13</property>
+                            <property name="bottom_attach">14</property>
                           </packing>
                         </child>
                         <child>
@@ -2338,7 +2369,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           <packing>
                             <property name="left_attach">11</property>
                             <property name="right_attach">12</property>
-                            <property name="bottom_attach">13</property>
+                            <property name="bottom_attach">14</property>
                           </packing>
                         </child>
                         <child>
@@ -2350,7 +2381,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           <packing>
                             <property name="left_attach">14</property>
                             <property name="right_attach">15</property>
-                            <property name="bottom_attach">13</property>
+                            <property name="bottom_attach">14</property>
                           </packing>
                         </child>
                         <child>
@@ -2362,7 +2393,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           <packing>
                             <property name="left_attach">17</property>
                             <property name="right_attach">18</property>
-                            <property name="bottom_attach">13</property>
+                            <property name="bottom_attach">14</property>
                           </packing>
                         </child>
                         <child>
@@ -3072,102 +3103,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkColorButton" id="cb_color_mem_bg2">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
-                          </object>
-                          <packing>
-                            <property name="left_attach">3</property>
-                            <property name="right_attach">4</property>
-                            <property name="top_attach">12</property>
-                            <property name="bottom_attach">13</property>
-                            <property name="y_options">GTK_SHRINK</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkColorButton" id="cb_color_swap_bg2">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
-                          </object>
-                          <packing>
-                            <property name="left_attach">9</property>
-                            <property name="right_attach">10</property>
-                            <property name="top_attach">12</property>
-                            <property name="bottom_attach">13</property>
-                            <property name="y_options">GTK_SHRINK</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkColorButton" id="cb_color_net_bg2">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
-                          </object>
-                          <packing>
-                            <property name="left_attach">6</property>
-                            <property name="right_attach">7</property>
-                            <property name="top_attach">12</property>
-                            <property name="bottom_attach">13</property>
-                            <property name="y_options">GTK_SHRINK</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkColorButton" id="cb_color_load_bg2">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
-                          </object>
-                          <packing>
-                            <property name="left_attach">12</property>
-                            <property name="right_attach">13</property>
-                            <property name="top_attach">12</property>
-                            <property name="bottom_attach">13</property>
-                            <property name="y_options">GTK_SHRINK</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkColorButton" id="cb_color_disk_bg2">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
-                          </object>
-                          <packing>
-                            <property name="left_attach">15</property>
-                            <property name="right_attach">16</property>
-                            <property name="top_attach">12</property>
-                            <property name="bottom_attach">13</property>
-                            <property name="y_options">GTK_SHRINK</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkColorButton" id="cb_color_temp_bg2">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
-                          </object>
-                          <packing>
-                            <property name="left_attach">18</property>
-                            <property name="right_attach">19</property>
-                            <property name="top_attach">12</property>
-                            <property name="bottom_attach">13</property>
-                            <property name="y_options">GTK_SHRINK</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="GtkColorButton" id="cb_color_net_border">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
@@ -3361,7 +3296,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="left_attach">1</property>
                             <property name="right_attach">2</property>
                             <property name="top_attach">11</property>
-                            <property name="bottom_attach">13</property>
+                            <property name="bottom_attach">14</property>
                             <property name="y_options">GTK_EXPAND | GTK_SHRINK | GTK_FILL</property>
                           </packing>
                         </child>
@@ -3374,7 +3309,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="left_attach">4</property>
                             <property name="right_attach">5</property>
                             <property name="top_attach">11</property>
-                            <property name="bottom_attach">13</property>
+                            <property name="bottom_attach">14</property>
                             <property name="y_options">GTK_EXPAND | GTK_SHRINK | GTK_FILL</property>
                           </packing>
                         </child>
@@ -3387,7 +3322,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="left_attach">7</property>
                             <property name="right_attach">8</property>
                             <property name="top_attach">11</property>
-                            <property name="bottom_attach">13</property>
+                            <property name="bottom_attach">14</property>
                             <property name="y_options">GTK_EXPAND | GTK_SHRINK | GTK_FILL</property>
                           </packing>
                         </child>
@@ -3400,7 +3335,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="left_attach">10</property>
                             <property name="right_attach">11</property>
                             <property name="top_attach">11</property>
-                            <property name="bottom_attach">13</property>
+                            <property name="bottom_attach">14</property>
                             <property name="y_options">GTK_EXPAND | GTK_SHRINK | GTK_FILL</property>
                           </packing>
                         </child>
@@ -3413,7 +3348,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="left_attach">13</property>
                             <property name="right_attach">14</property>
                             <property name="top_attach">11</property>
-                            <property name="bottom_attach">13</property>
+                            <property name="bottom_attach">14</property>
                             <property name="y_options">GTK_EXPAND | GTK_SHRINK | GTK_FILL</property>
                           </packing>
                         </child>
@@ -3426,7 +3361,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="left_attach">16</property>
                             <property name="right_attach">17</property>
                             <property name="top_attach">11</property>
-                            <property name="bottom_attach">13</property>
+                            <property name="bottom_attach">14</property>
                             <property name="y_options">GTK_EXPAND | GTK_SHRINK | GTK_FILL</property>
                           </packing>
                         </child>
@@ -3439,7 +3374,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="left_attach">19</property>
                             <property name="right_attach">20</property>
                             <property name="top_attach">11</property>
-                            <property name="bottom_attach">13</property>
+                            <property name="bottom_attach">14</property>
                             <property name="y_options">GTK_EXPAND | GTK_SHRINK | GTK_FILL</property>
                           </packing>
                         </child>
@@ -3452,7 +3387,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           <packing>
                             <property name="left_attach">20</property>
                             <property name="right_attach">21</property>
-                            <property name="bottom_attach">13</property>
+                            <property name="bottom_attach">14</property>
                           </packing>
                         </child>
                         <child>
@@ -3541,7 +3476,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="left_attach">22</property>
                             <property name="right_attach">23</property>
                             <property name="top_attach">11</property>
-                            <property name="bottom_attach">13</property>
+                            <property name="bottom_attach">14</property>
                             <property name="y_options">GTK_EXPAND | GTK_SHRINK | GTK_FILL</property>
                           </packing>
                         </child>
@@ -3559,23 +3494,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="right_attach">22</property>
                             <property name="top_attach">11</property>
                             <property name="bottom_attach">12</property>
-                            <property name="y_options">GTK_SHRINK</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkColorButton" id="cb_color_parm_bg2">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="relief">none</property>
-                            <property name="color">#000000000000</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
-                          </object>
-                          <packing>
-                            <property name="left_attach">21</property>
-                            <property name="right_attach">22</property>
-                            <property name="top_attach">12</property>
-                            <property name="bottom_attach">13</property>
                             <property name="y_options">GTK_SHRINK</property>
                           </packing>
                         </child>
@@ -3777,6 +3695,274 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="top_attach">4</property>
                             <property name="bottom_attach">5</property>
                             <property name="y_options">GTK_SHRINK</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkColorButton" id="cb_color_cpu_bg2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                            <property name="color">#000000000000</property>
+                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="top_attach">13</property>
+                            <property name="bottom_attach">14</property>
+                            <property name="y_options">GTK_SHRINK</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkColorButton" id="cb_color_mem_bg2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                            <property name="color">#000000000000</property>
+                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">3</property>
+                            <property name="right_attach">4</property>
+                            <property name="top_attach">13</property>
+                            <property name="bottom_attach">14</property>
+                            <property name="y_options">GTK_SHRINK</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkColorButton" id="cb_color_net_bg2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                            <property name="color">#000000000000</property>
+                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">6</property>
+                            <property name="right_attach">7</property>
+                            <property name="top_attach">13</property>
+                            <property name="bottom_attach">14</property>
+                            <property name="y_options">GTK_SHRINK</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkColorButton" id="cb_color_swap_bg2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                            <property name="color">#000000000000</property>
+                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">9</property>
+                            <property name="right_attach">10</property>
+                            <property name="top_attach">13</property>
+                            <property name="bottom_attach">14</property>
+                            <property name="y_options">GTK_SHRINK</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkColorButton" id="cb_color_load_bg2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                            <property name="color">#000000000000</property>
+                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">12</property>
+                            <property name="right_attach">13</property>
+                            <property name="top_attach">13</property>
+                            <property name="bottom_attach">14</property>
+                            <property name="y_options">GTK_SHRINK</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkColorButton" id="cb_color_disk_bg2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                            <property name="color">#000000000000</property>
+                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">15</property>
+                            <property name="right_attach">16</property>
+                            <property name="top_attach">13</property>
+                            <property name="bottom_attach">14</property>
+                            <property name="y_options">GTK_SHRINK</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkColorButton" id="cb_color_temp_bg2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                            <property name="color">#000000000000</property>
+                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">18</property>
+                            <property name="right_attach">19</property>
+                            <property name="top_attach">13</property>
+                            <property name="bottom_attach">14</property>
+                            <property name="y_options">GTK_SHRINK</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkColorButton" id="cb_color_parm_bg2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                            <property name="color">#000000000000</property>
+                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">21</property>
+                            <property name="right_attach">22</property>
+                            <property name="top_attach">13</property>
+                            <property name="bottom_attach">14</property>
+                            <property name="y_options">GTK_SHRINK</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="button_gradient_cpu">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
+                            <property name="image">image_gradient_cpu</property>
+                          </object>
+                          <packing>
+                            <property name="top_attach">12</property>
+                            <property name="bottom_attach">13</property>
+                            <property name="x_options"/>
+                            <property name="y_options"/>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="button_gradient_mem">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
+                            <property name="image">image_gradient_mem</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">3</property>
+                            <property name="right_attach">4</property>
+                            <property name="top_attach">12</property>
+                            <property name="bottom_attach">13</property>
+                            <property name="x_options"/>
+                            <property name="y_options"/>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="button_gradient_net">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
+                            <property name="image">image_gradient_net</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">6</property>
+                            <property name="right_attach">7</property>
+                            <property name="top_attach">12</property>
+                            <property name="bottom_attach">13</property>
+                            <property name="x_options"/>
+                            <property name="y_options"/>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="button_gradient_swap">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
+                            <property name="image">image_gradient_swap</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">9</property>
+                            <property name="right_attach">10</property>
+                            <property name="top_attach">12</property>
+                            <property name="bottom_attach">13</property>
+                            <property name="x_options"/>
+                            <property name="y_options"/>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="button_gradient_load">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
+                            <property name="image">image_gradient_load</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">12</property>
+                            <property name="right_attach">13</property>
+                            <property name="top_attach">12</property>
+                            <property name="bottom_attach">13</property>
+                            <property name="x_options"/>
+                            <property name="y_options"/>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="button_gradient_disk">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
+                            <property name="image">image_gradient_disk</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">15</property>
+                            <property name="right_attach">16</property>
+                            <property name="top_attach">12</property>
+                            <property name="bottom_attach">13</property>
+                            <property name="x_options"/>
+                            <property name="y_options"/>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="button_gradient_temp">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
+                            <property name="image">image_gradient_temp</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">18</property>
+                            <property name="right_attach">19</property>
+                            <property name="top_attach">12</property>
+                            <property name="bottom_attach">13</property>
+                            <property name="x_options"/>
+                            <property name="y_options"/>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="button_gradient_parm">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
+                            <property name="image">image_gradient_parm</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">21</property>
+                            <property name="right_attach">22</property>
+                            <property name="top_attach">12</property>
+                            <property name="bottom_attach">13</property>
+                            <property name="x_options"/>
+                            <property name="y_options"/>
                           </packing>
                         </child>
                       </object>

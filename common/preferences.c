@@ -42,8 +42,8 @@ static GtkBuilder *builder = NULL;
 static gboolean _orientation_warning_disable = FALSE;
 
 #define OB(name) (gtk_builder_get_object(builder, name))
-#define EMBED_GRAPH_INDEX(ob,i) g_object_set_data(G_OBJECT(ob), "graph-index", GINT_TO_POINTER(i));
-#define EXTRACT_GRAPH_INDEX(ob) GPOINTER_TO_INT(g_object_get_data(G_OBJECT(ob), "graph-index"));
+#define EMBED_GRAPH_INDEX(ob,i) g_object_set_data(G_OBJECT(ob), "graph-index", GUINT_TO_POINTER(i));
+#define EXTRACT_GRAPH_INDEX(ob) GPOINTER_TO_UINT(g_object_get_data(G_OBJECT(ob), "graph-index"));
 #define DEFINE_OB_NAMES_FULL(p) static const gchar* (p##_names)[GRAPH_MAX] = { #p "_cpu", #p "_mem", #p "_net", #p "_swap", #p "_load", #p "_disk", #p "_temp", #p "_parm" };
 
 
@@ -59,6 +59,7 @@ DEFINE_OB_NAMES_FULL(image_info_dblclick_command);
 DEFINE_OB_NAMES_FULL(sb_border);
 DEFINE_OB_NAMES_FULL(advanced_box);
 DEFINE_OB_NAMES_FULL(draw_color_bgpreview);
+DEFINE_OB_NAMES_FULL(button_gradient);
 
 static const gchar* spin_ceil_names[GRAPH_MAX] = {
 	"",
@@ -987,6 +988,93 @@ multiload_preferences_bgpreview_expose(GtkWidget *widget, GdkEventExpose *event,
 }
 #endif
 
+static void multiload_preferences_gradient_toggled_cb (GtkToggleButton *button, MultiloadPlugin *ma)
+{
+	if (gtk_toggle_button_get_active(button) == FALSE)
+		return;
+	guint graph_index = EXTRACT_GRAPH_INDEX(button);
+	ma->graph_config[graph_index].bg_direction = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(button), "bg-direction"));
+	gtk_widget_queue_draw(GTK_WIDGET(OB(draw_color_bgpreview_names[graph_index])));
+	gtk_dialog_response(GTK_DIALOG(g_object_get_data(G_OBJECT(button), "bg-dialog")), 0);
+}
+
+static void
+multiload_preferences_button_gradient_clicked_cb (GtkWidget *button, MultiloadPlugin *ma)
+{
+	const static gchar *labels[MULTILOAD_GRADIENT_MAX] = { "↓", "↙", "←", "↖", "↑", "↗", "→", "↘", "◎" }; //TODO C-escape these
+	GtkWidget *buttons[MULTILOAD_GRADIENT_MAX];
+
+	guint graph_index = multiload_preferences_get_graph_index(GTK_BUILDABLE(button), button_gradient_names);
+	guint i;
+
+	GtkWidget *dialog = gtk_dialog_new();
+	gtk_window_set_title(GTK_WINDOW(dialog), _("Direction of gradient"));
+	gtk_dialog_add_button (GTK_DIALOG(dialog), _("Close"), 0);
+
+	for (i=0; i<MULTILOAD_GRADIENT_MAX; i++) {
+		if (i==0)
+			buttons[i] = gtk_radio_button_new(NULL);
+		else
+			buttons[i] = gtk_radio_button_new_from_widget(GTK_RADIO_BUTTON(buttons[0]));
+
+		g_object_set(G_OBJECT(buttons[i]), "draw-indicator", FALSE, NULL);
+		g_signal_connect(G_OBJECT(buttons[i]), "toggled", G_CALLBACK(multiload_preferences_gradient_toggled_cb), ma);
+		g_object_set_data(G_OBJECT(buttons[i]), "bg-direction", GINT_TO_POINTER(i));
+		g_object_set_data(G_OBJECT(buttons[i]), "bg-dialog", dialog);
+		EMBED_GRAPH_INDEX(buttons[i], graph_index);
+
+		gtk_container_add(GTK_CONTAINER(buttons[i]), gtk_label_new(labels[i]));
+	}
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(buttons[ma->graph_config[graph_index].bg_direction]), TRUE);
+
+	GtkWidget *content_area = gtk_dialog_get_content_area (GTK_DIALOG(dialog));
+	gtk_container_add(GTK_CONTAINER(content_area), gtk_label_new(graph_types[graph_index].label));
+
+#if GTK_API == 2
+	GtkWidget *table = gtk_table_new (3, 3, 1);
+
+	gtk_table_attach_defaults (GTK_TABLE(table), buttons[MULTILOAD_GRADIENT_LINEAR_N_TO_S],		1, 2, 2, 3);
+	gtk_table_attach_defaults (GTK_TABLE(table), buttons[MULTILOAD_GRADIENT_LINEAR_NE_TO_SW],	0, 1, 2, 3);
+	gtk_table_attach_defaults (GTK_TABLE(table), buttons[MULTILOAD_GRADIENT_LINEAR_E_TO_W],		0, 1, 1, 2);
+	gtk_table_attach_defaults (GTK_TABLE(table), buttons[MULTILOAD_GRADIENT_LINEAR_SE_TO_NW],	0, 1, 0, 1);
+	gtk_table_attach_defaults (GTK_TABLE(table), buttons[MULTILOAD_GRADIENT_LINEAR_S_TO_N],		1, 2, 0, 1);
+	gtk_table_attach_defaults (GTK_TABLE(table), buttons[MULTILOAD_GRADIENT_LINEAR_SW_TO_NE],	2, 3, 0, 1);
+	gtk_table_attach_defaults (GTK_TABLE(table), buttons[MULTILOAD_GRADIENT_LINEAR_W_TO_E],		2, 3, 1, 2);
+	gtk_table_attach_defaults (GTK_TABLE(table), buttons[MULTILOAD_GRADIENT_LINEAR_NW_TO_SE],	2, 3, 2, 3);
+	gtk_table_attach_defaults (GTK_TABLE(table), buttons[MULTILOAD_GRADIENT_RADIAL],			1, 2, 1, 2);
+
+	gtk_container_add(GTK_CONTAINER(content_area), table);
+#else
+	GtkWidget *grid = gtk_grid_new();
+
+	gtk_grid_attach (GTK_GRID(grid), buttons[MULTILOAD_GRADIENT_LINEAR_N_TO_S],		1, 2, 1, 1);
+	gtk_grid_attach (GTK_GRID(grid), buttons[MULTILOAD_GRADIENT_LINEAR_NE_TO_SW],	0, 2, 1, 1);
+	gtk_grid_attach (GTK_GRID(grid), buttons[MULTILOAD_GRADIENT_LINEAR_E_TO_W],		0, 1, 1, 1);
+	gtk_grid_attach (GTK_GRID(grid), buttons[MULTILOAD_GRADIENT_LINEAR_SE_TO_NW],	0, 0, 1, 1);
+	gtk_grid_attach (GTK_GRID(grid), buttons[MULTILOAD_GRADIENT_LINEAR_S_TO_N],		1, 0, 1, 1);
+	gtk_grid_attach (GTK_GRID(grid), buttons[MULTILOAD_GRADIENT_LINEAR_SW_TO_NE],	2, 0, 1, 1);
+	gtk_grid_attach (GTK_GRID(grid), buttons[MULTILOAD_GRADIENT_LINEAR_W_TO_E],		2, 1, 1, 1);
+	gtk_grid_attach (GTK_GRID(grid), buttons[MULTILOAD_GRADIENT_LINEAR_NW_TO_SE],	2, 2, 1, 1);
+	gtk_grid_attach (GTK_GRID(grid), buttons[MULTILOAD_GRADIENT_RADIAL],			1, 1, 1, 1);
+
+	gtk_container_add(GTK_CONTAINER(content_area), grid);
+#endif
+
+	gtk_window_set_resizable(GTK_WINDOW(dialog), FALSE);
+	gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(gtk_widget_get_toplevel(button)));
+	gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_UTILITY);
+	gtk_widget_show_all(dialog);
+
+/*	int x, y, x_root, y_root;
+	gdk_window_get_root_origin(gtk_widget_get_window(button), &x_root, &y_root);
+	gtk_widget_translate_coordinates(button, gtk_widget_get_toplevel(button), 0, 0, &x, &y);
+	gtk_window_move(GTK_WINDOW(dialog), x_root+x, y_root+y);
+*/
+
+	gtk_dialog_run(GTK_DIALOG(dialog));
+	gtk_widget_destroy(dialog);
+}
+
 static void
 multiload_preferences_destroy ()
 {
@@ -1062,6 +1150,9 @@ multiload_preferences_connect_signals (MultiloadPlugin *ma)
 		#elif GTK_API == 3
 			g_signal_connect (OB(draw_color_bgpreview_names[i]), "draw", G_CALLBACK (multiload_preferences_bgpreview_draw_cb), ma->graphs[i]);
 		#endif
+
+		// background gradient button
+		g_signal_connect(G_OBJECT(OB(button_gradient_names[i])), "clicked", G_CALLBACK(multiload_preferences_button_gradient_clicked_cb), ma);
 	}
 
 	g_signal_connect(G_OBJECT(OB("cb_fill_between")), "toggled", G_CALLBACK(multiload_preferences_fill_between_toggled_cb), ma);
