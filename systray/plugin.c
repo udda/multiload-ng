@@ -64,7 +64,7 @@ systray_preferences_cb(GtkWidget *widget, MultiloadPlugin *ma)
 		MULTILOAD_SETTINGS_FILL_BETWEEN |
 		MULTILOAD_SETTINGS_DBLCLICK_POLICY
 	);
-	multiload_preferences_add_infobar (GTK_MESSAGE_INFO, _("Placement of system tray icons is controlled by the desktop environment. Graph order can not be set reliably."));
+	multiload_preferences_add_infobar (GTK_MESSAGE_INFO, _("Placement of system tray icons is controlled by the desktop environment. Graphs order may change."));
 }
 
 

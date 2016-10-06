@@ -1203,7 +1203,7 @@ multiload_preferences_add_infobar (GtkMessageType message_type, const gchar *tex
 	gtk_misc_set_alignment (GTK_MISC(label), 0, 0.5);
 	gtk_container_add(GTK_CONTAINER(content_area), label);
 
-	gtk_info_bar_add_button (GTK_INFO_BAR(info_bar), _("OK"), GTK_RESPONSE_OK);
+	gtk_info_bar_add_button (GTK_INFO_BAR(info_bar), _("_Close"), GTK_RESPONSE_OK);
 
 	g_signal_connect_swapped(G_OBJECT(info_bar), "response", G_CALLBACK (gtk_widget_hide), OB("infobar_graphs_container"));
 
