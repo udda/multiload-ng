@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: multiload-ng\n"
 "Report-Msgid-Bugs-To: Roberta Assennato <r.assennato@gmail.com>\n"
 "POT-Creation-Date: 2016-09-09 21:58+0200\n"
-"PO-Revision-Date: 2016-09-09 21:58+0200\n"
+"PO-Revision-Date: 2016-10-06 22:43+0200\n"
 "Last-Translator: Roberta Assennato <r.assennato@gmail.com>\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -561,3 +561,31 @@ msgstr ""
 "<b>EXEMPLES DE LIGNES DE COMMANDE COMMUNS</b>\n"
 "* Pour surveiller les changements dans un fichier: cat [filename]\n"
 "* Pour exécuter des commandes de shell: sh -c \"[commands]\""
+
+msgid "Direction of gradient"
+msgstr ""
+
+msgid "Under 'used' (like <i>htop</i> and some graphical task managers)"
+msgstr ""
+
+msgid "Under 'cache' (like <i>free</i> and <i>top</i>)"
+msgstr ""
+
+msgid "Use IEC units (binary prefixes)"
+msgstr ""
+
+msgid "Count Slab cache:"
+msgstr ""
+
+msgid "Choose how to count Slab cache"
+msgstr ""
+
+msgid ""
+"If the window is larger than its minimum size, graphs will be scaled in "
+"proportion to the dimensions set."
+msgstr ""
+
+msgid ""
+"Placement of system tray icons is controlled by the desktop environment. "
+"Graphs order may change."
+msgstr ""

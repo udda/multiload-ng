@@ -2,12 +2,13 @@
 # This file is distributed under the same license as the multiload-ng package.
 # Dee.H.Y <dongfengweixiao@hotmail.com>, 2016.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: multiload-ng\n"
 "Report-Msgid-Bugs-To: Dee.H.Y <dongfengweixiao@hotmail.com>\n"
 "POT-Creation-Date: 2016-09-17 15:33+0800\n"
-"PO-Revision-Date: 2016-09-17 15:33+0800\n"
+"PO-Revision-Date: 2016-10-06 22:44+0200\n"
 "Language-Team: Simplified Chinese\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -495,8 +496,7 @@ msgstr "名称"
 msgid ""
 "Please note that some selected sources might still not show up, because of "
 "other constraints that make them not suitable."
-msgstr ""
-"请注意，有一些选定的来源可能无法显示，这是因为其它的约束导致其不合适。"
+msgstr "请注意，有一些选定的来源可能无法显示，这是因为其它的约束导致其不合适。"
 
 msgid "Graph command:"
 msgstr "图像命令："
@@ -554,3 +554,31 @@ msgstr ""
 "<b>常见的命令行示例</b>\n"
 "* 为了监视文件的更改：cat [filename]\n"
 "* 为了执行任意的 shell 命令：sh -c \"[commands]\""
+
+msgid "Direction of gradient"
+msgstr ""
+
+msgid "Under 'used' (like <i>htop</i> and some graphical task managers)"
+msgstr ""
+
+msgid "Under 'cache' (like <i>free</i> and <i>top</i>)"
+msgstr ""
+
+msgid "Use IEC units (binary prefixes)"
+msgstr ""
+
+msgid "Count Slab cache:"
+msgstr ""
+
+msgid "Choose how to count Slab cache"
+msgstr ""
+
+msgid ""
+"If the window is larger than its minimum size, graphs will be scaled in "
+"proportion to the dimensions set."
+msgstr ""
+
+msgid ""
+"Placement of system tray icons is controlled by the desktop environment. "
+"Graphs order may change."
+msgstr ""

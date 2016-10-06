@@ -2,12 +2,13 @@
 # This file is distributed under the same license as the multiload-ng package.
 # Michael Kogan <michael.kogan@gmx.net>, 2016.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: multiload-ng\n"
 "Report-Msgid-Bugs-To: Michael Kogan <michael.kogan@gmx.net>\n"
 "POT-Creation-Date: 2016-09-09 21:58+0200\n"
-"PO-Revision-Date: 2016-09-14 10:06+0200\n"
+"PO-Revision-Date: 2016-10-06 22:43+0200\n"
 "Last-Translator: Michael Kogan <michael.kogan@gmx.net>\n"
 "Language-Team: Deutsche\n"
 "Language: de\n"
@@ -564,3 +565,31 @@ msgstr ""
 "<b>BEISPIELE VON GEBRÄUCHLICHEN BEFEHLSZEILEN</b>\n"
 "* Um Änderungen einer Datei zu überwachen: cat [Dateiname]\n"
 "* Um beliebige Shell-Befehle auszuführen: sh -c \"[Befehle]\""
+
+msgid "Direction of gradient"
+msgstr ""
+
+msgid "Under 'used' (like <i>htop</i> and some graphical task managers)"
+msgstr ""
+
+msgid "Under 'cache' (like <i>free</i> and <i>top</i>)"
+msgstr ""
+
+msgid "Use IEC units (binary prefixes)"
+msgstr ""
+
+msgid "Count Slab cache:"
+msgstr ""
+
+msgid "Choose how to count Slab cache"
+msgstr ""
+
+msgid ""
+"If the window is larger than its minimum size, graphs will be scaled in "
+"proportion to the dimensions set."
+msgstr ""
+
+msgid ""
+"Placement of system tray icons is controlled by the desktop environment. "
+"Graphs order may change."
+msgstr ""
