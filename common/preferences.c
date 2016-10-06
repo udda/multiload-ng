@@ -1105,7 +1105,7 @@ multiload_preferences_add_infobar (GtkMessageType message_type, const gchar *tex
 
 	gtk_info_bar_add_button (GTK_INFO_BAR(info_bar), _("OK"), GTK_RESPONSE_OK);
 
-	g_signal_connect(G_OBJECT(info_bar), "response", G_CALLBACK (gtk_widget_hide), NULL);
+	g_signal_connect_swapped(G_OBJECT(info_bar), "response", G_CALLBACK (gtk_widget_hide), OB("infobar_graphs_container"));
 
 	gtk_container_add(GTK_CONTAINER(OB("infobar_graphs_container")), info_bar);
 	gtk_widget_show_all(GTK_WIDGET(OB("infobar_graphs_container")));
