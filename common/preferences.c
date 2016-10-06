@@ -1009,7 +1009,6 @@ multiload_preferences_button_gradient_clicked_cb (GtkWidget *button, MultiloadPl
 
 	GtkWidget *dialog = gtk_dialog_new();
 	gtk_window_set_title(GTK_WINDOW(dialog), _("Direction of gradient"));
-	gtk_dialog_add_button (GTK_DIALOG(dialog), _("Close"), 0);
 
 	for (i=0; i<MULTILOAD_GRADIENT_MAX; i++) {
 		if (i==0)
