@@ -15,7 +15,7 @@ There is also a system tray version, for panels without plugin support, and a st
 Multiload-ng can be built with GTK2 and GTK3, so can be embedded within GTK2/GTK3 builds of all the aforementioned panels.
 	</longdescription>
 	<use>-debug -experimental gtk2 +gtk3 -awn -indicator +lxde +mate +standalone -systray +xfce4
-		<flag name="experimental">Enable experimental plugins (may be unstable)</flag>
+		<flag name="experimental">Enable experimental code (may be unstable)</flag>
 		<flag name="gtk2">Build against GTK+2 (check compatibility with your panel)</flag>
 		<flag name="gtk3">Build against GTK+3 (check compatibility with your panel)</flag>
 		<flag name="awn">Build plugin for <pkg>gnome-extra/avant-window-navigator</pkg></flag>
