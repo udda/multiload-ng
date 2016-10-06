@@ -19,7 +19,7 @@
 
 # note: name of this makefile is lowercase, in order to not get ignored by .gitignore
 
-COMMON_OPTS=\
+CHECKINSTALL_FLAGS=\
 	-y \
 	--install=no \
 	--nodoc \
@@ -42,10 +42,10 @@ checkbuild:
 		exit 1 ; fi
 
 deb-package: checkbuild notice
-	@cd ../.. ; checkinstall $(COMMON_OPTS) --type=debian
+	@cd ../.. ; checkinstall $(CHECKINSTALL_FLAGS) --type=debian
 
 slack-package: checkbuild notice
-	@cd ../.. ; checkinstall $(COMMON_OPTS) --type=slackware
+	@cd ../.. ; checkinstall $(CHECKINSTALL_FLAGS) --type=slackware
 
 rpm-package: checkbuild notice
-	@cd ../.. ; checkinstall $(COMMON_OPTS) --type=rpm
+	@cd ../.. ; checkinstall $(CHECKINSTALL_FLAGS) --type=rpm
