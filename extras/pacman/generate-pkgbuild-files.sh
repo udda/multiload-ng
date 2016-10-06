@@ -21,8 +21,24 @@
 
 pkgver=1.3.1
 pkgrel=1
-md5sums='f3e746784df07850a4f36d055bd141ba'
 
+gen_md5sum()
+{
+	local tmpfile=$(mktemp)
+
+	echo "Generating MD5 sums..." >&2
+
+	if ! which wget > /dev/null
+		then echo SKIP; return; fi
+
+	if ! wget "https://github.com/udda/multiload-ng/archive/v$pkgver.tar.gz" -O "$tmpfile"
+		then echo SKIP; return; fi
+
+	md5sum $tmpfile | while read -a array; do echo ${array[0]} ; done
+
+	rm "$tmpfile" >&2
+}
+md5sums=$(gen_md5sum)
 
 get_pkgname()
 {
