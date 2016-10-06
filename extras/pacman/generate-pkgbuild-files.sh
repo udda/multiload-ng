@@ -188,6 +188,11 @@ generate_pkgbuild()
 	local outfile="${pkgname}-${version_str}_${gtk_str}.PKGBUILD"
 
 	cat >"${outfile}" <<-EOF
+		# Maintainer: Mario Cianciolo <mr.udda at gmail dot com>
+		# This file is part of multiload-ng.
+
+		# THIS FILE IS GENERATED AUTOMATICALLY. DO NOT EDIT
+
 		pkgname='${pkgname}'
 		pkgdesc='${pkgdesc}'
 		pkgver=${pkgver}
