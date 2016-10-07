@@ -205,6 +205,9 @@ fi
 if test "x$enable_experimental" = "xyes"; then
 	AS_ECHO([ "*  Enabled experimental code (WARNING: this is unstable)" ])
 fi
+if test "x$enable_developer_mode" = "xyes"; then
+	AS_ECHO([ "*  Enabled developer mode" ])
+fi
 if test "x$enable_autostart" = "xyes"; then
 	AS_ECHO([ "*  Enabled autostart for suitable plugins" ])
 fi
