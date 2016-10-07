@@ -229,6 +229,10 @@ generate_pkgbuild()
 		}
 	EOF
 
+	if which makepkg >/dev/null 2>&1
+		then ( cd "${outdir}" ; makepkg --printsrcinfo > .SRCINFO )
+	fi
+
 	printf -- ' ... OK\n' >&2
 }
 
