@@ -296,7 +296,8 @@ Move to the directory that contains source code just cloned and run:
 
 Now run configure script:  
 `./configure --prefix=/usr`  
-Change prefix as needed (/usr is the default of most distros and it's just OK; if not specified it defaults to /usr/local).
+Change prefix as needed. **/usr** is the prefix of most distros.
+If you do not specify a prefix, configure script tries to infer it from installed programs. If this fails, prefix defaults to **/usr/local**.
 
 ### LxPanel in systems with Multiarch support
 Some Linux distributions (like Debian and its derivatives) have [Multiarch](https://wiki.debian.org/Multiarch) support, means that
