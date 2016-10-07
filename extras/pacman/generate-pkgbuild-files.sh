@@ -162,30 +162,33 @@ generate_pkgbuild()
 
 	# additional parsing
 	if [ -n "$is_git" ]; then
-		local version_str='git'
+		local pkgver=`printf -- "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"`
+		local version_str="git (${pkgver})"
+		local git_suffix='-git'
 		local makedepends="'intltool' 'git'"
 		local pkg_source="git+https://github.com/udda/multiload-ng.git"
 		local pkg_md5sum='SKIP'
 		local pkg_basedir='multiload-ng'
-		local pkgver=`printf -- "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"`
 	else
 		local version_str="$pkgver"
+		local git_suffix=''
 		local makedepends="'intltool'"
 		local pkg_source="https://github.com/udda/multiload-ng/archive/v\$pkgver.tar.gz"
 		local pkg_md5sum="$md5sums"
 		local pkg_basedir='multiload-ng-$pkgver'
 	fi
 
-	local pkgname="$(get_pkgname $target)"
+	local pkgname="$(get_pkgname $target)-${gtk_str}${git_suffix}"
 	local pkgdesc="$(get_pkgdesc $target)"
 	local depends="$(get_depends $target $gtk_str)"
 	local configure_opts="$(get_configure_string $target $gtk_str)"
 
 	# output
-	printf -- "Generating PKGBUILD  (target: %-13s version: %-8s $gtk_str)  ..." "$target" "$version_str" >&2
-	local outfile="${pkgname}-${version_str}_${gtk_str}.PKGBUILD"
+	printf -- "Generating PKGBUILD  (target: %-13s version: %-21s $gtk_str)" "$target" "$version_str" >&2
+	local outdir="multiload-ng.PKGBUILD/${pkgname}"
+	mkdir -p "${outdir}"
 
-	cat >"${outfile}" <<-EOF
+	cat >"${outdir}/PKGBUILD" <<-EOF
 		# Maintainer: Mario Cianciolo <mr.udda at gmail dot com>
 		# This file is part of multiload-ng.
 
@@ -219,14 +222,14 @@ generate_pkgbuild()
 		}
 	EOF
 
-	[ -n "$is_git" ] &&	cat >>"${outfile}" <<-EOF
+	[ -n "$is_git" ] &&	cat >>"${outdir}/PKGBUILD" <<-EOF
 		pkgver() {
 		    cd "${pkg_basedir}"
-		    printf -- "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+		    printf -- "r%s.%s" "\$(git rev-list --count HEAD)" "\$(git rev-parse --short HEAD)"
 		}
 	EOF
 
-	printf -- 'done.\n' >&2
+	printf -- ' ... OK\n' >&2
 }
 
 
