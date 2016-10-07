@@ -59,7 +59,7 @@ with meaningful names, for each plugin/GTK+ version combination.
 Script will generate PKGBUILDs for both last release and lastest git code.
 
 After generation, create packages for desired configurations with *makepkg*:  
-`makepkg -p <desired_build_script.PKGBUILD>`
+`cd <desired_plugin_directory>; makepkg`
 
 Install created packages with *pacman* (you might need to run as *root*):  
 `pacman -U <package.pkg.tar.gz>`
