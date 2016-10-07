@@ -71,24 +71,24 @@ get_depends()
 	if [ "$2" = "gtk2" ]; then
 		printf -- "'gtk2>=2.20.0' 'cairo'"
 		case "$1" in
-			awn)		printf -- " 'awn>=0.3.9' 'glibmm-2.4>=2.16.0' 'gtkmm-2.4>=-2.20'" ;;
-			indicator)	printf -- " 'appindicator-0.1>=0.4.92'" ;;
-			lxpanel)	printf -- " 'lxpanel>=0.7.0' 'libfm>=1.2.0'" ;;
-			mate)		printf -- " 'libmatepanelapplet-4.0>=1.7.0'" ;;
+			awn)		printf -- " 'avant-window-navigator>=0.3.9' 'glibmm>=2.16.0' 'gtkmm>=2.20'" ;;
+			indicator)	printf -- " 'libappindicator-gtk2>=0.4.92'" ;;
+			lxpanel)	printf -- " 'lxpanel>=0.7.0' 'libfm-gtk2>=1.2.0'" ;;
+			mate)		printf -- " 'mate-panel>=1.7.0'" ;;
 			standalone)	return 0 ;;
 			systray)	return 0 ;;
-			xfce4)		printf -- " 'libxfce4util-1.0>=4.6.0' 'libxfce4panel-1.0>=4.6.0'" ;;
+			xfce4)		printf -- " 'libxfce4util-1.0>=4.6.0' 'xfce4panel>=4.6.0'" ;;
 		esac
 	else
 		printf -- "'gtk3' 'cairo'"
 		case "$1" in
 			awn)		return 1 ;;
-			indicator)	printf -- " 'appindicator3-0.1>=0.4.92'" ;;
-			lxpanel)	return 1 ;;
-			mate)		printf -- " 'libmatepanelapplet-4.0>=1.7.0'" ;;
+			indicator)	printf -- " 'libappindicator-gtk3>=0.4.92'" ;;
+			lxpanel)	printf -- " 'lxpanel-gtk3>=0.7.0' 'libfm-gtk3>=1.2.0'" ;;
+			mate)		printf -- " 'mate-panel-gtk3>=1.7.0'" ;;
 			standalone)	return 0 ;;
 			systray)	return 0 ;;
-			xfce4)		printf -- " 'libxfce4util-1.0>=4.12.0' 'libxfce4panel-2.0>=4.12.0'" ;;
+			xfce4)		printf -- " 'libxfce4util-1.0>=4.12.0' 'xfce4panel>=4.12.0'" ;;
 		esac
 	fi
 }
@@ -158,8 +158,6 @@ generate_pkgbuild()
 
 	# there is no GTK3 support in AWN
 	[ "$target" = "awn" -a "$gtk_str" = "gtk3" ] && return 2
-	# there is no GTK3 support in LXDE
-	[ "$target" = "lxpanel" -a "$gtk_str" = "gtk3" ] && return 2
 
 
 	# additional parsing
