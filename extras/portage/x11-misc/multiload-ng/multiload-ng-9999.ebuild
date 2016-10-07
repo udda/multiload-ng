@@ -60,8 +60,7 @@ DOCS="AUTHORS README.md"
 REQUIRED_USE="
 	^^ ( gtk2 gtk3 )
 	|| ( awn indicator lxde mate standalone systray xfce4 )
-	awn? ( gtk2 experimental )
-	lxde? ( gtk2 )"
+	awn? ( gtk2 experimental )"
 
 src_prepare() {
 	eautoreconf

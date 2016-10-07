@@ -229,7 +229,7 @@ Due to an error in lxpanel source, if you are using lxpanel 0.7.0 you will
 need also libmenu-cache. This was fixed in version 0.7.1. Read about this
 [here](http://wiki.lxde.org/en/How_to_write_plugins_for_LXPanel#Preconditions).
 
-You will have to force GTK+2 build (see [here](#gtk-version) for instructions).
+You might have to force GTK+2 build (see [here](#gtk-version) for instructions).
 
 Note that LXDE 0.7 or greater is required.
 
@@ -313,7 +313,7 @@ If plugin does not show up in the list of LxPanel plugins, you could try to repe
 Build system automatically selects highest GTK+ version available. If you need to build against a lower version, you have to
 set it manually (see next section, [Advanced configure](#advanced-configure))
 
-For example, LXDE panel and older versions of XFCE panel (< 4.12.0) need GTK2 version of the plugin.
+For example, LxPanel and older versions of XFCE panel (< 4.12.0) need GTK2 version of the plugin.
 They need to add option `--with-gtk=2.0` to *./configure*.
 
 ### Advanced configure
