@@ -178,10 +178,21 @@ generate_pkgbuild()
 		local pkg_basedir='multiload-ng-$pkgver'
 	fi
 
-	local pkgname="$(get_pkgname $target)-${gtk_str}${git_suffix}"
+	local _p="$(get_pkgname $target)"
+
+	local pkgname="${_p}-${gtk_str}${git_suffix}"
 	local pkgdesc="$(get_pkgdesc $target)"
 	local depends="$(get_depends $target $gtk_str)"
 	local configure_opts="$(get_configure_string $target $gtk_str)"
+
+	# conflicts
+	local conflicts=''
+	for i in "${_p}-gtk2" "${_p}-gtk3" "${_p}-gtk2-git" "${_p}-gtk3-git"; do
+		if [ ! "${pkgname}" = "$i" ]; then
+			# appending with echo eliminates extra whitespaces
+			conflicts=`echo ${conflicts} "'${i}'"`
+		fi
+	done
 
 	# output
 	printf -- "Generating PKGBUILD  (target: %-13s version: %-21s $gtk_str)" "$target" "$version_str" >&2
@@ -201,6 +212,8 @@ generate_pkgbuild()
 
 		makedepends=(${makedepends})
 		depends=(${depends})
+
+		conflicts=(${conflicts})
 
 		source=('${pkg_source}')
 		md5sums=('${pkg_md5sum}')
@@ -223,6 +236,7 @@ generate_pkgbuild()
 	EOF
 
 	[ -n "$is_git" ] &&	cat >>"${outdir}/PKGBUILD" <<-EOF
+
 		pkgver() {
 		    cd "${pkg_basedir}"
 		    printf -- "r%s.%s" "\$(git rev-list --count HEAD)" "\$(git rev-parse --short HEAD)"
