@@ -266,11 +266,17 @@ Note that XFCE 4.12 or greater is required for GTK+3 plugin.
 
 ## Install instructions
 
-- For Debian and its derivatives (Ubuntu, Mint...) **stable** packages for all supported panels are available in [WebUpd8 PPA](https://launchpad.net/~nilarimogard/+archive/ubuntu/webupd8). Read how to install [here](http://www.webupd8.org/2016/08/multiload-ng-120-released-with-color.html).
-- Arch users can install XFCE version from AUR ([stable](https://aur.archlinux.org/packages/xfce4-multiload-ng-plugin/), [unstable](https://aur.archlinux.org/packages/xfce4-multiload-ng-plugin/))
-- Other distro users will have to [build from source](#build-instructions).
+### Official support
+Take a look at [extras directory](https://github.com/udda/multiload-ng/tree/master/extras).
+There are scripts for many Linux distributions, that generate packages which can
+be then installed through package managers.
 
-If you want to try lastest features, or have some control over build (e.g. enable/disable some panels), you can [build it yourself](#build-instructions).
+### Unofficial support
+- For Ubuntu/Mint and derivatives, [WebUpd8 PPA](https://launchpad.net/~nilarimogard/+archive/ubuntu/webupd8) hosts **stable** packages for all supported panels.
+Read how to install [here](http://www.webupd8.org/2016/08/multiload-ng-120-released-with-color.html) (article is old, but instructions are valid).
+- Arch users can install XFCE version from AUR ([stable](https://aur.archlinux.org/packages/xfce4-multiload-ng-plugin/), [unstable](https://aur.archlinux.org/packages/xfce4-multiload-ng-plugin/))
+
+If your distro isn't covered above, or you just want to have some control over build (e.g. enable/disable some plugins, try experimental features), you can [build it yourself](#build-instructions).
 
 
 
