@@ -11,7 +11,7 @@ This file describes contents of **extras** subdirectory in Multiload-ng source.
 Generate Debian, Slackware or RPM packages through `checkinstall`
 
 Debian packages are used on Debian and its derivatives, Ubuntu and its
-derivatives, Linux Mint, Puppy Linux, and so on.
+derivatives, Linux Mint, and so on.
 
 RPM packages are used on Red Hat Linux, Fedora, Mandriva, SuSe, OpenSUSE,
 PCLinuxOS, Mageia, and so on.
