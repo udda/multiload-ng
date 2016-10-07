@@ -3,9 +3,9 @@
 This file describes contents of **extras** subdirectory in Multiload-ng source.
 
 ## Contents
-- [#checkinstall](checkinstall) - Generate Debian, Slackware or RPM packages through `checkinstall`
-- [#pacman](pacman) - Generate PKGBUILD for all variants of Multiload-ng
-- [#portage](portage) - Gentoo ebuilds
+- [checkinstall](#checkinstall) - Generate Debian, Slackware or RPM packages through `checkinstall`
+- [pacman](#pacman) - Generate PKGBUILD for all variants of Multiload-ng
+- [portage](#portage) - Ready to use Gentoo ebuilds
 
 ## checkinstall
 Generate Debian, Slackware or RPM packages through `checkinstall`
@@ -35,7 +35,7 @@ Then, `cd` into *extras/checkinstall* directory, and execute:
 Below there are the methods to install generated packages (you might need to run these as *root*):
 - `dpkg -i <package.deb>` to install Debian package
 - `installpkg <package.tgz>` to install Slackware package
-- `rpm -i <package.tgz>` to install Slackware package
+- `rpm -i <package.rpm>` to install Slackware package
 
 
 ## pacman
@@ -61,12 +61,12 @@ Script will generate PKGBUILDs for both last release and lastest git code.
 After generation, create packages for desired configurations with *makepkg*:  
 `makepkg -p <desired_build_script.PKGBUILD>`
 
-Install created packages with *pacman*:  
+Install created packages with *pacman* (you might need to run as *root*):  
 `pacman -U <package.pkg.tar.gz>`
 
 
 ## portage
-Gentoo ebuilds
+Ready to use Gentoo ebuilds
 
 ### Prerequisites
 You will need **Portage** (default package manager in Gentoo Linux and its
@@ -77,11 +77,11 @@ First, `cd` into *extras/portage/x11-misc/multiload-ng* directory. Now, generate
 the *Manifest*:  
 `for i in *.ebuild; do ebuild $i manifest; done`
 
-Now you can install Multiload-ng of desired version:  
+Now you can install Multiload-ng of desired version (you might need to run as *root*):  
 `ebuild multiload-ng-<version>.ebuild merge`
 
 There is also a *live ebuild*, which fetches always lastest git code.
 
 These files are ready to be included as-is in your local overlay, if you have one!
-Just copy whole directory x11-misc under your local overlay root directory
+Just copy whole *x11-misc* directory right under overlay root directory
 (and maybe `chown portage`).
