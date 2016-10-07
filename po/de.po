@@ -2,13 +2,12 @@
 # This file is distributed under the same license as the multiload-ng package.
 # Michael Kogan <michael.kogan@gmx.net>, 2016.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: multiload-ng\n"
 "Report-Msgid-Bugs-To: Michael Kogan <michael.kogan@gmx.net>\n"
 "POT-Creation-Date: 2016-09-09 21:58+0200\n"
-"PO-Revision-Date: 2016-10-06 22:43+0200\n"
+"PO-Revision-Date: 2016-10-07 09:05+0200\n"
 "Last-Translator: Michael Kogan <michael.kogan@gmx.net>\n"
 "Language-Team: Deutsche\n"
 "Language: de\n"
@@ -18,10 +17,10 @@ msgstr ""
 "X-Generator: Poedit 1.8.9\n"
 
 msgid "Multiload-ng (indicator)"
-msgstr ""
+msgstr "Multiload-ng (Indicator)"
 
 msgid "Multiload-ng (system tray)"
-msgstr ""
+msgstr "Multiload-ng (System-Tray)"
 
 msgid "Modern graphical system monitor"
 msgstr "Moderne grafische Systemüberwachung"
@@ -567,29 +566,33 @@ msgstr ""
 "* Um beliebige Shell-Befehle auszuführen: sh -c \"[Befehle]\""
 
 msgid "Direction of gradient"
-msgstr ""
+msgstr "Richtung des Gradienten"
 
 msgid "Under 'used' (like <i>htop</i> and some graphical task managers)"
-msgstr ""
+msgstr "'benutzt' (wie <i>htop</i> und einige grafische Taskmanager)"
 
 msgid "Under 'cache' (like <i>free</i> and <i>top</i>)"
-msgstr ""
+msgstr "'Cache' (wie <i>free</i> und <i>top</i>)"
 
 msgid "Use IEC units (binary prefixes)"
-msgstr ""
+msgstr "IEC-Einheiten benutzen (binäre Präfixe)"
 
 msgid "Count Slab cache:"
-msgstr ""
+msgstr "Zähle Slab-Cache zu:"
 
 msgid "Choose how to count Slab cache"
-msgstr ""
+msgstr "Auswahl, wie der Slab-Cache berücksichtigt werden soll"
 
 msgid ""
 "If the window is larger than its minimum size, graphs will be scaled in "
 "proportion to the dimensions set."
 msgstr ""
+"Falls das Fenster größer als seine Minimalgröße ist, werden die Grafen "
+"proportional zu den gewählten Abmessungen skaliert."
 
 msgid ""
 "Placement of system tray icons is controlled by the desktop environment. "
 "Graphs order may change."
 msgstr ""
+"Die Platzierung der System-Tray Icons wird von der Desktop-Umgebung "
+"kontrolliert. Die Anordnung der Graphen könnte sich ändern."
