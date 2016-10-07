@@ -77,7 +77,7 @@ get_depends()
 			mate)		printf -- " 'mate-panel>=1.7.0'" ;;
 			standalone)	return 0 ;;
 			systray)	return 0 ;;
-			xfce4)		printf -- " 'libxfce4util>=4.6.0' 'xfce4panel>=4.6.0'" ;;
+			xfce4)		printf -- " 'libxfce4util>=4.6.0' 'xfce4-panel>=4.6.0'" ;;
 		esac
 	else
 		printf -- "'gtk3' 'cairo'"
@@ -88,7 +88,7 @@ get_depends()
 			mate)		printf -- " 'mate-panel-gtk3>=1.7.0'" ;;
 			standalone)	return 0 ;;
 			systray)	return 0 ;;
-			xfce4)		printf -- " 'libxfce4util>=4.12.0' 'xfce4panel>=4.12.0'" ;;
+			xfce4)		printf -- " 'libxfce4util>=4.12.0' 'xfce4-panel>=4.12.0'" ;;
 		esac
 	fi
 }
