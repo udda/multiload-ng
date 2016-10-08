@@ -413,10 +413,10 @@ There are some notable differences:
 * Original multiload contains old and unmantained code, Multiload-ng is actively mantained
 * Multiload-ng has a [Wiki](../../wiki)!
 * Multiload-ng runs on a variety of panels, including those of the original multiload
-* Multiload-ng recently dropped glibtop dependency, meaning less bugs and less overhead
-* Multiload-ng detects automatically which task manager is installed
+* Multiload-ng does not depend on *glibtop*, meaning less bugs and less overhead
+* Multiload-ng detects automatically installed task manager and launches it without configuration
 * Multiload-ng has additional graphs, and more will be added in the future
-* Multiload-ng has more graphical customizations, like individual size/interval/border
+* Multiload-ng has way more graphical customizations
 * Multiload-ng has color schemes support
 * Multiload-ng responds to mouse events with per-graph customizable actions
 * Multiload-ng can choose its orientation regardless of panel orientation
