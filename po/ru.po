@@ -17,10 +17,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "Multiload-ng (indicator)"
-msgstr ""
+msgstr "Multiload-ng (индикатор)"
 
 msgid "Multiload-ng (system tray)"
-msgstr ""
+msgstr "Multiload-ng (трей)"
 
 msgid "Modern graphical system monitor"
 msgstr "Графическая система мониторинга"
@@ -556,29 +556,33 @@ msgstr ""
 "* Получить из скрипта: sh -c \"[commands]\""
 
 msgid "Direction of gradient"
-msgstr ""
+msgstr "Направление градиента "
 
 msgid "Under 'used' (like <i>htop</i> and some graphical task managers)"
-msgstr ""
+msgstr "Вместе с 'использовано' (как в <i>htop</i> и прочих графических менеджерах задач)"
 
 msgid "Under 'cache' (like <i>free</i> and <i>top</i>)"
-msgstr ""
+msgstr "Отдельно (как в <i>free</i> и <i>top</i>)"
 
 msgid "Use IEC units (binary prefixes)"
-msgstr ""
+msgstr "Использовать единицы измерения МЭК"
 
 msgid "Count Slab cache:"
-msgstr ""
+msgstr "Учет кэш:"
 
 msgid "Choose how to count Slab cache"
-msgstr ""
+msgstr "Выберите, как учитывать кэш "
 
 msgid ""
 "If the window is larger than its minimum size, graphs will be scaled in "
 "proportion to the dimensions set."
 msgstr ""
+"Если окно больше, чем его минимальный размер, графики, будут уменьшены "
+"пропорционально установленным размерам."
 
 msgid ""
 "Placement of system tray icons is controlled by the desktop environment. "
 "Graphs order may change."
 msgstr ""
+"Размещение иконок в системном трее контролируется окружением рабочего "
+"стола. Порядок графиков может измениться"
