@@ -215,7 +215,7 @@ generate_pkgbuild()
 
 		conflicts=(${conflicts})
 
-		source=('${pkg_source}')
+		source=("${pkg_source}")
 		md5sums=('${pkg_md5sum}')
 
 		arch=('i686' 'x86_64')
