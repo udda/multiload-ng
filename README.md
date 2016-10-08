@@ -1,7 +1,8 @@
 # Multiload-ng
 
 ## Overview
-Multiload-ng is a modern graphical system monitor. It's a near-complete rewrite of the good old GNOME multiload applet.
+Multiload-ng is a modern graphical system monitor.
+It's a near-complete rewrite of the good old GNOME multiload applet, that aims to support *every* existing panel.
 
 It supports the following panels:
 - XFCE (*xfce4-panel*)
