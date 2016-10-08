@@ -5,7 +5,7 @@
 EAPI=6
 inherit autotools eutils
 
-DESCRIPTION="Modern graphical system monitor for XFCE/MATE/LXDE/Unity and others"
+DESCRIPTION="Modern graphical system monitor for any panel"
 HOMEPAGE="https://github.com/udda/multiload-ng"
 
 SRC_URI="https://github.com/udda/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"

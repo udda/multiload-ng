@@ -5,7 +5,7 @@
 EAPI=6
 inherit autotools eutils git-r3
 
-DESCRIPTION="Modern graphical system monitor for XFCE/MATE/LXDE/Unity and others"
+DESCRIPTION="Modern graphical system monitor for any panel"
 HOMEPAGE="https://github.com/udda/multiload-ng"
 
 EGIT_REPO_URI="git://github.com/udda/multiload-ng.git"
