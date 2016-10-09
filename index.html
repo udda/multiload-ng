@@ -25,15 +25,21 @@
 <h2>
 <a id="overview" class="anchor" href="#overview" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Overview</h2>
 
-<p>Multiload-ng is a modern graphical system monitor. It's a near-complete rewrite of the good old GNOME multiload applet.</p>
+<p>Multiload-ng is a modern graphical system monitor.
+It's a near-complete rewrite of the good old GNOME multiload applet, that aims to support <em>every</em> existing panel.</p>
 
 <p>It supports the following panels:</p>
 
 <ul>
-<li>XFCE (xfce4-panel)</li>
-<li>LXDE (lxpanel)</li>
-<li>MATE (mate-panel)</li>
+<li>XFCE (<em>xfce4-panel</em>)</li>
+<li>LXDE (<em>lxpanel</em>)</li>
+<li>MATE (<em>mate-panel</em>)</li>
+<li>Ubuntu Unity (through <em>libappindicator</em>)</li>
+<li>Every panel with support for <a href="https://unity.ubuntu.com/projects/appindicators/">Application Indicators</a>
+</li>
+<li>System tray (virtually <em>any</em> panel with a systray, in particular those without external plugins support, like <a href="https://gitlab.com/o9000/tint2/wikis/home">tint2</a>)</li>
 <li>Standalone (has its own window, not embedded in any panel)</li>
+<li>Avant Window Navigator (<strong>EXPERIMENTAL</strong>)</li>
 </ul>
 
 <p>Multiload-ng can be built with GTK2 and GTK3, so can be embedded within GTK2/GTK3 builds of all the panels above.</p>
@@ -77,6 +83,9 @@
 
 <p><img src="screenshots/all.panel-24px.png?raw=true" alt="Default configuration, small panel. All graphs visible"><br>
 <sup><em>Small panel, default configuration. All graphs visible</em></sup></p>
+
+<p><img src="screenshots/ubuntu.png?raw=true" alt="Multiload-ng running on Ubuntu"><br>
+<sup><em>Multiload-ng running on Ubuntu</em></sup></p>
 
 <p><img src="screenshots/all.panel-40px.border-2px.widths.png?raw=true" alt="All graphs visible, larger panel. Thicker (2px) borders, graphs have different widths"><br>
 <sup><em>All graphs visible, larger panel. Thicker (2px) borders, graphs have different widths</em></sup></p>
@@ -241,7 +250,7 @@ See per-panel section below for full list.</p>
 <tbody>
 <tr>
 <td align="left">gtk+</td>
-<td align="right">&gt;= 2.18.0</td>
+<td align="right">&gt;= 2.20.0</td>
 </tr>
 <tr>
 <td align="left">cairo</td>
@@ -292,6 +301,31 @@ speaking you don't have to worry about user kernels.</p>
 <p>Standalone target has no additional requirements.</p>
 
 <h3>
+<a id="requirements-for-application-indicator-ubuntu-unity-and-others" class="anchor" href="#requirements-for-application-indicator-ubuntu-unity-and-others" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements for Application Indicator (Ubuntu Unity and others)</h3>
+
+<p>In addition to common requirements (see above)
+these packages are required to build Application Indicator:</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">Package</th>
+<th align="right">Min version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">libappindicator</td>
+<td align="right">&gt;= 0.4.92</td>
+</tr>
+</tbody>
+</table>
+
+<p>Check which GTK+ version is supported by your target panel,
+Ubuntu Unity needs AppIndicators to be built against GTK+3.
+You may have to set correct GTK+ version (see <a href="#gtk-version">here</a> for instructions).</p>
+
+<h3>
 <a id="requirements-for-lxde-panel" class="anchor" href="#requirements-for-lxde-panel" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements for LXDE panel</h3>
 
 <p>In addition to common requirements (see above)
@@ -320,7 +354,7 @@ these packages are required to build LXDE panel plugin:</p>
 need also libmenu-cache. This was fixed in version 0.7.1. Read about this
 <a href="http://wiki.lxde.org/en/How_to_write_plugins_for_LXPanel#Preconditions">here</a>.</p>
 
-<p>You will have to force GTK+2 build (see <a href="#gtk-version">here</a> for instructions).</p>
+<p>You might have to force GTK+2 build (see <a href="#gtk-version">here</a> for instructions).</p>
 
 <p>Note that LXDE 0.7 or greater is required.</p>
 
@@ -373,10 +407,6 @@ these packages are required to build XFCE panel plugin:</p>
 <td align="left">libxfce4util</td>
 <td align="right">&gt;= 4.6.0</td>
 </tr>
-<tr>
-<td align="left">libxfce4ui-1 OR libxfcegui4</td>
-<td align="right">&gt;= 4.8.0</td>
-</tr>
 </tbody>
 </table>
 
@@ -384,18 +414,29 @@ these packages are required to build XFCE panel plugin:</p>
 only, newer versions of xfce4-panel supports GTK+3 too. You may have to set
 correct GTK+ version (see <a href="#gtk-version">here</a> for instructions).</p>
 
-<p>Note that XFCE 4.6 or greater is required.</p>
+<p>Note that XFCE 4.6 or greater is required for GTK+2 plugin.
+Note that XFCE 4.12 or greater is required for GTK+3 plugin.</p>
 
 <h2>
 <a id="install-instructions" class="anchor" href="#install-instructions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install instructions</h2>
 
+<h3>
+<a id="official-support" class="anchor" href="#official-support" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Official support</h3>
+
+<p>Take a look at <a href="https://github.com/udda/multiload-ng/tree/master/extras">extras directory</a>.
+There are scripts for many Linux distributions, that generate packages which can
+be then installed through package managers.</p>
+
+<h3>
+<a id="unofficial-support" class="anchor" href="#unofficial-support" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Unofficial support</h3>
+
 <ul>
-<li>For Debian and its derivatives (Ubuntu, Mint...) <strong>stable</strong> packages for all supported panels are available in <a href="https://launchpad.net/%7Enilarimogard/+archive/ubuntu/webupd8">WebUpd8 PPA</a>. Read how to install <a href="http://www.webupd8.org/2016/08/multiload-ng-120-released-with-color.html">here</a>.</li>
+<li>For Ubuntu/Mint and derivatives, <a href="https://launchpad.net/%7Enilarimogard/+archive/ubuntu/webupd8">WebUpd8 PPA</a> hosts <strong>stable</strong> packages for all supported panels.
+Read how to install <a href="http://www.webupd8.org/2016/08/multiload-ng-120-released-with-color.html">here</a> (article is old, but instructions are valid).</li>
 <li>Arch users can install XFCE version from AUR (<a href="https://aur.archlinux.org/packages/xfce4-multiload-ng-plugin/">stable</a>, <a href="https://aur.archlinux.org/packages/xfce4-multiload-ng-plugin/">unstable</a>)</li>
-<li>Other distro users will have to <a href="#build-instructions">build from source</a>.</li>
 </ul>
 
-<p>If you want to try lastest features, or have some control over build (e.g. enable/disable some panels), you can <a href="#build-instructions">build it yourself</a>.</p>
+<p>If your distro isn't covered above, or you just want to have some control over build (e.g. enable/disable some plugins, try experimental features), you can <a href="#build-instructions">build it yourself</a>.</p>
 
 <h2>
 <a id="build-instructions" class="anchor" href="#build-instructions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Build Instructions</h2>
@@ -418,11 +459,21 @@ correct GTK+ version (see <a href="#gtk-version">here</a> for instructions).</p>
 
 <p>Now run configure script:<br>
 <code>./configure --prefix=/usr</code><br>
-Change prefix as needed (/usr is the default of most distros and it's just OK; if not specified it defaults to /usr/local).</p>
+Change prefix as needed. <strong>/usr</strong> is the prefix of most distros.
+If you do not specify a prefix, configure script tries to infer it from installed programs. If this fails, prefix defaults to <strong>/usr/local</strong>.</p>
 
-<p>Lubuntu users (and possibly others) have different libraries location. They may have to set directly <em>libdir</em>:<br>
-<code>./configure --libdir=/usr/lib/x86_64-linux-gnu</code><br>
-If plugin does not show up in the list of panel plugins, you could try to repeat build process with this configure setting.</p>
+<h3>
+<a id="lxpanel-in-systems-with-multiarch-support" class="anchor" href="#lxpanel-in-systems-with-multiarch-support" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>LxPanel in systems with Multiarch support</h3>
+
+<p>Some Linux distributions (like Debian and its derivatives) have <a href="https://wiki.debian.org/Multiarch">Multiarch</a> support, means that
+they can install 32 bit and 64 bit libraries alongside each other.</p>
+
+<p>This affects libraries location for LxPanel plugin, and it must be set manually.</p>
+
+<p>Users of Multiarch-enabled systems running LxPanel (e.g. Lubuntu) have to set <code>libdir</code> directly, by adding to <em>./configure</em> the
+option <code>--libdir=/usr/lib/x86_64-linux-gnu</code> in 64 bit systems, and <code>--libdir=/usr/lib/i386-linux-gnu</code> in 32 bit systems.</p>
+
+<p>If plugin does not show up in the list of LxPanel plugins, you could try to repeat build process with this configure setting.</p>
 
 <h3>
 <a id="gtk-version" class="anchor" href="#gtk-version" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GTK version</h3>
@@ -430,7 +481,7 @@ If plugin does not show up in the list of panel plugins, you could try to repeat
 <p>Build system automatically selects highest GTK+ version available. If you need to build against a lower version, you have to
 set it manually (see next section, <a href="#advanced-configure">Advanced configure</a>)</p>
 
-<p>For example, LXDE panel and older versions of XFCE panel (&lt; 4.12.0) need GTK2 version of the plugin.
+<p>For example, LxPanel and older versions of XFCE panel (&lt; 4.12.0) need GTK2 version of the plugin.
 They need to add option <code>--with-gtk=2.0</code> to <em>./configure</em>.</p>
 
 <h3>
@@ -475,6 +526,11 @@ They need to add option <code>--with-gtk=2.0</code> to <em>./configure</em>.</p>
 <td><code>--enable-profiling</code></td>
 <td>Allows profiling with gprof</td>
 <td>This enables required CFLAGS</td>
+</tr>
+<tr>
+<td><code>--enable-autostart</code></td>
+<td>Enable autostart for suitable targets</td>
+<td>This installs .desktop files to <code>/etc/xdg/autostart</code> for some plugins (indicator, systray...)</td>
 </tr>
 </tbody>
 </table>
@@ -546,8 +602,21 @@ are still GTK2-based, and Multiload-ng build system automatically selects GTK+3 
 
 <p>Lowering update interval means more redraws per second. CPU usage might become noticeable on older systems.</p>
 
-<p>Command line of parametric graph is called synchronously every time the graph is redrawn. This means that
-plugins hangs waiting for the command line to terminate and return numbers. You should try to</p>
+<p>Command line of parametric graph is called <strong>synchronously</strong> every time the graph is redrawn. This means that
+plugins hangs waiting for the command line to terminate and return numbers.</p>
+
+<p>You should try to raise update interval, and try to use lightweight programs for parametric command line.</p>
+
+<h3>
+<a id="memory-usage-is-not-the-same-reported-by-task-manager" class="anchor" href="#memory-usage-is-not-the-same-reported-by-task-manager" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Memory usage is not the same reported by task manager</h3>
+
+<p>There is some disagreement on how to count some components of kernel memory. Some task managers
+count them as <em>used</em> memory, while standard programs like <code>free</code> report them as <em>shared</em>.</p>
+
+<p>Multiload-ng follows the latter approach, doing its best to align reported values to those of
+standard tools. Task managers could (and sometimes do) count memory usage in a different way.</p>
+
+<p>You can read more of this on <a href="https://github.com/udda/multiload-ng/issues/21">issue #21</a>.</p>
 
 <h2>
 <a id="faq" class="anchor" href="#faq" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>FAQ</h2>
@@ -565,10 +634,10 @@ and extend them.</p>
 <li>Original multiload contains old and unmantained code, Multiload-ng is actively mantained</li>
 <li>Multiload-ng has a <a href="../../wiki">Wiki</a>!</li>
 <li>Multiload-ng runs on a variety of panels, including those of the original multiload</li>
-<li>Multiload-ng recently dropped glibtop dependency, meaning less bugs and less overhead</li>
-<li>Multiload-ng detects automatically which task manager is installed</li>
+<li>Multiload-ng does not depend on <em>glibtop</em>, meaning less bugs and less overhead</li>
+<li>Multiload-ng detects automatically installed task manager and launches it without configuration</li>
 <li>Multiload-ng has additional graphs, and more will be added in the future</li>
-<li>Multiload-ng has more graphical customizations, like individual size/interval/border</li>
+<li>Multiload-ng has way more graphical customizations</li>
 <li>Multiload-ng has color schemes support</li>
 <li>Multiload-ng responds to mouse events with per-graph customizable actions</li>
 <li>Multiload-ng can choose its orientation regardless of panel orientation</li>
