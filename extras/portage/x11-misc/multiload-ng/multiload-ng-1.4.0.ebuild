@@ -78,6 +78,8 @@ src_configure() {
 		$(use_enable debug) \
 		$GTK_CONF \
 		$(use_with standalone) \
+		$(use_with awn) \
+		$(use_with indicator) \
 		$(use_with lxde lxpanel) \
 		$(use_with mate) \
 		$(use_with systray) \
