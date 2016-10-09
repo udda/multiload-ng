@@ -21,24 +21,42 @@
 
 pkgver=1.4.0
 pkgrel=1
+md5sums="NONE"
+
+value_in_array()
+{
+	local needle="$1"
+	shift 1
+
+	for i in $*; do
+		if [ "$needle" = "$i" ]
+			# found!
+			then return 0;
+		fi
+	done
+
+	# not found
+	return 1
+}
 
 gen_md5sum()
 {
 	local tmpfile=$(mktemp)
 
-	echo "Generating MD5 sums..." >&2
+	printf -- "Generating MD5 sums ... " >&2
 
 	if ! which wget > /dev/null
-		then echo SKIP; return; fi
+		then echo SKIP
+	elif ! wget -q "https://github.com/udda/multiload-ng/archive/v$pkgver.tar.gz" -O "$tmpfile"
+		then echo SKIP
+	else
+		md5sum $tmpfile | while read -a array; do echo ${array[0]} ; done
+	fi
 
-	if ! wget "https://github.com/udda/multiload-ng/archive/v$pkgver.tar.gz" -O "$tmpfile"
-		then echo SKIP; return; fi
-
-	md5sum $tmpfile | while read -a array; do echo ${array[0]} ; done
+	printf -- "OK\n" >&2
 
 	rm "$tmpfile" >&2
 }
-md5sums=$(gen_md5sum)
 
 get_pkgname()
 {
@@ -156,6 +174,9 @@ generate_pkgbuild()
 		return 1
 	fi
 
+	# generate MD5 sum from downloaded tarball
+	[ "$md5sums" = "NONE" ] && md5sums=$(gen_md5sum)
+
 	# there is no GTK3 support in AWN
 	[ "$target" = "awn" -a "$gtk_str" = "gtk3" ] && return 2
 
@@ -243,18 +264,109 @@ generate_pkgbuild()
 		}
 	EOF
 
-	if which makepkg >/dev/null 2>&1
+	if [ "${GENERATE_SRCINFO}" = "1" ] && which makepkg >/dev/null 2>&1
 		then ( cd "${outdir}" ; makepkg --printsrcinfo > .SRCINFO )
 	fi
 
 	printf -- ' ... OK\n' >&2
 }
 
+help()
+{
+	cat >&2 <<-EOF
+	USAGE: $0 [OPTIONS] [PKGSPEC]
+
+	OPTIONS:
+	  -s    Generate .SRCINFO next to each PKGBUILD. Requires makepkg installed
+	  -h    Show this help
 
 
-for target in awn indicator lxpanel mate standalone systray xfce4; do
-	for gtk in gtk2 gtk3; do
-		generate_pkgbuild ${gtk} ${target}
-		generate_pkgbuild ${gtk} ${target} git
-	done
+	PKGSPEC:
+	  Options can be followed by exactly THREE arguments, in the following order:
+	      PKG_TARGET   GTK_VERSION   PKG_VERSION
+	  If not specified, this script will generate automatically all PKGBUILDs.
+
+	PKG_TARGET: one of the following keywords:
+	  awn           Generate PKGBUILD for Avant Window Navigator applet
+	  indicator     Generate PKGBUILD for Indicator plugin
+	  lxpanel       Generate PKGBUILD for LxPanel plugin
+	  mate          Generate PKGBUILD for MATE panel applet
+	  standalone    Generate PKGBUILD for Standalone application
+	  systray       Generate PKGBUILD for system tray plugin
+	  xfce4         Generate PKGBUILD for XFCE4 panel plugin
+
+	GTK_VERSION: one of the following keywords:
+	  gtk2          Generate PKGBUILD for GTK+2 version of the plugin
+	  gtk3          Generate PKGBUILD for GTK+3 version of the plugin
+
+	PKG_VERSION: one of the following keywords:
+	  stable        Generate PKGBUILD that builds from release code (v$pkgver)
+	  git           Generate PKGBUILD that builds from lastest git code
+	EOF
+}
+
+
+
+
+
+
+
+# Option parsing
+while getopts ':sh' FLAG; do
+	case $FLAG in
+		s)		GENERATE_SRCINFO=1 ;;
+		h)		help ; exit 0 ;;
+
+		\?)		echo "Invalid option: -$OPTARG" >&2
+				echo "Run $0 -h for help." >&2
+				exit 1 ;;
+	esac
 done
+shift $((OPTIND-1))
+
+
+# Sanity check
+if [ ! "$#" = "0" -a ! "$#" = "3" ]; then
+	echo "Invalid number of arguments. PKGSPEC requires exactly three arguments." >&2
+	echo "Run $0 -h for help." >&2
+	exit 1
+fi
+
+
+# Everything is OK - let's proceed
+if [ "$#" = "3" ]; then
+
+	echo "Found PKGSPEC!" >&2
+
+	# check PKG_TARGET
+	echo "- PKG_TARGET:  '$1'" >&2
+	if ! value_in_array $1 awn indicator lxpanel mate standalone systray xfce4
+		then echo "Invalid PKG_TARGET. Run $0 -h for help." >&2 ; exit 1
+	fi
+
+	# check GTK_VERSION
+	echo "- GTK_VERSION: '$2'" >&2
+	if ! value_in_array $2 gtk2 gtk3
+		then echo "Invalid GTK_VERSION. Run $0 -h for help." >&2 ; exit 1
+	fi
+
+	# check PKG_VERSION
+	echo "- PKG_VERSION: '$3'" >&2
+	if ! value_in_array $3 stable git
+		then echo "Invalid PKG_VERSION. Run $0 -h for help." >&2 ; exit 1
+	fi
+
+	generate_pkgbuild $1 $2 $3
+
+else
+
+	echo "No PKGSPEC provided, generating all PKGBUILDs." >&2
+
+	for target in awn indicator lxpanel mate standalone systray xfce4; do
+		for gtk in gtk2 gtk3; do
+			generate_pkgbuild ${gtk} ${target}
+			generate_pkgbuild ${gtk} ${target} git
+		done
+	done
+
+fi

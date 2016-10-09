@@ -58,6 +58,10 @@ with meaningful names, for each plugin/GTK+ version combination.
 
 Script will generate PKGBUILDs for both last release and lastest git code.
 
+For generating only one specific PKGBUILD, automatic generation of **.SRCINFO**,
+and so on, run the script with `-h` option for details about available options:  
+`./generate-pkgbuild-files.sh -h`
+
 After generation, create packages for desired configurations with *makepkg*:  
 `cd <desired_plugin_directory>; makepkg`
 
