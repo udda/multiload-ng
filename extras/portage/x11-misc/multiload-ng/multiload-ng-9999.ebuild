@@ -33,7 +33,7 @@ RDEPEND="
 	)
 	lxde? (
 		>=lxde-base/lxpanel-0.7.0
-		>=x11-misc/libfm-1.2.0
+		>=x11-libs/libfm-1.2.0
 	)
 	mate? (
 		gtk2? ( >=mate-base/mate-panel-1.7.0 )
