@@ -24,6 +24,9 @@
     <key name="color-scheme" type="s">
       <default>'Multiload-ng'</default>
     </key>
+    <key name="size-format-iec" type="b">
+      <default>true</default>
+    </key>
 
     <key name="graph-cpu-visible" type="b">
       <default>true</default>
@@ -57,6 +60,9 @@
     </key>
     <key name="graph-cpu-filter" type="s">
       <default>''</default>
+    </key>
+    <key name="graph-cpu-background-direction" type="i">
+      <default>0</default>
     </key>
 
 
@@ -93,6 +99,13 @@
     <key name="graph-mem-filter" type="s">
       <default>''</default>
     </key>
+    <key name="graph-mem-background-direction" type="i">
+      <default>0</default>
+    </key>
+
+    <key name="graph-mem-procps-compliant" type="b">
+      <default>true</default>
+    </key>
 
 
     <key name="graph-net-visible" type="b">
@@ -127,6 +140,9 @@
     </key>
     <key name="graph-net-filter" type="s">
       <default>''</default>
+    </key>
+    <key name="graph-net-background-direction" type="i">
+      <default>0</default>
     </key>
 
 
@@ -163,6 +179,9 @@
     <key name="graph-swap-filter" type="s">
       <default>''</default>
     </key>
+    <key name="graph-swap-background-direction" type="i">
+      <default>0</default>
+    </key>
 
 
     <key name="graph-load-visible" type="b">
@@ -197,6 +216,9 @@
     </key>
     <key name="graph-load-filter" type="s">
       <default>''</default>
+    </key>
+    <key name="graph-load-background-direction" type="i">
+      <default>0</default>
     </key>
 
 
@@ -233,6 +255,9 @@
     <key name="graph-disk-filter" type="s">
       <default>''</default>
     </key>
+    <key name="graph-disk-background-direction" type="i">
+      <default>0</default>
+    </key>
 
 
     <key name="graph-temp-visible" type="b">
@@ -268,6 +293,9 @@
     <key name="graph-temp-filter" type="s">
       <default>''</default>
     </key>
+    <key name="graph-temp-background-direction" type="i">
+      <default>0</default>
+    </key>
 
 
     <key name="graph-parm-visible" type="b">
@@ -302,6 +330,9 @@
     </key>
     <key name="graph-parm-filter" type="s">
       <default>''</default>
+    </key>
+    <key name="graph-parm-background-direction" type="i">
+      <default>0</default>
     </key>
 
     <key name="graph-parm-command" type="s">
