@@ -63,7 +63,7 @@ multiload_filter_new_from_existing(gchar *existing)
 guint
 multiload_filter_get_length(MultiloadFilter *filter)
 {
-	g_assert_nonnull(filter);
+	g_assert(filter != NULL);
 
 	return filter->length;
 }
@@ -71,7 +71,7 @@ multiload_filter_get_length(MultiloadFilter *filter)
 guint
 multiload_filter_append(MultiloadFilter *filter, char *data)
 {
-	g_assert_nonnull(filter);
+	g_assert(filter != NULL);
 
 	MultiloadFilterElement element;
 	memset(&element, 0, sizeof(element));
@@ -88,7 +88,7 @@ multiload_filter_append(MultiloadFilter *filter, char *data)
 guint
 multiload_filter_append_with_label(MultiloadFilter *filter, char *data, char *label)
 {
-	g_assert_nonnull(filter);
+	g_assert(filter != NULL);
 
 	guint n = multiload_filter_append(filter, data);
 
@@ -100,7 +100,7 @@ multiload_filter_append_with_label(MultiloadFilter *filter, char *data, char *la
 guint
 multiload_filter_append_with_state(MultiloadFilter *filter, char *data, MultiloadFilterElementState state)
 {
-	g_assert_nonnull(filter);
+	g_assert(filter != NULL);
 
 	guint n = multiload_filter_append(filter, data);
 
@@ -112,7 +112,7 @@ multiload_filter_append_with_state(MultiloadFilter *filter, char *data, Multiloa
 void
 multiload_filter_import_existing(MultiloadFilter *filter, char *existing)
 {
-	g_assert_nonnull(filter);
+	g_assert(filter != NULL);
 
 	guint i, j;
 	MultiloadFilterElement *e;
@@ -147,7 +147,7 @@ multiload_filter_import_existing(MultiloadFilter *filter, char *existing)
 void
 multiload_filter_export(MultiloadFilter *filter, char *buf, size_t len)
 {
-	g_assert_nonnull(filter);
+	g_assert(filter != NULL);
 
 	guint i;
 	char *data;
@@ -157,7 +157,7 @@ multiload_filter_export(MultiloadFilter *filter, char *buf, size_t len)
 		data = multiload_filter_get_element_data(filter, i);
 
 		// element data must not contain filter separator - if it does, separator must be changed!
-		g_assert_null( strstr(data, MULTILOAD_FILTER_SEPARATOR) );
+		g_assert( strstr(data, MULTILOAD_FILTER_SEPARATOR) == NULL );
 
 		g_strlcat(buf, data, len);
 		g_strlcat(buf, MULTILOAD_FILTER_SEPARATOR, len);
@@ -167,7 +167,7 @@ multiload_filter_export(MultiloadFilter *filter, char *buf, size_t len)
 MultiloadFilterElement*
 multiload_filter_get_element(MultiloadFilter *filter, guint index)
 {
-	g_assert_nonnull(filter);
+	g_assert(filter != NULL);
 
 	// do not free returned pointer!
 	return &g_array_index (filter->array, MultiloadFilterElement, index);

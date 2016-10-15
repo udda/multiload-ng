@@ -47,9 +47,9 @@ multiload_tooltip_update (LoadGraph *g)
 	gchar *text_sanitized = NULL;
 	gchar *tooltip_markup;
 
-	g_assert_nonnull(g);
-	g_assert_nonnull(g->multiload);
-	g_assert_nonnull(g->multiload->extra_data);
+	g_assert(g != NULL);
+	g_assert(g->multiload != NULL);
+	g_assert(g->multiload->extra_data != NULL);
 	g_assert_cmpuint(g->id, >=, 0);
 	g_assert_cmpuint(g->id,  <, GRAPH_MAX);
 
@@ -289,7 +289,7 @@ multiload_sanitize(MultiloadPlugin *ma)
 
 void
 multiload_set_update_cb (MultiloadPlugin *ma, guint graph_id, GraphUpdateFunc callback, gpointer user_data) {
-	g_assert_nonnull(ma);
+	g_assert(ma != NULL);
 	ma->graphs[graph_id]->update_cb = callback;
 	ma->graphs[graph_id]->update_cb_user_data = user_data;
 }

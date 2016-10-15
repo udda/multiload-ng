@@ -503,7 +503,7 @@ multiload_preferences_color_set_cb (GtkColorButton *col, MultiloadPlugin *ma)
 			break;
 	}
 	g_assert_cmpuint(graph_index, <, GRAPH_MAX);
-	g_assert_true(found);
+	g_assert(found == TRUE);
 
 	gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER(col), &ma->graph_config[graph_index].colors[i]);
 

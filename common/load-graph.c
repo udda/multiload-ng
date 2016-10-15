@@ -219,7 +219,7 @@ load_graph_update (LoadGraph *g)
 
 	load_graph_rotate(g);
 
-	g_assert_nonnull(g->multiload->extra_data);
+	g_assert(g->multiload->extra_data != NULL);
 	guint H = g->draw_height - 2 * (g->multiload->graph_config[g->id].border_width);
 	graph_types[g->id].get_data(H, g->data [0], g, g->multiload->extra_data[g->id]);
 
@@ -344,7 +344,7 @@ static gchar* parse_cmdline(const gchar* cmdline, LoadGraph *g) {
 	// Once other replacements are done, convert back invalid UTF-8 character to escaped percent
 	gchar percent_escape[] = "\xff";
 
-	g_assert_nonnull(g->multiload->extra_data);
+	g_assert(g->multiload->extra_data != NULL);
 	graph_types[g->id].cmdline_output(g, g->multiload->extra_data[g->id]);
 
 	const gchar *subst_table[][2] = {
