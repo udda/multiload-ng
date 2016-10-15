@@ -76,7 +76,9 @@ multiload_ps_settings_save(gpointer settings)
 	gboolean res;
 	gchar* fname = build_config_filename();
 
-	res = g_key_file_save_to_file((GKeyFile*)settings, fname, &err);
+	// avoid to use g_key_file_save_to_file because it's available only for glib>=2.40
+	gchar* settings_data = g_key_file_to_data ((GKeyFile*)settings, NULL, NULL);
+	res = g_file_set_contents (fname, settings_data, -1, &err);
 
 	if (!res)
 		g_warning("multiload_ps_settings_save: %s", err->message);
