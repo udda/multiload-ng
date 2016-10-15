@@ -84,6 +84,7 @@ multiload_ps_settings_save(gpointer settings)
 		g_warning("multiload_ps_settings_save: %s", err->message);
 
 	g_free(fname);
+	g_free(settings_data);
 	g_clear_error(&err);
 	return res;
 }
