@@ -99,6 +99,10 @@ gtk_separator_new (GtkOrientation o)
 }
 
 
+#endif /* GTK_API == 2 */
+
+
+#if ! GTK_CHECK_VERSION(3,10,0)
 GtkWidget *
 gtk_button_new_from_icon_name (const gchar *icon_name, GtkIconSize size)
 {
@@ -107,11 +111,7 @@ gtk_button_new_from_icon_name (const gchar *icon_name, GtkIconSize size)
 	gtk_button_set_image(GTK_BUTTON(ret), image);
 	return ret;
 }
-
-#else  /* GTK_API == 2 */
-
-#endif /* GTK_API == 2 */
-
+#endif /* ! GTK_CHECK_VERSION(3,10,0) */
 
 void
 gdk_color_to_rgba(const GdkColor *color, guint16 alpha, GdkRGBA *rgba)

@@ -63,11 +63,12 @@ gtk_box_new (GtkOrientation o, guint spacing);
 G_GNUC_INTERNAL GtkWidget *
 gtk_separator_new (GtkOrientation o);
 
+#endif
+
+#if ! GTK_CHECK_VERSION(3,10,0)
 
 G_GNUC_INTERNAL GtkWidget *
 gtk_button_new_from_icon_name (const gchar *icon_name, GtkIconSize size);
-
-#else  /* GTK_API == 2 */
 
 #endif /* GTK_API == 2 */
 
