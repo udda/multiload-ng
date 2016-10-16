@@ -53,7 +53,7 @@ multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
 
 		// extract block device and partition names
 		gboolean is_partition = FALSE;
-		g_strlcpy(prefix, device, sizeof(device));
+		g_strlcpy(prefix, device, sizeof(prefix));
 		for (i=0; prefix[i] != '\0'; i++) {
 			if (isdigit(prefix[i])) {
 				prefix[i] = '\0';
@@ -128,7 +128,7 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 		// extract block device and partition names
 		gboolean is_partition = FALSE;
 		device = &mnt->mnt_fsname[5];
-		g_strlcpy(prefix, device, sizeof(device));
+		g_strlcpy(prefix, device, sizeof(prefix));
 		for (i=0; prefix[i] != '\0'; i++) {
 			if (isdigit(prefix[i])) {
 				prefix[i] = '\0';
