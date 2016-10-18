@@ -43,8 +43,8 @@
     <key name="graph-cpu-interval" type="i">
       <default>1000</default>
     </key>
-    <key name="graph-cpu-tooltip-style" type="b">
-      <default>false</default>
+    <key name="graph-cpu-tooltip-style" type="i">
+      <default>0</default>
     </key>
     <key name="graph-cpu-dblclick-policy" type="i">
       <default>0</default>
@@ -81,8 +81,8 @@
     <key name="graph-mem-interval" type="i">
       <default>1000</default>
     </key>
-    <key name="graph-mem-tooltip-style" type="b">
-      <default>false</default>
+    <key name="graph-mem-tooltip-style" type="i">
+      <default>0</default>
     </key>
     <key name="graph-mem-dblclick-policy" type="i">
       <default>0</default>
@@ -123,8 +123,8 @@
     <key name="graph-net-interval" type="i">
       <default>1000</default>
     </key>
-    <key name="graph-net-tooltip-style" type="b">
-      <default>false</default>
+    <key name="graph-net-tooltip-style" type="i">
+      <default>0</default>
     </key>
     <key name="graph-net-dblclick-policy" type="i">
       <default>0</default>
@@ -161,8 +161,8 @@
     <key name="graph-swap-interval" type="i">
       <default>1000</default>
     </key>
-    <key name="graph-swap-tooltip-style" type="b">
-      <default>false</default>
+    <key name="graph-swap-tooltip-style" type="i">
+      <default>0</default>
     </key>
     <key name="graph-swap-dblclick-policy" type="i">
       <default>0</default>
@@ -199,8 +199,8 @@
     <key name="graph-load-interval" type="i">
       <default>1000</default>
     </key>
-    <key name="graph-load-tooltip-style" type="b">
-      <default>false</default>
+    <key name="graph-load-tooltip-style" type="i">
+      <default>0</default>
     </key>
     <key name="graph-load-dblclick-policy" type="i">
       <default>0</default>
@@ -237,8 +237,8 @@
     <key name="graph-disk-interval" type="i">
       <default>1000</default>
     </key>
-    <key name="graph-disk-tooltip-style" type="b">
-      <default>false</default>
+    <key name="graph-disk-tooltip-style" type="i">
+      <default>0</default>
     </key>
     <key name="graph-disk-dblclick-policy" type="i">
       <default>0</default>
@@ -275,8 +275,8 @@
     <key name="graph-temp-interval" type="i">
       <default>1000</default>
     </key>
-    <key name="graph-temp-tooltip-style" type="b">
-      <default>false</default>
+    <key name="graph-temp-tooltip-style" type="i">
+      <default>0</default>
     </key>
     <key name="graph-temp-dblclick-policy" type="i">
       <default>0</default>
@@ -313,8 +313,8 @@
     <key name="graph-parm-interval" type="i">
       <default>1000</default>
     </key>
-    <key name="graph-parm-tooltip-style" type="b">
-      <default>false</default>
+    <key name="graph-parm-tooltip-style" type="i">
+      <default>0</default>
     </key>
     <key name="graph-parm-dblclick-policy" type="i">
       <default>0</default>
