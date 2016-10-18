@@ -176,20 +176,18 @@ All this keeps the author motivated, and the project alive and kicking!
 ## System Requirements
 ### Common requirements
 These are the packages required to build any version of the plugin.
-See per-panel section below for full list.
+Some panels may require additional packages (see below).
 
-Package                     | Min version
-:-------------------------- | -------------:
-gtk+                        | >= 2.20.0
-cairo                       | >= 1.0
+Package  | Min version (GTK+2)  | Min version (GTK+3)
+:------  | ------------------:  | ------------------:
+gtk+     | >= 2.20.0            | >= 3.0.0
+cairo    | >= 1.0               | >= 1.0
 
 Multiload-ng requires a reasonably recent Linux kernel (>2.6.36) built with
 specific configuration options. These are not build-time requirement, rather
 run-time ones. Here are required options:  
 - **CONFIG_SYSFS** *(sysfs filesystem support)*
 - **CONFIG_PROC_FS** *(/proc filesystem support)*
-
-Multiload-ng measures system resources using nodes in /sys and /proc, so they must exist.
 
 In addition, enabling the following options allows Multiload-ng to gather all possible
 informations from the system. These are not strictly required, but some graphs might
@@ -202,18 +200,15 @@ not work properly, or not work at all, without these other options:
 Any modern kernel (since 2010) sets all these options automatically, so generally
 speaking you don't have to worry about user kernels.
 
-### Requirements for standalone window
-Standalone target has no additional requirements.
-
 ### Requirements for Application Indicator (Ubuntu Unity and others)
 In addition to common requirements (see above)
 these packages are required to build Application Indicator:
 
-Package                     | Min version
-:-------------------------- | -------------:
-libappindicator             | >= 0.4.92
+Package          | Min version
+:------          | ----------:
+libappindicator  | >= 0.4.92
 
-Check which GTK+ version is supported by your target panel,
+Check which GTK+ version is supported by your target panel.
 Ubuntu Unity needs AppIndicators to be built against GTK+3.
 You may have to set correct GTK+ version (see [here](#gtk-version) for instructions).
 
@@ -221,10 +216,10 @@ You may have to set correct GTK+ version (see [here](#gtk-version) for instructi
 In addition to common requirements (see above)
 these packages are required to build LXDE panel plugin:
 
-Package                     | Min version
-:-------------------------- | -------------:
-lxpanel                     | >= 0.7.0
-libfm                       | >= 1.2.0
+Package  | Min version
+:------  | ---:
+lxpanel  | >= 0.7.0
+libfm    | >= 1.2.0
 
 Due to an error in lxpanel source, if you are using lxpanel 0.7.0 you will
 need also libmenu-cache. This was fixed in version 0.7.1. Read about this
@@ -238,9 +233,9 @@ Note that LXDE 0.7 or greater is required.
 In addition to common requirements (see above)
 these packages are required to build MATE panel plugin:
 
-Package                     | Min version
-:-------------------------- | -------------:
-libmatepanelapplet-4        | >= 1.7.0
+Package               | Min version
+:------               | ----------:
+libmatepanelapplet-4  | >= 1.7.0
 
 Check which GTK+ version is supported by your panel: mate-panel used to be GTK+2,
 newer versions of mate-panel are GTK+3. You may have to set correct GTK+ version
@@ -252,13 +247,13 @@ Note that MATE 1.7 or greater is required.
 In addition to common requirements (see above)
 these packages are required to build XFCE panel plugin:
 
-Package                     | Min version
-:-------------------------- | -------------:
-libxfce4panel               | >= 4.6.0
-libxfce4util                | >= 4.6.0
+Package        | Min version (GTK+2)  | Min version (GTK+3)
+:------        | ------------------:  | ------------------:
+libxfce4panel  | >= 4.6.0             | >= 4.12.0
+libxfce4util   | >= 4.6.0             | >= 4.12.0
 
 Check which GTK+ version is supported by your panel: xfce4-panel used to be GTK+2
-only, newer versions of xfce4-panel supports GTK+3 too. You may have to set
+only, while newer versions of xfce4-panel supports GTK+3 too. You may have to set
 correct GTK+ version (see [here](#gtk-version) for instructions).
 
 Note that XFCE 4.6 or greater is required for GTK+2 plugin.
@@ -269,7 +264,7 @@ Note that XFCE 4.12 or greater is required for GTK+3 plugin.
 
 ### Official support
 Take a look at [extras directory](https://github.com/udda/multiload-ng/tree/master/extras).
-There are scripts for many Linux distributions, that generate packages which can
+There are scripts for most Linux distributions, that generate packages which can
 be then installed through package managers.
 
 ### Unofficial support
@@ -315,7 +310,7 @@ If plugin does not show up in the list of LxPanel plugins, you could try to repe
 Build system automatically selects highest GTK+ version available. If you need to build against a lower version, you have to
 set it manually (see next section, [Advanced configure](#advanced-configure))
 
-For example, LxPanel and older versions of XFCE panel (< 4.12.0) need GTK2 version of the plugin.
+For example, LxPanel and older versions of MATE and XFCE panels need GTK2 version of the plugin.
 They need to add option `--with-gtk=2.0` to *./configure*.
 
 ### Advanced configure
@@ -340,7 +335,7 @@ To get a list of all available options, type:
 When you are satisfied with your flags, run `./configure` with selected options.
 
 ### Build
-This is simple. Move to the directory that contains source code and execute:  
+This is easy. Move to the directory that contains source code and execute:  
 `make`
 
 ### Install/uninstall
@@ -366,7 +361,7 @@ You can contribute in several ways:
 
 Look at the [Wiki](../../wiki), contains all the informations you will need.
 
-Each pull request will be considered and will get a response.
+Each pull request will be considered carefully and will get a response.
 
 
 
@@ -375,8 +370,8 @@ Each pull request will be considered and will get a response.
 Look at the [FAQ](#faq) for some common pitfalls. All additional documentation is located in the [Wiki](../../wiki).
 
 ### Plugin shows only a vertical blank line
-Probably you compiled against the wrong GTK+ version. E.g: LXDE panel and older version of XFCE panel (< 4.12.0)
-are still GTK2-based, and Multiload-ng build system automatically selects GTK+3 if available.
+Probably you compiled against the wrong GTK+ version. E.g: LXDE panel and older version of MATE and XFCE panels
+are still based on GTK+2, and Multiload-ng build system automatically selects GTK+3 when available.
 
 Try running Configure with the right options (see [Configure](#configure) section above)
 
@@ -387,20 +382,19 @@ This has basically two causes:
 
 Lowering update interval means more redraws per second. CPU usage might become noticeable on older systems.
 
-Command line of parametric graph is called **synchronously** every time the graph is redrawn. This means that
-plugins hangs waiting for the command line to terminate and return numbers.
+Command line of parametric graph is called **synchronously** every time the graph is redrawn.
+This means that plugins hangs waiting for the command to terminate and return numbers.
 
 You should try to raise update interval, and try to use lightweight programs for parametric command line.
 
 ### Memory usage is not the same reported by task manager
-There is some disagreement on how to count some components of kernel memory. Some task managers
-count them as *used* memory, while standard programs like `free` report them as *shared*.
+There is some disagreement on how to count some components of kernel memory. Some resource monitors
+(like `htop` and some graphical task managers) count them as *used* memory, while other programs
+like `top` and `free` report them as *cached*.
 
-Multiload-ng follows the latter approach, doing its best to align reported values to those of
-standard tools. Task managers could (and sometimes do) count memory usage in a different way.
-
-You can read more of this on [issue #21](https://github.com/udda/multiload-ng/issues/21).
-
+Multiload-ng now allows to choose *where* to count that memory component, in order
+to align memory usage value with what your favorite resource monitor reports. You can
+find the switch in *Advanced Preferences* window of *Memory* graph.
 
 ## FAQ
 
