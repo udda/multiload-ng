@@ -1,7 +1,7 @@
 AC_ARG_WITH([lxpanel], AS_HELP_STRING([--with-lxpanel], [Build plugin for lxpanel]), [], [with_lxpanel="check"])
 AS_IF([test "x$with_lxpanel" != "xno"], [
 	# libmenu-cache is implicitly required; we will fail if it's not present.
-	PKG_CHECK_MODULES(LXPANEL, [lxpanel >= 0.7.0 libfm >= 1.2.0], [
+	PKG_CHECK_MODULES(LXPANEL, [lxpanel >= 0.7.0], [
 		AC_DEFINE([HAVE_LXPANEL], [1], [Support for lxpanel])
 		with_lxpanel="yes"
 	],[

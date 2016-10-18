@@ -219,7 +219,6 @@ these packages are required to build LXDE panel plugin:
 Package  | Min version
 :------  | ---:
 lxpanel  | >= 0.7.0
-libfm    | >= 1.2.0
 
 Due to an error in lxpanel source, if you are using lxpanel 0.7.0 you will
 need also libmenu-cache. This was fixed in version 0.7.1. Read about this
@@ -237,9 +236,9 @@ Package               | Min version
 :------               | ----------:
 libmatepanelapplet-4  | >= 1.7.0
 
-Check which GTK+ version is supported by your panel: mate-panel used to be GTK+2,
-newer versions of mate-panel are GTK+3. You may have to set correct GTK+ version
-(see [here](#gtk-version) for instructions).
+Check which GTK+ version is supported by your panel: mate-panel used to be GTK+2
+only, while newer versions of mate-panel are GTK+3. You may have to set correct
+GTK+ version (see [here](#gtk-version) for instructions).
 
 Note that MATE 1.7 or greater is required.
 
