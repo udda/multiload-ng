@@ -344,6 +344,25 @@ multiload_preferences_button_advanced_clicked_cb (GtkWidget *button, MultiloadPl
 }
 
 static gint
+multiload_preferences_size_input_cb (GtkSpinButton *spin, double *new_value, gpointer user_data)
+{
+	const gchar *format = _("%d pixel");
+	int value;
+
+	gchar *text = gtk_entry_get_text(GTK_ENTRY(spin));
+
+	if (sscanf(text, format, &value) == 1) {
+		*new_value = (double)value;
+		return TRUE;
+	} else if (sscanf(text, "%d", &value) == 1) {
+		*new_value = (double)value;
+		return TRUE;
+	} else {
+		return GTK_INPUT_ERROR;
+	}
+}
+
+static gint
 multiload_preferences_size_output_cb (GtkSpinButton *spin, gpointer p)
 {
 	const gchar *format = _("%d pixel");
@@ -367,6 +386,25 @@ multiload_preferences_size_change_cb (GtkSpinButton *spin, MultiloadPlugin *ma)
 
 	load_graph_resize(ma->graphs[i]);
 	multiload_preferences_update_dynamic_widgets(ma);
+}
+
+static gint
+multiload_preferences_interval_input_cb (GtkSpinButton *spin, double *new_value, gpointer user_data)
+{
+	const gchar *format = _("%d milliseconds");
+	int value;
+
+	gchar *text = gtk_entry_get_text(GTK_ENTRY(spin));
+
+	if (sscanf(text, format, &value) == 1) {
+		*new_value = (double)value;
+		return TRUE;
+	} else if (sscanf(text, "%d", &value) == 1) {
+		*new_value = (double)value;
+		return TRUE;
+	} else {
+		return GTK_INPUT_ERROR;
+	}
 }
 
 static gint
@@ -674,6 +712,25 @@ multiload_preferences_ceil_changed_cb (GtkSpinButton *spin, MultiloadPlugin *ma)
 
 	int value = gtk_spin_button_get_value_as_int(spin);
 	autoscaler_set_max(scaler, value);
+}
+
+static gint
+multiload_preferences_ceil_input_cb (GtkSpinButton *spin, double *new_value, LoadGraph *g)
+{
+	gchar *format = g_strdup_printf("%%d %s", graph_types[g->id].output_unit);
+	int value;
+
+	gchar *text = gtk_entry_get_text(GTK_ENTRY(spin));
+
+	if (sscanf(text, format, &value) == 1) {
+		*new_value = (double)value;
+		return TRUE;
+	} else if (sscanf(text, "%d", &value) == 1) {
+		*new_value = (double)value;
+		return TRUE;
+	} else {
+		return GTK_INPUT_ERROR;
+	}
 }
 
 static gint
@@ -1110,8 +1167,10 @@ multiload_preferences_connect_signals (MultiloadPlugin *ma)
 	guint i, j;
 
 	for (i=0; i<GRAPH_MAX; i++) {
+		g_signal_connect(G_OBJECT(OB(sb_size_names[i])), "input", G_CALLBACK(multiload_preferences_size_input_cb), ma);
 		g_signal_connect(G_OBJECT(OB(sb_size_names[i])), "output", G_CALLBACK(multiload_preferences_size_output_cb), ma);
 		g_signal_connect(G_OBJECT(OB(sb_size_names[i])), "value-changed", G_CALLBACK(multiload_preferences_size_change_cb), ma);
+		g_signal_connect(G_OBJECT(OB(sb_interval_names[i])), "input", G_CALLBACK(multiload_preferences_interval_input_cb), ma);
 		g_signal_connect(G_OBJECT(OB(sb_interval_names[i])), "output", G_CALLBACK(multiload_preferences_interval_output_cb), ma);
 		g_signal_connect(G_OBJECT(OB(sb_interval_names[i])), "value-changed", G_CALLBACK(multiload_preferences_interval_change_cb), ma);
 		g_signal_connect(G_OBJECT(OB(cb_visible_names[i])), "toggled", G_CALLBACK(multiload_preferences_graph_visibility_cb), ma);
@@ -1125,6 +1184,7 @@ multiload_preferences_connect_signals (MultiloadPlugin *ma)
 		// autoscaler
 		if (cb_autoscaler_names[i][0] != '\0') {
 			g_signal_connect(G_OBJECT(OB(cb_autoscaler_names[i])), "toggled", G_CALLBACK(multiload_preferences_autoscaler_toggled_cb), ma);
+			g_signal_connect(G_OBJECT(OB(spin_ceil_names[i])), "input", G_CALLBACK(multiload_preferences_ceil_input_cb), ma->graphs[i]);
 			g_signal_connect(G_OBJECT(OB(spin_ceil_names[i])), "output", G_CALLBACK(multiload_preferences_ceil_output_cb), ma->graphs[i]);
 			g_signal_connect(G_OBJECT(OB(spin_ceil_names[i])), "value-changed", G_CALLBACK(multiload_preferences_ceil_changed_cb), ma);
 		}
