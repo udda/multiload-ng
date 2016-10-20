@@ -13,7 +13,7 @@ KEYWORDS="~amd64 ~x86"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="-debug -experimental gtk2 +gtk3 -awn +indicator +lxde +mate +standalone +systray +xfce4"
+IUSE="-debug +autostart -experimental gtk2 +gtk3 -awn +indicator +lxde +mate +standalone +systray +xfce4"
 
 LANGS="de es fr it lt ru zh_CN"
 for lang in ${LANGS} ; do IUSE+=" linguas_${lang}"; done
@@ -75,6 +75,7 @@ src_configure() {
 	econf \
 		$(use_enable experimental) \
 		$(use_enable debug) \
+		$(use_enable autostart) \
 		$GTK_CONF \
 		$(use_with standalone) \
 		$(use_with awn) \
