@@ -217,6 +217,7 @@ multiload_colors_from_string(MultiloadPlugin *ma, guint graph_index, const char 
 	char gspec[10];
 	char *lp, *tmp;
 
+	memset(gspec, 0, 10);
 	if (G_LIKELY(list != NULL)) {
 		ncolors = multiload_config_get_num_colors(graph_index);
 		colors = ma->graph_config[graph_index].colors;
