@@ -134,12 +134,12 @@ load_graph_draw (LoadGraph *g)
 		cairo_rectangle(cr, 0, 0, W, H);
 		cairo_fill(cr);
 
-		if (2*g->config->border_width < W)
+		if ((guint)(2*g->config->border_width) < W)
 			W -= 2*g->config->border_width;
 		else
 			W=0;
 
-		if (2*g->config->border_width < H)
+		if ((guint)(2*g->config->border_width) < H)
 			H -= 2*g->config->border_width;
 		else
 			H=0;

@@ -32,7 +32,7 @@
 #include "util.h"
 
 
-const static char *fstype_ignore_list[] = { "rootfs", "smbfs", "nfs", "cifs", "fuse.", NULL };
+static const char *fstype_ignore_list[] = { "rootfs", "smbfs", "nfs", "cifs", "fuse.", NULL };
 
 
 MultiloadFilter *

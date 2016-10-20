@@ -60,7 +60,7 @@ multiload_ui_read (MultiloadPlugin *ma)
 	multiload_defaults(ma);
 
 	settings = multiload_ps_settings_open_for_read(ma);
-	g_debug("[ui] Reading settings from object %p", settings);
+	g_debug("[ui] Reading settings from object %p", (void*)settings);
 	if (G_LIKELY (settings != NULL)) {
 		multiload_ps_settings_get_int		(settings, "padding",				&ma->padding);
 		multiload_ps_settings_get_int		(settings, "spacing",				&ma->spacing);
@@ -157,7 +157,7 @@ multiload_ui_read (MultiloadPlugin *ma)
 			multiload_ps_settings_get_int (settings, key, &ma->graph_config[i].bg_direction);
 			g_free (key);
 		}
-		g_debug("[ui] Done reading settings. Closing object %p", settings);
+		g_debug("[ui] Done reading settings. Closing object %p", (void*)settings);
 		multiload_ps_settings_close(settings);
 
 		multiload_sanitize(ma);
@@ -175,7 +175,7 @@ multiload_ui_save (MultiloadPlugin *ma)
 	int i;
 
 	settings = multiload_ps_settings_open_for_save(ma);
-	g_debug("[ui] Writing settings to object %p", settings);
+	g_debug("[ui] Writing settings to object %p", (void*)settings);
 	if (G_LIKELY (settings != NULL)) {
 		multiload_ps_settings_set_int		(settings, "padding",				ma->padding);
 		multiload_ps_settings_set_int		(settings, "spacing",				ma->spacing);
@@ -267,7 +267,7 @@ multiload_ui_save (MultiloadPlugin *ma)
 		if (!multiload_ps_settings_save(settings)) {
 			g_warning("multiload_ui_save: PS save failed");
 		}
-		g_debug("[ui] Done writing settings. Closing object %p", settings);
+		g_debug("[ui] Done writing settings. Closing object %p", (void*)settings);
 		multiload_ps_settings_close(settings);
 	} else {
 		g_warning("multiload_ui_save: settings = NULL");

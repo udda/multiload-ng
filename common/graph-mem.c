@@ -50,7 +50,7 @@ multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryDat
 	static guint64 kb_page_cache = 0;
 	static guint64 kb_slab = 0;
 
-	const static meminfo_mapping_table table[] = {
+	static const meminfo_mapping_table table[] = {
 		{ "MemTotal",		&kb_main_total },
 		{ "MemAvailable",	&kb_main_available},
 		{ "MemFree",		&kb_main_free},

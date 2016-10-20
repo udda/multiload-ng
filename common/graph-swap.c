@@ -42,7 +42,7 @@ multiload_graph_swap_get_data (int Maximum, int data [1], LoadGraph *g, SwapData
 	static guint64 kb_swap_total = 0;
 	static guint64 kb_swap_free = 0;
 
-	const static meminfo_mapping_table table[] = {
+	static const meminfo_mapping_table table[] = {
 		{ "SwapTotal",		&kb_swap_total },
 		{ "SwapFree",		&kb_swap_free },
 		{ "",				NULL }

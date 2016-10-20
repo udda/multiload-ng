@@ -42,9 +42,9 @@ static GtkBuilder *builder = NULL;
 static gboolean _orientation_warning_disable = FALSE;
 
 #define OB(name) (gtk_builder_get_object(builder, name))
-#define EMBED_GRAPH_INDEX(ob,i) g_object_set_data(G_OBJECT(ob), "graph-index", GUINT_TO_POINTER(i));
-#define EXTRACT_GRAPH_INDEX(ob) GPOINTER_TO_UINT(g_object_get_data(G_OBJECT(ob), "graph-index"));
-#define DEFINE_OB_NAMES_FULL(p) static const gchar* (p##_names)[GRAPH_MAX] = { #p "_cpu", #p "_mem", #p "_net", #p "_swap", #p "_load", #p "_disk", #p "_temp", #p "_parm" };
+#define EMBED_GRAPH_INDEX(ob,i) g_object_set_data(G_OBJECT(ob), "graph-index", GUINT_TO_POINTER(i))
+#define EXTRACT_GRAPH_INDEX(ob) GPOINTER_TO_UINT(g_object_get_data(G_OBJECT(ob), "graph-index"))
+#define DEFINE_OB_NAMES_FULL(p) static const gchar* (p##_names)[GRAPH_MAX] = { #p "_cpu", #p "_mem", #p "_net", #p "_swap", #p "_load", #p "_disk", #p "_temp", #p "_parm" }
 
 
 DEFINE_OB_NAMES_FULL(cb_visible);
@@ -939,12 +939,12 @@ multiload_preferences_bgpreview_draw_cb(GtkWidget *widget, cairo_t *cr, LoadGrap
 		cairo_rectangle(cr, 0, 0, W, H);
 		cairo_fill(cr);
 
-		if (2*g->config->border_width < W)
+		if ((guint)(2*g->config->border_width) < W)
 			W -= 2*g->config->border_width;
 		else
 			W=0;
 
-		if (2*g->config->border_width < H)
+		if ((guint)(2*g->config->border_width) < H)
 			H -= 2*g->config->border_width;
 		else
 			H=0;
@@ -1001,7 +1001,7 @@ static void multiload_preferences_gradient_toggled_cb (GtkToggleButton *button, 
 static void
 multiload_preferences_button_gradient_clicked_cb (GtkWidget *button, MultiloadPlugin *ma)
 {
-	const static gchar *labels[MULTILOAD_GRADIENT_MAX] = { "↓", "↙", "←", "↖", "↑", "↗", "→", "↘", "◎" }; //TODO C-escape these
+	static const gchar *labels[MULTILOAD_GRADIENT_MAX] = { "↓", "↙", "←", "↖", "↑", "↗", "→", "↘", "◎" }; //TODO C-escape these
 	GtkWidget *buttons[MULTILOAD_GRADIENT_MAX];
 
 	guint graph_index = multiload_preferences_get_graph_index(GTK_BUILDABLE(button), button_gradient_names);
