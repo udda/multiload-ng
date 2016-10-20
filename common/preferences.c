@@ -349,7 +349,7 @@ multiload_preferences_size_input_cb (GtkSpinButton *spin, double *new_value, gpo
 	const gchar *format = _("%d pixel");
 	int value;
 
-	gchar *text = gtk_entry_get_text(GTK_ENTRY(spin));
+	const gchar *text = gtk_entry_get_text(GTK_ENTRY(spin));
 
 	if (sscanf(text, format, &value) == 1) {
 		*new_value = (double)value;
@@ -394,7 +394,7 @@ multiload_preferences_interval_input_cb (GtkSpinButton *spin, double *new_value,
 	const gchar *format = _("%d milliseconds");
 	int value;
 
-	gchar *text = gtk_entry_get_text(GTK_ENTRY(spin));
+	const gchar *text = gtk_entry_get_text(GTK_ENTRY(spin));
 
 	if (sscanf(text, format, &value) == 1) {
 		*new_value = (double)value;
@@ -720,7 +720,7 @@ multiload_preferences_ceil_input_cb (GtkSpinButton *spin, double *new_value, Loa
 	gchar *format = g_strdup_printf("%%d %s", graph_types[g->id].output_unit);
 	int value;
 
-	gchar *text = gtk_entry_get_text(GTK_ENTRY(spin));
+	const gchar *text = gtk_entry_get_text(GTK_ENTRY(spin));
 
 	if (sscanf(text, format, &value) == 1) {
 		*new_value = (double)value;
