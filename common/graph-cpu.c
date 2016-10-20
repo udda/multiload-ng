@@ -136,7 +136,7 @@ multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *
 		xd->iowait			= 100.0 * (float)(diff[CPU_IOWAIT]) / total;
 		xd->total_use		= 100.0 * (float)(total-diff[CPU_IDLE]) / total;
 
-		for (i=0; i<CPU_MAX; i++)
+		for (i=0; i<4; i++)
 			data[i] = rint (Maximum * (float)diff[i] / total);
 	}
 
