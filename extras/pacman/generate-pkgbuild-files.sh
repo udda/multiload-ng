@@ -91,7 +91,7 @@ get_depends()
 		case "$1" in
 			awn)		printf -- " 'avant-window-navigator>=0.3.9' 'glibmm>=2.16.0' 'gtkmm>=2.20'" ;;
 			indicator)	printf -- " 'libappindicator-gtk2>=0.4.92'" ;;
-			lxpanel)	printf -- " 'lxpanel>=0.7.0'" ;;
+			lxpanel)	printf -- " 'lxpanel>=0.5.8'" ;;
 			mate)		printf -- " 'mate-panel>=1.7.0'" ;;
 			standalone)	return 0 ;;
 			systray)	return 0 ;;
@@ -102,7 +102,7 @@ get_depends()
 		case "$1" in
 			awn)		return 1 ;;
 			indicator)	printf -- " 'libappindicator-gtk3>=0.4.92'" ;;
-			lxpanel)	printf -- " 'lxpanel-gtk3>=0.7.0'" ;;
+			lxpanel)	printf -- " 'lxpanel-gtk3>=0.5.8'" ;;
 			mate)		printf -- " 'mate-panel-gtk3>=1.7.0'" ;;
 			standalone)	return 0 ;;
 			systray)	return 0 ;;

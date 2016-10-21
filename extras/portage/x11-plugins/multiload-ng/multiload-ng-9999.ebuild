@@ -32,7 +32,7 @@ RDEPEND="
 		gtk3? ( >=dev-libs/libappindicator-0.4.92:3 )
 	)
 	lxde? (
-		>=lxde-base/lxpanel-0.7.0
+		>=lxde-base/lxpanel-0.5.8
 	)
 	mate? (
 		gtk2? ( >=mate-base/mate-panel-1.7.0 )
