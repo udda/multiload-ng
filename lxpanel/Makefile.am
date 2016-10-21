@@ -8,13 +8,13 @@ AM_CPPFLAGS = \
 # multiload plugin
 #
 plugin_LTLIBRARIES = \
-	multiload-ng.la
+	multiload_ng.la
 
 plugindir = \
 	$(libdir)/lxpanel/plugins
 
 multiload_ng_la_SOURCES = \
-	plugin.c
+	plugin.c plugin-old.c
 
 multiload_ng_la_CFLAGS = \
 	$(GTK_CFLAGS) \

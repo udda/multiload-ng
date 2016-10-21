@@ -18,8 +18,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-
 #include <config.h>
+
+#ifdef LXPANEL_NEW_API
 
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
@@ -155,7 +156,7 @@ lxpanel_constructor(LXPanel *panel, config_setting_t *settings)
 }
 
 
-FM_DEFINE_MODULE(lxpanel_gtk, multiload-ng)
+FM_DEFINE_MODULE(lxpanel_gtk, multiload_ng)
 
 /* Plugin descriptor. */
 LXPanelPluginInit fm_module_init_lxpanel_gtk = {
@@ -168,3 +169,5 @@ LXPanelPluginInit fm_module_init_lxpanel_gtk = {
 	.one_per_system		= FALSE,
 	.expand_available	= FALSE
 };
+
+#endif
