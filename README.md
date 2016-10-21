@@ -216,17 +216,20 @@ You may have to set correct GTK+ version (see [here](#gtk-version) for instructi
 In addition to common requirements (see above)
 these packages are required to build LXDE panel plugin:
 
-Package  | Min version
-:------  | ---:
-lxpanel  | >= 0.7.0
+Package        | Min version  | Notes
+:------        | ---:         | :----
+lxpanel        | >= 0.5.8     |
+libmenu-cache  |              | Only for lxpanel <= 0.7.0
+libfm          | 1.2.0        | Only for lxpanel >= 0.7.0
 
-Due to an error in lxpanel source, if you are using lxpanel 0.7.0 you will
-need also libmenu-cache. This was fixed in version 0.7.1. Read about this
-[here](http://wiki.lxde.org/en/How_to_write_plugins_for_LXPanel#Preconditions).
+
+Note that due to a mistake in lxpanel source, if you are using lxpanel 0.7.0
+you will need both `libfm` and `libmenu-cache`. This was fixed in version 0.7.1.
+Read about this [here](http://wiki.lxde.org/en/How_to_write_plugins_for_LXPanel#Preconditions).
 
 You might have to force GTK+2 build (see [here](#gtk-version) for instructions).
 
-Note that LXDE 0.7 or greater is required.
+Note that LXDE 0.5.8 or greater is required.
 
 ### Requirements for MATE panel
 In addition to common requirements (see above)
