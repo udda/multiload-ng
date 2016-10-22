@@ -156,7 +156,7 @@ lxpanel_constructor(Plugin *p, char **fp)
 	p->pwid = GTK_WIDGET(multiload->container);
 
 	multiload_ui_read (multiload);
-	multiload_panel_configuration_changed(p);
+	lxpanel_configuration_changed(p);
 	multiload_start(multiload);
 
 	return 1;
