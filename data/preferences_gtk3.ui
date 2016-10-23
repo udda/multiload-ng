@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.18.3 
+<!-- Generated with glade 3.20.0 
 
 Multiload-ng - Modern graphical system monitor
 Copyright (C) 2016 Mario Cianciolo <mr.udda@gmail.com>
@@ -1006,90 +1006,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label_timespan_cpu">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label">-</property>
-                <property name="xalign">0</property>
-              </object>
-              <packing>
-                <property name="left_attach">4</property>
-                <property name="top_attach">2</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label_timespan_mem">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label">-</property>
-                <property name="xalign">0</property>
-              </object>
-              <packing>
-                <property name="left_attach">4</property>
-                <property name="top_attach">3</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label_timespan_temp">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label">-</property>
-                <property name="xalign">0</property>
-              </object>
-              <packing>
-                <property name="left_attach">4</property>
-                <property name="top_attach">8</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label_timespan_disk">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label">-</property>
-                <property name="xalign">0</property>
-              </object>
-              <packing>
-                <property name="left_attach">4</property>
-                <property name="top_attach">7</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label_timespan_load">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label">-</property>
-                <property name="xalign">0</property>
-              </object>
-              <packing>
-                <property name="left_attach">4</property>
-                <property name="top_attach">6</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label_timespan_swap">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label">-</property>
-                <property name="xalign">0</property>
-              </object>
-              <packing>
-                <property name="left_attach">4</property>
-                <property name="top_attach">5</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label_timespan_net">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label">-</property>
-                <property name="xalign">0</property>
-              </object>
-              <packing>
-                <property name="left_attach">4</property>
-                <property name="top_attach">4</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkButton" id="button_advanced_cpu">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -1102,19 +1018,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">2</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label_col_timespan">
-                <property name="visible">True</property>
-                <property name="sensitive">False</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Timespan</property>
-                <property name="xalign">0</property>
-              </object>
-              <packing>
-                <property name="left_attach">4</property>
-                <property name="top_attach">1</property>
               </packing>
             </child>
             <child>
@@ -1222,18 +1125,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               </object>
               <packing>
                 <property name="left_attach">3</property>
-                <property name="top_attach">9</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label_timespan_parm">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label">-</property>
-                <property name="xalign">0</property>
-              </object>
-              <packing>
-                <property name="left_attach">4</property>
                 <property name="top_attach">9</property>
               </packing>
             </child>
@@ -1384,6 +1275,33 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="top_attach">0</property>
                 <property name="width">9</property>
               </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
             </child>
             <child>
               <placeholder/>
@@ -3382,12 +3300,12 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
                             <property name="halign">center</property>
                             <property name="valign">center</property>
                             <property name="hexpand">False</property>
                             <property name="vexpand">False</property>
                             <property name="image">image_gradient_cpu</property>
-                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -3399,12 +3317,12 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
                             <property name="halign">center</property>
                             <property name="valign">center</property>
                             <property name="hexpand">False</property>
                             <property name="vexpand">False</property>
                             <property name="image">image_gradient_mem</property>
-                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
                           </object>
                           <packing>
                             <property name="left_attach">3</property>
@@ -3416,12 +3334,12 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
                             <property name="halign">center</property>
                             <property name="valign">center</property>
                             <property name="hexpand">False</property>
                             <property name="vexpand">False</property>
                             <property name="image">image_gradient_net</property>
-                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
                           </object>
                           <packing>
                             <property name="left_attach">6</property>
@@ -3433,12 +3351,12 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
                             <property name="halign">center</property>
                             <property name="valign">center</property>
                             <property name="hexpand">False</property>
                             <property name="vexpand">False</property>
                             <property name="image">image_gradient_swap</property>
-                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
                           </object>
                           <packing>
                             <property name="left_attach">9</property>
@@ -3450,12 +3368,12 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
                             <property name="halign">center</property>
                             <property name="valign">center</property>
                             <property name="hexpand">False</property>
                             <property name="vexpand">False</property>
                             <property name="image">image_gradient_load</property>
-                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
                           </object>
                           <packing>
                             <property name="left_attach">12</property>
@@ -3467,12 +3385,12 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
                             <property name="halign">center</property>
                             <property name="valign">center</property>
                             <property name="hexpand">False</property>
                             <property name="vexpand">False</property>
                             <property name="image">image_gradient_disk</property>
-                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
                           </object>
                           <packing>
                             <property name="left_attach">15</property>
@@ -3484,12 +3402,12 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
                             <property name="halign">center</property>
                             <property name="valign">center</property>
                             <property name="hexpand">False</property>
                             <property name="vexpand">False</property>
                             <property name="image">image_gradient_temp</property>
-                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
                           </object>
                           <packing>
                             <property name="left_attach">18</property>
@@ -3501,12 +3419,12 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
                             <property name="halign">center</property>
                             <property name="valign">center</property>
                             <property name="hexpand">False</property>
                             <property name="vexpand">False</property>
                             <property name="image">image_gradient_parm</property>
-                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
                           </object>
                           <packing>
                             <property name="left_attach">21</property>

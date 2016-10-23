@@ -51,7 +51,6 @@ DEFINE_OB_NAMES_FULL(cb_visible);
 DEFINE_OB_NAMES_FULL(button_advanced);
 DEFINE_OB_NAMES_FULL(sb_size);
 DEFINE_OB_NAMES_FULL(sb_interval);
-DEFINE_OB_NAMES_FULL(label_timespan);
 DEFINE_OB_NAMES_FULL(combo_tooltip);
 DEFINE_OB_NAMES_FULL(combo_dblclick);
 DEFINE_OB_NAMES_FULL(entry_dblclick_command);
@@ -236,11 +235,6 @@ multiload_preferences_update_dynamic_widgets(MultiloadPlugin *ma)
 
 	for (i=0; i<GRAPH_MAX; i++) {
 		conf = &ma->graph_config[i];
-
-		// timespan
-		gchar *timespan = format_time_duration(conf->size * conf->interval / 1000);
-		gtk_label_set_text (GTK_LABEL(OB(label_timespan_names[i])), timespan);
-		g_free(timespan);
 
 		// cmdline enable
 		gboolean cmdline_enabled = (conf->dblclick_policy == DBLCLICK_POLICY_CMDLINE);
@@ -1304,12 +1298,6 @@ multiload_preferences_disable_settings(guint mask)
 	if (mask & MULTILOAD_SETTINGS_TOOLTIPS) {
 		for (i=0; i<GRAPH_MAX; i++)
 			gtk_widget_set_sensitive(GTK_WIDGET(OB(combo_tooltip_names[i])), FALSE);
-	}
-
-	if (mask & MULTILOAD_SETTINGS_TIMESPAN) {
-		gtk_widget_set_visible(GTK_WIDGET(OB("label_col_timespan")), FALSE);
-		for (i=0; i<GRAPH_MAX; i++)
-			gtk_widget_set_visible(GTK_WIDGET(OB(label_timespan_names[i])), FALSE);
 	}
 
 	if (mask & MULTILOAD_SETTINGS_ORIENT_WARNING)
