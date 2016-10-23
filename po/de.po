@@ -88,8 +88,8 @@ msgid "%s of swap"
 msgstr "%s von Swap"
 
 #, c-format
-msgid "%s used"
-msgstr "%s benutzt"
+msgid "%s (%s) used"
+msgstr "%s (%s) benutzt"
 
 #, c-format
 msgid ""

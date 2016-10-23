@@ -89,8 +89,8 @@ msgid "%s of swap"
 msgstr "%s sukeitimų skaidinio"
 
 #, c-format
-msgid "%s used"
-msgstr "%s naudojama"
+msgid "%s (%s) used"
+msgstr "%s (%s) naudojama"
 
 #, c-format
 msgid ""
