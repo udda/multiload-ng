@@ -3910,7 +3910,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n - graph number - counting left to right, starting from 1
 %x - graph short name - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
@@ -4087,7 +4086,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n - graph number - counting left to right, starting from 1
 %x - graph short name - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
@@ -4329,7 +4327,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n - graph number - counting left to right, starting from 1
 %x - graph short name - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
@@ -4689,7 +4686,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n - graph number - counting left to right, starting from 1
 %x - graph short name - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
@@ -4869,7 +4865,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n - graph number - counting left to right, starting from 1
 %x - graph short name - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
@@ -5115,7 +5110,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n - graph number - counting left to right, starting from 1
 %x - graph short name - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
@@ -5475,7 +5469,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n - graph number - counting left to right, starting from 1
 %x - graph short name - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph
@@ -5825,7 +5818,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
 
-%n - graph number - counting left to right, starting from 1
 %x - graph short name - three to four lowercase characters
 
 %1 - first value of graph data - depends on the graph

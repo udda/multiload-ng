@@ -339,7 +339,6 @@ static gchar* parse_cmdline(const gchar* cmdline, LoadGraph *g) {
 	guint i;
 	gchar *ret, *tmp;
 
-	gchar number[2] = {'1'+g->id, '\0'};
 	// Convert escaped percent to UTF-8 invalid byte (so it isn't parsed by other means).
 	// Once other replacements are done, convert back invalid UTF-8 character to escaped percent
 	gchar percent_escape[] = "\xff";
@@ -349,7 +348,6 @@ static gchar* parse_cmdline(const gchar* cmdline, LoadGraph *g) {
 
 	const gchar *subst_table[][2] = {
 		{ "%%",				percent_escape },
-		{ "%n",				number },
 		{ "%x",				graph_types[g->id].name },
 		{ "%1",				g->output_str[0] },
 		{ "%2",				g->output_str[1] },
