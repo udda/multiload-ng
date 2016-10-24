@@ -143,6 +143,19 @@ multiload_ps_preferences_closed_cb(MultiloadPlugin *ma)
 }
 
 
+static void lxpanel_configuration_changed(Plugin *p)
+{
+	MultiloadPlugin *multiload = p->priv;
+	Panel *panel = p->panel;
+
+	if ( panel->orientation == ORIENT_HORIZ )
+		multiload->panel_orientation = GTK_ORIENTATION_HORIZONTAL;
+	else
+		multiload->panel_orientation = GTK_ORIENTATION_VERTICAL;
+
+	multiload_refresh_orientation(multiload);
+}
+
 static int
 lxpanel_constructor(Plugin *p, char **fp)
 {
@@ -183,20 +196,6 @@ static void lxpanel_save(Plugin * p, FILE * fp)
 	((PanelData*)multiload->panel_data)->fp_save = fp;
 	multiload_ui_save(multiload);
 }
-
-static void lxpanel_configuration_changed(Plugin *p)
-{
-	MultiloadPlugin *multiload = p->priv;
-	Panel *panel = p->panel;
-
-	if ( panel->orientation == ORIENT_HORIZ )
-		multiload->panel_orientation = GTK_ORIENTATION_HORIZONTAL;
-	else
-		multiload->panel_orientation = GTK_ORIENTATION_VERTICAL;
-
-	multiload_refresh_orientation(multiload);
-}
-
 
 
 /* Plugin descriptor. */
