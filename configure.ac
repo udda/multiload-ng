@@ -35,6 +35,13 @@ old_CFLAGS="$CFLAGS"
 CFLAGS="$CFLAGS -Wall"
 AC_TRY_COMPILE([],[], AC_MSG_RESULT(yes), AC_MSG_RESULT(no); CFLAGS="$old_CFLAGS")
 
+# Some CFLAGS
+# Optimize with -O3 (no problem so far)
+CFLAGS="${CFLAGS} -O3"
+# Runtime diagnostics (use with caution, breaks some plugins)
+#CFLAGS="${CFLAGS} -fdiagnostics-color=auto -fsanitize=address -fsanitize=leak -fsanitize=undefined"
+# Build-time error checking
+#CFLAGS="${CFLAGS} -Wextra -Wpedantic -std=gnu99 -Wno-unused-parameter"
 
 # Checks for library functions.
 AC_FUNC_MALLOC
