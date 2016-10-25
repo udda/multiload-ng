@@ -119,7 +119,7 @@ AC_ARG_ENABLE([developer-mode], AS_HELP_STRING([--enable-developer-mode], [Enabl
 AC_ARG_ENABLE([debug], AS_HELP_STRING([--enable-debug], [Enable CFLAGS for debugging with GDB.]),
 	[if test "x$enableval" = "xyes"; then
 		AC_DEFINE([MULTILOAD_DEBUG], [1], [Debug])
-		CFLAGS="${CFLAGS} -ggdb -O0"
+		CFLAGS="${CFLAGS} -ggdb3 -O0"
 	fi]
 )
 
