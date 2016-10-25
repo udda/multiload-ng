@@ -54,6 +54,7 @@ multiload_ui_read (MultiloadPlugin *ma)
 	gpointer *settings;
 	gchar *key;
 	gchar colors_list[10*MAX_COLORS];
+	gchar graph_order_str[12*GRAPH_MAX];
 	gboolean color_scheme_valid;
 	int i;
 
@@ -77,6 +78,10 @@ multiload_ui_read (MultiloadPlugin *ma)
 		color_scheme_valid = (scheme != NULL);
 		if (color_scheme_valid)
 			multiload_color_scheme_apply(scheme, ma);
+
+		/* Graph order */
+		multiload_ps_settings_get_string	(settings, "graph-order",		graph_order_str, sizeof(graph_order_str));
+		string_to_int_array(graph_order_str, ma->graph_order, GRAPH_MAX);
 
 		/* Memory graph */
 		MemoryData* xd_mem = (MemoryData*)ma->extra_data[GRAPH_MEMLOAD];
@@ -186,6 +191,11 @@ multiload_ui_save (MultiloadPlugin *ma)
 		multiload_ps_settings_set_int		(settings, "pref-dialog-height",	ma->pref_dialog_height);
 		multiload_ps_settings_set_boolean	(settings, "size-format-iec",		ma->size_format_iec);
 		multiload_ps_settings_set_string	(settings, "color-scheme",			ma->color_scheme);
+
+		/* Graph order */
+		key = int_array_to_string(ma->graph_order, GRAPH_MAX);
+		multiload_ps_settings_set_string	(settings, "graph-order",			key);
+		g_free(key);
 
 		/* Memory graph */
 		MemoryData* xd_mem = (MemoryData*)ma->extra_data[GRAPH_MEMLOAD];

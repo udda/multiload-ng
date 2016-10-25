@@ -24,6 +24,9 @@
     <key name="color-scheme" type="s">
       <default>'Multiload-ng'</default>
     </key>
+    <key name="graph-order" type="s">
+      <default>''</default>
+    </key>
     <key name="size-format-iec" type="b">
       <default>true</default>
     </key>

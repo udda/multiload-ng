@@ -63,6 +63,11 @@ cached_fopen_r(gchar* path, gboolean reopen);
 G_GNUC_INTERNAL GdkPixbuf*
 cairo_surface_to_gdk_pixbuf(cairo_surface_t *surface, guint width, guint height);
 
+G_GNUC_INTERNAL gchar*
+int_array_to_string(const int *data, const int length);
+G_GNUC_INTERNAL void
+string_to_int_array(const gchar *array_str, int *data, const int length);
+
 G_END_DECLS
 
 #endif /* __UTIL_H__ */

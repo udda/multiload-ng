@@ -124,6 +124,8 @@ multiload_start(MultiloadPlugin *ma)
 		}
 	}
 
+	multiload_set_order (ma, ma->graph_order);
+
 	g_debug("[multiload] Started %d of %d graphs", n, GRAPH_MAX);
 	return;
 }
@@ -273,6 +275,7 @@ void multiload_defaults(MultiloadPlugin *ma)
 		conf->filter[0] = '\0';
 		conf->filter_enable = FALSE;
 		conf->bg_direction = DEFAULT_BACKGROUND_DIRECTION;
+		ma->graph_order[i] = i;
 		multiload_colors_default(ma, i);
 
 		multiload_set_max_value(ma, i, graph_types[i].scaler_max);

@@ -1132,15 +1132,14 @@ multiload_preferences_reorder_set_order_from_tree_view(MultiloadPlugin *ma)
 	GtkTreeIter iter;
 	gboolean valid;
 	gint i = 0;
-	gint new_order[GRAPH_MAX];
 
 	for (valid = gtk_tree_model_get_iter_first(tree_model, &iter); valid == TRUE; valid = gtk_tree_model_iter_next(tree_model, &iter)) {
 		if (i >= GRAPH_MAX)
 			g_error("Array out of bounds during graph reordering");
-		gtk_tree_model_get(tree_model, &iter, 1, &new_order[i++], -1);
+		gtk_tree_model_get(tree_model, &iter, 1, &ma->graph_order[i++], -1);
 	}
 
-	multiload_set_order (ma, new_order);
+	multiload_set_order (ma, ma->graph_order);
 }
 
 static void
@@ -1514,7 +1513,7 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 	// Graph order
 	GtkListStore *ls_reorder = GTK_LIST_STORE(OB("liststore_reorder"));
 	for (i=0; i<GRAPH_MAX; i++) {
-		gtk_list_store_insert_with_values( ls_reorder, NULL, -1, 0, graph_types[i].label, 1, i, -1 );
+		gtk_list_store_insert_with_values( ls_reorder, NULL, -1, 0, graph_types[ma->graph_order[i]].label, 1, ma->graph_order[i], -1 );
 	}
 
 	// refresh widget status

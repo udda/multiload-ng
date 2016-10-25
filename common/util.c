@@ -331,3 +331,43 @@ cairo_surface_to_gdk_pixbuf(cairo_surface_t *surface, guint width, guint height)
 	// create pixbuf from converted data
 	return gdk_pixbuf_new_from_data(img_data_converted, GDK_COLORSPACE_RGB, FALSE, 8, width, height, width*3, gdk_pixbuf_image_data_free, NULL);
 }
+
+gchar*
+int_array_to_string(const int *data, const int length)
+{
+	int i;
+	int ret_len = 12*length; // enough to fit every integer number (including sign) and separators
+	gchar tmp[12];
+
+	if (data == NULL)
+		return NULL;
+
+	gchar *ret = g_new0(gchar, ret_len);
+
+	for (i=0; i<length; i++) {
+		if (i < length - 1)
+			snprintf(tmp, sizeof(tmp), "%d,", data[i]);
+		else
+			snprintf(tmp, sizeof(tmp), "%d", data[i]);
+
+		g_strlcat(ret, tmp, ret_len);
+	}
+
+	return ret;
+}
+
+void
+string_to_int_array(const gchar *array_str, int *data, const int length)
+{
+	int i;
+
+	if (array_str == NULL || array_str[0] == '\0')
+		return;
+
+	char **tokens = g_strsplit(array_str, ",", length);
+
+	for (i=0; tokens[i]!=NULL; i++)
+		data[i] = (int)g_ascii_strtoll(tokens[i], NULL, 10);
+
+	g_strfreev(tokens);
+}

@@ -87,6 +87,7 @@ typedef struct _MultiloadPlugin {
 	gint orientation_policy;
 	gchar color_scheme[20];
 	gboolean size_format_iec;
+	gint graph_order[GRAPH_MAX];
 } MultiloadPlugin;
 
 
