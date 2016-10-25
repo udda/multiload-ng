@@ -1126,6 +1126,118 @@ multiload_preferences_button_gradient_clicked_cb (GtkWidget *button, MultiloadPl
 }
 
 static void
+multiload_preferences_reorder_set_order_from_tree_view(MultiloadPlugin *ma)
+{
+	GtkTreeModel *tree_model = GTK_TREE_MODEL(OB("liststore_reorder"));
+	GtkTreeIter iter;
+	gboolean valid;
+	gint i = 0;
+	gint new_order[GRAPH_MAX];
+
+	for (valid = gtk_tree_model_get_iter_first(tree_model, &iter); valid == TRUE; valid = gtk_tree_model_iter_next(tree_model, &iter)) {
+		if (i >= GRAPH_MAX)
+			g_error("Array out of bounds during graph reordering");
+		gtk_tree_model_get(tree_model, &iter, 1, &new_order[i++], -1);
+	}
+
+	multiload_set_order (ma, new_order);
+}
+
+static void
+multiload_preferences_reorder_row_deleted_cb (GtkTreeModel *tree_model, GtkTreePath *path, MultiloadPlugin *ma)
+{
+	multiload_preferences_reorder_set_order_from_tree_view (ma);
+}
+
+static void
+multiload_preferences_reorder_up_clicked_cb (GtkToolButton *button, MultiloadPlugin *ma)
+{
+	gint i, s;
+	gint new_order[GRAPH_MAX];
+
+	GtkTreeSelection *sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(OB("treeview_reorder")));
+	GList *list = gtk_tree_selection_get_selected_rows (sel, NULL);
+
+	if (list == NULL)
+		return;
+
+	GtkTreePath *path = list->data;
+	gint *indices = gtk_tree_path_get_indices (path);
+	s = indices[0];
+	gtk_tree_path_free(path);
+
+	if (s == 0)
+		return;
+
+	for (i=0; i<GRAPH_MAX; i++) {
+		if (i == s)
+			new_order[i] = i-1;
+		else if (i == s-1)
+			new_order[i] = i+1;
+		else
+			new_order[i] = i;
+	}
+
+	gtk_list_store_reorder (GTK_LIST_STORE(OB("liststore_reorder")), new_order);
+	multiload_preferences_reorder_set_order_from_tree_view (ma);
+}
+
+static void
+multiload_preferences_reorder_down_clicked_cb (GtkToolButton *button, MultiloadPlugin *ma)
+{
+	gint i, s;
+	gint new_order[GRAPH_MAX];
+
+	GtkTreeSelection *sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(OB("treeview_reorder")));
+	GList *list = gtk_tree_selection_get_selected_rows (sel, NULL);
+
+	if (list == NULL)
+		return;
+
+	GtkTreePath *path = list->data;
+	gint *indices = gtk_tree_path_get_indices (path);
+	s = indices[0];
+	gtk_tree_path_free(path);
+
+	if (s == GRAPH_MAX-1)
+		return;
+
+	for (i=0; i<GRAPH_MAX; i++) {
+		if (i == s)
+			new_order[i] = i+1;
+		else if (i == s+1)
+			new_order[i] = i-1;
+		else
+			new_order[i] = i;
+	}
+
+	gtk_list_store_reorder (GTK_LIST_STORE(OB("liststore_reorder")), new_order);
+	multiload_preferences_reorder_set_order_from_tree_view (ma);
+}
+
+static void
+multiload_preferences_reorder_reset_clicked_cb (GtkToolButton *button, MultiloadPlugin *ma)
+{
+	GtkTreeModel *tree_model = GTK_TREE_MODEL(OB("liststore_reorder"));
+	GtkTreeIter iter;
+	gboolean valid;
+	gint n;
+
+	gint i;
+	gint new_order[GRAPH_MAX];
+
+	for (i=0, valid = gtk_tree_model_get_iter_first(tree_model, &iter); valid == TRUE; i++, valid = gtk_tree_model_iter_next(tree_model, &iter)) {
+		gtk_tree_model_get(tree_model, &iter, 1, &n, -1);
+		new_order[n] = i;
+	}
+
+	gtk_list_store_reorder (GTK_LIST_STORE(OB("liststore_reorder")), new_order);
+
+	multiload_preferences_reorder_set_order_from_tree_view (ma);
+}
+
+
+static void
 multiload_preferences_destroy ()
 {
 	if (builder == NULL)
@@ -1226,6 +1338,12 @@ multiload_preferences_connect_signals (MultiloadPlugin *ma)
 	g_signal_connect(G_OBJECT(OB("tb_colorscheme_export")), "clicked", G_CALLBACK(multiload_preferences_colorscheme_export_clicked_cb), ma);
 	GtkTreeSelection *sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(OB("treeview_colors")));
 	g_signal_connect(G_OBJECT(sel), "changed", G_CALLBACK(multiload_preferences_color_scheme_selected_cb), ma);
+
+	// Graph order
+	g_signal_connect(G_OBJECT(OB("liststore_reorder")), "row-deleted", G_CALLBACK(multiload_preferences_reorder_row_deleted_cb), ma);
+	g_signal_connect(G_OBJECT(OB("toolbar_reorder_btn_up")), "clicked", G_CALLBACK(multiload_preferences_reorder_up_clicked_cb), ma);
+	g_signal_connect(G_OBJECT(OB("toolbar_reorder_btn_down")), "clicked", G_CALLBACK(multiload_preferences_reorder_down_clicked_cb), ma);
+	g_signal_connect(G_OBJECT(OB("toolbar_reorder_btn_reset")), "clicked", G_CALLBACK(multiload_preferences_reorder_reset_clicked_cb), ma);
 
 	// Dialog
 	g_signal_connect(G_OBJECT(OB("dialog_advanced")), "delete-event", G_CALLBACK(gtk_widget_hide_on_delete), ma);
@@ -1393,6 +1511,11 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 	if (!color_scheme_is_set)
 		multiload_preferences_color_scheme_select_custom();
 
+	// Graph order
+	GtkListStore *ls_reorder = GTK_LIST_STORE(OB("liststore_reorder"));
+	for (i=0; i<GRAPH_MAX; i++) {
+		gtk_list_store_insert_with_values( ls_reorder, NULL, -1, 0, graph_types[i].label, 1, i, -1 );
+	}
 
 	// refresh widget status
 	multiload_preferences_update_color_buttons(ma);

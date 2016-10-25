@@ -335,6 +335,62 @@ Author: Mario cianciolo <mr.udda@gmail.com>
       <column type="GdkPixbuf"/>
     </columns>
   </object>
+  <object class="GtkListStore" id="liststore_dblclick">
+    <columns>
+      <!-- column-name Description -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Do nothing</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Start task manager</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Execute custom command</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="liststore_mem_slab">
+    <columns>
+      <!-- column-name Description -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Under 'used' (like &lt;i&gt;htop&lt;/i&gt; and some graphical task managers)</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Under 'cache' (like &lt;i&gt;free&lt;/i&gt; and &lt;i&gt;top&lt;/i&gt;)</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="liststore_orientation">
+    <columns>
+      <!-- column-name Description -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Automatic</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Horizontal</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Vertical</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="liststore_reorder">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name index -->
+      <column type="gint"/>
+    </columns>
+  </object>
   <object class="GtkBox" id="mainwnd_vbox">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -3517,15 +3573,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <child>
                   <placeholder/>
                 </child>
-                <child>
-                  <placeholder/>
-                </child>
-                <child>
-                  <placeholder/>
-                </child>
-                <child>
-                  <placeholder/>
-                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -3534,7 +3581,153 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkSeparator">
+                <property name="width_request">10</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkGrid">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="border_width">8</property>
+                <property name="row_spacing">10</property>
+                <property name="column_spacing">2</property>
+                <child>
+                  <object class="GtkScrolledWindow" id="scrolledwindow4">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="hscrollbar_policy">never</property>
+                    <property name="shadow_type">in</property>
+                    <child>
+                      <object class="GtkTreeView" id="treeview_reorder">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="model">liststore_reorder</property>
+                        <property name="headers_visible">False</property>
+                        <property name="reorderable">True</property>
+                        <property name="enable_search">False</property>
+                        <property name="fixed_height_mode">True</property>
+                        <property name="show_expanders">False</property>
+                        <child internal-child="selection">
+                          <object class="GtkTreeSelection"/>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeview_col_reorder_name">
+                            <property name="sizing">fixed</property>
+                            <property name="reorderable">True</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext23">
+                                <property name="scale">1.5</property>
+                              </object>
+                              <attributes>
+                                <attribute name="text">0</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeview_col_reorder_index">
+                            <property name="sizing">fixed</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label31">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="hexpand">True</property>
+                    <property name="label" translatable="yes">Order of graphs (drag to rearrange)</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">0</property>
+                    <property name="width">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolbar" id="toolbar_reorder">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="hexpand">False</property>
+                    <property name="orientation">vertical</property>
+                    <property name="toolbar_style">icons</property>
+                    <property name="show_arrow">False</property>
+                    <child>
+                      <object class="GtkToolButton" id="toolbar_reorder_btn_up">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="stock_id">gtk-go-up</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="homogeneous">True</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkToolButton" id="toolbar_reorder_btn_down">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="stock_id">gtk-go-down</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="homogeneous">True</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkSeparatorToolItem" id="toolbar_reorder_sep">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="homogeneous">True</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkToolButton" id="toolbar_reorder_btn_reset">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="stock_id">gtk-revert-to-saved</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="homogeneous">True</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
             </child>
           </object>
           <packing>
@@ -3647,54 +3840,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
       <widget name="label30"/>
       <widget name="label45"/>
     </widgets>
-  </object>
-  <object class="GtkListStore" id="liststore_dblclick">
-    <columns>
-      <!-- column-name Description -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Do nothing</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Start task manager</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Execute custom command</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="liststore_mem_slab">
-    <columns>
-      <!-- column-name Description -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Under 'used' (like &lt;i&gt;htop&lt;/i&gt; and some graphical task managers)</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Under 'cache' (like &lt;i&gt;free&lt;/i&gt; and &lt;i&gt;top&lt;/i&gt;)</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="liststore_orientation">
-    <columns>
-      <!-- column-name Description -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Automatic</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Horizontal</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Vertical</col>
-      </row>
-    </data>
   </object>
   <object class="GtkListStore" id="liststore_source_disk">
     <columns>

@@ -157,6 +157,8 @@ multiload_get_max_value (MultiloadPlugin *ma, guint graph_id);
 G_GNUC_INTERNAL void
 multiload_refresh_orientation (MultiloadPlugin *ma);
 G_GNUC_INTERNAL void
+multiload_set_order (MultiloadPlugin *ma, gint new_order[GRAPH_MAX]);
+G_GNUC_INTERNAL void
 multiload_init();
 G_GNUC_INTERNAL void
 multiload_sanitize(MultiloadPlugin *ma);

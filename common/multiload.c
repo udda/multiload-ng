@@ -201,6 +201,31 @@ multiload_refresh_orientation (MultiloadPlugin *ma)
 	}
 }
 
+void
+multiload_set_order (MultiloadPlugin *ma, gint new_order[GRAPH_MAX])
+{
+	gint i;
+
+	// validate permutation
+	gint check[GRAPH_MAX];
+	memset(check, 0, sizeof(check));
+
+	for (i=0; i<GRAPH_MAX; i++) {
+		if (new_order[i] < 0 || new_order[i] >= GRAPH_MAX)
+			g_error("multiload_set_order: permutation index out of bounds");
+		else
+			check[new_order[i]]++;
+	}
+
+	for (i=0; i<GRAPH_MAX; i++) {
+		if (check[i] != 1)
+			g_error("multiload_set_order: array is not a permutation");
+	}
+
+	// actual reordering
+	for (i=0; i<GRAPH_MAX; i++)
+		gtk_box_reorder_child (GTK_BOX(ma->box), GTK_WIDGET(ma->graphs[new_order[i]]->main_widget), -1);
+}
 
 void
 multiload_init()
