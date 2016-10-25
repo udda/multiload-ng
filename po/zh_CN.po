@@ -577,3 +577,9 @@ msgid ""
 "Placement of system tray icons is controlled by the desktop environment. "
 "Graphs order may change."
 msgstr ""
+
+msgid "Extra settings"
+msgstr ""
+
+msgid "Order of graphs (drag to rearrange)"
+msgstr ""

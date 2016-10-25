@@ -588,3 +588,9 @@ msgid ""
 msgstr ""
 "Le placement des icônes de la barre d'état est contrôlé par l'environnement "
 "du bureau. L'ordre des graphiques peuvent changer."
+
+msgid "Extra settings"
+msgstr ""
+
+msgid "Order of graphs (drag to rearrange)"
+msgstr ""

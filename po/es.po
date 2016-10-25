@@ -590,3 +590,9 @@ msgid ""
 msgstr ""
 "La colocación de los iconos de la bandeja de sistema está controlada por el "
 "entorno del escritorio. El orden de los gráficos podría cambiar."
+
+msgid "Extra settings"
+msgstr ""
+
+msgid "Order of graphs (drag to rearrange)"
+msgstr ""

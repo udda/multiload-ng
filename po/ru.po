@@ -581,3 +581,9 @@ msgid ""
 msgstr ""
 "Размещение иконок в системном трее контролируется окружением рабочего "
 "стола. Порядок графиков может измениться"
+
+msgid "Extra settings"
+msgstr ""
+
+msgid "Order of graphs (drag to rearrange)"
+msgstr ""

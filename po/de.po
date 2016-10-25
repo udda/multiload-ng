@@ -591,3 +591,9 @@ msgid ""
 msgstr ""
 "Die Platzierung der System-Tray Icons wird von der Desktop-Umgebung "
 "kontrolliert. Die Anordnung der Graphen könnte sich ändern."
+
+msgid "Extra settings"
+msgstr ""
+
+msgid "Order of graphs (drag to rearrange)"
+msgstr ""

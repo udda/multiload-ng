@@ -593,3 +593,9 @@ msgid ""
 msgstr ""
 "Sistemos dėklo piktogramų išdėstymas yra valdomas darbalaukio aplinkos. "
 "Grafikų tvarka gali pasikeisti."
+
+msgid "Extra settings"
+msgstr ""
+
+msgid "Order of graphs (drag to rearrange)"
+msgstr ""

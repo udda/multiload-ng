@@ -586,3 +586,9 @@ msgid ""
 msgstr ""
 "Il posizionamento delle icone dell'area di notifica è controllato "
 "dall'ambiente desktop. L'ordine dei grafici potrebbe cambiare."
+
+msgid "Extra settings"
+msgstr "Impostazioni aggiuntive"
+
+msgid "Order of graphs (drag to rearrange)"
+msgstr "Ordine dei grafici (trascina per riordinare)"
