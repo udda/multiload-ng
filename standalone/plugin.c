@@ -65,10 +65,10 @@ standalone_preferences_cb(GtkWidget *widget, MultiloadPlugin *multiload)
 }
 
 static gboolean
-standalone_resize_cb (GtkWidget *dialog, GdkEvent *event, MultiloadPlugin *ma)
+standalone_resize_cb (GtkWidget *dialog, GdkEventConfigure *event, MultiloadPlugin *ma)
 {
 	if (event->type == GDK_CONFIGURE) {
-		if (((GdkEventConfigure*)event)->width >= ((GdkEventConfigure*)event)->height)
+		if (event->width >= event->height)
 			ma->panel_orientation = GTK_ORIENTATION_HORIZONTAL;
 		else
 			ma->panel_orientation = GTK_ORIENTATION_VERTICAL;
