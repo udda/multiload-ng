@@ -3581,7 +3581,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               </packing>
             </child>
             <child>
-              <object class="GtkSeparator">
+              <object class="GtkSeparator" id="separator15">
                 <property name="width_request">10</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -3594,7 +3594,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               </packing>
             </child>
             <child>
-              <object class="GtkGrid">
+              <object class="GtkGrid" id="grid11">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="border_width">8</property>
