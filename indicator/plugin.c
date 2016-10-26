@@ -169,8 +169,6 @@ static void
 indicator_graph_update_cb(LoadGraph *g, gpointer user_data)
 {
 	GtkAllocation allocation;
-	int width;
-	guint height;
 
 	indicator_update_menu(g->multiload);
 
