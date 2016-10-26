@@ -193,8 +193,17 @@ multiload_refresh_orientation (MultiloadPlugin *ma)
 {
 	guint i;
 	LoadGraph *g;
+	gint opposite_size = 120;
 
 	gtk_orientable_set_orientation(GTK_ORIENTABLE(ma->box), multiload_get_orientation(ma));
+
+	if ( ma->panel_orientation == GTK_ORIENTATION_HORIZONTAL && ma->orientation_policy == MULTILOAD_ORIENTATION_VERTICAL) {
+		gtk_widget_set_size_request(GTK_WIDGET(ma->container), opposite_size, -1);
+	}
+
+	if ( ma->panel_orientation == GTK_ORIENTATION_VERTICAL && ma->orientation_policy == MULTILOAD_ORIENTATION_HORIZONTAL) {
+		gtk_widget_set_size_request(GTK_WIDGET(ma->container), -1, opposite_size);
+	}
 
 	for (i=0; i<GRAPH_MAX; i++) {
 		g = ma->graphs[i];
