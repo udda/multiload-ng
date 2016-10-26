@@ -3637,6 +3637,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeview_col_reorder_index">
+                            <property name="visible">False</property>
                             <property name="sizing">fixed</property>
                           </object>
                         </child>
