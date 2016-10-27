@@ -230,11 +230,13 @@ multiload_colors_from_string(MultiloadPlugin *ma, guint graph_index, const char 
 			} else if (j==ncolors-1) {
 				pos = strlen(lp);
 			} else {
+				g_debug("[multiload_colors_from_string] Incomplete color list for graph '%s'", graph_types[graph_index].name);
 				success = FALSE;
 				break;
 			}
 
 			if (G_UNLIKELY(pos!=9 && pos!=7)) {
+				g_debug("[multiload_colors_from_string] Wrong length of graph '%s' color list (%zu)", graph_types[graph_index].name, pos);
 				success = FALSE;
 				break;
 			}
@@ -242,6 +244,7 @@ multiload_colors_from_string(MultiloadPlugin *ma, guint graph_index, const char 
 			strncpy(gspec, lp, pos);
 			if (pos == 7) { // may be a standard RGB hex string, fallback to standard parse
 				if (FALSE == gdk_rgba_parse(&colors[j], gspec)) {
+					g_debug("[multiload_colors_from_string] Cannot parse color for of graph '%s' (%s)", graph_types[graph_index].name, gspec);
 					success = FALSE;
 					break;
 				}
@@ -260,6 +263,7 @@ multiload_colors_from_string(MultiloadPlugin *ma, guint graph_index, const char 
 				// color part
 				gspec[2] = '#';
 				if (FALSE == gdk_rgba_parse(&colors[j], gspec+2)) {
+					g_debug("[multiload_colors_from_string] Cannot parse color for of graph '%s' (%s)", graph_types[graph_index].name, gspec+2);
 					success = FALSE;
 					break;
 				} else {
@@ -283,8 +287,6 @@ multiload_colors_from_string(MultiloadPlugin *ma, guint graph_index, const char 
 
 	if (success)
 		g_debug("[multiload_colors_from_string] Loaded colors for graph '%s'", graph_types[graph_index].name);
-	else
-		g_debug("[multiload_colors_from_string] ERROR loading colors for graph '%s'", graph_types[graph_index].name);
 
 	return success;
 }
