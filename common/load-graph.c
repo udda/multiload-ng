@@ -403,7 +403,7 @@ static gboolean
 load_graph_mouse_move_cb(GtkWidget *widget, GdkEventCrossing *event, LoadGraph *g)
 {
 	g->tooltip_update = (event->type == GDK_ENTER_NOTIFY);
-	g_debug("[load-graph] Mouse %s event on graph %d", (event->type == GDK_ENTER_NOTIFY)?"enter":"leave", g->id);
+	g_debug("[load-graph] Mouse %s event on graph '%s'", (event->type == GDK_ENTER_NOTIFY)?"enter":"leave", graph_types[g->id].name);
 	return GDK_EVENT_PROPAGATE;
 }
 
