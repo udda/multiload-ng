@@ -82,7 +82,7 @@ multiload_graph_bat_get_data (int Maximum, int data [2], LoadGraph *g, BatteryDa
 		// check present
 		g_snprintf(buf, PATH_MAX, "%s/%s/present", root_node, dirent->d_name);
 		if (g_file_test(buf, G_FILE_TEST_EXISTS)) {
-			f = cached_fopen_r(buf, FALSE);
+			f = cached_fopen_r(buf, TRUE);
 			if (!file_check_contents(f, "1"))
 				continue;
 		}
@@ -108,7 +108,7 @@ multiload_graph_bat_get_data (int Maximum, int data [2], LoadGraph *g, BatteryDa
 		bat_charging = FALSE;
 
 	// capacity
-	f = cached_fopen_r(capacity_path, FALSE);
+	f = cached_fopen_r(capacity_path, TRUE);
 	if (f == NULL || fscanf(f, "%ld", &bat_capacity) != 1)
 		return;
 
