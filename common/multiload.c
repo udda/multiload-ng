@@ -199,10 +199,12 @@ multiload_refresh_orientation (MultiloadPlugin *ma)
 
 	if ( ma->panel_orientation == GTK_ORIENTATION_HORIZONTAL && ma->orientation_policy == MULTILOAD_ORIENTATION_VERTICAL) {
 		gtk_widget_set_size_request(GTK_WIDGET(ma->container), opposite_size, -1);
+		g_debug("[multiload] Set size request of Multiload-ng container: %d,-1", opposite_size);
 	}
 
 	if ( ma->panel_orientation == GTK_ORIENTATION_VERTICAL && ma->orientation_policy == MULTILOAD_ORIENTATION_HORIZONTAL) {
 		gtk_widget_set_size_request(GTK_WIDGET(ma->container), -1, opposite_size);
+		g_debug("[multiload] Set size request of Multiload-ng container: -1,%d", opposite_size);
 	}
 
 	for (i=0; i<GRAPH_MAX; i++) {
