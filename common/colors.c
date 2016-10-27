@@ -337,6 +337,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(80006B, FF),		// Border
 				HEX_TO_RGBA(261323, FF),		// Background (top)
 				HEX_TO_RGBA(000000, FF)			// Background (bottom)
+			}, { // BAT hue: 94
+				HEX_TO_RGBA(5B9C1A, FF),		// Charging
+				HEX_TO_RGBA(A8E37B, FF),		// Discharging
+				HEX_TO_RGBA(EAF9DB, FF),		// Critical level
+				HEX_TO_RGBA(3D8000, FF),		// Border
+				HEX_TO_RGBA(1C2613, FF),		// Background (top)
+				HEX_TO_RGBA(000000, FF)			// Background (bottom)
 			}, { // PARM hue: (gray)
 				HEX_TO_RGBA(4C4C4C, FF),		// Result 1
 				HEX_TO_RGBA(909090, FF),		// Result 2
@@ -391,6 +398,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 			}, { // TEMP - Tango Plum (light)
 				HEX_TO_RGBA(AD7FA8, FF),		// Value
 				HEX_TO_RGBA(75507B, FF),		// Critical
+				HEX_TO_RGBA(2E3436, FF),		// Border
+				HEX_TO_RGBA(888A85, FF),		// Background (top)
+				HEX_TO_RGBA(555753, FF)			// Background (bottom)
+			}, { // BAT - Tango Chameleon (a greener variant)
+				HEX_TO_RGBA(4C7356, FF),		// Charging
+				HEX_TO_RGBA(34DC5F, FF),		// Discharging
+				HEX_TO_RGBA(C7EED1, FF),		// Critical level
 				HEX_TO_RGBA(2E3436, FF),		// Border
 				HEX_TO_RGBA(888A85, FF),		// Background (top)
 				HEX_TO_RGBA(555753, FF)			// Background (bottom)
@@ -451,6 +465,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(586E75, FF),		// Border
 				HEX_TO_RGBA(073642, FF),		// Background (top)
 				HEX_TO_RGBA(002B36, FF)			// Background (bottom)
+			}, { // BAT - Solarized Cyan
+				HEX_TO_RGBA(2AA198, FF),		// Charging
+				HEX_TO_RGBA(657B83, FF),		// Discharging
+				HEX_TO_RGBA(657B83, FF),		// Critical level
+				HEX_TO_RGBA(586E75, FF),		// Border
+				HEX_TO_RGBA(073642, FF),		// Background (top)
+				HEX_TO_RGBA(002B36, FF)			// Background (bottom)
 			}, { // PARM - Solarized Base01
 				HEX_TO_RGBA(586E75, FF),		// Result 1
 				HEX_TO_RGBA(657B83, FF),		// Result 2
@@ -505,6 +526,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 			}, { // TEMP - Solarized Magenta
 				HEX_TO_RGBA(D33682, FF),		// Value
 				HEX_TO_RGBA(657B83, FF),		// Critical
+				HEX_TO_RGBA(586E75, FF),		// Border
+				HEX_TO_RGBA(FDF6E3, FF),		// Background (top)
+				HEX_TO_RGBA(EEE8D5, FF)			// Background (bottom)
+			}, { // BAT - Solarized Cyan
+				HEX_TO_RGBA(2AA198, FF),		// Charging
+				HEX_TO_RGBA(657B83, FF),		// Discharging
+				HEX_TO_RGBA(657B83, FF),		// Critical level
 				HEX_TO_RGBA(586E75, FF),		// Border
 				HEX_TO_RGBA(FDF6E3, FF),		// Background (top)
 				HEX_TO_RGBA(EEE8D5, FF)			// Background (bottom)
@@ -565,6 +593,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(404040, FF),		// Border
 				HEX_TO_RGBA(E38B5E, FF),		// Background (top)
 				HEX_TO_RGBA(D5290C, FF)			// Background (bottom)
+			}, { // BAT - Avocado
+				HEX_TO_RGBA(878844, FF),		// Charging
+				HEX_TO_RGBA(D5D984, FF),		// Discharging
+				HEX_TO_RGBA(EBECD0, FF),		// Critical level
+				HEX_TO_RGBA(404040, FF),		// Border
+				HEX_TO_RGBA(CD8342, FF),		// Background (top)
+				HEX_TO_RGBA(885F3C, FF)			// Background (bottom)
 			}, { // PARM
 				HEX_TO_RGBA(464D47, FF),		// Result 1
 				HEX_TO_RGBA(6B756C, FF),		// Result 2
@@ -622,6 +657,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(FFFFFF, FF),		// Border
 				HEX_TO_RGBA(FAD8F3, FF),		// Background (top)
 				HEX_TO_RGBA(F28AE1, FF)			// Background (bottom)
+			}, { // BAT
+				HEX_TO_RGBA(FFFFFF, D8),		// Charging
+				HEX_TO_RGBA(FFFFFF, A5),		// Discharging
+				HEX_TO_RGBA(FFFFFF, 72),		// Critical level
+				HEX_TO_RGBA(FFFFFF, FF),		// Border
+				HEX_TO_RGBA(E4FFCA, FF),		// Background (top)
+				HEX_TO_RGBA(BFFF81, FF)			// Background (bottom)
 			}, { // PARM
 				HEX_TO_RGBA(FFFFFF, D8),		// Result 1
 				HEX_TO_RGBA(FFFFFF, A5),		// Result 2
@@ -676,6 +718,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 			}, { // TEMP
 				HEX_TO_RGBA(E96F20, FF),		// Value
 				HEX_TO_RGBA(E96F20, FF),		// Critical
+				HEX_TO_RGBA(373737, FF),		// Border
+				HEX_TO_RGBA(300A24, FF),		// Background (top)
+				HEX_TO_RGBA(300A24, FF)			// Background (bottom)
+			}, { // BAT
+				HEX_TO_RGBA(E96F20, FF),		// Charging
+				HEX_TO_RGBA(E96F20, FF),		// Discharging
+				HEX_TO_RGBA(E96F20, FF),		// Critical level
 				HEX_TO_RGBA(373737, FF),		// Border
 				HEX_TO_RGBA(300A24, FF),		// Background (top)
 				HEX_TO_RGBA(300A24, FF)			// Background (bottom)
@@ -736,6 +785,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(D6D6D6, FF),		// Border
 				HEX_TO_RGBA(E8E8E8, FF),		// Background (top)
 				HEX_TO_RGBA(E8E8E8, FF)			// Background (bottom)
+			}, { // BAT
+				HEX_TO_RGBA(E96F20, FF),		// Charging
+				HEX_TO_RGBA(E96F20, FF),		// Discharging
+				HEX_TO_RGBA(E96F20, FF),		// Critical level
+				HEX_TO_RGBA(D6D6D6, FF),		// Border
+				HEX_TO_RGBA(E8E8E8, FF),		// Background (top)
+				HEX_TO_RGBA(E8E8E8, FF)			// Background (bottom)
 			}, { // PARM
 				HEX_TO_RGBA(E96F20, FF),		// Result 1
 				HEX_TO_RGBA(E96F20, FF),		// Result 2
@@ -790,6 +846,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 			}, { // TEMP
 				HEX_TO_RGBA(97BF60, FF),		// Value
 				HEX_TO_RGBA(97BF60, FF),		// Critical
+				HEX_TO_RGBA(3C3C3C, FF),		// Border
+				HEX_TO_RGBA(484848, FF),		// Background (top)
+				HEX_TO_RGBA(393939, FF)			// Background (bottom)
+			}, { // BAT
+				HEX_TO_RGBA(97BF60, FF),		// Charging
+				HEX_TO_RGBA(97BF60, FF),		// Discharging
+				HEX_TO_RGBA(97BF60, FF),		// Critical level
 				HEX_TO_RGBA(3C3C3C, FF),		// Border
 				HEX_TO_RGBA(484848, FF),		// Background (top)
 				HEX_TO_RGBA(393939, FF)			// Background (bottom)
@@ -850,6 +913,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(E064B7, FF),		// Border
 				HEX_TO_RGBA(DE4AAD, FF),		// Background (top)
 				HEX_TO_RGBA(DE4AAD, FF)			// Background (bottom)
+			}, { // BAT
+				HEX_TO_RGBA(91D100, FF),		// Charging
+				HEX_TO_RGBA(94BD4A, FF),		// Discharging
+				HEX_TO_RGBA(94BD4A, FF),		// Critical level
+				HEX_TO_RGBA(83BA1F, FF),		// Border
+				HEX_TO_RGBA(7BAD18, FF),		// Background (top)
+				HEX_TO_RGBA(7BAD18, FF)			// Background (bottom)
 			}, { // PARM
 				HEX_TO_RGBA(878787, FF),		// Result 1
 				HEX_TO_RGBA(727272, FF),		// Result 2
@@ -904,6 +974,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 			}, { // TEMP
 				HEX_TO_RGBA(5924E2, FF),		// Value
 				HEX_TO_RGBA(5924E2, FF),		// Critical
+				HEX_TO_RGBA(1B1E24, FF),		// Border
+				HEX_TO_RGBA(383C4A, FF),		// Background (top)
+				HEX_TO_RGBA(383C4A, FF)			// Background (bottom)
+			}, { // BAT
+				HEX_TO_RGBA(5924E2, FF),		// Charging
+				HEX_TO_RGBA(5924E2, FF),		// Discharging
+				HEX_TO_RGBA(5924E2, FF),		// Critical level
 				HEX_TO_RGBA(1B1E24, FF),		// Border
 				HEX_TO_RGBA(383C4A, FF),		// Background (top)
 				HEX_TO_RGBA(383C4A, FF)			// Background (bottom)
@@ -964,6 +1041,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(DEDEDE, FF),		// Border
 				HEX_TO_RGBA(333333, FF),		// Background (top)
 				HEX_TO_RGBA(333333, FF)			// Background (bottom)
+			}, { // BAT
+				HEX_TO_RGBA(D64937, FF),		// Charging
+				HEX_TO_RGBA(D64937, FF),		// Discharging
+				HEX_TO_RGBA(D64937, FF),		// Critical level
+				HEX_TO_RGBA(DEDEDE, FF),		// Border
+				HEX_TO_RGBA(333333, FF),		// Background (top)
+				HEX_TO_RGBA(333333, FF)			// Background (bottom)
 			}, { // PARM
 				HEX_TO_RGBA(D64937, FF),		// Result 1
 				HEX_TO_RGBA(D64937, FF),		// Result 2
@@ -1018,6 +1102,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 			}, { // TEMP
 				HEX_TO_RGBA(D64937, FF),		// Value
 				HEX_TO_RGBA(D64937, FF),		// Critical
+				HEX_TO_RGBA(333333, FF),		// Border
+				HEX_TO_RGBA(DEDEDE, FF),		// Background (top)
+				HEX_TO_RGBA(DEDEDE, FF)			// Background (bottom)
+			}, { // BAT
+				HEX_TO_RGBA(D64937, FF),		// Charging
+				HEX_TO_RGBA(D64937, FF),		// Discharging
+				HEX_TO_RGBA(D64937, FF),		// Critical level
 				HEX_TO_RGBA(333333, FF),		// Border
 				HEX_TO_RGBA(DEDEDE, FF),		// Background (top)
 				HEX_TO_RGBA(DEDEDE, FF)			// Background (bottom)
@@ -1078,6 +1169,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(142339, FF),		// Border
 				HEX_TO_RGBA(CBCBCB, FF),		// Background (top)
 				HEX_TO_RGBA(B5B5B5, FF)			// Background (bottom)
+			}, { // BAT
+				HEX_TO_RGBA(202020, FF),		// Charging
+				HEX_TO_RGBA(202020, FF),		// Discharging
+				HEX_TO_RGBA(202020, FF),		// Critical level
+				HEX_TO_RGBA(142339, FF),		// Border
+				HEX_TO_RGBA(CBCBCB, FF),		// Background (top)
+				HEX_TO_RGBA(B5B5B5, FF)			// Background (bottom)
 			}, { // PARM
 				HEX_TO_RGBA(959595, FF),		// Result 1
 				HEX_TO_RGBA(959595, FF),		// Result 2
@@ -1132,6 +1230,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 			}, { // TEMP
 				HEX_TO_RGBA(D0BA05, FF),		// Value
 				HEX_TO_RGBA(D0BA05, FF),		// Critical
+				HEX_TO_RGBA(E39E1C, FF),		// Border
+				HEX_TO_RGBA(C18F17, FF),		// Background (top)
+				HEX_TO_RGBA(A57C1B, FF)			// Background (bottom)
+			}, { // BAT
+				HEX_TO_RGBA(F9B72C, FF),		// Charging
+				HEX_TO_RGBA(F9B72C, FF),		// Discharging
+				HEX_TO_RGBA(F9B72C, FF),		// Critical level
 				HEX_TO_RGBA(E39E1C, FF),		// Border
 				HEX_TO_RGBA(C18F17, FF),		// Background (top)
 				HEX_TO_RGBA(A57C1B, FF)			// Background (bottom)
@@ -1192,6 +1297,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(24313A, FF),		// Border
 				HEX_TO_RGBA(79BDD8, FF),		// Background (top)
 				HEX_TO_RGBA(006287, FF)			// Background (bottom)
+			}, { // BAT
+				HEX_TO_RGBA(B18C6E, FF),		// Charging
+				HEX_TO_RGBA(CD620A, FF),		// Discharging
+				HEX_TO_RGBA(EECCB0, FF),		// Critical level
+				HEX_TO_RGBA(24313A, FF),		// Border
+				HEX_TO_RGBA(79BDD8, FF),		// Background (top)
+				HEX_TO_RGBA(006287, FF)			// Background (bottom)
 			}, { // PARM
 				HEX_TO_RGBA(201E36, FF),		// Result 1
 				HEX_TO_RGBA(5D579C, FF),		// Result 2
@@ -1246,6 +1358,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 			}, { // TEMP
 				HEX_TO_RGBA(FB0E08, FF),		// Value
 				HEX_TO_RGBA(FB0E08, FF),		// Critical
+				HEX_TO_RGBA(733E34, FF),		// Border
+				HEX_TO_RGBA(A27643, FF),		// Background (top)
+				HEX_TO_RGBA(45413F, FF)			// Background (bottom)
+			}, { // BAT
+				HEX_TO_RGBA(F77559, FF),		// Charging
+				HEX_TO_RGBA(F77559, FF),		// Discharging
+				HEX_TO_RGBA(F77559, FF),		// Critical level
 				HEX_TO_RGBA(733E34, FF),		// Border
 				HEX_TO_RGBA(A27643, FF),		// Background (top)
 				HEX_TO_RGBA(45413F, FF)			// Background (bottom)
@@ -1306,6 +1425,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(3B763B, FF),		// Border
 				HEX_TO_RGBA(C5C0AA, FF),		// Background (top)
 				HEX_TO_RGBA(063D06, FF)			// Background (bottom)
+			}, { // BAT
+				HEX_TO_RGBA(6CE870, FF),		// Charging
+				HEX_TO_RGBA(6CE870, FF),		// Discharging
+				HEX_TO_RGBA(6CE870, FF),		// Critical level
+				HEX_TO_RGBA(3B763B, FF),		// Border
+				HEX_TO_RGBA(C5C0AA, FF),		// Background (top)
+				HEX_TO_RGBA(063D06, FF)			// Background (bottom)
 			}, { // PARM
 				HEX_TO_RGBA(4D7A55, FF),		// Result 1
 				HEX_TO_RGBA(4D7A55, FF),		// Result 2
@@ -1363,6 +1489,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 				HEX_TO_RGBA(101010, FF),		// Border
 				HEX_TO_RGBA(228499, FF),		// Background (top)
 				HEX_TO_RGBA(03444A, FF)			// Background (bottom)
+			}, { // BAT
+				HEX_TO_RGBA(84D7F9, FF),		// Charging
+				HEX_TO_RGBA(84D7F9, FF),		// Discharging
+				HEX_TO_RGBA(84D7F9, FF),		// Critical level
+				HEX_TO_RGBA(101010, FF),		// Border
+				HEX_TO_RGBA(228499, FF),		// Background (top)
+				HEX_TO_RGBA(03444A, FF)			// Background (bottom)
 			}, { // PARM
 				HEX_TO_RGBA(4B9CDE, FF),		// Result 1
 				HEX_TO_RGBA(4B9CDE, FF),		// Result 2
@@ -1417,6 +1550,13 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 			}, { // TEMP
 				HEX_TO_RGBA(A0BAD5, FF),		// Value
 				HEX_TO_RGBA(A0BAD5, FF),		// Critical
+				HEX_TO_RGBA(142339, FF),		// Border
+				HEX_TO_RGBA(6459CA, FF),		// Background (top)
+				HEX_TO_RGBA(3D2B67, FF)			// Background (bottom)
+			}, { // BAT
+				HEX_TO_RGBA(6FD2FF, FF),		// Charging
+				HEX_TO_RGBA(6FD2FF, FF),		// Discharging
+				HEX_TO_RGBA(6FD2FF, FF),		// Critical level
 				HEX_TO_RGBA(142339, FF),		// Border
 				HEX_TO_RGBA(6459CA, FF),		// Background (top)
 				HEX_TO_RGBA(3D2B67, FF)			// Background (bottom)
