@@ -110,10 +110,8 @@ multiload_start(MultiloadPlugin *ma)
 	// Children (graphs) are individually shown/hidden to control visibility
 	gtk_widget_set_no_show_all (ma->box, TRUE);
 
-	// Create the GRAPH_MAX graphs, with user properties from ma->graph_config.
 	// Only start and display the graphs the user has turned on
 	for (n=0, i=0; i < GRAPH_MAX; i++) {
-		ma->graphs[i] = load_graph_new (ma, i);
 		gtk_box_pack_start(GTK_BOX(ma->box), ma->graphs[i]->main_widget, TRUE, TRUE, 0);
 
 		vis = ma->graph_config[i].visible;
@@ -337,11 +335,15 @@ multiload_set_update_cb (MultiloadPlugin *ma, guint graph_id, GraphUpdateFunc ca
 MultiloadPlugin*
 multiload_new()
 {
+	guint i;
 	MultiloadPlugin *ma = g_slice_new0(MultiloadPlugin);
 	multiload_init();
 
 	ma->container = GTK_CONTAINER(gtk_event_box_new ());
 	gtk_widget_show (GTK_WIDGET(ma->container));
+
+	for (i=0; i < GRAPH_MAX; i++)
+		ma->graphs[i] = load_graph_new (ma, i);
 
 	ma->extra_data[GRAPH_CPULOAD]		= (gpointer)g_new0(CpuData, 1);
 	ma->extra_data[GRAPH_MEMLOAD]		= (gpointer)g_new0(MemoryData, 1);
