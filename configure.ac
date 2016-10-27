@@ -60,7 +60,7 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package.])
 AM_GLIB_GNU_GETTEXT
 
 # Default paths
-AC_PREFIX_PROGRAM([ xdg-open ])
+AC_PREFIX_PROGRAM([ make ])
 if test "${sysconfdir}" = '${prefix}/etc' ; then sysconfdir=/etc ; fi
 
 # Check highest available GTK version
