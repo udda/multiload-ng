@@ -44,7 +44,7 @@ static gboolean _orientation_warning_disable = FALSE;
 #define OB(name) (gtk_builder_get_object(builder, name))
 #define EMBED_GRAPH_INDEX(ob,i) g_object_set_data(G_OBJECT(ob), "graph-index", GUINT_TO_POINTER(i))
 #define EXTRACT_GRAPH_INDEX(ob) GPOINTER_TO_UINT(g_object_get_data(G_OBJECT(ob), "graph-index"))
-#define DEFINE_OB_NAMES_FULL(p) static const gchar* (p##_names)[GRAPH_MAX] = { #p "_cpu", #p "_mem", #p "_net", #p "_swap", #p "_load", #p "_disk", #p "_temp", #p "_parm" }
+#define DEFINE_OB_NAMES_FULL(p) static const gchar* (p##_names)[GRAPH_MAX] = { #p "_cpu", #p "_mem", #p "_net", #p "_swap", #p "_load", #p "_disk", #p "_temp", #p "_bat", #p "_parm" }
 
 
 DEFINE_OB_NAMES_FULL(cb_visible);
@@ -68,6 +68,7 @@ static const gchar* spin_ceil_names[GRAPH_MAX] = {
 	"sb_ceil_load",
 	"sb_ceil_disk",
 	"sb_ceil_temp",
+	"",
 	"sb_ceil_parm"
 };
 
@@ -79,6 +80,7 @@ static const gchar* cb_autoscaler_names[GRAPH_MAX] = {
 	"cb_autoscaler_load",
 	"cb_autoscaler_disk",
 	"cb_autoscaler_temp",
+	"",
 	"cb_autoscaler_parm"
 };
 
@@ -90,6 +92,7 @@ static const gchar* cb_source_auto_names[GRAPH_MAX] = {
 	"",
 	"cb_source_auto_disk",
 	"cb_source_auto_temp",
+	"",
 	""
 };
 
@@ -101,6 +104,7 @@ static const gchar* treeview_source_names[GRAPH_MAX] = {
 	"",
 	"treeview_source_disk",
 	"treeview_source_temp",
+	"",
 	""
 };
 
@@ -112,6 +116,7 @@ static const gchar* cellrenderertoggle_source_names[GRAPH_MAX] = {
 	"",
 	"cellrenderertoggle_source_disk",
 	"cellrenderertoggle_source_temp",
+	"",
 	""
 };
 
@@ -123,6 +128,7 @@ static const gchar* liststore_source_names[GRAPH_MAX] = {
 	"",
 	"liststore_source_disk",
 	"liststore_source_temp",
+	"",
 	""
 };
 
@@ -175,6 +181,14 @@ static const gchar* color_button_names[GRAPH_MAX][MAX_COLORS] = {
 		"cb_color_temp_border",
 		"cb_color_temp_bg1",
 		"cb_color_temp_bg2",
+		NULL
+	}, {
+		"cb_color_bat1",
+		"cb_color_bat2",
+		"cb_color_bat3",
+		"cb_color_bat_border",
+		"cb_color_bat_bg1",
+		"cb_color_bat_bg2",
 		NULL
 	}, {
 		"cb_color_parm1",

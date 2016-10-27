@@ -37,6 +37,8 @@ str_replace(const char *string, const char *needle, const char *replacement);
 
 G_GNUC_INTERNAL gboolean
 file_check_contents(FILE *f, const gchar *string);
+gboolean
+read_string_from_file(const gchar *path, gchar *buf, const size_t length);
 G_GNUC_INTERNAL gint64
 read_int_from_file(const gchar *path);
 

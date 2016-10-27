@@ -118,10 +118,16 @@ Draws Disk I/O, differentiating between read and write speeds.
 User can choose which partitions will be used for graph calculations.
 
 ### TEMPERATURE
-Draws temperature of the system
+Draws temperature of the system.
 
 User can choose which sensor/driver to read for drawing the graph, or let Multiload-ng 
 automatically select the hottest temperature measured among all detected sensors.
+
+### BATTERY
+Draws charge and status of system battery, using different colors for charging,
+discharging and critical level.
+
+Tooltip shows additional battery info.
 
 ### PARAMETRIC
 Draws numeric output of user defined command line. Up to 4 values will be shown together.  

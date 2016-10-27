@@ -347,6 +347,7 @@ multiload_new()
 	ma->extra_data[GRAPH_LOADAVG]		= (gpointer)g_new0(LoadData, 1);
 	ma->extra_data[GRAPH_DISKLOAD]		= (gpointer)g_new0(DiskData, 1);
 	ma->extra_data[GRAPH_TEMPERATURE]	= (gpointer)g_new0(TemperatureData, 1);
+	ma->extra_data[GRAPH_BATTERY]		= (gpointer)g_new0(BatteryData, 1);
 	ma->extra_data[GRAPH_PARAMETRIC]	= (gpointer)g_new0(ParametricData, 1);
 
 	return ma;

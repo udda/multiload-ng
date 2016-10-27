@@ -100,6 +100,11 @@ typedef struct _TemperatureData {
 	AutoScaler scaler;
 } TemperatureData;
 
+typedef struct _BatteryData {
+	int percent;
+	gchar battery_name[128];
+} BatteryData;
+
 typedef struct _ParametricData {
 	gchar command[512];
 	gchar message[512];
@@ -164,6 +169,13 @@ G_GNUC_INTERNAL void
 multiload_graph_temp_cmdline_output (LoadGraph *g, TemperatureData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_temp_tooltip_update (char **title, char **text, LoadGraph *g, TemperatureData *xd);
+
+G_GNUC_INTERNAL void
+multiload_graph_bat_get_data (int Maximum, int data [2], LoadGraph *g, BatteryData *xd);
+G_GNUC_INTERNAL void
+multiload_graph_bat_cmdline_output (LoadGraph *g, BatteryData *xd);
+G_GNUC_INTERNAL void
+multiload_graph_bat_tooltip_update (char **title, char **text, LoadGraph *g, BatteryData *xd);
 
 G_GNUC_INTERNAL void
 multiload_graph_parm_get_data (int Maximum, int data[1], LoadGraph *g, ParametricData *xd);

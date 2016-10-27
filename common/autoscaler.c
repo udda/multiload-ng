@@ -103,6 +103,7 @@ multiload_get_scaler (MultiloadPlugin *ma, guint graph_id)
 		case GRAPH_CPULOAD:
 		case GRAPH_MEMLOAD:
 		case GRAPH_SWAPLOAD:
+		case GRAPH_BATTERY:
 			// no autoscaler
 			return NULL;
 		case GRAPH_NETLOAD:

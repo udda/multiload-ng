@@ -83,6 +83,12 @@ void multiload_config_init()
 			(GraphCmdlineOutputFunc)	multiload_graph_temp_cmdline_output,
 			(GraphGetFilterFunc)		multiload_graph_temp_get_filter
 		},
+		{	"bat",	_("Battery"),		6,	-1,		-1,		"%",
+			(GraphGetDataFunc)			multiload_graph_bat_get_data,
+			(GraphTooltipUpdateFunc)	multiload_graph_bat_tooltip_update,
+			(GraphCmdlineOutputFunc)	multiload_graph_bat_cmdline_output,
+			(GraphGetFilterFunc)		NULL
+		},
 		{	"parm",	_("Parametric"),	7,	-1,		-1,		"",
 			(GraphGetDataFunc)			multiload_graph_parm_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_parm_tooltip_update,

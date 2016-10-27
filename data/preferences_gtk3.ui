@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.20.0
+<!-- Generated with glade 3.20.0 
 
 Multiload-ng - Modern graphical system monitor
 Copyright (C) 2016 Mario Cianciolo <mr.udda@gmail.com>
@@ -28,6 +28,11 @@ Author: Mario cianciolo <mr.udda@gmail.com>
   <!-- interface-description Modern graphical system monitor -->
   <!-- interface-copyright 2016 Mario Cianciolo <mr.udda@gmail.com> -->
   <!-- interface-authors Mario cianciolo <mr.udda@gmail.com> -->
+  <object class="GtkAdjustment" id="adjustment_border_bat">
+    <property name="upper">16</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">4</property>
+  </object>
   <object class="GtkAdjustment" id="adjustment_border_cpu">
     <property name="upper">16</property>
     <property name="value">1</property>
@@ -105,6 +110,13 @@ Author: Mario cianciolo <mr.udda@gmail.com>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
+  <object class="GtkAdjustment" id="adjustment_interval_bat">
+    <property name="lower">50</property>
+    <property name="upper">20000</property>
+    <property name="value">1000</property>
+    <property name="step_increment">50</property>
+    <property name="page_increment">250</property>
+  </object>
   <object class="GtkAdjustment" id="adjustment_interval_cpu">
     <property name="lower">50</property>
     <property name="upper">20000</property>
@@ -165,6 +177,13 @@ Author: Mario cianciolo <mr.udda@gmail.com>
     <property name="upper">40</property>
     <property name="value">2</property>
     <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment_size_bat">
+    <property name="lower">10</property>
+    <property name="upper">400</property>
+    <property name="value">40</property>
+    <property name="step_increment">5</property>
     <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment_size_cpu">
@@ -229,6 +248,12 @@ Author: Mario cianciolo <mr.udda@gmail.com>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
+  <object class="GtkImage" id="image_advanced_bat">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-preferences</property>
+    <property name="icon_size">1</property>
+  </object>
   <object class="GtkImage" id="image_advanced_cpu">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -275,6 +300,12 @@ Author: Mario cianciolo <mr.udda@gmail.com>
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="stock">gtk-preferences</property>
+    <property name="icon_size">1</property>
+  </object>
+  <object class="GtkImage" id="image_gradient_bat">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">document-properties</property>
     <property name="icon_size">1</property>
   </object>
   <object class="GtkImage" id="image_gradient_cpu">
@@ -1057,6 +1088,19 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               </packing>
             </child>
             <child>
+              <object class="GtkBox" id="infobar_graphs_container">
+                <property name="can_focus">False</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+                <property name="width">4</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkCheckButton" id="cb_visible_parm">
                 <property name="label" translatable="yes">Parametric</property>
                 <property name="visible">True</property>
@@ -1070,7 +1114,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">9</property>
+                <property name="top_attach">10</property>
               </packing>
             </child>
             <child>
@@ -1092,7 +1136,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               </object>
               <packing>
                 <property name="left_attach">2</property>
-                <property name="top_attach">9</property>
+                <property name="top_attach">10</property>
               </packing>
             </child>
             <child>
@@ -1116,7 +1160,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               </object>
               <packing>
                 <property name="left_attach">3</property>
-                <property name="top_attach">9</property>
+                <property name="top_attach">10</property>
               </packing>
             </child>
             <child>
@@ -1133,20 +1177,79 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               </object>
               <packing>
                 <property name="left_attach">1</property>
+                <property name="top_attach">10</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_advanced_bat">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="tooltip_text" translatable="yes">Advanced configuration</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="hexpand">False</property>
+                <property name="image">image_advanced_bat</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
                 <property name="top_attach">9</property>
               </packing>
             </child>
             <child>
-              <object class="GtkBox" id="infobar_graphs_container">
-                <property name="can_focus">False</property>
-                <child>
-                  <placeholder/>
-                </child>
+              <object class="GtkCheckButton" id="cb_visible_bat">
+                <property name="label" translatable="yes">Battery</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="tooltip_text" translatable="yes">Make this graph visible</property>
+                <property name="xalign">0</property>
+                <property name="draw_indicator">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">0</property>
-                <property name="width">4</property>
+                <property name="top_attach">9</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="sb_size_bat">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="tooltip_text" translatable="yes">Set the size of this graph</property>
+                <property name="valign">center</property>
+                <property name="invisible_char">●</property>
+                <property name="width_chars">10</property>
+                <property name="text">40</property>
+                <property name="primary_icon_activatable">False</property>
+                <property name="secondary_icon_activatable">False</property>
+                <property name="adjustment">adjustment_size_bat</property>
+                <property name="update_policy">if-valid</property>
+                <property name="value">40</property>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">9</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="sb_interval_bat">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="tooltip_text" translatable="yes">Set the time between updates of this graph</property>
+                <property name="valign">center</property>
+                <property name="invisible_char">●</property>
+                <property name="width_chars">16</property>
+                <property name="text">1000</property>
+                <property name="secondary_icon_stock">gtk-dialog-warning</property>
+                <property name="primary_icon_activatable">False</property>
+                <property name="secondary_icon_activatable">False</property>
+                <property name="adjustment">adjustment_interval_bat</property>
+                <property name="update_policy">if-valid</property>
+                <property name="value">1000</property>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="top_attach">9</property>
               </packing>
             </child>
           </object>
@@ -2744,47 +2847,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkLabel" id="colors_label_parm">
-                            <property name="visible">True</property>
-                            <property name="sensitive">False</property>
-                            <property name="can_focus">False</property>
-                            <property name="margin_bottom">4</property>
-                            <property name="label" translatable="yes">Parametric</property>
-                            <property name="use_markup">True</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">21</property>
-                            <property name="top_attach">0</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkColorButton" id="cb_color_parm1">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="relief">none</property>
-                            <property name="use_alpha">True</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
-                          </object>
-                          <packing>
-                            <property name="left_attach">21</property>
-                            <property name="top_attach">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="label45">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Result 1</property>
-                            <property name="xalign">0</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">22</property>
-                            <property name="top_attach">1</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="GtkSeparator" id="hseparator15">
                             <property name="height_request">10</property>
                             <property name="visible">True</property>
@@ -2806,99 +2868,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="left_attach">21</property>
                             <property name="top_attach">10</property>
                             <property name="width">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkDrawingArea" id="draw_color_bgpreview_parm">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">22</property>
-                            <property name="top_attach">12</property>
-                            <property name="height">3</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="colors_label_temp_border1">
-                            <property name="visible">True</property>
-                            <property name="sensitive">False</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Border</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">21</property>
-                            <property name="top_attach">7</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="label46">
-                            <property name="visible">True</property>
-                            <property name="sensitive">False</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Background</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">21</property>
-                            <property name="top_attach">11</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="label47">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Color</property>
-                            <property name="xalign">0</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">22</property>
-                            <property name="top_attach">8</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkColorButton" id="cb_color_parm_border">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
-                          </object>
-                          <packing>
-                            <property name="left_attach">21</property>
-                            <property name="top_attach">8</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkSpinButton" id="sb_border_parm">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="invisible_char">●</property>
-                            <property name="text">0</property>
-                            <property name="primary_icon_activatable">False</property>
-                            <property name="secondary_icon_activatable">False</property>
-                            <property name="adjustment">adjustment_border_parm</property>
-                            <property name="update_policy">if-valid</property>
-                            <signal name="value-changed" handler="border_changed_cb" swapped="no"/>
-                          </object>
-                          <packing>
-                            <property name="left_attach">21</property>
-                            <property name="top_attach">9</property>
-                            <property name="width">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkColorButton" id="cb_color_parm_bg1">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
-                          </object>
-                          <packing>
-                            <property name="left_attach">21</property>
-                            <property name="top_attach">12</property>
                           </packing>
                         </child>
                         <child>
@@ -2924,81 +2893,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           <packing>
                             <property name="left_attach">19</property>
                             <property name="top_attach">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkColorButton" id="cb_color_parm2">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="relief">none</property>
-                            <property name="use_alpha">True</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">21</property>
-                            <property name="top_attach">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkColorButton" id="cb_color_parm3">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="relief">none</property>
-                            <property name="use_alpha">True</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">21</property>
-                            <property name="top_attach">3</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkColorButton" id="cb_color_parm4">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="relief">none</property>
-                            <property name="use_alpha">True</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">21</property>
-                            <property name="top_attach">4</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="label63">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Result 2</property>
-                            <property name="xalign">0</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">22</property>
-                            <property name="top_attach">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="label64">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Result 3</property>
-                            <property name="xalign">0</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">22</property>
-                            <property name="top_attach">3</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="label65">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Result 4</property>
-                            <property name="xalign">0</property>
-                          </object>
-                          <packing>
-                            <property name="left_attach">22</property>
-                            <property name="top_attach">4</property>
                           </packing>
                         </child>
                         <child>
@@ -3089,19 +2983,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           </object>
                           <packing>
                             <property name="left_attach">18</property>
-                            <property name="top_attach">14</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkColorButton" id="cb_color_parm_bg2">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
-                          </object>
-                          <packing>
-                            <property name="left_attach">21</property>
                             <property name="top_attach">14</property>
                           </packing>
                         </child>
@@ -3225,6 +3106,215 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           </packing>
                         </child>
                         <child>
+                          <object class="GtkLabel" id="label45">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Result 1</property>
+                            <property name="xalign">0</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">25</property>
+                            <property name="top_attach">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="colors_label_parm">
+                            <property name="visible">True</property>
+                            <property name="sensitive">False</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_bottom">4</property>
+                            <property name="label" translatable="yes">Parametric</property>
+                            <property name="use_markup">True</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">24</property>
+                            <property name="top_attach">0</property>
+                            <property name="width">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkColorButton" id="cb_color_parm1">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                            <property name="use_alpha">True</property>
+                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">24</property>
+                            <property name="top_attach">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label63">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Result 2</property>
+                            <property name="xalign">0</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">25</property>
+                            <property name="top_attach">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label64">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Result 3</property>
+                            <property name="xalign">0</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">25</property>
+                            <property name="top_attach">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkColorButton" id="cb_color_parm2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                            <property name="use_alpha">True</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">24</property>
+                            <property name="top_attach">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkColorButton" id="cb_color_parm3">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                            <property name="use_alpha">True</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">24</property>
+                            <property name="top_attach">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label65">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Result 4</property>
+                            <property name="xalign">0</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">25</property>
+                            <property name="top_attach">4</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkColorButton" id="cb_color_parm4">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                            <property name="use_alpha">True</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">24</property>
+                            <property name="top_attach">4</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label47">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Color</property>
+                            <property name="xalign">0</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">25</property>
+                            <property name="top_attach">8</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkColorButton" id="cb_color_parm_border">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">24</property>
+                            <property name="top_attach">8</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="colors_label_parm_border">
+                            <property name="visible">True</property>
+                            <property name="sensitive">False</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Border</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">24</property>
+                            <property name="top_attach">7</property>
+                            <property name="width">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkSpinButton" id="sb_border_parm">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="invisible_char">●</property>
+                            <property name="text">0</property>
+                            <property name="primary_icon_activatable">False</property>
+                            <property name="secondary_icon_activatable">False</property>
+                            <property name="adjustment">adjustment_border_parm</property>
+                            <property name="update_policy">if-valid</property>
+                            <signal name="value-changed" handler="border_changed_cb" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">24</property>
+                            <property name="top_attach">9</property>
+                            <property name="width">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkDrawingArea" id="draw_color_bgpreview_parm">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">25</property>
+                            <property name="top_attach">12</property>
+                            <property name="height">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkColorButton" id="cb_color_parm_bg1">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">24</property>
+                            <property name="top_attach">12</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkColorButton" id="cb_color_parm_bg2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">24</property>
+                            <property name="top_attach">14</property>
+                          </packing>
+                        </child>
+                        <child>
                           <object class="GtkButton" id="button_gradient_parm">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
@@ -3237,9 +3327,280 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="image">image_gradient_parm</property>
                           </object>
                           <packing>
+                            <property name="left_attach">24</property>
+                            <property name="top_attach">13</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label46">
+                            <property name="visible">True</property>
+                            <property name="sensitive">False</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Background</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">24</property>
+                            <property name="top_attach">11</property>
+                            <property name="width">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkSeparator" id="vseparator3">
+                            <property name="width_request">8</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="orientation">vertical</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">23</property>
+                            <property name="top_attach">0</property>
+                            <property name="height">15</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkSeparator" id="hseparator17">
+                            <property name="height_request">10</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">24</property>
+                            <property name="top_attach">6</property>
+                            <property name="width">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkSeparator" id="hseparator18">
+                            <property name="height_request">10</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">24</property>
+                            <property name="top_attach">10</property>
+                            <property name="width">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="colors_label_bat">
+                            <property name="visible">True</property>
+                            <property name="sensitive">False</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_bottom">4</property>
+                            <property name="label" translatable="yes">Battery</property>
+                            <property name="use_markup">True</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">21</property>
+                            <property name="top_attach">0</property>
+                            <property name="width">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkColorButton" id="cb_color_bat1">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                            <property name="use_alpha">True</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">21</property>
+                            <property name="top_attach">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkColorButton" id="cb_color_bat2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                            <property name="use_alpha">True</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">21</property>
+                            <property name="top_attach">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label9">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Charging</property>
+                            <property name="xalign">0</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">22</property>
+                            <property name="top_attach">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label12">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Discharging</property>
+                            <property name="xalign">0</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">22</property>
+                            <property name="top_attach">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label20">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Color</property>
+                            <property name="xalign">0</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">22</property>
+                            <property name="top_attach">8</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkColorButton" id="cb_color_bat_border">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">21</property>
+                            <property name="top_attach">8</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkSpinButton" id="sb_border_bat">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="invisible_char">●</property>
+                            <property name="text" translatable="yes">0</property>
+                            <property name="primary_icon_activatable">False</property>
+                            <property name="secondary_icon_activatable">False</property>
+                            <property name="adjustment">adjustment_border_bat</property>
+                            <property name="update_policy">if-valid</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">21</property>
+                            <property name="top_attach">9</property>
+                            <property name="width">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label28">
+                            <property name="visible">True</property>
+                            <property name="sensitive">False</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Background</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">21</property>
+                            <property name="top_attach">11</property>
+                            <property name="width">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkDrawingArea" id="draw_color_bgpreview_bat">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">22</property>
+                            <property name="top_attach">12</property>
+                            <property name="height">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkColorButton" id="cb_color_bat_bg1">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">21</property>
+                            <property name="top_attach">12</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkColorButton" id="cb_color_bat_bg2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">21</property>
+                            <property name="top_attach">14</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="button_gradient_bat">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="tooltip_text" translatable="yes">Direction of gradient</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <property name="hexpand">False</property>
+                            <property name="vexpand">False</property>
+                            <property name="image">image_gradient_bat</property>
+                          </object>
+                          <packing>
                             <property name="left_attach">21</property>
                             <property name="top_attach">13</property>
                           </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="colors_label_bat_border">
+                            <property name="visible">True</property>
+                            <property name="sensitive">False</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Border</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">21</property>
+                            <property name="top_attach">7</property>
+                            <property name="width">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkColorButton" id="cb_color_bat3">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">none</property>
+                            <property name="use_alpha">True</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">21</property>
+                            <property name="top_attach">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="label32">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Critical level</property>
+                            <property name="xalign">0</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">22</property>
+                            <property name="top_attach">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <placeholder/>
+                        </child>
+                        <child>
+                          <placeholder/>
+                        </child>
+                        <child>
+                          <placeholder/>
+                        </child>
+                        <child>
+                          <placeholder/>
                         </child>
                         <child>
                           <placeholder/>
@@ -3787,7 +4148,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
       <widget name="cb_color_cpu2"/>
       <widget name="cb_color_cpu3"/>
       <widget name="cb_color_cpu4"/>
-      <widget name="cb_color_cpu_bg2"/>
       <widget name="cb_color_cpu_bg1"/>
       <widget name="cb_color_cpu_border"/>
       <widget name="cb_color_mem1"/>
@@ -3801,24 +4161,47 @@ Author: Mario cianciolo <mr.udda@gmail.com>
       <widget name="cb_color_disk1"/>
       <widget name="cb_color_temp1"/>
       <widget name="cb_color_disk2"/>
+      <widget name="cb_color_mem_border"/>
       <widget name="cb_color_mem_bg1"/>
       <widget name="cb_color_net_bg1"/>
       <widget name="cb_color_swap_bg1"/>
       <widget name="cb_color_load_bg1"/>
       <widget name="cb_color_disk_bg1"/>
       <widget name="cb_color_temp_bg1"/>
-      <widget name="cb_color_mem_bg2"/>
-      <widget name="cb_color_swap_bg2"/>
-      <widget name="cb_color_net_bg2"/>
-      <widget name="cb_color_load_bg2"/>
-      <widget name="cb_color_disk_bg2"/>
-      <widget name="cb_color_temp_bg2"/>
       <widget name="cb_color_net_border"/>
       <widget name="cb_color_swap_border"/>
       <widget name="cb_color_load_border"/>
       <widget name="cb_color_disk_border"/>
       <widget name="cb_color_temp_border"/>
+      <widget name="cb_color_cpu_bg2"/>
+      <widget name="cb_color_mem_bg2"/>
+      <widget name="cb_color_net_bg2"/>
+      <widget name="cb_color_swap_bg2"/>
+      <widget name="cb_color_load_bg2"/>
+      <widget name="cb_color_disk_bg2"/>
+      <widget name="cb_color_temp_bg2"/>
+      <widget name="button_gradient_cpu"/>
+      <widget name="button_gradient_mem"/>
+      <widget name="button_gradient_net"/>
+      <widget name="button_gradient_swap"/>
+      <widget name="button_gradient_load"/>
+      <widget name="button_gradient_disk"/>
+      <widget name="button_gradient_temp"/>
       <widget name="cb_color_parm1"/>
+      <widget name="cb_color_parm2"/>
+      <widget name="cb_color_parm3"/>
+      <widget name="cb_color_parm4"/>
+      <widget name="cb_color_parm_border"/>
+      <widget name="cb_color_parm_bg1"/>
+      <widget name="cb_color_parm_bg2"/>
+      <widget name="button_gradient_parm"/>
+      <widget name="cb_color_bat1"/>
+      <widget name="cb_color_bat2"/>
+      <widget name="cb_color_bat_border"/>
+      <widget name="cb_color_bat_bg1"/>
+      <widget name="cb_color_bat_bg2"/>
+      <widget name="button_gradient_bat"/>
+      <widget name="cb_color_bat3"/>
     </widgets>
   </object>
   <object class="GtkSizeGroup" id="sizegroup_color_labels">
@@ -3828,18 +4211,33 @@ Author: Mario cianciolo <mr.udda@gmail.com>
       <widget name="label14"/>
       <widget name="label15"/>
       <widget name="label16"/>
+      <widget name="label3"/>
       <widget name="label17"/>
       <widget name="label18"/>
       <widget name="label19"/>
+      <widget name="label33"/>
       <widget name="label21"/>
       <widget name="label22"/>
       <widget name="label23"/>
+      <widget name="label34"/>
       <widget name="label24"/>
+      <widget name="label35"/>
       <widget name="label25"/>
+      <widget name="label36"/>
       <widget name="label26"/>
       <widget name="label27"/>
+      <widget name="label43"/>
       <widget name="label30"/>
+      <widget name="label61"/>
+      <widget name="label44"/>
+      <widget name="label9"/>
+      <widget name="label12"/>
+      <widget name="label20"/>
       <widget name="label45"/>
+      <widget name="label63"/>
+      <widget name="label64"/>
+      <widget name="label65"/>
+      <widget name="label47"/>
     </widgets>
   </object>
   <object class="GtkListStore" id="liststore_source_disk">
@@ -5851,6 +6249,178 @@ Author: Mario cianciolo <mr.udda@gmail.com>
               </packing>
             </child>
             <child>
+              <object class="GtkBox" id="advanced_box_bat">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">6</property>
+                <property name="margin_bottom">6</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkGrid" id="table2">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_top">6</property>
+                    <property name="margin_bottom">6</property>
+                    <property name="row_spacing">6</property>
+                    <property name="column_spacing">6</property>
+                    <child>
+                      <object class="GtkLabel" id="label_col_tooltip9">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Tooltip style:</property>
+                        <property name="xalign">0</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label_col_dblclick9">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Double click action:</property>
+                        <property name="xalign">0</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkComboBox" id="combo_tooltip_bat">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">Set tooltip style of this graph</property>
+                        <property name="hexpand">True</property>
+                        <property name="model">liststore_tooltips</property>
+                        <property name="active">0</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext24"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">0</property>
+                        <property name="width">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkComboBox" id="combo_dblclick_bat">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">Choose what to do when double clicking on this graph</property>
+                        <property name="hexpand">True</property>
+                        <property name="model">liststore_dblclick</property>
+                        <property name="active">0</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext25"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">1</property>
+                        <property name="width">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="entry_dblclick_command_bat">
+                        <property name="visible">True</property>
+                        <property name="sensitive">False</property>
+                        <property name="can_focus">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="tooltip_text" translatable="yes">Set custom action of this graph</property>
+                        <property name="hexpand">True</property>
+                        <property name="invisible_char">●</property>
+                        <property name="width_chars">18</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkImage" id="image_info_dblclick_command_bat">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">The following tokens can be used within the command line:
+
+%x - graph short name - three to four lowercase characters
+
+%1 - first value of graph data - depends on the graph
+%2 - second value of graph data - depends on the graph
+%3 - third value of graph data - depends on the graph
+%4 - fourth value of graph data - depends on the graph
+%u - measure unit in which graph data values are measured
+
+%% - inserts a literal percent sign</property>
+                        <property name="hexpand">False</property>
+                        <property name="icon_name">dialog-information</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">2</property>
+                        <property name="top_attach">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label29">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Double click command:</property>
+                        <property name="xalign">0</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">2</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkSeparator" id="separator16">
+                    <property name="height_request">10</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="position">7</property>
+              </packing>
+            </child>
+            <child type="tab">
+              <object class="GtkLabel" id="advanced_label_bat">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Battery</property>
+              </object>
+              <packing>
+                <property name="position">7</property>
+                <property name="tab_fill">False</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkBox" id="advanced_box_parm">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -6170,7 +6740,7 @@ Process CAN print some text to stderr.
                 </child>
               </object>
               <packing>
-                <property name="position">7</property>
+                <property name="position">8</property>
               </packing>
             </child>
             <child type="tab">
@@ -6180,7 +6750,7 @@ Process CAN print some text to stderr.
                 <property name="label" translatable="yes">Parametric</property>
               </object>
               <packing>
-                <property name="position">7</property>
+                <property name="position">8</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>

@@ -90,6 +90,9 @@ file_check_contents(FILE *f, const gchar *string)
 	gchar *buf;
 	gboolean result;
 
+	if (f == NULL)
+		return FALSE;
+
 	n = strlen(string);
 	buf = (gchar*)malloc(n);
 
@@ -106,23 +109,38 @@ file_check_contents(FILE *f, const gchar *string)
 	return result;
 }
 
-gint64
-read_int_from_file(const gchar *path)
+gboolean
+read_string_from_file(const gchar *path, gchar *buf, const size_t length)
 {
 	FILE *f;
 	size_t s;
-	//30 chars should contain every possible number
-	gchar buf[30];
 
 
 	f = fopen(path, "r");
 	if (!f)
-		return 0;
+		return FALSE;
 
-	s = fread(buf, 1, sizeof(buf), f);
+	s = fread(buf, 1, length, f);
 	fclose(f);
 
 	if (s < 1)
+		return FALSE;
+
+	if (buf[s-1] == '\n')
+		buf[s-1] = '\0';
+	else if (s < length)
+		buf[s] = '\0';
+
+	return TRUE;
+}
+
+gint64
+read_int_from_file(const gchar *path)
+{
+	//30 chars should hold every possible number
+	gchar buf[30];
+
+	if (!read_string_from_file(path, buf, sizeof(buf)))
 		return 0;
 
 	return atol(buf);

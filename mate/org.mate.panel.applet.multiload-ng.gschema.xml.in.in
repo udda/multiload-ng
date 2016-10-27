@@ -301,6 +301,44 @@
     </key>
 
 
+    <key name="graph-bat-visible" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-bat-border-width" type="i">
+      <default>1</default>
+    </key>
+    <key name="graph-bat-colors" type="s">
+      <default>''</default>
+    </key>
+    <key name="graph-bat-size" type="i">
+      <default>40</default>
+    </key>
+    <key name="graph-bat-interval" type="i">
+      <default>1000</default>
+    </key>
+    <key name="graph-bat-tooltip-style" type="i">
+      <default>0</default>
+    </key>
+    <key name="graph-bat-dblclick-policy" type="i">
+      <default>0</default>
+    </key>
+    <key name="graph-bat-dblclick-cmdline" type="s">
+      <default>''</default>
+    </key>
+    <key name="graph-bat-max" type="i">
+      <default>500</default>
+    </key>
+    <key name="graph-bat-filter-enable" type="b">
+      <default>false</default>
+    </key>
+    <key name="graph-bat-filter" type="s">
+      <default>''</default>
+    </key>
+    <key name="graph-bat-background-direction" type="i">
+      <default>0</default>
+    </key>
+
+
     <key name="graph-parm-visible" type="b">
       <default>false</default>
     </key>
