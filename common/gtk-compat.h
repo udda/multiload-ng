@@ -23,8 +23,6 @@
 #ifndef __GTK_COMPAT_H__
 #define __GTK_COMPAT_H__
 
-#include <config.h>
-
 #include <gtk/gtk.h>
 
 

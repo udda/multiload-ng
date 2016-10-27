@@ -1,6 +1,5 @@
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
-	-DG_LOG_DOMAIN=\"multiload-ng-mate\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	-DMATELOCALEDIR=\"$(localedir)\" \
 	$(PLATFORM_CPPFLAGS)

@@ -1,6 +1,5 @@
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
-	-DG_LOG_DOMAIN=\"multiload-ng-core\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	$(PLATFORM_CPPFLAGS)
 

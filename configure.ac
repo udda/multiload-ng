@@ -90,6 +90,8 @@ esac
 AC_SUBST(GTK_API_VERSION)
 AC_DEFINE_UNQUOTED(GTK_API, $GTK_API, [GTK API version to compile against.])
 
+# Log domain
+AC_DEFINE_UNQUOTED(G_LOG_DOMAIN,"multiload-ng", [Log domain])
 
 PKG_CHECK_MODULES(GTK, gtk+-$GTK_API.0 >= $GTK_REQUIRED)
 AC_SUBST(GTK_FLAGS)

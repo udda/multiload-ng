@@ -1,6 +1,5 @@
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \
-	-DG_LOG_DOMAIN=\"multiload-ng-systray\" \
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
 	$(PLATFORM_CPPFLAGS)
 
