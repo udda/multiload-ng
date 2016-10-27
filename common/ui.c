@@ -76,6 +76,7 @@ multiload_ui_read (MultiloadPlugin *ma)
 		multiload_ps_settings_get_string	(settings, "color-scheme",		ma->color_scheme, sizeof(ma->color_scheme));
 		const MultiloadColorScheme *scheme = multiload_color_scheme_find_by_name(ma->color_scheme);
 		color_scheme_valid = (scheme != NULL);
+		g_debug("[preferences] Found color scheme: %s -> %p", ma->color_scheme, scheme);
 		if (color_scheme_valid)
 			multiload_color_scheme_apply(scheme, ma);
 
@@ -152,7 +153,7 @@ multiload_ui_read (MultiloadPlugin *ma)
 			if (!color_scheme_valid) {
 				key = g_strdup_printf("graph-%s-colors", graph_types[i].name);
 				colors_list[0] = 0;
-				multiload_ps_settings_get_string (settings, key, colors_list, sizeof(colors_list)/sizeof(gchar));
+				multiload_ps_settings_get_string (settings, key, colors_list, sizeof(colors_list));
 				multiload_colors_from_string(ma, i, colors_list);
 				g_free (key);
 			}

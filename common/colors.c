@@ -281,6 +281,11 @@ multiload_colors_from_string(MultiloadPlugin *ma, guint graph_index, const char 
 		multiload_colors_default(ma, graph_index);
 	}
 
+	if (success)
+		g_debug("[multiload_colors_from_string] Loaded colors for graph '%s'", graph_types[graph_index].name);
+	else
+		g_debug("[multiload_colors_from_string] ERROR loading colors for graph '%s'", graph_types[graph_index].name);
+
 	return success;
 }
 
