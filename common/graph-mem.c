@@ -108,8 +108,8 @@ void
 multiload_graph_mem_cmdline_output (LoadGraph *g, MemoryData *xd)
 {
 	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%"G_GUINT64_FORMAT, xd->user);
-	g_snprintf(g->output_str[1], sizeof(g->output_str[2]), "%"G_GUINT64_FORMAT, xd->buffers);
-	g_snprintf(g->output_str[2], sizeof(g->output_str[3]), "%"G_GUINT64_FORMAT, xd->cache);
+	g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "%"G_GUINT64_FORMAT, xd->buffers);
+	g_snprintf(g->output_str[2], sizeof(g->output_str[2]), "%"G_GUINT64_FORMAT, xd->cache);
 }
 
 void
