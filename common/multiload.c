@@ -191,6 +191,7 @@ multiload_get_max_value(MultiloadPlugin *ma, guint graph_id)
 void
 multiload_refresh_orientation (MultiloadPlugin *ma)
 {
+	GtkAllocation alloc;
 	guint i;
 	LoadGraph *g;
 	gint opposite_size = 120;
@@ -199,19 +200,19 @@ multiload_refresh_orientation (MultiloadPlugin *ma)
 
 	if ( ma->panel_orientation == GTK_ORIENTATION_HORIZONTAL && ma->orientation_policy == MULTILOAD_ORIENTATION_VERTICAL) {
 		gtk_widget_set_size_request(GTK_WIDGET(ma->container), opposite_size, -1);
-		g_debug("[multiload] Set size request of Multiload-ng container: %d,-1", opposite_size);
-	}
-
-	if ( ma->panel_orientation == GTK_ORIENTATION_VERTICAL && ma->orientation_policy == MULTILOAD_ORIENTATION_HORIZONTAL) {
+	} else if ( ma->panel_orientation == GTK_ORIENTATION_VERTICAL && ma->orientation_policy == MULTILOAD_ORIENTATION_HORIZONTAL) {
 		gtk_widget_set_size_request(GTK_WIDGET(ma->container), -1, opposite_size);
-		g_debug("[multiload] Set size request of Multiload-ng container: -1,%d", opposite_size);
-	}
+	} else
+		gtk_widget_set_size_request(GTK_WIDGET(ma->container), -1, -1);
 
 	for (i=0; i<GRAPH_MAX; i++) {
 		g = ma->graphs[i];
 		if (g != NULL)
 			load_graph_resize(g);
 	}
+
+	gtk_widget_get_allocation(GTK_WIDGET(ma->container), &alloc);
+	g_debug("[multiload] New allocation for Multiload-ng container: %d,%d", alloc.width, alloc.height);
 }
 
 void
