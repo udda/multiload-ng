@@ -592,3 +592,18 @@ msgstr "Impostazioni aggiuntive"
 
 msgid "Order of graphs (drag to rearrange)"
 msgstr "Ordine dei grafici (trascina per riordinare)"
+
+msgid "Battery"
+msgstr "Batteria"
+
+msgid "Charging"
+msgstr "In carica"
+
+msgid "Discharging"
+msgstr "Non in carica"
+
+msgid "Capacity: %d%%"
+msgstr "Capacità: %d%%"
+
+msgid "Critical level"
+msgstr "Livello critico"

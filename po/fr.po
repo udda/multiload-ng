@@ -594,3 +594,18 @@ msgstr ""
 
 msgid "Order of graphs (drag to rearrange)"
 msgstr ""
+
+msgid "Battery"
+msgstr ""
+
+msgid "Charging"
+msgstr ""
+
+msgid "Discharging"
+msgstr ""
+
+msgid "Capacity: %d%%"
+msgstr ""
+
+msgid "Critical level"
+msgstr ""
