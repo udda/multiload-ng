@@ -199,6 +199,7 @@ In addition, enabling the following options allows Multiload-ng to gather all po
 informations from the system. These are not strictly required, but some graphs might
 not work properly, or not work at all, without these other options:  
 - **CONFIG_CPU_FREQ** *(CPU Frequency scaling)*
+- **CONFIG_POWER_SUPPLY** *(Power supply class support)*
 - **CONFIG_HWMON** *(Hardware Monitoring support)*
 - **CONFIG_THERMAL** *(Generic Thermal sysfs driver)*
 - __CONFIG_SENSORS_*__ - enable sensors you need
