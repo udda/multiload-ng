@@ -23,7 +23,7 @@
 
 #include <math.h>
 #include <ctype.h>
-#include <mntent.h>
+#include <dirent.h>
 #include <stdlib.h>
 
 #include "graph-data.h"
