@@ -1,5 +1,18 @@
 # Multiload-ng Changelog
 
+This document groups together changelogs for every Multiload-ng release.
+
+- [Multiload-ng v1.4.2](#multiload-ng-v142)
+- [Multiload-ng v1.4.1](#multiload-ng-v141)
+- [Multiload-ng v1.4.0](#multiload-ng-v140)
+- [Multiload-ng v1.3.1](#multiload-ng-v131)
+- [Multiload-ng v1.3.0](#multiload-ng-v130)
+- [Multiload-ng v1.2.0](#multiload-ng-v120)
+- [Multiload-ng v1.1.0](#multiload-ng-v110)
+- [Multiload-ng v1.0.1](#multiload-ng-v101)
+- [Multiload-ng v1.0](#multiload-ng-v10)
+
+
 
 
 
@@ -14,7 +27,7 @@
 - Compatibility with Ubuntu 12.04 and newer (thanks to @spvkgn)
 
 ### Notes about upgrade
-This is a minor release. When upgrading from previous major releases, it is really recommended to read [release notes of Multiload-ng 1.4.0](#multiload-ng-v1.4.0).
+This is a minor release. When upgrading from previous major releases, it is really recommended to read [release notes of Multiload-ng 1.4.0](#multiload-ng-v140).
 
 
 
@@ -31,7 +44,7 @@ This is a minor release. When upgrading from previous major releases, it is real
 - Fixed: MATE applet won't start due to missing GSettings keys (thanks to @hotice)
 
 ### Notes about upgrade
-This is a minor release. When upgrading from previous major releases, it is really recommended to read [release notes of Multiload-ng 1.4.0](#multiload-ng-v1.4.0).
+This is a minor release. When upgrading from previous major releases, it is really recommended to read [release notes of Multiload-ng 1.4.0](#multiload-ng-v140).
 
 
 
@@ -133,7 +146,7 @@ Run application in a terminal with `--help` argument to get the full list of sup
 - Simplified Chinese localization (thanks to Dee.H.Y <dongfengweixiao@hotmail.com> @dongfengweixiao)
 
 ### Notes about upgrade
-This is a minor release. When upgrading from 1.2.0, it is really recommended to read [release notes of Multiload-ng 1.3.0](#multiload-ng-v1.3.0).
+This is a minor release. When upgrading from 1.2.0, it is really recommended to read [release notes of Multiload-ng 1.3.0](#multiload-ng-v130).
 
 
 
