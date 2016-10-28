@@ -23,8 +23,13 @@
 #ifndef __GTK_COMPAT_H__
 #define __GTK_COMPAT_H__
 
-#include <gtk/gtk.h>
+// This hack is needed in order to include <config.h> in a header file
+#ifdef G_LOG_DOMAIN
+#undef G_LOG_DOMAIN
+#endif
+#include <config.h>
 
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
