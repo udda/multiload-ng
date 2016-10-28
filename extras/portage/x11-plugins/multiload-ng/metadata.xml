@@ -31,7 +31,7 @@ Multiload-ng can be built with GTK2 and GTK3, so can be embedded within GTK2/GTK
 		<doc>https://github.com/udda/multiload-ng/wiki</doc>
 		<doc>http://udda.github.io/multiload-ng</doc>
 		<bugs-to>mailto:mr.udda@gmail.com</bugs-to>
-		<changelog>https://github.com/udda/multiload-ng/releases</changelog>
+		<changelog>https://github.com/udda/multiload-ng/blob/master/Changelog.md</changelog>
 		<remote-id type="github">udda/multiload-ng</remote-id>
 	</upstream>
 </pkgmetadata>
