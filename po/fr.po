@@ -590,22 +590,22 @@ msgstr ""
 "du bureau. L'ordre des graphiques peuvent changer."
 
 msgid "Extra settings"
-msgstr ""
+msgstr "Paramètres supplémentaires"
 
 msgid "Order of graphs (drag to rearrange)"
-msgstr ""
+msgstr "Ordre des graphiques (traîner pour arranger)"
 
 msgid "Battery"
-msgstr ""
+msgstr "Batterie"
 
 msgid "Charging"
-msgstr ""
+msgstr "En charge"
 
 msgid "Discharging"
-msgstr ""
+msgstr "Pas de charge"
 
 msgid "Capacity: %d%%"
-msgstr ""
+msgstr "Capacité: %d%%"
 
 msgid "Critical level"
-msgstr ""
+msgstr "Niveau critique"
