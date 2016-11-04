@@ -592,22 +592,22 @@ msgstr ""
 "entorno del escritorio. El orden de los gráficos podría cambiar."
 
 msgid "Extra settings"
-msgstr ""
+msgstr "Ajustes adjuntos"
 
 msgid "Order of graphs (drag to rearrange)"
-msgstr ""
+msgstr "Orden de los gráficos (arrastre para ordenar)"
 
 msgid "Battery"
-msgstr ""
+msgstr "Batería"
 
 msgid "Charging"
-msgstr ""
+msgstr "En carga"
 
 msgid "Discharging"
-msgstr ""
+msgstr "No en carga"
 
 msgid "Capacity: %d%%"
-msgstr ""
+msgstr "Capacidad: %d%%"
 
 msgid "Critical level"
-msgstr ""
+msgstr "Nivel crítico"
