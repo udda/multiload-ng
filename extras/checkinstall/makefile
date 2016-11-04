@@ -28,6 +28,8 @@ CHECKINSTALL_FLAGS=\
 	--spec=extras/checkinstall/.spec \
 	--pakdir=extras/checkinstall
 
+TOPSRCDIR=../..
+
 all:
 	@echo "Please select a target ( deb-package | slack-package | rpm-package )."
 
@@ -41,11 +43,19 @@ checkbuild:
 		echo "*** ERROR: configure and build package according to desired options before calling this."; \
 		exit 1 ; fi
 
-deb-package: checkbuild notice
-	@cd ../.. ; checkinstall $(CHECKINSTALL_FLAGS) --type=debian
+.PHONY: .spec
+.spec:
+	printf "Summary:   Modern graphical system monitor\n" > .spec
+	printf "Name:      multiload-ng\n" >> .spec
+	printf "Version:   " >> .spec
+	cat $(TOPSRCDIR)/version >> .spec
+	printf "\n" >> .spec
 
-slack-package: checkbuild notice
-	@cd ../.. ; checkinstall $(CHECKINSTALL_FLAGS) --type=slackware
+deb-package: checkbuild notice .spec
+	@cd $(TOPSRCDIR) ; checkinstall $(CHECKINSTALL_FLAGS) --type=debian
 
-rpm-package: checkbuild notice
-	@cd ../.. ; checkinstall $(CHECKINSTALL_FLAGS) --type=rpm
+slack-package: checkbuild notice .spec
+	@cd $(TOPSRCDIR) ; checkinstall $(CHECKINSTALL_FLAGS) --type=slackware
+
+rpm-package: checkbuild notice .spec
+	@cd $(TOPSRCDIR) ; checkinstall $(CHECKINSTALL_FLAGS) --type=rpm
