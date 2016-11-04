@@ -593,22 +593,22 @@ msgstr ""
 "kontrolliert. Die Anordnung der Graphen könnte sich ändern."
 
 msgid "Extra settings"
-msgstr ""
+msgstr "Zusätzliche Einstellungen"
 
 msgid "Order of graphs (drag to rearrange)"
-msgstr ""
+msgstr "Reihenfolge der Grafen (ziehen zum Umordnen)"
 
 msgid "Battery"
-msgstr ""
+msgstr "Akku"
 
 msgid "Charging"
-msgstr ""
+msgstr "Wird geladen"
 
 msgid "Discharging"
-msgstr ""
+msgstr "Wird entladen"
 
 msgid "Capacity: %d%%"
-msgstr ""
+msgstr "Kapazität: %d%%"
 
 msgid "Critical level"
-msgstr ""
+msgstr "Kritischer Ladezustand"
