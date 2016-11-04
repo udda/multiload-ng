@@ -140,8 +140,12 @@ AC_ARG_ENABLE([profiling], AS_HELP_STRING([--enable-profiling], [Enable CFLAGS f
 )
 
 # Enable autostart for suitable targets
-AC_ARG_ENABLE([autostart], AS_HELP_STRING([--enable-autostart], [Enable autostart for suitable targets.]))
-AM_CONDITIONAL(ENABLE_AUTOSTART, test "x$enable_autostart" = "xyes")
+AC_ARG_ENABLE([autostart], AS_HELP_STRING([--disable-autostart], [Do not install autostart entries for suitable targets.]))
+# Default behavior is to install autostart entries
+if test "x$enable_autostart" != "xno"; then
+	enable_autostart=yes
+fi
+AM_CONDITIONAL(ENABLE_AUTOSTART, test "x$enable_autostart" != "xno")
 
 # Per-panel configure
 m4_include([data/configure.m4])
@@ -217,8 +221,8 @@ fi
 if test "x$enable_developer_mode" = "xyes"; then
 	AS_ECHO([ "*  Enabled developer mode" ])
 fi
-if test "x$enable_autostart" = "xyes"; then
-	AS_ECHO([ "*  Enabled autostart for suitable plugins" ])
+if test "x$enable_autostart" = "xno"; then
+	AS_ECHO([ "*  Do not install autostart entries" ])
 fi
 AS_ECHO([ "*" ])
 AS_ECHO([ "*  Enabled plugins:" ])

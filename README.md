@@ -336,7 +336,7 @@ Option                      | Description                           | Note
 `--enable-experimental`     | Compile in experimental code          | May be unstable/malfunctioning. Only for testing/developing purposes.
 `--enable-debug`            | Allows debugging with GDB             | This enables required CFLAGS.
 `--enable-profiling`        | Allows profiling with gprof           | This enables required CFLAGS
-`--enable-autostart`        | Enable autostart for suitable targets | This installs .desktop files to `/etc/xdg/autostart` for some plugins (indicator, systray...)
+`--disable-autostart`       | Do not install autostart entries      | Autostart entries are normally put into `/etc/xdg/autostart` for some plugins (indicator, systray...)
 
 To get a list of all available options, type:  
 `./configure --help`
