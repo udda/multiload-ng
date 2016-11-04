@@ -26,8 +26,7 @@
 
 
 // Compatibility functions for GTK2
-#if GTK_API == 2
-
+#if ! GTK_CHECK_VERSION(3,0,0)
 
 gboolean
 gdk_rgba_parse (GdkRGBA* color, const gchar* gspec) {
@@ -99,7 +98,7 @@ gtk_separator_new (GtkOrientation o)
 }
 
 
-#endif /* GTK_API == 2 */
+#endif /* ! GTK_CHECK_VERSION(3,0,0) */
 
 
 #if ! GTK_CHECK_VERSION(3,10,0)

@@ -23,18 +23,12 @@
 #ifndef __GTK_COMPAT_H__
 #define __GTK_COMPAT_H__
 
-// This hack is needed in order to include <config.h> in a header file
-#ifdef G_LOG_DOMAIN
-#undef G_LOG_DOMAIN
-#endif
-#include <config.h>
-
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
 // Compatibility functions for GTK2
-#if GTK_API == 2
+#if ! GTK_CHECK_VERSION(3,0,0)
 
 typedef struct {
 	gdouble red;
@@ -73,7 +67,7 @@ gtk_separator_new (GtkOrientation o);
 G_GNUC_INTERNAL GtkWidget *
 gtk_button_new_from_icon_name (const gchar *icon_name, GtkIconSize size);
 
-#endif /* GTK_API == 2 */
+#endif /* ! GTK_CHECK_VERSION(3,0,0) */
 
 
 //gtk+>3.4
