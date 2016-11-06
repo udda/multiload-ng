@@ -407,9 +407,13 @@ find the switch in *Advanced Preferences* window of *Memory* graph.
 
 ### Tooltips not showing reliably
 This happens often on GTK+3 builds. Due to changes in the way tooltips are handled in GTK+3,
-sometimes they might show with big delay, or not show at all. Some users "*solved*" it
-by raising update interval of the graphs above *GTK+ default tooltip delay time* (500 ms in many systems).
+sometimes they might show with big delay, or not show at all. Sometimes they can show, but they aren't
+updated with graph redraws.
+
 Basically, being on GTK+ side, there is not much that can be done from Multiload-ng.
+Some users "*solved*" it by raising update interval of the graphs above
+*GTK+ default tooltip delay time* (500 ms in many systems).
+
 Starting from GTK+ 3.20.0, tooltips appear to be working normally.
 
 ## FAQ
