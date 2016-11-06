@@ -44,9 +44,6 @@ multiload_graph_bat_get_data (int Maximum, int data [2], LoadGraph *g, BatteryDa
 	struct dirent *dirent;
 
 	gboolean found = FALSE;
-	gboolean bat_charging;
-	gboolean bat_critical;
-	glong bat_capacity;
 
 	gchar buf[PATH_MAX];
 	gchar buf2[PATH_MAX];
@@ -103,40 +100,41 @@ multiload_graph_bat_get_data (int Maximum, int data [2], LoadGraph *g, BatteryDa
 	// status
 	if (g_file_test(status_path, G_FILE_TEST_EXISTS)) {
 		f = cached_fopen_r(status_path, TRUE);
-		bat_charging = !file_check_contents(f, "Discharging");
-	} else
-		bat_charging = FALSE;
+		xd->is_charging = !file_check_contents(f, "Discharging");
+	} else {
+		xd->is_charging = FALSE;
+	}
 
 	// capacity
 	f = cached_fopen_r(capacity_path, TRUE);
-	if (f == NULL || fscanf(f, "%ld", &bat_capacity) != 1)
+	if (f == NULL || fscanf(f, "%d", &xd->percent) != 1)
 		return;
 
 	// capacity level
 	if (g_file_test(capacity_level_path, G_FILE_TEST_EXISTS)) {
 		f = cached_fopen_r(capacity_level_path, TRUE);
-		bat_critical = file_check_contents(f, "Critical");
-	} else
-		bat_critical = bat_capacity <= CRITICAL_LEVEL;
+		xd->is_critical = file_check_contents(f, "Critical");
+	} else {
+		xd->is_critical = (xd->percent <= CRITICAL_LEVEL);
+	}
 
-	xd->percent = bat_capacity;
 	read_string_from_file(manufacturer_path, buf, sizeof(buf));
 	read_string_from_file(model_name_path, buf2, sizeof(buf2));
 	g_snprintf(xd->battery_name, sizeof(xd->battery_name), "%s %s", buf, buf2);
 
 
-	if (bat_charging) {
-		data[0] = rint (Maximum * bat_capacity / 100);
+	if (xd->is_charging) {
+		data[0] = rint (Maximum * xd->percent / 100);
 		data[1] = 0;
 		data[2] = 0;
-	} else if (!bat_critical) {
+	} else if (!xd->is_critical) {
 		data[0] = 0;
-		data[1] = rint (Maximum * bat_capacity / 100);
+		data[1] = rint (Maximum * xd->percent / 100);
 		data[2] = 0;
 	} else {
 		data[0] = 0;
 		data[1] = 0;
-		data[2] = rint (Maximum * bat_capacity / 100);
+		data[2] = rint (Maximum * xd->percent / 100);
 	}
 }
 

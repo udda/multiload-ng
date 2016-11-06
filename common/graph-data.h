@@ -102,6 +102,8 @@ typedef struct _TemperatureData {
 
 typedef struct _BatteryData {
 	int percent;
+	gboolean is_charging;
+	gboolean is_critical;
 	gchar battery_name[128];
 } BatteryData;
 
