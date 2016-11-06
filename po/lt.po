@@ -595,22 +595,22 @@ msgstr ""
 "Grafikų tvarka gali pasikeisti."
 
 msgid "Extra settings"
-msgstr ""
+msgstr "Papildomi nustatymai"
 
 msgid "Order of graphs (drag to rearrange)"
-msgstr ""
+msgstr "Grafikų tvarka (vilkite, norėdami pertvarkyti)"
 
 msgid "Battery"
-msgstr ""
+msgstr "Akumuliatorius"
 
 msgid "Charging"
-msgstr ""
+msgstr "Įkraunama"
 
 msgid "Discharging"
-msgstr ""
+msgstr "Išsikrauna"
 
 msgid "Capacity: %d%%"
-msgstr ""
+msgstr "Talpa: %d%%"
 
 msgid "Critical level"
-msgstr ""
+msgstr "Kritinis lygis"
