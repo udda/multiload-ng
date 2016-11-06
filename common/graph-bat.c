@@ -150,9 +150,16 @@ void
 multiload_graph_bat_tooltip_update (char **title, char **text, LoadGraph *g, BatteryData *xd)
 {
 	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
+		gchar *capacity = g_strdup_printf(_("Capacity: %d%%"), xd->percent);
+		gchar *status = (xd->is_charging? _("Charging") : _("Discharging"));
+
 		*title = g_strdup(xd->battery_name);
-		*text = g_strdup_printf(_(	"Capacity: %d%%"),
-									xd->percent);
+		if (xd->is_critical)
+			*text = g_strdup_printf("%s (%s)\n%s", capacity, _("Critical level"), status);
+		else
+			*text = g_strdup_printf("%s\n%s", capacity, status);
+
+		g_free(capacity);
 	} else {
 		*text=g_strdup_printf("%d%%", xd->percent);
 	}
