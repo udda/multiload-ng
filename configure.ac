@@ -221,9 +221,7 @@ fi
 if test "x$enable_developer_mode" = "xyes"; then
 	AS_ECHO([ "*  Enabled developer mode" ])
 fi
-if test "x$enable_autostart" = "xno"; then
-	AS_ECHO([ "*  Do not install autostart entries" ])
-fi
+AS_ECHO([ "*  Install autostart entries: $enable_autostart" ])
 AS_ECHO([ "*" ])
 AS_ECHO([ "*  Enabled plugins:" ])
 AS_ECHO([ "*   - standalone       : $with_standalone" ])
