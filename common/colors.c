@@ -1195,6 +1195,70 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
+	{ "Simpsons", color_scheme_simpsons_xpm, // from http://www.fubiz.net/en/2015/09/19/the-colors-of-simpsons-pantone/
+			{  { // CPU - Homer
+				HEX_TO_RGBA(6BADDF, FF),		// User
+				HEX_TO_RGBA(FFFFFF, FF),		// System
+				HEX_TO_RGBA(D2B17E, FF),		// Nice
+				HEX_TO_RGBA(FED420, FF),		// IOWait
+				HEX_TO_RGBA(657A7D, FF),		// Border
+				HEX_TO_RGBA(657A7D, FF),		// Background (top)
+				HEX_TO_RGBA(657A7D, FF)			// Background (bottom)
+			}, { // MEM - Bart
+				HEX_TO_RGBA(0F9BE0, FF),		// User
+				HEX_TO_RGBA(F15B30, FF),		// Buffers
+				HEX_TO_RGBA(FED420, FF),		// Cached
+				HEX_TO_RGBA(84C55F, FF),		// Border
+				HEX_TO_RGBA(84C55F, FF),		// Background (top)
+				HEX_TO_RGBA(84C55F, FF)			// Background (bottom)
+			}, { // NET - Milhouse
+				HEX_TO_RGBA(E0C6DF, FF),		// In
+				HEX_TO_RGBA(FED420, FF),		// Out
+				HEX_TO_RGBA(4B91CC, FF),		// Local
+				HEX_TO_RGBA(F15B30, FF),		// Border
+				HEX_TO_RGBA(F15B30, FF),		// Background (top)
+				HEX_TO_RGBA(F15B30, FF)			// Background (bottom)
+			}, { // SWAP - Little Santa's Helper
+				HEX_TO_RGBA(FFFFFF, FF),		// Used
+				HEX_TO_RGBA(000000, FF),		// Border
+				HEX_TO_RGBA(C37C14, FF),		// Background (top)
+				HEX_TO_RGBA(C37C14, FF)			// Background (bottom)
+			}, { // LOAD - Snowball
+				HEX_TO_RGBA(FF88CC, FF),		// Average
+				HEX_TO_RGBA(2099AA, FF),		// Border
+				HEX_TO_RGBA(475556, FF),		// Background (top)
+				HEX_TO_RGBA(475556, FF)			// Background (bottom)
+			}, { // DISK - Sideshow Bob
+				HEX_TO_RGBA(FED420, FF),		// Read
+				HEX_TO_RGBA(C20033, FF),		// Write
+				HEX_TO_RGBA(94300E, FF),		// Border
+				HEX_TO_RGBA(357130, FF),		// Background (top)
+				HEX_TO_RGBA(568CAE, FF)			// Background (bottom)
+			}, { // TEMP - Edna
+				HEX_TO_RGBA(FED420, FF),		// Value
+				HEX_TO_RGBA(D3AD7E, FF),		// Critical
+				HEX_TO_RGBA(00947E, FF),		// Border
+				HEX_TO_RGBA(7BC041, FF),		// Background (top)
+				HEX_TO_RGBA(B3C98B, FF)			// Background (bottom)
+			}, { // BAT - Stupid Flanders
+				HEX_TO_RGBA(FAC5CB, FF),		// Charging
+				HEX_TO_RGBA(FED420, FF),		// Discharging
+				HEX_TO_RGBA(9B6B3B, FF),		// Critical level
+				HEX_TO_RGBA(8D989E, FF),		// Border
+				HEX_TO_RGBA(4F8633, FF),		// Background (top)
+				HEX_TO_RGBA(4F8633, FF)			// Background (bottom)
+			}, { // PARM - Moe
+				HEX_TO_RGBA(FFFFFF, FF),		// Result 1
+				HEX_TO_RGBA(B1D3EC, FF),		// Result 2
+				HEX_TO_RGBA(FED420, FF),		// Result 3
+				HEX_TO_RGBA(41535D, FF),		// Result 4
+				HEX_TO_RGBA(98887B, FF),		// Border
+				HEX_TO_RGBA(98887B, FF),		// Background (top)
+				HEX_TO_RGBA(98887B, FF)			// Background (bottom)
+			}
+		}
+	},
+
 	{ "Moon", color_scheme_moon_xpm,
 			{  { // CPU
 				HEX_TO_RGBA(505050, FF),		// User
