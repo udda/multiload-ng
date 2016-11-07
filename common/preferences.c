@@ -858,16 +858,14 @@ multiload_preferences_dev_colorscheme_generate_clicked_cb (GtkToolButton *btn, M
 	_CPRINT(ma->graph_config[GRAPH_MEMLOAD].colors[0], buf);
 	printf("\t\t\t\t%s,\t\t// User\n", buf);
 	_CPRINT(ma->graph_config[GRAPH_MEMLOAD].colors[1], buf);
-	printf("\t\t\t\t%s,\t\t// Shared\n", buf);
-	_CPRINT(ma->graph_config[GRAPH_MEMLOAD].colors[2], buf);
 	printf("\t\t\t\t%s,\t\t// Buffers\n", buf);
-	_CPRINT(ma->graph_config[GRAPH_MEMLOAD].colors[3], buf);
+	_CPRINT(ma->graph_config[GRAPH_MEMLOAD].colors[2], buf);
 	printf("\t\t\t\t%s,\t\t// Cached\n", buf);
-	_CPRINT(ma->graph_config[GRAPH_MEMLOAD].colors[4], buf);
+	_CPRINT(ma->graph_config[GRAPH_MEMLOAD].colors[3], buf);
 	printf("\t\t\t\t%s,\t\t// Border\n", buf);
-	_CPRINT(ma->graph_config[GRAPH_MEMLOAD].colors[5], buf);
+	_CPRINT(ma->graph_config[GRAPH_MEMLOAD].colors[4], buf);
 	printf("\t\t\t\t%s,\t\t// Background (top)\n", buf);
-	_CPRINT(ma->graph_config[GRAPH_MEMLOAD].colors[6], buf);
+	_CPRINT(ma->graph_config[GRAPH_MEMLOAD].colors[5], buf);
 	printf("\t\t\t\t%s\t\t\t// Background (bottom)\n", buf);
 
 	printf("\t\t\t}, { // NET\n");
@@ -926,6 +924,20 @@ multiload_preferences_dev_colorscheme_generate_clicked_cb (GtkToolButton *btn, M
 	_CPRINT(ma->graph_config[GRAPH_TEMPERATURE].colors[3], buf);
 	printf("\t\t\t\t%s,\t\t// Background (top)\n", buf);
 	_CPRINT(ma->graph_config[GRAPH_TEMPERATURE].colors[4], buf);
+	printf("\t\t\t\t%s\t\t\t// Background (bottom)\n", buf);
+
+	printf("\t\t\t}, { // BAT\n");
+	_CPRINT(ma->graph_config[GRAPH_BATTERY].colors[0], buf);
+	printf("\t\t\t\t%s,\t\t// Charging\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_BATTERY].colors[1], buf);
+	printf("\t\t\t\t%s,\t\t// Discharging\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_BATTERY].colors[2], buf);
+	printf("\t\t\t\t%s,\t\t// Critical level\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_BATTERY].colors[3], buf);
+	printf("\t\t\t\t%s,\t\t// Border\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_BATTERY].colors[4], buf);
+	printf("\t\t\t\t%s,\t\t// Background (top)\n", buf);
+	_CPRINT(ma->graph_config[GRAPH_BATTERY].colors[5], buf);
 	printf("\t\t\t\t%s\t\t\t// Background (bottom)\n", buf);
 
 	printf("\t\t\t}, { // PARM\n");
