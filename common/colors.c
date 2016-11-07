@@ -1231,9 +1231,9 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 			}, { // DISK - Sideshow Bob
 				HEX_TO_RGBA(FED420, FF),		// Read
 				HEX_TO_RGBA(C20033, FF),		// Write
-				HEX_TO_RGBA(94300E, FF),		// Border
+				HEX_TO_RGBA(568CAE, FF),		// Border
 				HEX_TO_RGBA(357130, FF),		// Background (top)
-				HEX_TO_RGBA(568CAE, FF)			// Background (bottom)
+				HEX_TO_RGBA(357130, FF)			// Background (bottom)
 			}, { // TEMP - Edna
 				HEX_TO_RGBA(FED420, FF),		// Value
 				HEX_TO_RGBA(D3AD7E, FF),		// Critical
