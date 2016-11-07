@@ -1195,6 +1195,70 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
+	{ "Dragon Ball Z", color_scheme_dragon_ball_z_xpm,
+			{  { // CPU - Ball
+				HEX_TO_RGBA(F01920, FF),		// User
+				HEX_TO_RGBA(E34D0A, FF),		// System
+				HEX_TO_RGBA(D45C41, FF),		// Nice
+				HEX_TO_RGBA(D48341, FF),		// IOWait
+				HEX_TO_RGBA(11141B, FF),		// Border
+				HEX_TO_RGBA(FCA400, FF),		// Background (top)
+				HEX_TO_RGBA(FCA400, FF)			// Background (bottom)
+			}, { // MEM - Goku
+				HEX_TO_RGBA(333098, FF),		// User
+				HEX_TO_RGBA(FDC9AB, FF),		// Buffers
+				HEX_TO_RGBA(11141B, FF),		// Cached
+				HEX_TO_RGBA(11141B, FF),		// Border
+				HEX_TO_RGBA(FD5700, FF),		// Background (top)
+				HEX_TO_RGBA(FD5700, FF)			// Background (bottom)
+			}, { // NET - Vegeta
+				HEX_TO_RGBA(D9D8D9, FF),		// In
+				HEX_TO_RGBA(FDC9AB, FF),		// Out
+				HEX_TO_RGBA(11141B, FF),		// Local
+				HEX_TO_RGBA(11141B, FF),		// Border
+				HEX_TO_RGBA(323399, FF),		// Background (top)
+				HEX_TO_RGBA(323399, FF)			// Background (bottom)
+			}, { // SWAP - Boo
+				HEX_TO_RGBA(FD9899, FF),		// Used
+				HEX_TO_RGBA(11141B, FF),		// Border
+				HEX_TO_RGBA(D9D9D9, FF),		// Background (top)
+				HEX_TO_RGBA(D9D9D9, FF)			// Background (bottom)
+			}, { // LOAD - Freeza
+				HEX_TO_RGBA(A500FF, FF),		// Average
+				HEX_TO_RGBA(11141B, FF),		// Border
+				HEX_TO_RGBA(D9D9D9, FF),		// Background (top)
+				HEX_TO_RGBA(D9D9D9, FF)			// Background (bottom)
+			}, { // DISK - Bulma
+				HEX_TO_RGBA(FFE4E0, FF),		// Read
+				HEX_TO_RGBA(5CADAE, FF),		// Write
+				HEX_TO_RGBA(11141B, FF),		// Border
+				HEX_TO_RGBA(FECE02, FF),		// Background (top)
+				HEX_TO_RGBA(FECE02, FF)			// Background (bottom)
+			}, { // TEMP - Trunks
+				HEX_TO_RGBA(F8E7CB, FF),		// Value
+				HEX_TO_RGBA(BDB5EE, FF),		// Critical
+				HEX_TO_RGBA(11141B, FF),		// Border
+				HEX_TO_RGBA(4D5C7D, FF),		// Background (top)
+				HEX_TO_RGBA(4D5C7D, FF)			// Background (bottom)
+			}, { // BAT - Cell
+				HEX_TO_RGBA(35074F, FF),		// Charging
+				HEX_TO_RGBA(2C5308, FF),		// Discharging
+				HEX_TO_RGBA(629930, FF),		// Critical level
+				HEX_TO_RGBA(11141B, FF),		// Border
+				HEX_TO_RGBA(CCCDCC, FF),		// Background (top)
+				HEX_TO_RGBA(CCCDCC, FF)			// Background (bottom)
+			}, { // PARM - Jiaozi
+				HEX_TO_RGBA(C58102, FF),		// Result 1
+				HEX_TO_RGBA(DA240C, FF),		// Result 2
+				HEX_TO_RGBA(F0F0F0, FF),		// Result 3
+				HEX_TO_RGBA(29352B, FF),		// Result 4
+				HEX_TO_RGBA(11141B, FF),		// Border
+				HEX_TO_RGBA(337F37, FF),		// Background (top)
+				HEX_TO_RGBA(337F37, FF)			// Background (bottom)
+			}
+		}
+	},
+
 	{ "Simpsons", color_scheme_simpsons_xpm, // from http://www.fubiz.net/en/2015/09/19/the-colors-of-simpsons-pantone/
 			{  { // CPU - Homer
 				HEX_TO_RGBA(6BADDF, FF),		// User

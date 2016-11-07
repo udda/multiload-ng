@@ -62,6 +62,7 @@ COLOR_SCHEME_ICONS = \
 	$(top_srcdir)/data/color-scheme-numix-light.xpm \
 	$(top_srcdir)/data/color-scheme-super-mario-bros.xpm \
 	$(top_srcdir)/data/color-scheme-simpsons.xpm \
+	$(top_srcdir)/data/color-scheme-dragon-ball-z.xpm \
 	$(top_srcdir)/data/color-scheme-moon.xpm \
 	$(top_srcdir)/data/color-scheme-venus.xpm \
 	$(top_srcdir)/data/color-scheme-earth.xpm \
