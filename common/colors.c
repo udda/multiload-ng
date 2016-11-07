@@ -1131,6 +1131,70 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
+	{ "Super Mario Bros", color_scheme_super_mario_bros_xpm,
+			{  { // CPU - Plant
+				HEX_TO_RGBA(48A327, FF),		// User
+				HEX_TO_RGBA(82D427, FF),		// System
+				HEX_TO_RGBA(CA9258, FF),		// Nice
+				HEX_TO_RGBA(669F74, FF),		// IOWait
+				HEX_TO_RGBA(030000, FF),		// Border
+				HEX_TO_RGBA(6385FB, FF),		// Background (top)
+				HEX_TO_RGBA(6385FB, FF)			// Background (bottom)
+			}, { // MEM - Mario
+				HEX_TO_RGBA(DA0000, FF),		// User
+				HEX_TO_RGBA(716800, FF),		// Buffers
+				HEX_TO_RGBA(FAB100, FF),		// Cached
+				HEX_TO_RGBA(030000, FF),		// Border
+				HEX_TO_RGBA(6385FB, FF),		// Background (top)
+				HEX_TO_RGBA(6385FB, FF)			// Background (bottom)
+			}, { // NET - Luigi
+				HEX_TO_RGBA(FBFBFB, FF),		// In
+				HEX_TO_RGBA(3B8400, FF),		// Out
+				HEX_TO_RGBA(FAB100, FF),		// Local
+				HEX_TO_RGBA(030000, FF),		// Border
+				HEX_TO_RGBA(6385FB, FF),		// Background (top)
+				HEX_TO_RGBA(6385FB, FF)			// Background (bottom)
+			}, { // SWAP - Coin
+				HEX_TO_RGBA(FAB930, FF),		// Used
+				HEX_TO_RGBA(030000, FF),		// Border
+				HEX_TO_RGBA(6385FB, FF),		// Background (top)
+				HEX_TO_RGBA(6385FB, FF)			// Background (bottom)
+			}, { // LOAD - Castle brick
+				HEX_TO_RGBA(B9B9B9, FF),		// Average
+				HEX_TO_RGBA(030000, FF),		// Border
+				HEX_TO_RGBA(6385FB, FF),		// Background (top)
+				HEX_TO_RGBA(6385FB, FF)			// Background (bottom)
+			}, { // DISK - Koopa
+				HEX_TO_RGBA(FAC095, FF),		// Read
+				HEX_TO_RGBA(9A4800, FF),		// Write
+				HEX_TO_RGBA(030000, FF),		// Border
+				HEX_TO_RGBA(6385FB, FF),		// Background (top)
+				HEX_TO_RGBA(6385FB, FF)			// Background (bottom)
+			}, { // TEMP - Bush
+				HEX_TO_RGBA(6AF90D, FF),		// Value
+				HEX_TO_RGBA(008700, FF),		// Critical
+				HEX_TO_RGBA(030000, FF),		// Border
+				HEX_TO_RGBA(6385FB, FF),		// Background (top)
+				HEX_TO_RGBA(6385FB, FF)			// Background (bottom)
+			}, { // BAT - Mario Fire
+				HEX_TO_RGBA(A32E1F, FF),		// Charging
+				HEX_TO_RGBA(F7794D, FF),		// Discharging
+				HEX_TO_RGBA(EED09E, FF),		// Critical level
+				HEX_TO_RGBA(030000, FF),		// Border
+				HEX_TO_RGBA(6385FB, FF),		// Background (top)
+				HEX_TO_RGBA(6385FB, FF)			// Background (bottom)
+			}, { // PARM - Cloud
+				HEX_TO_RGBA(709EC7, FF),		// Result 1
+				HEX_TO_RGBA(58CAFF, FF),		// Result 2
+				HEX_TO_RGBA(ACD0F2, FF),		// Result 3
+				HEX_TO_RGBA(FBFBFB, FF),		// Result 4
+				HEX_TO_RGBA(030000, FF),		// Border
+				HEX_TO_RGBA(6385FB, FF),		// Background (top)
+				HEX_TO_RGBA(6385FB, FF)			// Background (bottom)
+			}
+		}
+	},
+
 	{ "Moon", color_scheme_moon_xpm,
 			{  { // CPU
 				HEX_TO_RGBA(505050, FF),		// User
