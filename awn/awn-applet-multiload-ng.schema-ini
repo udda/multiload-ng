@@ -437,6 +437,62 @@ default =
 description = 
 
 
+[DEFAULT/graph-bat-visible]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-bat-border-width]
+type = integer
+default = 1
+description = 
+
+[DEFAULT/graph-bat-colors]
+type = string
+default = 
+description = 
+
+[DEFAULT/graph-bat-size]
+type = integer
+default = 40
+description = 
+
+[DEFAULT/graph-bat-interval]
+type = integer
+default = 1000
+description = 
+
+[DEFAULT/graph-bat-tooltip-style]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-bat-dblclick-policy]
+type = integer
+default = 0
+description = 
+
+[DEFAULT/graph-bat-dblclick-cmdline]
+type = string
+default = 
+description = 
+
+[DEFAULT/graph-bat-max]
+type = integer
+default = 500
+description = 
+
+[DEFAULT/graph-bat-filter-enable]
+type = boolean
+default = false
+description = 
+
+[DEFAULT/graph-bat-filter]
+type = string
+default = 
+description = 
+
+
 
 [DEFAULT/graph-parm-visible]
 type = boolean
