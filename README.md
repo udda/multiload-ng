@@ -156,6 +156,8 @@ Some examples are present in [screenshots](#screenshots) above. Here is a partia
 - Color schemes inspired by famous Linux distribution: **[Ubuntu](http://www.ubuntu.com/)** (both Ambiance and Radiance), **[Linux Mint](https://www.linuxmint.com/)**
 - Color schemes inspired by famous GTK themes: **[Numix](https://numixproject.org/)** (both Light and Dark), **[Arc](https://github.com/horst3180/arc-theme)**
 - Color schemes inspired by outer space: **Moon**, **Venus**, **Earth**, **Mars**, **Jupiter**, **Uranus**, **Neptune**
+- Color schemes inspired by **The Simpsons** (from the work of designer [Hyo Taek Kim](http://www.hyotk.com/), watch it [here](http://www.fubiz.net/en/2015/09/19/the-colors-of-simpsons-pantone/))
+- Color schemes inspired by old cartoons and video games: **Dragon Ball Z**, **Super Mario Bros** (with colors from original 1985 game)
 - More!
 
 
