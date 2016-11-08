@@ -66,7 +66,6 @@ multiload_ui_read (MultiloadPlugin *ma)
 		multiload_ps_settings_get_int		(settings, "padding",				&ma->padding);
 		multiload_ps_settings_get_int		(settings, "spacing",				&ma->spacing);
 		multiload_ps_settings_get_int		(settings, "orientation",			&ma->orientation_policy);
-		multiload_ps_settings_get_boolean	(settings, "fill-between",			&ma->fill_between);
 		multiload_ps_settings_get_boolean	(settings, "pref-dialog-maximized",	&ma->pref_dialog_maximized);
 		multiload_ps_settings_get_int		(settings, "pref-dialog-width",		&ma->pref_dialog_width);
 		multiload_ps_settings_get_int		(settings, "pref-dialog-height",	&ma->pref_dialog_height);
@@ -186,7 +185,6 @@ multiload_ui_save (MultiloadPlugin *ma)
 		multiload_ps_settings_set_int		(settings, "padding",				ma->padding);
 		multiload_ps_settings_set_int		(settings, "spacing",				ma->spacing);
 		multiload_ps_settings_set_int		(settings, "orientation",			ma->orientation_policy);
-		multiload_ps_settings_set_boolean	(settings, "fill-between",			ma->fill_between);
 		multiload_ps_settings_set_boolean	(settings, "pref-dialog-maximized",	ma->pref_dialog_maximized);
 		multiload_ps_settings_set_int		(settings, "pref-dialog-width",		ma->pref_dialog_width);
 		multiload_ps_settings_set_int		(settings, "pref-dialog-height",	ma->pref_dialog_height);

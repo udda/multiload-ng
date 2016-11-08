@@ -84,7 +84,6 @@ typedef struct _MultiloadPlugin {
 
 	gint padding;
 	gint spacing;
-	gboolean fill_between;
 	gint orientation_policy;
 	gchar color_scheme[20];
 	gboolean size_format_iec;
@@ -146,8 +145,6 @@ G_GNUC_INTERNAL GtkOrientation
 multiload_get_orientation(MultiloadPlugin *ma);
 G_GNUC_INTERNAL void
 multiload_tooltip_update(LoadGraph *g);
-G_GNUC_INTERNAL void
-multiload_set_fill_between (MultiloadPlugin *ma, gboolean fill);
 G_GNUC_INTERNAL void
 multiload_set_spacing (MultiloadPlugin *ma, gint val);
 G_GNUC_INTERNAL void

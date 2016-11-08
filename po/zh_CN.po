@@ -315,9 +315,6 @@ msgstr "更新间隔"
 msgid "Advanced configuration"
 msgstr "高级配置"
 
-msgid "Fill space between graphs"
-msgstr "图像间的间隔"
-
 msgid "Orientation:"
 msgstr "方向："
 

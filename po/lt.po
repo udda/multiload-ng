@@ -317,9 +317,6 @@ msgstr "Atnaujinimo intervalas"
 msgid "Advanced configuration"
 msgstr "Išplėstinė konfigūracija"
 
-msgid "Fill space between graphs"
-msgstr "Užpildyti vietą tarp grafikų"
-
 msgid "Orientation:"
 msgstr "Orientacija:"
 

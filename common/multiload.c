@@ -101,8 +101,8 @@ multiload_start(MultiloadPlugin *ma)
 
 	multiload_set_spacing(ma, ma->spacing);
 	multiload_set_padding(ma, ma->padding);
-	multiload_set_fill_between(ma, ma->fill_between);
 	multiload_refresh_orientation(ma);
+	gtk_event_box_set_visible_window(GTK_EVENT_BOX(ma->container), FALSE);
 
 	gtk_widget_show (ma->box);
 	gtk_container_add (ma->container, ma->box);
@@ -126,12 +126,6 @@ multiload_start(MultiloadPlugin *ma)
 
 	g_debug("[multiload] Started %d of %d graphs", n, GRAPH_MAX);
 	return;
-}
-
-void
-multiload_set_fill_between (MultiloadPlugin *ma, gboolean fill)
-{
-	gtk_event_box_set_visible_window(GTK_EVENT_BOX(ma->container), fill);
 }
 
 void
@@ -271,7 +265,6 @@ void multiload_defaults(MultiloadPlugin *ma)
 	/* default settings */
 	ma->padding = DEFAULT_PADDING;
 	ma->spacing = DEFAULT_SPACING;
-	ma->fill_between = DEFAULT_FILL_BETWEEN;
 	ma->size_format_iec = DEFAULT_SIZE_FORMAT_IEC;
 	strncpy(ma->color_scheme, DEFAULT_COLOR_SCHEME, sizeof(ma->color_scheme));
 	for ( i = 0; i < GRAPH_MAX; i++ ) {
@@ -303,7 +296,6 @@ multiload_sanitize(MultiloadPlugin *ma)
 	/* Keep values between max and min */
 	ma->padding = CLAMP(ma->padding, MIN_PADDING, MAX_PADDING);
 	ma->spacing = CLAMP(ma->spacing, MIN_SPACING, MAX_SPACING);
-	ma->fill_between = ma->fill_between? TRUE:FALSE;
 	ma->orientation_policy = CLAMP(ma->orientation_policy, 0, MULTILOAD_ORIENTATION_N_VALUES);
 
 	for ( i=0; i<GRAPH_MAX; i++ ) {

@@ -13,11 +13,6 @@ type = integer
 default = 0
 description = 
 
-[DEFAULT/fill-between]
-type = boolean
-default = false
-description = 
-
 [DEFAULT/pref-dialog-maximized]
 type = boolean
 default = false

@@ -314,9 +314,6 @@ msgstr "Интервалы: обновления и"
 msgid "Advanced configuration"
 msgstr "Расширенные настройки"
 
-msgid "Fill space between graphs"
-msgstr "Заполнить место между графиками"
-
 msgid "Orientation:"
 msgstr "Ориентация:"
 

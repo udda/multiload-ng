@@ -61,7 +61,6 @@ systray_preferences_cb(GtkWidget *widget, MultiloadPlugin *ma)
 		MULTILOAD_SETTINGS_PADDING |
 		MULTILOAD_SETTINGS_SPACING |
 		MULTILOAD_SETTINGS_ORIENTATION |
-		MULTILOAD_SETTINGS_FILL_BETWEEN |
 		MULTILOAD_SETTINGS_DBLCLICK_POLICY
 	);
 	multiload_preferences_add_infobar (GTK_MESSAGE_INFO, _("Placement of system tray icons is controlled by the desktop environment. Graphs order may change."));
@@ -147,14 +146,12 @@ set_defaults (MultiloadPlugin *ma)
 
 	ma->padding = 0;
 	ma->spacing = 0;
-	ma->fill_between = FALSE;
 	ma->orientation_policy = MULTILOAD_ORIENTATION_HORIZONTAL;
 	for (i=0; i<GRAPH_MAX; i++)
 		ma->graph_config[i].dblclick_policy = DBLCLICK_POLICY_DONOTHING;
 
 	multiload_set_padding (ma, ma->padding);
 	multiload_set_spacing (ma, ma->spacing);
-	multiload_set_fill_between (ma, ma->fill_between);
 	multiload_refresh_orientation (ma);
 
 	multiload_ui_save(ma);

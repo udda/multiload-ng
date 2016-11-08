@@ -480,13 +480,6 @@ multiload_preferences_orientation_changed_cb (GtkComboBox *combo, MultiloadPlugi
 }
 
 static void
-multiload_preferences_fill_between_toggled_cb (GtkToggleButton *toggle, MultiloadPlugin *ma)
-{
-	ma->fill_between = gtk_toggle_button_get_active(toggle);
-	multiload_set_fill_between(ma, ma->fill_between);
-}
-
-static void
 multiload_preferences_iec_units_toggled_cb (GtkToggleButton *toggle, MultiloadPlugin *ma)
 {
 	ma->size_format_iec = gtk_toggle_button_get_active(toggle);
@@ -1345,7 +1338,6 @@ multiload_preferences_connect_signals (MultiloadPlugin *ma)
 		g_signal_connect(G_OBJECT(OB(button_gradient_names[i])), "clicked", G_CALLBACK(multiload_preferences_button_gradient_clicked_cb), ma);
 	}
 
-	g_signal_connect(G_OBJECT(OB("cb_fill_between")), "toggled", G_CALLBACK(multiload_preferences_fill_between_toggled_cb), ma);
 	g_signal_connect(G_OBJECT(OB("cb_iec_units")), "toggled", G_CALLBACK(multiload_preferences_iec_units_toggled_cb), ma);
 	g_signal_connect(G_OBJECT(OB("hscale_spacing")), "value-changed", G_CALLBACK(multiload_preferences_spacing_or_padding_changed_cb), ma);
 	g_signal_connect(G_OBJECT(OB("hscale_padding")), "value-changed", G_CALLBACK(multiload_preferences_spacing_or_padding_changed_cb), ma);
@@ -1430,9 +1422,6 @@ multiload_preferences_disable_settings(guint mask)
 	if (mask & MULTILOAD_SETTINGS_ORIENTATION)
 		gtk_widget_set_sensitive(GTK_WIDGET(OB("combo_orientation")), FALSE);
 
-	if (mask & MULTILOAD_SETTINGS_FILL_BETWEEN)
-		gtk_widget_set_sensitive(GTK_WIDGET(OB("cb_fill_between")), FALSE);
-
 	if (mask & MULTILOAD_SETTINGS_DBLCLICK_POLICY) {
 		for (i=0; i<GRAPH_MAX; i++)
 			gtk_widget_set_sensitive(GTK_WIDGET(OB(combo_dblclick_names[i])), FALSE);
@@ -1502,7 +1491,6 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 	gtk_range_set_value(GTK_RANGE(OB("hscale_spacing")), (gdouble)ma->spacing);
 	gtk_range_set_value(GTK_RANGE(OB("hscale_padding")), (gdouble)ma->padding);
 	gtk_combo_box_set_active (GTK_COMBO_BOX(OB("combo_orientation")), ma->orientation_policy);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(OB("cb_fill_between")), ma->fill_between);
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(OB("cb_iec_units")), ma->size_format_iec);
 
 	// Memory

@@ -86,7 +86,6 @@ indicator_preferences_cb(GtkWidget *widget, MultiloadPlugin *ma)
 	gtk_window_present(GTK_WINDOW(dialog));
 
 	multiload_preferences_disable_settings(
-		MULTILOAD_SETTINGS_FILL_BETWEEN |
 		MULTILOAD_SETTINGS_TOOLTIPS |
 		MULTILOAD_SETTINGS_DBLCLICK_POLICY
 	);
@@ -201,13 +200,10 @@ set_defaults(MultiloadPlugin *ma)
 {
 	guint i;
 
-	ma->fill_between = FALSE;
 	for (i=0; i<GRAPH_MAX; i++) {
 		ma->graph_config[i].tooltip_style = MULTILOAD_TOOLTIP_STYLE_SIMPLE;
 		ma->graph_config[i].dblclick_policy = DBLCLICK_POLICY_DONOTHING;
 	}
-
-	multiload_set_fill_between (ma, ma->fill_between);
 
 	multiload_ui_save(ma);
 }

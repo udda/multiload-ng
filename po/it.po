@@ -314,9 +314,6 @@ msgstr "Intervallo di aggiornamento"
 msgid "Advanced configuration"
 msgstr "Configurazione avanzata"
 
-msgid "Fill space between graphs"
-msgstr "Riempi spazio tra i grafici"
-
 msgid "Orientation:"
 msgstr "Orientamento:"
 
