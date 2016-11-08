@@ -1259,7 +1259,7 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
-	{ "Simpsons", color_scheme_simpsons_xpm, // from http://www.fubiz.net/en/2015/09/19/the-colors-of-simpsons-pantone/
+	{ "The Simpsons", color_scheme_simpsons_xpm, // http://www.fubiz.net/en/2015/09/19/the-colors-of-simpsons-pantone/
 			{  { // CPU - Homer
 				HEX_TO_RGBA(6BADDF, FF),		// User
 				HEX_TO_RGBA(FFFFFF, FF),		// System
