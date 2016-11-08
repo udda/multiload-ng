@@ -30,6 +30,7 @@ Multiload-ng can be built with GTK2 and GTK3, so can be embedded within GTK2/GTK
 - [How to Contribute](#how-to-contribute)
 - [Help & Troubleshooting](#help--troubleshooting)
 - [FAQ](#faq)
+- [Disclaimer](#disclaimer)
 - [Credits](#credits)
 
 
@@ -470,8 +471,12 @@ The best way to get a new port is to suggest it (or code it yourself, of course)
 
 
 
+## Disclaimer
+All product names, logos and brands are property of their respective owners. All company, product and service names used in this software are for identification purposes only. Use of these names, logos, and brands does not imply endorsement, and do not infringe any patent, trademark, copyright, license or any other proprietary right of any third party.
+
+
+
 ## Credits
-- FSF and creators of original Multiload applet (see AUTHORS file), for giving me a starting point
+- FSF and creators of original Multiload applet (see AUTHORS file), for giving a good starting point
 - Translators, for sending me always up-to-date translations. Read their names in *About* dialog, in git commits comments, or looking at the source, in the PO file headers
 - Beta testers, for reporting bugs that I would have never discovered, because they didn't happen in any of my systems. Now these bugs are all gone, thanks to them. Some translators also helped me with testing.
-
