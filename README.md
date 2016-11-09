@@ -210,6 +210,10 @@ not work properly, or not work at all, without these other options:
 Any modern kernel (since 2010) sets all these options automatically, so generally
 speaking you don't have to worry about user kernels.
 
+It is recommended building with **gcc**. Multiload-ng code is pretty standards
+compliant, so it should work flawlessly with any C compiler, but using
+compilers other than *gcc* is untested and it's not guaranteed to succeed.
+
 ### Requirements for Application Indicator (Ubuntu Unity and others)
 In addition to common requirements (see above)
 these packages are required to build Application Indicator:
