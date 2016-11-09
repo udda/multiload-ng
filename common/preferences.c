@@ -208,6 +208,12 @@ enum {
 	LS_SOURCE_COLUMN_DATA		= 3
 };
 
+enum {
+	LS_COLORS_COLUMN_NAME		= 0,
+	LS_COLORS_COLUMN_ICON		= 1,
+	LS_COLORS_COLUMN_SEPARATOR	= 2
+};
+
 static guint
 multiload_preferences_get_graph_index (GtkBuildable *ob, const gchar **list)
 {
@@ -1254,6 +1260,14 @@ multiload_preferences_reorder_reset_clicked_cb (GtkToolButton *button, Multiload
 	multiload_preferences_reorder_set_order_from_tree_view (ma);
 }
 
+gboolean
+multiload_preferences_color_scheme_row_separator_func (GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
+{
+	gboolean sep;
+	gtk_tree_model_get(model, iter, LS_COLORS_COLUMN_SEPARATOR, &sep, -1);
+	return sep;
+}
+
 
 static void
 multiload_preferences_destroy ()
@@ -1501,8 +1515,10 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 
 	// Color schemes
 	GtkListStore *ls_colors = GTK_LIST_STORE(OB("liststore_colors"));
+	gtk_tree_view_set_row_separator_func (GTK_TREE_VIEW(OB("treeview_colors")), multiload_preferences_color_scheme_row_separator_func, NULL, NULL);
 	for (i=0; multiload_builtin_color_schemes[i].name[0] != '\0'; i++) {
 		const gchar *name = multiload_builtin_color_schemes[i].name;
+		gboolean sep = (name[0]=='=');
 
 		if (multiload_builtin_color_schemes[i].xpm_data != NULL)
 			pix = gdk_pixbuf_new_from_xpm_data((const char**)multiload_builtin_color_schemes[i].xpm_data);
@@ -1510,7 +1526,11 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 			pix = NULL;
 
 		// insert color scheme
-		gtk_list_store_insert_with_values( ls_colors, NULL, -1, 0, name, 1, i, 2, pix, -1 );
+		gtk_list_store_insert_with_values( ls_colors, NULL, -1,
+			LS_COLORS_COLUMN_NAME,		name,
+			LS_COLORS_COLUMN_ICON,		pix,
+			LS_COLORS_COLUMN_SEPARATOR,	sep,
+		-1 );
 
 		// if it's the current color scheme, select it
 		if (strcmp(ma->color_scheme, name) == 0) {
@@ -1519,7 +1539,10 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 		}
 	}
 	// insert (Custom) entry
-	gtk_list_store_insert_with_values(ls_colors, NULL, -1, 0, _("(Custom)"), 1, i, -1 );
+	gtk_list_store_insert_with_values( ls_colors, NULL, -1,
+		LS_COLORS_COLUMN_NAME,		_("(Custom)"),
+		LS_COLORS_COLUMN_SEPARATOR,	FALSE,
+	-1 );
 	// no current color scheme, select last entry (Custom)
 	if (!color_scheme_is_set)
 		multiload_preferences_color_scheme_select_custom();

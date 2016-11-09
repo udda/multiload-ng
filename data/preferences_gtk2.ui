@@ -354,12 +354,12 @@ Author: Mario cianciolo <mr.udda@gmail.com>
   </object>
   <object class="GtkListStore" id="liststore_colors">
     <columns>
-      <!-- column-name Description -->
+      <!-- column-name name -->
       <column type="gchararray"/>
-      <!-- column-name Index -->
-      <column type="guint"/>
       <!-- column-name icon -->
       <column type="GdkPixbuf"/>
+      <!-- column-name separator -->
+      <column type="gboolean"/>
     </columns>
   </object>
   <object class="GtkListStore" id="liststore_dblclick">
@@ -1392,7 +1392,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="model">liststore_colors</property>
                             <property name="headers_clickable">False</property>
                             <property name="search_column">0</property>
-                            <property name="fixed_height_mode">True</property>
+                            <property name="fixed_height_mode">False</property>
                             <property name="show_expanders">False</property>
                             <child>
                               <object class="GtkTreeViewColumn" id="Category">
@@ -1404,7 +1404,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                                     <property name="height">20</property>
                                   </object>
                                   <attributes>
-                                    <attribute name="pixbuf">2</attribute>
+                                    <attribute name="pixbuf">1</attribute>
                                   </attributes>
                                 </child>
                               </object>
@@ -4095,6 +4095,15 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="column_spacing">10</property>
                 <property name="row_spacing">8</property>
                 <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
                   <object class="GtkLabel" id="label_spacing">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
@@ -4242,15 +4251,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                     <property name="bottom_attach">4</property>
                     <property name="y_options">GTK_FILL</property>
                   </packing>
-                </child>
-                <child>
-                  <placeholder/>
-                </child>
-                <child>
-                  <placeholder/>
-                </child>
-                <child>
-                  <placeholder/>
                 </child>
                 <child>
                   <placeholder/>

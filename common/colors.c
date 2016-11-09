@@ -555,6 +555,8 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
+	{ "=====" },
+
 	{ "Fruity", color_scheme_fruity_xpm, // http://allfreedesigns.com/bright-color-palettes/
 			{  { // CPU  - Blueberries
 				HEX_TO_RGBA(064490, FF),		// User
@@ -682,6 +684,8 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 			}
 		}
 	},
+
+	{ "=====" },
 
 	{ "Ubuntu Ambiance", color_scheme_ubuntu_ambiance_xpm,
 			{  { // CPU
@@ -939,6 +943,8 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
+	{ "=====" },
+
 	{ "Arc", color_scheme_arc_xpm,
 			{  { // CPU
 				HEX_TO_RGBA(5924E2, FF),		// User
@@ -1131,6 +1137,8 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 		}
 	},
 
+	{ "=====" },
+
 	{ "Super Mario Bros", color_scheme_super_mario_bros_xpm,
 			{  { // CPU - Plant
 				HEX_TO_RGBA(48A327, FF),		// User
@@ -1322,6 +1330,8 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 			}
 		}
 	},
+
+	{ "=====" },
 
 	{ "Moon", color_scheme_moon_xpm,
 			{  { // CPU
@@ -1770,6 +1780,8 @@ const MultiloadColorScheme multiload_builtin_color_schemes[] = {
 			}
 		}
 	},
+
+	{ "=====" },
 
 	{ "\0" }
 
