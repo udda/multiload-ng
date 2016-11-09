@@ -7,6 +7,8 @@ AM_INIT_AUTOMAKE([1.11 -Wall -Werror no-dist-gzip dist-xz silent-rules foreign])
 AM_SILENT_RULES([yes])
 AM_MAINTAINER_MODE()
 
+# Set starting CFLAGS (instead of default "-g -O2")
+: ${CFLAGS="-g -O3"}
 
 # Checks for programs.
 AM_PROG_AR()
@@ -29,15 +31,20 @@ AC_CHECK_HEADERS([time.h glib.h math.h dirent.h mntent.h ctype.h stdio.h errno.h
 # Checks for typedefs, structures, and compiler characteristics.
 AC_TYPE_SIZE_T
 AC_TYPE_SSIZE_T
-# -Wall
-AC_MSG_CHECKING(whether compiler understands -Wall)
-old_CFLAGS="$CFLAGS"
-CFLAGS="$CFLAGS -Wall"
-AC_TRY_COMPILE([],[], AC_MSG_RESULT(yes), AC_MSG_RESULT(no); CFLAGS="$old_CFLAGS")
 
-# Some CFLAGS
-# Optimize with -O3 (no problem so far)
-CFLAGS="${CFLAGS} -O3"
+
+# Test CFLAGS
+AC_DEFUN([TEST_CFLAGS],
+	AC_MSG_CHECKING([whether compiler understands $1])
+	old_CFLAGS="$CFLAGS"
+	CFLAGS="$CFLAGS $1"
+	AC_TRY_COMPILE([],[], AC_MSG_RESULT(yes), AC_MSG_RESULT(no); CFLAGS="$old_CFLAGS")
+)
+
+TEST_CFLAGS([-Wall])
+
+
+# GCC-specific CFLAGS (uncomment when needed)
 # Runtime diagnostics (use with caution, breaks some plugins)
 #CFLAGS="${CFLAGS} -fdiagnostics-color=auto -fsanitize=address -fsanitize=leak -fsanitize=undefined"
 # Build-time error checking
