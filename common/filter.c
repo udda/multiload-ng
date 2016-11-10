@@ -82,7 +82,7 @@ multiload_filter_append(MultiloadFilter *filter, char *data)
 	g_array_append_val(filter->array, element);
 	filter->length++;
 
-	return filter->length;
+	return filter->length-1;
 }
 
 guint
