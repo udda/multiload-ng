@@ -27,9 +27,12 @@
 
 #include "graph-data.h"
 #include "autoscaler.h"
+#include "info-file.h"
 #include "preferences.h"
 #include "util.h"
 
+
+#define PATH_NET_DEV "/proc/net/dev"
 
 typedef struct {
 	char name[32];
@@ -70,7 +73,7 @@ multiload_graph_net_get_filter (LoadGraph *g, NetData *xd)
 
 	MultiloadFilter *filter = multiload_filter_new();
 
-	FILE *f = cached_fopen_r("/proc/net/dev", FALSE);
+	FILE *f = info_file_required_fopen(PATH_NET_DEV, "r");
 	while (getline(&buf, &n, f) >= 0) {
 		// skip header lines of /proc/net/dev
 		if ((end = strchr(buf, ':')) == NULL)
@@ -83,6 +86,7 @@ multiload_graph_net_get_filter (LoadGraph *g, NetData *xd)
 		multiload_filter_append(filter, iface);
 	}
 	g_free(buf);
+	fclose(f);
 
 	multiload_filter_import_existing(filter, g->config->filter);
 
@@ -131,7 +135,7 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 
 	xd->ifaces[0] = 0;
 
-	f_net = cached_fopen_r("/proc/net/dev", FALSE);
+	f_net = info_file_required_fopen(PATH_NET_DEV, "r");
 	while (getline(&buf, &n, f_net) >= 0) {
 		// skip header lines of /proc/net/dev
 		if (strchr(buf, ':') == NULL)
@@ -193,6 +197,8 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 		g_array_append_val(valid_ifaces, *d_ptr);
 		valid_ifaces_len++;
 	}
+	g_free(buf);
+	fclose(f_net);
 
 	// sort array by ifindex (so we can take first device when they are same address)
 	g_array_sort(valid_ifaces, sort_if_data_by_ifindex);

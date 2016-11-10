@@ -21,6 +21,7 @@ multiload_ng_core_la_SOURCES = \
 	graph-bat.c graph-cpu.c graph-mem.c graph-net.c graph-swap.c \
 	graph-load.c graph-disk.c graph-temp.c graph-parm.c \
 	graph-data.h \
+	info-file.c info-file.h \
 	load-graph.c load-graph.h \
 	multiload.c multiload.h \
 	multiload-config.c multiload-config.h \

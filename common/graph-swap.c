@@ -27,13 +27,11 @@
 #include <stdlib.h>
 
 #include "graph-data.h"
+#include "info-file.h"
 #include "preferences.h"
 #include "util.h"
 
-typedef struct {
-	char key[20];
-	guint64 *address;
-} meminfo_mapping_table;
+#define PATH_MEMINFO "/proc/meminfo"
 
 void
 multiload_graph_swap_get_data (int Maximum, int data [1], LoadGraph *g, SwapData *xd)
@@ -42,34 +40,13 @@ multiload_graph_swap_get_data (int Maximum, int data [1], LoadGraph *g, SwapData
 	static guint64 kb_swap_total = 0;
 	static guint64 kb_swap_free = 0;
 
-	static const meminfo_mapping_table table[] = {
-		{ "SwapTotal",		&kb_swap_total },
-		{ "SwapFree",		&kb_swap_free },
-		{ "",				NULL }
+	static const InfoFileMappingEntry table[] = {
+		{ "SwapTotal",	'u',	&kb_swap_total },
+		{ "SwapFree",	'u',	&kb_swap_free }
 	};
 
-	char *buf = NULL;
-	char *tmp;
-	size_t n = 0;
-	guint i;
-
-	FILE *f = cached_fopen_r("/proc/meminfo", FALSE);
-	while(getline(&buf, &n, f) >= 0) {
-		for (i=0; table[i].address != NULL; i++) {
-			if (strncmp(buf, table[i].key, strlen(table[i].key)) == 0) {
-				// tmp will start with numeric value
-				for (tmp = buf+strlen(table[i].key)+1; isspace(tmp[0]); tmp++);
-
-				errno = 0;
-				*(table[i].address) = g_ascii_strtoull(tmp, NULL, 0);
-				if (errno != 0)
-					g_warning("[graph-mem] Parsing of key %s failed", table[i].key);
-
-				break;
-			}
-		}
-	}
-	free(buf);
+	gint r = info_file_read_keys (PATH_MEMINFO, table, 2);
+	g_assert_cmpint(r, ==, 2);
 
 	xd->used = (kb_swap_total - kb_swap_free) * 1024;
 	xd->total = kb_swap_total * 1024;

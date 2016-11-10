@@ -82,70 +82,6 @@ str_replace(const char *string , const char *needle , const char *replacement)
 }
 
 
-gboolean
-file_check_contents(FILE *f, const gchar *string)
-{
-	size_t n;
-	size_t s;
-	gchar *buf;
-	gboolean result;
-
-	if (f == NULL)
-		return FALSE;
-
-	n = strlen(string);
-	buf = (gchar*)malloc(n);
-
-	s = fread(buf, 1, n, f);
-
-	if (s != n)
-		result = FALSE;
-	else if (strncmp(buf, string, n) != 0)
-		result = FALSE;
-	else
-		result = TRUE;
-
-	g_free(buf);
-	return result;
-}
-
-gboolean
-read_string_from_file(const gchar *path, gchar *buf, const size_t length)
-{
-	FILE *f;
-	size_t s;
-
-
-	f = fopen(path, "r");
-	if (!f)
-		return FALSE;
-
-	s = fread(buf, 1, length, f);
-	fclose(f);
-
-	if (s < 1)
-		return FALSE;
-
-	if (buf[s-1] == '\n')
-		buf[s-1] = '\0';
-	else if (s < length)
-		buf[s] = '\0';
-
-	return TRUE;
-}
-
-gint64
-read_int_from_file(const gchar *path)
-{
-	//30 chars should hold every possible number
-	gchar buf[30];
-
-	if (!read_string_from_file(path, buf, sizeof(buf)))
-		return 0;
-
-	return atol(buf);
-}
-
 
 gchar*
 format_size_for_display(guint64 size, gboolean iec_units)
@@ -298,32 +234,6 @@ xdg_open_url(const gchar* url)
 
 	if (G_UNLIKELY (result == FALSE))
 		g_warning (_("Unable to open the following url: '%s'"), url);
-}
-
-// return a file pointer that does not need to be closed
-FILE*
-cached_fopen_r(gchar* path, gboolean reopen)
-{
-	static GHashTable *table = NULL;
-	FILE *f;
-
-	if (table == NULL)
-		table = g_hash_table_new (g_str_hash, g_str_equal);
-
-	f = (FILE*)g_hash_table_lookup(table, path);
-	if (f != NULL && reopen) {
-		fclose(f);
-		f = NULL;
-	}
-	if (f == NULL) {
-		f = fopen(path, "r");
-		if (f == NULL)
-			g_error("fopen failed for '%s'", path);
-		g_hash_table_insert(table, path, f);
-	}
-
-	rewind(f);
-	return f;
 }
 
 static void

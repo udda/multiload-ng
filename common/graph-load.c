@@ -27,6 +27,7 @@
 #include <sys/utsname.h>
 
 #include "graph-data.h"
+#include "info-file.h"
 #include "preferences.h"
 #include "util.h"
 
@@ -37,11 +38,12 @@ enum {
 	LOADAVG_PROC
 };
 
+#define PATH_LOADAVG "/proc/loadavg"
+
 void
 multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData *xd)
 {
 	static gboolean first_call = TRUE;
-	FILE *f = cached_fopen_r("/proc/loadavg", TRUE);
 	int n;
 
 	// load average
@@ -49,7 +51,9 @@ multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData
 	g_assert_cmpint(n, >=, 0);
 
 	// threads stats
+	FILE *f = info_file_required_fopen(PATH_LOADAVG, "r");
 	n = fscanf(f, "%*s %*s %*s %u/%u", &xd->proc_active, &xd->proc_count);
+	fclose(f);
 	g_assert_cmpint(n, ==, 2);
 
 	if (G_UNLIKELY(first_call)) {

@@ -34,14 +34,6 @@ calculate_speed(guint64 delta, guint period_ms);
 G_GNUC_INTERNAL char*
 str_replace(const char *string, const char *needle, const char *replacement);
 
-
-G_GNUC_INTERNAL gboolean
-file_check_contents(FILE *f, const gchar *string);
-gboolean
-read_string_from_file(const gchar *path, gchar *buf, const size_t length);
-G_GNUC_INTERNAL gint64
-read_int_from_file(const gchar *path);
-
 G_GNUC_INTERNAL gchar*
 format_size_for_display (guint64 size, gboolean iec_units);
 G_GNUC_INTERNAL gchar*
@@ -58,9 +50,6 @@ G_GNUC_INTERNAL gchar*
 get_system_monitor_executable();
 G_GNUC_INTERNAL void
 xdg_open_url();
-
-G_GNUC_INTERNAL FILE*
-cached_fopen_r(gchar* path, gboolean reopen);
 
 G_GNUC_INTERNAL GdkPixbuf*
 cairo_surface_to_gdk_pixbuf(cairo_surface_t *surface, guint width, guint height);

@@ -26,6 +26,7 @@
 #include <stdlib.h>
 
 #include "graph-data.h"
+#include "info-file.h"
 #include "preferences.h"
 #include "util.h"
 
@@ -40,39 +41,30 @@ enum {
 	CPU_MAX		= 5
 };
 
+#define PATH_CPUFREQ "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor"
+#define PATH_UPTIME "/proc/uptime"
+#define PATH_CPUINFO "/proc/cpuinfo"
+#define PATH_STAT "/proc/stat"
 
 void
 multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *xd)
 {
 	static gboolean first_call = TRUE;
 	static gboolean have_cpufreq = TRUE;
-	static const gchar *cpufreq_sysfs_path = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor";
 
-	FILE *f;
 	guint64 irq, softirq, total;
 	guint i;
 
 	guint64 time[CPU_MAX];
 	guint64 diff[CPU_MAX];
 
-	char *buf;
 	size_t n;
 
 	if (first_call) {
-		// CPU name and number of CPUs
-		buf = NULL; n = 0;
-		f = cached_fopen_r("/proc/cpuinfo", TRUE);
-		while(getline(&buf, &n, f) >= 0) {
-			if (strncmp(buf, "model name", 10) == 0) {
-				strcpy(xd->cpu0_name, strchr(buf, ':')+2);
-				xd->cpu0_name[strlen(xd->cpu0_name)-1] = '\0'; //remove newline
-			} else if (strncmp(buf, "processor", 9) == 0) {
-				xd->num_cpu++;
-			}
-		}
-		free(buf);
+		info_file_read_key_string_s (PATH_CPUINFO, "model name", xd->cpu0_name, sizeof(xd->cpu0_name), NULL);
+		xd->num_cpu = info_file_count_key_values (PATH_CPUINFO, "processor");
 
-		have_cpufreq = (access(cpufreq_sysfs_path, R_OK)==0);
+		have_cpufreq = info_file_exists(PATH_CPUFREQ);
 		if (!have_cpufreq) {
 			//xgettext: Not Available
 			strcpy(xd->cpu0_governor, _("N/A"));
@@ -80,45 +72,19 @@ multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *
 		}
 	}
 
-	// MHz
-	buf = NULL; n = 0;
-	f = cached_fopen_r("/proc/cpuinfo", TRUE);
-	while(getline(&buf, &n, f) >= 0) {
-		if (strncmp(buf, "cpu MHz", 7) == 0) {
-			xd->cpu0_mhz = g_ascii_strtod(strchr(buf, ':')+2, NULL);
-			if (errno != 0)
-				g_warning("[graph-cpu] Could not retrieve CPU0 frequency (d)");
-			break;
-		}
-	}
-	free(buf);
+	info_file_read_key_double (PATH_CPUINFO, "cpu MHz", &xd->cpu0_mhz, 1);
+	info_file_read_double (PATH_UPTIME, &xd->uptime, 1);
 
-	// governor
-	if (have_cpufreq) {
-		f = cached_fopen_r((gchar*)cpufreq_sysfs_path, TRUE);
-		n = fscanf(f, "%s", xd->cpu0_governor);
-		if (n != 1) {
-			g_warning("[graph-cpu] Could not retrieve CPU0 governor");
-			have_cpufreq = FALSE;
-		}
+	if (have_cpufreq && !info_file_read_string_s (PATH_CPUFREQ, xd->cpu0_governor, sizeof(xd->cpu0_governor), NULL)) {
+		g_warning("[graph-cpu] Could not retrieve CPU0 governor");
+		have_cpufreq = FALSE;
 	}
-
-	// uptime
-	f = cached_fopen_r("/proc/uptime", TRUE);
-	buf = (char*)malloc(12);
-	if (1 != fscanf(f, "%s", buf))
-		g_warning("[graph-cpu] Could not retrieve system uptime (s)");
-	else {
-		xd->uptime = g_ascii_strtod(buf, NULL);
-		if (errno != 0)
-			g_warning("[graph-cpu] Could not retrieve system uptime (d)");
-	}
-	free(buf);
 
 	// CPU stats
-	f = cached_fopen_r("/proc/stat", TRUE);
+	FILE *f = info_file_required_fopen(PATH_STAT, "r");
 	n = fscanf(f, "cpu %"G_GUINT64_FORMAT" %"G_GUINT64_FORMAT" %"G_GUINT64_FORMAT" %"G_GUINT64_FORMAT" %"G_GUINT64_FORMAT" %"G_GUINT64_FORMAT" %"G_GUINT64_FORMAT,
 				time+CPU_USER, time+CPU_NICE, time+CPU_SYS, time+CPU_IDLE, time+CPU_IOWAIT, &irq, &softirq);
+	fclose(f);
 	g_assert_cmpuint(n, ==, 7);
 	time[CPU_IOWAIT] += irq+softirq;
 

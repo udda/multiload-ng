@@ -28,6 +28,7 @@
 
 #include "graph-data.h"
 #include "autoscaler.h"
+#include "info-file.h"
 #include "preferences.h"
 #include "util.h"
 
@@ -85,6 +86,7 @@ list_temp_acpitz(TemperatureSourceData **list, gboolean init)
 
 	gchar buf[PATH_MAX];
 	guint i, j;
+	TemperatureSourceData *li;
 	size_t s;
 
 	(void)s; // shuts off warning by '-Wunused-but-set-variable'
@@ -115,35 +117,37 @@ list_temp_acpitz(TemperatureSourceData **list, gboolean init)
 			if (strncmp(dirent->d_name, "thermal_zone", 12) != 0)
 				continue;
 
+			li = &(*list)[i];
+
 			// fill paths
-			g_snprintf((*list)[i].node_path, sizeof((*list)[i].node_path), "%s/%s", root_node, dirent->d_name);
-			g_snprintf((*list)[i].temp_path, sizeof((*list)[i].temp_path), "%s/temp", (*list)[i].node_path);
+			g_snprintf(li->node_path, sizeof(li->node_path), "%s/%s", root_node, dirent->d_name);
+			g_snprintf(li->temp_path, sizeof(li->temp_path), "%s/temp", li->node_path);
 
 			// fill name from device path if present, else generate unique name
-			g_snprintf(buf, PATH_MAX, "%s/device/path", (*list)[i].node_path);
+			g_snprintf(buf, PATH_MAX, "%s/device/path", li->node_path);
 			if ((f = fopen(buf, "r")) != NULL) {
 				s = fscanf(f, "%s", buf);
 				fclose(f);
 
 				// remove leading path prefix
 				if (strncmp(buf, "\\_TZ_.", 6) == 0)
-					strncpy((*list)[i].name, buf+6, sizeof((*list)[i].name));
+					strncpy(li->name, buf+6, sizeof(li->name));
 				else
-					strncpy((*list)[i].name, buf, sizeof((*list)[i].name));
+					strncpy(li->name, buf, sizeof(li->name));
 			}
-			if ((*list)[i].name[0] == '\0')
-				g_snprintf((*list)[i].name, sizeof((*list)[i].name), "thermal_zone%d (ACPI)", i);
+			if (li->name[0] == '\0')
+				g_snprintf(li->name, sizeof(li->name), "thermal_zone%d (ACPI)", i);
 
 			// find "critical" temperature searching in trip points
 			for (j=0; ; j++) {
-				g_snprintf(buf, PATH_MAX, "%s/trip_point_%d_type", (*list)[i].node_path, j);
+				g_snprintf(buf, PATH_MAX, "%s/trip_point_%d_type", li->node_path, j);
 
-				if ((f = fopen(buf, "r")) == NULL)
+				if (!info_file_exists(buf))
 					break; //no more trip point files, stop searching
 
-				if (file_check_contents(f, "critical")) { // found critical temp
-					g_snprintf(buf, PATH_MAX, "%s/trip_point_%d_temp", (*list)[i].node_path, j);
-					(*list)[i].critical = read_int_from_file(buf) / 1000.0f;
+				if (info_file_has_contents(buf, "critical")) { // found critical temp
+					g_snprintf(buf, PATH_MAX, "%s/trip_point_%d_temp", li->node_path, j);
+					info_file_read_double (buf, &li->critical, 1000.0);
 				}
 
 				fclose(f);
@@ -155,8 +159,10 @@ list_temp_acpitz(TemperatureSourceData **list, gboolean init)
 	}
 
 	// read phase - always return TRUE
-	for (i=0; (*list)[i].temp_path[0] != '\0'; i++)
-		(*list)[i].temp = read_int_from_file((*list)[i].temp_path) / 1000.0f;
+	for (i=0; (*list)[i].temp_path[0] != '\0'; i++) {
+		li = &(*list)[i];
+		info_file_read_double (li->temp_path, &li->temp, 1000.0);
+	}
 
 	return TRUE;
 }
@@ -176,6 +182,7 @@ list_temp_hwmon(TemperatureSourceData **list, gboolean init)
 
 	char name[60];
 	char buf[PATH_MAX];
+	TemperatureSourceData *li;
 	char *tmp;
 	size_t s;
 	guint i, n;
@@ -234,6 +241,8 @@ list_temp_hwmon(TemperatureSourceData **list, gboolean init)
 				if (g_regex_match_simple("^temp[0-9]+_input$", subdirent->d_name, 0, 0) == FALSE)
 					continue;
 
+				li = &(*list)[i];
+
 				// get hwmon driver name
 				g_snprintf(buf, PATH_MAX, "%s/%s/name", root_node, dirent->d_name);
 				f  = fopen(buf, "r");
@@ -249,32 +258,30 @@ list_temp_hwmon(TemperatureSourceData **list, gboolean init)
 				f  = fopen(buf, "r");
 				if (f != NULL) {
 					// build format string to accept spaces too
-					tmp = g_strdup_printf("%%%zu[0-9a-zA-Z ]", sizeof((*list)[i].name)-1);
+					tmp = g_strdup_printf("%%%zu[0-9a-zA-Z ]", sizeof(li->name)-1);
 					s = fscanf(f, tmp, buf);
 					g_free(tmp);
 					fclose(f);
-					g_snprintf((*list)[i].name, sizeof((*list)[i].name), "%s (%s)", buf, name);
+					g_snprintf(li->name, sizeof(li->name), "%s (%s)", buf, name);
 				} else {
 					n = atoi(&subdirent->d_name[4]);
-					g_snprintf((*list)[i].name, sizeof((*list)[i].name), "#%d (%s)", n, name);
+					g_snprintf(li->name, sizeof(li->name), "#%d (%s)", n, name);
 				}
 
 				// fill paths
-				g_snprintf((*list)[i].node_path, sizeof((*list)[i].node_path), "%s/%s", root_node, dirent->d_name);
-				g_snprintf((*list)[i].temp_path, sizeof((*list)[i].temp_path), "%s/%s", (*list)[i].node_path, subdirent->d_name);
+				g_snprintf(li->node_path, sizeof(li->node_path), "%s/%s", root_node, dirent->d_name);
+				g_snprintf(li->temp_path, sizeof(li->temp_path), "%s/%s", li->node_path, subdirent->d_name);
 
 				// look first for temp*_crit, then for temp*_max, else set critical = 0
 				tmp = str_replace(subdirent->d_name, "_input", "_crit");
 				g_snprintf(buf, PATH_MAX, "%s/%s/%s", root_node, dirent->d_name, tmp);
 				g_free(tmp);
-				(*list)[i].critical = read_int_from_file(buf);
-				if ((*list)[i].critical == 0) {
+				if (!info_file_read_double (buf, &li->critical, 1000.0)) {
 					tmp = str_replace(subdirent->d_name, "_input", "_max");
 					g_snprintf(buf, PATH_MAX, "%s/%s/%s", root_node, dirent->d_name, tmp);
 					g_free(tmp);
-					(*list)[i].critical = read_int_from_file(buf);
+					info_file_read_double (buf, &li->critical, 1000.0);
 				}
-				(*list)[i].critical /= 1000.0f;
 
 				i++;
 			}
@@ -285,8 +292,11 @@ list_temp_hwmon(TemperatureSourceData **list, gboolean init)
 	}
 
 	// read phase - always return TRUE
-	for (i=0; (*list)[i].temp_path[0] != '\0'; i++)
-		(*list)[i].temp = read_int_from_file((*list)[i].temp_path) / 1000.0f;
+	for (i=0; (*list)[i].temp_path[0] != '\0'; i++) {
+		li = &(*list)[i];
+		info_file_read_double (li->temp_path, &li->temp, 1000.0);
+	}
+
 
 	return TRUE;
 }

@@ -27,13 +27,11 @@
 #include <stdlib.h>
 
 #include "graph-data.h"
+#include "info-file.h"
 #include "preferences.h"
 #include "util.h"
 
-typedef struct {
-	char key[20];
-	guint64 *address;
-} meminfo_mapping_table;
+#define PATH_MEMINFO "/proc/meminfo"
 
 void
 multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryData *xd)
@@ -50,40 +48,17 @@ multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryDat
 	static guint64 kb_page_cache = 0;
 	static guint64 kb_slab = 0;
 
-	static const meminfo_mapping_table table[] = {
-		{ "MemTotal",		&kb_main_total },
-		{ "MemAvailable",	&kb_main_available},
-		{ "MemFree",		&kb_main_free},
-		{ "Buffers",		&kb_main_buffers },
-		{ "Cached",			&kb_page_cache },
-		{ "Slab",			&kb_slab },
-		{ "",				NULL }
+	static const InfoFileMappingEntry table[] = {
+		{ "MemTotal",		'u',	&kb_main_total },
+		{ "MemAvailable",	'u',	&kb_main_available},
+		{ "MemFree",		'u',	&kb_main_free},
+		{ "Buffers",		'u',	&kb_main_buffers },
+		{ "Cached",			'u',	&kb_page_cache },
+		{ "Slab",			'u',	&kb_slab }
 	};
 
-	char *buf = NULL;
-	char *tmp;
-	size_t n = 0;
-	size_t len;
-	guint i;
-
-	FILE *f = cached_fopen_r("/proc/meminfo", FALSE);
-	while(getline(&buf, &n, f) >= 0) {
-		for (i=0; table[i].address != NULL; i++) {
-			len = strlen(table[i].key);
-			if (strncmp(buf, table[i].key, len) == 0) {
-				// tmp will start with numeric value
-				for (tmp = buf+len+1; isspace(tmp[0]); tmp++);
-
-				errno = 0;
-				*(table[i].address) = g_ascii_strtoull(tmp, NULL, 0);
-				if (errno != 0)
-					g_warning("[graph-mem] Parsing of key %s failed", table[i].key);
-
-				break;
-			}
-		}
-	}
-	free(buf);
+	gint r = info_file_read_keys (PATH_MEMINFO, table, 6);
+	g_assert_cmpint(r, ==, 6);
 
 	kb_main_cached = kb_page_cache;
 	if (xd->procps_compliant)

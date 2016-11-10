@@ -28,6 +28,7 @@
 
 #include "graph-data.h"
 #include "autoscaler.h"
+#include "info-file.h"
 #include "preferences.h"
 #include "util.h"
 
@@ -46,7 +47,8 @@ multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
 
 	MultiloadFilter *filter = multiload_filter_new();
 
-	FILE *f = cached_fopen_r("/proc/partitions", TRUE);
+	FILE *f = info_file_required_fopen("/proc/partitions", "r");
+
 	while(getline(&buf, &n, f) >= 0) {
 		if (1 != fscanf(f, "%*u %*u %*u %s", device))
 			continue;
@@ -74,7 +76,9 @@ multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
 
 		multiload_filter_append(filter, device);
 	}
+
 	g_free(buf);
+	fclose(f);
 
 	multiload_filter_import_existing(filter, g->config->filter);
 
