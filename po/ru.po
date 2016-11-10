@@ -580,22 +580,22 @@ msgstr ""
 "стола. Порядок графиков может измениться"
 
 msgid "Extra settings"
-msgstr ""
+msgstr "Дополнительно"
 
 msgid "Order of graphs (drag to rearrange)"
-msgstr ""
+msgstr "Порядок (для перестановки - перетащить)"
 
 msgid "Battery"
-msgstr ""
+msgstr "Батарея"
 
 msgid "Charging"
-msgstr ""
+msgstr "Зарядка"
 
 msgid "Discharging"
-msgstr ""
+msgstr "Разрядка"
 
 msgid "Capacity: %d%%"
-msgstr ""
+msgstr "Заряд: %d%%"
 
 msgid "Critical level"
-msgstr ""
+msgstr "Критический уровень"
