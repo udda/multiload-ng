@@ -34,7 +34,7 @@
 #define PATH_MEMINFO "/proc/meminfo"
 
 void
-multiload_graph_swap_get_data (int Maximum, int data [1], LoadGraph *g, SwapData *xd)
+multiload_graph_swap_get_data (int Maximum, int data [1], LoadGraph *g, SwapData *xd, gboolean first_call)
 {
 	// displayed keys
 	static guint64 kb_swap_total = 0;

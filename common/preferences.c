@@ -677,7 +677,7 @@ multiload_preferences_parm_command_test_clicked_cb (GtkWidget *button, Multiload
 {
 	ParametricData *xd = (ParametricData*)ma->extra_data[GRAPH_PARAMETRIC];
 	// test command line and fill structure with result
-	multiload_graph_parm_get_data(0, NULL, NULL, xd);
+	multiload_graph_parm_get_data(0, NULL, NULL, xd, FALSE);
 
 	GtkWindow *parent = GTK_WINDOW(gtk_widget_get_toplevel(button));
 

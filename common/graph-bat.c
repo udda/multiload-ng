@@ -34,90 +34,92 @@
 
 
 #define CRITICAL_LEVEL 4
+#define PATH_POWER_SUPPLY "/sys/class/power_supply"
+
+static gboolean battery_found = FALSE;
+static gchar path_battery_root[PATH_MAX];
+static gchar path_battery_capacity[PATH_MAX];
+static gchar path_battery_status[PATH_MAX];
+static gchar path_battery_capacity_level[PATH_MAX];
 
 void
-multiload_graph_bat_get_data (int Maximum, int data [2], LoadGraph *g, BatteryData *xd)
+multiload_graph_bat_init (LoadGraph *g, BatteryData *xd)
 {
-	static const char *root_node = "/sys/class/power_supply";
-	static gboolean first_call = TRUE;
-	static gchar battery_path[PATH_MAX];
-
 	gchar buf[PATH_MAX];
-	gchar status_path[PATH_MAX];
-	gchar capacity_path[PATH_MAX];
-	gchar capacity_level_path[PATH_MAX];
-	size_t s;
+	struct dirent *dirent;
 
-	(void)s; // shuts off warning by '-Wunused-but-set-variable'
+	// check if /sys node exists, otherwise means no battery support or no battery at all
+	DIR *dir = opendir(PATH_POWER_SUPPLY);
+	if (dir == NULL)
+		return;
 
-	if (G_UNLIKELY(first_call)) {
-		first_call = FALSE;
-		battery_path[0] = '\0';
+	while ((dirent = readdir(dir)) != NULL) {
+		g_snprintf(path_battery_root, PATH_MAX, "%s/%s", PATH_POWER_SUPPLY, dirent->d_name);
 
-		// check if /sys node exists, otherwise means no battery support or no battery at all
-		struct dirent *dirent;
-		DIR *dir = opendir(root_node);
-		if (dir == NULL)
-			return;
+		// check type
+		g_snprintf(buf, PATH_MAX, "%s/type", path_battery_root);
+		if (!info_file_exists(buf) || !info_file_has_contents(buf, "Battery"))
+			continue;
 
-		while ((dirent = readdir(dir)) != NULL) {
-			// check type
-			g_snprintf(buf, PATH_MAX, "%s/%s/type", root_node, dirent->d_name);
-			if (!info_file_exists(buf) || !info_file_has_contents(buf, "Battery"))
-				continue;
+		// check capacity
+		g_snprintf(path_battery_capacity, PATH_MAX, "%s/capacity", path_battery_root);
+		if (!info_file_exists(path_battery_capacity))
+			continue;
 
-			// check capacity
-			g_snprintf(capacity_path, PATH_MAX, "%s/%s/capacity", root_node, dirent->d_name);
-			if (!info_file_exists(capacity_path))
-				continue;
-
-			// check present
-			g_snprintf(buf, PATH_MAX, "%s/%s/present", root_node, dirent->d_name);
-			if (info_file_exists(buf) && !info_file_has_contents(buf, "1"))
-				continue;
+		// check present
+		g_snprintf(buf, PATH_MAX, "%s/present", path_battery_root);
+		if (info_file_exists(buf) && !info_file_has_contents(buf, "1"))
+			continue;
 
 
-			// Battery found! Set base paths
-			g_snprintf(battery_path, PATH_MAX, "%s/%s", root_node, dirent->d_name);
-			g_snprintf(status_path, PATH_MAX, "%s/status", battery_path);
-			g_snprintf(capacity_level_path, PATH_MAX, "%s/capacity_level", battery_path);
+		// Battery found! Set base paths
+		g_snprintf(path_battery_status, PATH_MAX, "%s/status", path_battery_root);
+		g_snprintf(path_battery_capacity_level, PATH_MAX, "%s/capacity_level", path_battery_root);
 
-			// set battery name
-			gchar manufacturer[PATH_MAX];
-			gchar model_name[PATH_MAX];
 
-			g_snprintf(buf, PATH_MAX, "%s/manufacturer", battery_path);
-			if (!info_file_read_string_s (buf, manufacturer, sizeof(manufacturer), NULL))
-				manufacturer[0] = '\0';
+		// set battery name
+		gchar manufacturer[PATH_MAX];
+		gchar model_name[PATH_MAX];
 
-			g_snprintf(buf, PATH_MAX, "%s/model_name", battery_path);
-			if (!info_file_read_string_s (buf, model_name, sizeof(model_name), NULL))
-				model_name[0] = '\0';
+		g_snprintf(buf, PATH_MAX, "%s/manufacturer", path_battery_root);
+		if (!info_file_read_string_s (buf, manufacturer, sizeof(manufacturer), NULL))
+			manufacturer[0] = '\0';
 
-			g_snprintf(xd->battery_name, sizeof(xd->battery_name), "%s %s", manufacturer, model_name);
+		g_snprintf(buf, PATH_MAX, "%s/model_name", path_battery_root);
+		if (!info_file_read_string_s (buf, model_name, sizeof(model_name), NULL))
+			model_name[0] = '\0';
 
-			break;
-		}
-		closedir(dir);
+		g_snprintf(xd->battery_name, sizeof(xd->battery_name), "%s %s", manufacturer, model_name);
+
+		battery_found = TRUE;
+
+		break;
 	}
+	closedir(dir);
+}
 
-	if (battery_path[0] == '\0')
+void
+multiload_graph_bat_get_data (int Maximum, int data [3], LoadGraph *g, BatteryData *xd, gboolean first_call)
+{
+	if (!battery_found)
 		return;
 
 	// status
-	if (info_file_exists(status_path)) {
-		xd->is_charging = !info_file_has_contents(status_path, "Discharging");
+	if (info_file_exists(path_battery_status)) {
+		xd->is_charging = !info_file_has_contents(path_battery_status, "Discharging");
 	} else {
 		xd->is_charging = FALSE;
 	}
 
 	// capacity
-	if (!info_file_read_int64 (capacity_path, (gint64*)&xd->percent))
+	gint64 capacity;
+	if (!info_file_read_int64 (path_battery_capacity, &capacity))
 		return;
+	xd->percent = (int)capacity;
 
 	// capacity level
-	if (info_file_exists(capacity_level_path)) {
-		xd->is_critical = info_file_has_contents(capacity_level_path, "Critical");
+	if (info_file_exists(path_battery_capacity_level)) {
+		xd->is_critical = info_file_has_contents(path_battery_capacity_level, "Critical");
 	} else {
 		xd->is_critical = (xd->percent <= CRITICAL_LEVEL);
 	}

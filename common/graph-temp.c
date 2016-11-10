@@ -52,26 +52,8 @@ typedef enum {
 	TEMP_SOURCE_NO_SUPPORT
 } TemperatureSourceSupport;
 
-static TemperatureSourceSupport list_temp(TemperatureSourceData **list);
-
-MultiloadFilter *
-multiload_graph_temp_get_filter (LoadGraph *g, TemperatureData *xd)
-{
-	TemperatureSourceData *list = NULL;
-	guint i;
-
-	MultiloadFilter *filter = multiload_filter_new();
-
-	if (list_temp(&list) != TEMP_SOURCE_NO_SUPPORT) {
-		for (i=0; list[i].temp_path[0]!='\0'; i++)
-			multiload_filter_append(filter, list[i].name);
-
-		multiload_filter_import_existing(filter, g->config->filter);
-	}
-	g_free(list);
-
-	return filter;
-}
+static TemperatureSourceSupport sources_support = TEMP_SOURCE_SUPPORT_UNINITIALIZED;
+static TemperatureSourceData *sources_list = NULL;
 
 static gboolean
 list_temp_acpitz(TemperatureSourceData **list, gboolean init)
@@ -313,29 +295,44 @@ list_temp(TemperatureSourceData **list)
 }
 
 void
-multiload_graph_temp_get_data (int Maximum, int data[2], LoadGraph *g, TemperatureData *xd)
+multiload_graph_temp_init (LoadGraph *g, TemperatureData *xd)
 {
-	static TemperatureSourceSupport support = TEMP_SOURCE_SUPPORT_UNINITIALIZED;
-	static TemperatureSourceData *list = NULL;
+	sources_support = list_temp(&sources_list);
+}
+
+MultiloadFilter *
+multiload_graph_temp_get_filter (LoadGraph *g, TemperatureData *xd)
+{
+	TemperatureSourceData *list = NULL;
+	guint i;
+
+	MultiloadFilter *filter = multiload_filter_new();
+
+	if (list_temp(&list) != TEMP_SOURCE_NO_SUPPORT) {
+		for (i=0; list[i].temp_path[0]!='\0'; i++)
+			multiload_filter_append(filter, list[i].name);
+
+		multiload_filter_import_existing(filter, g->config->filter);
+	}
+	g_free(list);
+
+	return filter;
+}
+
+void
+multiload_graph_temp_get_data (int Maximum, int data[2], LoadGraph *g, TemperatureData *xd, gboolean first_call)
+{
 	TemperatureSourceData *use = NULL;
 
 	guint i, m;
 
-	if (G_UNLIKELY(support == TEMP_SOURCE_NO_SUPPORT))
-		return;
-
-	// initialization phase: looks for support type and builds static data
-	if (G_UNLIKELY(support == TEMP_SOURCE_SUPPORT_UNINITIALIZED)) {
-		support = list_temp(&list);
-	}
-
 	// read phase: fills in current temperature values
-	switch (support) {
+	switch (sources_support) {
 		case TEMP_SOURCE_SUPPORT_HWMON:
-			list_temp_hwmon(&list, FALSE);
+			list_temp_hwmon(&sources_list, FALSE);
 			break;
 		case TEMP_SOURCE_SUPPORT_ACPITZ:
-			list_temp_acpitz(&list, FALSE);
+			list_temp_acpitz(&sources_list, FALSE);
 			break;
 		case TEMP_SOURCE_NO_SUPPORT:
 			return;
@@ -346,21 +343,21 @@ multiload_graph_temp_get_data (int Maximum, int data[2], LoadGraph *g, Temperatu
 
 	// select phase: choose which source to show
 	if (g->config->filter_enable && g->config->filter[0] != '\0') {
-		for (i=0; list[i].temp_path[0]!='\0'; i++) {
-			if (strcmp(list[i].name, g->config->filter) == 0) {
-				use = &list[i];
-				g_debug("[graph-temp] Using source '%s' (selected by filter)", list[i].name);
+		for (i=0; sources_list[i].temp_path[0]!='\0'; i++) {
+			if (strcmp(sources_list[i].name, g->config->filter) == 0) {
+				use = &sources_list[i];
+				g_debug("[graph-temp] Using source '%s' (selected by filter)", sources_list[i].name);
 				break;
 			}
 			g_debug("[graph-temp] No source found for filter '%s'", g->config->filter);
 		}
 	}
 	if (use == NULL) { // filter disabled or filter value not found - auto selection
-		for (i=1, m=0; list[i].temp_path[0]!='\0'; i++) {
-			if (list[i].temp > list[m].temp)
+		for (i=1, m=0; sources_list[i].temp_path[0]!='\0'; i++) {
+			if (sources_list[i].temp > sources_list[m].temp)
 				m = i;
 		}
-		use = &list[m];
+		use = &sources_list[m];
 	}
 
 	// output phase

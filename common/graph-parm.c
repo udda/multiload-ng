@@ -31,7 +31,7 @@
 
 
 void
-multiload_graph_parm_get_data (int Maximum, int data[1], LoadGraph *g, ParametricData *xd)
+multiload_graph_parm_get_data (int Maximum, int data[4], LoadGraph *g, ParametricData *xd, gboolean first_call)
 {
 	int max;
 	gboolean spawn_success;

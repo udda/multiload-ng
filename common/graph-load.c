@@ -40,10 +40,21 @@ enum {
 
 #define PATH_LOADAVG "/proc/loadavg"
 
+
 void
-multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData *xd)
+multiload_graph_load_init (LoadGraph *g, LoadData *xd)
 {
-	static gboolean first_call = TRUE;
+	struct utsname un;
+	if (0 == uname(&un)) {
+		g_snprintf(xd->uname, sizeof(xd->uname), "%s %s (%s)", un.sysname, un.release, un.machine);
+	} else {
+		g_warning("uname() failed: could not get kernel name and version.");
+	}
+}
+
+void
+multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData *xd, gboolean first_call)
+{
 	int n;
 
 	// load average
@@ -55,16 +66,6 @@ multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData
 	n = fscanf(f, "%*s %*s %*s %u/%u", &xd->proc_active, &xd->proc_count);
 	fclose(f);
 	g_assert_cmpint(n, ==, 2);
-
-	if (G_UNLIKELY(first_call)) {
-		struct utsname un;
-		first_call = FALSE;
-		if (0 == uname(&un)) {
-			g_snprintf(xd->uname, sizeof(xd->uname), "%s %s (%s)", un.sysname, un.release, un.machine);
-		} else {
-			g_warning("uname() failed: could not get kernel name and version.");
-		}
-	}
 
 	int max = autoscaler_get_max(&xd->scaler, g, rint(xd->loadavg[LOADAVG_1]));
 	if (max == 0) {

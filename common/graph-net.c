@@ -62,6 +62,12 @@ sort_if_data_by_ifindex (gconstpointer a, gconstpointer b)
 }
 
 
+void
+multiload_graph_net_init (LoadGraph *g, NetData *xd)
+{
+
+}
+
 MultiloadFilter *
 multiload_graph_net_get_filter (LoadGraph *g, NetData *xd)
 {
@@ -95,7 +101,7 @@ multiload_graph_net_get_filter (LoadGraph *g, NetData *xd)
 
 
 void
-multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *xd)
+multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *xd, gboolean first_call)
 {
 	enum {
 		NET_IN		= 0,
@@ -106,7 +112,6 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 	};
 
 	static GHashTable *table = NULL;
-	static gboolean first_call = TRUE;
 
 	char *buf = NULL;
 	char tmp[PATH_MAX];
@@ -121,11 +126,6 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 
 	if_data d;
 	if_data *d_ptr;
-
-	if (g->filter_changed) {
-		first_call = TRUE;
-		g->filter_changed = FALSE;
-	}
 
 	GArray *valid_ifaces = g_array_sized_new(TRUE, FALSE, sizeof(if_data), 10);
 
@@ -253,12 +253,12 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 	xd->ifaces[strlen(xd->ifaces)-2] = 0;
 
 
-	if (G_UNLIKELY(first_call)) { // avoid initial spike
-		first_call = FALSE;
-
+	if (G_UNLIKELY(first_call || g->filter_changed)) { // avoid initial spike
 		xd->in_speed = 0;
 		xd->out_speed = 0;
 		xd->local_speed = 0;
+
+		g->filter_changed = FALSE;
 
 		memset(data, 0, NET_MAX * sizeof data[0]);
 	} else {

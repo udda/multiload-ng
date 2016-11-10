@@ -110,6 +110,7 @@ struct _LoadGraph {
 	gboolean allocated;
 	gboolean tooltip_update;
 	gboolean filter_changed;
+	gboolean first_update;
 
 	GraphUpdateFunc update_cb;
 	gpointer update_cb_user_data;

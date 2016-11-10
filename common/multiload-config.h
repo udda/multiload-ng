@@ -34,7 +34,8 @@
 
 G_BEGIN_DECLS
 
-typedef void 				(*GraphGetDataFunc)			(int id, int data[], LoadGraph *g, gpointer xd);
+typedef void 				(*GraphInitFunc)			(LoadGraph *g, gpointer xd);
+typedef void 				(*GraphGetDataFunc)			(int Maximum, int data[], LoadGraph *g, gpointer xd, gboolean first_call);
 typedef void				(*GraphTooltipUpdateFunc)	(char **title, char **text, LoadGraph *g, gpointer xd);
 typedef void				(*GraphCmdlineOutputFunc)	(LoadGraph *g, gpointer xd);
 typedef MultiloadFilter*	(*GraphGetFilterFunc)		(LoadGraph *g, gpointer xd);
@@ -46,6 +47,7 @@ typedef struct _GraphType {
 	const gint scaler_max;			// fixed max value, or -1 for autoscaler
 	const gint scaler_max_floor;	// fixed minimum value of scaler max, or -1 for default
 	const gchar output_unit[10];
+	const GraphInitFunc init;
 	const GraphGetDataFunc get_data;
 	const GraphTooltipUpdateFunc tooltip_update;
 	const GraphCmdlineOutputFunc cmdline_output;

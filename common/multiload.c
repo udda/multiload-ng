@@ -334,9 +334,6 @@ multiload_new()
 	ma->container = GTK_CONTAINER(gtk_event_box_new ());
 	gtk_widget_show (GTK_WIDGET(ma->container));
 
-	for (i=0; i < GRAPH_MAX; i++)
-		ma->graphs[i] = load_graph_new (ma, i);
-
 	ma->extra_data[GRAPH_CPULOAD]		= (gpointer)g_new0(CpuData, 1);
 	ma->extra_data[GRAPH_MEMLOAD]		= (gpointer)g_new0(MemoryData, 1);
 	ma->extra_data[GRAPH_NETLOAD]		= (gpointer)g_new0(NetData, 1);
@@ -346,6 +343,12 @@ multiload_new()
 	ma->extra_data[GRAPH_TEMPERATURE]	= (gpointer)g_new0(TemperatureData, 1);
 	ma->extra_data[GRAPH_BATTERY]		= (gpointer)g_new0(BatteryData, 1);
 	ma->extra_data[GRAPH_PARAMETRIC]	= (gpointer)g_new0(ParametricData, 1);
+
+	for (i=0; i < GRAPH_MAX; i++) {
+		ma->graphs[i] = load_graph_new (ma, i);
+		if ( graph_types[i].init != NULL )
+			graph_types[i].init(ma->graphs[i], ma->extra_data[i]);
+	}
 
 	return ma;
 }

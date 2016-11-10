@@ -34,7 +34,7 @@
 #define PATH_MEMINFO "/proc/meminfo"
 
 void
-multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryData *xd)
+multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryData *xd, gboolean first_call)
 {
 	// displayed keys
 	static guint64 kb_main_total = 0;

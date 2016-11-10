@@ -87,10 +87,8 @@ multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
 
 
 void
-multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData *xd)
+multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData *xd, gboolean first_call)
 {
-	static gboolean first_call = TRUE;
-
 	FILE *f_mntent;
 	FILE *f_stat;
 	struct mntent *mnt;
@@ -190,9 +188,7 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 	xd->last_read  = read_total;
 	xd->last_write = write_total;
 
-	if (first_call) { // cannot calculate diff on first call
-		first_call = FALSE;
-	} else {
+	if (G_LIKELY(!first_call)) { // cannot calculate diff on first call
 		max = autoscaler_get_max(&xd->scaler, g, readdiff + writediff);
 
 		if (max == 0) {

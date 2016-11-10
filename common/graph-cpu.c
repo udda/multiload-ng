@@ -46,12 +46,28 @@ enum {
 #define PATH_CPUINFO "/proc/cpuinfo"
 #define PATH_STAT "/proc/stat"
 
-void
-multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *xd)
-{
-	static gboolean first_call = TRUE;
-	static gboolean have_cpufreq = TRUE;
 
+static gboolean have_cpufreq;
+
+
+void
+multiload_graph_cpu_init (LoadGraph *g, CpuData *xd)
+{
+	info_file_read_key_string_s (PATH_CPUINFO, "model name", xd->cpu0_name, sizeof(xd->cpu0_name), NULL);
+
+	xd->num_cpu = info_file_count_key_values (PATH_CPUINFO, "processor");
+
+	have_cpufreq = info_file_exists(PATH_CPUFREQ);
+	if (!have_cpufreq) {
+		//xgettext: Not Available
+		strcpy(xd->cpu0_governor, _("N/A"));
+		g_debug("[graph-cpu] cpufreq scaling support not found");
+	}
+}
+
+void
+multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *xd, gboolean first_call)
+{
 	guint64 irq, softirq, total;
 	guint i;
 
@@ -59,18 +75,6 @@ multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *
 	guint64 diff[CPU_MAX];
 
 	size_t n;
-
-	if (first_call) {
-		info_file_read_key_string_s (PATH_CPUINFO, "model name", xd->cpu0_name, sizeof(xd->cpu0_name), NULL);
-		xd->num_cpu = info_file_count_key_values (PATH_CPUINFO, "processor");
-
-		have_cpufreq = info_file_exists(PATH_CPUFREQ);
-		if (!have_cpufreq) {
-			//xgettext: Not Available
-			strcpy(xd->cpu0_governor, _("N/A"));
-			g_debug("[graph-cpu] cpufreq scaling support not found");
-		}
-	}
 
 	info_file_read_key_double (PATH_CPUINFO, "cpu MHz", &xd->cpu0_mhz, 1);
 	info_file_read_double (PATH_UPTIME, &xd->uptime, 1);
@@ -88,9 +92,7 @@ multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *
 	g_assert_cmpuint(n, ==, 7);
 	time[CPU_IOWAIT] += irq+softirq;
 
-	if (G_UNLIKELY(first_call)) {
-		first_call = FALSE;
-	} else {
+	if (G_LIKELY(!first_call)) { // cannot calculate diff on first call
 		for (i=0, total=0; i<CPU_MAX; i++) {
 			diff[i] = time[i] - xd->last[i];
 			total += diff[i];

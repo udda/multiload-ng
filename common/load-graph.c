@@ -221,7 +221,9 @@ load_graph_update (LoadGraph *g)
 
 	g_assert(g->multiload->extra_data != NULL);
 	guint H = g->draw_height - 2 * (g->multiload->graph_config[g->id].border_width);
-	graph_types[g->id].get_data(H, g->data [0], g, g->multiload->extra_data[g->id]);
+	graph_types[g->id].get_data(H, g->data [0], g, g->multiload->extra_data[g->id], g->first_update);
+
+	g->first_update = FALSE;
 
 	if (g->tooltip_update)
 		multiload_tooltip_update(g);
@@ -230,6 +232,7 @@ load_graph_update (LoadGraph *g)
 
 	if (g->update_cb)
 		g->update_cb(g, g->update_cb_user_data);
+
 	return TRUE;
 }
 
@@ -425,6 +428,7 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 	gtk_box_pack_start (GTK_BOX (g->main_widget), g->box, TRUE, TRUE, 0);
 
 	g->timer_index = -1;
+	g->first_update = TRUE;
 
 	load_graph_resize(g);
 
