@@ -42,7 +42,8 @@ multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
 	char *buf = NULL;
 	size_t n = 0;
 
-	char device[20], prefix[20];
+	guint64 blocks;
+	char device[20], prefix[20], label[30];
 	guint i;
 
 	MultiloadFilter *filter = multiload_filter_new();
@@ -50,7 +51,7 @@ multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
 	FILE *f = info_file_required_fopen("/proc/partitions", "r");
 
 	while(getline(&buf, &n, f) >= 0) {
-		if (1 != fscanf(f, "%*u %*u %*u %s", device))
+		if (2 != fscanf(f, "%*u %*u %"G_GUINT64_FORMAT" %s", &blocks, device))
 			continue;
 
 		// extract block device and partition names
@@ -74,7 +75,11 @@ multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
 		if (access(sysfs_path, R_OK) != 0)
 			continue;
 
-		multiload_filter_append(filter, device);
+		gchar *size = format_size_for_display(blocks*1024, g->multiload->size_format_iec);
+		g_snprintf(label, sizeof(label), "%s (%s)", device, size);
+		g_free(size);
+
+		multiload_filter_append_with_label(filter, device, label);
 	}
 
 	g_free(buf);
