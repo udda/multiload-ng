@@ -278,12 +278,12 @@ Note that XFCE 4.12 or greater is required for GTK+3 plugin.
 
 ## Install instructions
 
-### Official support
+### Package generators
 Take a look at [extras directory](https://github.com/udda/multiload-ng/tree/master/extras).
 There are scripts for most Linux distributions, that generate packages which can
-be then installed through package managers.
+be then installed through package managers. This is the preferred method.
 
-### Unofficial support
+### External support
 - For Ubuntu/Mint and derivatives, [WebUpd8 PPA](https://launchpad.net/~nilarimogard/+archive/ubuntu/webupd8) hosts **stable** packages for all supported panels.
 Read how to install [here](http://www.webupd8.org/2016/10/multiload-ng-140-gnome-twitch-030.html) (instructions are valid for all versions).
 - Arch users can install XFCE version from AUR ([stable](https://aur.archlinux.org/packages/xfce4-multiload-ng-plugin/), [unstable](https://aur.archlinux.org/packages/xfce4-multiload-ng-plugin/))
