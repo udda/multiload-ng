@@ -39,14 +39,14 @@ typedef struct {
 	guint64 rx_bytes;
 	guint64 tx_bytes;
 
-	FILE *f_address;
-	char address[40]; // IPv6
+	gchar path_address[PATH_MAX];
+	char address[40]; // enough for IPv6 addresses
 
-	FILE* f_flags;
-	guint flags;
+	gchar path_flags[PATH_MAX];
+	guint64 flags;
 
-	FILE *f_ifindex;
-	guint ifindex;
+	gchar path_ifindex[PATH_MAX];
+	guint64 ifindex;
 } if_data;
 
 
@@ -114,7 +114,6 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 	static GHashTable *table = NULL;
 
 	char *buf = NULL;
-	char tmp[PATH_MAX];
 	size_t n = 0;
 	uint i,j;
 	ulong valid_ifaces_len=0;
@@ -151,24 +150,11 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 			d_ptr = g_new(if_data,1);
 			strcpy(d_ptr->name, d.name);
 
-			sprintf(tmp, "/sys/class/net/%s/address", d_ptr->name);
-			d_ptr->f_address = fopen(tmp, "r");
-			if (d_ptr->f_address == NULL) {
-				g_free(d_ptr);
-				continue;
-			}
-
-			sprintf(tmp, "/sys/class/net/%s/flags", d_ptr->name);
-			d_ptr->f_flags = fopen(tmp, "r");
-			if (d_ptr->f_flags == NULL) {
-				g_free(d_ptr);
-				continue;
-			}
-
-			sprintf(tmp, "/sys/class/net/%s/ifindex", d_ptr->name);
-			d_ptr->f_ifindex = fopen(tmp, "r");
-			if (d_ptr->f_ifindex == NULL) {
-				g_free(d_ptr);
+			sprintf(d_ptr->path_address, "/sys/class/net/%s/address", d_ptr->name);
+			sprintf(d_ptr->path_flags, "/sys/class/net/%s/flags", d_ptr->name);
+			sprintf(d_ptr->path_ifindex, "/sys/class/net/%s/ifindex", d_ptr->name);
+			if (!info_file_exists(d_ptr->path_address) || !info_file_exists(d_ptr->path_flags) || !info_file_exists(d_ptr->path_ifindex)) {
+				g_free (d_ptr);
 				continue;
 			}
 
@@ -178,20 +164,15 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 		d_ptr->rx_bytes = d.rx_bytes;
 		d_ptr->tx_bytes = d.tx_bytes;
 
-		rewind(d_ptr->f_flags);
-		if (1 != fscanf(d_ptr->f_flags, "%x", &d_ptr->flags))
-			continue; // bad data
+		if (!info_file_read_hex64(d_ptr->path_flags, &d_ptr->flags))
+			continue;
+		if (!info_file_read_string_s(d_ptr->path_address, d_ptr->address, sizeof(d_ptr->address), NULL))
+			continue;
+		if (!info_file_read_uint64(d_ptr->path_ifindex, &d_ptr->ifindex))
+			continue;
 
 		if (!(d_ptr->flags & IFF_UP))
 			continue; // device is down, ignore
-
-		rewind(d_ptr->f_address);
-		if (1 != fscanf(d_ptr->f_address, "%s", d_ptr->address))
-			continue; // bad data
-
-		rewind(d_ptr->f_ifindex);
-		if (1 != fscanf(d_ptr->f_ifindex, "%u", &d_ptr->ifindex))
-			continue; // bad data
 
 		// all OK - add interface to valid list
 		g_array_append_val(valid_ifaces, *d_ptr);
