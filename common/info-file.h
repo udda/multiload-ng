@@ -44,7 +44,7 @@ info_file_exists (const gchar *path);
 
 G_GNUC_INTERNAL
 gboolean
-info_file_has_contents (const gchar *path, const gchar *contents);
+info_file_has_contents (const gchar *path, const gchar *contents, gboolean case_sensitive);
 
 G_GNUC_INTERNAL
 gboolean

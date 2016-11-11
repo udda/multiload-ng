@@ -39,7 +39,7 @@ info_file_exists (const gchar *path)
 }
 
 gboolean
-info_file_has_contents (const gchar *path, const gchar *contents)
+info_file_has_contents (const gchar *path, const gchar *contents, gboolean case_sensitive)
 {
 	if (path == NULL || contents == NULL)
 		return FALSE;
@@ -55,12 +55,14 @@ info_file_has_contents (const gchar *path, const gchar *contents)
 
 	size_t s = fread(buf, 1, n, f);
 
-	if (s != n)
+	if (s != n) {
 		result = FALSE;
-	else if (strncmp(buf, contents, n) != 0)
-		result = FALSE;
-	else
-		result = TRUE;
+	} else {
+		if (case_sensitive)
+			result = (strncmp(buf, contents, n) == 0);
+		else
+			result = (g_ascii_strncasecmp(buf, contents, n) == 0);
+	}
 
 	g_free(buf);
 	fclose(f);
