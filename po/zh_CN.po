@@ -590,7 +590,7 @@ msgstr ""
 msgid "Discharging"
 msgstr ""
 
-msgid "Capacity: %d%%"
+msgid "Capacity: %.1f%%"
 msgstr ""
 
 msgid "Critical level"

@@ -599,8 +599,8 @@ msgstr "In carica"
 msgid "Discharging"
 msgstr "Non in carica"
 
-msgid "Capacity: %d%%"
-msgstr "Capacità: %d%%"
+msgid "Capacity: %.1f%%"
+msgstr "Capacità: %.1f%%"
 
 msgid "Critical level"
 msgstr "Livello critico"

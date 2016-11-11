@@ -594,8 +594,8 @@ msgstr "Зарядка"
 msgid "Discharging"
 msgstr "Разрядка"
 
-msgid "Capacity: %d%%"
-msgstr "Заряд: %d%%"
+msgid "Capacity: %.1f%%"
+msgstr "Заряд: %.1f%%"
 
 msgid "Critical level"
 msgstr "Критический уровень"

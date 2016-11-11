@@ -606,8 +606,8 @@ msgstr "Įkraunama"
 msgid "Discharging"
 msgstr "Išsikrauna"
 
-msgid "Capacity: %d%%"
-msgstr "Talpa: %d%%"
+msgid "Capacity: %.1f%%"
+msgstr "Talpa: %.1f%%"
 
 msgid "Critical level"
 msgstr "Kritinis lygis"
