@@ -127,7 +127,7 @@ list_temp_acpitz(TemperatureSourceData **list, gboolean init)
 				if (!info_file_exists(buf))
 					break; //no more trip point files, stop searching
 
-				if (info_file_has_contents(buf, "critical")) { // found critical temp
+				if (info_file_has_contents(buf, "critical", FALSE)) { // found critical temp
 					g_snprintf(buf, PATH_MAX, "%s/trip_point_%d_temp", li->node_path, j);
 					info_file_read_double (buf, &li->critical, 1000.0);
 				}
