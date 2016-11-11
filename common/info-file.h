@@ -29,7 +29,7 @@
 
 typedef struct {
 	gchar *key;
-	gchar type; // one of 's', 'i', 'u', 'd'
+	gchar type; // one of 's', 'i', 'u', 'x', 'd'
 	gpointer address;
 } InfoFileMappingEntry;
 
@@ -64,6 +64,10 @@ info_file_read_uint64 (const gchar *path, guint64 *out);
 
 G_GNUC_INTERNAL
 gboolean
+info_file_read_hex64 (const gchar *path, guint64 *out);
+
+G_GNUC_INTERNAL
+gboolean
 info_file_read_double (const gchar *path, gdouble *out, gdouble scale);
 
 
@@ -78,6 +82,10 @@ info_file_read_key_int64 (const gchar *path, const gchar *key, gint64 *out);
 G_GNUC_INTERNAL
 gboolean
 info_file_read_key_uint64 (const gchar *path, const gchar *key, guint64 *out);
+
+G_GNUC_INTERNAL
+gboolean
+info_file_read_key_hex64 (const gchar *path, const gchar *key, guint64 *out);
 
 G_GNUC_INTERNAL
 gboolean

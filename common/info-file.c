@@ -152,6 +152,24 @@ info_file_read_uint64 (const gchar *path, guint64 *out)
 }
 
 gboolean
+info_file_read_hex64 (const gchar *path, guint64 *out)
+{
+	if (path == NULL || out == NULL)
+		return FALSE;
+
+	gchar buf[30];
+	gchar *endptr;
+	if (!info_file_read_string_s(path, buf, sizeof(buf), NULL))
+		return FALSE;
+
+	*out = g_ascii_strtoull (buf, &endptr, 16);
+	if (buf == endptr)
+		return FALSE;
+
+	return TRUE;
+}
+
+gboolean
 info_file_read_double (const gchar *path, gdouble *out, gdouble scale)
 {
 	if (path == NULL || out == NULL || scale <= 0)
@@ -268,6 +286,24 @@ info_file_read_key_uint64 (const gchar *path, const gchar *key, guint64 *out)
 }
 
 gboolean
+info_file_read_key_hex64 (const gchar *path, const gchar *key, guint64 *out)
+{
+	if (path == NULL || key == NULL || out == NULL)
+		return FALSE;
+
+	gchar buf[30];
+	gchar *endptr;
+	if (!info_file_read_key_string_s(path, key, buf, sizeof(buf), NULL))
+		return FALSE;
+
+	*out = g_ascii_strtoull (buf, &endptr, 16);
+	if (buf == endptr)
+		return FALSE;
+
+	return TRUE;
+}
+
+gboolean
 info_file_read_key_double (const gchar *path, const gchar *key, gdouble *out, gdouble scale)
 {
 	if (path == NULL || key == NULL || out == NULL)
@@ -343,6 +379,12 @@ info_file_read_keys (const gchar *path, const InfoFileMappingEntry *entries, gin
 
 					case 'u': // entries[i].address is a guint64*
 						(*((guint64*)entries[i].address)) = g_ascii_strtoull (pch, &endptr, 10);
+						if (pch != endptr)
+							ret++;
+						break;
+
+					case 'x': // entries[i].address is a guint64* (hex)
+						(*((guint64*)entries[i].address)) = g_ascii_strtoull (pch, &endptr, 16);
 						if (pch != endptr)
 							ret++;
 						break;
