@@ -44,12 +44,15 @@ str_replace(const char *string , const char *needle , const char *replacement)
 	size_t c = 0;
 	size_t final;
 
+	if (string == NULL)
+		return NULL;
+
+	if (needle == NULL || replacement == NULL || string[0] == '\0')
+		return g_strdup(string);
+
 	size_t s_string = strlen(string);
 	size_t s_needle = strlen(needle);
 	size_t s_replacement = strlen(replacement);
-
-	if (needle == NULL || replacement == NULL)
-		return g_strdup(string);
 
 	// count how many occurences
 	for(p = strstr(string, needle); p != NULL; p = strstr(p+s_needle, needle))
