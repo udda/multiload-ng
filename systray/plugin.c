@@ -37,9 +37,11 @@
 #define MULTILOAD_CONFIG_BASENAME "systray.conf"
 #include "common/ps-settings-impl-gkeyfile.inc"
 
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+static GtkStatusIcon *status_icons[GRAPH_MAX];
+G_GNUC_END_IGNORE_DEPRECATIONS
 
 static GtkWidget *offscr;
-static GtkStatusIcon *status_icons[GRAPH_MAX];
 static GtkWidget *menu;
 static guint timer_indexes[GRAPH_MAX];
 
@@ -89,14 +91,17 @@ systray_graph_update_cb(LoadGraph *g, gpointer user_data)
 
 	for (i=0, v=0; i<GRAPH_MAX; i++) {
 		visible = g->multiload->graph_config[i].visible;
+		G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 		gtk_status_icon_set_visible(status_icons[i], visible);
+		G_GNUC_END_IGNORE_DEPRECATIONS
 		if (visible)
 			v++;
 	}
 
+	G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 	g_return_if_fail (gtk_status_icon_is_embedded(status_icons[g->id]));
-
 	guint icon_size = gtk_status_icon_get_size(status_icons[g->id]);
+	G_GNUC_END_IGNORE_DEPRECATIONS
 
 	gtk_window_resize(GTK_WINDOW(offscr), v*icon_size, icon_size);
 	gtk_widget_set_size_request(GTK_WIDGET(g->multiload->container), v*icon_size, icon_size);
@@ -108,7 +113,11 @@ systray_graph_update_cb(LoadGraph *g, gpointer user_data)
 		return; // incorrect pixbuf size - could be first drawing
 
 	pixbuf = cairo_surface_to_gdk_pixbuf(g->surface, icon_size, icon_size);
+
+	G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 	gtk_status_icon_set_from_pixbuf(status_icons[g->id], pixbuf);
+	G_GNUC_END_IGNORE_DEPRECATIONS
+
 	g_object_unref(pixbuf);
 }
 
@@ -120,7 +129,10 @@ systray_tooltip_disable (GtkStatusIcon *status_icon)
 	timer_indexes[g->id] = 0;
 
 	g->tooltip_update = FALSE;
+
+	G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 	gtk_status_icon_set_tooltip_markup(status_icon, gtk_status_icon_get_title(status_icon));
+	G_GNUC_END_IGNORE_DEPRECATIONS
 
 	return FALSE; // single shot timer
 }
@@ -166,18 +178,25 @@ build_icons (MultiloadPlugin *ma)
 	// create new icons
 	for (i=GRAPH_MAX-1; i>=0; i--) {
 		// create status icon
+		G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 		status_icons[i] = gtk_status_icon_new_from_icon_name (about_data_icon);
+		G_GNUC_END_IGNORE_DEPRECATIONS
+
 		g_signal_connect (G_OBJECT(status_icons[i]), "popup-menu", G_CALLBACK(systray_popup_menu), ma);
 		g_signal_connect (G_OBJECT(status_icons[i]), "query-tooltip", G_CALLBACK(systray_query_tooltip_cb), ma->graphs[i]);
 		g_object_set_data(G_OBJECT(status_icons[i]), "graph", ma->graphs[i]);
 
 		// set title
 		title = g_strdup_printf("Multiload-ng: %s", graph_types[i].label);
+		G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 		gtk_status_icon_set_title(status_icons[i], title);
+		G_GNUC_END_IGNORE_DEPRECATIONS
 		g_free(title);
 
 		// enable "query-tooltip" signal
+		G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 		gtk_status_icon_set_has_tooltip (status_icons[i], TRUE);
+		G_GNUC_END_IGNORE_DEPRECATIONS
 
 		multiload_set_update_cb(ma, i, systray_graph_update_cb, status_icons[i]);
 	}
