@@ -45,15 +45,16 @@ gen_md5sum()
 
 	printf -- "Generating MD5 sums ... " >&2
 
-	if ! which wget >/dev/null 2>&1
-		then echo SKIP
-	elif ! wget -q "https://github.com/udda/multiload-ng/archive/v$pkgver.tar.gz" -O "$tmpfile"
-		then echo SKIP
+	if ! which wget >/dev/null 2>&1 ; then
+		echo SKIP
+		printf -- "SKIP: wget not found\n" >&2
+	elif ! wget -q "https://github.com/udda/multiload-ng/archive/v$pkgver.tar.gz" -O "$tmpfile" ; then
+		echo SKIP
+		printf -- "SKIP: could not download tarball\n" >&2
 	else
 		md5sum $tmpfile | while read -a array; do echo ${array[0]} ; done
+		printf -- "OK\n" >&2
 	fi
-
-	printf -- "OK\n" >&2
 
 	rm "$tmpfile" >&2
 }
