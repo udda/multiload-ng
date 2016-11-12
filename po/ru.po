@@ -266,6 +266,12 @@ msgstr "Alexander <sfslinux@gmail.com>"
 msgid "_Help"
 msgstr "_Помощь"
 
+msgid "_About"
+msgstr "_О программе"
+
+msgid "_Preferences"
+msgstr "_Параметры"
+
 msgid "_Close"
 msgstr "_Закрыть"
 

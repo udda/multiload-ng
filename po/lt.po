@@ -267,6 +267,12 @@ msgstr "Moo <hazap@hotmail.com>"
 msgid "_Help"
 msgstr "Ž_inynas"
 
+msgid "_About"
+msgstr "_Apie"
+
+msgid "_Preferences"
+msgstr "_Nustatymai"
+
 msgid "_Close"
 msgstr "_Užverti"
 

@@ -266,6 +266,12 @@ msgstr "Michael Kogan <michael.kogan@gmx.net>"
 msgid "_Help"
 msgstr "_Hilfe"
 
+msgid "_About"
+msgstr "_Info"
+
+msgid "_Preferences"
+msgstr "_Einstellungen"
+
 msgid "_Close"
 msgstr "S_chließen"
 

@@ -268,6 +268,12 @@ msgstr "Roberta Assennato <r.assennato@gmail.com>"
 msgid "_Help"
 msgstr "A_ide"
 
+msgid "_About"
+msgstr "À _propos"
+
+msgid "_Preferences"
+msgstr "_Préférences"
+
 msgid "_Close"
 msgstr "_Fermer"
 

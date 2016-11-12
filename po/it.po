@@ -266,6 +266,12 @@ msgstr "Mario Cianciolo <mr.udda@gmail.com>"
 msgid "_Help"
 msgstr "A_iuto"
 
+msgid "_About"
+msgstr "_Informazioni"
+
+msgid "_Preferences"
+msgstr "_Preferenze"
+
 msgid "_Close"
 msgstr "_Chiudi"
 

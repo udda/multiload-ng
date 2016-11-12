@@ -265,10 +265,16 @@ msgid "translator-credits"
 msgstr "Dee.H.Y <dongfengweixiao@hotmail.com>"
 
 msgid "_Help"
-msgstr "帮助（&H）"
+msgstr "帮助（_H）"
+
+msgid "_About"
+msgstr "关于(_A)"
+
+msgid "_Preferences"
+msgstr "首选项(_P)"
 
 msgid "_Close"
-msgstr "关闭（&C）"
+msgstr "关闭（_C）"
 
 msgid "Do nothing"
 msgstr "没有要处理的事务"
