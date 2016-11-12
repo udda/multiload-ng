@@ -45,7 +45,7 @@ gen_md5sum()
 
 	printf -- "Generating MD5 sums ... " >&2
 
-	if ! which wget > /dev/null
+	if ! which wget >/dev/null 2>&1
 		then echo SKIP
 	elif ! wget -q "https://github.com/udda/multiload-ng/archive/v$pkgver.tar.gz" -O "$tmpfile"
 		then echo SKIP
