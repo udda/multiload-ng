@@ -281,7 +281,7 @@ Note that XFCE 4.12 or greater is required for GTK+3 plugin.
 ### Package generators
 Take a look at [extras directory](https://github.com/udda/multiload-ng/tree/master/extras).
 There are scripts for most Linux distributions, that generate packages which can
-be then installed through package managers. This is the preferred method.
+be then installed through package managers.
 
 ### External support
 - For Ubuntu/Mint and derivatives, [WebUpd8 PPA](https://launchpad.net/~nilarimogard/+archive/ubuntu/webupd8) hosts **stable** packages for all supported panels.
