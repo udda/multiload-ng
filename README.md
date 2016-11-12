@@ -286,7 +286,8 @@ be then installed through package managers. This is the preferred method.
 ### External support
 - For Ubuntu/Mint and derivatives, [WebUpd8 PPA](https://launchpad.net/~nilarimogard/+archive/ubuntu/webupd8) hosts **stable** packages for all supported panels.
 Read how to install [here](http://www.webupd8.org/2016/10/multiload-ng-140-gnome-twitch-030.html) (instructions are valid for all versions).
-- Arch users can install XFCE version from AUR ([stable](https://aur.archlinux.org/packages/xfce4-multiload-ng-plugin/), [unstable](https://aur.archlinux.org/packages/xfce4-multiload-ng-plugin/))
+- Arch users can get Multiload-ng from AUR. There is a separate package for each variant of the plugin.
+Just [search for multiload-ng in AUR](https://aur.archlinux.org/packages/?SeB=n&K=multiload-ng)!
 
 If your distro isn't covered above, or you just want to have some control over build (e.g. enable/disable some plugins, try experimental features), you can [build it yourself](#build-instructions).
 
