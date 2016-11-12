@@ -313,7 +313,7 @@ help()
 	USAGE: $0 [OPTIONS] [PKGSPEC]
 
 	OPTIONS:
-	  -s    Generate .SRCINFO next to each PKGBUILD. Requires makepkg installed
+	  -s    Generate .SRCINFO next to each PKGBUILD
 	  -h    Show this help
 
 
