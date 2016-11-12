@@ -255,16 +255,13 @@ multiload_graph_bat_tooltip_update (char *buf_title, size_t len_title, char *buf
 		return;
 
 	if (style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
-		gchar *capacity = g_strdup_printf(_("Capacity: %.1f%%"), battery->percentage);
 		gchar *status = (battery->is_charging? _("Charging") : _("Discharging"));
 
 		strncpy(buf_title, battery->name_label, len_title);
 		if (battery->is_critical)
-			g_snprintf(buf_text, len_text, "%s (%s)\n%s", capacity, _("Critical level"), status);
+			g_snprintf(buf_text, len_text, "%s %.1f%% (%s)\n%s", _("Capacity:"), battery->percentage, _("Critical level"), status);
 		else
-			g_snprintf(buf_text, len_text, "%s\n%s", capacity, status);
-
-		g_free(capacity);
+			g_snprintf(buf_text, len_text, "%s %.1f%%\n%s", _("Capacity:"), battery->percentage, status);
 	} else {
 		g_snprintf(buf_text, len_text, "%.1f%%", battery->percentage);
 	}

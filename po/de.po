@@ -610,8 +610,8 @@ msgstr "Wird geladen"
 msgid "Discharging"
 msgstr "Wird entladen"
 
-msgid "Capacity: %.1f%%"
-msgstr "Kapazität: %.1f%%"
+msgid "Capacity:"
+msgstr "Kapazität:"
 
 msgid "Critical level"
 msgstr "Kritischer Ladezustand"
