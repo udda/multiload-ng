@@ -216,7 +216,9 @@ generate_pkgbuild()
 	done
 
 	# output
-	printf -- "Generating PKGBUILD  (target: %-13s version: %-21s $gtk_str)" "$target" "$version_str" >&2
+	printf -- "Package:     (target: %-13s version: %-21s $gtk_str)\n" "$target" "$version_str" >&2
+
+	printf -- "Generating PKGBUILD ... " >&2
 	local outdir="multiload-ng.PKGBUILD/${pkgname}"
 	mkdir -p "${outdir}"
 
@@ -263,12 +265,46 @@ generate_pkgbuild()
 		    printf -- "r%s.%s" "\$(git rev-list --count HEAD)" "\$(git rev-parse --short HEAD)"
 		}
 	EOF
+	printf -- 'OK\n' >&2
 
-	if [ "${GENERATE_SRCINFO}" = "1" ] && which makepkg >/dev/null 2>&1
-		then ( cd "${outdir}" ; makepkg --printsrcinfo > .SRCINFO )
+
+	if [ "${GENERATE_SRCINFO}" = "1" ] ; then
+		printf -- "Generating .SRCINFO ... " >&2
+
+		local T=$'\t'
+		cat >"${outdir}/.SRCINFO" <<-EOF
+			pkgbase = ${pkgname}
+			${T}pkgdesc = ${pkgdesc}
+			${T}pkgver = ${pkgver}
+			${T}pkgrel = ${pkgrel}
+			${T}url = https://udda.github.io/multiload-ng/
+			${T}arch = i686
+			${T}arch = x86_64
+			${T}license = GPL2
+		EOF
+		unset T
+
+		for i in ${makedepends}; do
+			printf "\tmakedepends = %s\n" `echo $i | sed "s/'/ /g"` >>"${outdir}/.SRCINFO"
+		done
+
+		for i in ${depends}; do
+			printf "\tdepends = %s\n" `echo $i | sed "s/'/ /g"` >>"${outdir}/.SRCINFO"
+		done
+
+		for i in ${conflicts}; do
+			printf "\tconflicts = %s\n" `echo $i | sed "s/'/ /g"` >>"${outdir}/.SRCINFO"
+		done
+
+		printf "\tsource = %s\n" `eval echo ${pkg_source}` >>"${outdir}/.SRCINFO"
+		printf "\tmd5sums = ${pkg_md5sum}\n" >>"${outdir}/.SRCINFO"
+
+		printf "\npkgname = ${pkgname}\n\n" >>"${outdir}/.SRCINFO"
+
+		printf -- 'OK\n' >&2
 	fi
 
-	printf -- ' ... OK\n' >&2
+	printf -- '\n' >&2
 }
 
 help()
