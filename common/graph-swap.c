@@ -66,21 +66,21 @@ multiload_graph_swap_cmdline_output (LoadGraph *g, SwapData *xd)
 
 
 void
-multiload_graph_swap_tooltip_update (char **title, char **text, LoadGraph *g, SwapData *xd)
+multiload_graph_swap_tooltip_update (char *buf_title, size_t len_title, char *buf_text, size_t len_text, LoadGraph *g, SwapData *xd, gint style)
 {
 	if (xd->total == 0) {
-		*text = g_strdup_printf(_("No swap"));
+		g_snprintf(buf_text, len_text, _("No swap"));
 	} else {
 		gchar *used = format_size_for_display(xd->used, g->multiload->size_format_iec);
 		gchar *used_percent = format_percent(xd->used, xd->total, 0);
 
 		gchar *total = format_size_for_display(xd->total, g->multiload->size_format_iec);
 
-		if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
-			*title = g_strdup_printf(_("%s of swap"), total);
-			*text = g_strdup_printf(_("%s (%s) used"), used_percent, used);
+		if (style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
+			g_snprintf(buf_title, len_title, _("%s of swap"), total);
+			g_snprintf(buf_text, len_text, _("%s (%s) used"), used_percent, used);
 		} else {
-			*text = g_strdup_printf("%s", used_percent);
+			g_snprintf(buf_text, len_text, "%s", used_percent);
 		}
 
 		g_free(used);

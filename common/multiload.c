@@ -42,10 +42,9 @@ const char* MULTILOAD_CONFIG_PATH;
 void
 multiload_tooltip_update (LoadGraph *g)
 {
-	gchar *title = NULL;
-	gchar *text = NULL;
-	gchar *text_sanitized = NULL;
-	gchar *tooltip_markup;
+	gchar buf_title[100];
+	gchar buf_text[800];
+	gchar tooltip_markup[1024];
 
 	g_assert(g != NULL);
 	g_assert(g->multiload != NULL);
@@ -53,31 +52,25 @@ multiload_tooltip_update (LoadGraph *g)
 	g_assert_cmpuint(g->id, >=, 0);
 	g_assert_cmpuint(g->id,  <, GRAPH_MAX);
 
-	graph_types[g->id].tooltip_update(&title, &text, g, g->multiload->extra_data[g->id]);
+	buf_title[0] = '\0';
+	buf_text[0] = '\0';
 
-	if (title == NULL)
-		title = g_strdup(graph_types[g->id].label);
+	graph_types[g->id].tooltip_update(buf_title, sizeof(buf_title), buf_text, sizeof(buf_text), g, g->multiload->extra_data[g->id], g->config->tooltip_style);
 
-	if (text == NULL) {
-		text_sanitized = g_strdup("");
+	if (buf_text[0] == '\0')
 		g_warning("[multiload] Empty text for tooltip #%d", g->id);
-	} else {
-		text_sanitized = str_replace(text, "&", "&amp;");
-		g_free(text);
-	}
 
-	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
-		tooltip_markup = g_strdup_printf("<span weight='bold' size='larger'>%s</span>\n%s", title, text_sanitized);
-	} else {
-		tooltip_markup = g_strdup_printf("%s: %s", title, text_sanitized);
-	}
+	const gchar *title = (*buf_title)? buf_title : graph_types[g->id].label;
+	gchar *text = str_replace(buf_text, "&", "&amp;");
+
+	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED)
+		g_snprintf(tooltip_markup, sizeof(tooltip_markup), "<span weight='bold' size='larger'>%s</span>\n%s", title, text);
+	else
+		g_snprintf(tooltip_markup, sizeof(tooltip_markup), "%s: %s", title, text);
 
 	gtk_widget_set_tooltip_markup(g->disp, tooltip_markup);
 	gtk_widget_trigger_tooltip_query (g->disp);
-	g_free(title);
-	g_free(text_sanitized);
-	g_free(tooltip_markup);
-
+	g_free(text);
 }
 
 /* get current orientation */

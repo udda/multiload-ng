@@ -88,9 +88,9 @@ multiload_graph_mem_cmdline_output (LoadGraph *g, MemoryData *xd)
 }
 
 void
-multiload_graph_mem_tooltip_update (char **title, char **text, LoadGraph *g, MemoryData *xd)
+multiload_graph_mem_tooltip_update (char *buf_title, size_t len_title, char *buf_text, size_t len_text, LoadGraph *g, MemoryData *xd, gint style)
 {
-	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
+	if (style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
 		gchar *total = format_size_for_display(xd->total, g->multiload->size_format_iec);
 
 		gchar *user = format_size_for_display(xd->user, g->multiload->size_format_iec);
@@ -102,13 +102,13 @@ multiload_graph_mem_tooltip_update (char **title, char **text, LoadGraph *g, Mem
 		gchar *cache = format_size_for_display(xd->cache, g->multiload->size_format_iec);
 		gchar *cache_percent = format_percent(xd->cache, xd->total, 1);
 
-		*title = g_strdup_printf(_("%s of RAM"), total);
-		*text = g_strdup_printf(_(	"%s (%s) used by programs\n"
-									"%s (%s) used for buffers\n"
-									"%s (%s) used as cache"),
-									user_percent, user,
-									buffers_percent, buffers,
-									cache_percent, cache);
+		g_snprintf(buf_title, len_title, _("%s of RAM"), total);
+		g_snprintf(buf_text, len_text, _(	"%s (%s) used by programs\n"
+											"%s (%s) used for buffers\n"
+											"%s (%s) used as cache"),
+											user_percent, user,
+											buffers_percent, buffers,
+											cache_percent, cache);
 		g_free(total);
 		g_free(user);
 		g_free(user_percent);
@@ -118,7 +118,7 @@ multiload_graph_mem_tooltip_update (char **title, char **text, LoadGraph *g, Mem
 		g_free(cache_percent);
 	} else {
 		gchar *use = format_percent(xd->user, xd->total, 0);
-		*text = g_strdup_printf("%s", use);
+		g_snprintf(buf_text, len_text, "%s", use);
 		g_free(use);
 	}
 }

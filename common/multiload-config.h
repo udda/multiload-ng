@@ -36,7 +36,7 @@ G_BEGIN_DECLS
 
 typedef void 				(*GraphInitFunc)			(LoadGraph *g, gpointer xd);
 typedef void 				(*GraphGetDataFunc)			(int Maximum, int data[], LoadGraph *g, gpointer xd, gboolean first_call);
-typedef void				(*GraphTooltipUpdateFunc)	(char **title, char **text, LoadGraph *g, gpointer xd);
+typedef void				(*GraphTooltipUpdateFunc)	(char *buf_title, size_t len_title, char *buf_text, size_t len_text, LoadGraph *g, gpointer xd, gint style);
 typedef void				(*GraphCmdlineOutputFunc)	(LoadGraph *g, gpointer xd);
 typedef MultiloadFilter*	(*GraphGetFilterFunc)		(LoadGraph *g, gpointer xd);
 

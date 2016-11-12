@@ -281,21 +281,21 @@ multiload_graph_net_cmdline_output (LoadGraph *g, NetData *xd)
 
 
 void
-multiload_graph_net_tooltip_update (char **title, char **text, LoadGraph *g, NetData *xd)
+multiload_graph_net_tooltip_update (char *buf_title, size_t len_title, char *buf_text, size_t len_text, LoadGraph *g, NetData *xd, gint style)
 {
 	gchar *tx_in = format_rate_for_display(xd->in_speed, g->multiload->size_format_iec);
 	gchar *tx_out = format_rate_for_display(xd->out_speed, g->multiload->size_format_iec);
 	gchar *tx_local = format_rate_for_display(xd->local_speed, g->multiload->size_format_iec);
 
-	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
-		*text = g_strdup_printf(_(	"Monitored interfaces: %s\n"
-									"\n"
-									"Receiving: %s\n"
-									"Sending: %s\n"
-									"Local: %s"),
-									xd->ifaces, tx_in, tx_out, tx_local);
+	if (style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
+		g_snprintf(buf_text, len_text, _(	"Monitored interfaces: %s\n"
+											"\n"
+											"Receiving: %s\n"
+											"Sending: %s\n"
+											"Local: %s"),
+											xd->ifaces, tx_in, tx_out, tx_local);
 	} else {
-		*text = g_strdup_printf("\xe2\xac\x87%s \xe2\xac\x86%s", tx_in, tx_out);
+		g_snprintf(buf_text, len_text, "\xe2\xac\x87%s \xe2\xac\x86%s", tx_in, tx_out);
 	}
 
 	g_free(tx_in);

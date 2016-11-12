@@ -101,19 +101,16 @@ static void
 indicator_update_menu(MultiloadPlugin *ma)
 {
 	guint i;
-	gchar *title=NULL, *text=NULL, *label=NULL;
+	gchar title[98], text[800], label[900];
 
 	for (i=0; i<GRAPH_MAX; i++) {
 		ma->graphs[i]->tooltip_update = ma->graph_config[i].visible;
 		gtk_widget_set_visible(graphs_menu_items[i], ma->graph_config[i].visible);
 
 		if (ma->graph_config[i].visible) {
-			graph_types[i].tooltip_update(&title, &text, ma->graphs[i], ma->extra_data[i]);
-			label = g_strdup_printf("%s: %s", graph_types[i].label, text);
+			graph_types[i].tooltip_update(title, sizeof(title), text, sizeof(text), ma->graphs[i], ma->extra_data[i], ma->graph_config[i].tooltip_style);
+			g_snprintf(label, sizeof(label), "%s: %s", graph_types[i].label, text);
 			gtk_menu_item_set_label(GTK_MENU_ITEM(graphs_menu_items[i]), label);
-			g_free(title);
-			g_free(text);
-			g_free(label);
 		}
 
 	}

@@ -123,24 +123,24 @@ multiload_graph_cpu_cmdline_output (LoadGraph *g, CpuData *xd)
 
 
 void
-multiload_graph_cpu_tooltip_update (char **title, char **text, LoadGraph *g, CpuData *xd)
+multiload_graph_cpu_tooltip_update (char *buf_title, size_t len_title, char *buf_text, size_t len_text, LoadGraph *g, CpuData *xd, gint style)
 {
-	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
+	if (style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
 		gchar *uptime = format_time_duration(xd->uptime);
-		*title = g_strdup(xd->cpu0_name);
-		*text = g_strdup_printf(_(	"%lu processors  -  %.2f GHz  -  Governor: %s\n"
-									"%.1f%% in use by programs\n"
-									"%.1f%% in use by low priority programs\n"
-									"%.1f%% in use by the kernel\n"
-									"%.1f%% in wait for I/O\n"
-									"%.1f%% total CPU use\n"
-									"\n"
-									"Uptime: %s"),
-									xd->num_cpu, xd->cpu0_mhz/1000.0, xd->cpu0_governor,
-									xd->user, xd->nice, xd->system, xd->iowait, xd->total_use,
-									uptime);
+		strncpy(buf_title, xd->cpu0_name, len_title);
+		g_snprintf(buf_text, len_text, _(	"%lu processors  -  %.2f GHz  -  Governor: %s\n"
+											"%.1f%% in use by programs\n"
+											"%.1f%% in use by low priority programs\n"
+											"%.1f%% in use by the kernel\n"
+											"%.1f%% in wait for I/O\n"
+											"%.1f%% total CPU use\n"
+											"\n"
+											"Uptime: %s"),
+											xd->num_cpu, xd->cpu0_mhz/1000.0, xd->cpu0_governor,
+											xd->user, xd->nice, xd->system, xd->iowait, xd->total_use,
+											uptime);
 		g_free(uptime);
 	} else {
-		*text = g_strdup_printf("%.1f%%", xd->total_use);
+		g_snprintf(buf_text, len_text, "%.1f%%", xd->total_use);
 	}
 }

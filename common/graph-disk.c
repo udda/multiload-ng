@@ -219,19 +219,19 @@ multiload_graph_disk_cmdline_output (LoadGraph *g, DiskData *xd)
 
 
 void
-multiload_graph_disk_tooltip_update (char **title, char **text, LoadGraph *g, DiskData *xd)
+multiload_graph_disk_tooltip_update (char *buf_title, size_t len_title, char *buf_text, size_t len_text, LoadGraph *g, DiskData *xd, gint style)
 {
 	gchar *disk_read = format_rate_for_display(xd->read_speed, g->multiload->size_format_iec);
 	gchar *disk_write = format_rate_for_display(xd->write_speed, g->multiload->size_format_iec);
 
-	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
-		*text = g_strdup_printf(_(	"Monitored partitions: %s\n"
-									"\n"
-									"Read: %s\n"
-									"Write: %s"),
-									xd->partitions, disk_read, disk_write);
+	if (style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
+		g_snprintf(buf_text, len_text, _(	"Monitored partitions: %s\n"
+											"\n"
+											"Read: %s\n"
+											"Write: %s"),
+											xd->partitions, disk_read, disk_write);
 	} else {
-		*text = g_strdup_printf("\xe2\xac\x86%s \xe2\xac\x87%s", disk_read, disk_write);
+		g_snprintf(buf_text, len_text, "\xe2\xac\x86%s \xe2\xac\x87%s", disk_read, disk_write);
 	}
 	g_free(disk_read);
 	g_free(disk_write);

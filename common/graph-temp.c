@@ -389,19 +389,19 @@ multiload_graph_temp_cmdline_output (LoadGraph *g, TemperatureData *xd)
 
 
 void
-multiload_graph_temp_tooltip_update (char **title, char **text, LoadGraph *g, TemperatureData *xd)
+multiload_graph_temp_tooltip_update (char *buf_title, size_t len_title, char *buf_text, size_t len_text, LoadGraph *g, TemperatureData *xd, gint style)
 {
-	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
-		*title = g_strdup(xd->name);
+	if (style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
+		strncpy(buf_title, xd->name, len_title);
 
 		if (xd->max > 0)
-			*text = g_strdup_printf(_(	"Current: %.1f °C\n"
-										"Critical: %.1f °C"),
-										xd->value, xd->max);
+			g_snprintf(buf_text, len_text, _(	"Current: %.1f °C\n"
+												"Critical: %.1f °C"),
+												xd->value, xd->max);
 		else
-			*text = g_strdup_printf(_(	"Current: %.1f °C"),
-										xd->value);
+			g_snprintf(buf_text, len_text, _(	"Current: %.1f °C"),
+												xd->value);
 	} else {
-		*text = g_strdup_printf("%.1f °C", xd->value);
+		g_snprintf(buf_text, len_text, "%.1f °C", xd->value);
 	}
 }

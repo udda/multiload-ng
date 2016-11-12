@@ -247,25 +247,25 @@ multiload_graph_bat_cmdline_output (LoadGraph *g, BatteryData *xd)
 
 
 void
-multiload_graph_bat_tooltip_update (char **title, char **text, LoadGraph *g, BatteryData *xd)
+multiload_graph_bat_tooltip_update (char *buf_title, size_t len_title, char *buf_text, size_t len_text, LoadGraph *g, BatteryData *xd, gint style)
 {
 	bat_info *battery = B(xd);
 
 	if (battery == NULL)
 		return;
 
-	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
+	if (style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
 		gchar *capacity = g_strdup_printf(_("Capacity: %.1f%%"), battery->percentage);
 		gchar *status = (battery->is_charging? _("Charging") : _("Discharging"));
 
-		*title = g_strdup(battery->name_label);
+		strncpy(buf_title, battery->name_label, len_title);
 		if (battery->is_critical)
-			*text = g_strdup_printf("%s (%s)\n%s", capacity, _("Critical level"), status);
+			g_snprintf(buf_text, len_text, "%s (%s)\n%s", capacity, _("Critical level"), status);
 		else
-			*text = g_strdup_printf("%s\n%s", capacity, status);
+			g_snprintf(buf_text, len_text, "%s\n%s", capacity, status);
 
 		g_free(capacity);
 	} else {
-		*text=g_strdup_printf("%.1f%%", battery->percentage);
+		g_snprintf(buf_text, len_text, "%.1f%%", battery->percentage);
 	}
 }

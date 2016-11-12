@@ -85,18 +85,18 @@ multiload_graph_load_cmdline_output (LoadGraph *g, LoadData *xd)
 }
 
 void
-multiload_graph_load_tooltip_update (char **title, char **text, LoadGraph *g, LoadData *xd)
+multiload_graph_load_tooltip_update (char *buf_title, size_t len_title, char *buf_text, size_t len_text, LoadGraph *g, LoadData *xd, gint style)
 {
-	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
+	if (style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
 		if (xd->uname[0] != 0)
-			*title = g_strdup(xd->uname);
-		*text = g_strdup_printf(_(	"Last minute: %0.02f\n"
-									"Last 5 minutes: %0.02f\n"
-									"Last 15 minutes: %0.02f\n"
-									"Processes/threads: %u active out of %u."),
-									xd->loadavg[LOADAVG_1], xd->loadavg[LOADAVG_5], xd->loadavg[LOADAVG_15],
-									xd->proc_active, xd->proc_count);
+			strncpy(buf_title, xd->uname, len_title);
+		g_snprintf(buf_text, len_text, _(	"Last minute: %0.02f\n"
+											"Last 5 minutes: %0.02f\n"
+											"Last 15 minutes: %0.02f\n"
+											"Processes/threads: %u active out of %u."),
+											xd->loadavg[LOADAVG_1], xd->loadavg[LOADAVG_5], xd->loadavg[LOADAVG_15],
+											xd->proc_active, xd->proc_count);
 	} else {
-		*text = g_strdup_printf("%0.02f", xd->loadavg[LOADAVG_1]);
+		g_snprintf(buf_text, len_text, "%0.02f", xd->loadavg[LOADAVG_1]);
 	}
 }

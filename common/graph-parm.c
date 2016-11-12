@@ -120,28 +120,28 @@ multiload_graph_parm_cmdline_output (LoadGraph *g, ParametricData *xd)
 
 
 void
-multiload_graph_parm_tooltip_update (char **title, char **text, LoadGraph *g, ParametricData *xd)
+multiload_graph_parm_tooltip_update (char *buf_title, size_t len_title, char *buf_text, size_t len_text, LoadGraph *g, ParametricData *xd, gint style)
 {
-	if (g->config->tooltip_style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
+	if (style == MULTILOAD_TOOLTIP_STYLE_DETAILED) {
 		if (xd->error)
-			*text = g_strdup_printf(_(	"Command: %s\n"
-										"ERROR: %s"),
-										xd->command, xd->message);
+			g_snprintf(buf_text, len_text, _(	"Command: %s\n"
+												"ERROR: %s"),
+												xd->command, xd->message);
 		else {
 			if (xd->message[0] != '\0')
-				*title = g_strdup(xd->message);
-			*text = g_strdup_printf(_(	"Command: %s\n"
-										"Results: (%.3lf, %.3lf, %.3lf, %.3lf)"),
-										xd->command, xd->result[0], xd->result[1],
-										xd->result[2], xd->result[3]);
+				strncpy(buf_title, xd->message, len_title);
+			g_snprintf(buf_text, len_text, _(	"Command: %s\n"
+												"Results: (%.3lf, %.3lf, %.3lf, %.3lf)"),
+												xd->command, xd->result[0], xd->result[1],
+												xd->result[2], xd->result[3]);
 		}
 	} else {
 		if (xd->error)
-			*text = g_strdup_printf(_(	"ERROR: %s"), xd->message);
+			g_snprintf(buf_text, len_text, _(	"ERROR: %s"), xd->message);
 		else if (xd->message[0] != '\0')
-			*text = g_strdup(xd->message);
+			strncpy(buf_text, xd->message, len_text);
 		else
-			*text = g_strdup_printf("(%lf, %lf, %lf, %lf)",
+			g_snprintf(buf_text, len_text, "(%lf, %lf, %lf, %lf)",
 										xd->result[0], xd->result[1],
 										xd->result[2], xd->result[3]);
 	}
