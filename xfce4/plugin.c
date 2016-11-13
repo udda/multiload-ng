@@ -195,10 +195,8 @@ xfce_constructor (XfcePanelPlugin *plugin)
 
 	/* menu items */
 	GtkMenuItem *mi_separator = GTK_MENU_ITEM(gtk_separator_menu_item_new ());
-	GtkMenuItem *mi_help = GTK_MENU_ITEM(gtk_image_menu_item_new_from_stock (GTK_STOCK_HELP, NULL));
-	GtkMenuItem *mi_sysmon = GTK_MENU_ITEM(gtk_image_menu_item_new_with_label(_("Start task manager")));
-	gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(mi_sysmon),
-		GTK_WIDGET(gtk_image_new_from_icon_name("utilities-system-monitor", GTK_ICON_SIZE_MENU)));
+	GtkMenuItem *mi_help = GTK_MENU_ITEM(gtk_menu_item_new_with_mnemonic (_("_Help")));
+	GtkMenuItem *mi_sysmon = GTK_MENU_ITEM(gtk_menu_item_new_with_label(_("Start task manager")));
 	xfce_panel_plugin_menu_show_configure (plugin);
 	xfce_panel_plugin_menu_show_about (plugin);
 	xfce_panel_plugin_menu_insert_item (plugin, mi_separator);

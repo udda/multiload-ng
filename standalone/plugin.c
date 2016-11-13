@@ -86,28 +86,27 @@ build_menu(MultiloadPlugin *ma, GtkWidget *button_config)
 	GtkMenu *menu = GTK_MENU(gtk_menu_new());
 	GtkWidget *menuitem;
 
-	menuitem = gtk_image_menu_item_new_with_label (_("Start task manager"));
-	gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM(menuitem), gtk_image_new_from_icon_name("utilities-system-monitor", GTK_ICON_SIZE_MENU));
+	menuitem = gtk_menu_item_new_with_label (_("Start task manager"));
 	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(multiload_ui_start_system_monitor), ma);
 	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
 
 	gtk_menu_shell_append (GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
 
-	menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_PREFERENCES, NULL);
+	menuitem = gtk_menu_item_new_with_mnemonic (_("_Preferences"));
 	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(standalone_preferences_cb), ma);
 	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
 
-	menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_HELP, NULL);
+	menuitem = gtk_menu_item_new_with_mnemonic (_("_Help"));
 	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(multiload_ui_show_help), NULL);
 	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
 
 	gtk_menu_shell_append (GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
 
-	menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_ABOUT, NULL);
+	menuitem = gtk_menu_item_new_with_mnemonic (_("_About"));
 	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(multiload_ui_show_about), ma->panel_data);
 	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
 
-	menuitem = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, NULL);
+	menuitem = gtk_menu_item_new_with_mnemonic (_("_Quit"));
 	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(standalone_destroy_cb), ma);
 	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
 
