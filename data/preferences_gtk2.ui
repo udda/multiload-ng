@@ -1336,7 +1336,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="model">liststore_colors</property>
                             <property name="headers_clickable">False</property>
                             <property name="search_column">0</property>
-                            <property name="fixed_height_mode">False</property>
                             <property name="show_expanders">False</property>
                             <child>
                               <object class="GtkTreeViewColumn" id="Category">
@@ -1589,7 +1588,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           </object>
                           <packing>
                             <property name="right_attach">2</property>
-                            <property name="y_options">GTK_EXPAND | GTK_SHRINK | GTK_FILL</property>
+                            <property name="y_options">GTK_SHRINK | GTK_FILL</property>
                           </packing>
                         </child>
                         <child>
@@ -1836,7 +1835,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           <packing>
                             <property name="left_attach">3</property>
                             <property name="right_attach">5</property>
-                            <property name="y_options">GTK_EXPAND | GTK_SHRINK | GTK_FILL</property>
+                            <property name="y_options">GTK_SHRINK | GTK_FILL</property>
                           </packing>
                         </child>
                         <child>
@@ -1959,7 +1958,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           <packing>
                             <property name="left_attach">6</property>
                             <property name="right_attach">8</property>
-                            <property name="y_options">GTK_EXPAND | GTK_SHRINK | GTK_FILL</property>
+                            <property name="y_options">GTK_SHRINK | GTK_FILL</property>
                           </packing>
                         </child>
                         <child>
@@ -2118,7 +2117,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           <packing>
                             <property name="left_attach">9</property>
                             <property name="right_attach">11</property>
-                            <property name="y_options">GTK_EXPAND | GTK_SHRINK | GTK_FILL</property>
+                            <property name="y_options">GTK_SHRINK | GTK_FILL</property>
                           </packing>
                         </child>
                         <child>
@@ -2165,7 +2164,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           <packing>
                             <property name="left_attach">12</property>
                             <property name="right_attach">14</property>
-                            <property name="y_options">GTK_EXPAND | GTK_SHRINK | GTK_FILL</property>
+                            <property name="y_options">GTK_SHRINK | GTK_FILL</property>
                           </packing>
                         </child>
                         <child>
@@ -2180,7 +2179,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           <packing>
                             <property name="left_attach">15</property>
                             <property name="right_attach">17</property>
-                            <property name="y_options">GTK_EXPAND | GTK_SHRINK | GTK_FILL</property>
+                            <property name="y_options">GTK_SHRINK | GTK_FILL</property>
                           </packing>
                         </child>
                         <child>
@@ -2195,7 +2194,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           <packing>
                             <property name="left_attach">18</property>
                             <property name="right_attach">20</property>
-                            <property name="y_options">GTK_EXPAND | GTK_SHRINK | GTK_FILL</property>
+                            <property name="y_options">GTK_SHRINK | GTK_FILL</property>
                           </packing>
                         </child>
                         <child>
@@ -3089,7 +3088,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           <packing>
                             <property name="left_attach">24</property>
                             <property name="right_attach">26</property>
-                            <property name="y_options">GTK_EXPAND | GTK_SHRINK | GTK_FILL</property>
+                            <property name="y_options">GTK_SHRINK | GTK_FILL</property>
                           </packing>
                         </child>
                         <child>
@@ -3707,7 +3706,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                           <packing>
                             <property name="left_attach">21</property>
                             <property name="right_attach">23</property>
-                            <property name="y_options">GTK_EXPAND | GTK_SHRINK | GTK_FILL</property>
+                            <property name="y_options">GTK_SHRINK | GTK_FILL</property>
                           </packing>
                         </child>
                         <child>
