@@ -255,7 +255,7 @@ generate_pkgbuild()
 
 		package() {
 		    cd "${pkg_basedir}"
-		    make -C "${target}" DESTDIR="\$pkgdir" install
+		    make DESTDIR="\$pkgdir" install
 		}
 	EOF
 
