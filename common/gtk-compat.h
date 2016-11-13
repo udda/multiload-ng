@@ -80,6 +80,17 @@ gtk_button_new_from_icon_name (const gchar *icon_name, GtkIconSize size);
 #endif /* ! GTK_CHECK_VERSION(3,10,0) */
 
 
+#if ! GTK_CHECK_VERSION(3,16,0)
+
+G_GNUC_INTERNAL void
+gtk_label_set_xalign (GtkLabel *label, gfloat xalign);
+
+G_GNUC_INTERNAL void
+gtk_label_set_yalign (GtkLabel *label, gfloat yalign);
+
+#endif /* ! GTK_CHECK_VERSION(3,16,0) */
+
+
 //gtk+>3.4
 #ifndef GDK_EVENT_PROPAGATE
 #define GDK_EVENT_PROPAGATE (FALSE)

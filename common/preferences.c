@@ -1403,7 +1403,7 @@ multiload_preferences_add_infobar (GtkMessageType message_type, const gchar *tex
 	GtkWidget *content_area = gtk_info_bar_get_content_area (GTK_INFO_BAR(info_bar));
 
 	GtkWidget *label = gtk_label_new(text);
-	gtk_misc_set_alignment (GTK_MISC(label), 0, 0.5);
+	gtk_label_set_xalign (GTK_LABEL(label), 0);
 	gtk_container_add(GTK_CONTAINER(content_area), label);
 
 	gtk_info_bar_add_button (GTK_INFO_BAR(info_bar), _("_Close"), GTK_RESPONSE_OK);

@@ -116,6 +116,26 @@ gtk_button_new_from_icon_name (const gchar *icon_name, GtkIconSize size)
 
 #endif /*  ! GTK_CHECK_VERSION(3,10,0) */
 
+
+#if ! GTK_CHECK_VERSION(3,16,0)
+
+G_GNUC_INTERNAL void
+gtk_label_set_xalign (GtkLabel *label, gfloat xalign) {
+	gfloat yalign;
+	gtk_misc_get_alignment (GTK_MISC(label), NULL, &yalign);
+	gtk_misc_set_alignment (GTK_MISC(label), xalign, yalign);
+}
+
+G_GNUC_INTERNAL void
+gtk_label_set_yalign (GtkLabel *label, gfloat yalign) {
+	gfloat xalign;
+	gtk_misc_get_alignment (GTK_MISC(label), &xalign, NULL);
+	gtk_misc_set_alignment (GTK_MISC(label), xalign, yalign);
+}
+
+#endif /* ! GTK_CHECK_VERSION(3,16,0) */
+
+
 void
 gdk_color_to_rgba(const GdkColor *color, guint16 alpha, GdkRGBA *rgba)
 {
