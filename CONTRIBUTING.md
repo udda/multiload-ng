@@ -182,7 +182,7 @@ Include details about your configuration and environment:
 
 		**Screenshots and GIFs**
 
-		![Screenshots and GIFs which demonstrate the steps or part of Atom the enhancement suggestion is related to](url)
+		![Screenshots and GIFs which demonstrate the steps or part of Multiload-ng the enhancement suggestion is related to](url)
 
 		**Multiload-ng Version:** [Enter Multiload-ng version here]
 		**OS and Version:** [Enter OS name and version here]
@@ -206,6 +206,62 @@ You can also help a lot by just adding a useful comment to an open issue, to giv
 - Follow the [C](#c-styleguide) and [Translations](#translations-styleguide) styleguides.
 - You can use [Markdown](https://daringfireball.net/projects/markdown).
 
+
+
+### Translations
+
+Translators are highly welcome! Translating Multiload-ng into new languages will help it to reach more and more users.
+
+You can start right now by reading [related Wiki page](https://github.com/udda/multiload-ng/wiki/HowTo:-Translations).
+
+
+
+### Artwork
+
+You can contribute also without writing a single line of code. Are you feeling inspired? Submit a [color scheme](#color-schemes)
+or an [icon](#icons). Don't forget to clarify its [license](artwork-license)
+
+#### Color Schemes
+
+Did you create a nice color scheme for Multiload-ng, and you'd like to share it with the world? Well, you should do it!
+
+Export your color scheme from Multiload-ng, and submit to [mr.udda@gmail.com](mailto:mr.udda@gmail.com) or via pull request.
+Also provide the following information:
+- A name for your color scheme, if you have one
+- Any inspiration/description that comes to your mind
+- Your name (for the credits) and email or other contact info (optional, but recommended)
+
+If the color scheme is original enough, it might be builtin in a future release!
+Even if it's not, don't worry: your work is valuable and won't get ignored.
+If color scheme submissions begin to increase, there could be an online "user repository", in which
+users put their color schemes and those with most votes become part of official color schemes (like Arch's AUR).
+
+
+
+#### Icons
+
+Since its birth, Multiload-ng lacks a distinctive **icon** (in fact it uses the standard icon `utilities-system-monitor`).
+You can submit your own icon and it will be carefully considered. You can help even with just
+a hint/suggestion on what you think a good icon should have.
+
+Here are the requirements for icons submissions:  
+- Must be **original content** (that is, created purposely for Multiload-ng, and not used anywhere else)
+- Must be **properly licensed** (see [below](#artwork-license))
+- Must come in standard Freedesktop icon sizes: 16x16, 24x24, 36x36, 48x48, 64x64, 128x128, 256x256, 512x512. Nonstandard panel size of 22x22 (used for example by Ubuntu) is appreciated too.
+- Making a large icon and just shrinking it to various sizes is not enough: especially at small sizes there would be too much loss of detail.
+- Smaller icons should have a 1px dark outline to compensate the loss of detail.
+- A SVG (scalable) variant is appreciated.
+- Should be theme-agnostic (perhaps by using Tango colors). Otherwise, there should be icons for most common GTK themes.
+
+
+
+#### Artwork License
+If you provide original work, it must come in a form usable in open source software. In short, you must license it.
+
+This is done by explicitly stating its license when you publish/submit it.
+
+The license you choose must be compatible for use in a GPLv2 software, like some *Creative Commons*, *GPL* itself,
+or if you don't want to license it, *Public Domain* (although I suggest to not release your work without any license at all).
 
 
 
