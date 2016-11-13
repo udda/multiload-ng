@@ -373,7 +373,6 @@ You can contribute in several ways:
 * Port the plugin to other panels
 * Submit your personal color scheme
 * Implement something present in the [Wishlist](../../wiki/Wishlist)
-* Fix something present in [Known issues and TODO](../../wiki/Known-issues-and-TODO)
 * ...
 
 Look at the [Wiki](../../wiki), contains all the informations you will need.
