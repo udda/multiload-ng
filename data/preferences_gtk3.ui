@@ -525,8 +525,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="adjustment">adjustment_size_cpu</property>
                 <property name="update_policy">if-valid</property>
-                <signal name="output" handler="spinbutton_size_output_cb" swapped="no"/>
-                <signal name="value-changed" handler="spinbutton_size_change_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -547,8 +545,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="secondary_icon_tooltip_text" translatable="yes">Tooltip may not show if update interval is too short.</property>
                 <property name="adjustment">adjustment_interval_cpu</property>
                 <property name="update_policy">if-valid</property>
-                <signal name="output" handler="spinbutton_interval_output_cb" swapped="no"/>
-                <signal name="value-changed" handler="spinbutton_interval_change_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -567,8 +563,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="adjustment">adjustment_size_mem</property>
                 <property name="update_policy">if-valid</property>
-                <signal name="output" handler="spinbutton_size_output_cb" swapped="no"/>
-                <signal name="value-changed" handler="spinbutton_size_change_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -589,8 +583,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="secondary_icon_tooltip_text" translatable="yes">Tooltip may not show if update interval is too short.</property>
                 <property name="adjustment">adjustment_interval_mem</property>
                 <property name="update_policy">if-valid</property>
-                <signal name="output" handler="spinbutton_interval_output_cb" swapped="no"/>
-                <signal name="value-changed" handler="spinbutton_interval_change_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -611,8 +603,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="secondary_icon_tooltip_text" translatable="yes">Tooltip may not show if update interval is too short.</property>
                 <property name="adjustment">adjustment_interval_net</property>
                 <property name="update_policy">if-valid</property>
-                <signal name="output" handler="spinbutton_interval_output_cb" swapped="no"/>
-                <signal name="value-changed" handler="spinbutton_interval_change_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -631,8 +621,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="adjustment">adjustment_size_net</property>
                 <property name="update_policy">if-valid</property>
-                <signal name="output" handler="spinbutton_size_output_cb" swapped="no"/>
-                <signal name="value-changed" handler="spinbutton_size_change_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -651,8 +639,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="adjustment">adjustment_size_temp</property>
                 <property name="update_policy">if-valid</property>
-                <signal name="output" handler="spinbutton_size_output_cb" swapped="no"/>
-                <signal name="value-changed" handler="spinbutton_size_change_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -673,8 +659,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="secondary_icon_tooltip_text" translatable="yes">Tooltip may not show if update interval is too short.</property>
                 <property name="adjustment">adjustment_interval_disk</property>
                 <property name="update_policy">if-valid</property>
-                <signal name="output" handler="spinbutton_interval_output_cb" swapped="no"/>
-                <signal name="value-changed" handler="spinbutton_interval_change_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -693,8 +677,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="adjustment">adjustment_size_load</property>
                 <property name="update_policy">if-valid</property>
-                <signal name="output" handler="spinbutton_size_output_cb" swapped="no"/>
-                <signal name="value-changed" handler="spinbutton_size_change_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -715,8 +697,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="secondary_icon_tooltip_text" translatable="yes">Tooltip may not show if update interval is too short.</property>
                 <property name="adjustment">adjustment_interval_swap</property>
                 <property name="update_policy">if-valid</property>
-                <signal name="output" handler="spinbutton_interval_output_cb" swapped="no"/>
-                <signal name="value-changed" handler="spinbutton_interval_change_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -735,8 +715,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="adjustment">adjustment_size_swap</property>
                 <property name="update_policy">if-valid</property>
-                <signal name="output" handler="spinbutton_size_output_cb" swapped="no"/>
-                <signal name="value-changed" handler="spinbutton_size_change_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -757,8 +735,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="secondary_icon_tooltip_text" translatable="yes">Tooltip may not show if update interval is too short.</property>
                 <property name="adjustment">adjustment_interval_load</property>
                 <property name="update_policy">if-valid</property>
-                <signal name="output" handler="spinbutton_interval_output_cb" swapped="no"/>
-                <signal name="value-changed" handler="spinbutton_interval_change_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -777,8 +753,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="secondary_icon_activatable">False</property>
                 <property name="adjustment">adjustment_size_disk</property>
                 <property name="update_policy">if-valid</property>
-                <signal name="output" handler="spinbutton_size_output_cb" swapped="no"/>
-                <signal name="value-changed" handler="spinbutton_size_change_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -799,8 +773,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="secondary_icon_tooltip_text" translatable="yes">Tooltip may not show if update interval is too short.</property>
                 <property name="adjustment">adjustment_interval_temp</property>
                 <property name="update_policy">if-valid</property>
-                <signal name="output" handler="spinbutton_interval_output_cb" swapped="no"/>
-                <signal name="value-changed" handler="spinbutton_interval_change_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -818,8 +790,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="image_position">top</property>
                 <property name="active">True</property>
                 <property name="draw_indicator">True</property>
-                <signal name="toggled" handler="prop_checkboxes_sensitive_cb" swapped="no"/>
-                <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -835,8 +805,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="tooltip_text" translatable="yes">Make this graph visible</property>
                 <property name="xalign">0.5</property>
                 <property name="draw_indicator">True</property>
-                <signal name="toggled" handler="prop_checkboxes_sensitive_cb" swapped="no"/>
-                <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -852,8 +820,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="tooltip_text" translatable="yes">Make this graph visible</property>
                 <property name="xalign">0.5</property>
                 <property name="draw_indicator">True</property>
-                <signal name="toggled" handler="prop_checkboxes_sensitive_cb" swapped="no"/>
-                <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -869,8 +835,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="tooltip_text" translatable="yes">Make this graph visible</property>
                 <property name="xalign">0.5</property>
                 <property name="draw_indicator">True</property>
-                <signal name="toggled" handler="prop_checkboxes_sensitive_cb" swapped="no"/>
-                <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -886,8 +850,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="tooltip_text" translatable="yes">Make this graph visible</property>
                 <property name="xalign">0.5</property>
                 <property name="draw_indicator">True</property>
-                <signal name="toggled" handler="prop_checkboxes_sensitive_cb" swapped="no"/>
-                <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -903,8 +865,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="tooltip_text" translatable="yes">Make this graph visible</property>
                 <property name="xalign">0.5</property>
                 <property name="draw_indicator">True</property>
-                <signal name="toggled" handler="prop_checkboxes_sensitive_cb" swapped="no"/>
-                <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -920,8 +880,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="tooltip_text" translatable="yes">Make this graph visible</property>
                 <property name="xalign">0.5</property>
                 <property name="draw_indicator">True</property>
-                <signal name="toggled" handler="prop_checkboxes_sensitive_cb" swapped="no"/>
-                <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -978,7 +936,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="valign">center</property>
                 <property name="hexpand">False</property>
                 <property name="image">image_advanced_mem</property>
-                <signal name="clicked" handler="button_advanced_clicked_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -995,7 +952,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="valign">center</property>
                 <property name="hexpand">False</property>
                 <property name="image">image_advanced_net</property>
-                <signal name="clicked" handler="button_advanced_clicked_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -1012,7 +968,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="valign">center</property>
                 <property name="hexpand">False</property>
                 <property name="image">image_advanced_swap</property>
-                <signal name="clicked" handler="button_advanced_clicked_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -1029,7 +984,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="valign">center</property>
                 <property name="hexpand">False</property>
                 <property name="image">image_advanced_load</property>
-                <signal name="clicked" handler="button_advanced_clicked_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -1046,7 +1000,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="valign">center</property>
                 <property name="hexpand">False</property>
                 <property name="image">image_advanced_disk</property>
-                <signal name="clicked" handler="button_advanced_clicked_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -1063,7 +1016,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="valign">center</property>
                 <property name="hexpand">False</property>
                 <property name="image">image_advanced_temp</property>
-                <signal name="clicked" handler="button_advanced_clicked_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -1080,7 +1032,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="valign">center</property>
                 <property name="hexpand">False</property>
                 <property name="image">image_advanced_cpu</property>
-                <signal name="clicked" handler="button_advanced_clicked_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -1109,8 +1060,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="tooltip_text" translatable="yes">Make this graph visible</property>
                 <property name="xalign">0</property>
                 <property name="draw_indicator">True</property>
-                <signal name="toggled" handler="prop_checkboxes_sensitive_cb" swapped="no"/>
-                <signal name="toggled" handler="prop_graph_visibility_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -1131,8 +1080,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="adjustment">adjustment_size_parm</property>
                 <property name="update_policy">if-valid</property>
                 <property name="value">40</property>
-                <signal name="output" handler="spinbutton_size_output_cb" swapped="no"/>
-                <signal name="value-changed" handler="spinbutton_size_change_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">2</property>
@@ -1155,8 +1102,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="adjustment">adjustment_interval_parm</property>
                 <property name="update_policy">if-valid</property>
                 <property name="value">1000</property>
-                <signal name="output" handler="spinbutton_interval_output_cb" swapped="no"/>
-                <signal name="value-changed" handler="spinbutton_interval_change_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">3</property>
@@ -1173,7 +1118,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="valign">center</property>
                 <property name="hexpand">False</property>
                 <property name="image">image_advanced_parm</property>
-                <signal name="clicked" handler="button_advanced_clicked_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -1378,7 +1322,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="tooltip_text" translatable="yes">Import color scheme from file</property>
                             <property name="label" translatable="yes">Import</property>
                             <property name="stock_id">gtk-open</property>
-                            <signal name="clicked" handler="colorscheme_import_clicked_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1392,7 +1335,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="tooltip_text" translatable="yes">Export color scheme to file</property>
                             <property name="label" translatable="yes">Export</property>
                             <property name="stock_id">gtk-save-as</property>
-                            <signal name="clicked" handler="colorscheme_export_clicked_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1457,7 +1399,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
                             <property name="use_alpha">True</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -1471,7 +1412,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
                             <property name="use_alpha">True</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -1485,7 +1425,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
                             <property name="use_alpha">True</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -1499,7 +1438,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
                             <property name="use_alpha">True</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -1560,7 +1498,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -1598,7 +1535,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -1614,7 +1550,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="secondary_icon_activatable">False</property>
                             <property name="adjustment">adjustment_border_cpu</property>
                             <property name="update_policy">if-valid</property>
-                            <signal name="value-changed" handler="border_changed_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -1695,7 +1630,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
                             <property name="use_alpha">True</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">3</property>
@@ -1709,7 +1643,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
                             <property name="use_alpha">True</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">3</property>
@@ -1723,7 +1656,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
                             <property name="use_alpha">True</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">3</property>
@@ -1788,7 +1720,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
                             <property name="use_alpha">True</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">6</property>
@@ -1802,7 +1733,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
                             <property name="use_alpha">True</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">6</property>
@@ -1816,7 +1746,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
                             <property name="use_alpha">True</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">6</property>
@@ -1933,7 +1862,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
                             <property name="use_alpha">True</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">9</property>
@@ -2004,7 +1932,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
                             <property name="use_alpha">True</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">12</property>
@@ -2030,7 +1957,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
                             <property name="use_alpha">True</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">15</property>
@@ -2044,7 +1970,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
                             <property name="use_alpha">True</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">18</property>
@@ -2058,7 +1983,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
                             <property name="use_alpha">True</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">15</property>
@@ -2257,7 +2181,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">3</property>
@@ -2273,7 +2196,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="secondary_icon_activatable">False</property>
                             <property name="adjustment">adjustment_border_mem</property>
                             <property name="update_policy">if-valid</property>
-                            <signal name="value-changed" handler="border_changed_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">3</property>
@@ -2437,7 +2359,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">3</property>
@@ -2450,7 +2371,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">6</property>
@@ -2463,7 +2383,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">9</property>
@@ -2476,7 +2395,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">12</property>
@@ -2489,7 +2407,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">15</property>
@@ -2502,7 +2419,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">18</property>
@@ -2515,7 +2431,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">6</property>
@@ -2528,7 +2443,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">9</property>
@@ -2541,7 +2455,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">12</property>
@@ -2554,7 +2467,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">15</property>
@@ -2567,7 +2479,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">18</property>
@@ -2583,7 +2494,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="secondary_icon_activatable">False</property>
                             <property name="adjustment">adjustment_border_net</property>
                             <property name="update_policy">if-valid</property>
-                            <signal name="value-changed" handler="border_changed_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">6</property>
@@ -2600,7 +2510,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="secondary_icon_activatable">False</property>
                             <property name="adjustment">adjustment_border_swap</property>
                             <property name="update_policy">if-valid</property>
-                            <signal name="value-changed" handler="border_changed_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">9</property>
@@ -2617,7 +2526,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="secondary_icon_activatable">False</property>
                             <property name="adjustment">adjustment_border_load</property>
                             <property name="update_policy">if-valid</property>
-                            <signal name="value-changed" handler="border_changed_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">12</property>
@@ -2634,7 +2542,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="secondary_icon_activatable">False</property>
                             <property name="adjustment">adjustment_border_disk</property>
                             <property name="update_policy">if-valid</property>
-                            <signal name="value-changed" handler="border_changed_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">15</property>
@@ -2651,7 +2558,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="secondary_icon_activatable">False</property>
                             <property name="adjustment">adjustment_border_temp</property>
                             <property name="update_policy">if-valid</property>
-                            <signal name="value-changed" handler="border_changed_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">18</property>
@@ -2900,7 +2806,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -2913,7 +2818,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">3</property>
@@ -2926,7 +2830,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">6</property>
@@ -2939,7 +2842,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">9</property>
@@ -2952,7 +2854,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">12</property>
@@ -2965,7 +2866,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">15</property>
@@ -2978,7 +2878,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">18</property>
@@ -3138,7 +3037,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
                             <property name="use_alpha">True</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">24</property>
@@ -3238,7 +3136,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">24</property>
@@ -3268,7 +3165,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="secondary_icon_activatable">False</property>
                             <property name="adjustment">adjustment_border_parm</property>
                             <property name="update_policy">if-valid</property>
-                            <signal name="value-changed" handler="border_changed_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">24</property>
@@ -3293,7 +3189,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">24</property>
@@ -3306,7 +3201,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="relief">none</property>
-                            <signal name="color-set" handler="color_set_cb" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">24</property>
@@ -3802,7 +3696,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                     <property name="round_digits">0</property>
                     <property name="digits">0</property>
                     <property name="value_pos">right</property>
-                    <signal name="value-changed" handler="spacing_or_padding_changed_cb" swapped="no"/>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -3832,7 +3725,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                     <property name="round_digits">0</property>
                     <property name="digits">0</property>
                     <property name="value_pos">right</property>
-                    <signal name="value-changed" handler="spacing_or_padding_changed_cb" swapped="no"/>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -3873,7 +3765,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                     <property name="hexpand">True</property>
                     <property name="model">liststore_orientation</property>
                     <property name="active">0</property>
-                    <signal name="changed" handler="combo_orientation_changed_cb" swapped="no"/>
                     <child>
                       <object class="GtkCellRendererText" id="cellrenderertext14"/>
                       <attributes>
@@ -4285,7 +4176,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="urgency_hint">True</property>
-    <signal name="delete-event" handler="gtk_widget_hide_on_delete" swapped="no"/>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox2">
         <property name="visible">True</property>
@@ -4304,7 +4194,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="gtk_widget_hide" object="dialog_advanced" swapped="yes"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -4376,7 +4265,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="hexpand">True</property>
                         <property name="model">liststore_tooltips</property>
                         <property name="active">0</property>
-                        <signal name="changed" handler="tooltip_style_changed_cb" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext16"/>
                           <attributes>
@@ -4398,7 +4286,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="hexpand">True</property>
                         <property name="model">liststore_dblclick</property>
                         <property name="active">0</property>
-                        <signal name="changed" handler="dblclick_policy_changed_cb" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext1"/>
                           <attributes>
@@ -4424,7 +4311,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="width_chars">18</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
-                        <signal name="changed" handler="dblclick_command_changed_cb" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -4552,7 +4438,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="hexpand">True</property>
                         <property name="model">liststore_tooltips</property>
                         <property name="active">0</property>
-                        <signal name="changed" handler="tooltip_style_changed_cb" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext2"/>
                           <attributes>
@@ -4574,7 +4459,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="hexpand">True</property>
                         <property name="model">liststore_dblclick</property>
                         <property name="active">0</property>
-                        <signal name="changed" handler="dblclick_policy_changed_cb" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext3"/>
                           <attributes>
@@ -4600,7 +4484,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="width_chars">18</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
-                        <signal name="changed" handler="dblclick_command_changed_cb" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -4793,7 +4676,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="hexpand">True</property>
                         <property name="model">liststore_tooltips</property>
                         <property name="active">0</property>
-                        <signal name="changed" handler="tooltip_style_changed_cb" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext9"/>
                           <attributes>
@@ -4815,7 +4697,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="hexpand">True</property>
                         <property name="model">liststore_dblclick</property>
                         <property name="active">0</property>
-                        <signal name="changed" handler="dblclick_policy_changed_cb" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext4"/>
                           <attributes>
@@ -4841,7 +4722,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="width_chars">18</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
-                        <signal name="changed" handler="dblclick_command_changed_cb" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -5152,7 +5032,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="hexpand">True</property>
                         <property name="model">liststore_tooltips</property>
                         <property name="active">0</property>
-                        <signal name="changed" handler="tooltip_style_changed_cb" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext10"/>
                           <attributes>
@@ -5174,7 +5053,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="hexpand">True</property>
                         <property name="model">liststore_dblclick</property>
                         <property name="active">0</property>
-                        <signal name="changed" handler="dblclick_policy_changed_cb" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext5"/>
                           <attributes>
@@ -5200,7 +5078,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="width_chars">18</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
-                        <signal name="changed" handler="dblclick_command_changed_cb" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -5331,7 +5208,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="hexpand">True</property>
                         <property name="model">liststore_tooltips</property>
                         <property name="active">0</property>
-                        <signal name="changed" handler="tooltip_style_changed_cb" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext11"/>
                           <attributes>
@@ -5353,7 +5229,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="hexpand">True</property>
                         <property name="model">liststore_dblclick</property>
                         <property name="active">0</property>
-                        <signal name="changed" handler="dblclick_policy_changed_cb" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext6"/>
                           <attributes>
@@ -5379,7 +5254,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="width_chars">18</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
-                        <signal name="changed" handler="dblclick_command_changed_cb" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -5576,7 +5450,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="hexpand">True</property>
                         <property name="model">liststore_tooltips</property>
                         <property name="active">0</property>
-                        <signal name="changed" handler="tooltip_style_changed_cb" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext12"/>
                           <attributes>
@@ -5598,7 +5471,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="hexpand">True</property>
                         <property name="model">liststore_dblclick</property>
                         <property name="active">0</property>
-                        <signal name="changed" handler="dblclick_policy_changed_cb" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext7"/>
                           <attributes>
@@ -5624,7 +5496,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="width_chars">18</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
-                        <signal name="changed" handler="dblclick_command_changed_cb" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -5935,7 +5806,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="hexpand">True</property>
                         <property name="model">liststore_tooltips</property>
                         <property name="active">0</property>
-                        <signal name="changed" handler="tooltip_style_changed_cb" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext13"/>
                           <attributes>
@@ -5957,7 +5827,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="hexpand">True</property>
                         <property name="model">liststore_dblclick</property>
                         <property name="active">0</property>
-                        <signal name="changed" handler="dblclick_policy_changed_cb" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext8"/>
                           <attributes>
@@ -5983,7 +5852,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="width_chars">18</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
-                        <signal name="changed" handler="dblclick_command_changed_cb" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -6460,7 +6328,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="hexpand">True</property>
                         <property name="model">liststore_tooltips</property>
                         <property name="active">0</property>
-                        <signal name="changed" handler="tooltip_style_changed_cb" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext17"/>
                           <attributes>
@@ -6482,7 +6349,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="hexpand">True</property>
                         <property name="model">liststore_dblclick</property>
                         <property name="active">0</property>
-                        <signal name="changed" handler="dblclick_policy_changed_cb" swapped="no"/>
                         <child>
                           <object class="GtkCellRendererText" id="cellrenderertext18"/>
                           <attributes>
@@ -6508,7 +6374,6 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         <property name="width_chars">18</property>
                         <property name="primary_icon_activatable">False</property>
                         <property name="secondary_icon_activatable">False</property>
-                        <signal name="changed" handler="dblclick_command_changed_cb" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
