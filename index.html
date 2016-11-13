@@ -59,6 +59,7 @@ It's a near-complete rewrite of the good old GNOME multiload applet, that aims t
 <li><a href="#how-to-contribute">How to Contribute</a></li>
 <li><a href="#help--troubleshooting">Help &amp; Troubleshooting</a></li>
 <li><a href="#faq">FAQ</a></li>
+<li><a href="#disclaimer">Disclaimer</a></li>
 <li><a href="#credits">Credits</a></li>
 </ul>
 
@@ -164,10 +165,18 @@ and informations about currently running kernel.</p>
 <h3>
 <a id="temperature" class="anchor" href="#temperature" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TEMPERATURE</h3>
 
-<p>Draws temperature of the system</p>
+<p>Draws temperature of the system.</p>
 
 <p>User can choose which sensor/driver to read for drawing the graph, or let Multiload-ng 
 automatically select the hottest temperature measured among all detected sensors.</p>
+
+<h3>
+<a id="battery" class="anchor" href="#battery" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>BATTERY</h3>
+
+<p>Draws charge and status of system battery, using different colors for charging,
+discharging and critical level.</p>
+
+<p>Tooltip shows additional battery info.</p>
 
 <h3>
 <a id="parametric" class="anchor" href="#parametric" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>PARAMETRIC</h3>
@@ -209,6 +218,8 @@ Some examples are present in <a href="#screenshots">screenshots</a> above. Here 
 </li>
 <li>Color schemes inspired by outer space: <strong>Moon</strong>, <strong>Venus</strong>, <strong>Earth</strong>, <strong>Mars</strong>, <strong>Jupiter</strong>, <strong>Uranus</strong>, <strong>Neptune</strong>
 </li>
+<li>Color schemes inspired by <strong>The Simpsons</strong> (from the work of designer <a href="http://www.hyotk.com/">Hyo Taek Kim</a>, watch it <a href="http://www.fubiz.net/en/2015/09/19/the-colors-of-simpsons-pantone/">here</a>)</li>
+<li>Color schemes inspired by old cartoons and video games: <strong>Dragon Ball Z</strong>, <strong>Super Mario Bros</strong> (with colors from original 1985 game)</li>
 <li>More!</li>
 </ul>
 
@@ -238,22 +249,25 @@ started writing about the plugin, and some contributors started to send translat
 <a id="common-requirements" class="anchor" href="#common-requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Common requirements</h3>
 
 <p>These are the packages required to build any version of the plugin.
-See per-panel section below for full list.</p>
+Some panels may require additional packages (see below).</p>
 
 <table>
 <thead>
 <tr>
 <th align="left">Package</th>
-<th align="right">Min version</th>
+<th align="right">Min version (GTK+2)</th>
+<th align="right">Min version (GTK+3)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="left">gtk+</td>
 <td align="right">&gt;= 2.20.0</td>
+<td align="right">&gt;= 3.0.0</td>
 </tr>
 <tr>
 <td align="left">cairo</td>
+<td align="right">&gt;= 1.0</td>
 <td align="right">&gt;= 1.0</td>
 </tr>
 </tbody>
@@ -272,8 +286,6 @@ run-time ones. Here are required options:  </p>
 </li>
 </ul>
 
-<p>Multiload-ng measures system resources using nodes in /sys and /proc, so they must exist.</p>
-
 <p>In addition, enabling the following options allows Multiload-ng to gather all possible
 informations from the system. These are not strictly required, but some graphs might
 not work properly, or not work at all, without these other options:  </p>
@@ -281,6 +293,9 @@ not work properly, or not work at all, without these other options:  </p>
 <ul>
 <li>
 <strong>CONFIG_CPU_FREQ</strong> <em>(CPU Frequency scaling)</em>
+</li>
+<li>
+<strong>CONFIG_POWER_SUPPLY</strong> <em>(Power supply class support)</em>
 </li>
 <li>
 <strong>CONFIG_HWMON</strong> <em>(Hardware Monitoring support)</em>
@@ -295,10 +310,9 @@ not work properly, or not work at all, without these other options:  </p>
 <p>Any modern kernel (since 2010) sets all these options automatically, so generally
 speaking you don't have to worry about user kernels.</p>
 
-<h3>
-<a id="requirements-for-standalone-window" class="anchor" href="#requirements-for-standalone-window" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements for standalone window</h3>
-
-<p>Standalone target has no additional requirements.</p>
+<p>It is recommended building with <strong>gcc</strong>. Multiload-ng code is pretty standards
+compliant, so it should work flawlessly with any C compiler, but using
+compilers other than <em>gcc</em> is untested and it's not guaranteed to succeed.</p>
 
 <h3>
 <a id="requirements-for-application-indicator-ubuntu-unity-and-others" class="anchor" href="#requirements-for-application-indicator-ubuntu-unity-and-others" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements for Application Indicator (Ubuntu Unity and others)</h3>
@@ -321,7 +335,7 @@ these packages are required to build Application Indicator:</p>
 </tbody>
 </table>
 
-<p>Check which GTK+ version is supported by your target panel,
+<p>Check which GTK+ version is supported by your target panel.
 Ubuntu Unity needs AppIndicators to be built against GTK+3.
 You may have to set correct GTK+ version (see <a href="#gtk-version">here</a> for instructions).</p>
 
@@ -336,27 +350,35 @@ these packages are required to build LXDE panel plugin:</p>
 <tr>
 <th align="left">Package</th>
 <th align="right">Min version</th>
+<th align="left">Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="left">lxpanel</td>
-<td align="right">&gt;= 0.7.0</td>
+<td align="right">&gt;= 0.5.8</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">libmenu-cache</td>
+<td align="right"></td>
+<td align="left">Only for lxpanel &lt;= 0.7.0</td>
 </tr>
 <tr>
 <td align="left">libfm</td>
-<td align="right">&gt;= 1.2.0</td>
+<td align="right">1.2.0</td>
+<td align="left">Only for lxpanel &gt;= 0.7.0</td>
 </tr>
 </tbody>
 </table>
 
-<p>Due to an error in lxpanel source, if you are using lxpanel 0.7.0 you will
-need also libmenu-cache. This was fixed in version 0.7.1. Read about this
-<a href="http://wiki.lxde.org/en/How_to_write_plugins_for_LXPanel#Preconditions">here</a>.</p>
+<p>Note that due to a mistake in lxpanel source, if you are using lxpanel 0.7.0
+you will need both <code>libfm</code> and <code>libmenu-cache</code>. This was fixed in version 0.7.1.
+Read about this <a href="http://wiki.lxde.org/en/How_to_write_plugins_for_LXPanel#Preconditions">here</a>.</p>
 
 <p>You might have to force GTK+2 build (see <a href="#gtk-version">here</a> for instructions).</p>
 
-<p>Note that LXDE 0.7 or greater is required.</p>
+<p>Note that LXDE 0.5.8 or greater is required.</p>
 
 <h3>
 <a id="requirements-for-mate-panel" class="anchor" href="#requirements-for-mate-panel" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements for MATE panel</h3>
@@ -379,9 +401,9 @@ these packages are required to build MATE panel plugin:</p>
 </tbody>
 </table>
 
-<p>Check which GTK+ version is supported by your panel: mate-panel used to be GTK+2,
-newer versions of mate-panel are GTK+3. You may have to set correct GTK+ version
-(see <a href="#gtk-version">here</a> for instructions).</p>
+<p>Check which GTK+ version is supported by your panel: mate-panel used to be GTK+2
+only, while newer versions of mate-panel are GTK+3. You may have to set correct
+GTK+ version (see <a href="#gtk-version">here</a> for instructions).</p>
 
 <p>Note that MATE 1.7 or greater is required.</p>
 
@@ -395,23 +417,26 @@ these packages are required to build XFCE panel plugin:</p>
 <thead>
 <tr>
 <th align="left">Package</th>
-<th align="right">Min version</th>
+<th align="right">Min version (GTK+2)</th>
+<th align="right">Min version (GTK+3)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="left">libxfce4panel</td>
 <td align="right">&gt;= 4.6.0</td>
+<td align="right">&gt;= 4.12.0</td>
 </tr>
 <tr>
 <td align="left">libxfce4util</td>
 <td align="right">&gt;= 4.6.0</td>
+<td align="right">&gt;= 4.12.0</td>
 </tr>
 </tbody>
 </table>
 
 <p>Check which GTK+ version is supported by your panel: xfce4-panel used to be GTK+2
-only, newer versions of xfce4-panel supports GTK+3 too. You may have to set
+only, while newer versions of xfce4-panel supports GTK+3 too. You may have to set
 correct GTK+ version (see <a href="#gtk-version">here</a> for instructions).</p>
 
 <p>Note that XFCE 4.6 or greater is required for GTK+2 plugin.
@@ -421,19 +446,20 @@ Note that XFCE 4.12 or greater is required for GTK+3 plugin.</p>
 <a id="install-instructions" class="anchor" href="#install-instructions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install instructions</h2>
 
 <h3>
-<a id="official-support" class="anchor" href="#official-support" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Official support</h3>
+<a id="package-generators" class="anchor" href="#package-generators" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Package generators</h3>
 
 <p>Take a look at <a href="https://github.com/udda/multiload-ng/tree/master/extras">extras directory</a>.
-There are scripts for many Linux distributions, that generate packages which can
+There are scripts for most Linux distributions, that generate packages which can
 be then installed through package managers.</p>
 
 <h3>
-<a id="unofficial-support" class="anchor" href="#unofficial-support" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Unofficial support</h3>
+<a id="external-support" class="anchor" href="#external-support" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>External support</h3>
 
 <ul>
 <li>For Ubuntu/Mint and derivatives, <a href="https://launchpad.net/%7Enilarimogard/+archive/ubuntu/webupd8">WebUpd8 PPA</a> hosts <strong>stable</strong> packages for all supported panels.
-Read how to install <a href="http://www.webupd8.org/2016/08/multiload-ng-120-released-with-color.html">here</a> (article is old, but instructions are valid).</li>
-<li>Arch users can install XFCE version from AUR (<a href="https://aur.archlinux.org/packages/xfce4-multiload-ng-plugin/">stable</a>, <a href="https://aur.archlinux.org/packages/xfce4-multiload-ng-plugin/">unstable</a>)</li>
+Read how to install <a href="http://www.webupd8.org/2016/10/multiload-ng-140-gnome-twitch-030.html">here</a> (instructions are valid for all versions).</li>
+<li>Arch users can get Multiload-ng from AUR. There is a separate package for each variant of the plugin.
+Just <a href="https://aur.archlinux.org/packages/?SeB=n&amp;K=multiload-ng">search for multiload-ng in AUR</a>!</li>
 </ul>
 
 <p>If your distro isn't covered above, or you just want to have some control over build (e.g. enable/disable some plugins, try experimental features), you can <a href="#build-instructions">build it yourself</a>.</p>
@@ -481,7 +507,7 @@ option <code>--libdir=/usr/lib/x86_64-linux-gnu</code> in 64 bit systems, and <c
 <p>Build system automatically selects highest GTK+ version available. If you need to build against a lower version, you have to
 set it manually (see next section, <a href="#advanced-configure">Advanced configure</a>)</p>
 
-<p>For example, LxPanel and older versions of XFCE panel (&lt; 4.12.0) need GTK2 version of the plugin.
+<p>For example, LxPanel and older versions of MATE and XFCE panels need GTK2 version of the plugin.
 They need to add option <code>--with-gtk=2.0</code> to <em>./configure</em>.</p>
 
 <h3>
@@ -528,9 +554,9 @@ They need to add option <code>--with-gtk=2.0</code> to <em>./configure</em>.</p>
 <td>This enables required CFLAGS</td>
 </tr>
 <tr>
-<td><code>--enable-autostart</code></td>
-<td>Enable autostart for suitable targets</td>
-<td>This installs .desktop files to <code>/etc/xdg/autostart</code> for some plugins (indicator, systray...)</td>
+<td><code>--disable-autostart</code></td>
+<td>Do not install autostart entries</td>
+<td>Autostart entries are normally put into <code>/etc/xdg/autostart</code> for some plugins (indicator, systray...)</td>
 </tr>
 </tbody>
 </table>
@@ -543,7 +569,7 @@ They need to add option <code>--with-gtk=2.0</code> to <em>./configure</em>.</p>
 <h3>
 <a id="build" class="anchor" href="#build" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Build</h3>
 
-<p>This is simple. Move to the directory that contains source code and execute:<br>
+<p>This is easy. Move to the directory that contains source code and execute:<br>
 <code>make</code></p>
 
 <h3>
@@ -575,7 +601,7 @@ They need to add option <code>--with-gtk=2.0</code> to <em>./configure</em>.</p>
 
 <p>Look at the <a href="../../wiki">Wiki</a>, contains all the informations you will need.</p>
 
-<p>Each pull request will be considered and will get a response.</p>
+<p>Each pull request will be considered carefully and will get a response.</p>
 
 <h2>
 <a id="help--troubleshooting" class="anchor" href="#help--troubleshooting" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Help &amp; Troubleshooting</h2>
@@ -585,8 +611,8 @@ They need to add option <code>--with-gtk=2.0</code> to <em>./configure</em>.</p>
 <h3>
 <a id="plugin-shows-only-a-vertical-blank-line" class="anchor" href="#plugin-shows-only-a-vertical-blank-line" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Plugin shows only a vertical blank line</h3>
 
-<p>Probably you compiled against the wrong GTK+ version. E.g: LXDE panel and older version of XFCE panel (&lt; 4.12.0)
-are still GTK2-based, and Multiload-ng build system automatically selects GTK+3 if available.</p>
+<p>Probably you compiled against the wrong GTK+ version. E.g: LXDE panel and older version of MATE and XFCE panels
+are still based on GTK+2, and Multiload-ng build system automatically selects GTK+3 when available.</p>
 
 <p>Try running Configure with the right options (see <a href="#configure">Configure</a> section above)</p>
 
@@ -602,21 +628,34 @@ are still GTK2-based, and Multiload-ng build system automatically selects GTK+3 
 
 <p>Lowering update interval means more redraws per second. CPU usage might become noticeable on older systems.</p>
 
-<p>Command line of parametric graph is called <strong>synchronously</strong> every time the graph is redrawn. This means that
-plugins hangs waiting for the command line to terminate and return numbers.</p>
+<p>Command line of parametric graph is called <strong>synchronously</strong> every time the graph is redrawn.
+This means that plugins hangs waiting for the command to terminate and return numbers.</p>
 
 <p>You should try to raise update interval, and try to use lightweight programs for parametric command line.</p>
 
 <h3>
 <a id="memory-usage-is-not-the-same-reported-by-task-manager" class="anchor" href="#memory-usage-is-not-the-same-reported-by-task-manager" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Memory usage is not the same reported by task manager</h3>
 
-<p>There is some disagreement on how to count some components of kernel memory. Some task managers
-count them as <em>used</em> memory, while standard programs like <code>free</code> report them as <em>shared</em>.</p>
+<p>There is some disagreement on how to count some components of kernel memory. Some resource monitors
+(like <code>htop</code> and some graphical task managers) count them as <em>used</em> memory, while other programs
+like <code>top</code> and <code>free</code> report them as <em>cached</em>.</p>
 
-<p>Multiload-ng follows the latter approach, doing its best to align reported values to those of
-standard tools. Task managers could (and sometimes do) count memory usage in a different way.</p>
+<p>Multiload-ng now allows to choose <em>where</em> to count that memory component, in order
+to align memory usage value with what your favorite resource monitor reports. You can
+find the switch in <em>Advanced Preferences</em> window of <em>Memory</em> graph.</p>
 
-<p>You can read more of this on <a href="https://github.com/udda/multiload-ng/issues/21">issue #21</a>.</p>
+<h3>
+<a id="tooltips-not-showing-reliably" class="anchor" href="#tooltips-not-showing-reliably" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tooltips not showing reliably</h3>
+
+<p>This happens often on GTK+3 builds. Due to changes in the way tooltips are handled in GTK+3,
+sometimes they might show with big delay, or not show at all. Sometimes they do show up,
+but without being updated with every graph redraw, as they should.</p>
+
+<p>Basically, being on GTK+ side, there is not much that can be done from Multiload-ng.
+Some users "<em>solved</em>" it by raising update interval of the graphs above
+<em>GTK+ default tooltip delay time</em> (500 ms in many systems).</p>
+
+<p>Starting from GTK+ 3.20.0, tooltips appear to be working normally.</p>
 
 <h2>
 <a id="faq" class="anchor" href="#faq" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>FAQ</h2>
@@ -684,10 +723,15 @@ If it's not, you should <a href="../../issues/new">create a new issue</a>.</p>
 <p>The best way to get a new port is to suggest it (or code it yourself, of course). Feel free to submit an issue about your request, it will be considered carefully.</p>
 
 <h2>
+<a id="disclaimer" class="anchor" href="#disclaimer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Disclaimer</h2>
+
+<p>All product names, logos and brands are property of their respective owners. All company, product and service names used in this software are for identification purposes only. Use of these names, logos, and brands does not imply endorsement, and do not infringe any patent, trademark, copyright, license or any other proprietary right of any third party.</p>
+
+<h2>
 <a id="credits" class="anchor" href="#credits" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Credits</h2>
 
 <ul>
-<li>FSF and creators of original Multiload applet (see AUTHORS file), for giving me a starting point</li>
+<li>FSF and creators of original Multiload applet (see AUTHORS file), for giving a good starting point</li>
 <li>Translators, for sending me always up-to-date translations. Read their names in <em>About</em> dialog, in git commits comments, or looking at the source, in the PO file headers</li>
 <li>Beta testers, for reporting bugs that I would have never discovered, because they didn't happen in any of my systems. Now these bugs are all gone, thanks to them. Some translators also helped me with testing.</li>
 </ul>
