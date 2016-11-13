@@ -25,8 +25,7 @@
 #include "gtk-compat.h"
 
 
-// Compatibility functions for GTK2
-#if ! GTK_CHECK_VERSION(3,0,0)
+#if ! GTK_CHECK_VERSION(3,4,0)
 
 gboolean
 gdk_rgba_parse (GdkRGBA* color, const gchar* gspec) {
@@ -78,6 +77,10 @@ gtk_color_button_new_with_rgba (const GdkRGBA *rgba)
 	return ret;
 }
 
+#endif /* ! GTK_CHECK_VERSION(3,4,0) */
+
+
+#if ! GTK_CHECK_VERSION(3,0,0)
 
 GtkWidget *
 gtk_box_new (GtkOrientation o, guint spacing)
@@ -97,11 +100,11 @@ gtk_separator_new (GtkOrientation o)
 		return gtk_vseparator_new();
 }
 
-
 #endif /* ! GTK_CHECK_VERSION(3,0,0) */
 
 
 #if ! GTK_CHECK_VERSION(3,10,0)
+
 GtkWidget *
 gtk_button_new_from_icon_name (const gchar *icon_name, GtkIconSize size)
 {
@@ -110,7 +113,8 @@ gtk_button_new_from_icon_name (const gchar *icon_name, GtkIconSize size)
 	gtk_button_set_image(GTK_BUTTON(ret), image);
 	return ret;
 }
-#endif /* ! GTK_CHECK_VERSION(3,10,0) */
+
+#endif /*  ! GTK_CHECK_VERSION(3,10,0) */
 
 void
 gdk_color_to_rgba(const GdkColor *color, guint16 alpha, GdkRGBA *rgba)

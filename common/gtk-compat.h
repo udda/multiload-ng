@@ -27,7 +27,7 @@
 
 G_BEGIN_DECLS
 
-// Compatibility functions for GTK2
+
 #if ! GTK_CHECK_VERSION(3,0,0)
 
 typedef struct {
@@ -37,6 +37,11 @@ typedef struct {
 	gdouble alpha;
 } GdkRGBA;
 #define GTK_COLOR_CHOOSER GTK_COLOR_BUTTON
+
+#endif /* ! GTK_CHECK_VERSION(3,0,0) */
+
+
+#if ! GTK_CHECK_VERSION(3,4,0)
 
 G_GNUC_INTERNAL gboolean
 gdk_rgba_parse (GdkRGBA* color, const gchar* gspec);
@@ -53,6 +58,10 @@ gtk_color_chooser_set_use_alpha (GtkColorButton *chooser, gboolean use_alpha);
 G_GNUC_INTERNAL GtkWidget *
 gtk_color_button_new_with_rgba (const GdkRGBA *rgba);
 
+#endif /* ! GTK_CHECK_VERSION(3,4,0) */
+
+
+#if ! GTK_CHECK_VERSION(3,0,0)
 
 G_GNUC_INTERNAL GtkWidget *
 gtk_box_new (GtkOrientation o, guint spacing);
@@ -60,14 +69,15 @@ gtk_box_new (GtkOrientation o, guint spacing);
 G_GNUC_INTERNAL GtkWidget *
 gtk_separator_new (GtkOrientation o);
 
-#endif
+#endif /* ! GTK_CHECK_VERSION(3,0,0) */
+
 
 #if ! GTK_CHECK_VERSION(3,10,0)
 
 G_GNUC_INTERNAL GtkWidget *
 gtk_button_new_from_icon_name (const gchar *icon_name, GtkIconSize size);
 
-#endif /* ! GTK_CHECK_VERSION(3,0,0) */
+#endif /* ! GTK_CHECK_VERSION(3,10,0) */
 
 
 //gtk+>3.4
