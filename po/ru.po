@@ -275,6 +275,9 @@ msgstr "_Параметры"
 msgid "_Close"
 msgstr "_Закрыть"
 
+msgid "_Quit"
+msgstr "В_ыйти"
+
 msgid "Do nothing"
 msgstr "Ничего не делать"
 

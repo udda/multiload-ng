@@ -275,6 +275,9 @@ msgstr "_Preferenze"
 msgid "_Close"
 msgstr "_Chiudi"
 
+msgid "_Quit"
+msgstr "_Esci"
+
 msgid "Do nothing"
 msgstr "Non fare nulla"
 

@@ -276,6 +276,9 @@ msgstr "_Nustatymai"
 msgid "_Close"
 msgstr "_Užverti"
 
+msgid "_Quit"
+msgstr "Išei_ti"
+
 msgid "Do nothing"
 msgstr "Nieko nedaryti"
 

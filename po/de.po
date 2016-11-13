@@ -275,6 +275,9 @@ msgstr "_Einstellungen"
 msgid "_Close"
 msgstr "S_chließen"
 
+msgid "_Quit"
+msgstr "_Beenden"
+
 msgid "Do nothing"
 msgstr "Nichts tun"
 
