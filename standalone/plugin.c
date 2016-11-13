@@ -48,7 +48,11 @@ standalone_destroy_cb(GtkWidget *widget, MultiloadPlugin *multiload)
 void
 standalone_settingsmenu_cb(GtkWidget *widget, GtkMenu *menu)
 {
-	gtk_menu_popup(menu, NULL, NULL, NULL, NULL, 1, 0);
+	#if GTK_CHECK_VERSION(3,22,0)
+		gtk_menu_popup_at_widget (menu, widget, GDK_GRAVITY_SOUTH_EAST, GDK_GRAVITY_NORTH_EAST, NULL);
+	#else
+		gtk_menu_popup(menu, NULL, NULL, NULL, NULL, 1, 0);
+	#endif
 }
 
 void
