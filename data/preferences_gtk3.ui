@@ -1519,9 +1519,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="hseparator1">
-                            <property name="height_request">10</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">5</property>
+                            <property name="margin_bottom">5</property>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -1572,9 +1573,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="hseparator2">
-                            <property name="height_request">10</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">5</property>
+                            <property name="margin_bottom">5</property>
                           </object>
                           <packing>
                             <property name="left_attach">0</property>
@@ -1584,9 +1586,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="vseparator1">
-                            <property name="width_request">8</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_left">4</property>
+                            <property name="margin_right">4</property>
                             <property name="orientation">vertical</property>
                           </object>
                           <packing>
@@ -1612,9 +1615,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="vseparator2">
-                            <property name="width_request">8</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_left">4</property>
+                            <property name="margin_right">4</property>
                             <property name="orientation">vertical</property>
                           </object>
                           <packing>
@@ -1790,9 +1794,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="vseparator7">
-                            <property name="width_request">8</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_left">4</property>
+                            <property name="margin_right">4</property>
                             <property name="orientation">vertical</property>
                           </object>
                           <packing>
@@ -1803,9 +1808,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="vseparator8">
-                            <property name="width_request">8</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_left">4</property>
+                            <property name="margin_right">4</property>
                             <property name="orientation">vertical</property>
                           </object>
                           <packing>
@@ -1816,9 +1822,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="vseparator9">
-                            <property name="width_request">8</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_left">4</property>
+                            <property name="margin_right">4</property>
                             <property name="orientation">vertical</property>
                           </object>
                           <packing>
@@ -1829,9 +1836,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="vseparator10">
-                            <property name="width_request">8</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_left">4</property>
+                            <property name="margin_right">4</property>
                             <property name="orientation">vertical</property>
                           </object>
                           <packing>
@@ -2027,9 +2035,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="hseparator3">
-                            <property name="height_request">10</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">5</property>
+                            <property name="margin_bottom">5</property>
                           </object>
                           <packing>
                             <property name="left_attach">3</property>
@@ -2039,9 +2048,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="hseparator4">
-                            <property name="height_request">10</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">5</property>
+                            <property name="margin_bottom">5</property>
                           </object>
                           <packing>
                             <property name="left_attach">6</property>
@@ -2051,9 +2061,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="hseparator5">
-                            <property name="height_request">10</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">5</property>
+                            <property name="margin_bottom">5</property>
                           </object>
                           <packing>
                             <property name="left_attach">9</property>
@@ -2063,9 +2074,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="hseparator6">
-                            <property name="height_request">10</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">5</property>
+                            <property name="margin_bottom">5</property>
                           </object>
                           <packing>
                             <property name="left_attach">12</property>
@@ -2075,9 +2087,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="hseparator7">
-                            <property name="height_request">10</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">5</property>
+                            <property name="margin_bottom">5</property>
                           </object>
                           <packing>
                             <property name="left_attach">15</property>
@@ -2087,9 +2100,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="hseparator8">
-                            <property name="height_request">10</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">5</property>
+                            <property name="margin_bottom">5</property>
                           </object>
                           <packing>
                             <property name="left_attach">18</property>
@@ -2205,9 +2219,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="hseparator9">
-                            <property name="height_request">10</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">5</property>
+                            <property name="margin_bottom">5</property>
                           </object>
                           <packing>
                             <property name="left_attach">3</property>
@@ -2217,9 +2232,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="hseparator10">
-                            <property name="height_request">10</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">5</property>
+                            <property name="margin_bottom">5</property>
                           </object>
                           <packing>
                             <property name="left_attach">6</property>
@@ -2229,9 +2245,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="hseparator11">
-                            <property name="height_request">10</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">5</property>
+                            <property name="margin_bottom">5</property>
                           </object>
                           <packing>
                             <property name="left_attach">9</property>
@@ -2241,9 +2258,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="hseparator12">
-                            <property name="height_request">10</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">5</property>
+                            <property name="margin_bottom">5</property>
                           </object>
                           <packing>
                             <property name="left_attach">12</property>
@@ -2253,9 +2271,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="hseparator13">
-                            <property name="height_request">10</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">5</property>
+                            <property name="margin_bottom">5</property>
                           </object>
                           <packing>
                             <property name="left_attach">15</property>
@@ -2265,9 +2284,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="hseparator14">
-                            <property name="height_request">10</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">5</property>
+                            <property name="margin_bottom">5</property>
                           </object>
                           <packing>
                             <property name="left_attach">18</property>
@@ -2740,9 +2760,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="vseparator4">
-                            <property name="width_request">8</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_left">4</property>
+                            <property name="margin_right">4</property>
                             <property name="orientation">vertical</property>
                           </object>
                           <packing>
@@ -2753,9 +2774,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="hseparator15">
-                            <property name="height_request">10</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">5</property>
+                            <property name="margin_bottom">5</property>
                           </object>
                           <packing>
                             <property name="left_attach">21</property>
@@ -2765,9 +2787,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="hseparator16">
-                            <property name="height_request">10</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">5</property>
+                            <property name="margin_bottom">5</property>
                           </object>
                           <packing>
                             <property name="left_attach">21</property>
@@ -3239,9 +3262,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="vseparator3">
-                            <property name="width_request">8</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_left">4</property>
+                            <property name="margin_right">4</property>
                             <property name="orientation">vertical</property>
                           </object>
                           <packing>
@@ -3252,9 +3276,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="hseparator17">
-                            <property name="height_request">10</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">5</property>
+                            <property name="margin_bottom">5</property>
                           </object>
                           <packing>
                             <property name="left_attach">24</property>
@@ -3264,9 +3289,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                         </child>
                         <child>
                           <object class="GtkSeparator" id="hseparator18">
-                            <property name="height_request">10</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">5</property>
+                            <property name="margin_bottom">5</property>
                           </object>
                           <packing>
                             <property name="left_attach">24</property>
@@ -3817,9 +3843,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
             </child>
             <child>
               <object class="GtkSeparator" id="separator15">
-                <property name="width_request">10</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="margin_left">5</property>
+                <property name="margin_right">5</property>
                 <property name="orientation">vertical</property>
               </object>
               <packing>
@@ -4362,9 +4389,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 </child>
                 <child>
                   <object class="GtkSeparator" id="separator1">
-                    <property name="height_request">10</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_top">5</property>
+                    <property name="margin_bottom">5</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -4535,9 +4563,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 </child>
                 <child>
                   <object class="GtkSeparator" id="separator2">
-                    <property name="height_request">10</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_top">5</property>
+                    <property name="margin_bottom">5</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -4596,9 +4625,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 </child>
                 <child>
                   <object class="GtkSeparator" id="separator14">
-                    <property name="height_request">10</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_top">5</property>
+                    <property name="margin_bottom">5</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -4772,9 +4802,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 </child>
                 <child>
                   <object class="GtkSeparator" id="separator3">
-                    <property name="height_request">10</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_top">5</property>
+                    <property name="margin_bottom">5</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -4840,9 +4871,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 </child>
                 <child>
                   <object class="GtkSeparator" id="separator9">
-                    <property name="height_request">10</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_top">5</property>
+                    <property name="margin_bottom">5</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -5128,9 +5160,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 </child>
                 <child>
                   <object class="GtkSeparator" id="separator4">
-                    <property name="height_request">10</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_top">5</property>
+                    <property name="margin_bottom">5</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -5304,9 +5337,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 </child>
                 <child>
                   <object class="GtkSeparator" id="separator5">
-                    <property name="height_request">10</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_top">5</property>
+                    <property name="margin_bottom">4</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -5370,9 +5404,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 </child>
                 <child>
                   <object class="GtkSeparator" id="separator13">
-                    <property name="height_request">10</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_top">5</property>
+                    <property name="margin_bottom">5</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -5546,9 +5581,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 </child>
                 <child>
                   <object class="GtkSeparator" id="separator6">
-                    <property name="height_request">10</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_top">5</property>
+                    <property name="margin_bottom">5</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -5614,9 +5650,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 </child>
                 <child>
                   <object class="GtkSeparator" id="separator10">
-                    <property name="height_request">10</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_top">5</property>
+                    <property name="margin_bottom">5</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -5903,9 +5940,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 </child>
                 <child>
                   <object class="GtkSeparator" id="separator7">
-                    <property name="height_request">10</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_top">5</property>
+                    <property name="margin_bottom">5</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -5971,9 +6009,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 </child>
                 <child>
                   <object class="GtkSeparator" id="separator11">
-                    <property name="height_request">10</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_top">5</property>
+                    <property name="margin_bottom">5</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -6246,9 +6285,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 </child>
                 <child>
                   <object class="GtkSeparator" id="separator16">
-                    <property name="height_request">10</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_top">5</property>
+                    <property name="margin_bottom">5</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -6425,9 +6465,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 </child>
                 <child>
                   <object class="GtkSeparator" id="separator8">
-                    <property name="height_request">10</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_top">5</property>
+                    <property name="margin_bottom">5</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -6493,9 +6534,10 @@ Author: Mario cianciolo <mr.udda@gmail.com>
                 </child>
                 <child>
                   <object class="GtkSeparator" id="separator12">
-                    <property name="height_request">10</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_top">5</property>
+                    <property name="margin_bottom">5</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
