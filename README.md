@@ -384,7 +384,6 @@ Each pull request will be considered carefully and will get a response.
 
 
 ## Help & Troubleshooting
-Look at the [FAQ](#faq) for some common pitfalls. All additional documentation is located in the [Wiki](../../wiki).
 
 ### Plugin shows only a vertical blank line
 Probably you compiled against the wrong GTK+ version. E.g: LXDE panel and older version of MATE and XFCE panels
@@ -423,6 +422,12 @@ Some users "*solved*" it by raising update interval of the graphs above
 *GTK+ default tooltip delay time* (500 ms in many systems).
 
 Starting from GTK+ 3.20.0, tooltips appear to be working normally.
+
+### Plugin doesn't show, and terminal is full of lines like this: `GLib-GObject-WARNING *: cannot register existing type 'GtkWidget'`
+You probably selected wrong GTK+ version when building. See [GTK Version section](#gtk-version)
+
+
+
 
 ## FAQ
 
