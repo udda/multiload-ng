@@ -365,20 +365,7 @@ To later uninstall you need source directory. If you deleted it, just download a
 
 
 ## How to Contribute
-You can contribute in several ways:
-
-* Suggest new features
-* Report bugs
-* Translate to new languages
-* Port the plugin to other panels
-* Submit your personal color scheme
-* Implement something present in the [Wishlist](../../wiki/Wishlist)
-* ...
-
-Look at the [Wiki](../../wiki), contains all the informations you will need.
-
-Each pull request will be considered carefully and will get a response.
-
+Read [here](https://github.com/udda/multiload-ng/blob/master/CONTRIBUTING.md)
 
 
 
@@ -459,10 +446,7 @@ Not enough? Try it in your system and you won't come back!
 A: Yes. This is true for every system monitor. That's why resources usage from Multiload-ng is kept to a negligible level.
 
 ### Q: I found a bug/I have a suggestion! How can I report?
-A: The preferred way to report a bug or suggest new features is by [creating a new issue](../../issues/new).
-
-First, check wether the bug/suggestion is already present in [issues list](../../issues) or in the project [Wishlist](../../wiki/Wishlist).
-If it's not, you should [create a new issue](../../issues/new).
+A: It's easy. Read [here](https://github.com/udda/multiload-ng/blob/master/CONTRIBUTING.md)
 
 ### Q: Will you continue the development of Multiload-ng?
 A: Of course! To get an idea of future directions, take a look at the [Wishlist](../../wiki/Wishlist).
