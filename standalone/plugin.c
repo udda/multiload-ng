@@ -39,14 +39,14 @@
 
 
 static void
-standalone_destroy_cb(GtkWidget *widget, MultiloadPlugin *multiload)
+standalone_destroy_cb (GtkWidget *widget, MultiloadPlugin *multiload)
 {
     gtk_main_quit ();
     g_free(multiload);
 }
 
-void
-standalone_settingsmenu_cb(GtkWidget *widget, GtkMenu *menu)
+static void
+standalone_settingsmenu_cb (GtkWidget *widget, GtkMenu *menu)
 {
 	#if GTK_CHECK_VERSION(3,22,0)
 		gtk_menu_popup_at_widget (menu, widget, GDK_GRAVITY_SOUTH_EAST, GDK_GRAVITY_NORTH_EAST, NULL);
@@ -55,8 +55,8 @@ standalone_settingsmenu_cb(GtkWidget *widget, GtkMenu *menu)
 	#endif
 }
 
-void
-standalone_preferences_cb(GtkWidget *widget, MultiloadPlugin *multiload)
+static void
+standalone_preferences_cb (GtkWidget *widget, MultiloadPlugin *multiload)
 {
 	GtkWindow *window = multiload->panel_data;
 	GtkWidget *dialog = multiload_ui_configure_dialog_new(multiload, window);
@@ -83,6 +83,59 @@ standalone_resize_cb (GtkWidget *dialog, GdkEventConfigure *event, MultiloadPlug
 	return FALSE;
 }
 
+#ifdef MULTILOAD_EXPERIMENTAL
+
+static gboolean window_decorated = TRUE; //TODO preferences
+static gboolean window_above = TRUE; //TODO preferences
+static gboolean window_show_button = TRUE; //TODO preferences
+static gboolean window_allow_move = TRUE; //TODO preferences
+static gboolean window_allow_resize = TRUE; //TODO preferences
+
+static void
+standalone_above_cb (GtkCheckMenuItem *item, GtkWindow *window)
+{
+	gboolean v = gtk_check_menu_item_get_active(item);
+	gtk_window_set_keep_above(window, v);
+}
+
+static void
+standalone_decorated_cb (GtkCheckMenuItem *item, GtkWindow *window)
+{
+	gboolean v = gtk_check_menu_item_get_active(item);
+	gtk_window_set_decorated(window, v);
+}
+
+static void
+standalone_show_button_cb (GtkCheckMenuItem *item, GtkWidget *button_config)
+{
+	gboolean v = gtk_check_menu_item_get_active(item);
+	printf("TODO [%c]\n", v?'X':' ');
+//	gtk_widget_set_visible(button_config, v)
+	//TODO notice user to use right click when disabled
+}
+
+static void
+standalone_allow_move_cb (GtkCheckMenuItem *item, GtkWindow *window)
+{
+	window_allow_move = gtk_check_menu_item_get_active(item);
+	printf("TODO [%c]\n", window_allow_move?'X':' ');
+}
+
+static void
+standalone_allow_resize_cb (GtkCheckMenuItem *item, GtkWindow *window)
+{
+	window_allow_resize = gtk_check_menu_item_get_active(item);
+	printf("TODO [%c]\n", window_allow_resize?'X':' ');
+}
+
+static void
+standalone_handle_press_cb (GtkWidget *widget, GdkEventButton *event, GtkWindow *window)
+{
+	if (window_allow_move)
+		gtk_window_begin_move_drag(window, event->button, event->x_root, event->y_root, event->time);
+}
+
+#endif
 
 static void
 build_menu(MultiloadPlugin *ma, GtkWidget *button_config)
@@ -100,6 +153,15 @@ build_menu(MultiloadPlugin *ma, GtkWidget *button_config)
 	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(standalone_preferences_cb), ma);
 	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
 
+	#ifdef MULTILOAD_EXPERIMENTAL
+
+	GtkMenu *submenu = GTK_MENU(gtk_menu_new());
+	menuitem = gtk_menu_item_new_with_mnemonic (_("Extra settings"));
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuitem), GTK_WIDGET(submenu));
+	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
+
+	#endif
+
 	menuitem = gtk_menu_item_new_with_mnemonic (_("_Help"));
 	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(multiload_ui_show_help), NULL);
 	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
@@ -113,6 +175,35 @@ build_menu(MultiloadPlugin *ma, GtkWidget *button_config)
 	menuitem = gtk_menu_item_new_with_mnemonic (_("_Quit"));
 	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(standalone_destroy_cb), ma);
 	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
+
+	#ifdef MULTILOAD_EXPERIMENTAL
+
+	menuitem = gtk_check_menu_item_new_with_mnemonic (_("_Always on top"));
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(menuitem), window_above); //TODO preferences
+	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(standalone_above_cb), ma->panel_data);
+	gtk_menu_shell_append (GTK_MENU_SHELL(submenu), menuitem);
+
+	menuitem = gtk_check_menu_item_new_with_mnemonic (_("Show window _borders"));
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(menuitem), window_decorated); //TODO preferences
+	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(standalone_decorated_cb), ma->panel_data);
+	gtk_menu_shell_append (GTK_MENU_SHELL(submenu), menuitem);
+
+	menuitem = gtk_check_menu_item_new_with_mnemonic (_("Show _settings button"));
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(menuitem), window_show_button); //TODO preferences
+	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(standalone_show_button_cb), button_config);
+	gtk_menu_shell_append (GTK_MENU_SHELL(submenu), menuitem);
+
+	menuitem = gtk_check_menu_item_new_with_mnemonic (_("Allow _move"));
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(menuitem), window_allow_move); //TODO preferences
+	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(standalone_allow_move_cb), ma->panel_data);
+	gtk_menu_shell_append (GTK_MENU_SHELL(submenu), menuitem);
+
+	menuitem = gtk_check_menu_item_new_with_mnemonic (_("Allow _resize"));
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(menuitem), window_allow_resize); //TODO preferences
+	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(standalone_allow_resize_cb), ma->panel_data);
+	gtk_menu_shell_append (GTK_MENU_SHELL(submenu), menuitem);
+
+	#endif
 
 	gtk_widget_show_all(GTK_WIDGET(menu));
 
@@ -138,9 +229,17 @@ int main(int argc, char *argv[]) {
 	multiload->panel_data = w;
 
 	GtkWidget *hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 1);
+	gtk_widget_show (hbox);
+
 	GtkWidget *btnConfig = gtk_button_new_from_icon_name("preferences-system", GTK_ICON_SIZE_LARGE_TOOLBAR);
 	gtk_widget_show (btnConfig);
-	gtk_widget_show (hbox);
+
+	#ifdef MULTILOAD_EXPERIMENTAL
+	GtkWidget *handle = gtk_event_box_new();
+	gtk_container_add (GTK_CONTAINER(handle), gtk_label_new("(move)"));
+	g_signal_connect (G_OBJECT(handle), "button-press-event", G_CALLBACK(standalone_handle_press_cb), w);
+	gtk_box_pack_start(GTK_BOX(hbox), handle, FALSE, FALSE, 0);
+	#endif
 
 	gtk_box_pack_start(GTK_BOX(hbox), GTK_WIDGET(multiload->container), TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(hbox), btnConfig, FALSE, FALSE, 0);
