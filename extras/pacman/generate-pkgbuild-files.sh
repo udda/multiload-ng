@@ -20,7 +20,7 @@
 #
 
 pkgver=$(cat ../../version)
-pkgrel=1
+pkgrel=2
 md5sums="NONE"
 
 value_in_array()
