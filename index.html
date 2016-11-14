@@ -82,14 +82,11 @@ It's a near-complete rewrite of the good old GNOME multiload applet, that aims t
 <h2>
 <a id="screenshots" class="anchor" href="#screenshots" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Screenshots</h2>
 
-<p><img src="screenshots/all.panel-24px.png?raw=true" alt="Default configuration, small panel. All graphs visible"><br>
-<sup><em>Small panel, default configuration. All graphs visible</em></sup></p>
+<p><img src="screenshots/all.panel-24px.png?raw=true" alt="Small panel, all graphs are visible"><br>
+<sup><em>Small panel, all graphs are visible</em></sup></p>
 
-<p><img src="screenshots/ubuntu.png?raw=true" alt="Multiload-ng running on Ubuntu"><br>
-<sup><em>Multiload-ng running on Ubuntu</em></sup></p>
-
-<p><img src="screenshots/all.panel-40px.border-2px.widths.png?raw=true" alt="All graphs visible, larger panel. Thicker (2px) borders, graphs have different widths"><br>
-<sup><em>All graphs visible, larger panel. Thicker (2px) borders, graphs have different widths</em></sup></p>
+<p><img src="screenshots/all.panel-40px.border-2px.widths.png?raw=true" alt="Larger panel, all graphs visible. Thicker (2px) borders, graphs have different widths"><br>
+<sup><em>Larger panel, all graphs visible. Thicker (2px) borders, graphs have different widths</em></sup></p>
 
 <p><img src="screenshots/borders.uranus.png?raw=true" alt="Each graph has different border width. Color scheme: Uranus"><br>
 <sup><em>Each graph has different border width. Color scheme: <strong>Uranus</strong></em></sup></p>
@@ -108,6 +105,21 @@ It's a near-complete rewrite of the good old GNOME multiload applet, that aims t
 
 <p><img src="screenshots/cpu.ambiance.png?raw=true" alt="Just CPU graph. Color scheme: Ubuntu Ambiance"><br>
 <sup><em>Just CPU graph. Color scheme: <strong>Ubuntu Ambiance</strong></em></sup></p>
+
+<h3>
+<a id="multiload-ng-in-action" class="anchor" href="#multiload-ng-in-action" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Multiload-ng in action</h3>
+
+<p><img src="screenshots/ubuntu.png?raw=true" alt="Multiload-ng running on Ubuntu"><br>
+<sup><em>Multiload-ng running on Ubuntu</em></sup></p>
+
+<p><img src="screenshots/lxpanel.png?raw=true" alt="Multiload-ng running on LxPanel. Graphs have different widths"><br>
+<sup><em>Multiload-ng running on LxPanel. Graphs have different widths</em></sup></p>
+
+<p><img src="screenshots/mate.png?raw=true" alt="Multiload-ng running on MATE panel. Changed some background colors"><br>
+<sup><em>Multiload-ng running on MATE panel. Changed some background colors</em></sup></p>
+
+<p><img src="screenshots/xfce.png?raw=true" alt="Multiload-ng running on XFCE panel. Color scheme: __Windows Metro__"><br>
+<sup><em>Multiload-ng running on XFCE panel. Color scheme: <strong>Windows Metro</strong></em></sup></p>
 
 <p><img src="screenshots/standalone.horizontal.fruity.png?raw=true" alt="Standalone window, horizontal layout. Color scheme: Fruity"><br>
 <sup><em>Standalone window, horizontal layout. Color scheme: <strong>Fruity</strong></em></sup></p>
@@ -584,29 +596,10 @@ They need to add option <code>--with-gtk=2.0</code> to <em>./configure</em>.</p>
 <h2>
 <a id="how-to-contribute" class="anchor" href="#how-to-contribute" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to Contribute</h2>
 
-<p>You can contribute in several ways:</p>
-
-<ul>
-<li>Suggest new features</li>
-<li>Report bugs</li>
-<li>Translate to new languages</li>
-<li>Port the plugin to other panels</li>
-<li>Submit your personal color scheme</li>
-<li>Implement something present in the <a href="../../wiki/Wishlist">Wishlist</a>
-</li>
-<li>Fix something present in <a href="../../wiki/Known-issues-and-TODO">Known issues and TODO</a>
-</li>
-<li>...</li>
-</ul>
-
-<p>Look at the <a href="../../wiki">Wiki</a>, contains all the informations you will need.</p>
-
-<p>Each pull request will be considered carefully and will get a response.</p>
+<p>Read <a href="https://github.com/udda/multiload-ng/blob/master/CONTRIBUTING.md">here</a></p>
 
 <h2>
 <a id="help--troubleshooting" class="anchor" href="#help--troubleshooting" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Help &amp; Troubleshooting</h2>
-
-<p>Look at the <a href="#faq">FAQ</a> for some common pitfalls. All additional documentation is located in the <a href="../../wiki">Wiki</a>.</p>
 
 <h3>
 <a id="plugin-shows-only-a-vertical-blank-line" class="anchor" href="#plugin-shows-only-a-vertical-blank-line" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Plugin shows only a vertical blank line</h3>
@@ -657,6 +650,12 @@ Some users "<em>solved</em>" it by raising update interval of the graphs above
 
 <p>Starting from GTK+ 3.20.0, tooltips appear to be working normally.</p>
 
+<h3>
+<a id="plugin-doesnt-show-and-terminal-is-full-of-lines-like-this-glib-gobject-warning--cannot-register-existing-type-gtkwidget" class="anchor" href="#plugin-doesnt-show-and-terminal-is-full-of-lines-like-this-glib-gobject-warning--cannot-register-existing-type-gtkwidget" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Plugin doesn't show, and terminal is full of lines like this: <code>GLib-GObject-WARNING *: cannot register existing type 'GtkWidget'</code>
+</h3>
+
+<p>You probably selected wrong GTK+ version when building. See <a href="#gtk-version">GTK Version section</a></p>
+
 <h2>
 <a id="faq" class="anchor" href="#faq" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>FAQ</h2>
 
@@ -697,10 +696,7 @@ and extend them.</p>
 <h3>
 <a id="q-i-found-a-bugi-have-a-suggestion-how-can-i-report" class="anchor" href="#q-i-found-a-bugi-have-a-suggestion-how-can-i-report" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q: I found a bug/I have a suggestion! How can I report?</h3>
 
-<p>A: The preferred way to report a bug or suggest new features is by <a href="../../issues/new">creating a new issue</a>.</p>
-
-<p>First, check wether the bug/suggestion is already present in <a href="../../issues">issues list</a> or in the project <a href="../../wiki/Wishlist">Wishlist</a>.
-If it's not, you should <a href="../../issues/new">create a new issue</a>.</p>
+<p>A: It's easy. Read <a href="https://github.com/udda/multiload-ng/blob/master/CONTRIBUTING.md">here</a></p>
 
 <h3>
 <a id="q-will-you-continue-the-development-of-multiload-ng" class="anchor" href="#q-will-you-continue-the-development-of-multiload-ng" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Q: Will you continue the development of Multiload-ng?</h3>
