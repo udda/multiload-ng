@@ -64,7 +64,7 @@ get_pkgname()
 	case "$1" in
 		awn)		echo 'awn-applet-multiload-ng' ;;
 		indicator)	echo 'multiload-ng-indicator' ;;
-		lxpanel)	echo 'lxpanel-multiload-ng-applet' ;;
+		lxpanel)	echo 'lxpanel-multiload-ng-plugin' ;;
 		mate)		echo 'mate-multiload-ng-applet' ;;
 		standalone)	echo 'multiload-ng-standalone' ;;
 		systray)	echo 'multiload-ng-systray' ;;
