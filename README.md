@@ -62,6 +62,9 @@ Multiload-ng can be built with GTK2 and GTK3, so can be embedded within GTK2/GTK
 ![Multiload-ng running on LxPanel](../gh-pages/screenshots/lxpanel.png?raw=true)  
 <sup>*Multiload-ng running on LxPanel*</sup>
 
+![Multiload-ng running on XFCE](../gh-pages/screenshots/xfce.png?raw=true)  
+<sup>*Multiload-ng running on XFCE*</sup>
+
 ![Each graph has different border width. Color scheme: Uranus](../gh-pages/screenshots/borders.uranus.png?raw=true)  
 <sup>*Each graph has different border width. Color scheme: __Uranus__*</sup>
 
