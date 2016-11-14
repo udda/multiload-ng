@@ -115,7 +115,7 @@ get_depends()
 get_replaces()
 {
 	if [ "$1" = "xfce4" -a "$2" = "gtk2" ]; then
-		printf -- "'xfce4-multiload-ng-plugin'"
+		printf -- "'xfce4-multiload-ng-plugin$3'"
 	fi
 }
 
@@ -212,7 +212,7 @@ generate_pkgbuild()
 	local pkgname="${_p}-${gtk_str}${git_suffix}"
 	local pkgdesc="$(get_pkgdesc $target)"
 	local depends="$(get_depends $target $gtk_str)"
-	local replaces="$(get_replaces $target $gtk_str)"
+	local replaces="$(get_replaces $target $gtk_str $git_suffix)"
 	local configure_opts="$(get_configure_string $target $gtk_str)"
 
 	# conflicts
