@@ -118,7 +118,7 @@ get_replaces()
 		printf -- "'xfce4-multiload-ng-plugin$3'"
 	fi
 
-	if [ "$1" = "lxpanel"]; then
+	if [ "$1" = "lxpanel" ]; then
 		printf -- "'lxpanel-multiload-ng-applet-$2$3'"
 	fi
 }
