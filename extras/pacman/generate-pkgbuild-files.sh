@@ -117,6 +117,10 @@ get_replaces()
 	if [ "$1" = "xfce4" -a "$2" = "gtk2" ]; then
 		printf -- "'xfce4-multiload-ng-plugin$3'"
 	fi
+
+	if [ "$1" = "lxpanel"]; then
+		printf -- "'lxpanel-multiload-ng-applet-$2$3'"
+	fi
 }
 
 get_configure_string()
