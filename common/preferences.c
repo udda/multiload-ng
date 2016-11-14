@@ -1448,6 +1448,13 @@ multiload_preferences_disable_settings(guint mask)
 
 	if (mask & MULTILOAD_SETTINGS_ORIENT_WARNING)
 		_orientation_warning_disable = TRUE;
+
+	if (mask & MULTILOAD_SETTINGS_REORDER) {
+		gtk_widget_set_sensitive(GTK_WIDGET(OB("treeview_reorder")), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(OB("toolbar_reorder_btn_up")), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(OB("toolbar_reorder_btn_down")), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(OB("toolbar_reorder_btn_reset")), FALSE);
+	}
 }
 
 
