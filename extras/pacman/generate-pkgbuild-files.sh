@@ -314,6 +314,10 @@ generate_pkgbuild()
 			printf "\tconflicts = %s\n" `echo $i | sed "s/'/ /g"` >>"${outdir}/.SRCINFO"
 		done
 
+		for i in ${replaces}; do
+			printf "\treplaces = %s\n" `echo $i | sed "s/'/ /g"` >>"${outdir}/.SRCINFO"
+		done
+
 		printf "\tsource = %s\n" `eval echo ${pkg_source}` >>"${outdir}/.SRCINFO"
 		printf "\tmd5sums = ${pkg_md5sum}\n" >>"${outdir}/.SRCINFO"
 
