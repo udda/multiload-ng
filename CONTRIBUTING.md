@@ -68,11 +68,13 @@ Include details about your configuration and environment:
 
 - **Which version of Multiload-ng are you using**?
 - **Are you using Multiload-ng inside a panel**? If so, provide panel name and version.
-- **Are you using a native plugin**? (e.g. XFCE, MATE or LXDE panel plugin) Or is it a generic one? (that is, not tied to a particular panel, like AppIndicator, System Tray, Standalone)
+- **Are you using a native plugin**? (e.g. XFCE, MATE or LXDE panel plugin) Or is it a generic one? (that is, not tied to a particular panel, like AppIndicator, System Tray, Standalone) Include panel version when applicable.
 - **What's the name and version of the OS you're using**?
 - **What is the architecture of your CPU**? (32/64 bit - output of `uname -a` can be useful)
 - **Are you running Multiload-ng in a virtual machine**? If so, which VM software are you using and which operating systems and versions are used for the host and the guest?
 - **Everything else you think it's relevant**. Often, it is.
+
+If you are reporting a crash, **backtraces** are very useful. Read how to get a backtrace [here](https://github.com/udda/multiload-ng/wiki/HowTo:-Debugging) (you might need to rebuild Multiload-ng with debugging options)
 
 For some specific categories of bugs, there is some data that will help developers to better understand the problem. This can be a file or the output of a command
 You should include these files in your bug report, either attaching them to the issue or linking from a pastebin. Here is the list:
@@ -80,8 +82,11 @@ You should include these files in your bug report, either attaching them to the 
 Issue type			| Useful data
 :---------			| :----------
 Build error			| contents of `config.log` (located in your build directory)
-Battery graph		| output of `ls -laR /sys/class/power_supply /sys/class/power_supply/*/`
+CPU graph			| contents of `/proc/cpuinfo` and `/proc/stat`
+Memory graph		| contents of `/proc/meminfo`
+Swap graph			| contents of `/proc/meminfo`
 Temperature graph	| output of `ls -laR /sys/class/hwmon /sys/class/thermal /sys/class/hwmon/*/ /sys/class/thermal/*/`
+Battery graph		| output of `ls -laR /sys/class/power_supply /sys/class/power_supply/*/`
 
 
 
