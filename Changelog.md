@@ -2,6 +2,7 @@
 
 This document groups together changelogs for every Multiload-ng release.
 
+- [Multiload-ng v1.5.0](#multiload-ng-v150)
 - [Multiload-ng v1.4.2](#multiload-ng-v142)
 - [Multiload-ng v1.4.1](#multiload-ng-v141)
 - [Multiload-ng v1.4.0](#multiload-ng-v140)
@@ -21,7 +22,123 @@ This document groups together changelogs for every Multiload-ng release.
 
 
 
+## Multiload-ng v1.5.0
+
+<sup>*Released on 15 Nov 2016*</sup>
+
+### Changelog
+- Reorderable graphs
+- New graph: **Battery**
+- Remove *timespan* column in Preferences window (thanks to @doublemeat)
+- Remove of preferences item *Fill space between graphs*
+- Removed icons from menu items to comply with GNOME HIG (Human Interface Guidelines)
+- Support for older versions of LxPanel (starting from v0.5.8)
+- New color scheme: **Super Mario Bros** (with colors from 1985 game)
+- New color scheme: **Dragon Ball Z**
+- New color scheme: **The Simpsons**
+- Add byte count to detailed tooltip in Swap graph (thanks to @spvkgn)
+- Show size of block devices in Disk graph filter selection
+- Higher level of optimization (build with `-O3`)
+- Official packages for Arch Linux are in AUR
+- Install autostart entries by default (systray, indicator)
+- Ebuilds (Gentoo): change category from `x11-misc` to `x11-plugins`, add `autostart` USE flag
+- PKGBUILD generator does no longer require Arch to run
+- Other minor improvements
+
+### Bugfixes
+- Fixed: byte sizes over 4 GiB were not formatted properly (thanks to @makrochip)
+- Fixed: numeric values could not be directly inserted into *interval* and *size* entries (thanks to @doublemeat)
+- Fixed: `tooltip-style` property on MATE plugin not restoring after restart (thanks to @spvkgn)
+- Fixed: user-defined colors not restoring after restart (thanks to @spvkgn and @doublemeat)
+- Fixed: some translations were missing in MATE plugin's right click menu (thanks to @spvkgn)
+- Secured whole code through GCC sanitizers
+- Improved debugging experience
+- Other minor fixes
+
+### Release notes
+This release brings some *under-the-hood* improvements, along with the visible changes.
+
+#### Reorderable graphs
+Graphs can now be reordered from a new control in Preferences window, either by dragging them or by
+clicking buttons on the side. As a side effect, the notion of *graph index* is now meaningless, so
+the `%n` token is not recognized anymore in double click command line.
+
+#### Battery graph
+There is a new graph in Multiload-ng: **Battery** graph. It draws system battery usage
+(as long there is a battery installed, of course). Graph lines change color according to
+battery remaining capacity and charging status. Tooltip can show battery brand and model,
+along with its charge.
+
+#### New color schemes
+In honor of old times, this release comes with a new series of color schemes inspired
+by fictional characters from old video games and TV programs:
+- *Super Mario Bros*, with colors of characters and game objects from original 1985 game
+- *Dragon Ball Z*, with colors of some DBZ heroes and villains
+- *The Simpsons*, with colors of some distinguishing characters
+
+This list is expected to grow in future releases, with many color schemes that
+will bring back our childhood memories.
+
+#### Removal of some UI elements
+*Timespan* column was removed from Preferences window, because it was considered useless
+by some users, and its name was potentially misleading. This saves space and unclutters UI.
+
+Preferences item *Fill space between graphs* was removed too in this release. Many plugins did not
+respect this preference (like LxPanel, Standalone, Systray and GTK+3 XFCE). Also it was another
+thing with little use and a confusing and misleading name.
+
+**GNOME HIG** (Human Interface Guidelines) recommends to drop icons in menus unless they are strictly
+necessary, and suggests to use them only for *nouns* and not for *actions*. Since menu items
+in Multiload-ng are all actions, icons were all dropped in order to better adhere to guidelines.
+This helps giving Multiload-ng a native look-and-feel in most desktop environments.
+
+#### Autostart entries
+Support for autostart entries (*.desktop* files placed in `/etc/xdg/autostart`) was already present in
+previous versions, through ./configure flag `--enable-autostart`. However, being disabled by default,
+this feature went unnoticed by most users.  
+New policy is to install these entries by default, for *indicator* and *systray* targets, so
+these applications will now be executed at startup. This is often the desired behavior. Autostart
+entries installation can still be avoided, by using the new ./configure flag `--disable-autostart`.
+
+#### Support for older LxPanel versions
+Multiload-ng 1.5.0, like its ancestor [multiload-nandhp](https://github.com/nandhp/multiload-nandhp),
+now supports old LxPanel API (starting from lxpanel 0.5.8). That means that Multiload-ng can now be also
+run in older systems, like Lubuntu 12.04.
+
+#### Code sanitizing
+Code was secured by building it with gcc builtin [sanitizers](https://github.com/google/sanitizers)
+(AddressSanitizer, MemorySanitizer and LeakSanitizer). This revealed some minor flaws that might potentially
+cause buffer and heap overflows. Although these flaws have never caused any problems, it's good to
+have them fixed before they can.
+
+#### Higher optimization level
+Whole software is now built with `-O3` compiler flag. Multiload-ng runs faster and smoother than ever,
+while using less memory.
+
+Thousands of tests haven't revealed any issue with the advanced optimization.
+
+#### Arch Linux
+Internal package generator for PKGBUILDS located ([here](https://github.com/udda/multiload-ng/blob/master/extras/pacman/generate-pkgbuild-files.sh))
+now produces valid and perfectly compliant scripts, thanks to @Photon89 useful improvements.
+It no longer makes use of `makepkg`, now it's a pure bash script that can be run from any distribution.
+
+Automatically generated packages are now mature enough to get *official* status. Official packages for Arch Linux
+can be now found in AUR, just [search for them](https://aur.archlinux.org/packages/?SeB=n&K=multiload-ng)!
+
+
+
+
+
+
+
+
+
+
+
+
 ## Multiload-ng v1.4.2
+
+<sup>*Released on 16 Oct 2016*</sup>
 
 ### Changelog
 - Compatibility with Ubuntu 12.04 and newer (thanks to @spvkgn)
@@ -40,6 +157,8 @@ This is a minor release. When upgrading from previous major releases, it is real
 
 ## Multiload-ng v1.4.1
 
+<sup>*Released on 14 Oct 2016*</sup>
+
 ### Bugfixes
 - Fixed: MATE applet won't start due to missing GSettings keys (thanks to @hotice)
 
@@ -56,6 +175,8 @@ This is a minor release. When upgrading from previous major releases, it is real
 
 
 ## Multiload-ng v1.4.0
+
+<sup>*Released on 10 Oct 2016*</sup>
 
 ### Changelog
 - Support for Ubuntu Unity and others (AppIndicator plugin)
@@ -132,6 +253,8 @@ Run application in a terminal with `--help` argument to get the full list of sup
 
 ## Multiload-ng v1.3.1
 
+<sup>*Released on 21 Sep 2016*</sup>
+
 ### Changelog
 - Improvements to system tray plugin (still experimental, but now usable)
 - Better fallback when no temperature sources are available (e.g. running in a virtual machine)
@@ -158,6 +281,8 @@ This is a minor release. When upgrading from 1.2.0, it is really recommended to 
 
 
 ## Multiload-ng v1.3.0
+
+<sup>*Released on 17 Sep 2016*</sup>
 
 ### Changelog
 - Drop libgtop dependency (less overhead and more precise measurements)
@@ -219,6 +344,8 @@ Multiload-ng 1.3.0 has **filters** support: in graphs with multiple sources (nam
 
 ## Multiload-ng v1.2.0
 
+<sup>*Released on 28 Aug 2016*</sup>
+
 ### Changelog
 * New preferences window
 * Each graph can now have different size
@@ -255,6 +382,8 @@ Files related to Multiload-ng are now located in directory `$HOME/.config/multil
 
 ## Multiload-ng v1.1.0
 
+<sup>*Released on 20 Aug 2016*</sup>
+
 Changelog:
 * Full GTK3 support
 * Build system improvements
@@ -271,6 +400,8 @@ Changelog:
 
 ## Multiload-ng v1.0.1
 
+<sup>*Released on 14 Aug 2016*</sup>
+
 Changelog:
 * Successful build on Debian / *buntu
 * Fixed some gcc warnings
@@ -286,6 +417,8 @@ Changelog:
 
 
 ## Multiload-ng v1.0
+
+<sup>*Released on 3 Aug 2016*</sup>
 
 First stable release of Multiload-ng.
 
