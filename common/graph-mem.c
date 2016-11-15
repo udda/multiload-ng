@@ -43,22 +43,20 @@ multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryDat
 	static guint64 kb_main_used = 0;
 
 	// auxiliary keys
-	static guint64 kb_main_available = 0;
 	static guint64 kb_main_free = 0;
 	static guint64 kb_page_cache = 0;
 	static guint64 kb_slab = 0;
 
 	static const InfoFileMappingEntry table[] = {
 		{ "MemTotal",		'u',	&kb_main_total },
-		{ "MemAvailable",	'u',	&kb_main_available},
 		{ "MemFree",		'u',	&kb_main_free},
 		{ "Buffers",		'u',	&kb_main_buffers },
 		{ "Cached",			'u',	&kb_page_cache },
 		{ "Slab",			'u',	&kb_slab }
 	};
 
-	gint r = info_file_read_keys (PATH_MEMINFO, table, 6);
-	g_assert_cmpint(r, ==, 6);
+	gint r = info_file_read_keys (PATH_MEMINFO, table, 5);
+	g_assert_cmpint(r, ==, 5);
 
 	kb_main_cached = kb_page_cache;
 	if (xd->procps_compliant)
