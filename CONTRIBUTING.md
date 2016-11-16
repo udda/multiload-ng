@@ -198,7 +198,7 @@ Include details about your configuration and environment:
 
 You can contribute to Multiload-ng with your coding skills:
 
-- **Close an existing open issue**: begin by searching [all open issues with 'help-wanted' label](https://github.com/udda/multiload-ng/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22). Those issues are waiting for you to fix them!
+- **Close an existing open issue**: begin by searching [all open issues with 'help-wanted' label](https://github.com/udda/multiload-ng/labels/help-wanted). Those issues are waiting for you to fix them!
 - You can also help a lot by just adding a **useful comment to open issues**, to give code snippets, hints, usecases, and so on.
 - **[Port the plugin to other panels](../../wiki/HowTo:-Porting-to-a-new-panel)**
 - **Implement something present in the [Wishlist](../../wiki/Wishlist)**
