@@ -30,8 +30,7 @@ echo "#define NULL (char)0x00"
 echo "#endif"
 echo
 echo "const char * const about_data_authors[] = {"
-IFS=$'\n'
-for line in $(cat $1); do
+cat $1 | while read line; do
 	echo "	\"$line\","
 done
 echo "	NULL"
