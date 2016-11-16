@@ -239,17 +239,17 @@ build_menu(MultiloadPlugin *ma)
 	GtkWidget *menuitem;
 	GtkWidget *menu = gtk_menu_new();
 
+	menuitem = gtk_menu_item_new_with_label (_("Start task manager"));
+	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(multiload_ui_start_system_monitor), ma);
+	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
+
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
+
 	for (i=0; i<GRAPH_MAX; i++) {
 		graphs_menu_items[i] = gtk_menu_item_new_with_label (graph_types[i].label);
 		gtk_widget_set_sensitive(graphs_menu_items[i], FALSE);
 		gtk_menu_shell_append (GTK_MENU_SHELL(menu), graphs_menu_items[i]);
 	}
-
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
-
-	menuitem = gtk_menu_item_new_with_label (_("Start task manager"));
-	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(multiload_ui_start_system_monitor), ma);
-	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
 
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
 
