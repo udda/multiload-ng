@@ -179,7 +179,7 @@ indicator_graph_update_cb(LoadGraph *g, gpointer user_data)
 	}
 
 	// resize widget and offscreen window to fit into panel
-	gtk_widget_set_size_request(GTK_WIDGET(g->multiload->container), 120, indicator_get_icon_height()); // TODO the 120 shouldn't be hardcoded
+	gtk_widget_set_size_request(GTK_WIDGET(g->multiload->container), multiload_calculate_size_request(g->multiload), indicator_get_icon_height());
 	gtk_widget_get_allocation (GTK_WIDGET(g->multiload->container), &allocation);
 	gtk_window_resize(GTK_WINDOW(offscr), allocation.width, allocation.height);
 
