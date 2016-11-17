@@ -202,14 +202,10 @@ xfce_constructor (XfcePanelPlugin *plugin)
 	xfce_panel_plugin_menu_insert_item (plugin, mi_separator);
 	xfce_panel_plugin_menu_insert_item (plugin, mi_help);
 	xfce_panel_plugin_menu_insert_item (plugin, mi_sysmon);
-	g_signal_connect (G_OBJECT (plugin), "configure-plugin",
-						G_CALLBACK (xfce_configure_cb), multiload);
-	g_signal_connect (G_OBJECT (plugin), "about",
-						G_CALLBACK (xfce_about_cb), NULL);
-	g_signal_connect (G_OBJECT (mi_help), "activate",
-						G_CALLBACK (xfce_help_cb), NULL);
-	g_signal_connect (G_OBJECT (mi_sysmon), "activate",
-						G_CALLBACK (xfce_sysmon_cb), multiload);
+	g_signal_connect (G_OBJECT (plugin), "configure-plugin",	G_CALLBACK (xfce_configure_cb), multiload);
+	g_signal_connect (G_OBJECT (plugin), "about",				G_CALLBACK (xfce_about_cb), NULL);
+	g_signal_connect (G_OBJECT (mi_help), "activate",			G_CALLBACK (xfce_help_cb), NULL);
+	g_signal_connect (G_OBJECT (mi_sysmon), "activate",			G_CALLBACK (xfce_sysmon_cb), multiload);
 	gtk_widget_show(GTK_WIDGET(mi_separator));
 	gtk_widget_show(GTK_WIDGET(mi_help));
 	gtk_widget_show(GTK_WIDGET(mi_sysmon));
