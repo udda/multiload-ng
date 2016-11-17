@@ -173,6 +173,22 @@ multiload_get_max_value(MultiloadPlugin *ma, guint graph_id)
 		return autoscaler_get_max(scaler, NULL, 0);
 }
 
+gint
+multiload_calculate_size_request (MultiloadPlugin *ma)
+{
+	guint i;
+	gint size = 2*ma->padding - ma->spacing;
+
+	for ( i = 0; i < GRAPH_MAX; i++ ) {
+		if (ma->graph_config[i].visible) {
+			size += ma->graph_config[i].size;
+			size += ma->spacing;
+		}
+	}
+
+	return size;
+}
+
 void
 multiload_refresh_orientation (MultiloadPlugin *ma)
 {
