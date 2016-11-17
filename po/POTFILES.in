@@ -1,4 +1,7 @@
+awn/multiload-ng-awn.desktop.in.in
+awn/plugin.c
 common/about-data.h
+common/graph-bat.c
 common/graph-cpu.c
 common/graph-mem.c
 common/graph-net.c
