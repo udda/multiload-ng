@@ -202,6 +202,8 @@ generate_pkgbuild()
 		local pkg_source="git+https://github.com/udda/multiload-ng.git"
 		local pkg_md5sum='SKIP'
 		local pkg_basedir='multiload-ng'
+		# git version always increases, no need to increase pkgrel too
+		local pkgrel_str='1'
 	else
 		local version_str="$pkgver"
 		local git_suffix=''
@@ -209,6 +211,7 @@ generate_pkgbuild()
 		local pkg_source="https://github.com/udda/multiload-ng/archive/v\$pkgver.tar.gz"
 		local pkg_md5sum="$md5sums"
 		local pkg_basedir='multiload-ng-$pkgver'
+		local pkgrel_str="$pkgrel"
 	fi
 
 	local _p="$(get_pkgname $target)"
@@ -229,7 +232,7 @@ generate_pkgbuild()
 	done
 
 	# output
-	printf -- "Package:     (target: %-13s version: %-21s $gtk_str)\n" "$target" "$version_str" >&2
+	printf -- "Package:  %-13s  $gtk_str  version: %-21s\n" "$target" "$version_str" >&2
 
 	printf -- "Generating PKGBUILD ... " >&2
 	local outdir="multiload-ng.PKGBUILD/${pkgname}"
@@ -244,7 +247,7 @@ generate_pkgbuild()
 		pkgname='${pkgname}'
 		pkgdesc='${pkgdesc}'
 		pkgver=${pkgver}
-		pkgrel=${pkgrel}
+		pkgrel=${pkgrel_str}
 
 		makedepends=(${makedepends})
 		depends=(${depends})
@@ -294,7 +297,7 @@ generate_pkgbuild()
 			pkgbase = ${pkgname}
 			${T}pkgdesc = ${pkgdesc}
 			${T}pkgver = ${pkgver}
-			${T}pkgrel = ${pkgrel}
+			${T}pkgrel = ${pkgrel_str}
 			${T}url = https://udda.github.io/multiload-ng/
 			${T}arch = i686
 			${T}arch = x86_64
