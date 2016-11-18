@@ -2,6 +2,7 @@
 
 This document groups together changelogs for every Multiload-ng release.
 
+- [Multiload-ng v1.5.1](#multiload-ng-v151)
 - [Multiload-ng v1.5.0](#multiload-ng-v150)
 - [Multiload-ng v1.4.2](#multiload-ng-v142)
 - [Multiload-ng v1.4.1](#multiload-ng-v141)
@@ -12,6 +13,32 @@ This document groups together changelogs for every Multiload-ng release.
 - [Multiload-ng v1.1.0](#multiload-ng-v110)
 - [Multiload-ng v1.0.1](#multiload-ng-v101)
 - [Multiload-ng v1.0](#multiload-ng-v10)
+
+
+
+
+
+
+
+
+
+
+## Multiload-ng v1.5.1
+
+<sup>*Released on 18 Nov 2016*</sup>
+
+### Changelog
+- Indicator: move system monitor menu item to the top (thanks to @leoheck)
+- Change *Capacity* to *Current charge* in Battery graph (thanks to @Photon89)
+- Standalone, Indicator, Systray: added command line option `-a`, `--about` (open *About* dialog on startup)
+- Show copyright notice on application startup (only when target outputs to terminal)
+
+### Bugfixes
+- Fixed: failed assert in Memory graph caused abnormal termination in Ubuntu 12.04 (thanks to @spvkgn)
+- Fixed: GTK+2 indicator was locked to 120 horizontal pixels (thanks to @leoheck)
+
+### Notes about upgrade
+This is a minor release. When upgrading from previous major releases, it is really recommended to read [release notes of Multiload-ng 1.5.0](#multiload-ng-v150).
 
 
 
