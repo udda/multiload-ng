@@ -591,16 +591,16 @@ msgid "Order of graphs (drag to rearrange)"
 msgstr ""
 
 msgid "Battery"
-msgstr ""
+msgstr "电池"
 
 msgid "Charging"
-msgstr ""
+msgstr "正在充电"
 
 msgid "Discharging"
-msgstr ""
+msgstr "未充电"
 
 msgid "Current charge:"
 msgstr "当前电量:"
 
 msgid "Critical level"
-msgstr ""
+msgstr "电量不足"
