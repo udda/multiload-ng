@@ -183,7 +183,7 @@ build_menu(MultiloadPlugin *ma, GtkWidget *button_config)
 	gtk_menu_shell_append (GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
 
 	menuitem = gtk_menu_item_new_with_mnemonic (_("_About"));
-	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(multiload_ui_show_about), ma->panel_data);
+	g_signal_connect_swapped (G_OBJECT(menuitem), "activate", G_CALLBACK(multiload_ui_show_about), ma->panel_data);
 	gtk_menu_shell_append (GTK_MENU_SHELL(menu), menuitem);
 
 	menuitem = gtk_menu_item_new_with_mnemonic (_("_Quit"));
@@ -275,6 +275,8 @@ int main(int argc, char *argv[]) {
 
 	gtk_window_present (w);
 
+	if (options->show_about)
+		multiload_ui_show_about(w);
 	if (options->show_preferences)
 		standalone_preferences_cb(GTK_WIDGET(w), multiload);
 

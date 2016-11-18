@@ -119,6 +119,7 @@ struct _LoadGraph {
 };
 
 typedef struct {
+	gboolean show_about;
 	gboolean show_preferences;
 	gboolean reset_settings;
 } MultiloadOptions;

@@ -61,8 +61,7 @@ mate_help_cb (GtkAction *action, gpointer data)
 static void
 mate_about_cb (GtkAction *action, MultiloadPlugin *ma)
 {
-	multiload_ui_show_about(
-		GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (ma->container))));
+	multiload_ui_show_about(GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (ma->container))));
 }
 
 static void

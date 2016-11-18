@@ -319,6 +319,8 @@ int main (int argc, char **argv)
 	signal(SIGINT, indicator_cleanup);
 	signal(SIGTERM, indicator_cleanup);
 
+	if (options->show_about)
+		multiload_ui_show_about(NULL);
 	if (options->show_preferences)
 		indicator_preferences_cb(GTK_WIDGET(indicator), multiload);
 

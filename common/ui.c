@@ -402,12 +402,13 @@ multiload_ui_parse_cmdline(int *argc, char ***argv, GOptionEntry *extra_entries)
 	GError *error = NULL;
 
 	GOptionEntry entries[] = {
+		{ "about",			'a', 0, G_OPTION_ARG_NONE, &options->show_about,			"Open about dialog on startup", NULL },
 		{ "preferences",	'p', 0, G_OPTION_ARG_NONE, &options->show_preferences,		"Open preferences editor on startup", NULL },
 		{ "reset",			'r', 0, G_OPTION_ARG_NONE, &options->reset_settings,		"Reset to default settings", NULL },
 		{ NULL }
 	};
 	GOptionContext *context = g_option_context_new (NULL);
-	g_option_context_set_summary (context, ("Modern graphical system monitor"));
+	g_option_context_set_summary (context, "Modern graphical system monitor");
 	g_option_context_set_translation_domain(context, GETTEXT_PACKAGE);
 	g_option_context_add_group (context, gtk_get_option_group (TRUE));
 

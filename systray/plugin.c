@@ -263,6 +263,8 @@ int main (int argc, char **argv)
 	build_menu(multiload);
 	build_icons(multiload);
 
+	if (options->show_about)
+		multiload_ui_show_about(NULL);
 	if (options->show_preferences)
 		systray_preferences_cb(NULL, multiload);
 
