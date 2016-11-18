@@ -35,6 +35,7 @@
 #include "multiload-config.h"
 #include "preferences.h"
 #include "util.h"
+#include "ui.h"
 
 
 const char* MULTILOAD_CONFIG_PATH;
@@ -262,6 +263,8 @@ multiload_init()
 
 
 	multiload_config_init();
+
+	multiload_ui_print_notice();
 
 	g_debug("[multiload] Initialization complete");
 }

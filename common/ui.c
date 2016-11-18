@@ -423,3 +423,12 @@ multiload_ui_parse_cmdline(int *argc, char ***argv, GOptionEntry *extra_entries)
 
 	return options;
 }
+
+void
+multiload_ui_print_notice()
+{
+	printf ("%s %s   -   %s\n", about_data_progname, PACKAGE_VERSION, about_data_description);
+	printf ("%s\n", about_data_copyright);
+	printf ("%s\n", about_data_website);
+	printf ("\n");
+}
