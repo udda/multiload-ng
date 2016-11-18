@@ -614,7 +614,7 @@ msgid "Discharging"
 msgstr "Wird entladen"
 
 msgid "Current charge:"
-msgstr "Aktuelle Ladung:"
+msgstr "Ladezustand:"
 
 msgid "Critical level"
 msgstr "Kritischer Ladezustand"
