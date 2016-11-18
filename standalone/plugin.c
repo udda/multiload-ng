@@ -90,6 +90,7 @@ static gboolean window_above = TRUE; //TODO preferences
 static gboolean window_show_button = TRUE; //TODO preferences
 static gboolean window_allow_move = TRUE; //TODO preferences
 static gboolean window_allow_resize = TRUE; //TODO preferences
+static gboolean window_half_transparent = FALSE; //TODO preferences
 
 static void
 standalone_above_cb (GtkCheckMenuItem *item, GtkWindow *window)
@@ -133,6 +134,19 @@ standalone_handle_press_cb (GtkWidget *widget, GdkEventButton *event, GtkWindow 
 {
 	if (window_allow_move)
 		gtk_window_begin_move_drag(window, event->button, event->x_root, event->y_root, event->time);
+}
+
+static void
+standalone_half_transparent_cb (GtkCheckMenuItem *item, GtkWindow *window)
+{
+	window_half_transparent = gtk_check_menu_item_get_active(item);
+	gdouble val = window_half_transparent? 0.5:1.0;
+
+	#if GTK_CHECK_VERSION(3,8,0)
+		gtk_widget_set_opacity (GTK_WIDGET(window), val);
+	#else
+		gtk_window_set_opacity (window, val)
+	#endif
 }
 
 #endif
@@ -202,6 +216,13 @@ build_menu(MultiloadPlugin *ma, GtkWidget *button_config)
 	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(menuitem), window_allow_resize); //TODO preferences
 	g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(standalone_allow_resize_cb), ma->panel_data);
 	gtk_menu_shell_append (GTK_MENU_SHELL(submenu), menuitem);
+
+	if (gdk_screen_is_composited(gdk_screen_get_default())) {
+		menuitem = gtk_check_menu_item_new_with_mnemonic (_("Half _transparent"));
+		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM(menuitem), window_half_transparent); //TODO preferences
+		g_signal_connect (G_OBJECT(menuitem), "activate", G_CALLBACK(standalone_half_transparent_cb), ma->panel_data);
+		gtk_menu_shell_append (GTK_MENU_SHELL(submenu), menuitem);
+	}
 
 	#endif
 
