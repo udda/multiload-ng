@@ -599,8 +599,8 @@ msgstr ""
 msgid "Discharging"
 msgstr ""
 
-msgid "Capacity:"
-msgstr ""
+msgid "Current charge:"
+msgstr "当前电量:"
 
 msgid "Critical level"
 msgstr ""

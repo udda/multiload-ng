@@ -603,8 +603,8 @@ msgstr "Зарядка"
 msgid "Discharging"
 msgstr "Разрядка"
 
-msgid "Capacity:"
-msgstr "Заряд:"
+msgid "Current charge:"
+msgstr "Текущий уровень заряда:"
 
 msgid "Critical level"
 msgstr "Критический уровень"

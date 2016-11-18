@@ -615,8 +615,8 @@ msgstr "Įkraunama"
 msgid "Discharging"
 msgstr "Išsikrauna"
 
-msgid "Capacity:"
-msgstr "Talpa:"
+msgid "Current charge:"
+msgstr "Dabartinė įkrova:"
 
 msgid "Critical level"
 msgstr "Kritinis lygis"

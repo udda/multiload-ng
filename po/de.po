@@ -613,8 +613,8 @@ msgstr "Wird geladen"
 msgid "Discharging"
 msgstr "Wird entladen"
 
-msgid "Capacity:"
-msgstr "Kapazität:"
+msgid "Current charge:"
+msgstr "Aktuelle Ladung:"
 
 msgid "Critical level"
 msgstr "Kritischer Ladezustand"

@@ -608,8 +608,8 @@ msgstr "In carica"
 msgid "Discharging"
 msgstr "Non in carica"
 
-msgid "Capacity:"
-msgstr "Capacità:"
+msgid "Current charge:"
+msgstr "Carica corrente:"
 
 msgid "Critical level"
 msgstr "Livello critico"
