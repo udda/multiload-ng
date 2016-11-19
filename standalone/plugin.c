@@ -145,7 +145,7 @@ standalone_half_transparent_cb (GtkCheckMenuItem *item, GtkWindow *window)
 	#if GTK_CHECK_VERSION(3,8,0)
 		gtk_widget_set_opacity (GTK_WIDGET(window), val);
 	#else
-		gtk_window_set_opacity (window, val)
+		gtk_window_set_opacity (window, val);
 	#endif
 }
 
