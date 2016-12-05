@@ -85,6 +85,8 @@ multiload_graph_parm_get_data (int Maximum, int data[4], LoadGraph *g, Parametri
 		}
 
 	}
+	g_free (stdout);
+	g_free (stderr);
 
 	if (xd->error == TRUE) {
 		memset(xd->result, 0, 4*sizeof(xd->result[0]));

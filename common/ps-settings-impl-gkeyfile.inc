@@ -60,6 +60,7 @@ multiload_ps_settings_open_for_read(MultiloadPlugin *ma)
 		}
 	}
 
+	g_free(fname);
 	g_clear_error(&err);
 	return gkf;
 }

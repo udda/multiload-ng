@@ -93,6 +93,7 @@ load_graph_cairo_set_gradient(cairo_t *cr, double width, double height, int dire
 	cairo_pattern_add_color_stop_rgb (pat, 0, a->red, a->green, a->blue);
 	cairo_pattern_add_color_stop_rgb (pat, 1, b->red, b->green, b->blue);
 	cairo_set_source(cr, pat);
+	cairo_pattern_destroy (pat);
 }
 
 /* Redraws the backing pixmap for the load graph and updates the window */
@@ -446,7 +447,7 @@ load_graph_new (MultiloadPlugin *ma, guint id)
 		g_signal_connect (G_OBJECT(g->disp), "draw", G_CALLBACK (load_graph_draw_cb), g);
 	#endif */
 	g_signal_connect (G_OBJECT(g->disp), "configure_event", G_CALLBACK (load_graph_configure), g);
-	g_signal_connect (G_OBJECT(g->disp), "destroy", G_CALLBACK (load_graph_destroy), g);
+	g_signal_connect (G_OBJECT(g->main_widget), "destroy", G_CALLBACK (load_graph_destroy), g);
 	g_signal_connect (G_OBJECT(g->disp), "button-press-event", G_CALLBACK (load_graph_clicked), g);
 	g_signal_connect (G_OBJECT(g->disp), "enter-notify-event", G_CALLBACK(load_graph_mouse_move_cb), g);
 	g_signal_connect (G_OBJECT(g->disp), "leave-notify-event", G_CALLBACK(load_graph_mouse_move_cb), g);

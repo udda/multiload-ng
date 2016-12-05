@@ -418,8 +418,11 @@ multiload_ui_parse_cmdline(int *argc, char ***argv, GOptionEntry *extra_entries)
 
 	if (!g_option_context_parse (context, argc, argv, &error)) {
 		g_print ("%s\n", error->message);
+		g_error_free (error);
 		exit (1);
 	}
+
+	g_option_context_free (context);
 
 	return options;
 }

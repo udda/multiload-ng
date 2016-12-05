@@ -366,19 +366,21 @@ multiload_new()
 }
 
 void
-multiload_destroy(MultiloadPlugin *ma)
+multiload_free(MultiloadPlugin *ma)
 {
 	gint i;
 
 	for (i = 0; i < GRAPH_MAX; i++) {
-		load_graph_stop(ma->graphs[i]);
-		gtk_widget_destroy(ma->graphs[i]->main_widget);
+		load_graph_stop (ma->graphs[i]);
+		gtk_widget_destroy (ma->graphs[i]->main_widget);
 
-		load_graph_unalloc(ma->graphs[i]);
-		g_free(ma->graphs[i]);
+		load_graph_unalloc (ma->graphs[i]);
+		g_free (ma->graphs[i]);
 
-		g_free(ma->extra_data[i]);
+		g_free (ma->extra_data[i]);
 	}
+
+	g_free (ma);
 
 	g_debug("[multiload] Destroyed");
 }

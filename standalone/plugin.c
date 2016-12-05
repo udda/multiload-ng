@@ -41,8 +41,8 @@
 static void
 standalone_destroy_cb (GtkWidget *widget, MultiloadPlugin *multiload)
 {
-    gtk_main_quit ();
-    g_free(multiload);
+	gtk_main_quit ();
+	multiload_free (multiload);
 }
 
 static void

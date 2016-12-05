@@ -141,7 +141,7 @@ xfce_free_cb (XfcePanelPlugin *plugin, MultiloadPlugin *multiload)
 	if (G_UNLIKELY (multiload->pref_dialog != NULL))
 		gtk_widget_destroy (multiload->pref_dialog);
 
-	multiload_destroy (multiload);
+	multiload_free (multiload);
 	gtk_widget_destroy (GTK_WIDGET(multiload->container));
 
 	g_slice_free (MultiloadPlugin, multiload);

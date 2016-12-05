@@ -48,8 +48,8 @@ static guint timer_indexes[GRAPH_MAX];
 static void
 systray_destroy_cb(GtkWidget *widget, MultiloadPlugin *ma)
 {
-    gtk_main_quit ();
-    g_free(ma);
+	gtk_main_quit ();
+	multiload_free (ma);
 }
 
 static void

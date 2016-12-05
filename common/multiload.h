@@ -172,7 +172,7 @@ multiload_defaults(MultiloadPlugin *ma);
 G_GNUC_INTERNAL MultiloadPlugin*
 multiload_new();
 G_GNUC_INTERNAL void
-multiload_destroy(MultiloadPlugin *ma);
+multiload_free(MultiloadPlugin *ma);
 G_GNUC_INTERNAL int
 multiload_find_graph_by_name(char *str, char **suffix);
 

@@ -61,19 +61,19 @@ indicator_cleanup(int sig)
 		sprintf(signame, "Signal %d", sig);
 
 	printf("Received %s, cleaning up...\n", signame);
-    remove(icon_filename[0]);
-    remove(icon_filename[1]);
-    remove(icon_directory);
+	remove(icon_filename[0]);
+	remove(icon_filename[1]);
+	remove(icon_directory);
 
-    exit(0);
+	exit(0);
 }
 
 static void
 indicator_destroy_cb(GtkWidget *widget, MultiloadPlugin *ma)
 {
-    gtk_main_quit ();
-    g_free(ma);
-    indicator_cleanup(0);
+	gtk_main_quit ();
+	multiload_free (ma);
+	indicator_cleanup (0);
 }
 
 static void
