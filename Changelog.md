@@ -2,6 +2,7 @@
 
 This document groups together changelogs for every Multiload-ng release.
 
+- [Multiload-ng v1.5.2](#multiload-ng-v152)
 - [Multiload-ng v1.5.1](#multiload-ng-v151)
 - [Multiload-ng v1.5.0](#multiload-ng-v150)
 - [Multiload-ng v1.4.2](#multiload-ng-v142)
@@ -13,6 +14,30 @@ This document groups together changelogs for every Multiload-ng release.
 - [Multiload-ng v1.1.0](#multiload-ng-v110)
 - [Multiload-ng v1.0.1](#multiload-ng-v101)
 - [Multiload-ng v1.0](#multiload-ng-v10)
+
+
+
+
+
+
+
+
+
+
+## Multiload-ng v1.5.2
+
+<sup>*Released on 05 Dec 2016*</sup>
+
+### Bugfixes
+- Fixed: Desktop entry for Systray contained a small typo, because of which it was not assigned to the correct desktop categories in some systems
+- Fixed: several memory leaks, some of these were severe enough to make Multiload-ng use huge amounts of memory after some days of continuous use (up to several hundreds MB)
+
+### Notes about upgrade
+This is a minor release. When upgrading from previous major releases, it is really recommended to read [release notes of Multiload-ng 1.5.0](#multiload-ng-v150).
+
+Considering the positive effects brought by this release (smaller memory usage), upgrade is highly recommended.
+
+Sorry for my absence this month, I'm pretty busy in real life. Development is definitely not over, and will resume soon.
 
 
 
