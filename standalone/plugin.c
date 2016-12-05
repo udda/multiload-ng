@@ -257,9 +257,10 @@ int main(int argc, char *argv[]) {
 
 	#ifdef MULTILOAD_EXPERIMENTAL
 	GtkWidget *handle = gtk_event_box_new();
-	gtk_container_add (GTK_CONTAINER(handle), gtk_label_new("(move)"));
+	gtk_container_add (GTK_CONTAINER(handle), gtk_label_new("(move me)"));
 	g_signal_connect (G_OBJECT(handle), "button-press-event", G_CALLBACK(standalone_handle_press_cb), w);
 	gtk_box_pack_start(GTK_BOX(hbox), handle, FALSE, FALSE, 0);
+	gtk_widget_show_all (handle);
 	#endif
 
 	gtk_box_pack_start(GTK_BOX(hbox), GTK_WIDGET(multiload->container), TRUE, TRUE, 0);
