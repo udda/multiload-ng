@@ -19,16 +19,17 @@
 
 # note: name of this makefile is lowercase, in order to not get ignored by .gitignore
 
+TOPSRCDIR=../..
+
 CHECKINSTALL_FLAGS=\
 	-y \
 	--install=no \
 	--nodoc \
 	--pkglicense=GPL2 \
 	--maintainer=mr.udda@gmail.com \
-	--spec=extras/checkinstall/.spec \
-	--pakdir=extras/checkinstall
-
-TOPSRCDIR=../..
+	--pakdir=extras/checkinstall \
+        --pkgversion=$(shell cat $(TOPSRCDIR)/version) \
+        --pkgname="multiload-ng"
 
 all:
 	@echo "Please select a target ( deb-package | slack-package | rpm-package )."
@@ -45,11 +46,7 @@ checkbuild:
 
 .PHONY: .spec
 .spec:
-	printf "Summary:   Modern graphical system monitor\n" > .spec
-	printf "Name:      multiload-ng\n" >> .spec
-	printf "Version:   " >> .spec
-	cat $(TOPSRCDIR)/version >> .spec
-	printf "\n" >> .spec
+	printf "Modern graphical system monitor\n" > $(TOPSRCDIR)/description-pak
 
 deb-package: checkbuild notice .spec
 	@cd $(TOPSRCDIR) ; checkinstall $(CHECKINSTALL_FLAGS) --type=debian
