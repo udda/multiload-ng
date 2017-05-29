@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!--
+Copyright (C) 2017 Mario Cianciolo <mr.udda@gmail.com>
+
+This file is part of Multiload-ng.
+
+Multiload-ng is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Multiload-ng is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Multiload-ng.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="512" height="512">
+  <rect fill="#223549" width="512" height="512" x="0" y="0" rx="140" ry="140" />
+  <rect fill="#19a1cb" width="64" height="224" x="360" y="144" />
+  <rect fill="#70c260" width="64" height="256" x="272" y="112" />
+  <rect fill="#dccb1e" width="64" height="128" x="184" y="240" />
+  <rect fill="#f15d4d" width="64" height="176" x="96" y="192" />
+  <line stroke="#346278" stroke-width="4" x1="64" y1="368" x2="448" y2="368" />
+</svg>

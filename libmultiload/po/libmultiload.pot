@@ -1,0 +1,1087 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Mario Cianciolo <mr.udda@gmail.com>
+# This file is distributed under the same license as the libmultiload package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: libmultiload 2.0.0\n"
+"Report-Msgid-Bugs-To: Mario Cianciolo <mr.udda@gmail.com>\n"
+"POT-Creation-Date: 2017-05-22 16:38+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. TRANSLATORS: program usage line
+#: bin/multiload-debug-collector.c:34
+#, c-format
+msgid "USAGE: %s [output.zip]\n"
+msgstr ""
+
+#. TRANSLATORS: %s is a filename
+#: bin/multiload-debug-collector.c:61
+#, c-format
+msgid "Collecting data into %s"
+msgstr ""
+
+#: bin/multiload-debug-collector.c:64
+msgid "Success"
+msgstr ""
+
+#: bin/multiload-debug-collector.c:67
+msgid "Failure"
+msgstr ""
+
+#: src/multiload/shared.c:60
+msgid "Colored console output"
+msgstr ""
+
+#: src/multiload/shared.c:61
+msgid "Use colored text when printing to terminal."
+msgstr ""
+
+#: src/multiload/shared.c:68
+msgid "Enable process monitor"
+msgstr ""
+
+#: src/multiload/shared.c:69
+msgid "Process monitor provides lists of processes ordered by usage of system resources."
+msgstr ""
+
+#: src/provider/battery.c:25
+msgid "Battery"
+msgstr ""
+
+#: src/provider/battery.c:26
+msgid "Shows battery charge and status (charging, full, critical level, ...)."
+msgstr ""
+
+#: src/provider/battery.c:69 src/provider/battery.c:146
+msgid "Critical level"
+msgstr ""
+
+#: src/provider/battery.c:70
+msgid "Battery percentage to be reported as critical. Will be drawn in a different color."
+msgstr ""
+
+#: src/provider/battery.c:83
+msgid "Cannot update battery info"
+msgstr ""
+
+#: src/provider/battery.c:84
+msgid "Battery not present"
+msgstr ""
+
+#: src/provider/battery.c:131
+#, c-format
+msgid "Technology: %s"
+msgstr ""
+
+#: src/provider/battery.c:133
+msgid "Unknown technology"
+msgstr ""
+
+#: src/provider/battery.c:138
+#, c-format
+msgid "Manufacturer: %s"
+msgstr ""
+
+#: src/provider/battery.c:140
+msgid "Unknown manufacturer"
+msgstr ""
+
+#. TRANSLATORS: remaining time for full charge/discharge of the battery
+#: src/provider/battery.c:154
+#, c-format
+msgid "Time left: %s"
+msgstr ""
+
+#: src/provider/cpu.c:25
+msgid "CPU usage"
+msgstr ""
+
+#: src/provider/cpu.c:26
+msgid "Shows CPU usage, split by type (user processes, low priority processes, kernel processes, I/O wait)."
+msgstr ""
+
+#: src/provider/cpu.c:71 src/provider/cpufreq.c:63
+msgid "CPU core"
+msgstr ""
+
+#: src/provider/cpu.c:72
+msgid "Core to use for graph values. Enter <b>-1</b> to use all cores together."
+msgstr ""
+
+#: src/provider/cpu.c:98
+msgid "Unable to get current CPU time information"
+msgstr ""
+
+#. TRANSLATORS: CPU usage percentage
+#: src/provider/cpu.c:174
+#, c-format
+msgid "%0.01f%% used by programs"
+msgstr ""
+
+#. TRANSLATORS: CPU usage percentage
+#: src/provider/cpu.c:177
+#, c-format
+msgid "%0.01f%% used by low priority programs"
+msgstr ""
+
+#. TRANSLATORS: CPU usage percentage
+#: src/provider/cpu.c:180
+#, c-format
+msgid "%0.01f%% used by the kernel"
+msgstr ""
+
+#. TRANSLATORS: CPU usage percentage
+#: src/provider/cpu.c:183
+#, c-format
+msgid "%0.01f%% waiting for I/O"
+msgstr ""
+
+#. TRANSLATORS: CPU usage percentage
+#: src/provider/cpu.c:186
+#, c-format
+msgid "%0.01f%% total CPU usage"
+msgstr ""
+
+#. TRANSLATORS: number of CPUs in this system
+#: src/provider/cpu.c:189
+#, c-format
+msgid "%d total cores"
+msgstr ""
+
+#: src/provider/cpu.c:192 src/provider/cpufreq.c:151
+#, c-format
+msgid "Selected core: #%d"
+msgstr ""
+
+#: src/provider/cpufreq.c:25
+msgid "CPU frequency"
+msgstr ""
+
+#: src/provider/cpufreq.c:26
+msgid "Shows CPU frequency and governor."
+msgstr ""
+
+#: src/provider/cpufreq.c:64
+msgid "Core to use for graph values."
+msgstr ""
+
+#: src/provider/cpufreq.c:90
+msgid "Unable to get current CPU scaling information"
+msgstr ""
+
+#. TRANSLATORS: CPU governor (many languages leave it untranslated)
+#: src/provider/cpufreq.c:143
+#, c-format
+msgid "Governor: %s"
+msgstr ""
+
+#: src/provider/cpufreq.c:145
+#, c-format
+msgid "Current frequency: %s"
+msgstr ""
+
+#: src/provider/cpufreq.c:147
+#, c-format
+msgid "Minimum frequency: %s"
+msgstr ""
+
+#: src/provider/cpufreq.c:149
+#, c-format
+msgid "Maximum frequency: %s"
+msgstr ""
+
+#: src/provider/ctxtrate.c:25
+msgid "Context switch rate"
+msgstr ""
+
+#: src/provider/ctxtrate.c:26
+msgid "Shows number of context switch events."
+msgstr ""
+
+#: src/provider/ctxtrate.c:68
+msgid "Context switch stats do not exist in this system"
+msgstr ""
+
+#: src/provider/ctxtrate.c:72 src/provider/intrrate.c:73
+#: src/provider/procrate.c:73 src/provider/sockets.c:131
+#: src/provider/wifi.c:100
+msgid "Wrong line format"
+msgstr ""
+
+#: src/provider/ctxtrate.c:102
+#, c-format
+msgid "%u context switches since last update"
+msgstr ""
+
+#: src/provider/diskio.c:25
+msgid "Disk I/O"
+msgstr ""
+
+#: src/provider/diskio.c:26
+msgid "Shows disk I/O, split by direction (read/write) and type (sectors or busy time)."
+msgstr ""
+
+#: src/provider/diskio.c:75
+msgid "Count reads"
+msgstr ""
+
+#: src/provider/diskio.c:76
+msgid "Measure disk reads. Set to <b>false</b> to disable."
+msgstr ""
+
+#: src/provider/diskio.c:82
+msgid "Count writes"
+msgstr ""
+
+#: src/provider/diskio.c:83
+msgid "Measure disk writes. Set to <b>false</b> to disable."
+msgstr ""
+
+#: src/provider/diskio.c:89
+msgid "Use disk time"
+msgstr ""
+
+#: src/provider/diskio.c:90
+msgid "Calculate values using disk busy time instead of bytes read or written."
+msgstr ""
+
+#: src/provider/diskio.c:96 src/provider/net.c:107 src/provider/storage.c:87
+#: src/provider/temperature.c:83
+msgid "Filter"
+msgstr ""
+
+#: src/provider/diskio.c:97 src/provider/net.c:108
+msgid "Devices that aren't in this list will not be used. If this list is empty, all available devices will be used."
+msgstr ""
+
+#: src/provider/diskio.c:122 src/provider/diskio.c:123
+#: src/provider/storage.c:113 src/provider/storage.c:114
+msgid "Cannot find any mounted disk or volume"
+msgstr ""
+
+#. TRANSLATORS: short form for "milliseconds"
+#: src/provider/diskio.c:231 src/provider/diskio.c:248
+#, c-format
+msgid "%u ms"
+msgstr ""
+
+#. TRANSLATORS: disk read time or disk read speed
+#: src/provider/diskio.c:237
+#, c-format
+msgid "Read: %s"
+msgstr ""
+
+#. TRANSLATORS: disk read time/speed measuring is not active
+#: src/provider/diskio.c:240
+msgid "Read: not measuring"
+msgstr ""
+
+#. TRANSLATORS: disk write time/speed measuring is not active
+#: src/provider/diskio.c:257
+msgid "Write: not measuring"
+msgstr ""
+
+#: src/provider/entropy.c:25
+msgid "Available entropy"
+msgstr ""
+
+#: src/provider/entropy.c:26
+msgid "Shows system available entropy."
+msgstr ""
+
+#: src/provider/entropy.c:52
+msgid "Entropy data is invalid or missing"
+msgstr ""
+
+#: src/provider/entropy.c:61
+#, c-format
+msgid "Available entropy: %u bytes"
+msgstr ""
+
+#: src/provider/intrrate.c:25
+msgid "Interrupt rate"
+msgstr ""
+
+#: src/provider/intrrate.c:26
+msgid "Shows number of interrupt events."
+msgstr ""
+
+#: src/provider/intrrate.c:69
+msgid "Interrupt stats do not exist in this system"
+msgstr ""
+
+#: src/provider/intrrate.c:103
+#, c-format
+msgid "%u interrupts since last update"
+msgstr ""
+
+#: src/provider/javascript.c:25
+msgid "JavaScript interpreter"
+msgstr ""
+
+#: src/provider/javascript.c:26
+msgid "Customizable output using JavaScript language."
+msgstr ""
+
+#: src/provider/javascript.c:102
+#, c-format
+msgid "Message from JavaScript: %s"
+msgstr ""
+
+#: src/provider/javascript.c:185
+#, c-format
+msgid "Duktape fatal error: %s"
+msgstr ""
+
+#: src/provider/javascript.c:202
+msgid "Javascript code"
+msgstr ""
+
+#: src/provider/javascript.c:203
+msgid "Code to be executed at every graph iteration, to provide values to draw."
+msgstr ""
+
+#: src/provider/javascript.c:228
+msgid "No Javascript code"
+msgstr ""
+
+#: src/provider/javascript.c:231
+msgid "Cannot create Javascript context"
+msgstr ""
+
+#: src/provider/javascript.c:279
+#, c-format
+msgid "Javascript error: %s"
+msgstr ""
+
+#: src/provider/loadavg.c:25
+msgid "Load average"
+msgstr ""
+
+#: src/provider/loadavg.c:26
+msgid "Shows system load average for a given interval."
+msgstr ""
+
+#: src/provider/loadavg.c:46
+msgid "Load average (full)"
+msgstr ""
+
+#: src/provider/loadavg.c:47
+msgid "Shows system load average for all intervals."
+msgstr ""
+
+#: src/provider/loadavg.c:82
+msgid "Average time"
+msgstr ""
+
+#: src/provider/loadavg.c:83
+msgid "Specify which load average to draw. Enter <b>0</b> for last minute, <b>1</b> for last 5 minutes, or <b>2</b> for last 15 minutes."
+msgstr ""
+
+#: src/provider/loadavg.c:132 src/provider/loadavg.c:150
+#, c-format
+msgid "Load average for last minute: %0.02f"
+msgstr ""
+
+#: src/provider/loadavg.c:135 src/provider/loadavg.c:152
+#, c-format
+msgid "Load average for last 5 minutes: %0.02f"
+msgstr ""
+
+#: src/provider/loadavg.c:138 src/provider/loadavg.c:154
+#, c-format
+msgid "Load average for last 15 minutes: %0.02f"
+msgstr ""
+
+#: src/provider/net.c:25
+msgid "Network"
+msgstr ""
+
+#: src/provider/net.c:26
+msgid "Shows network I/O, split by direction (input/output/local)."
+msgstr ""
+
+#: src/provider/net.c:42
+msgid "Local traffic includes I/O generated by loopback devices of any type.<br />For example, ADB (Android Debug Bridge) traffic will be counted as local."
+msgstr ""
+
+#: src/provider/net.c:79
+msgid "Count inbound traffic"
+msgstr ""
+
+#: src/provider/net.c:80
+msgid "Draw cumulative inbound traffic. Enter <b>false</b> to disable."
+msgstr ""
+
+#: src/provider/net.c:86
+msgid "Count outbound traffic"
+msgstr ""
+
+#: src/provider/net.c:87
+msgid "Draw cumulative outbound traffic. Enter <b>false</b> to disable."
+msgstr ""
+
+#: src/provider/net.c:93
+msgid "Count local traffic"
+msgstr ""
+
+#: src/provider/net.c:94
+msgid "Draw cumulative local traffic. This includes traffic generated by local servers, and by some toolkits like ADB. Enter <b>false</b> to disable."
+msgstr ""
+
+#: src/provider/net.c:100
+msgid "Use packets"
+msgstr ""
+
+#: src/provider/net.c:101
+msgid "Calculate values using packets instead of bytes."
+msgstr ""
+
+#: src/provider/net.c:129 src/provider/net.c:130
+msgid "Cannot find any usable network interface"
+msgstr ""
+
+#. TRANSLATORS: network packets per seconds
+#: src/provider/net.c:248 src/provider/net.c:265 src/provider/net.c:282
+#, c-format
+msgid "%u packets/s"
+msgstr ""
+
+#. TRANSLATORS: network speed
+#: src/provider/net.c:254
+#, c-format
+msgid "Inbound traffic: %s"
+msgstr ""
+
+#. TRANSLATORS: network speed measuring for inbound traffic is not active
+#: src/provider/net.c:257
+msgid "Inbound traffic: not measuring"
+msgstr ""
+
+#. TRANSLATORS: network speed, outbound traffic
+#: src/provider/net.c:271
+#, c-format
+msgid "Outbound traffic: %s"
+msgstr ""
+
+#. TRANSLATORS: network speed measuring for outbound traffic is not active
+#: src/provider/net.c:274
+msgid "Outbound traffic: not measuring"
+msgstr ""
+
+#. TRANSLATORS: network speed, local traffic
+#: src/provider/net.c:288
+#, c-format
+msgid "Local traffic: %s"
+msgstr ""
+
+#. TRANSLATORS: network speed measuring for local traffic is not active
+#: src/provider/net.c:291
+msgid "Local traffic: not measuring"
+msgstr ""
+
+#. TRANSLATORS: list of monitored network interfaces
+#: src/provider/net.c:295
+#, c-format
+msgid "Monitored interfaces: %s"
+msgstr ""
+
+#: src/provider/parametric.c:25
+msgid "Parametric"
+msgstr ""
+
+#: src/provider/parametric.c:26
+msgid "Customizable output using an external application."
+msgstr ""
+
+#: src/provider/parametric.c:42
+msgid "Selected process:<ul><li>MUST exit with status code '0'</li><li>MUST print to stdout 1 up to 4 numbers, separated by spaces or newline</li>Numbers can be integer or floating point. Floating point numbers will be read according to current locale <br />Numbers can begin with 0 (octal) or 0x (hex) <br />Numbers must not be negative. Negative numbers will be read as 0 <br />Text after the numbers is ignored</li><li>CAN print some text on stderr. Any additional content after the first line is ignored</li></ul>"
+msgstr ""
+
+#: src/provider/parametric.c:81
+msgid "Command line"
+msgstr ""
+
+#: src/provider/parametric.c:82
+msgid "Complete shell-like command line to execute."
+msgstr ""
+
+#: src/provider/parametric.c:96 src/provider/ping.c:99
+msgid "Command line is empty"
+msgstr ""
+
+#: src/provider/parametric.c:102
+#, c-format
+msgid "Command has exited with nonzero status code (%d)"
+msgstr ""
+
+#: src/provider/parametric.c:109
+msgid "Command did not return valid numbers"
+msgstr ""
+
+#: src/provider/parametric.c:153
+#, c-format
+msgid "Command line: %s"
+msgstr ""
+
+#: src/provider/parametric.c:154
+#, c-format
+msgid "Values: [%0.02f, %0.02f, %0.02f, %0.02f]"
+msgstr ""
+
+#: src/provider/ping.c:25
+msgid "Ping"
+msgstr ""
+
+#: src/provider/ping.c:26
+msgid "Shows ping time for a given host."
+msgstr ""
+
+#: src/provider/ping.c:42
+msgid "Requires <i>ping</i> installed in this machine. <br />For IPv6 to work, both host system and <i>ping</i> executable must support IPv6. IPv4 is always supported."
+msgstr ""
+
+#: src/provider/ping.c:69
+msgid "Host address"
+msgstr ""
+
+#: src/provider/ping.c:70
+msgid "Address of remote host to ping. Can be a domain name (eg. <i>google.com</i> or an IP address (eg. <i>216.58.205.78</i>)."
+msgstr ""
+
+#: src/provider/ping.c:104
+#, c-format
+msgid "Unable to run 'ping': %s"
+msgstr ""
+
+#: src/provider/ping.c:110
+#, c-format
+msgid "No reply from host %s"
+msgstr ""
+
+#: src/provider/ping.c:111
+#, c-format
+msgid "Ping error (exit status %d)"
+msgstr ""
+
+#: src/provider/ping.c:114
+msgid "No output from ping"
+msgstr ""
+
+#: src/provider/ping.c:117 src/provider/ping.c:121
+msgid "Unexpected output from 'ping' command"
+msgstr ""
+
+#. TRANSLATORS: internet address of selected host
+#: src/provider/ping.c:171
+#, c-format
+msgid "Host name: %s"
+msgstr ""
+
+#. TRANSLATORS: ping time for selected host. "ms" stands for "milliseconds"
+#: src/provider/ping.c:175
+#, c-format
+msgid "Ping time: %0.01f ms"
+msgstr ""
+
+#: src/provider/procrate.c:25
+msgid "Process creation rate"
+msgstr ""
+
+#: src/provider/procrate.c:26
+msgid "Shows number of new processes/threads."
+msgstr ""
+
+#: src/provider/procrate.c:69
+msgid "Processes stats do not exist in this system"
+msgstr ""
+
+#: src/provider/procrate.c:103
+#, c-format
+msgid "%u new processes since last update"
+msgstr ""
+
+#: src/provider/ram.c:25
+msgid "RAM usage"
+msgstr ""
+
+#: src/provider/ram.c:26
+msgid "Shows RAM usage, split by type (user processes, buffers, cache)."
+msgstr ""
+
+#: src/provider/ram.c:62
+msgid "Procps-compliant measurement"
+msgstr ""
+
+#: src/provider/ram.c:63
+msgid "Specifies whether to follow the measurement method used by standard UNIX procps tools, like <i>free</i> and <i>top</i>. In particular, specifies how to count <i>Slab cache</i>. If <b>true</b>, it will appear as cached memory (this is the behavior of <i>free</i> and <i>top</i>). If <b>false</b>, it will appear as free memory (this is the behavior of eg. <i>htop</i> and some graphical tasak managers)."
+msgstr ""
+
+#: src/provider/ram.c:92 src/provider/swap.c:59
+msgid "Cannot retrieve one or more values"
+msgstr ""
+
+#: src/provider/ram.c:137
+#, c-format
+msgid "Total RAM: %s"
+msgstr ""
+
+#. TRANSLATORS: used RAM, absolute and percentage value
+#: src/provider/ram.c:141
+#, c-format
+msgid "%s (%0.01f%%) used by programs"
+msgstr ""
+
+#. TRANSLATORS: used RAM, absolute and percentage value
+#: src/provider/ram.c:144
+#, c-format
+msgid "%s (%0.01f%%) used for buffers"
+msgstr ""
+
+#. TRANSLATORS: used RAM, absolute and percentage value
+#: src/provider/ram.c:147
+#, c-format
+msgid "%s (%0.01f%%) used as cache"
+msgstr ""
+
+#: src/provider/random.c:25
+msgid "Random"
+msgstr ""
+
+#: src/provider/random.c:26
+msgid "Shows random numbers, in a given range."
+msgstr ""
+
+#: src/provider/random.c:64
+msgid "Seed"
+msgstr ""
+
+#: src/provider/random.c:65
+msgid "Seed to use for initializing the random number generator. If <b>0</b>, a default seed will be used."
+msgstr ""
+
+#: src/provider/random.c:72
+msgid "Minimum value"
+msgstr ""
+
+#: src/provider/random.c:73
+msgid "Minimum allowed value for random numbers."
+msgstr ""
+
+#: src/provider/random.c:80
+msgid "Maximum value"
+msgstr ""
+
+#: src/provider/random.c:81
+msgid "Maximum allowed value for random numbers."
+msgstr ""
+
+#. TRANSLATORS: minimum and maximum possible values
+#: src/provider/random.c:146
+#, c-format
+msgid "Range: [%ld,%ld]"
+msgstr ""
+
+#. TRANSLATORS: current random seed
+#: src/provider/random.c:148
+#, c-format
+msgid "Seed: [%lu]"
+msgstr ""
+
+#: src/provider/random.c:151
+#, c-format
+msgid "Current random number: %ld"
+msgstr ""
+
+#: src/provider/sockets.c:25
+msgid "Sockets in use"
+msgstr ""
+
+#: src/provider/sockets.c:26
+msgid "Shows active sockets, split by type (TCP/UDP) and protocol (IPv4/IPv6)."
+msgstr ""
+
+#: src/provider/sockets.c:42
+msgid "Some distro disable IPv6 support. Selecting IPv6 in these systems will cause graph failure."
+msgstr ""
+
+#: src/provider/sockets.c:76
+msgid "IP version"
+msgstr ""
+
+#: src/provider/sockets.c:77
+msgid "Enter <b>1</b> to count only IPv4 sockets, <b>2</b> to count only IPv6 sockets, or <b>3</b> to count both."
+msgstr ""
+
+#: src/provider/sockets.c:110
+msgid "Socket data for IPv4 is missing"
+msgstr ""
+
+#: src/provider/sockets.c:113
+msgid "Socket data for IPv6 is missing"
+msgstr ""
+
+#: src/provider/sockets.c:169
+#, c-format
+msgid "TCP sockets: %u (IPv4)"
+msgstr ""
+
+#: src/provider/sockets.c:170
+#, c-format
+msgid "UDP sockets: %u (IPv4)"
+msgstr ""
+
+#: src/provider/sockets.c:173
+#, c-format
+msgid "TCP sockets: %u (IPv6)"
+msgstr ""
+
+#: src/provider/sockets.c:174
+#, c-format
+msgid "UDP sockets: %u (IPv6)"
+msgstr ""
+
+#: src/provider/sockets.c:177
+#, c-format
+msgid "TCP sockets: %u (IPv4), %u (IPv6)"
+msgstr ""
+
+#: src/provider/sockets.c:178
+#, c-format
+msgid "UDP sockets: %u (IPv4), %u (IPv6)"
+msgstr ""
+
+#: src/provider/storage.c:25
+msgid "Storage"
+msgstr ""
+
+#: src/provider/storage.c:26
+msgid "Shows used storage space or used inodes."
+msgstr ""
+
+#: src/provider/storage.c:73
+msgid "Use inodes"
+msgstr ""
+
+#: src/provider/storage.c:74
+msgid "Calculate values using inodes instead of blocks."
+msgstr ""
+
+#: src/provider/storage.c:80
+msgid "Include root quota"
+msgstr ""
+
+#: src/provider/storage.c:81
+msgid "Also count blocks/inodes reserved for root user."
+msgstr ""
+
+#: src/provider/storage.c:88
+msgid "Mountpoints that aren't in this list will not be used. If this list is empty, mountpoints will be filtered automatically."
+msgstr ""
+
+#: src/provider/storage.c:197
+#, c-format
+msgid "Free inodes: %llu"
+msgstr ""
+
+#: src/provider/storage.c:199
+#, c-format
+msgid "Total inodes: %llu"
+msgstr ""
+
+#: src/provider/storage.c:206
+#, c-format
+msgid "Free storage: %s"
+msgstr ""
+
+#: src/provider/storage.c:208
+#, c-format
+msgid "Total storage: %s"
+msgstr ""
+
+#. TRANSLATORS: list of monitored mountpoints for measuring storage space
+#: src/provider/storage.c:212
+#, c-format
+msgid "Monitored mountpoints: %s"
+msgstr ""
+
+#: src/provider/swap.c:25
+msgid "Swap usage"
+msgstr ""
+
+#: src/provider/swap.c:26
+msgid "Shows swap usage."
+msgstr ""
+
+#: src/provider/swap.c:78
+#, c-format
+msgid "Total swap: %s"
+msgstr ""
+
+#. TRANSLATORS: used swap, absolute and percentage value
+#: src/provider/swap.c:81
+#, c-format
+msgid "%s (%0.01f%%) used swap"
+msgstr ""
+
+#: src/provider/temperature.c:25
+msgid "Temperature"
+msgstr ""
+
+#: src/provider/temperature.c:26
+msgid "Shows temperature from one or more sensors."
+msgstr ""
+
+#: src/provider/temperature.c:76
+msgid "Calculate average"
+msgstr ""
+
+#: src/provider/temperature.c:77
+msgid "If <b>true</b>, graph will draw average temperature of available sources. If <b>false</b>, graph will draw maximum temperature of available sources."
+msgstr ""
+
+#: src/provider/temperature.c:84
+msgid "Temperature sources that aren't in this list will not be used. If this list is empty, all available temperature sources will be used."
+msgstr ""
+
+#: src/provider/temperature.c:98
+msgid "Cannot find any temperature sensor"
+msgstr ""
+
+#: src/provider/temperature.c:115
+#, c-format
+msgid "Cannot update temperature data for %s"
+msgstr ""
+
+#: src/provider/temperature.c:136
+msgid "All usable temperature sources are filtered out or outdated"
+msgstr ""
+
+#. TRANSLATORS: multiple temperature sources
+#: src/provider/temperature.c:188
+#, c-format
+msgid "Average temperature from %zu sources"
+msgstr ""
+
+#. TRANSLATORS: single temperature source
+#: src/provider/temperature.c:191
+#, c-format
+msgid "Temperature source: %s"
+msgstr ""
+
+#: src/provider/temperature.c:194
+#, c-format
+msgid "Current temperature: %0.01f °C"
+msgstr ""
+
+#: src/provider/temperature.c:196
+#, c-format
+msgid "Critical temperature: %0.01f °C"
+msgstr ""
+
+#: src/provider/testfail.c:25
+msgid "Failure test"
+msgstr ""
+
+#: src/provider/testfail.c:26
+msgid "Fails at defined interval."
+msgstr ""
+
+#: src/provider/testfail.c:42
+msgid "A simple graph that can be used for theme testing.<br />It does nothing. Its only purpose is to fail at defined interval."
+msgstr ""
+
+#: src/provider/testfail.c:70
+msgid "This graph fails, that's normal"
+msgstr ""
+
+#: src/provider/testfail.c:89
+#, c-format
+msgid "This graph fails every %d iterations."
+msgstr ""
+
+#: src/provider/threads.c:25
+msgid "Active threads"
+msgstr ""
+
+#: src/provider/threads.c:26
+msgid "Shows number of active processes/threads."
+msgstr ""
+
+#: src/provider/threads.c:67
+msgid "Processes/threads stats do not exist in this system"
+msgstr ""
+
+#: src/provider/threads.c:87
+#, c-format
+msgid "%lu processes/threads out of %lu are active"
+msgstr ""
+
+#. TRANSLATORS: number of threads of a process
+#: src/provider/threads.c:100
+#, c-format
+msgid "%lu threads"
+msgstr ""
+
+#: src/provider/wifi.c:25
+msgid "WiFi"
+msgstr ""
+
+#: src/provider/wifi.c:26
+msgid "Shows WiFi link quality and signal strength."
+msgstr ""
+
+#: src/provider/wifi.c:69
+msgid "Wireless interface"
+msgstr ""
+
+#: src/provider/wifi.c:70
+msgid "Interface to use for measuring. If empty or non existing, the first available interface will be used."
+msgstr ""
+
+#: src/provider/wifi.c:77
+msgid "Use signal strength"
+msgstr ""
+
+#: src/provider/wifi.c:78
+msgid "Show signal strength instead of link quality."
+msgstr ""
+
+#: src/provider/wifi.c:91
+msgid "No wireless data in this system"
+msgstr ""
+
+#. TRANSLATORS: selected wireless interface
+#: src/provider/wifi.c:142
+#, c-format
+msgid "Wireless interface: %s"
+msgstr ""
+
+#: src/provider/wifi.c:144
+#, c-format
+msgid "Link quality: %d"
+msgstr ""
+
+#: src/provider/wifi.c:146
+#, c-format
+msgid "Signal strength: %d"
+msgstr ""
+
+#: src/sys/battery_info.c:231
+msgid "Full"
+msgstr ""
+
+#: src/sys/battery_info.c:233
+msgid "Charging"
+msgstr ""
+
+#: src/sys/battery_info.c:235
+msgid "Discharging"
+msgstr ""
+
+#: src/sys/battery_info.c:237
+msgid "Absent"
+msgstr ""
+
+#: src/util/string.c:339
+msgid "week"
+msgstr ""
+
+#: src/util/string.c:339
+msgid "weeks"
+msgstr ""
+
+#: src/util/string.c:346
+msgid "day"
+msgstr ""
+
+#: src/util/string.c:346
+msgid "days"
+msgstr ""
+
+#: src/util/string.c:353
+msgid "hour"
+msgstr ""
+
+#: src/util/string.c:353
+msgid "hours"
+msgstr ""
+
+#: src/util/string.c:360
+msgid "minute"
+msgstr ""
+
+#: src/util/string.c:360
+msgid "minutes"
+msgstr ""
+
+#: src/util/string.c:366
+msgid "second"
+msgstr ""
+
+#: src/util/string.c:366
+msgid "seconds"
+msgstr ""
+
+#: src/util/system.c:119 src/util/system.c:124 src/util/system.c:129
+#, c-format
+msgid "pipe(%s) failed: %s"
+msgstr ""
+
+#: src/util/system.c:137 src/util/system.c:220
+#, c-format
+msgid "fork() failed: %s"
+msgstr ""
+
+#: src/util/system.c:152
+#, c-format
+msgid "waitpid() failed: %s"
+msgstr ""
+
+#: src/util/system.c:161
+#, c-format
+msgid "Error from child: %s"
+msgstr ""
+
+#: src/util/system.c:172 src/util/system.c:174
+#, c-format
+msgid "Child process killed by signal %ld"
+msgstr ""
+
+#: src/util/system.c:176
+msgid "Child process terminated abnormally"
+msgstr ""
+
+#: src/util/system.c:233
+#, c-format
+msgid "dup2(%s) failed: %s"
+msgstr ""
+
+#: src/util/system.c:268 src/util/system.c:281
+#, c-format
+msgid "Can't open %s for writing: %s"
+msgstr ""
+
+#: src/util/system.c:290
+#, c-format
+msgid "Can't open %s for reading: %s"
+msgstr ""
+
+#: src/util/system.c:303
+#, c-format
+msgid "chdir(%s) failed: %s"
+msgstr ""
+
+#: src/util/system.c:314
+#, c-format
+msgid "execl() failed: %s"
+msgstr ""

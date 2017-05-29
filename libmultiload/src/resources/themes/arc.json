@@ -1,0 +1,20 @@
+{
+	"name":		"arc",
+	"label":	"Arc",
+	"engine":	"delta",
+
+	"background": {
+		"start":		"#5924E2",
+		"end":			"#5924E2",
+		"direction":	"s"
+	},
+	
+	"border": {
+		"color":		"#1B1E24",
+		"width":		2
+	},
+
+	"error-color":		"hsv (334, 84, 89)",
+
+	"data-colors":		[ "#5924E2" ]
+}

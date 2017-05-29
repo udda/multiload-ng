@@ -1,0 +1,44 @@
+<!-- HTML footer for doxygen 1.8.11-->
+<!-- start footer part -->
+<!--BEGIN GENERATE_TREEVIEW-->
+<!-- Commented out by udda
+<div id="nav-path" class="navpath">
+	<ul>
+		$navpath
+		<li class="footer">
+			$generatedby <a href="http://www.doxygen.org/index.html">Doxygen $doxygenversion</a>
+		</li>
+	</ul>
+</div><!-->
+
+<!--END GENERATE_TREEVIEW-->
+<!--BEGIN !GENERATE_TREEVIEW-->
+<hr class="footer"/>
+<address class="footer">
+	$generatedby <a href="http://www.doxygen.org/index.html">Doxygen $doxygenversion</a>
+</address>
+<!--END !GENERATE_TREEVIEW-->
+
+<script type="text/javascript">
+	/* Member title */
+/*	$('div.memitem').each(function() {
+		var x = $(this).find('td.memname').text().trim().split(' ').pop();
+		$(this).prepend('<div class="multiload-memname">' + x + '</div>');
+	});*/
+
+	/* Line numbers in code fragments */
+	$('.fragment').each(function() {
+		var i = 0;
+		$(this).find('.line').each(function(){
+			$(this).prepend('<div class="multiload-fragment-line noselect">' + (++i) + '</div>')
+		});
+	});
+
+	$('td.memname a.el').addClass("paramtype");
+	$('td.memname').html(function(index, html) {
+		return html.replace(/bool|int|(const )?char ?\*?|size_t|void|\*/,'<span class="paramtype">$&</span>');
+	});
+
+</script>
+</body>
+</html>

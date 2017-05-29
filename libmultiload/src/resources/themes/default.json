@@ -1,0 +1,25 @@
+{
+	"name":		"default",
+	"label":	"Default theme",
+	"engine":	"delta",
+
+	"background": {
+		"start":		"hsv (+0, 50, 15)",
+		"end":			"hsv (+0, 0, 0)",
+		"direction":	"s"
+	},
+	
+	"border": {
+		"color":		"hsv (+0, 100, 50)",
+		"width":		2
+	},
+
+	"error-color":		"hsv (0, 60, 100)",
+
+	"data-colors": [
+		"hsv (0, 96, 59)",
+		"hsv (0, 69, 90)",
+		"hsv (0, 25, 100)",
+		"hsv (0, 100, 40)"
+	]
+}
