@@ -2,17 +2,17 @@
  * Copyright (C) 2017 Mario Cianciolo <mr.udda@gmail.com>
  *
  * This file is part of Multiload-ng.
- * 
+ *
  * Multiload-ng is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Multiload-ng is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with Multiload-ng.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -65,7 +65,7 @@ ml_execute_cmdline_full (const char *cmdline, const char *working_dir, bool asyn
 	 *   and propagating the priority is the intended behavior. For processes
 	 *   launched from other threads, the starting priority is tipically unchanged (0).
 	 *   Again, this is the intended behavior.
-	 * 
+	 *
 	 * - all grow buffers provided in arguments are rewinded at function start.
 	 *   gbuf_stdout and gbuf_stderr are filled only when proces is executed (this function
 	 *   returns true), while gbuf_report is filled only when the function fails, and
@@ -266,7 +266,7 @@ ml_execute_cmdline_full (const char *cmdline, const char *working_dir, bool asyn
 			} else {
 				fprintf (file_report, _("dup2(%s) failed: %s"), name, strerror(errno));
 				exit (1);
-			}			
+			}
 		}
 
 		void close_extra_fd () {

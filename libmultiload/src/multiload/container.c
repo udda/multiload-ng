@@ -2,17 +2,17 @@
  * Copyright (C) 2017 Mario Cianciolo <mr.udda@gmail.com>
  *
  * This file is part of Multiload-ng.
- * 
+ *
  * Multiload-ng is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Multiload-ng is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with Multiload-ng.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -103,7 +103,7 @@ _ml_multiload_container_add_element (MlMultiloadContainer *container, MlMultiloa
 	if_unlikely (container == NULL || size <= 0)
 		return -1;
 
-	if_unlikely (!_ml_multiload_container_check_index(container, index, true)) 
+	if_unlikely (!_ml_multiload_container_check_index(container, index, true))
 		return -1;
 
 	if_unlikely (type == ML_MULTILOAD_ELEMENT_TYPE_GRAPH && (graph == NULL || timer == NULL)) {
@@ -238,7 +238,7 @@ ml_multiload_container_new_from_json (cJSON *obj, const char *theme_name)
 		cJSON *obj_item = cJSON_GetArrayItem (obj_elements, i);
 		if_unlikely (obj_item == NULL)
 			continue;
-	
+
 		cJSON *obj_type = ml_cJSON_GetObjectItem (obj_item, "type");
 		if (obj_type == NULL)
 			continue;
@@ -807,7 +807,7 @@ ml_multiload_container_draw (MlMultiloadContainer *container)
 
 		if (e->type == ML_MULTILOAD_ELEMENT_TYPE_GRAPH) {
 			ml_graph_draw (e->graph);
-			
+
 			MlSurface *graph_surface = ml_graph_get_surface (e->graph);
 
 			if (!ml_multiload_timer_is_running (e->timer))

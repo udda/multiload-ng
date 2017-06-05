@@ -2,17 +2,17 @@
  * Copyright (C) 2017 Mario Cianciolo <mr.udda@gmail.com>
  *
  * This file is part of Multiload-ng.
- * 
+ *
  * Multiload-ng is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Multiload-ng is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with Multiload-ng.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -536,7 +536,7 @@ __attribute__(( __visibility__("default") ));
  *
  * \a newsize must be greater than zero. If the element is a graph, \a newsize
  * must be big enough to allow the graph to draw itself (taking in account eg. border size)
- * 
+ *
  * \see			multiload_element_get_size
  */
 bool
@@ -619,7 +619,7 @@ __attribute__(( __visibility__("default") ));
  * \return		a \c array of MultiloadGraphType
  * \retval		NULL if any error occours
  * \since		2.0
- * 
+ *
  * The array is terminated by a null element (with all bits set to zero).
  *
  * \note		The returned array is newly allocated. It must be freed after use.
@@ -664,7 +664,7 @@ __attribute__(( __visibility__("default"), __malloc__ ));
  * \return		ceiling value of graph element
  * \retval		0 if any error occours (or if ceiling is not set)
  * \since		2.0
- * 
+ *
  * Ceiling of a graph is the maximum value that will be drawn. If nonzero, instead
  * of calculating a max value from graph data, the max value is taken directly as
  * the ceiling.
@@ -685,7 +685,7 @@ __attribute__(( __visibility__("default") ));
  * \retval		true if operation succeeds
  * \retval		false if operation fails
  * \since		2.0
- * 
+ *
  * Ceiling of a graph is the maximum value that will be drawn. If nonzero, instead
  * of calculating a max value from graph data, the max value is taken directly as
  * the ceiling.
@@ -849,7 +849,7 @@ __attribute__(( __visibility__("default") ));
  * \retval		NULL if any error occours
  * \since		2.0
  * \note		The returned array is newly allocated. It must be freed after use.
- * 
+ *
  * The array is terminated by a null element (all bits are zero). The following
  * is a way to check the end of the array in a loop:
  *
@@ -1077,12 +1077,12 @@ __attribute__(( __visibility__("default") ));
  *
  * Choose the compression level to balance final size and compression speed.
  * Following zlib standards, compression level goes from 0 to 9.
- * 
+ *
  * - `0`: no compression
  * - `1`: fastest compression, larger file
  * - `6`: default compression
  * - `9`: best (slowest) compression, smallest file
- * 
+ *
  * \see multiload_write_to_png_file
  */
 uint8_t *
@@ -1100,15 +1100,15 @@ __attribute__(( __visibility__("default") ));
  *
  * This function takes the current graphical state of a Multiload, and exports
  * it into a PNG file, whose path is specified by \a filename.
- * 
+ *
  * Choose the compression level to balance final size and compression speed.
  * Following zlib standards, compression level goes from 0 to 9.
- * 
+ *
  * - `0`: no compression
  * - `1`: fastest compression, larger file
  * - `6`: default compression
  * - `9`: best (slowest) compression, smallest file
- * 
+ *
  * \see multiload_write_to_png_buffer
  */
 bool
@@ -1160,7 +1160,7 @@ __attribute__(( __visibility__("default") ));
  *
  * This function takes the complete current Multiload configuration, and dumps
  * it into a newly allocated JSON string.
- * 
+ *
  * The returned string can be used to create a new Multiload object with the
  * same elements, using multiload_new_from_json().
  *
@@ -1180,7 +1180,7 @@ __attribute__(( __visibility__("default"), __malloc__ ));
  *
  * This function takes the complete current Multiload configuration, and dumps
  * it to a file containing JSON data.
- * 
+ *
  * The created file can be used to create a new Multiload object with the
  * same elements, using multiload_new_from_json_file().
  *

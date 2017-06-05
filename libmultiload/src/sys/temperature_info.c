@@ -2,17 +2,17 @@
  * Copyright (C) 2017 Mario Cianciolo <mr.udda@gmail.com>
  *
  * This file is part of Multiload-ng.
- * 
+ *
  * Multiload-ng is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Multiload-ng is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with Multiload-ng.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -86,8 +86,8 @@ ml_temperature_info_new (const char *node_path, MlTemperatureInfoType type)
 			ti->id = ml_strdup_printf ("hwmon:%s/%u", buf_label, n);
 		else
 			ti->id = ml_strdup_printf ("hwmon:%s", node_path+17);
-		
-		
+
+
 		// current temp path is node_path
 		ti->current_temp_path = ml_strdup (node_path);
 
@@ -155,7 +155,7 @@ ml_temperature_info_update (MlTemperatureInfo *ti)
 {
 	if_unlikely (ti == NULL)
 		return false;
-	
+
 	return ml_infofile_read_double (ti->current_temp_path, &ti->current_temp, 1000.0);
 }
 

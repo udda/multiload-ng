@@ -268,4 +268,3 @@ The last thing to check is the license. If the interpreter is not a library
 (code to directly include into main tree), its license must be compatible
 with `libmultiload`'s *GPLv3*.  
 For example, Duktape JS engine is licensed under MIT (that is compatible with almost everything).
-

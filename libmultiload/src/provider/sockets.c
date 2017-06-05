@@ -2,17 +2,17 @@
  * Copyright (C) 2017 Mario Cianciolo <mr.udda@gmail.com>
  *
  * This file is part of Multiload-ng.
- * 
+ *
  * Multiload-ng is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Multiload-ng is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with Multiload-ng.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -37,7 +37,7 @@ const MlGraphTypeInterface ML_PROVIDER_SOCKETS_IFACE = {
 	.sizeof_fn		= ml_provider_sockets_sizeof,
 	.unpause_fn		= NULL,
 	.caption_fn		= ml_provider_sockets_caption,
-	
+
 	.helptext		= N_(
 		"Some distro disable IPv6 support. Selecting IPv6 in these systems will cause graph failure."
 	)
@@ -122,7 +122,7 @@ ml_provider_sockets_get (MlGraphContext *context)
 			if (ml_string_has_prefix(line, "TCP") || ml_string_has_prefix(line, "UDP")) {
 				if ((pch = strstr (line, "inuse")) == NULL)
 					continue;
-				
+
 				uint32_t sockets = (uint32_t)ml_ascii_strtoll (pch+6, &endptr, 0);
 				if (pch+6 == endptr) {
 					free (line);
