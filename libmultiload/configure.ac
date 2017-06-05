@@ -93,6 +93,6 @@ echo "  Build configuration"
 echo " ===================="
 echo " "
 echo " - Link Time Optimization      (--enable-lto)   :  $enable_lto"
-echo " - Debug-friendly build        (--enable-debug) :  $enable_lto"
+echo " - Debug-friendly build        (--enable-debug) :  $enable_debug"
 echo " "
 echo
