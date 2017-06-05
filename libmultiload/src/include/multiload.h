@@ -848,7 +848,8 @@ __attribute__(( __visibility__("default") ));
  * \return		a \c array of MultiloadConfigEntry
  * \retval		NULL if any error occours
  * \since		2.0
- * \note		The returned array is newly allocated. It must be freed after use.
+ * \note		The returned array is newly allocated, but its elements belong
+ *				to the library. Array (just the array) must be freed after use.
  *
  * The array is terminated by a null element (all bits are zero). The following
  * is a way to check the end of the array in a loop:
@@ -870,9 +871,34 @@ __attribute__(( __visibility__("default") ));
  * \note		This list changes only when adding or removing graph elements,
  *				otherwise its contents are remain constant. There is no need
  *				to repeatedly call this function to update the interface.
+ * \see			multiload_graph_list_config_entries_json
+ * \see			MultiloadConfigEntry
  */
 MultiloadConfigEntry *
 multiload_graph_list_config_entries (Multiload *ml, int index)
+__attribute__(( __visibility__("default") ));
+
+/**
+ * \brief		Get the list of all config entries of a graph element, in JSON format
+ * \param[in]	ml Multiload
+ * \param[in]	index position of graph element
+ * \return		a JSON string
+ * \retval		NULL if any error occours
+ * \since		2.0
+ * \note		The returned string is newly allocated. It must be freed after use.
+ *
+ * Format and fields of returned JSON data are pretty similar to those returned
+ * by multiload_graph_list_config_entries(). See \ref MultiloadConfigEntry for
+ * additional details.
+ *
+ * \note		This list changes only when adding or removing graph elements,
+ *				otherwise its contents are remain constant. There is no need
+ *				to repeatedly call this function to update the interface.
+ * \see			multiload_graph_list_config_entries
+ * \see			MultiloadConfigEntry
+ */
+char *
+multiload_graph_list_config_entries_json (Multiload *ml, int index)
 __attribute__(( __visibility__("default"), __malloc__ ));
 
 /// @}

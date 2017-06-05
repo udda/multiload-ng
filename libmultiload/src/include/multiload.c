@@ -738,6 +738,88 @@ multiload_graph_list_config_entries (Multiload *ml, int index)
 }
 
 char *
+multiload_graph_list_config_entries_json (Multiload *ml, int index)
+{
+	if_unlikely (ml == NULL)
+		return NULL;
+
+	MlGraph *g = ml_multiload_container_get_graph (ml->container, index);
+	if (g == NULL)
+		return NULL;
+
+	MlConfig *conf = ml_graph_get_ml_config (g);
+	if_unlikely (conf == NULL)
+		return NULL;
+
+	const char * const * keys = ml_config_list_keys (conf);
+	int len = ml_strv_length ((char**)keys);
+	if (len < 1) {
+		free ((void*)keys);
+		return NULL;
+	}
+
+	cJSON *obj = cJSON_CreateObject();
+
+	for (int i = 0; i < len; i++) {
+		cJSON *obj_item = cJSON_CreateObject();
+		cJSON_AddStringToObject (obj_item, "label",			ml_string_null_to_empty (ml_config_get_label (conf, keys[i])));
+		cJSON_AddStringToObject (obj_item, "description",	ml_string_null_to_empty (ml_config_get_description (conf, keys[i])));
+
+		int64_t n[2];
+		bool has_bounds = ml_config_get_entry_bounds (conf, keys[i], &n[0], &n[1]);
+
+		MlValueType type = ml_config_get_entry_type (conf, keys[i]);
+		switch (type) {
+			case ML_VALUE_TYPE_INT32:
+				cJSON_AddStringToObject (obj_item, "type", "i");
+				if (has_bounds) {
+					cJSON_AddNumberToObject (obj_item, "min", n[0]);
+					cJSON_AddNumberToObject (obj_item, "max", n[1]);
+				}
+				break;
+
+			case ML_VALUE_TYPE_INT64:
+				cJSON_AddStringToObject (obj_item, "type", "I");
+				if (has_bounds) {
+					cJSON_AddNumberToObject (obj_item, "min", n[0]);
+					cJSON_AddNumberToObject (obj_item, "max", n[1]);
+				}
+				break;
+
+			case ML_VALUE_TYPE_TRISTATE:
+				cJSON_AddStringToObject (obj_item, "type", "t");
+				break;
+
+			case ML_VALUE_TYPE_BOOLEAN:
+				cJSON_AddStringToObject (obj_item, "type", "b");
+				break;
+
+			case ML_VALUE_TYPE_STRING:
+				cJSON_AddStringToObject (obj_item, "type", "s");
+				break;
+
+			case ML_VALUE_TYPE_STRV:
+				cJSON_AddStringToObject (obj_item, "type", "l");
+				break;
+
+			default:
+				ml_error ("Unknown type for key '%s' (%d)", keys[i], (int)type);
+				cJSON_AddStringToObject (obj_item, "type", "?");
+				break;
+		}
+
+		cJSON_AddItemToObject (obj, keys[i], obj_item);
+	}
+
+	free ((void*)keys);
+
+	char *ret = cJSON_Print (obj);
+
+	cJSON_Delete (obj);
+	return ret;
+}
+
+char *
 multiload_graph_get_style_json (Multiload *ml, int index)
 {
 	if_unlikely (ml == NULL)
