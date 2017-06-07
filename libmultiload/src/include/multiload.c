@@ -146,6 +146,7 @@ multiload_new_from_json_file (const char *path)
 		return NULL;
 	}
 
+	ml_debug ("Loaded %zu byte of JSON data from '%s' (trimmed: %zu byte)", size, path, readlen);
 	Multiload *ml = multiload_new_from_json (buf);
 	free (buf);
 
