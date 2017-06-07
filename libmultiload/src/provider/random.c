@@ -63,6 +63,7 @@ ml_provider_random_init (MlConfig *config)
 		&s->seed,
 		_("Seed"),
 		_("Seed to use for initializing the random number generator. If <b>0</b>, a default seed will be used."),
+		// seed is actually 32 bit long, we are storing it as a int64 because it's unsigned
 		0, UINT32_MAX
 	);
 	ml_config_add_entry_with_bounds (config,
