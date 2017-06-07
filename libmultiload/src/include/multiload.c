@@ -140,7 +140,7 @@ multiload_new_from_json_file (const char *path)
 	char *buf = ml_new_n (char, size+1);
 	size_t readlen;
 
-	if (!ml_infofile_read_string_s (path, buf, size, &readlen)) {
+	if (!ml_infofile_read_string_s (path, buf, size+1, &readlen)) {
 		ml_error ("Cannot read JSON data from '%s'", path);
 		free (buf);
 		return NULL;
