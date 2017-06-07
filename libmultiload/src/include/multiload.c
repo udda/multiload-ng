@@ -1028,7 +1028,7 @@ multiload_to_json_file (Multiload *ml, const char *path)
 	fclose (f);
 
 	if (result == EOF) {
-		ml_warning ("Cannot write data to '%s': %s", path, strerror (errno));
+		ml_error ("Cannot write data to '%s': %s", path, strerror (errno));
 		return false;
 	}
 
