@@ -455,10 +455,8 @@ ml_config_parse_json (MlConfig *config, cJSON *obj)
 	do {
 		ml_debug ("Set config entry \"%s\" => \"%s\"", child->string, child->valuestring);
 
-		if (!ml_config_set (config, child->string, child->valuestring)) {
+		if (!ml_config_set (config, child->string, child->valuestring))
 			ml_warning ("Cannot set config entry \"%s\" => \"%s\"", child->string, child->valuestring);
-			continue;
-		}
 
 		child = child->next;
 	} while (child != NULL);
