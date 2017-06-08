@@ -200,7 +200,7 @@ gchar* get_system_monitor_executable()
 		"gnome-system-monitor",
 		"xfce4-taskmanager",
 		"lxtask",
-		"gnome-system-monitor",
+		"mate-system-monitor",
 		"procexp",
 		NULL
 	};
