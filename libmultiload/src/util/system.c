@@ -368,3 +368,22 @@ ml_execute_cmdline_async (const char *cmdline, const char *working_dir, int time
 {
 	return ml_execute_cmdline_full (cmdline, working_dir, true, timeout_ms, NULL, NULL, gbuf_report, NULL);
 }
+
+/*
+MlAssocArray *
+ml_list_available_graphical_system_monitors ()
+{
+	static struct {
+		const char *name;
+		const char *path;
+	} known_executables = {
+		{ "KSysGuard", "ksysguard" },
+		{ "GNOME System Monitor", "gnome-system-monitor" },
+		{ "MATE System Monitor", "mate-system-monitor" },
+		{ "XFCE Task Manager", "xfce4-taskmanager" },
+		{ "LxTask", "lxtask" },
+		{ "ProcExp", "procexp" },
+		{ NULL, NULL }
+	};
+}
+*/
