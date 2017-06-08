@@ -1023,8 +1023,13 @@ multiload_to_json_file (Multiload *ml, const char *path)
 		return false;
 	}
 
+	// write string to file
 	int result = fputs (json_str, f);
 	free (json_str);
+
+	// append terminating newline, without guarantees (do not throw an error on failure)
+	fputc ('\n', f);
+
 	fclose (f);
 
 	if (result == EOF) {
