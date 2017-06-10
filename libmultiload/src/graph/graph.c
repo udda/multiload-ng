@@ -431,8 +431,10 @@ ml_graph_get_ceiling (MlGraph *g)
 bool
 ml_graph_set_ceiling (MlGraph *g, uint32_t ceiling)
 {
-	if_unlikely (g == NULL || ceiling == 0)
+	if_unlikely (g == NULL)
 		return false;
+
+	// ceiling = 0 : auto
 
 	g->ceiling = ceiling;
 	return true;
