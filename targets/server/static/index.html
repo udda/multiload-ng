@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Multiload-ng</title>
+		<link rel="icon" href="favicon.png" type="image/png" />
+
+		<script type="text/javascript" src="static/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="static/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="static/jquery.mousewheel.js"></script>
+		<script type="text/javascript" src="static/multiload.js"></script>
+		<script type="text/javascript" src="static/multiload.ui.js"></script>
+		<script type="text/javascript" src="static/multiload.dialog.create.js"></script>
+		<script type="text/javascript" src="static/multiload.dialog.settings.js"></script>
+
+		<link rel="stylesheet" href="static/multiload.css" />
+		<link rel="stylesheet" href="static/jquery-ui.min.css" />
+		<link rel="stylesheet" href="static/jquery-ui.structure.min.css" />
+		<link rel="stylesheet" href="static/jquery-ui.theme.min.css" />
+	</head>
+	<body>
+
+		<div class="headerbar">
+			<div class="logo">
+				<img src="logo.png" alt="Multiload-ng" />
+				<div class="app-name">Multiload-ng</div>
+			</div>
+
+			<a href="#" id="settings-button" class="ml-localize">Settings</a>
+			<a href="#" id="create-button" class="ml-localize">Create</a>
+
+			<span class="separator"></span>
+
+			<a href="#" id="reload-button" class="ml-localize">Reload</a>
+			<a href="#" id="save-button" class="ml-localize">Save</a>
+			<a href="multiload.json" id="export-button" class="ml-localize">Export</a>
+
+			<span class="separator"></span>
+
+			<a href="#" id="about-button" class="ml-localize">About</a>
+		</div>
+
+		<div class="multiload">
+			<img id="multiload-image" src="multiload.png" alt="Multiload-ng" />
+			<div id="multiload-placeholder" class="ml-localize">Unable to contact server</div>
+		</div>
+
+		<div id="create-dialog" class="ml-dialog"></div>
+		<div id="settings-dialog" class="ml-dialog"></div>
+
+		<div class="bottom-notice">
+		Multiload-ng <span id="multiload-ng-version"></span> by <a href="mailto:mr.udda@gmail.com" title="Mario Cianciolo">Mario Cianciolo</a><br />
+		&copy; 2017 Mario Cianciolo (<a href="mailto:mr.udda@gmail.com" title="Mario Cianciolo">mr.udda@gmail.com</a>)
+		<div>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+
+				$('.ml-localize').each(function() {
+					var originalText = $(this).text();
+					$(this).text(Multiload.localizeText(originalText));
+				});
+
+				// top buttons
+				$('#settings-button').click(function() {
+					$('#settings-dialog').dialog("open");
+				});
+
+				$('#create-button').click(function() {
+					$('#create-dialog').dialog("open");
+				});
+
+				if (Multiload.hasFile()) {
+					$('#reload-button').click(function() {
+						Multiload.reloadFromFile();
+					});
+					$('#save-button').click(function() {
+						Multiload.saveToFile();
+					});
+				} else {
+					$('#reload-button').hide();
+					$('#save-button').hide();
+				}
+
+				// bottom panel
+				$('#multiload-ng-version').text(Multiload.libVersion);
+			});
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,318 @@
+{
+	"product":	"Multiload-ng",
+	"version":	"2.0.0",
+	"shared-config":	{
+		"console_colors":	"auto",
+		"procmon_enable":	"true"
+	},
+	"container":	{
+		"size":	30,
+		"padding":	2,
+		"orientation":	"horizontal",
+		"elements":	[{
+				"size":	50,
+				"type":	"graph",
+				"interval":	1000,
+				"graph":	{
+					"type":	"cpu",
+					"border":	3,
+					"ceiling":	0,
+					"config":	{
+						"cpu_index":	"0"
+					},
+					"style":	{
+						"background":	{
+							"start":	"#ff132026",
+							"end":	"#ff000000",
+							"direction":	"s"
+						},
+						"border-color":	"#ff005d7f",
+						"error-color":	"#ffff6666",
+						"data-colors":	["#ff066f96", "#ff46bae5", "#ffbfeeff", "#ff004a66"]
+					}
+				}
+			}, {
+				"size":	50,
+				"type":	"graph",
+				"interval":	1000,
+				"graph":	{
+					"type":	"ram",
+					"border":	3,
+					"ceiling":	0,
+					"config":	{
+						"procps_like":	"true"
+					},
+					"style":	{
+						"background":	{
+							"start":	"#ff13261c",
+							"end":	"#ff000000",
+							"direction":	"s"
+						},
+						"border-color":	"#ff007f41",
+						"error-color":	"#ffff6666",
+						"data-colors":	["#ff069650", "#ff46e598", "#ffbfffe0"]
+					}
+				}
+			}, {
+				"size":	10,
+				"type":	"separator"
+			}, {
+				"size":	50,
+				"type":	"graph",
+				"interval":	1000,
+				"graph":	{
+					"type":	"battery",
+					"border":	3,
+					"ceiling":	0,
+					"config":	{
+						"critical_level":	"4"
+					},
+					"style":	{
+						"background":	{
+							"start":	"#ff1b2613",
+							"end":	"#ff000000",
+							"direction":	"s"
+						},
+						"border-color":	"#ff377f00",
+						"error-color":	"#ffff6666",
+						"data-colors":	["#ff449606", "#ff8be546", "#ffdaffbf"]
+					}
+				}
+			}, {
+				"size":	10,
+				"type":	"separator"
+			}, {
+				"size":	50,
+				"type":	"graph",
+				"interval":	1000,
+				"graph":	{
+					"type":	"net",
+					"border":	3,
+					"ceiling":	0,
+					"config":	{
+						"count_in":	"true",
+						"count_out":	"true",
+						"count_local":	"true",
+						"use_packets":	"false",
+						"filter":	""
+					},
+					"style":	{
+						"background":	{
+							"start":	"#ff262313",
+							"end":	"#ff000000",
+							"direction":	"s"
+						},
+						"border-color":	"#ff7f7000",
+						"error-color":	"#ffff6666",
+						"data-colors":	["#ff968506", "#ffe5d246", "#fffff7bf"]
+					}
+				}
+			}, {
+				"size":	10,
+				"type":	"separator"
+			}, {
+				"size":	50,
+				"type":	"graph",
+				"interval":	1000,
+				"graph":	{
+					"type":	"diskio",
+					"border":	3,
+					"ceiling":	0,
+					"config":	{
+						"count_reads":	"true",
+						"count_writes":	"true",
+						"use_time":	"false",
+						"filter":	""
+					},
+					"style":	{
+						"background":	{
+							"start":	"#ff261c13",
+							"end":	"#ff000000",
+							"direction":	"s"
+						},
+						"border-color":	"#ff7f4100",
+						"error-color":	"#ffff6666",
+						"data-colors":	["#ff965006", "#ffe59846"]
+					}
+				}
+			}, {
+				"size":	10,
+				"type":	"separator"
+			}, {
+				"size":	50,
+				"type":	"graph",
+				"interval":	1000,
+				"graph":	{
+					"type":	"temperature",
+					"border":	3,
+					"ceiling":	0,
+					"config":	{
+						"average_mode":	"false",
+						"filter":	""
+					},
+					"style":	{
+						"background":	{
+							"start":	"#ff261322",
+							"end":	"#ff000000",
+							"direction":	"s"
+						},
+						"border-color":	"#ff7f0069",
+						"error-color":	"#ffff6666",
+						"data-colors":	["#ff96067d", "#ffe546ca"]
+					}
+				}
+			}, {
+				"size":	10,
+				"type":	"separator"
+			}, {
+				"size":	50,
+				"type":	"graph",
+				"interval":	1000,
+				"graph":	{
+					"type":	"storage",
+					"border":	3,
+					"ceiling":	0,
+					"config":	{
+						"use_inodes":	"false",
+						"count_root":	"false",
+						"filter":	""
+					},
+					"style":	{
+						"background":	{
+							"start":	"#ff131826",
+							"end":	"#ff000000",
+							"direction":	"s"
+						},
+						"border-color":	"#ff00217f",
+						"error-color":	"#ffff6666",
+						"data-colors":	["#ff062c96"]
+					}
+				}
+			}, {
+				"size":	10,
+				"type":	"separator"
+			}, {
+				"size":	50,
+				"type":	"graph",
+				"interval":	1000,
+				"graph":	{
+					"type":	"loadavg_full",
+					"border":	3,
+					"ceiling":	0,
+					"config":	{
+					},
+					"style":	{
+						"background":	{
+							"start":	"#ff261313",
+							"end":	"#ff000000",
+							"direction":	"s"
+						},
+						"border-color":	"#ff7f0000",
+						"error-color":	"#ffff6666",
+						"data-colors":	["#ff960606", "#ffe54646", "#ffffbfbf"]
+					}
+				}
+			}, {
+				"size":	10,
+				"type":	"separator"
+			}, {
+				"size":	50,
+				"type":	"graph",
+				"interval":	1200,
+				"graph":	{
+					"type":	"swap",
+					"border":	3,
+					"ceiling":	0,
+					"config":	{
+					},
+					"style":	{
+						"background":	{
+							"start":	"#ff1f1326",
+							"end":	"#ff000000",
+							"direction":	"s"
+						},
+						"border-color":	"#ff50007f",
+						"error-color":	"#ffff6666",
+						"data-colors":	["#ff610696"]
+					}
+				}
+			}, {
+				"size":	10,
+				"type":	"separator"
+			}, {
+				"size":	50,
+				"type":	"graph",
+				"interval":	1000,
+				"graph":	{
+					"type":	"threads",
+					"border":	3,
+					"ceiling":	0,
+					"config":	{
+					},
+					"style":	{
+						"background":	{
+							"start":	"#ff152613",
+							"end":	"#ff000000",
+							"direction":	"s"
+						},
+						"border-color":	"#ff0e7f00",
+						"error-color":	"#ffff6666",
+						"data-colors":	["#ff169606"]
+					}
+				}
+			}, {
+				"size":	10,
+				"type":	"separator"
+			}, {
+				"size":	50,
+				"type":	"graph",
+				"interval":	1000,
+				"graph":	{
+					"type":	"javascript",
+					"border":	3,
+					"ceiling":	0,
+					"config":	{
+						"js_code":	"multiloadPutData (2,1);",
+						"exec_timeout":	"500"
+					},
+					"style":	{
+						"background":	{
+							"start":	"#ff261813",
+							"end":	"#ff000000",
+							"direction":	"s"
+						},
+						"border-color":	"#ff7f2300",
+						"error-color":	"#ffff6666",
+						"data-colors":	["#ff962e06", "#ffe57346", "#ffffd1bf", "#ff661c00"]
+					}
+				}
+			}, {
+				"size":	10,
+				"type":	"separator"
+			}, {
+				"size":	50,
+				"type":	"graph",
+				"interval":	1000,
+				"graph":	{
+					"type":	"random",
+					"border":	3,
+					"ceiling":	0,
+					"config":	{
+						"seed":	"100809784280",
+						"min":	"0",
+						"max":	"100"
+					},
+					"style":	{
+						"background":	{
+							"start":	"#ff132625",
+							"end":	"#ff000000",
+							"direction":	"s"
+						},
+						"border-color":	"#ff007f7a",
+						"error-color":	"#ffff6666",
+						"data-colors":	["#ff069691"]
+					}
+				}
+			}]
+	}
+}

@@ -1,0 +1,257 @@
+/*
+ * Copyright (C) 2017 Mario Cianciolo <mr.udda@gmail.com>
+ *
+ * This file is part of Multiload-ng.
+ *
+ * Multiload-ng is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Multiload-ng is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Multiload-ng.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/* <editor-fold> General styling */
+body {
+	font-family: sans-serif;
+	margin: 0px;
+	padding: 0px;
+}
+
+label {
+	color: #666;
+	font-style: 0.6em;
+	padding-bottom: 10px;
+}
+
+.ml-hidden {
+	/* hide elements without actually hiding them - this is required in
+	 * some browsers in order to make buttons and file selectors work*/
+	position: fixed;
+	top: -1000px;
+}
+/* </editor-fold> */
+
+/* <editor-fold> jQuery UI fixes */
+.ui-selectmenu-open {
+	z-index:9999 !important;
+}
+.ui-tooltip {
+	max-width: 450px !important;
+}
+/* </editor-fold> */
+
+/* <editor-fold> Multiload */
+div.multiload {
+	text-align: center;
+}
+
+img#multiload-image {
+	border: 1px solid #F0F0F0;
+	padding: 10px;
+	border-radius: 4px;
+	display: none; /* jQuery will show this on successful server response */
+}
+
+#multiload-placeholder {
+	z-index: 10000 !important;
+	font-size: 2em;
+	color: #888;
+}
+/* </editor-fold> */
+
+/* <editor-fold> Header bar */
+div.headerbar, div.headerbar * {
+	height: 60px;
+	line-height: 60px;
+
+	background-color: #202020;
+	color: #DDD;
+
+	vertical-align: middle;
+}
+
+div.headerbar * {
+	display: inline-block;
+}
+
+div.headerbar {
+	width: 100%;
+	border-bottom: 2px solid #999;
+	margin-bottom: 80px;
+	white-space: nowrap;
+}
+
+div.headerbar .separator {
+	width: 50px;
+}
+
+div.headerbar a {
+	width: 120px;
+	text-decoration: none;
+	text-align: center;
+}
+
+div.headerbar a:hover {
+	background-color: #505050;
+}
+
+div.headerbar div.logo {
+	margin-left: 10px;
+	margin-right: 80px;
+}
+
+div.headerbar div.logo img {
+	vertical-align: middle;
+	width: 2em;
+	height: 2em;
+}
+
+div.headerbar div.logo div.app-name {
+	color: #AAA;
+	font-size: 2em;
+	cursor: default;
+}
+/* </editor-fold> */
+
+/* <editor-fold> Tooltip */
+div.multiload-tooltip * {
+	white-space: pre;
+}
+
+div.multiload-tooltip .leftPane {
+	float: left;
+}
+
+div.multiload-tooltip .rightPane {
+	float: right;
+}
+
+div.multiload-tooltip div.title {
+	font-size: 2em;
+	color: #44A;
+	padding-bottom: 6px;
+	margin-bottom: 6px;
+	border-bottom: 1px solid #DDE;
+}
+
+div.multiload-tooltip div.header {
+	font-size: 0.8em;
+	color: #666;
+}
+
+div.multiload-tooltip div.footer {
+	font-size: 0.8em;
+	color: #666;
+}
+
+div.multiload-tooltip div.body {
+	margin: 20px 0px;
+}
+
+div.multiload-tooltip table.table {
+	font-size: 0.8em;
+	border-top: 1px solid #DDE;
+	color: #666;
+	padding-top: 6px;
+	margin-top: 6px;
+	width: 100%;
+	font-family: monospace;
+}
+
+div.multiload-tooltip table.table td:last-child {
+	text-align: right;
+}
+/* </editor-fold> */
+
+/* <editor-fold> General dialogs*/
+.ml-dialog label {
+	display: block;
+	margin-top: 1em;
+	margin-bottom: 1px;
+}
+/* </editor-fold> */
+
+/* <editor-fold> "Create" dialog */
+#create-dialog #createGraphTypeDetails {
+    border: 1px solid #eee;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+#create-dialog #createGraphTypeDetails .description {
+}
+
+#create-dialog #createGraphTypeDetails .helptext {
+	font-size: 0.7em;
+	padding: 4px 1em 0;
+}
+/* </editor-fold> */
+
+/* <editor-fold> "Settings" dialog */
+#settings-dialog > * {
+	display: inline-block;
+}
+
+#settings-dialog #settingsElementConfig {
+	vertical-align: top;
+}
+
+#settings-dialog ul#settingsElements {
+	padding: 0px;
+	margin: 0px 20px 0px 0px;
+}
+
+#settings-dialog ul#settingsElements li {
+	list-style: none;
+	height: 20px;
+	line-height: 20px;
+	width: 100%;
+	vertical-align: middle;
+	background-color: #F9F9F9;
+	border: 1px solid #CCC;
+	margin: 4px 0;
+	padding: 2px;
+	box-shadow: #999 0px 1px 2px;
+	cursor: default;
+}
+
+#settings-dialog ul#settingsElements li.graph {
+	background-color: #F5F5F5;
+	color: #555;
+}
+
+#settings-dialog ul#settingsElements li.separator {
+	background-color: #DCDCDC;
+}
+
+#settings-dialog ul#settingsElements li .ml-button {
+	padding: 1px;
+	float: right;
+}
+/* </editor-fold> */
+
+/* <editor-fold> Bottom notice */
+div.bottom-notice {
+	background-color: #EEE;
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	width: 100%;
+	padding: 4px;
+	border-top: 1px solid #DDD;
+	text-align: right;
+	font-size: 0.8em;
+	color: #666;
+}
+
+div.bottom-notice a {
+	color: #666;
+}
+/* </editor-fold> */
