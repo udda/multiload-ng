@@ -120,7 +120,9 @@ Bitcoin is not managed by any government or central authority. Instead, it
 relies on an Internet-based network.  
 For more details, see Wikipedia’s [Bitcoin](http://en.wikipedia.org/wiki/Bitcoin) article.
 
-Bitcoin address: [17BU3bPadWhmMwVe1heCs77wAY5SCMZJw8](bitcoin:17BU3bPadWhmMwVe1heCs77wAY5SCMZJw8?label=Multiload-ng%20Donation)
+Bitcoin address: <a href="bitcoin:17BU3bPadWhmMwVe1heCs77wAY5SCMZJw8?label=Multiload-ng%20Donation">
+17BU3bPadWhmMwVe1heCs77wAY5SCMZJw8
+</a>
 
 Alternatively, you can scan this QR code with any Bitcoin app:
 
