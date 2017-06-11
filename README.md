@@ -5,21 +5,6 @@ This is the `2.x` branch of Multiload-ng.
 
 That's the next major release of popular graphical system monitor.
 
-### Donate
-
-Multiload-ng is a single-person work. I write some code almost daily.
-
-If you like Multiload-ng, and you want buy to me a coffee or a beer,
-here are the available options:
-
-- Donate via PayPal: [here](https://paypal.me/udda)
-- Donate via BitCoin: 17BU3bPadWhmMwVe1heCs77wAY5SCMZJw8
-
-Your donations will be really much appreciated. They will keep me motivated to
-continue development of Multiload-ng.
-
-Donor names will be listed here, unless they want to remain anonymous.
-
 ### Disclaimer
 
 Multiload-ng 2.x is still at early development stage.
@@ -108,9 +93,17 @@ in source code in order to avoid external dependencies when possible.
 
 The full list of libraries (and licenses) is available [here](libmultiload/third-party/README.md).
 
+## Donate
 
+Multiload-ng is a single-person work. I write some code almost daily.
 
-# TODO
-- README in ogni cartella (per ora: libmultiload, server) che spiega come compilare, installare ed eseguire
-- indicare che per compilare la lib serve GCC (per i targets questo
-requisito non c'è) e per eseguire serve linux >= 2.6.36
+If you like Multiload-ng, and you want buy to me a coffee or a beer,
+here are the available options:
+
+- Donate via PayPal: [here](https://paypal.me/udda)
+- Donate via BitCoin: 17BU3bPadWhmMwVe1heCs77wAY5SCMZJw8
+
+Your donations will be really much appreciated. They will keep me motivated to
+continue development of Multiload-ng.
+
+Donor names will be listed here, unless they want to remain anonymous.
