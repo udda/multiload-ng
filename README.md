@@ -120,9 +120,11 @@ Bitcoin is not managed by any government or central authority. Instead, it
 relies on an Internet-based network.  
 For more details, see Wikipedia’s [Bitcoin](http://en.wikipedia.org/wiki/Bitcoin) article.
 
-Bitcoin address: <a href="bitcoin:17BU3bPadWhmMwVe1heCs77wAY5SCMZJw8?label=Multiload-ng%20Donation">
-17BU3bPadWhmMwVe1heCs77wAY5SCMZJw8
-</a>
+Bitcoin address: **17BU3bPadWhmMwVe1heCs77wAY5SCMZJw8**
+
+Here is a direct donate link. GitHub does not allow `bitcoin:` URI scheme,
+so you'll have to copy and paste it into yout Bitcoin client:  
+**bitcoin:17BU3bPadWhmMwVe1heCs77wAY5SCMZJw8?label=Multiload-ng%20Donation**
 
 Alternatively, you can scan this QR code with any Bitcoin app:
 
