@@ -123,7 +123,7 @@ For more details, see Wikipedia’s [Bitcoin](http://en.wikipedia.org/wiki/Bitco
 Bitcoin address: **17BU3bPadWhmMwVe1heCs77wAY5SCMZJw8**
 
 Here is a direct donate link. GitHub does not allow `bitcoin:` URI scheme,
-so you'll have to copy and paste it into yout Bitcoin client:  
+so you'll have to copy and paste it into your Bitcoin client:  
 **bitcoin:17BU3bPadWhmMwVe1heCs77wAY5SCMZJw8?label=Multiload-ng%20Donation**
 
 Alternatively, you can scan this QR code with any Bitcoin app:
