@@ -35,7 +35,7 @@ either upon one auxiliary library, or directly upon core library.
 This is the proposed final design. Some elements do not exist at all (but
 thanks to the new modular structure, they could).
 
-![This image can be imported in draw.io](misc/structure_diagram.png)
+![This image can be imported in draw.io](misc/resources/structure-diagram.png)
 
 ## How to install
 
@@ -97,13 +97,31 @@ The full list of libraries (and licenses) is available [here](libmultiload/third
 
 Multiload-ng is a single-person work. I write some code almost daily.
 
-If you like Multiload-ng, and you want buy to me a coffee or a beer,
-here are the available options:
-
-- Donate via PayPal: [here](https://paypal.me/udda)
-- Donate via BitCoin: 17BU3bPadWhmMwVe1heCs77wAY5SCMZJw8
+If you like Multiload-ng, and you want support development, or just buy
+me a coffee or a beer, there are multiple options available.
 
 Your donations will be really much appreciated. They will keep me motivated to
 continue development of Multiload-ng.
 
-Donor names will be listed here, unless they want to remain anonymous.
+### PayPal
+
+Donate to Multiload-ng project with PayPal.
+Credit card donations are also accepted.
+
+Donate with PayPal [here](https://paypal.me/udda).
+
+### Bitcoin
+
+Donate to Multiload-ng project with Bitcoin.
+
+Bitcoin (BTC) is an online digital currency that is based on an open-source,
+peer-to-peer encryption protocol.  
+Bitcoin is not managed by any government or central authority. Instead, it
+relies on an Internet-based network.  
+For more details, see Wikipedia’s [Bitcoin](http://en.wikipedia.org/wiki/Bitcoin) article.
+
+Bitcoin address: [17BU3bPadWhmMwVe1heCs77wAY5SCMZJw8](bitcoin:17BU3bPadWhmMwVe1heCs77wAY5SCMZJw8?label=Multiload-ng%20Donation)
+
+Alternatively, you can scan this QR code with any Bitcoin app:
+
+![Bitcoin Multiload-ng QR code](misc/resources/bitcoin-qr.png)
