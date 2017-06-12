@@ -2,7 +2,7 @@ EXECUTABLE_NAME = multiload-ng-server
 
 all: $(EXECUTABLE_NAME)
 
-multiload-ng-httpd:		src/main.c \
+$(EXECUTABLE_NAME):		src/main.c \
 						src/core/log.c \
 						src/core/util.c \
 						src/http/command.c \
