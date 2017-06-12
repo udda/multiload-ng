@@ -5,7 +5,7 @@ This is the `2.x` branch of Multiload-ng.
 
 That's the next major release of popular graphical system monitor.
 
-### Disclaimer
+#### Disclaimer
 
 Multiload-ng 2.x is still at early development stage.
 At the moment it's meant for beta testers and enthusiasts only.
@@ -13,6 +13,15 @@ At the moment it's meant for beta testers and enthusiasts only.
 I repeat: **IT'S A BETA PRODUCT**. Please keep that in mind when you
 experience any problems. Don't use yet Multiload-ng 2.x in production
 environments.
+
+## Table of Contents
+- [Modular structure](#modular-structure)
+- [How to install](#how-to-install)
+- [Wanna help?](#wanna-help)
+- [Projects that use Multiload-ng](#projects-that-use-multiload-ng)
+- [Links](#links)
+- [Acknowledgements](#acknowledgements)
+- [Donate](#donate)
 
 ## Modular structure
 
