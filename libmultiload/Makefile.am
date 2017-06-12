@@ -42,12 +42,12 @@ libmultiload_la_LDFLAGS = \
 	-export-symbols-regex '^multiload_' \
 	-O 1
 
-if LTO
+if MULTILOAD_ENABLE_LTO
 libmultiload_la_CFLAGS += -flto
 libmultiload_la_LDFLAGS += -Wc,-flto
 endif
 
-if DEBUG
+if MULTILOAD_ENABLE_DEBUG
 #debug flags
 libmultiload_la_CFLAGS += -Og -ggdb3
 else
@@ -148,7 +148,7 @@ multiload_debug_collector_SOURCES = bin/multiload-debug-collector.c
 multiload_debug_collector_LDADD = -lmultiload
 multiload_debug_collector_CFLAGS = -O3 -Isrc/include
 
-if DEBUG
+if MULTILOAD_ENABLE_DEBUG
 #debug flags
 multiload_debug_collector_CFLAGS += -Og -ggdb3
 else

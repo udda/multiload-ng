@@ -64,11 +64,8 @@ AC_TYPE_SIZE_T
 
 
 # Build time options
-AC_ARG_ENABLE([lto], AS_HELP_STRING([--enable-lto], [enable Link Time Optimization (LTO), which (when supported) produces smaller and faster binaries]), [], [enable_lto="no"])
-AM_CONDITIONAL(LTO, test x"$enable_lto" = x"yes")
-
-AC_ARG_ENABLE([debug], AS_HELP_STRING([--enable-debug], [debug-friendly build]), [], [enable_debug="no"])
-AM_CONDITIONAL(DEBUG, test x"$enable_debug" = x"yes")
+MULTILOAD_ARG_DEBUG()
+MULTILOAD_ARG_LTO()
 
 
 # Libtool
@@ -105,7 +102,7 @@ echo " ===================="
 echo "  Build configuration"
 echo " ===================="
 echo " "
-echo " - Link Time Optimization      (--enable-lto)   :  $enable_lto"
-echo " - Debug-friendly build        (--enable-debug) :  $enable_debug"
+echo " - Link Time Optimization      (--enable-lto)   :  " MULTILOAD_ENABLE_LTO
+echo " - Debug-friendly build        (--enable-debug) :  " MULTILOAD_ENABLE_DEBUG
 echo " "
 echo
