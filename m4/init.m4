@@ -1,5 +1,3 @@
-#!/bin/sh
-
 # Copyright (C) 2017 Mario Cianciolo <mr.udda@gmail.com>
 #
 # This file is part of Multiload-ng.
@@ -18,13 +16,13 @@
 # along with Multiload-ng.  If not, see <http://www.gnu.org/licenses/>.
 
 
-set -x
-
-mkdir -p m4
-autopoint --force || exit 1
-aclocal || exit 1
-libtoolize --force --copy || exit 1
-autoheader --force || exit 1
-automake --force --add-missing || exit 1
-autoconf --force || exit 1
-#autoheader || exit 1
+# MULTILOAD_INIT(PACKAGE_NAME)
+# Initialize common variables for use in configure.ac
+AC_DEFUN([MULTILOAD_INIT],
+[
+	m4_define([MULTILOAD_PACKAGE],   [$1])
+	m4_define([MULTILOAD_VERSION],   [2.0.0])
+	m4_define([MULTILOAD_EMAIL],     [mr.udda@gmail.com])
+	m4_define([MULTILOAD_URL],       [https://github.com/udda/multiload-ng])
+	m4_define([MULTILOAD_COPYRIGHT], [Copyright © 2017 Mario Cianciolo])
+])
