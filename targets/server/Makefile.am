@@ -30,7 +30,7 @@ multiload_ng_server_CFLAGS = \
 	-Wall -Wextra \
 	-Wpedantic
 
-if DEBUG
+if MULTILOAD_ENABLE_DEBUG
 multiload_ng_server_CFLAGS += -Og -ggdb3
 else
 multiload_ng_server_CFLAGS += -O3 -g
