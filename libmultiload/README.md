@@ -10,12 +10,13 @@ You will need:
 - Autotools (`aclocal`, `autoconf`, `autoheader`, `automake`)
 - Gettext tools (namely `autopoint`, it's often located in `gettext-tools` package of your distro)
 - Libtool
-- GCC compiler
+- GCC compiler. Library might compile with other compilers too, but GCC
+  is the only one officially supported
 - A Linux distribution that's not too old (every system after 2010 is fine)
 - Optional: [Doxygen](http://www.stack.nl/~dimitri/doxygen/) to generate documentation
 
-Consult your distro documentation for detailed instructions to install
-the requirements.
+Consult your distro documentation for detailed instructions for getting
+all the requirements installed.
 
 ## Dependencies
 
