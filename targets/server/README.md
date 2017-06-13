@@ -26,7 +26,8 @@ Remember that Multiload-ng Server is still in beta.
 - Exhaustive logging to console
 - Port selection
 
-![Multiload-ng Server running on Google Chrome](screenshot.png)
+![Multiload-ng Server running on Google Chrome.](screenshot.png)
+<sup>Multiload-ng Server running on Google Chrome.</sup>
 
 ## Required dependencies
 
