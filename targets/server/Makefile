@@ -53,7 +53,7 @@ gdb:
 bt:
 	gdb -ex "set args --file test-config.json" -ex "run" -ex "bt full" ./$(EXECUTABLE_NAME)
 
-run: all
+test: all
 	./$(EXECUTABLE_NAME) --file "test-config.json"
 
 help: all
