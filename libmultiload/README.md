@@ -1,7 +1,7 @@
 # libmultiload: Multiload-ng core library
 
 This is a temporary README. You can get a better idea of how Multiload-ng
-works in top dicectory [README](../README.md).
+works in top directory [README](../README.md).
 
 ## Build requirements
 
