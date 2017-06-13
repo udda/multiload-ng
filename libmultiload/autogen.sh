@@ -18,13 +18,34 @@
 # along with Multiload-ng.  If not, see <http://www.gnu.org/licenses/>.
 
 
-set -x
+show_error_and_exit ()
+{
+	echo "Last command produced an error."
+	exit 1
+}
+
+
+echo "Preparing build tree..."
 
 mkdir -p m4
-autopoint --force || exit 1
-aclocal || exit 1
-libtoolize --force --copy || exit 1
-autoheader --force || exit 1
-automake --force --add-missing || exit 1
-autoconf --force || exit 1
-#autoheader || exit 1
+
+echo "Running autopoint   (gettext support)..."
+autopoint --force                        || show_error_and_exit
+
+echo "Running aclocal     (external M4 macro support)..."
+aclocal                                  || show_error_and_exit
+
+echo "Running libtoolize  (libtool support)..."
+libtoolize --force --copy --quiet        || show_error_and_exit
+
+echo "Running autoheader  (config.h template)..."
+autoheader --force                       || show_error_and_exit
+
+echo "Running automake    (Makefile template)..."
+automake --force --copy --add-missing    || show_error_and_exit
+
+echo "Running autoconf    (generate ./configure script)..."
+autoconf --force                         || show_error_and_exit
+
+
+echo "Autogen script succeeded. Build tree is ready."
