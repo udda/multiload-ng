@@ -3,24 +3,28 @@
 This is a temporary README. You can get a better idea of how Multiload-ng
 works in top dicectory [README](../README.md).
 
-## Requirements
+## Build requirements
 
-You will need:
+In order to build Multiload-ng, you will need:
 
 - Autotools (`aclocal`, `autoconf`, `autoheader`, `automake`)
 - Gettext tools (namely `autopoint`, it's often located in `gettext-tools` package of your distro)
 - Libtool
 - GCC compiler. Library might compile with other compilers too, but GCC
   is the only one officially supported
-- A Linux distribution that's not too old (every system after 2010 is fine)
 - Optional: [Doxygen](http://www.stack.nl/~dimitri/doxygen/) to generate documentation
 
 Consult your distro documentation for detailed instructions for getting
 all the requirements installed.
 
-## Dependencies
+## Dependencies, runtime requirements
 
-`libmultiload` has no external runtime dependencies.
+`libmultiload` has no external runtime dependencies. You don't have to
+install anything on target system.
+
+The only runtime requirement is a Linux kernel, with version starting from
+**2.6.36** (included).  
+Any system after 2010 is just fine.
 
 ## Package contents
 
