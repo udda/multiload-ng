@@ -229,12 +229,12 @@ generate_pkgbuild()
 	local replaces="$(get_replaces $target $gtk_str $git_suffix)"
 	local configure_opts="$(get_configure_string $target $gtk_str)"
 
-	local depends="$(get_depends $target $gtk_str)"
 	if [ "$target" != "common" ]; then
+		local depends="$(get_depends $target $gtk_str)"
 		if [ -n "$is_git" ]; then
-			depends+=" multiload-ng-common-git"
+			depends+=" 'multiload-ng-common-git'"
 		else
-			depends+=" multiload-ng-common"
+			depends+=" 'multiload-ng-common'"
 		fi
 	fi
 	
