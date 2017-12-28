@@ -63,6 +63,7 @@ get_pkgname()
 {
 	case "$1" in
 		awn)		echo 'awn-applet-multiload-ng' ;;
+    common) echo 'multiload-ng-common' ;;
 		indicator)	echo 'multiload-ng-indicator' ;;
 		lxpanel)	echo 'lxpanel-multiload-ng-plugin' ;;
 		mate)		echo 'mate-multiload-ng-applet' ;;
@@ -76,6 +77,7 @@ get_pkgdesc()
 {
 	case "$1" in
 		awn)		echo 'Modern graphical system monitor, Avant Window Navigator applet' ;;
+    common) echo 'Common files for multiload-ng, the modern graphical system monitor' ;;
 		indicator)	echo 'Modern graphical system monitor, AppIndicator plugin' ;;
 		lxpanel)	echo 'Modern graphical system monitor, LxPanel plugin' ;;
 		mate)		echo 'Modern graphical system monitor, MATE panel applet' ;;
@@ -91,6 +93,7 @@ get_depends()
 		printf -- "'gtk2>=2.20.0' 'cairo'"
 		case "$1" in
 			awn)		printf -- " 'avant-window-navigator>=0.3.9' 'glibmm>=2.16.0' 'gtkmm>=2.20'" ;;
+      common) return 0 ;;
 			indicator)	printf -- " 'libappindicator-gtk2>=0.4.92'" ;;
 			lxpanel)	printf -- " 'lxpanel>=0.5.8'" ;;
 			mate)		printf -- " 'mate-panel>=1.7.0'" ;;
@@ -174,7 +177,7 @@ generate_pkgbuild()
 				is_git=1 ;;
 			gtk2 | gtk3)
 				gtk_str="$arg" ;;
-			awn | indicator | lxpanel | mate | standalone | systray | xfce4)
+			awn | common | indicator | lxpanel | mate | standalone | systray | xfce4)
 				target="$arg" ;;
 		esac
 	done
@@ -204,6 +207,9 @@ generate_pkgbuild()
 		local pkg_basedir='multiload-ng'
 		# git version always increases, no need to increase pkgrel too
 		local pkgrel_str='1'
+    if [ $target != "common" ]; then
+      local depends="$(get_depends $target $gtk_str) 'multiload-ng-common-git'"
+    fi
 	else
 		local version_str="$pkgver"
 		local git_suffix=''
@@ -212,24 +218,39 @@ generate_pkgbuild()
 		local pkg_md5sum="$md5sums"
 		local pkg_basedir='multiload-ng-$pkgver'
 		local pkgrel_str="$pkgrel"
+    if [ $target != "common" ]; then
+      local depends="$(get_depends $target $gtk_str) 'multiload-ng-common'"
+    fi
 	fi
 
 	local _p="$(get_pkgname $target)"
-
-	local pkgname="${_p}-${gtk_str}${git_suffix}"
+  
+  if [ $target == "common" ]; then
+  	local pkgname="${_p}${git_suffix}"
+  else
+  	local pkgname="${_p}-${gtk_str}${git_suffix}"
+  fi
 	local pkgdesc="$(get_pkgdesc $target)"
-	local depends="$(get_depends $target $gtk_str)"
 	local replaces="$(get_replaces $target $gtk_str $git_suffix)"
 	local configure_opts="$(get_configure_string $target $gtk_str)"
 
 	# conflicts
 	local conflicts=''
-	for i in "${_p}-gtk2" "${_p}-gtk3" "${_p}-gtk2-git" "${_p}-gtk3-git"; do
-		if [ ! "${pkgname}" = "$i" ]; then
-			# appending with echo eliminates extra whitespaces
-			conflicts=`echo ${conflicts} "'${i}'"`
-		fi
-	done
+  if [ $target != "common" ]; then
+    for i in "${_p}-gtk2" "${_p}-gtk3" "${_p}-gtk2-git" "${_p}-gtk3-git"; do
+      if [ ! "${pkgname}" = "$i" ]; then
+        # appending with echo eliminates extra whitespaces
+        conflicts=`echo ${conflicts} "'${i}'"`
+      fi
+    done
+  else
+    for i in "${_p}" "${_p}-git"; do
+      if [ ! "${pkgname}" = "$i" ]; then
+        # appending with echo eliminates extra whitespaces
+        conflicts=`echo ${conflicts} "'${i}'"`
+      fi
+    done    
+  fi
 
 	# output
 	printf -- "Package:  %-13s  $gtk_str  version: %-21s\n" "$target" "$version_str" >&2
@@ -273,11 +294,25 @@ generate_pkgbuild()
 		    make
 		} 
 
-		package() {
+	EOF
+
+	if [ $target == "common" ]; then 
+		cat >>"${outdir}/PKGBUILD" <<-EOF
+			package() {
 		    cd "${pkg_basedir}"
 		    make DESTDIR="\$pkgdir" install
-		}
+			}
+		
 	EOF
+	else
+		cat >>"${outdir}/PKGBUILD" <<-EOF
+			package() {
+		    cd "${pkg_basedir}"
+		    make DESTDIR="\$pkgdir" install
+		    rm -r "\$pkgdir/usr/share/locale"
+			}
+		EOF
+	fi
 
 	[ -n "$is_git" ] &&	cat >>"${outdir}/PKGBUILD" <<-EOF
 
@@ -418,7 +453,8 @@ if [ "$#" = "3" ]; then
 	fi
 
 	generate_pkgbuild $1 $2 $3
-
+  generate_pkgbuild gtk2 common $3
+  
 else
 
 	echo "No PKGSPEC provided, generating all PKGBUILDs." >&2
@@ -429,5 +465,8 @@ else
 			generate_pkgbuild ${gtk} ${target} git
 		done
 	done
+  
+  generate_pkgbuild gtk2 common
+  generate_pkgbuild gtk2 common git
 
 fi
