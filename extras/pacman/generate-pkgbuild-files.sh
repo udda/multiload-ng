@@ -20,7 +20,7 @@
 #
 
 pkgver=$(cat ../../version)
-pkgrel=2
+pkgrel=3
 md5sums="NONE"
 
 value_in_array()
@@ -96,7 +96,7 @@ get_depends()
 			common)		return 0 ;;
 			indicator)	printf -- " 'libappindicator-gtk2>=0.4.92'" ;;
 			lxpanel)	printf -- " 'lxpanel>=0.5.8'" ;;
-			mate)		printf -- " 'mate-panel>=1.7.0'" ;;
+			mate)		printf -- " 'mate-panel-gtk2>=1.7.0'" ;;
 			standalone)	return 0 ;;
 			systray)	return 0 ;;
 			xfce4)		printf -- " 'libxfce4util>=4.6.0' 'xfce4-panel>=4.6.0'" ;;
@@ -107,7 +107,7 @@ get_depends()
 			awn)		return 1 ;;
 			indicator)	printf -- " 'libappindicator-gtk3>=0.4.92'" ;;
 			lxpanel)	printf -- " 'lxpanel-gtk3>=0.5.8'" ;;
-			mate)		printf -- " 'mate-panel-gtk3>=1.7.0'" ;;
+			mate)		printf -- " 'mate-panel>=1.7.0'" ;;
 			standalone)	return 0 ;;
 			systray)	return 0 ;;
 			xfce4)		printf -- " 'libxfce4util>=4.12.0' 'xfce4-panel>=4.12.0'" ;;
