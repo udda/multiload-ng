@@ -381,6 +381,14 @@ multiload_graph_temp_get_data (int Maximum, int data[2], LoadGraph *g, Temperatu
 
 
 void
+multiload_graph_temp_inline_output (LoadGraph *g, TemperatureData *xd)
+{
+	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%.01f", xd->value);
+	g->output_str[1][0] = '\0';
+}
+
+
+void
 multiload_graph_temp_cmdline_output (LoadGraph *g, TemperatureData *xd)
 {
 	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%.03f", xd->value);

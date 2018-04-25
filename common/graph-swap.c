@@ -59,6 +59,15 @@ multiload_graph_swap_get_data (int Maximum, int data [1], LoadGraph *g, SwapData
 
 
 void
+multiload_graph_swap_inline_output (LoadGraph *g, SwapData *xd)
+{
+	gchar *swap_used = format_size_for_display_short(xd->used, g->multiload->size_format_iec);
+	g_strlcpy(g->output_str[0], swap_used, sizeof(g->output_str[0]));
+	g_free(swap_used);
+}
+
+
+void
 multiload_graph_swap_cmdline_output (LoadGraph *g, SwapData *xd)
 {
 	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%"G_GUINT64_FORMAT, xd->used);

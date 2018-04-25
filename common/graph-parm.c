@@ -113,6 +113,15 @@ multiload_graph_parm_get_data (int Maximum, int data[4], LoadGraph *g, Parametri
 
 
 void
+multiload_graph_parm_inline_output (LoadGraph *g, ParametricData *xd)
+{
+	guint i;
+	for (i=0; i<2; i++)
+		g_snprintf(g->output_str[i], sizeof(g->output_str[i]), "%lf", xd->result[i]);
+}
+
+
+void
 multiload_graph_parm_cmdline_output (LoadGraph *g, ParametricData *xd)
 {
 	guint i;

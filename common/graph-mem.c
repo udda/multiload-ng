@@ -78,6 +78,15 @@ multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryDat
 
 
 void
+multiload_graph_mem_inline_output (LoadGraph *g, MemoryData *xd)
+{
+	gchar *mem_free = format_size_for_display_short(xd->total - xd->user, g->multiload->size_format_iec);
+	g_strlcpy(g->output_str[0], mem_free, sizeof(g->output_str[0]));
+	g->output_str[1][0] = '\0';
+	g_free(mem_free);
+}
+
+void
 multiload_graph_mem_cmdline_output (LoadGraph *g, MemoryData *xd)
 {
 	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%"G_GUINT64_FORMAT, xd->user);

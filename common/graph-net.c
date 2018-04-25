@@ -272,6 +272,24 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 
 
 void
+multiload_graph_net_inline_output (LoadGraph *g, NetData *xd)
+{
+	gchar *net_read = format_size_for_display_short(xd->in_speed, g->multiload->size_format_iec);
+	gchar *net_write = format_size_for_display_short(xd->out_speed, g->multiload->size_format_iec);
+	g_strlcpy(g->output_str[0], net_read, sizeof(g->output_str[0]));
+	g_strlcpy(g->output_str[1], net_write, sizeof(g->output_str[1]));
+	g_free(net_read);
+	g_free(net_write);
+	if (strcmp(g->output_str[0], "0b") == 0) {
+		g->output_str[0][1] = 'd';
+	}
+	if (strcmp(g->output_str[1], "0b") == 0) {
+		g->output_str[1][1] = 'u';
+	}
+}
+
+
+void
 multiload_graph_net_cmdline_output (LoadGraph *g, NetData *xd)
 {
 	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%"G_GUINT64_FORMAT, xd->in_speed);

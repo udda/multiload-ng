@@ -113,6 +113,14 @@ multiload_graph_cpu_get_data (int Maximum, int data [4], LoadGraph *g, CpuData *
 
 
 void
+multiload_graph_cpu_inline_output (LoadGraph *g, CpuData *xd)
+{
+	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%.01f%%", xd->total_use);
+	g->output_str[1][0] = '\0';
+}
+
+
+void
 multiload_graph_cpu_cmdline_output (LoadGraph *g, CpuData *xd)
 {
 	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%.03f", xd->user);

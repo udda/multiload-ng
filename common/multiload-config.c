@@ -46,6 +46,7 @@ void multiload_config_init()
 			(GraphGetDataFunc)			multiload_graph_cpu_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_cpu_tooltip_update,
 			(GraphCmdlineOutputFunc)	multiload_graph_cpu_cmdline_output,
+			(GraphInlineOutputFunc)		multiload_graph_cpu_inline_output,
 			(GraphGetFilterFunc)		NULL
 		},
 		{	"mem",	_("Memory"),		6,	-1,		-1,		"byte",
@@ -53,6 +54,7 @@ void multiload_config_init()
 			(GraphGetDataFunc)			multiload_graph_mem_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_mem_tooltip_update,
 			(GraphCmdlineOutputFunc)	multiload_graph_mem_cmdline_output,
+			(GraphInlineOutputFunc)		multiload_graph_mem_inline_output,
 			(GraphGetFilterFunc)		NULL
 		},
 		{	"net",	_("Network"),		6,	-1,		500,	"Bps",
@@ -60,6 +62,7 @@ void multiload_config_init()
 			(GraphGetDataFunc)			multiload_graph_net_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_net_tooltip_update,
 			(GraphCmdlineOutputFunc)	multiload_graph_net_cmdline_output,
+			(GraphInlineOutputFunc)		multiload_graph_net_inline_output,
 			(GraphGetFilterFunc)		multiload_graph_net_get_filter
 		},
 		{	"swap",	_("Swap"),			4,	-1,		-1,		"byte",
@@ -67,6 +70,7 @@ void multiload_config_init()
 			(GraphGetDataFunc)			multiload_graph_swap_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_swap_tooltip_update,
 			(GraphCmdlineOutputFunc)	multiload_graph_swap_cmdline_output,
+			(GraphInlineOutputFunc)		multiload_graph_swap_inline_output,
 			(GraphGetFilterFunc)		NULL
 		},
 		{	"load",	_("Load average"),	4,	8,		3,		"",
@@ -74,6 +78,7 @@ void multiload_config_init()
 			(GraphGetDataFunc)			multiload_graph_load_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_load_tooltip_update,
 			(GraphCmdlineOutputFunc)	multiload_graph_load_cmdline_output,
+			(GraphInlineOutputFunc)		multiload_graph_load_inline_output,
 			(GraphGetFilterFunc)		NULL
 		},
 		{	"disk",	_("Disk"),			5,	-1,		500,	"Bps",
@@ -81,6 +86,7 @@ void multiload_config_init()
 			(GraphGetDataFunc)			multiload_graph_disk_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_disk_tooltip_update,
 			(GraphCmdlineOutputFunc)	multiload_graph_disk_cmdline_output,
+			(GraphInlineOutputFunc)		multiload_graph_disk_inline_output,
 			(GraphGetFilterFunc)		multiload_graph_disk_get_filter
 		},
 		{	"temp",	_("Temperature"),	5,	120,	60,		"°C",
@@ -88,6 +94,7 @@ void multiload_config_init()
 			(GraphGetDataFunc)			multiload_graph_temp_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_temp_tooltip_update,
 			(GraphCmdlineOutputFunc)	multiload_graph_temp_cmdline_output,
+			(GraphInlineOutputFunc)		multiload_graph_temp_inline_output,
 			(GraphGetFilterFunc)		multiload_graph_temp_get_filter
 		},
 		{	"bat",	_("Battery"),		6,	-1,		-1,		"%",
@@ -95,6 +102,7 @@ void multiload_config_init()
 			(GraphGetDataFunc)			multiload_graph_bat_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_bat_tooltip_update,
 			(GraphCmdlineOutputFunc)	multiload_graph_bat_cmdline_output,
+			(GraphInlineOutputFunc)		multiload_graph_bat_inline_output,
 			(GraphGetFilterFunc)		NULL
 		},
 		{	"parm",	_("Parametric"),	7,	-1,		-1,		"",
@@ -102,6 +110,7 @@ void multiload_config_init()
 			(GraphGetDataFunc)			multiload_graph_parm_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_parm_tooltip_update,
 			(GraphCmdlineOutputFunc)	multiload_graph_parm_cmdline_output,
+			(GraphInlineOutputFunc)		multiload_graph_parm_inline_output,
 			(GraphGetFilterFunc)		NULL
 		}
 	};

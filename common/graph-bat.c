@@ -235,6 +235,13 @@ multiload_graph_bat_get_data (int Maximum, int data [3], LoadGraph *g, BatteryDa
 
 
 void
+multiload_graph_bat_inline_output (LoadGraph *g, BatteryData *xd)
+{
+	multiload_graph_bat_cmdline_output (g, xd);
+}
+
+
+void
 multiload_graph_bat_cmdline_output (LoadGraph *g, BatteryData *xd)
 {
 	bat_info *battery = B(xd);

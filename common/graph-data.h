@@ -119,12 +119,16 @@ multiload_graph_cpu_init (LoadGraph *g, CpuData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_cpu_get_data (int Maximum, int data [5], LoadGraph *g, CpuData *xd, gboolean first_call);
 G_GNUC_INTERNAL void
+multiload_graph_cpu_inline_output (LoadGraph *g, CpuData *xd);
+G_GNUC_INTERNAL void
 multiload_graph_cpu_cmdline_output (LoadGraph *g, CpuData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_cpu_tooltip_update (char *buf_title, size_t len_title, char *buf_text, size_t len_text, LoadGraph *g, CpuData *xd, gint style);
 
 G_GNUC_INTERNAL void
 multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryData *xd, gboolean first_call);
+G_GNUC_INTERNAL void
+multiload_graph_mem_inline_output (LoadGraph *g, MemoryData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_mem_cmdline_output (LoadGraph *g, MemoryData *xd);
 G_GNUC_INTERNAL void
@@ -137,12 +141,16 @@ multiload_graph_net_get_filter (LoadGraph *g, NetData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_net_get_data (int Maximum, int data [4], LoadGraph *g, NetData *xd, gboolean first_call);
 G_GNUC_INTERNAL void
+multiload_graph_net_inline_output (LoadGraph *g, NetData *xd);
+G_GNUC_INTERNAL void
 multiload_graph_net_cmdline_output (LoadGraph *g, NetData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_net_tooltip_update (char *buf_title, size_t len_title, char *buf_text, size_t len_text, LoadGraph *g, NetData *xd, gint style);
 
 G_GNUC_INTERNAL void
 multiload_graph_swap_get_data (int Maximum, int data [2], LoadGraph *g, SwapData *xd, gboolean first_call);
+G_GNUC_INTERNAL void
+multiload_graph_swap_inline_output (LoadGraph *g, SwapData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_swap_cmdline_output (LoadGraph *g, SwapData *xd);
 G_GNUC_INTERNAL void
@@ -152,6 +160,8 @@ G_GNUC_INTERNAL void
 multiload_graph_load_init (LoadGraph *g, LoadData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_load_get_data (int Maximum, int data [2], LoadGraph *g, LoadData *xd, gboolean first_call);
+G_GNUC_INTERNAL void
+multiload_graph_load_inline_output (LoadGraph *g, LoadData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_load_cmdline_output (LoadGraph *g, LoadData *xd);
 G_GNUC_INTERNAL void
@@ -164,6 +174,8 @@ multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_disk_get_data (int Maximum, int data [3], LoadGraph *g, DiskData *xd, gboolean first_call);
 G_GNUC_INTERNAL void
+multiload_graph_disk_inline_output (LoadGraph *g, DiskData *xd);
+G_GNUC_INTERNAL void
 multiload_graph_disk_cmdline_output (LoadGraph *g, DiskData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_disk_tooltip_update (char *buf_title, size_t len_title, char *buf_text, size_t len_text, LoadGraph *g, DiskData *xd, gint style);
@@ -175,6 +187,8 @@ multiload_graph_temp_get_filter (LoadGraph *g, TemperatureData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_temp_get_data (int Maximum, int data [2], LoadGraph *g, TemperatureData *xd, gboolean first_call);
 G_GNUC_INTERNAL void
+multiload_graph_temp_inline_output (LoadGraph *g, TemperatureData *xd);
+G_GNUC_INTERNAL void
 multiload_graph_temp_cmdline_output (LoadGraph *g, TemperatureData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_temp_tooltip_update (char *buf_title, size_t len_title, char *buf_text, size_t len_text, LoadGraph *g, TemperatureData *xd, gint style);
@@ -184,12 +198,16 @@ multiload_graph_bat_init (LoadGraph *g, BatteryData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_bat_get_data (int Maximum, int data [3], LoadGraph *g, BatteryData *xd, gboolean first_call);
 G_GNUC_INTERNAL void
+multiload_graph_bat_inline_output (LoadGraph *g, BatteryData *xd);
+G_GNUC_INTERNAL void
 multiload_graph_bat_cmdline_output (LoadGraph *g, BatteryData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_bat_tooltip_update (char *buf_title, size_t len_title, char *buf_text, size_t len_text, LoadGraph *g, BatteryData *xd, gint style);
 
 G_GNUC_INTERNAL void
 multiload_graph_parm_get_data (int Maximum, int data[4], LoadGraph *g, ParametricData *xd, gboolean first_call);
+G_GNUC_INTERNAL void
+multiload_graph_parm_inline_output (LoadGraph *g, ParametricData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_parm_cmdline_output (LoadGraph *g, ParametricData *xd);
 G_GNUC_INTERNAL void

@@ -94,6 +94,30 @@ format_size_for_display(guint64 size, gboolean iec_units)
 }
 
 gchar*
+format_size_for_display_short(guint64 rate, gboolean iec_units)
+{
+	// Transform e.g. "2.1 MB" into shorter "2.1M"
+	gchar *bytes = format_size_for_display(rate, iec_units);
+	gchar *ret = g_strdup(bytes);
+	guint i;
+	guint j=0;
+	for (i=0; bytes[i] != '\0'; i++) {
+		if (bytes[i] == ' ') {
+			if (bytes[i+1] != '\0') { // should always be the case
+				ret[j++] = bytes[i+1];
+			}
+			ret[j++] = '\0';
+			break;
+		} else {
+			ret[j++] = bytes[i];
+		}
+	}
+
+	g_free(bytes);
+	return ret;
+}
+
+gchar*
 format_rate_for_display(guint64 rate, gboolean iec_units)
 {
 	gchar *bytes = format_size_for_display(rate, iec_units);

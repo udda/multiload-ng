@@ -230,6 +230,24 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 
 
 void
+multiload_graph_disk_inline_output (LoadGraph *g, DiskData *xd)
+{
+	gchar *disk_read = format_size_for_display_short(xd->read_speed, g->multiload->size_format_iec);
+	gchar *disk_write = format_size_for_display_short(xd->write_speed, g->multiload->size_format_iec);
+	g_strlcpy(g->output_str[0], disk_read, sizeof(g->output_str[0]));
+	g_strlcpy(g->output_str[1], disk_write, sizeof(g->output_str[1]));
+	g_free(disk_read);
+	g_free(disk_write);
+	if (strcmp(g->output_str[0], "0b") == 0) {
+		g->output_str[0][1] = 'r';
+	}
+	if (strcmp(g->output_str[1], "0b") == 0) {
+		g->output_str[1][1] = 'w';
+	}
+}
+
+
+void
 multiload_graph_disk_cmdline_output (LoadGraph *g, DiskData *xd)
 {
 	g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%"G_GUINT64_FORMAT, xd->read_speed);

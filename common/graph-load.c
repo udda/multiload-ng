@@ -76,6 +76,13 @@ multiload_graph_load_get_data (int Maximum, int data [1], LoadGraph *g, LoadData
 }
 
 void
+multiload_graph_load_inline_output (LoadGraph *g, LoadData *xd)
+{
+	g_snprintf(g->output_str[LOADAVG_1], sizeof(g->output_str[LOADAVG_1]), "%.01f", xd->loadavg[LOADAVG_1]);
+	g_snprintf(g->output_str[LOADAVG_5], sizeof(g->output_str[LOADAVG_5]), "%.01f", xd->loadavg[LOADAVG_5]);
+}
+
+void
 multiload_graph_load_cmdline_output (LoadGraph *g, LoadData *xd)
 {
 	g_snprintf(g->output_str[LOADAVG_1], sizeof(g->output_str[LOADAVG_1]), "%.02f", xd->loadavg[LOADAVG_1]);
