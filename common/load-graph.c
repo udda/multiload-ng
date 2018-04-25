@@ -188,7 +188,7 @@ load_graph_draw (LoadGraph *g)
 		}
 
 		graph_types[g->id].inline_output(g, g->multiload->extra_data[g->id]);
-		cairo_set_source_rgb (cr, 0, 0, 0);
+		cairo_set_source_rgba (cr, 0, 0, 0, 0.7);
 		cairo_select_font_face (cr, "Sans", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
 		cairo_set_font_size (cr, 20);
 		cairo_move_to (cr, 2, 18);
