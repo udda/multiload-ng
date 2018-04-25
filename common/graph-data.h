@@ -157,6 +157,8 @@ multiload_graph_load_cmdline_output (LoadGraph *g, LoadData *xd);
 G_GNUC_INTERNAL void
 multiload_graph_load_tooltip_update (char *buf_title, size_t len_title, char *buf_text, size_t len_text, LoadGraph *g, LoadData *xd, gint style);
 
+G_GNUC_INTERNAL gboolean
+multiload_graph_disk_device_is_partition (char *device, char *prefix, size_t sizeof_prefix);
 G_GNUC_INTERNAL MultiloadFilter *
 multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd);
 G_GNUC_INTERNAL void
