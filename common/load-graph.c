@@ -122,7 +122,7 @@ load_graph_draw (LoadGraph *g)
 
 	cr = cairo_create (g->surface);
 	cairo_set_antialias(cr, CAIRO_ANTIALIAS_NONE);
-	cairo_set_line_width (cr, 1.0);
+	cairo_set_line_width (cr, 2.0);
 	cairo_set_line_cap (cr, CAIRO_LINE_CAP_SQUARE);
 
 	c_top = multiload_colors_get_extra_index(g->id, EXTRA_COLOR_BACKGROUND_TOP);
@@ -162,11 +162,11 @@ load_graph_draw (LoadGraph *g)
 
 		for (j = 0; j < multiload_config_get_num_data(g->id); j++) {
 			cairo_set_source_rgba_from_config(cr, g->config, j);
-			for (i = 0; i < W; i++) {
+			for (i = 0; i < W / 2; i++) {
 				if (g->data[i][j] == 0)
 					continue;
 
-				line_x = x + W - i - 0.5;
+				line_x = x + W - i*2 - 0.5;
 				line_y = y + g->pos[i] - 0.5;
 				line_y_dest = line_y - g->data[i][j] + 1;
 
