@@ -1,10 +1,12 @@
 *~
+*.deb
 *.gmo
 *.la
 *.lo
 *.o
 *.swp
 *.tar.*
+*.tgz
 .deps
 .libs
 ChangeLog
@@ -26,6 +28,8 @@ common/about-data.c
 common/binary-data.c
 common/color-scheme-icons.inc
 data/generate-about-data.sh
+description-pak
+doc-pak
 extras/pacman/*.PKGBUILD
 indicator/multiload-ng-indicator
 indicator/*.desktop
