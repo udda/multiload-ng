@@ -108,6 +108,11 @@ format_size_for_display_short(guint64 rate, gboolean iec_units)
 			}
 			ret[j++] = '\0';
 			break;
+		} else if (i >= 3 && bytes[i] == '.' && isdigit(bytes[i+1])) {
+			// Strip decimals from "123.4" (three or more leading digits)
+			// Not worrying about rounding up for now, as this requires parsing
+			// the number to correctly handle all cases (e.g. "999.5").
+			i++;
 		} else {
 			ret[j++] = bytes[i];
 		}
