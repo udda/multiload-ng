@@ -69,6 +69,7 @@ multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryDat
 	xd->user = kb_main_used * 1024;
 	xd->buffers = kb_main_buffers * 1024;
 	xd->cache = kb_main_cached * 1024;
+	xd->free = kb_main_free * 1024;
 	xd->total = kb_main_total * 1024;
 
 	data [0] = rint (Maximum * (float)kb_main_used   / (float)kb_main_total);
@@ -80,10 +81,12 @@ multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryDat
 void
 multiload_graph_mem_inline_output (LoadGraph *g, MemoryData *xd)
 {
-	gchar *mem_free = format_size_for_display_short(xd->total - xd->user, g->multiload->size_format_iec);
+	gchar *mem_free = format_size_for_display_short(xd->free, g->multiload->size_format_iec);
+	gchar *mem_available = format_size_for_display_short(xd->total - xd->user, g->multiload->size_format_iec);
 	g_strlcpy(g->output_str[0], mem_free, sizeof(g->output_str[0]));
-	g->output_str[1][0] = '\0';
+	g_strlcpy(g->output_str[1], mem_available, sizeof(g->output_str[0]));
 	g_free(mem_free);
+	g_free(mem_available);
 }
 
 void

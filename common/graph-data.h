@@ -50,6 +50,7 @@ typedef struct _MemoryData {
 	guint64 user;
 	guint64 buffers;
 	guint64 cache;
+	guint64 free;
 	guint64 total;
 
 	gboolean procps_compliant;
