@@ -237,7 +237,34 @@ multiload_graph_bat_get_data (int Maximum, int data [3], LoadGraph *g, BatteryDa
 void
 multiload_graph_bat_inline_output (LoadGraph *g, BatteryData *xd)
 {
-	multiload_graph_bat_cmdline_output (g, xd);
+	bat_info *battery = B(xd);
+
+	if (battery == NULL)
+		return;
+
+	if (battery->percentage == 100.0f) {
+		g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%.0f%%", battery->percentage);
+	} else {
+		g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%.1f%%", battery->percentage);
+	}
+
+	if (battery->is_charging) {
+		g_snprintf(g->output_str[1], sizeof(g->output_str[0]), "AC");
+	} else if (battery->current_now > 1000L*1000L) {
+		g_snprintf(
+			g->output_str[1],
+			sizeof(g->output_str[0]),
+			"%.2fA",
+			(float)battery->current_now / 1000.0f / 1000.0f
+		);
+	} else {
+		g_snprintf(
+			g->output_str[1],
+			sizeof(g->output_str[0]),
+			"%.0fmA",
+			(float)battery->current_now / 1000.0f
+		);
+	}
 }
 
 
