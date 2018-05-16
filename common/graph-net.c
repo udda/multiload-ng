@@ -164,15 +164,21 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 		d_ptr->rx_bytes = d.rx_bytes;
 		d_ptr->tx_bytes = d.tx_bytes;
 
-		if (!info_file_read_hex64(d_ptr->path_flags, &d_ptr->flags))
+		if (!info_file_read_hex64(d_ptr->path_flags, &d_ptr->flags)) {
 			continue;
-		if (!info_file_read_string_s(d_ptr->path_address, d_ptr->address, sizeof(d_ptr->address), NULL))
-			continue;
-		if (!info_file_read_uint64(d_ptr->path_ifindex, &d_ptr->ifindex))
-			continue;
+		}
 
-		if (!(d_ptr->flags & IFF_UP))
+		if (!info_file_read_string_s(d_ptr->path_address, d_ptr->address, sizeof(d_ptr->address), NULL)) {
+			continue;
+		}
+
+		if (!info_file_read_uint64(d_ptr->path_ifindex, &d_ptr->ifindex)) {
+			continue;
+		}
+
+		if (!(d_ptr->flags & IFF_UP)) {
 			continue; // device is down, ignore
+		}
 
 		// all OK - add interface to valid list
 		g_array_append_val(valid_ifaces, *d_ptr);
