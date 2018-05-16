@@ -47,6 +47,9 @@ typedef struct {
 
 	gchar path_ifindex[PATH_MAX];
 	guint64 ifindex;
+
+	gchar path_carrier[PATH_MAX];
+	guint64 carrier;
 } if_data;
 
 
@@ -153,7 +156,13 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 			sprintf(d_ptr->path_address, "/sys/class/net/%s/address", d_ptr->name);
 			sprintf(d_ptr->path_flags, "/sys/class/net/%s/flags", d_ptr->name);
 			sprintf(d_ptr->path_ifindex, "/sys/class/net/%s/ifindex", d_ptr->name);
-			if (!info_file_exists(d_ptr->path_address) || !info_file_exists(d_ptr->path_flags) || !info_file_exists(d_ptr->path_ifindex)) {
+			sprintf(d_ptr->path_carrier, "/sys/class/net/%s/carrier", d_ptr->name);
+			if (
+				!info_file_exists(d_ptr->path_address) ||
+				!info_file_exists(d_ptr->path_flags) ||
+				!info_file_exists(d_ptr->path_ifindex) ||
+				!info_file_exists(d_ptr->path_carrier)
+			) {
 				g_free (d_ptr);
 				continue;
 			}
@@ -176,6 +185,12 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 			continue;
 		}
 
+		// Apparently the 'carrier' file is not always readable...
+		// https://unix.stackexchange.com/a/252009/26139
+		if (!info_file_read_uint64(d_ptr->path_carrier, &d_ptr->carrier)) {
+			d_ptr->carrier = 0;
+		}
+
 		if (!(d_ptr->flags & IFF_UP)) {
 			continue; // device is down, ignore
 		}
@@ -189,6 +204,8 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 
 	// sort array by ifindex (so we can take first device when they are same address)
 	g_array_sort(valid_ifaces, sort_if_data_by_ifindex);
+
+	xd->connected = FALSE;
 
 	for (i=0; i<valid_ifaces_len; i++) {
 		d_ptr = &g_array_index(valid_ifaces, if_data, i);
@@ -230,6 +247,9 @@ multiload_graph_net_get_data (int Maximum, int data [3], LoadGraph *g, NetData *
 		} else {
 			present[NET_IN] += d_ptr->rx_bytes;
 			present[NET_OUT] += d_ptr->tx_bytes;
+			if (d_ptr->carrier > 0) {
+				xd->connected = TRUE;
+			}
 		}
 
 		g_strlcat (xd->ifaces, d_ptr->name, sizeof(xd->ifaces));
@@ -282,16 +302,26 @@ multiload_graph_net_inline_output (LoadGraph *g, NetData *xd)
 {
 	gchar *net_read = format_size_for_display_short(xd->in_speed, g->multiload->size_format_iec);
 	gchar *net_write = format_size_for_display_short(xd->out_speed, g->multiload->size_format_iec);
-	g_strlcpy(g->output_str[0], net_read, sizeof(g->output_str[0]));
-	g_strlcpy(g->output_str[1], net_write, sizeof(g->output_str[1]));
+	if (xd->connected) {
+		g_strlcpy(g->output_str[0], net_read, sizeof(g->output_str[0]));
+		g_strlcpy(g->output_str[1], net_write, sizeof(g->output_str[1]));
+		if (strcmp(g->output_str[0], "0b") == 0) {
+			g->output_str[0][1] = 'd';
+		}
+		if (strcmp(g->output_str[1], "0b") == 0) {
+			g->output_str[1][1] = 'u';
+		}
+	} else {
+		// Strip suffix (should always be 1 char)
+		net_read[strlen(net_read) - 1] = '\0';
+		net_write[strlen(net_write) - 1] = '\0';
+		// Show read/write together (almost always 0/0)
+		g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%s/%s", net_read, net_write);
+		g_snprintf(g->output_str[1], sizeof(g->output_str[1]), "NC");
+	}
+
 	g_free(net_read);
 	g_free(net_write);
-	if (strcmp(g->output_str[0], "0b") == 0) {
-		g->output_str[0][1] = 'd';
-	}
-	if (strcmp(g->output_str[1], "0b") == 0) {
-		g->output_str[1][1] = 'u';
-	}
 }
 
 
