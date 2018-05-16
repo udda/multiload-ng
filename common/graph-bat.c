@@ -243,7 +243,7 @@ multiload_graph_bat_inline_output (LoadGraph *g, BatteryData *xd)
 		return;
 
 	if (battery->percentage == 100.0f) {
-		g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "100%");
+		g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "100%%");
 	} else {
 		g_snprintf(g->output_str[0], sizeof(g->output_str[0]), "%.1f%%", battery->percentage);
 	}
