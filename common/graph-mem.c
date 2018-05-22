@@ -47,16 +47,24 @@ multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryDat
 	static guint64 kb_page_cache = 0;
 	static guint64 kb_slab = 0;
 
+	// can_hibernate keys
+	static guint64 kb_swap_total = 0;
+	static guint64 kb_swap_free = 0;
+	static guint64 kb_active_anon = 0;
+
 	static const InfoFileMappingEntry table[] = {
 		{ "MemTotal",		'u',	&kb_main_total },
 		{ "MemFree",		'u',	&kb_main_free},
 		{ "Buffers",		'u',	&kb_main_buffers },
 		{ "Cached",			'u',	&kb_page_cache },
-		{ "Slab",			'u',	&kb_slab }
+		{ "Slab",			'u',	&kb_slab },
+		{ "SwapTotal",		'u',	&kb_swap_total },
+		{ "SwapFree",		'u',	&kb_swap_free },
+		{ "Active(anon)",	'u',	&kb_active_anon }
 	};
 
-	gint r = info_file_read_keys (PATH_MEMINFO, table, 5);
-	g_assert_cmpint(r, ==, 5);
+	gint r = info_file_read_keys (PATH_MEMINFO, table, 8);
+	g_assert_cmpint(r, ==, 8);
 
 	kb_main_cached = kb_page_cache;
 	if (xd->procps_compliant)
@@ -72,6 +80,18 @@ multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryDat
 	xd->free = kb_main_free * 1024;
 	xd->total = kb_main_total * 1024;
 
+	// This is the same logic used by upower and xfce4-session to determine
+	// whether the system can hibernate, BUT upower also checks the exit code
+	// of this command on startup to determine kernel support for hibernation:
+	//
+	//   /usr/bin/pm-is-supported --hibernate
+	//
+	xd->can_hibernate = (
+		kb_swap_total > 0 &&
+		kb_swap_free > 0 &&
+		(gfloat)((kb_active_anon * 100) / kb_swap_free) < 98.f
+	);
+
 	data [0] = rint (Maximum * (float)kb_main_used   / (float)kb_main_total);
 	data [1] = rint (Maximum * (float)kb_main_buffers / (float)kb_main_total);
 	data [2] = rint (Maximum * (float)kb_main_cached / (float)kb_main_total);
@@ -84,7 +104,11 @@ multiload_graph_mem_inline_output (LoadGraph *g, MemoryData *xd)
 	gchar *mem_free = format_size_for_display_short(xd->free, g->multiload->size_format_iec);
 	gchar *mem_available = format_size_for_display_short(xd->total - xd->user, g->multiload->size_format_iec);
 	g_strlcpy(g->output_str[0], mem_free, sizeof(g->output_str[0]));
-	g_strlcpy(g->output_str[1], mem_available, sizeof(g->output_str[0]));
+	if (xd->can_hibernate) {
+		g_snprintf(g->output_str[1], sizeof(g->output_str[0]), "%s H", mem_available);
+	} else {
+		g_snprintf(g->output_str[1], sizeof(g->output_str[0]), "!! %s", mem_available);
+	}
 	g_free(mem_free);
 	g_free(mem_available);
 }

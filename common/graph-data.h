@@ -53,6 +53,8 @@ typedef struct _MemoryData {
 	guint64 free;
 	guint64 total;
 
+	gboolean can_hibernate;
+
 	gboolean procps_compliant;
 } MemoryData;
 
