@@ -86,11 +86,14 @@ multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryDat
 	//
 	//   /usr/bin/pm-is-supported --hibernate
 	//
-	xd->can_hibernate = (
-		kb_swap_total > 0 &&
-		kb_swap_free > 0 &&
-		(gfloat)((kb_active_anon * 100) / kb_swap_free) < 98.f
-	);
+	if (kb_swap_total > 0 && kb_swap_free > 0) {
+		gfloat kb_free_before_hibernate = (gfloat)kb_active_anon - 0.98f * kb_swap_free;
+		xd->free_before_hibernate = (gint64)kb_free_before_hibernate * 1024;
+		xd->can_hibernate = (xd->free_before_hibernate < 0);
+	} else {
+		xd->can_hibernate = FALSE;
+		xd->free_before_hibernate = 0;
+	}
 
 	data [0] = rint (Maximum * (float)kb_main_used   / (float)kb_main_total);
 	data [1] = rint (Maximum * (float)kb_main_buffers / (float)kb_main_total);
@@ -101,16 +104,40 @@ multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryDat
 void
 multiload_graph_mem_inline_output (LoadGraph *g, MemoryData *xd)
 {
-	gchar *mem_free = format_size_for_display_short(xd->free, g->multiload->size_format_iec);
-	gchar *mem_available = format_size_for_display_short(xd->total - xd->user, g->multiload->size_format_iec);
+	gchar *mem_free = format_size_for_display_short(
+		xd->free,
+		g->multiload->size_format_iec
+	);
 	g_strlcpy(g->output_str[0], mem_free, sizeof(g->output_str[0]));
-	if (xd->can_hibernate) {
-		g_snprintf(g->output_str[1], sizeof(g->output_str[0]), "%s H", mem_available);
-	} else {
-		g_snprintf(g->output_str[1], sizeof(g->output_str[0]), "!! %s", mem_available);
-	}
 	g_free(mem_free);
-	g_free(mem_available);
+
+	if (xd->can_hibernate) {
+		gchar *mem_available = format_size_for_display_short(
+			xd->total - xd->user,
+			g->multiload->size_format_iec
+		);
+		g_snprintf(
+			g->output_str[1],
+			sizeof(g->output_str[0]),
+			"%s H",
+			mem_available
+		);
+		g_free(mem_available);
+	} else if (xd->free_before_hibernate > 0) {
+		gchar *mem_needed_for_hibernate = format_size_for_display_short(
+			xd->free_before_hibernate,
+			g->multiload->size_format_iec
+		);
+		g_snprintf(
+			g->output_str[1],
+			sizeof(g->output_str[0]),
+			"!! -%s",
+			mem_needed_for_hibernate
+		);
+	} else {
+		// Hibernation is disabled, maybe no swap file or no swap free at all?
+		g_snprintf(g->output_str[1], sizeof(g->output_str[0]), "!! ??");
+	}
 }
 
 void
