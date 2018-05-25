@@ -112,17 +112,17 @@ multiload_graph_mem_inline_output (LoadGraph *g, MemoryData *xd)
 	g_free(mem_free);
 
 	if (xd->can_hibernate) {
-		gchar *mem_available = format_size_for_display_short(
-			xd->total - xd->user,
+		gchar *mem_hibernate_headroom = format_size_for_display_short(
+			-xd->free_before_hibernate,
 			g->multiload->size_format_iec
 		);
 		g_snprintf(
 			g->output_str[1],
 			sizeof(g->output_str[0]),
-			"%s H",
-			mem_available
+			"+%s H",
+			mem_hibernate_headroom
 		);
-		g_free(mem_available);
+		g_free(mem_hibernate_headroom);
 	} else if (xd->free_before_hibernate > 0) {
 		gchar *mem_needed_for_hibernate = format_size_for_display_short(
 			xd->free_before_hibernate,
