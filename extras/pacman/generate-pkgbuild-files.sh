@@ -110,7 +110,7 @@ get_depends()
 			mate)		printf -- " 'mate-panel>=1.7.0'" ;;
 			standalone)	return 0 ;;
 			systray)	return 0 ;;
-			xfce4)		printf -- " 'libxfce4util>=4.12.0' 'xfce4-panel>=4.12.0'" ;;
+			xfce4)		printf -- " 'libxfce4util' 'xfce4-panel'" ;;
 		esac
 	fi
 }
