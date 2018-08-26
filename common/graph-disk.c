@@ -23,7 +23,6 @@
 
 #include <math.h>
 #include <ctype.h>
-#include <mntent.h>
 #include <stdlib.h>
 
 #include "graph-data.h"
@@ -31,9 +30,6 @@
 #include "info-file.h"
 #include "preferences.h"
 #include "util.h"
-
-
-static const char *fstype_ignore_list[] = { "rootfs", "smbfs", "nfs", "cifs", "fuse.", NULL };
 
 gboolean
 multiload_graph_disk_device_is_partition (char *device, char *prefix, size_t sizeof_prefix) {
@@ -90,7 +86,11 @@ multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
 			continue;
 
 		// extract block device and partition names
-		gboolean is_partition = multiload_graph_disk_device_is_partition(device, prefix, sizeof(prefix));
+		gboolean is_partition = multiload_graph_disk_device_is_partition(
+			device,
+			prefix,
+			sizeof(prefix)
+		);
 
 		// generate sysfs path
 		char sysfs_path[PATH_MAX];
@@ -121,60 +121,51 @@ multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
 void
 multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData *xd, gboolean first_call)
 {
-	FILE *f_mntent;
+	char *buf = NULL;
+	size_t n = 0;
+
 	FILE *f_stat;
-	struct mntent *mnt;
 
 	guint i;
 	int max;
 
 	char sysfs_path[PATH_MAX];
-	char *device;
-	char prefix[20];
+	char device[20], prefix[20];
 	guint64 read, write;
 	guint64 read_total = 0, write_total = 0;
 	guint64 readdiff, writediff;
 
-
-	if ((f_mntent = setmntent(MOUNTED, "r")) == NULL)
-		return;
+	_debug("begin multiload_graph_disk_get_data\n");
 
 	xd->partitions[0] = '\0';
 
-	// loop through mountpoints
-	while ((mnt = getmntent(f_mntent)) != NULL) {
+	FILE *f = info_file_required_fopen("/proc/partitions", "r");
 
-		// skip filesystens that do not have a block device
-		if (strncmp (mnt->mnt_fsname, "/dev/", 5) != 0)
-			continue;
-
-		// skip filesystems of certain types, defined in fstype_ignore_list[]
-		gboolean ignore = FALSE;
-		for (i=0; fstype_ignore_list[i] != NULL; i++) {
-			if (strncmp (mnt->mnt_type, fstype_ignore_list[i], strlen(fstype_ignore_list[i])) == 0) {
-				ignore = TRUE;
-				break;
-			}
-		}
-		if (ignore)
+	while(getline(&buf, &n, f) >= 0) {
+		if (1 != fscanf(f, "%*u %*u %*u %s", device))
 			continue;
 
 		// extract block device and partition names
-		device = &mnt->mnt_fsname[5];
-		gboolean is_partition = multiload_graph_disk_device_is_partition(device, prefix, sizeof(prefix));
+		gboolean is_partition = multiload_graph_disk_device_is_partition(
+			device,
+			prefix,
+			sizeof(prefix)
+		);
 
 		// filter
+		gboolean ignore = FALSE;
 		if (g->config->filter_enable) {
 			MultiloadFilter *filter = multiload_filter_new_from_existing(g->config->filter);
-			for (i=0, ignore=TRUE; i<multiload_filter_get_length(filter); i++) {
-				if (strcmp(multiload_filter_get_element_data(filter,i), device) == 0) {
+			ignore = TRUE;
+			for (i=0; i < multiload_filter_get_length(filter); i++) {
+				if (strcmp(multiload_filter_get_element_data(filter, i), device) == 0) {
 					ignore = FALSE;
 					break;
 				}
 			}
 
 			if (ignore)
-				g_debug("[graph-disk] Ignored device '%s' due to user filter", device);
+				_debug("skip %s (user filter)", device);
 
 			multiload_filter_free(filter);
 		}
@@ -189,21 +180,28 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 
 		// read data from sysfs
 		f_stat = fopen(sysfs_path, "r");
-		if (f_stat == NULL)
+		if (f_stat == NULL) {
+			_debug("skip %s (failed fopen %s)", device, sysfs_path);
 			continue;
+		}
+
 		int result = fscanf(f_stat, "%*u %*u %"G_GUINT64_FORMAT" %*u %*u %*u %"G_GUINT64_FORMAT" %*u", &read, &write);
 		fclose(f_stat);
-		if (result != 2)
+		if (result != 2) {
+			_debug("skip %s (failed fscanf %s)", device, sysfs_path);
 			continue;
+		}
 
 		// data gathered - add to totals
 		read_total += read;
 		write_total += write;
 
+		_debug("ok %s (read %d write %d)", device, read, write);
+
 		g_strlcat (xd->partitions, device, sizeof(xd->partitions));
 		g_strlcat (xd->partitions, ", ", sizeof(xd->partitions));
 	}
-	endmntent(f_mntent);
+	fclose(f);
 	xd->partitions[strlen(xd->partitions)-2] = 0;
 
 	readdiff  = read_total  - xd->last_read;
