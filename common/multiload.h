@@ -141,6 +141,8 @@ typedef enum {
 
 G_BEGIN_DECLS
 
+void _debug(const char *fmt, ...);
+
 G_GNUC_INTERNAL void
 multiload_start(MultiloadPlugin *ma);
 G_GNUC_INTERNAL GtkOrientation

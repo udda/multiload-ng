@@ -38,6 +38,17 @@
 #include "ui.h"
 
 
+// https://stackoverflow.com/a/1737675/106302
+void _debug(const char *fmt, ...) {
+	va_list ap;
+	va_start(ap, fmt);
+	FILE *log = fopen("/tmp/multiload-ng.log", "a");
+	vfprintf(log, fmt, ap);
+	fputs("\n", log);
+	fclose(log);
+	va_end(ap);
+}
+
 const char* MULTILOAD_CONFIG_PATH;
 
 void
