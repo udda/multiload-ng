@@ -38,6 +38,7 @@
 #include "ui.h"
 
 
+#ifdef ENABLE_MULTILOAD_DEBUG
 // https://stackoverflow.com/a/1737675/106302
 void _debug(const char *fmt, ...) {
 	va_list ap;
@@ -48,6 +49,11 @@ void _debug(const char *fmt, ...) {
 	fclose(log);
 	va_end(ap);
 }
+#else
+void _debug(const char *fmt, ...) {
+	(void) fmt;
+}
+#endif
 
 const char* MULTILOAD_CONFIG_PATH;
 
