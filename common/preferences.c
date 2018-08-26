@@ -345,6 +345,7 @@ multiload_preferences_button_advanced_clicked_cb (GtkWidget *button, MultiloadPl
 
 	GtkWidget *dialog_config = GTK_WIDGET(OB("dialog_advanced"));
 	gtk_window_set_transient_for(GTK_WINDOW(dialog_config), GTK_WINDOW(gtk_widget_get_toplevel(button)));
+	gtk_widget_set_size_request(dialog_config, 1400, 1024);
 
 	GtkNotebook *notebook = GTK_NOTEBOOK(OB("advanced_notebook"));
 
@@ -1135,9 +1136,9 @@ multiload_preferences_button_gradient_clicked_cb (GtkWidget *button, MultiloadPl
 	gtk_container_add(GTK_CONTAINER(content_area), grid);
 #endif
 
-	gtk_window_set_resizable(GTK_WINDOW(dialog), FALSE);
 	gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(gtk_widget_get_toplevel(button)));
 	gtk_window_set_type_hint(GTK_WINDOW(dialog), GDK_WINDOW_TYPE_HINT_UTILITY);
+	gtk_widget_set_size_request(dialog, 420, 300);
 	gtk_widget_show_all(dialog);
 
 /*	int x, y, x_root, y_root;
