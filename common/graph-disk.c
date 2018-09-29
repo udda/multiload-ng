@@ -167,6 +167,10 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 		g_strlcat (xd->partitions, device, sizeof(xd->partitions));
 		g_strlcat (xd->partitions, ", ", sizeof(xd->partitions));
 	}
+
+	g_free(buf);
+	fclose(f);
+
 	xd->partitions[strlen(xd->partitions)-2] = 0;
 
 	readdiff  = read_total  - xd->last_read;
