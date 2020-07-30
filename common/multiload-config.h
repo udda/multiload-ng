@@ -56,7 +56,7 @@ typedef struct _GraphType {
 
 
 // global variable
-GraphType graph_types[GRAPH_MAX];
+extern GraphType graph_types[GRAPH_MAX];
 
 
 G_GNUC_INTERNAL guint
