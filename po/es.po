@@ -1,22 +1,22 @@
 # Copyright (C) 2016 Mario Cianciolo <mr.udda@gmail.com>
 # This file is distributed under the same license as the multiload-ng package.
 # Roberta Assennato <r.assennato@gmail.com>, 2016.
+# Xoán Sampaiño <xoansampainho@gmail.com>, 2019.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: multiload-ng\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-09 21:58+0200\n"
-"PO-Revision-Date: 2016-10-07 16:04+0200\n"
-"Last-Translator: Roberta Assennato <r.assennato@gmail.com>\n"
-"Language-Team: French\n"
-"Language: fr\n"
+"PO-Revision-Date: 2019-04-12 13:38+0100\n"
+"Last-Translator: Xoán Sampaíño <xoansampainho@gmail.com>\n"
+"Language-Team: Spanish\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Vé 0.1.4\n"
+"X-Generator: Poedit 2.2.1\n"
 
 msgid "Multiload-ng (indicator)"
 msgstr "Multiload-ng (indicador)"
@@ -46,11 +46,11 @@ msgid ""
 "Uptime: %s"
 msgstr ""
 "%lu procesadores  -  %.2f GHz  -  Regulador: %s\n"
-"%.1f%% en uno por los programas\n"
+"%.1f%% en uso por los programas\n"
 "%.1f%% en uso por los programas de baja prioridad\n"
-"%.1f%% en uso por el kernel\n"
-"%.1f%% esperando I/O\n"
-"%.1f%% uso total de UCP\n"
+"%.1f%% en uso por el núcleo\n"
+"%.1f%% esperando E/S\n"
+"%.1f%% uso total de CPU\n"
 "\n"
 "Uptime: %s"
 
@@ -66,7 +66,7 @@ msgid ""
 msgstr ""
 "%s (%s) usado por los programas\n"
 "%s (%s) usado para los buffers\n"
-"%s (%s) usado por la cache"
+"%s (%s) usado como caché"
 
 #, c-format
 msgid ""
@@ -76,18 +76,18 @@ msgid ""
 "Sending: %s\n"
 "Local: %s"
 msgstr ""
-"Interfazas controladas: %s\n"
+"Interfaces controladas: %s\n"
 "\n"
-"Recepción: %s\n"
-"Envio: %s\n"
+"Recibiendo: %s\n"
+"Enviando: %s\n"
 "Local: %s"
 
 msgid "No swap"
-msgstr "Ninguno swap"
+msgstr "Sin espacio de intercambio"
 
 #, c-format
 msgid "%s of swap"
-msgstr "%s de swap"
+msgstr "%s de espacio de intercambio"
 
 #, c-format
 msgid "%s used"
@@ -100,10 +100,10 @@ msgid ""
 "Last 15 minutes: %0.02f\n"
 "Processes/threads: %u active out of %u."
 msgstr ""
-"Último minudo: %0.02f\n"
-"Últimos 5 minudos: %0.02f\n"
-"Últimos 15 minudos: %0.02f\n"
-"Procesos/threads: %u de %u activos."
+"Último minuto: %0.02f\n"
+"Últimos 5 minutos: %0.02f\n"
+"Últimos 15 minutos: %0.02f\n"
+"Procesos/hilos: %u de %u activos."
 
 #, c-format
 msgid ""
@@ -131,26 +131,26 @@ msgstr "Actual: %.1f °C"
 
 #, c-format
 msgid "Command line is empty."
-msgstr "La línea de comando està vacía."
+msgstr "La línea de órdenes está vacía."
 
 #, c-format
 msgid "Unable to execute command."
-msgstr "Imposible ejecturar el comando."
+msgstr "No se puede ejecutar la orden."
 
 #, c-format
 msgid "Command has exited with status code %d."
-msgstr "El comando terminó con el código de estado %d."
+msgstr "La orden terminó con el código de estado %d."
 
 #, c-format
 msgid "Command did not return valid numbers."
-msgstr "El comando no ha producido números validos"
+msgstr "La orden no ha devuelto números válidos."
 
 #, c-format
 msgid ""
 "Command: %s\n"
 "ERROR: %s"
 msgstr ""
-"Comando: %s\n"
+"Orden: %s\n"
 "ERROR: %s"
 
 #, c-format
@@ -158,7 +158,7 @@ msgid ""
 "Command: %s\n"
 "Results: (%.3lf, %.3lf, %.3lf, %.3lf)"
 msgstr ""
-"Comando: %s\n"
+"Orden: %s\n"
 "Resultados: (%.3lf, %.3lf, %.3lf, %.3lf)"
 
 #, c-format
@@ -167,7 +167,7 @@ msgstr "ERROR: %s"
 
 #, c-format
 msgid "Unable to execute the following command line: '%s'"
-msgstr "Imposible efectuar la siguiente línea de comando: '%s'"
+msgstr "Ha sido imposible ejecutar la siguiente línea de órdenes: '%s'"
 
 msgid "Processor"
 msgstr "Procesador"
@@ -179,7 +179,7 @@ msgid "Network"
 msgstr "Red"
 
 msgid "Swap"
-msgstr "Swap"
+msgstr "Espacio de intercambio"
 
 msgid "Load average"
 msgstr "Carga media"
@@ -202,7 +202,7 @@ msgid "%d milliseconds"
 msgstr "%d milisegundos"
 
 msgid "Import color scheme"
-msgstr "Importe combinación de colores"
+msgstr "Importar combinación de colores"
 
 msgid "_Cancel"
 msgstr "_Cancelar"
@@ -212,27 +212,28 @@ msgstr "_Abrir"
 
 msgid "Color scheme format is incorrect. Unable to import."
 msgstr ""
-"El formato de la combinación de colores es incorecto. Imposible importar."
+"El formato de la combinación de colores es incorrecto. No se ha podido "
+"importar."
 
 msgid ""
 "Color scheme was created by an incompatible version of Multiload-ng. Unable "
 "to import."
 msgstr ""
 "La combinación de colores fue creada por una versión incompatible de "
-"Multiload-ng. Imposible importar."
+"Multiload-ng. No se ha podido importar."
 
 msgid "Export color scheme"
-msgstr "Exporte combinación de colores"
+msgstr "Exportar combinación de colores"
 
 msgid "_Save"
 msgstr "_Guardar"
 
 msgid "Error exporting color scheme."
-msgstr "Error en exportar la combinación de colores."
+msgstr "Error al exportar la combinación de colores."
 
 #, c-format
 msgid "Command line is valid. Retrieved %d numbers."
-msgstr "La línea de comando es valida. Recuperado %d números"
+msgstr "La línea de órdenes es valida. Se han recuperado %d números."
 
 msgid "(Custom)"
 msgstr "(Personalizado)"
@@ -260,11 +261,13 @@ msgstr "s"
 
 #, c-format
 msgid "Unable to open the following url: '%s'"
-msgstr "Imposible abrir el siguiente url: '%s'"
+msgstr "No se ha podido abrir la siguiente URL: '%s'"
 
 #. xgettext: Translator Full Name <translator_email@example.com>
 msgid "translator-credits"
-msgstr "Roberta Assennato <r.assennato@gmail.com>"
+msgstr ""
+"Roberta Assennato <r.assennato@gmail.com>\n"
+"Xoán Sampaíño <xoansampainho@gmail.com>"
 
 msgid "_Help"
 msgstr "Ay_uda"
@@ -282,13 +285,13 @@ msgid "_Quit"
 msgstr "_Salir"
 
 msgid "Do nothing"
-msgstr "No haga nada"
+msgstr "No hacer nada"
 
 msgid "Start task manager"
-msgstr "Administrador de tareas"
+msgstr "Iniciar el administrador de tareas"
 
 msgid "Execute custom command"
-msgstr "Mando personalizado"
+msgstr "Ejecutar una orden personalizada"
 
 msgid "Automatic"
 msgstr "Automático"
@@ -303,16 +306,18 @@ msgid "Preferences editor"
 msgstr "Editor de preferencias"
 
 msgid "Set the size of this graph"
-msgstr "Ajuste el tamaño del gráfico"
+msgstr "Ajustar el tamaño del gráfico"
 
 msgid "Set the time between updates of this graph"
-msgstr "Ajuste el tiempo entre dos actualizaciones de este gráfico"
+msgstr "Ajustar el tiempo entre actualizaciones de este gráfico"
 
 msgid "Tooltip may not show if update interval is too short."
-msgstr "Los tooltip podrían no aparecer si el intervalo es demasiado breve."
+msgstr ""
+"La descripción emergente podría no aparecer si el intervalo es demasiado "
+"breve."
 
 msgid "Make this graph visible"
-msgstr "Rinda el gráfico visible"
+msgstr "Hacer visible este gráfico"
 
 msgid "Graph"
 msgstr "Gráfico"
@@ -327,27 +332,27 @@ msgid "Advanced configuration"
 msgstr "Configuración avanzada"
 
 msgid "Orientation:"
-msgstr "Orientación"
+msgstr "Orientación:"
 
 msgid "Padding:"
 msgstr "Relleno:"
 
 msgid "Spacing:"
-msgstr "Espacio:"
+msgstr "Espaciado:"
 
 msgid "Set space between graphs"
-msgstr "Ajuste el espacio entre los gráficos"
+msgstr "Ajustar el espacio entre los gráficos"
 
 msgid "Set padding width"
-msgstr "Ajuste la anchura del relleno"
+msgstr "Ajustar la anchura del relleno"
 
 msgid "If padding is set too large, the graph won't show."
-msgstr "Si el relleno es demasiado grande, el gráfico non será visible."
+msgstr "Si el relleno es demasiado grande, el gráfico no será visible."
 
 msgid ""
 "Selected orientation is not the same of the panel. Graphs may be very small."
 msgstr ""
-"La orientación seleccionada no es la misma del escritorio. Los gráficos "
+"La orientación seleccionada no es la misma que la del panel. Los gráficos "
 "podrían ser muy pequeños."
 
 msgid "Graphs"
@@ -357,13 +362,13 @@ msgid "Color scheme"
 msgstr "Combinación de colores"
 
 msgid "Import color scheme from file"
-msgstr "Importe el esquema de color de un archivo"
+msgstr "Importar el esquema de color desde un archivo"
 
 msgid "Import"
 msgstr "Importar"
 
 msgid "Export color scheme to file"
-msgstr "Exporte el esquema de color en un archivo"
+msgstr "Exportar el esquema de color en un archivo"
 
 msgid "Export"
 msgstr "Exportar"
@@ -375,13 +380,13 @@ msgid "System"
 msgstr "Sistema"
 
 msgid "Nice"
-msgstr "Nice"
+msgstr ""
 
 msgid "I/O wait"
 msgstr ""
 
 msgid "Background"
-msgstr "Trasfondo"
+msgstr "Fondo"
 
 msgid "Border"
 msgstr "Borde"
@@ -393,13 +398,13 @@ msgid "Buffer"
 msgstr "Buffer"
 
 msgid "Cache"
-msgstr "Cache"
+msgstr "Caché"
 
 msgid "Receiving"
-msgstr "Recepción"
+msgstr "Recibiendo"
 
 msgid "Sending"
-msgstr "Envio"
+msgstr "Enviando"
 
 msgid "Local"
 msgstr "Local"
@@ -444,19 +449,19 @@ msgid "Detailed"
 msgstr "Detallado"
 
 msgid "Tooltip style:"
-msgstr "Estilo de tooltip:"
+msgstr "Estilo de la descripción emergente:"
 
 msgid "Double click action:"
 msgstr "Acción al hacer doble clic:"
 
 msgid "Set tooltip style of this graph"
-msgstr "Cambie el estilo de tooltip de este gráfico"
+msgstr "Cambiar el estilo de la descripción emergente de este gráfico"
 
 msgid "Choose what to do when double clicking on this graph"
-msgstr "Elija qué hacer cuando hace doble clic en este gráfico"
+msgstr "Seleccionar qué hacer al hacer doble clic en este gráfico"
 
 msgid "Set custom action of this graph"
-msgstr "Configure la acción personalizada de este gráfico"
+msgstr "Configurar la acción personalizada de este gráfico"
 
 msgid ""
 "The following tokens can be used within the command line:\n"
@@ -471,27 +476,27 @@ msgid ""
 "\n"
 "%% - inserts a literal percent sign"
 msgstr ""
-"Los símbolos siguientes se pueden usar en la línea de comando:\n"
+"Se pueden utilizar los siguientes símbolos en la línea de órdenes:\n"
 "\n"
 "%x - nombre abreviado del gráfico, desde tres hasta cuatro letras "
-"minusculas\n"
+"minúsculas\n"
 "\n"
 "%1 - primer valor de los datos del gráfico - depende del gráfico\n"
 "%2 - segundo valor de los datos del gráfico - depende del gráfico\n"
 "%3 - tercer valor de los datos del gráfico - depende del gráfico\n"
 "%4 - cuarto valor de los datos del gráfico - depende del gráfico\n"
-"%u - unidad de misura en el que los datos del gráfico estàn misurados\n"
+"%u - unidad de medida en la que se miden los datos del gráfico\n"
 "\n"
-"%% - escriba el símbolo de porcentaje"
+"%% - inserta un símbolo de porcentaje"
 
 msgid "Double click command:"
-msgstr "Comando al hacer doble clic:"
+msgstr "Orden al hacer doble clic:"
 
 msgid "Maximum value:"
-msgstr "Valor máximo"
+msgstr "Valor máximo:"
 
 msgid "Choose automatically"
-msgstr "Seleccione automaticamente"
+msgstr "Seleccionar automáticamente"
 
 msgid "Source:"
 msgstr "Fuente:"
@@ -504,13 +509,13 @@ msgid ""
 "other constraints that make them not suitable."
 msgstr ""
 "Tenga en cuenta que algunas fuentes seleccionadas podrían no aparecer "
-"todavía, por causa de otros vínculos que las rinden inadecuadas."
+"todavía, por causa de otras restricciones que las hacen inadecuadas."
 
 msgid "Graph command:"
-msgstr "Comando de gráfico"
+msgstr "Orden para el gráfico:"
 
 msgid "Test"
-msgstr "Testar"
+msgstr "Probar"
 
 msgid "Color"
 msgstr "Color"
@@ -540,14 +545,14 @@ msgid ""
 "* To monitor changes to a file: cat [filename]\n"
 "* To execute arbitrary shell commands: sh -c \"[commands]\""
 msgstr ""
-"Escriba una línea de comando valida. El proceso debe respetar las reglas "
-"siguientes:\n"
+"Escriba una orden valida. El proceso debe respetar las reglas siguientes:\n"
 "\n"
 "<b>CÓDIGO DE SALIDA</b>\n"
-"El proceso TIENE QUE terminar con el código de estado '0'\n"
+"El proceso TIENE QUE terminar con el código de estado «0»\n"
 "\n"
 "<b>STDOUT</b>\n"
-"El proceso TIENE QUE escribir en stdout números con coma POSITIVOS.\n"
+"El proceso TIENE QUE escribir números decimales POSITIVOS en <i>stdout</"
+"i>.\n"
 "* El gráfico acepta al menos un número por un máximo de cuatro números.\n"
 "* Separe los números por medio de espacios o nueva línea.\n"
 "* Para los números decimales, use el punto o la coma en base a las opciones "
@@ -557,31 +562,32 @@ msgstr ""
 "* Cualquier otro elemento adicional después de los números será ignorado.\n"
 "\n"
 "<b>STDERR</b>\n"
-"El proceso PUEDE escribir un texto en stderr.\n"
-"* La primera línea del texto será mostrada como \"Mensaje\".\n"
+"El proceso PUEDE escribir un texto en <i>stderr</i>.\n"
+"* La primera línea del texto será mostrada como «Mensaje».\n"
 "* Cualquier otro elemento después de la primera línea será ignorado.\n"
 "\n"
-"<b>EJEMPLOS DE LÍNEAS DE COMANDO COMUNES</b>\n"
+"<b>EJEMPLOS DE ÓRDENES COMUNES</b>\n"
 "* Para observar cambios en un archivo: cat [filename]\n"
-"* Para ejecutar comandos de shell arbitrarios: sh -c \"[commands]\""
+"* Para ejecutar órdenes arbitrarias del intérprete de órdenes: sh -c "
+"\"[commands]\""
 
 msgid "Direction of gradient"
-msgstr "Dirección de la gradación"
+msgstr "Dirección del degradado"
 
 msgid "Under 'used' (like <i>htop</i> and some graphical task managers)"
-msgstr "Bajo usado (como <i>htop</i> y otros gestores de tareas)"
+msgstr "Bajo «usado» (como <i>htop</i> y otros gestores de tareas)"
 
 msgid "Under 'cache' (like <i>free</i> and <i>top</i>)"
-msgstr "Bajo cache (como <i>free</i> y <i>top</i>)"
+msgstr "Bajo «cache» (como <i>free</i> y <i>top</i>)"
 
 msgid "Use IEC units (binary prefixes)"
 msgstr "Use unidades IEC (prefijos binarios)"
 
 msgid "Count Slab cache:"
-msgstr "Cuente cache Slab:"
+msgstr "Tener en cuenta la cache Slab:"
 
 msgid "Choose how to count Slab cache"
-msgstr "Elija como contar las cache Slab"
+msgstr "Elegir como tener en cuenta la cache Slab"
 
 msgid ""
 "If the window is larger than its minimum size, graphs will be scaled in "
@@ -598,7 +604,7 @@ msgstr ""
 "entorno del escritorio. El orden de los gráficos podría cambiar."
 
 msgid "Extra settings"
-msgstr "Ajustes adjuntos"
+msgstr "Ajustes extra"
 
 msgid "Order of graphs (drag to rearrange)"
 msgstr "Orden de los gráficos (arrastre para ordenar)"
@@ -607,10 +613,10 @@ msgid "Battery"
 msgstr "Batería"
 
 msgid "Charging"
-msgstr "En carga"
+msgstr "Cargando"
 
 msgid "Discharging"
-msgstr "No en carga"
+msgstr "Descargando"
 
 msgid "Current charge:"
 msgstr "Carga actual:"
