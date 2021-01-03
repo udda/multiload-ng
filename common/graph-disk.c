@@ -33,8 +33,6 @@
 #include "util.h"
 
 
-static const char *fstype_ignore_list[] = { "rootfs", "smbfs", "nfs", "cifs", "fuse.", NULL };
-
 
 MultiloadFilter *
 multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
@@ -94,47 +92,31 @@ multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
 void
 multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData *xd, gboolean first_call)
 {
-	FILE *f_mntent;
 	FILE *f_stat;
-	struct mntent *mnt;
+
+	char *buf = NULL;
+	size_t n = 0;
 
 	guint i;
 	int max;
 
 	char sysfs_path[PATH_MAX];
-	char *device;
-	char prefix[20];
+	guint64 blocks;
+	char device[20], prefix[20];
 	guint64 read, write;
 	guint64 read_total = 0, write_total = 0;
 	guint64 readdiff, writediff;
 
-
-	if ((f_mntent = setmntent(MOUNTED, "r")) == NULL)
-		return;
+	FILE *f = info_file_required_fopen("/proc/partitions", "r");
 
 	xd->partitions[0] = '\0';
 
-	// loop through mountpoints
-	while ((mnt = getmntent(f_mntent)) != NULL) {
-
-		// skip filesystens that do not have a block device
-		if (strncmp (mnt->mnt_fsname, "/dev/", 5) != 0)
-			continue;
-
-		// skip filesystems of certain types, defined in fstype_ignore_list[]
-		gboolean ignore = FALSE;
-		for (i=0; fstype_ignore_list[i] != NULL; i++) {
-			if (strncmp (mnt->mnt_type, fstype_ignore_list[i], strlen(fstype_ignore_list[i])) == 0) {
-				ignore = TRUE;
-				break;
-			}
-		}
-		if (ignore)
+	while(getline(&buf, &n, f) >= 0) {
+		if (2 != fscanf(f, "%*u %*u %"G_GUINT64_FORMAT" %s", &blocks, device))
 			continue;
 
 		// extract block device and partition names
 		gboolean is_partition = FALSE;
-		device = &mnt->mnt_fsname[5];
 		g_strlcpy(prefix, device, sizeof(prefix));
 		for (i=0; prefix[i] != '\0'; i++) {
 			if (isdigit(prefix[i])) {
@@ -145,6 +127,7 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 		}
 
 		// filter
+		gboolean ignore=FALSE;
 		if (g->config->filter_enable) {
 			MultiloadFilter *filter = multiload_filter_new_from_existing(g->config->filter);
 			for (i=0, ignore=TRUE; i<multiload_filter_get_length(filter); i++) {
@@ -184,7 +167,10 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 		g_strlcat (xd->partitions, device, sizeof(xd->partitions));
 		g_strlcat (xd->partitions, ", ", sizeof(xd->partitions));
 	}
-	endmntent(f_mntent);
+
+	g_free(buf);
+	fclose(f);
+
 	xd->partitions[strlen(xd->partitions)-2] = 0;
 
 	readdiff  = read_total  - xd->last_read;
