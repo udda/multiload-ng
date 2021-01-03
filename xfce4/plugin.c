@@ -25,6 +25,7 @@
 
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
+#include <libxfce4panel/xfce-panel-macros.h>
 
 #include "common/multiload.h"
 #include "common/ui.h"
