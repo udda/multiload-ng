@@ -35,6 +35,42 @@
 
 static const char *fstype_ignore_list[] = { "rootfs", "smbfs", "nfs", "cifs", "fuse.", NULL };
 
+gboolean
+multiload_graph_disk_device_is_partition (char *device, char *prefix, size_t sizeof_prefix) {
+	gboolean is_partition = FALSE;
+	guint i;
+	g_strlcpy(prefix, device, sizeof_prefix);
+
+	if (strncmp (prefix, "nvme", 4) == 0) {
+		// several possibilities:
+		// - nvme0
+		// - nvme0n1
+		// - nvme0n1p1
+		// only the last one is a partition, with sysfs subfolder nvme0n1
+		for (i=4; prefix[i] != '\0'; i++) {
+			if (isdigit(prefix[i]) && prefix[i-1] == 'p') {
+				prefix[i-1] = '\0';
+				is_partition = TRUE;
+				break;
+			}
+		}
+		return is_partition;
+	}
+
+	if (strncmp (prefix, "dm-", 3) == 0) {
+		// device-mapper devices do not show up in a sysfs subfolder
+		return FALSE;
+	}
+
+	for (i=0; prefix[i] != '\0'; i++) {
+		if (isdigit(prefix[i])) {
+			prefix[i] = '\0';
+			is_partition = TRUE;
+			break;
+		}
+	}
+	return is_partition;
+}
 
 MultiloadFilter *
 multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
@@ -44,7 +80,6 @@ multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
 
 	guint64 blocks;
 	char device[20], prefix[20], label[30];
-	guint i;
 
 	MultiloadFilter *filter = multiload_filter_new();
 
@@ -55,15 +90,7 @@ multiload_graph_disk_get_filter (LoadGraph *g, DiskData *xd)
 			continue;
 
 		// extract block device and partition names
-		gboolean is_partition = FALSE;
-		g_strlcpy(prefix, device, sizeof(prefix));
-		for (i=0; prefix[i] != '\0'; i++) {
-			if (isdigit(prefix[i])) {
-				prefix[i] = '\0';
-				is_partition = TRUE;
-				break;
-			}
-		}
+		gboolean is_partition = multiload_graph_disk_device_is_partition(device, prefix, sizeof(prefix));
 
 		// generate sysfs path
 		char sysfs_path[PATH_MAX];
@@ -133,16 +160,8 @@ multiload_graph_disk_get_data (int Maximum, int data [2], LoadGraph *g, DiskData
 			continue;
 
 		// extract block device and partition names
-		gboolean is_partition = FALSE;
 		device = &mnt->mnt_fsname[5];
-		g_strlcpy(prefix, device, sizeof(prefix));
-		for (i=0; prefix[i] != '\0'; i++) {
-			if (isdigit(prefix[i])) {
-				prefix[i] = '\0';
-				is_partition = TRUE;
-				break;
-			}
-		}
+		gboolean is_partition = multiload_graph_disk_device_is_partition(device, prefix, sizeof(prefix));
 
 		// filter
 		if (g->config->filter_enable) {
