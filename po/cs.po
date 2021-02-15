@@ -1,0 +1,815 @@
+# Czech translations for multiload-ng package.
+# Copyright (C) 2021 THE multiload-ng'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the multiload-ng package.
+# Jan Breuer <jan.breuer@jaybee.cz>, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: multiload-ng 1.5.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-15 11:21+0100\n"
+"PO-Revision-Date: 2021-02-15 09:36+0100\n"
+"Last-Translator: Jan Breuer <jan.breuer@jaybee.cz>\n"
+"Language-Team: Czech\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: ../awn/multiload-ng-awn.desktop.in.in.h:1 ../common/about-data.h:28
+#: ../common/about-data.h:29
+#: ../indicator/multiload-ng-indicator.desktop.in.in.h:2
+#: ../standalone/multiload-ng-standalone.desktop.in.in.h:1
+#: ../systray/multiload-ng-systray.desktop.in.in.h:2
+#: ../xfce4/multiload-ng-xfce4.desktop.in.in.h:1
+msgid "Modern graphical system monitor"
+msgstr "Moderní grafický monitor systému"
+
+#: ../awn/plugin.c:152 ../data/preferences_gtk2.ui.h:2
+#: ../data/preferences_gtk3.ui.h:2 ../indicator/plugin.c:245
+#: ../mate/plugin.c:92 ../standalone/plugin.c:160 ../systray/plugin.c:213
+#: ../xfce4/plugin.c:200
+msgid "Start task manager"
+msgstr "Spustit správce úloh"
+
+#: ../common/about-data.h:34
+msgid "Copyright © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF, and others"
+msgstr "Copyright © 2016 Mario Cianciolo, 1999-2012 nandhp, FSF a další"
+
+#: ../common/graph-bat.c:258 ../data/preferences_gtk2.ui.h:55
+#: ../data/preferences_gtk3.ui.h:56
+msgid "Charging"
+msgstr "Nabíjení"
+
+#: ../common/graph-bat.c:258 ../data/preferences_gtk2.ui.h:56
+#: ../data/preferences_gtk3.ui.h:57
+msgid "Discharging"
+msgstr "Vybíjení"
+
+#: ../common/graph-bat.c:262 ../common/graph-bat.c:264
+msgid "Current charge:"
+msgstr "Aktuální nabíjení:"
+
+#: ../common/graph-bat.c:262 ../data/preferences_gtk2.ui.h:57
+#: ../data/preferences_gtk3.ui.h:59
+msgid "Critical level"
+msgstr "Kritická úroveň"
+
+#. xgettext: Not Available
+#: ../common/graph-cpu.c:63
+msgid "N/A"
+msgstr "nedostupné"
+
+#: ../common/graph-cpu.c:131
+#, c-format
+msgid ""
+"%lu processors  -  %.2f GHz  -  Governor: %s\n"
+"%.1f%% in use by programs\n"
+"%.1f%% in use by low priority programs\n"
+"%.1f%% in use by the kernel\n"
+"%.1f%% in wait for I/O\n"
+"%.1f%% total CPU use\n"
+"\n"
+"Uptime: %s"
+msgstr ""
+"%lu procesorů  -  %.2f GHz  -  Governor: %s\n"
+"%.1f%% použito programy\n"
+"%.1f%% použito programy s nízkou prioritou\n"
+"%.1f%% použito jádrem\n"
+"%.1f%% při čekání na I/O\n"
+"%.1f%% celkové využití CPU\n"
+"\n"
+"Uptime: %s"
+
+#: ../common/graph-mem.c:103
+#, c-format
+msgid "%s of RAM"
+msgstr "%s RAM"
+
+#: ../common/graph-mem.c:104
+#, c-format
+msgid ""
+"%s (%s) used by programs\n"
+"%s (%s) used for buffers\n"
+"%s (%s) used as cache"
+msgstr ""
+"%s (%s) použito programy\n"
+"%s (%s) použito pro buffery\n"
+"%s (%s) použito jako cache"
+
+#: ../common/graph-net.c:291
+#, c-format
+msgid ""
+"Monitored interfaces: %s\n"
+"\n"
+"Receiving: %s\n"
+"Sending: %s\n"
+"Local: %s"
+msgstr ""
+"Monitorovaná rozhraní: %s\n"
+"\n"
+"Příjem: %s\n"
+"Vysílání: %s\n"
+"Lokální: %s"
+
+#: ../common/graph-swap.c:72
+#, c-format
+msgid "No swap"
+msgstr "Žádný swap"
+
+#: ../common/graph-swap.c:80
+#, c-format
+msgid "%s of swap"
+msgstr "%s swapu"
+
+#: ../common/graph-swap.c:81
+#, c-format
+msgid "%s (%s) used"
+msgstr "%s (%s) použio"
+
+#: ../common/graph-load.c:93
+#, c-format
+msgid ""
+"Last minute: %0.02f\n"
+"Last 5 minutes: %0.02f\n"
+"Last 15 minutes: %0.02f\n"
+"Processes/threads: %u active out of %u."
+msgstr ""
+"Poslední minuta: %0.02f\n"
+"Posledních 5 minut: %0.02f\n"
+"Posledních 15 minut: %0.02f\n"
+"Procesory/vlákna: %u aktivních z %u."
+
+#: ../common/graph-disk.c:228
+#, c-format
+msgid ""
+"Monitored partitions: %s\n"
+"\n"
+"Read: %s\n"
+"Write: %s"
+msgstr ""
+"Monitorované oddíly: %s\n"
+"\n"
+"Čtení: %s\n"
+"Zápis: %s"
+
+#: ../common/graph-temp.c:398
+#, c-format
+msgid ""
+"Current: %.1f °C\n"
+"Critical: %.1f °C"
+msgstr ""
+"Aktuální: %.1f °C\n"
+"Kritická: %.1f °C"
+
+#: ../common/graph-temp.c:402
+#, c-format
+msgid "Current: %.1f °C"
+msgstr "Aktuální: %.1f °C"
+
+#: ../common/graph-parm.c:48
+#, c-format
+msgid "Command line is empty."
+msgstr "Příkazový řádek je prázdný."
+
+#: ../common/graph-parm.c:51
+#, c-format
+msgid "Unable to execute command."
+msgstr "Příkaz nelze spustit."
+
+#: ../common/graph-parm.c:54
+#, c-format
+msgid "Command has exited with status code %d."
+msgstr "Příkas skončil se stavovým kódem %d."
+
+#: ../common/graph-parm.c:67
+#, c-format
+msgid "Command did not return valid numbers."
+msgstr "Příkaz nevrátil platná čísla."
+
+#: ../common/graph-parm.c:129
+#, c-format
+msgid ""
+"Command: %s\n"
+"ERROR: %s"
+msgstr ""
+"Příkaz: %s\n"
+"CHYBA: %s"
+
+#: ../common/graph-parm.c:135
+#, c-format
+msgid ""
+"Command: %s\n"
+"Results: (%.3lf, %.3lf, %.3lf, %.3lf)"
+msgstr ""
+"Příkaz: %s\n"
+"Výsledek: (%.3lf, %.3lf, %.3lf, %.3lf)"
+
+#: ../common/graph-parm.c:142
+#, c-format
+msgid "ERROR: %s"
+msgstr "CHYBA: %s"
+
+#: ../common/load-graph.c:399 ../common/ui.c:392
+#, c-format
+msgid "Unable to execute the following command line: '%s'"
+msgstr "Není možné spustit následující příkazový řádek: „%s“"
+
+#: ../common/multiload-config.c:46 ../data/preferences_gtk2.ui.h:13
+#: ../data/preferences_gtk3.ui.h:13
+msgid "Processor"
+msgstr "Procesor"
+
+#: ../common/multiload-config.c:53 ../data/preferences_gtk2.ui.h:15
+#: ../data/preferences_gtk3.ui.h:15
+msgid "Memory"
+msgstr "Paměť"
+
+#: ../common/multiload-config.c:60 ../data/preferences_gtk2.ui.h:16
+#: ../data/preferences_gtk3.ui.h:16
+msgid "Network"
+msgstr "Síť"
+
+#: ../common/multiload-config.c:67 ../data/preferences_gtk2.ui.h:17
+#: ../data/preferences_gtk3.ui.h:17
+msgid "Swap"
+msgstr "Swap"
+
+#: ../common/multiload-config.c:74 ../data/preferences_gtk2.ui.h:18
+#: ../data/preferences_gtk3.ui.h:18
+msgid "Load average"
+msgstr "Průměrné zatížení"
+
+#: ../common/multiload-config.c:81 ../data/preferences_gtk2.ui.h:19
+#: ../data/preferences_gtk3.ui.h:19
+msgid "Disk"
+msgstr "Disk"
+
+#: ../common/multiload-config.c:88 ../data/preferences_gtk2.ui.h:20
+#: ../data/preferences_gtk3.ui.h:20
+msgid "Temperature"
+msgstr "Teplota"
+
+#: ../common/multiload-config.c:95 ../data/preferences_gtk2.ui.h:26
+#: ../data/preferences_gtk3.ui.h:26
+msgid "Battery"
+msgstr "Baterie"
+
+#: ../common/multiload-config.c:102 ../data/preferences_gtk2.ui.h:25
+#: ../data/preferences_gtk3.ui.h:25
+msgid "Parametric"
+msgstr "Parametrický"
+
+#: ../common/preferences.c:363 ../common/preferences.c:382
+#, c-format
+msgid "%d pixel"
+msgstr "%d px"
+
+#: ../common/preferences.c:408 ../common/preferences.c:427
+#, c-format
+msgid "%d milliseconds"
+msgstr "%d ms"
+
+#: ../common/preferences.c:569
+msgid "Import color scheme"
+msgstr "Importovat barevné schema"
+
+#: ../common/preferences.c:571 ../common/preferences.c:610
+msgid "_Cancel"
+msgstr "_Zrušit"
+
+#: ../common/preferences.c:572
+msgid "_Open"
+msgstr "_Otevřít"
+
+#: ../common/preferences.c:589
+msgid "Color scheme format is incorrect. Unable to import."
+msgstr "Formát barevného schema je nesprávný. Nelze importovat."
+
+#: ../common/preferences.c:592
+msgid ""
+"Color scheme was created by an incompatible version of Multiload-ng. Unable "
+"to import."
+msgstr ""
+"Barevné schema bylo vytvořeno nekommatibilní verzí Multiload-ng. Nelze "
+"importovat."
+
+#: ../common/preferences.c:608
+msgid "Export color scheme"
+msgstr "Exportovat barevné schema"
+
+#: ../common/preferences.c:611
+msgid "_Save"
+msgstr "_Uložiy"
+
+#: ../common/preferences.c:624
+msgid "Error exporting color scheme."
+msgstr "Chyba při exportování barevného schematu."
+
+#: ../common/preferences.c:687
+#, c-format
+msgid "Command line is valid. Retrieved %d numbers."
+msgstr "Příkazová řádka je platná. Získáno %d čísel."
+
+#: ../common/preferences.c:1087 ../data/preferences_gtk2.ui.h:54
+#: ../data/preferences_gtk3.ui.h:51
+msgid "Direction of gradient"
+msgstr "Směr přechodu"
+
+#: ../common/preferences.c:1409 ../common/ui.c:354
+msgid "_Close"
+msgstr "_Zavřít"
+
+#: ../common/preferences.c:1550
+msgid "(Custom)"
+msgstr "(Vlastní)"
+
+#. xgettext: this is a rate format (eg. 2 MiB/s)
+#: ../common/util.c:101
+#, c-format
+msgid "%s/s"
+msgstr "%s/s"
+
+#. xgettext: single-letter form for "days" - e.g. 3 days -> 3d
+#: ../common/util.c:153
+msgid "d"
+msgstr "d"
+
+#. xgettext: single-letter form for "hours" - e.g. 3 hours -> 3h
+#: ../common/util.c:160
+msgid "h"
+msgstr "h"
+
+#. xgettext: single-letter form for "minutes" - e.g. 3 minutes -> 3m
+#: ../common/util.c:167
+msgid "m"
+msgstr "m"
+
+#. xgettext: single-letter form for "seconds" - e.g. 3 seconds -> 3s
+#: ../common/util.c:174
+msgid "s"
+msgstr "s"
+
+#: ../common/util.c:239
+#, c-format
+msgid "Unable to open the following url: '%s'"
+msgstr "Nelze otevřít následující url: „%s“"
+
+#. xgettext: Translator Full Name <translator_email@example.com>
+#: ../common/ui.c:309
+msgid "translator-credits"
+msgstr "Jan Breuer <jan.breuer@jaybee.cz>"
+
+#: ../common/ui.c:353 ../indicator/plugin.c:263 ../mate/plugin.c:94
+#: ../standalone/plugin.c:179 ../systray/plugin.c:223 ../xfce4/plugin.c:199
+msgid "_Help"
+msgstr "_Nápověda"
+
+#: ../data/preferences_gtk2.ui.h:1 ../data/preferences_gtk3.ui.h:1
+msgid "Do nothing"
+msgstr "Nedělat nic"
+
+#: ../data/preferences_gtk2.ui.h:3 ../data/preferences_gtk3.ui.h:3
+msgid "Execute custom command"
+msgstr "Vykonat vlastní příkaz"
+
+#: ../data/preferences_gtk2.ui.h:4 ../data/preferences_gtk3.ui.h:4
+msgid "Under 'used' (like <i>htop</i> and some graphical task managers)"
+msgstr "Pod „used“ (jako <i>htop</i> a další správci úloh)"
+
+#: ../data/preferences_gtk2.ui.h:5 ../data/preferences_gtk3.ui.h:5
+msgid "Under 'cache' (like <i>free</i> and <i>top</i>)"
+msgstr "Pod „cache“ (jako <i>free</i> a <i>top</i>)"
+
+#: ../data/preferences_gtk2.ui.h:6 ../data/preferences_gtk3.ui.h:6
+msgid "Automatic"
+msgstr "Automaticky"
+
+#: ../data/preferences_gtk2.ui.h:7 ../data/preferences_gtk3.ui.h:7
+msgid "Horizontal"
+msgstr "Horizontálně"
+
+#: ../data/preferences_gtk2.ui.h:8 ../data/preferences_gtk3.ui.h:8
+msgid "Vertical"
+msgstr "Vertikálně"
+
+#: ../data/preferences_gtk2.ui.h:9 ../data/preferences_gtk3.ui.h:9
+msgid "Preferences editor"
+msgstr "Editor předvoleb"
+
+#: ../data/preferences_gtk2.ui.h:10 ../data/preferences_gtk3.ui.h:10
+msgid "Set the size of this graph"
+msgstr "Nastaví velikost tohoto grafu"
+
+#: ../data/preferences_gtk2.ui.h:11 ../data/preferences_gtk3.ui.h:11
+msgid "Set the time between updates of this graph"
+msgstr "Nastaví čas mezi aktualizacemi tohoto grafu"
+
+#: ../data/preferences_gtk2.ui.h:12 ../data/preferences_gtk3.ui.h:12
+msgid "Tooltip may not show if update interval is too short."
+msgstr ""
+"Tooltip se nemusí ukázat, pokud je aktualizační interval příliš krátký."
+
+#: ../data/preferences_gtk2.ui.h:14 ../data/preferences_gtk3.ui.h:14
+msgid "Make this graph visible"
+msgstr "Zviditelnit tento graf"
+
+#: ../data/preferences_gtk2.ui.h:21 ../data/preferences_gtk3.ui.h:21
+msgid "Graph"
+msgstr "Graf"
+
+#: ../data/preferences_gtk2.ui.h:22 ../data/preferences_gtk3.ui.h:22
+msgid "Size"
+msgstr "Velikost"
+
+#: ../data/preferences_gtk2.ui.h:23 ../data/preferences_gtk3.ui.h:23
+msgid "Update interval"
+msgstr "Aktualizační interval"
+
+#: ../data/preferences_gtk2.ui.h:24 ../data/preferences_gtk3.ui.h:24
+msgid "Advanced configuration"
+msgstr "Rozšířená konfigurace"
+
+#: ../data/preferences_gtk2.ui.h:27 ../data/preferences_gtk3.ui.h:27
+msgid "Graphs"
+msgstr "Grafy"
+
+#: ../data/preferences_gtk2.ui.h:28 ../data/preferences_gtk3.ui.h:28
+msgid "Color scheme"
+msgstr "Barevné schema"
+
+#: ../data/preferences_gtk2.ui.h:29 ../data/preferences_gtk3.ui.h:29
+msgid "Import color scheme from file"
+msgstr "Importovat barevné schema ze souboru"
+
+#: ../data/preferences_gtk2.ui.h:30 ../data/preferences_gtk3.ui.h:30
+msgid "Import"
+msgstr "Importovat"
+
+#: ../data/preferences_gtk2.ui.h:31 ../data/preferences_gtk3.ui.h:31
+msgid "Export color scheme to file"
+msgstr "Exportovat barevné schema do souboru"
+
+#: ../data/preferences_gtk2.ui.h:32 ../data/preferences_gtk3.ui.h:32
+msgid "Export"
+msgstr "Exportovat"
+
+#: ../data/preferences_gtk2.ui.h:33 ../data/preferences_gtk3.ui.h:33
+msgid "User"
+msgstr "Uživatel"
+
+#: ../data/preferences_gtk2.ui.h:34 ../data/preferences_gtk3.ui.h:34
+msgid "System"
+msgstr "Systém"
+
+#: ../data/preferences_gtk2.ui.h:35 ../data/preferences_gtk3.ui.h:35
+msgid "Nice"
+msgstr "Nice"
+
+#: ../data/preferences_gtk2.ui.h:36 ../data/preferences_gtk3.ui.h:36
+msgid "I/O wait"
+msgstr "Čekání I/O"
+
+#: ../data/preferences_gtk2.ui.h:37 ../data/preferences_gtk3.ui.h:37
+msgid "Background"
+msgstr "Pozadí"
+
+#: ../data/preferences_gtk2.ui.h:38 ../data/preferences_gtk3.ui.h:38
+msgid "Border"
+msgstr "Rámeček"
+
+#: ../data/preferences_gtk2.ui.h:39 ../data/preferences_gtk3.ui.h:39
+msgid "Buffer"
+msgstr "Buffer"
+
+#: ../data/preferences_gtk2.ui.h:40 ../data/preferences_gtk3.ui.h:40
+msgid "Cache"
+msgstr "Cache"
+
+#: ../data/preferences_gtk2.ui.h:41 ../data/preferences_gtk3.ui.h:41
+msgid "Receiving"
+msgstr "Příjem"
+
+#: ../data/preferences_gtk2.ui.h:42 ../data/preferences_gtk3.ui.h:42
+msgid "Sending"
+msgstr "Vysílání"
+
+#: ../data/preferences_gtk2.ui.h:43 ../data/preferences_gtk3.ui.h:43
+msgid "Local"
+msgstr "Lokální"
+
+#: ../data/preferences_gtk2.ui.h:44 ../data/preferences_gtk3.ui.h:44
+msgid "Used"
+msgstr "Použito"
+
+#: ../data/preferences_gtk2.ui.h:45 ../data/preferences_gtk3.ui.h:45
+msgid "Average"
+msgstr "Průměr"
+
+#: ../data/preferences_gtk2.ui.h:46 ../data/preferences_gtk3.ui.h:46
+msgid "Read"
+msgstr "Čtení"
+
+#: ../data/preferences_gtk2.ui.h:47 ../data/preferences_gtk3.ui.h:47
+msgid "Write"
+msgstr "Zápis"
+
+#: ../data/preferences_gtk2.ui.h:48 ../data/preferences_gtk3.ui.h:48
+msgid "Current"
+msgstr "Aktuální"
+
+#: ../data/preferences_gtk2.ui.h:49 ../data/preferences_gtk3.ui.h:52
+msgid "Result 1"
+msgstr "Výsledek 1"
+
+#: ../data/preferences_gtk2.ui.h:50 ../data/preferences_gtk3.ui.h:50
+msgid "Critical"
+msgstr "Kritický"
+
+#: ../data/preferences_gtk2.ui.h:51 ../data/preferences_gtk3.ui.h:53
+msgid "Result 2"
+msgstr "Výsledek 2"
+
+#: ../data/preferences_gtk2.ui.h:52 ../data/preferences_gtk3.ui.h:54
+msgid "Result 3"
+msgstr "Výsledek 3"
+
+#: ../data/preferences_gtk2.ui.h:53 ../data/preferences_gtk3.ui.h:55
+msgid "Result 4"
+msgstr "Výsledek 4"
+
+#: ../data/preferences_gtk2.ui.h:58 ../data/preferences_gtk3.ui.h:60
+msgid "Colors"
+msgstr "Barvy"
+
+#: ../data/preferences_gtk2.ui.h:59 ../data/preferences_gtk3.ui.h:61
+msgid "Spacing:"
+msgstr "Mezera:"
+
+#: ../data/preferences_gtk2.ui.h:60 ../data/preferences_gtk3.ui.h:62
+msgid "Set space between graphs"
+msgstr "Nastaví mezeru mezi grafy"
+
+#: ../data/preferences_gtk2.ui.h:61 ../data/preferences_gtk3.ui.h:64
+msgid "Set padding width"
+msgstr "Nastaví velikost spadávky"
+
+#: ../data/preferences_gtk2.ui.h:62 ../data/preferences_gtk3.ui.h:63
+msgid "Padding:"
+msgstr "Spadávka:"
+
+#: ../data/preferences_gtk2.ui.h:63 ../data/preferences_gtk3.ui.h:65
+msgid "If padding is set too large, the graph won't show."
+msgstr "Pokud je spadávka nastavena příliš velká, graf se neukáže."
+
+#: ../data/preferences_gtk2.ui.h:64 ../data/preferences_gtk3.ui.h:67
+msgid ""
+"Selected orientation is not the same of the panel. Graphs may be very small."
+msgstr "Vybraná orientace se neshoduje s panelem. Graf může být velmi malý."
+
+#: ../data/preferences_gtk2.ui.h:65 ../data/preferences_gtk3.ui.h:66
+msgid "Orientation:"
+msgstr "Orientace:"
+
+#: ../data/preferences_gtk2.ui.h:66 ../data/preferences_gtk3.ui.h:68
+msgid "Use IEC units (binary prefixes)"
+msgstr "Použít jednotky IEC (binární prefixy)"
+
+#: ../data/preferences_gtk2.ui.h:67 ../data/preferences_gtk3.ui.h:69
+msgid "Order of graphs (drag to rearrange)"
+msgstr "Pořadí grafů (přetažením změníte uspořádání)"
+
+#: ../data/preferences_gtk2.ui.h:68
+msgid "toolbutton1"
+msgstr "toolbutton1"
+
+#: ../data/preferences_gtk2.ui.h:69 ../data/preferences_gtk3.ui.h:70
+#: ../standalone/plugin.c:173
+msgid "Extra settings"
+msgstr "Další nastavení"
+
+#: ../data/preferences_gtk2.ui.h:70 ../data/preferences_gtk3.ui.h:71
+msgid "Simple"
+msgstr "Jednoduchý"
+
+#: ../data/preferences_gtk2.ui.h:71 ../data/preferences_gtk3.ui.h:72
+msgid "Detailed"
+msgstr "Podrobný"
+
+#: ../data/preferences_gtk2.ui.h:72 ../data/preferences_gtk3.ui.h:73
+msgid "Tooltip style:"
+msgstr "Styl tooltipu"
+
+#: ../data/preferences_gtk2.ui.h:73 ../data/preferences_gtk3.ui.h:74
+msgid "Double click action:"
+msgstr "Událost po dvojkliku:"
+
+#: ../data/preferences_gtk2.ui.h:74 ../data/preferences_gtk3.ui.h:75
+msgid "Set tooltip style of this graph"
+msgstr "Nastavejí stylu toolitpu pro tento graf"
+
+#: ../data/preferences_gtk2.ui.h:75 ../data/preferences_gtk3.ui.h:76
+msgid "Choose what to do when double clicking on this graph"
+msgstr "Vyberte co se stane po dvojkliku na tento graf"
+
+#: ../data/preferences_gtk2.ui.h:76 ../data/preferences_gtk3.ui.h:77
+msgid "Set custom action of this graph"
+msgstr "Nastavení vlastních událostí tohoto grafu"
+
+#: ../data/preferences_gtk2.ui.h:78 ../data/preferences_gtk3.ui.h:79
+#, no-c-format
+msgid ""
+"The following tokens can be used within the command line:\n"
+"\n"
+"%x - graph short name - three to four lowercase characters\n"
+"\n"
+"%1 - first value of graph data - depends on the graph\n"
+"%2 - second value of graph data - depends on the graph\n"
+"%3 - third value of graph data - depends on the graph\n"
+"%4 - fourth value of graph data - depends on the graph\n"
+"%u - measure unit in which graph data values are measured\n"
+"\n"
+"%% - inserts a literal percent sign"
+msgstr ""
+"Následující tokeny mohou být použity v příkazové rádce:\n"
+"\n"
+"%x - krátký název grafu - tři až čtyři malá písmena\n"
+"\n"
+"%1 - první hodnota grafu - záleží na grafu\n"
+"%2 - druhá hodnota grafu - záleží na grafu\n"
+"%3 - třetí hodnota grafu - záleží na grafu\n"
+"%4 - čtvrtá hodnota grafu - záleží na grafu\n"
+"%u - jednotka, ve které jsou data grafu měřena\n"
+"\n"
+"%% - vloží znak procento"
+
+#: ../data/preferences_gtk2.ui.h:89 ../data/preferences_gtk3.ui.h:90
+msgid "Double click command:"
+msgstr "Příkazy dvojkliku:"
+
+#: ../data/preferences_gtk2.ui.h:90 ../data/preferences_gtk3.ui.h:91
+msgid "Count Slab cache:"
+msgstr "Započítat Slab cache:"
+
+#: ../data/preferences_gtk2.ui.h:91 ../data/preferences_gtk3.ui.h:92
+msgid "Choose how to count Slab cache"
+msgstr "Vybrat, jak započítat Slab cache"
+
+#: ../data/preferences_gtk2.ui.h:92 ../data/preferences_gtk3.ui.h:93
+msgid "Maximum value:"
+msgstr "Maximální hodnota:"
+
+#: ../data/preferences_gtk2.ui.h:93 ../data/preferences_gtk3.ui.h:95
+msgid "Choose automatically"
+msgstr "Vybrat automaticky"
+
+#: ../data/preferences_gtk2.ui.h:94 ../data/preferences_gtk3.ui.h:94
+msgid "Source:"
+msgstr "Zdroj:"
+
+#: ../data/preferences_gtk2.ui.h:95 ../data/preferences_gtk3.ui.h:96
+msgid "Name"
+msgstr "Jméno"
+
+#: ../data/preferences_gtk2.ui.h:96 ../data/preferences_gtk3.ui.h:97
+msgid ""
+"Please note that some selected sources might still not show up, because of "
+"other constraints that make them not suitable."
+msgstr ""
+"Vezměte prosím na vědomí, že některé vybrané zdroje se stále nemusí "
+"zobrazovat z důvodu jiných omezení, která je činí nevhodnými."
+
+#: ../data/preferences_gtk2.ui.h:97 ../data/preferences_gtk3.ui.h:98
+msgid "Graph command:"
+msgstr "Příkaz grafu:"
+
+#: ../data/preferences_gtk2.ui.h:98 ../data/preferences_gtk3.ui.h:100
+msgid ""
+"Type a valid command line. Process must obey these rules:\n"
+"\n"
+"<b>EXIT CODE</b>\n"
+"Process MUST exit with status code '0'\n"
+"\n"
+"<b>STDOUT</b>\n"
+"Process MUST print to stdout POSITIVE floating point numbers.\n"
+"* Graph accepts at least one number to max 4 numbers.\n"
+"* Separate numbers by spaces or newline.\n"
+"* For decimal numbers, use point or comma depending on your locale "
+"settings.\n"
+"* Negative numbers will be set to 0.\n"
+"* Numbers can be prefix with 0 (octal) or 0x (hex).\n"
+"* Any additional content after the numbers is ignored.\n"
+"\n"
+"<b>STDERR</b>\n"
+"Process CAN print some text to stderr.\n"
+"* The first line of text will be displayed as \"Message\" text.\n"
+"* Any additional content after the first line is ignored.\n"
+"\n"
+"<b>EXAMPLES OF COMMON COMMAND LINES</b>\n"
+"* To monitor changes to a file: cat [filename]\n"
+"* To execute arbitrary shell commands: sh -c \"[commands]\""
+msgstr ""
+"Napište platnou příkazovou řádku. Proces musí následovat tato pravidla:\n"
+"\n"
+"<b>EXIT CODE</b>\n"
+"Proces se MUSÍ ukončit se stavovým kódem „0“\n"
+"\n"
+"<b>STDOUT</b>\n"
+"Proces MUSÍ vypsat na standardní výstup POZITIVNÍ desettiná čísla.\n"
+"* Graf akceptuje od jednoho do čtyř čísel.\n"
+"* Rozdělte čísla mezerou nebo koncem řádku.\n"
+"* Pro desettinou čárku použijte tečku nebo čárku vzledem k nastavení vaší "
+"lokalizace.\n"
+"* Záporná čísla budou nastavena na 0.\n"
+"* Čísla mohou mít prefix 0 (osmičková) nebo 0x (hexadecimální).\n"
+"* Jakýkoli další obsah po číslech je ignorován.\n"
+"\n"
+"<b>STDERR</b>\n"
+"Proces MŮŽE psát do standardního chybového výstupu.\n"
+"* První řádek bude zobrazen jako text „Zprávy“.\n"
+"* Nasledující řádky jsou ignorovány.\n"
+"\n"
+"<b>PŘÍKLADY PŘÍKAZOVÝCH ŘÁDKŮ</b>\n"
+"* Monitorování změn souboru: cat [filename]\n"
+"* Vykonání libovolných příkazů shellu: sh -c \"[commands]\""
+
+#: ../data/preferences_gtk2.ui.h:120 ../data/preferences_gtk3.ui.h:99
+msgid "Test"
+msgstr "Test"
+
+#: ../data/preferences_gtk3.ui.h:49
+msgid "Color"
+msgstr "Barva"
+
+#: ../data/preferences_gtk3.ui.h:58
+msgid "0"
+msgstr "0"
+
+#: ../indicator/multiload-ng-indicator.desktop.in.in.h:1
+msgid "Multiload-ng (indicator)"
+msgstr "Multiload-ng (indikátor)"
+
+#: ../indicator/multiload-ng-indicator.desktop.in.in.h:3
+#: ../standalone/multiload-ng-standalone.desktop.in.in.h:2
+#: ../systray/multiload-ng-systray.desktop.in.in.h:3
+msgid "Preferences"
+msgstr "Předvolby"
+
+#: ../indicator/plugin.c:259 ../mate/plugin.c:93 ../standalone/plugin.c:166
+#: ../systray/plugin.c:219
+msgid "_Preferences"
+msgstr "_Předvolby"
+
+#: ../indicator/plugin.c:269 ../mate/plugin.c:95 ../standalone/plugin.c:185
+#: ../systray/plugin.c:229
+msgid "_About"
+msgstr "_O aplikaci"
+
+#: ../indicator/plugin.c:273 ../standalone/plugin.c:189 ../systray/plugin.c:233
+msgid "_Quit"
+msgstr "_Zavřít"
+
+#: ../standalone/plugin.c:68
+msgid ""
+"If the window is larger than its minimum size, graphs will be scaled in "
+"proportion to the dimensions set."
+msgstr ""
+"Pokud je okno větší, než jeho maximální velikost, grafy budou škálované v "
+"nastavených proporcích."
+
+#: ../standalone/plugin.c:195
+msgid "_Always on top"
+msgstr "_Vždy navrchu"
+
+#: ../standalone/plugin.c:200
+msgid "Show window _borders"
+msgstr "Ukázat _okraje okna"
+
+#: ../standalone/plugin.c:205
+msgid "Show _settings button"
+msgstr "Ukázat tlačítko _nastavení"
+
+#: ../standalone/plugin.c:210
+msgid "Allow _move"
+msgstr "Povolit _přesun"
+
+#: ../standalone/plugin.c:215
+msgid "Allow _resize"
+msgstr "Povolit změnu _velikosti"
+
+#: ../standalone/plugin.c:221
+msgid "Half _transparent"
+msgstr "Poloviční prů_hlednost"
+
+#: ../systray/multiload-ng-systray.desktop.in.in.h:1
+msgid "Multiload-ng (system tray)"
+msgstr "Multiload-ng (system tray"
+
+#: ../systray/plugin.c:69
+msgid ""
+"Placement of system tray icons is controlled by the desktop environment. "
+"Graphs order may change."
+msgstr ""
+"Umístění system tray ikon je ovládání desktopovým prostředím. Pořadí grafů "
+"se může změnit."
