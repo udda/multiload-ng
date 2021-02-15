@@ -15,7 +15,7 @@ LICENSE="GPL-2"
 SLOT="0"
 IUSE="-debug +autostart -experimental gtk2 +gtk3 -awn +indicator +lxde +mate +standalone +systray +xfce4"
 
-LANGS="de es fr it lt ru zh_CN"
+LANGS="cs de es fr it lt ru zh_CN"
 for lang in ${LANGS} ; do IUSE+=" linguas_${lang}"; done
 
 RDEPEND="
