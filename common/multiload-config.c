@@ -26,6 +26,8 @@
 #include "graph-data.h"
 #include "multiload-config.h"
 
+GraphType graph_types[GRAPH_MAX];
+
 guint multiload_config_get_num_colors(guint id)
 {
 	g_assert_cmpuint (graph_types[id].num_colors, <=, MAX_COLORS);
