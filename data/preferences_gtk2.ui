@@ -73,7 +73,7 @@ Author: Mario cianciolo <mr.udda@gmail.com>
   </object>
   <object class="GtkAdjustment" id="adjustment_ceil_disk">
     <property name="lower">500</property>
-    <property name="upper">20000000</property>
+    <property name="upper">500000000000</property>
     <property name="value">500</property>
     <property name="step_increment">50</property>
     <property name="page_increment">1000</property>
@@ -87,14 +87,14 @@ Author: Mario cianciolo <mr.udda@gmail.com>
   </object>
   <object class="GtkAdjustment" id="adjustment_ceil_net">
     <property name="lower">500</property>
-    <property name="upper">20000000</property>
+    <property name="upper">500000000000</property>
     <property name="value">500</property>
     <property name="step_increment">50</property>
     <property name="page_increment">1000</property>
   </object>
   <object class="GtkAdjustment" id="adjustment_ceil_parm">
     <property name="lower">10</property>
-    <property name="upper">20000000</property>
+    <property name="upper">500000000000</property>
     <property name="value">10</property>
     <property name="step_increment">50</property>
     <property name="page_increment">1000</property>
