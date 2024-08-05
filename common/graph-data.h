@@ -48,6 +48,7 @@ typedef struct _CpuData {
 
 typedef struct _MemoryData {
 	guint64 user;
+	guint64 shared;
 	guint64 buffers;
 	guint64 cache;
 	guint64 total;
@@ -124,7 +125,7 @@ G_GNUC_INTERNAL void
 multiload_graph_cpu_tooltip_update (char *buf_title, size_t len_title, char *buf_text, size_t len_text, LoadGraph *g, CpuData *xd, gint style);
 
 G_GNUC_INTERNAL void
-multiload_graph_mem_get_data (int Maximum, int data [4], LoadGraph *g, MemoryData *xd, gboolean first_call);
+multiload_graph_mem_get_data (int Maximum, int data [5], LoadGraph *g, MemoryData *xd, gboolean first_call);
 G_GNUC_INTERNAL void
 multiload_graph_mem_cmdline_output (LoadGraph *g, MemoryData *xd);
 G_GNUC_INTERNAL void

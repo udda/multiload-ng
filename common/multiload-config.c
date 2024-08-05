@@ -50,7 +50,7 @@ void multiload_config_init()
 			(GraphCmdlineOutputFunc)	multiload_graph_cpu_cmdline_output,
 			(GraphGetFilterFunc)		NULL
 		},
-		{	"mem",	_("Memory"),		6,	-1,		-1,		"byte",
+		{	"mem",	_("Memory"),		7,	-1,		-1,		"byte",
 			(GraphInitFunc)				NULL,
 			(GraphGetDataFunc)			multiload_graph_mem_get_data,
 			(GraphTooltipUpdateFunc)	multiload_graph_mem_tooltip_update,
