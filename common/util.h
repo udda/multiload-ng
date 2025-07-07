@@ -49,7 +49,7 @@ show_modal_info_dialog(GtkWindow *parent, GtkMessageType type, const gchar *mess
 G_GNUC_INTERNAL gchar*
 get_system_monitor_executable();
 G_GNUC_INTERNAL void
-xdg_open_url();
+xdg_open_url(const gchar* url);
 
 G_GNUC_INTERNAL GdkPixbuf*
 cairo_surface_to_gdk_pixbuf(cairo_surface_t *surface, guint width, guint height);
