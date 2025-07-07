@@ -1566,7 +1566,11 @@ multiload_preferences_fill_dialog (GtkWidget *dialog, MultiloadPlugin *ma)
 	multiload_preferences_update_dynamic_widgets(ma);
 
 	// other stuff
+#ifdef MULTILOAD_DEVELOPER_MODE
 	multiload_developer_buttons(ma);
+#else
+        multiload_developer_buttons();
+#endif
 
 	#if GTK_API == 3 && GTK_CHECK_VERSION(3,16,0)
 	if (gtk_check_version(3,16,0) == NULL)
